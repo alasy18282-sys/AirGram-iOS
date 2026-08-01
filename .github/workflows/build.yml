@@ -48,6 +48,12 @@ jobs:
           cp -R "$GITHUB_WORKSPACE" /Users/Shared/
           mv "/Users/Shared/$(basename "$GITHUB_WORKSPACE")" /Users/Shared/telegram-ios
 
+      - name: Install build dependencies
+        run: |
+          set -euxo pipefail
+          brew list pkg-config >/dev/null 2>&1 || brew install pkg-config
+          pkg-config --version
+
       - name: Fix script permissions
         run: |
           set -euxo pipefail
