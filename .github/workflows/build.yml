@@ -10,7 +10,7 @@ permissions:
 
 jobs:
   build:
-    runs-on: macos-15
+    runs-on: macos-26
 
     steps:
       - uses: actions/checkout@v4
@@ -21,14 +21,24 @@ jobs:
         run: |
           set -euxo pipefail
           XCODE_VERSION=$(python3 -c 'import json; print(json.load(open("versions.json"))["xcode"])')
-          if [ -d "/Applications/Xcode_${XCODE_VERSION}.app" ]; then
-            sudo xcode-select -s "/Applications/Xcode_${XCODE_VERSION}.app/Contents/Developer"
-          else
-            echo "Requested Xcode ${XCODE_VERSION} not found, using default:"
+          XCODE_APP=""
+          for candidate in \
+            "/Applications/Xcode_${XCODE_VERSION}.app" \
+            "/Applications/Xcode_${XCODE_VERSION}.1.app" \
+            "/Applications/Xcode.app"; do
+            if [ -d "$candidate" ]; then
+              XCODE_APP="$candidate"
+              break
+            fi
+          done
+          if [ -z "$XCODE_APP" ]; then
+            echo "No suitable Xcode found. Installed versions:"
             ls /Applications | grep -i Xcode || true
-            sudo xcode-select -p
+            exit 1
           fi
+          sudo xcode-select -s "$XCODE_APP/Contents/Developer"
           xcodebuild -version
+          xcode-select -p
 
       - name: Create canonical source directory
         run: |
@@ -38,6 +48,7 @@ jobs:
           mv "/Users/Shared/$(basename "$GITHUB_WORKSPACE")" /Users/Shared/telegram-ios
 
       - name: Build the App
+        timeout-minutes: 180
         run: |
           set -euxo pipefail
           SOURCE_DIR=/Users/Shared/telegram-ios
@@ -55,6 +66,7 @@ jobs:
           python3 build-system/Make/ImportCertificates.py --path build-system/fake-codesigning/certs
           python3 -u build-system/Make/Make.py \
             --bazelUserRoot="$BAZEL_USER_ROOT" \
+            --overrideXcodeVersion \
             build \
             --configurationPath="build-system/appstore-configuration.json" \
             --codesigningInformationPath=build-system/fake-codesigning \
