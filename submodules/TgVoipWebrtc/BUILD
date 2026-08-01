@@ -107,6 +107,7 @@ sources = glob([
     "tgcalls/tgcalls/group/AudioStreamingPartPersistentDecoder.cpp",
     "tgcalls/tgcalls/group/AVIOContextImpl.cpp",
     "tgcalls/tgcalls/group/GroupInstanceCustomImpl.cpp",
+    "tgcalls/tgcalls/group/GroupInstanceReferenceImpl.cpp",
     "tgcalls/tgcalls/group/GroupJoinPayloadInternal.cpp",
     "tgcalls/tgcalls/group/GroupNetworkManager.cpp",
     "tgcalls/tgcalls/group/StreamingMediaContext.cpp",
@@ -116,6 +117,7 @@ sources = glob([
     "tgcalls/tgcalls/v2/DirectNetworkingImpl.cpp",
     "tgcalls/tgcalls/v2/ExternalSignalingConnection.cpp",
     "tgcalls/tgcalls/v2/InstanceV2Impl.cpp",
+    "tgcalls/tgcalls/v2/InstanceV2CompatImpl.cpp",
     "tgcalls/tgcalls/v2/InstanceV2ReferenceImpl.cpp",
     "tgcalls/tgcalls/v2/NativeNetworkingImpl.cpp",
     "tgcalls/tgcalls/v2/RawTcpSocket.cpp",
@@ -125,6 +127,8 @@ sources = glob([
     "tgcalls/tgcalls/v2/SignalingConnection.cpp",
     "tgcalls/tgcalls/v2/SignalingEncryption.cpp",
     "tgcalls/tgcalls/v2/SignalingSctpConnection.cpp",
+    "tgcalls/tgcalls/v2/CustomDcSctpSocket.cpp",
+    "tgcalls/tgcalls/v2/SignalingTranslator.cpp",
 ]
 
 objc_library(
