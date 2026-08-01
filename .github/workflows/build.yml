@@ -58,6 +58,8 @@ jobs:
         run: |
           set -euxo pipefail
           find . -name '*.sh' -print0 | xargs -0 chmod +x
+          chmod +x submodules/ffmpeg/Sources/FFMpeg/pkg-config || true
+          chmod +x submodules/ffmpeg/Sources/FFMpeg/gas-preprocessor.pl || true
 
       - name: Build the App
         timeout-minutes: 180

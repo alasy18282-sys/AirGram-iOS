@@ -1,6 +1,8 @@
 # Linguist overrides for vendored code
 *.sh text eol=lf
 *.bash text eol=lf
+submodules/ffmpeg/Sources/FFMpeg/pkg-config text eol=lf
+submodules/ffmpeg/Sources/FFMpeg/gas-preprocessor.pl text eol=lf
 submodules/AsyncDisplayKit/* linguist-vendored
 submodules/ffmpeg/* linguist-vendored
 submodules/HockeySDK-iOS/* linguist-vendored
