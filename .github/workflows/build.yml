@@ -48,6 +48,11 @@ jobs:
           cp -R "$GITHUB_WORKSPACE" /Users/Shared/
           mv "/Users/Shared/$(basename "$GITHUB_WORKSPACE")" /Users/Shared/telegram-ios
 
+      - name: Fix script permissions
+        run: |
+          set -euxo pipefail
+          find . -name '*.sh' -print0 | xargs -0 chmod +x
+
       - name: Build the App
         timeout-minutes: 180
         run: |
