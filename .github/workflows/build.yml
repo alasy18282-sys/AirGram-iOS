@@ -90,16 +90,26 @@ jobs:
           rm -rf "$OUTPUT_PATH"
           mkdir -p "$OUTPUT_PATH"
           shopt -s nullglob
-          for f in bazel-out/applebin_ios-ios_arm*-opt-ST-*/bin/Telegram/Telegram.ipa; do
-            cp "$f" "$OUTPUT_PATH/"
-          done
+
+          # Newer Bazel layouts place IPA in bazel-bin; keep legacy bazel-out fallback.
+          if [ -f "bazel-bin/Telegram/Telegram.ipa" ]; then
+            cp "bazel-bin/Telegram/Telegram.ipa" "$OUTPUT_PATH/"
+          else
+            for f in bazel-out/applebin_ios-ios_arm*-opt-ST-*/bin/Telegram/Telegram.ipa; do
+              cp "$f" "$OUTPUT_PATH/"
+            done
+          fi
+
           if [ ! -f "$OUTPUT_PATH/Telegram.ipa" ]; then
             echo "Telegram.ipa was not produced"
-            find bazel-out -name '*.ipa' || true
+            find bazel-bin bazel-out -name '*.ipa' || true
             exit 1
           fi
 
           mkdir -p build/DSYMs
+          for f in bazel-bin/Telegram/*.dSYM; do
+            cp -R "$f" build/DSYMs/
+          done
           for f in bazel-out/applebin_ios-ios_arm*-opt-ST-*/bin/Telegram/*.dSYM; do
             cp -R "$f" build/DSYMs/
           done
