@@ -1971,8 +1971,16 @@ ios_application(
         ":RequiredDeviceCapabilitiesPlist",
         ":UrlTypesInfoPlist",
     ],
+    app_icons = [ ":{}_icon".format(name) for name in composer_icon_folders ],
+    resources = [
+        ":LaunchScreen",
+    ],
+    strings = [
+        ":AppStringResources",
+    ],
+    # No app extensions: faster auth-only device IPA with full UI bootstrap.
     deps = [
         ":Main",
-        "//submodules/AuthorizationUI:AuthorizationUI",
+        ":Lib",
     ],
 )

@@ -9,13 +9,13 @@ permissions:
 jobs:
   auth-only-build:
     runs-on: macos-26
-    timeout-minutes: 40
+    timeout-minutes: 120
 
     steps:
       - uses: actions/checkout@v4
         with:
           submodules: recursive
-          fetch-depth: 1
+          fetch-depth: 0
 
       - name: Select Xcode
         run: |
@@ -39,15 +39,28 @@ jobs:
           sudo xcode-select -s "$XCODE_APP/Contents/Developer"
           xcodebuild -version
 
+      - name: Install build dependencies
+        run: |
+          set -euxo pipefail
+          brew list pkg-config >/dev/null 2>&1 || brew install pkg-config
+          pkg-config --version
+
+      - name: Fix script permissions
+        run: |
+          set -euxo pipefail
+          find . -name '*.sh' -print0 | xargs -0 chmod +x
+          find submodules/ffmpeg third-party -type f \( -name configure -o -name pkg-config -o -name '*.pl' \) -print0 | xargs -0 chmod +x
+
       - name: Restore Bazel cache
         uses: actions/cache@v4
         with:
           path: /private/var/tmp/_bazel_containerhost
-          key: ${{ runner.os }}-bazel-auth-only-v2-${{ hashFiles('WORKSPACE', 'WORKSPACE.bzlmod', 'MODULE.bazel', '.bazelrc', 'build-system/Make/Make.py', 'Telegram/BUILD', 'submodules/AuthorizationUI/BUILD', 'submodules/LegacyComponents/BUILD') }}
+          key: ${{ runner.os }}-bazel-auth-device-v1-${{ hashFiles('WORKSPACE', 'WORKSPACE.bzlmod', 'MODULE.bazel', '.bazelrc', 'build-system/Make/Make.py', 'Telegram/BUILD') }}
           restore-keys: |
+            ${{ runner.os }}-bazel-auth-device-v1-
             ${{ runner.os }}-bazel-auth-only-v2-
 
-      - name: Compile auth-only target
+      - name: Compile auth-only device IPA
         run: |
           set -euxo pipefail
           BAZEL_USER_ROOT="/private/var/tmp/_bazel_containerhost"
@@ -56,13 +69,14 @@ jobs:
           BUILD_NUMBER="$((COMMIT_COUNT + BUILD_NUMBER_OFFSET))"
           echo "BUILD_NUMBER=$BUILD_NUMBER" >> "$GITHUB_ENV"
 
+          python3 build-system/Make/ImportCertificates.py --path build-system/fake-codesigning/certs
           python3 -u build-system/Make/Make.py \
             --bazelUserRoot="$BAZEL_USER_ROOT" \
             --overrideXcodeVersion \
             build \
             --configurationPath="build-system/appstore-configuration.json" \
             --codesigningInformationPath=build-system/fake-codesigning \
-            --configuration=debug_sim_arm64 \
+            --configuration=release_arm64 \
             --target=Telegram/telegram_auth_build_test \
             --buildNumber="$BUILD_NUMBER"
 
@@ -87,8 +101,7 @@ jobs:
               for root in search_roots:
                   if not os.path.exists(root):
                       continue
-                  root_matches = glob.glob(os.path.join(root, "**", pattern), recursive=True)
-                  for path in root_matches:
+                  for path in glob.glob(os.path.join(root, "**", pattern), recursive=True):
                       if expect_dir and os.path.isdir(path):
                           matches.append(os.path.abspath(path))
                       if not expect_dir and os.path.isfile(path):
@@ -98,27 +111,26 @@ jobs:
           ipa_candidates = collect("telegram_auth_build_test.ipa", expect_dir=False)
           if not ipa_candidates:
               print("No auth-only IPA artifacts found.", file=sys.stderr)
-              debug = collect("telegram_auth_build_test*", expect_dir=False)[:20]
-              for item in debug:
-                  print(f"debug-file: {item}", file=sys.stderr)
-              debug_dirs = collect("telegram_auth_build_test*", expect_dir=True)[:20]
-              for item in debug_dirs:
-                  print(f"debug-dir: {item}", file=sys.stderr)
+              for item in collect("*.ipa", expect_dir=False)[:30]:
+                  print(f"debug-ipa: {item}", file=sys.stderr)
               sys.exit(1)
 
           ipa_path = ipa_candidates[0]
           print(f"Using IPA: {ipa_path}")
+          shutil.copy2(ipa_path, os.path.join(output_path, "AirGram-auth-only.ipa"))
           shutil.copy2(ipa_path, os.path.join(output_path, os.path.basename(ipa_path)))
 
           base_dir = os.path.dirname(ipa_path)
           app_bundle = os.path.join(base_dir, "telegram_auth_build_test.app")
           if os.path.isdir(app_bundle):
-              shutil.make_archive(os.path.join(output_path, "telegram_auth_build_test.app"), "zip", root_dir=os.path.dirname(app_bundle), base_dir=os.path.basename(app_bundle))
-              print(f"Packed app bundle: {app_bundle}")
+              shutil.make_archive(
+                  os.path.join(output_path, "telegram_auth_build_test.app"),
+                  "zip",
+                  root_dir=os.path.dirname(app_bundle),
+                  base_dir=os.path.basename(app_bundle),
+              )
 
-          dsym_candidates = []
-          local_dsym = glob.glob(os.path.join(base_dir, "telegram_auth_build_test*.dSYM"))
-          dsym_candidates.extend([p for p in local_dsym if os.path.isdir(p)])
+          dsym_candidates = [p for p in glob.glob(os.path.join(base_dir, "telegram_auth_build_test*.dSYM")) if os.path.isdir(p)]
           if not dsym_candidates:
               dsym_candidates = collect("telegram_auth_build_test*.dSYM", expect_dir=True)
 
@@ -137,11 +149,9 @@ jobs:
                       for root, _, files in os.walk(dsym_dir):
                           for file_name in files:
                               file_path = os.path.join(root, file_name)
-                              archive_path = os.path.relpath(file_path, output_path)
-                              zf.write(file_path, arcname=archive_path)
+                              zf.write(file_path, arcname=os.path.relpath(file_path, output_path))
               for dsym_dir in copied_dsyms:
                   shutil.rmtree(dsym_dir)
-              print(f"Packed dSYM count: {len(copied_dsyms)}")
           PY
 
           ls -la "$OUTPUT_PATH"
@@ -157,9 +167,9 @@ jobs:
         uses: softprops/action-gh-release@v2
         with:
           tag_name: auth-only-${{ env.BUILD_NUMBER }}-${{ github.run_number }}
-          name: AirGram Auth-Only (${{ env.BUILD_NUMBER }})
+          name: AirGram Auth-Only Device (${{ env.BUILD_NUMBER }})
           body: |
-            Auth-only build with persistent Logs button and Telegram Web export.
+            Device IPA (release_arm64) with auth-only mode, Logs button, no app extensions.
           files: build/artifacts/*
           fail_on_unmatched_files: false
           prerelease: true
