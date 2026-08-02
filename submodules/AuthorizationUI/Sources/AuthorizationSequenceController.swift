@@ -46,6 +46,11 @@ public final class AuthorizationSequenceController: NavigationController, ASAuth
     private let openUrl: (String) -> Void
     private let authorizationCompleted: () -> Void
     
+    // Temporary validation mode: keep the app in authorization flow after login.
+    // This helps test only auth connectivity without entering the full UI.
+    private let authorizationOnlyMode = true
+    private var didPresentAuthorizationOnlyAlert = false
+    
     private var stateDisposable: Disposable?
     private let actionDisposable = MetaDisposable()
     private var applicationStateDisposable: Disposable?
@@ -1246,8 +1251,18 @@ public final class AuthorizationSequenceController: NavigationController, ASAuth
     private func updateState(state: InnerState) {
         switch state {
         case .authorized:
-            self.authorizationCompleted()
+            if self.authorizationOnlyMode {
+                if !self.didPresentAuthorizationOnlyAlert {
+                    self.didPresentAuthorizationOnlyAlert = true
+                    if let controller = self.topViewController as? ViewController {
+                        controller.present(textAlertController(sharedContext: self.sharedContext, title: "Authorization", text: "Authorization succeeded. Auth-only mode is enabled, so the main interface is intentionally disabled for testing.", actions: [TextAlertAction(type: .defaultAction, title: self.presentationData.strings.Common_OK, action: {})]), in: .window(.root))
+                    }
+                }
+            } else {
+                self.authorizationCompleted()
+            }
         case let .state(state):
+            self.didPresentAuthorizationOnlyAlert = false
             switch state {
                 case .empty:
                     if let _ = self.viewControllers.last as? AuthorizationSequenceSplashController {

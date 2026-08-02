@@ -62,6 +62,7 @@ public final class AuthorizationSequencePhoneEntryController: ViewController, MF
     weak var confirmationController: PhoneConfirmationController?
     
     private let termsDisposable = MetaDisposable()
+    private let logsDisposable = MetaDisposable()
     
     private let hapticFeedback = HapticFeedback()
     
@@ -106,6 +107,7 @@ public final class AuthorizationSequencePhoneEntryController: ViewController, MF
     
     deinit {
         self.termsDisposable.dispose()
+        self.logsDisposable.dispose()
     }
     
     @objc private func cancelPressed() {
@@ -113,16 +115,35 @@ public final class AuthorizationSequencePhoneEntryController: ViewController, MF
     }
     
     func updateNavigationItems() {
-        guard let layout = self.validLayout, layout.size.width < 360.0 else {
+        guard let layout = self.validLayout else {
             return
         }
-                
-        if self.inProgress {
-            let item = UIBarButtonItem(customDisplayNode: ProgressNavigationButtonNode(color: self.presentationData.theme.rootController.navigationBar.accentTextColor))
-            self.navigationItem.rightBarButtonItem = item
+        
+        let logsItem = UIBarButtonItem(title: "Logs", style: .plain, target: self, action: #selector(self.logsPressed))
+        
+        if layout.size.width < 360.0 {
+            if self.inProgress {
+                let progressItem = UIBarButtonItem(customDisplayNode: ProgressNavigationButtonNode(color: self.presentationData.theme.rootController.navigationBar.accentTextColor))
+                self.navigationItem.rightBarButtonItems = [progressItem, logsItem]
+            } else {
+                let nextItem = UIBarButtonItem(title: self.presentationData.strings.Common_Next, style: .done, target: self, action: #selector(self.nextPressed))
+                self.navigationItem.rightBarButtonItems = [nextItem, logsItem]
+            }
         } else {
-            self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: self.presentationData.strings.Common_Next, style: .done, target: self, action: #selector(self.nextPressed))
+            self.navigationItem.rightBarButtonItems = [logsItem]
         }
+    }
+    
+    @objc private func logsPressed() {
+        self.view.endEditing(true)
+        self.logsDisposable.set(exportAuthorizationLogsToTelegramWeb(openUrl: { [weak self] url in
+            self?.openUrl(url)
+        }, completed: { [weak self] _ in
+            guard let self else {
+                return
+            }
+            self.present(textAlertController(sharedContext: self.sharedContext, title: nil, text: "Logs copied. Telegram Web is opened.", actions: [TextAlertAction(type: .defaultAction, title: self.presentationData.strings.Common_OK, action: {})]), in: .window(.root))
+        }))
     }
     
     public func updateData(countryCode: Int32, countryName: String?, number: String) {

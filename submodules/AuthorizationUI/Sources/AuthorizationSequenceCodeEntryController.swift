@@ -19,6 +19,8 @@ public final class AuthorizationSequenceCodeEntryController: ViewController {
     private let sharedContext: SharedAccountContext
     private let strings: PresentationStrings
     private let theme: PresentationTheme
+    private let logsDisposable = MetaDisposable()
+    private var nextBarButtonItem: UIBarButtonItem?
     
     public var loginWithCode: ((String) -> Void)?
     public var signInWithApple: (() -> Void)?
@@ -93,6 +95,10 @@ public final class AuthorizationSequenceCodeEntryController: ViewController {
         fatalError("init(coder:) has not been implemented")
     }
     
+    deinit {
+        self.logsDisposable.dispose()
+    }
+    
     override public func loadDisplayNode() {
         self.displayNode = AuthorizationSequenceCodeEntryControllerNode(strings: self.strings, theme: self.theme)
         self.displayNodeDidLoad()
@@ -124,7 +130,7 @@ public final class AuthorizationSequenceCodeEntryController: ViewController {
         }
         
         self.controllerNode.updateNextEnabled = { [weak self] value in
-            self?.navigationItem.rightBarButtonItem?.isEnabled = value
+            self?.nextBarButtonItem?.isEnabled = value
         }
         
         self.controllerNode.reset = { [weak self] in
@@ -180,16 +186,38 @@ public final class AuthorizationSequenceCodeEntryController: ViewController {
     }
     
     func updateNavigationItems() {
-        guard let layout = self.validLayout, layout.size.width < 360.0 else {
+        guard let layout = self.validLayout else {
             return
         }
-                
-        if self.inProgress {
-            let item = UIBarButtonItem(customDisplayNode: ProgressNavigationButtonNode(color: self.theme.rootController.navigationBar.accentTextColor))
-            self.navigationItem.rightBarButtonItem = item
+        
+        let logsItem = UIBarButtonItem(title: "Logs", style: .plain, target: self, action: #selector(self.logsPressed))
+        
+        if layout.size.width < 360.0 {
+            if self.inProgress {
+                let progressItem = UIBarButtonItem(customDisplayNode: ProgressNavigationButtonNode(color: self.theme.rootController.navigationBar.accentTextColor))
+                self.nextBarButtonItem = nil
+                self.navigationItem.rightBarButtonItems = [progressItem, logsItem]
+            } else {
+                let nextItem = UIBarButtonItem(title: self.strings.Common_Next, style: .done, target: self, action: #selector(self.nextPressed))
+                self.nextBarButtonItem = nextItem
+                self.navigationItem.rightBarButtonItems = [nextItem, logsItem]
+            }
         } else {
-            self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: self.strings.Common_Next, style: .done, target: self, action: #selector(self.nextPressed))
+            self.nextBarButtonItem = nil
+            self.navigationItem.rightBarButtonItems = [logsItem]
         }
+    }
+    
+    @objc private func logsPressed() {
+        self.view.endEditing(true)
+        self.logsDisposable.set(exportAuthorizationLogsToTelegramWeb(openUrl: { [weak self] url in
+            self?.sharedContext.applicationBindings.openUrl(url)
+        }, completed: { [weak self] _ in
+            guard let self else {
+                return
+            }
+            self.present(textAlertController(sharedContext: self.sharedContext, title: nil, text: "Logs copied. Telegram Web is opened.", actions: [TextAlertAction(type: .defaultAction, title: self.strings.Common_OK, action: {})]), in: .window(.root))
+        }))
     }
     
     public func updateData(number: String, email: String?, codeType: SentAuthorizationCodeType, nextType: AuthorizationCodeNextType?, timeout: Int32?, termsOfService: (UnauthorizedAccountTermsOfService, Bool)?, previousCodeType: SentAuthorizationCodeType?, isPrevious: Bool) {
