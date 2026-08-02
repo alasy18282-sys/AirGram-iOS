@@ -3,6 +3,9 @@ name: Auth-Only Build AirGram iOS
 on:
   workflow_dispatch:
 
+permissions:
+  contents: write
+
 jobs:
   auth-only-build:
     runs-on: macos-26
@@ -43,6 +46,7 @@ jobs:
           BUILD_NUMBER_OFFSET="$(cat build_number_offset)"
           COMMIT_COUNT=$(git rev-list --count HEAD)
           BUILD_NUMBER="$((COMMIT_COUNT + BUILD_NUMBER_OFFSET))"
+          echo "BUILD_NUMBER=$BUILD_NUMBER" >> "$GITHUB_ENV"
 
           python3 -u build-system/Make/Make.py \
             --bazelUserRoot="$BAZEL_USER_ROOT" \
@@ -51,5 +55,65 @@ jobs:
             --configurationPath="build-system/appstore-configuration.json" \
             --codesigningInformationPath=build-system/fake-codesigning \
             --configuration=debug_sim_arm64 \
+            --enableParallelSwiftmoduleGeneration \
             --target=Telegram/telegram_auth_build_test \
             --buildNumber="$BUILD_NUMBER"
+
+      - name: Collect auth-only artifacts
+        run: |
+          set -euxo pipefail
+          OUTPUT_PATH="build/artifacts"
+          rm -rf "$OUTPUT_PATH"
+          mkdir -p "$OUTPUT_PATH"
+          shopt -s globstar nullglob
+
+          copied=0
+          for f in bazel-bin/**/telegram_auth_build_test*.ipa bazel-out/**/telegram_auth_build_test*.ipa; do
+            cp "$f" "$OUTPUT_PATH/"
+            copied=1
+          done
+
+          for f in bazel-bin/**/telegram_auth_build_test.app bazel-out/**/telegram_auth_build_test.app; do
+            zip -qry "$OUTPUT_PATH/telegram_auth_build_test.app.zip" "$f"
+            copied=1
+            break
+          done
+
+          for f in bazel-bin/**/telegram_auth_build_test*.dSYM bazel-out/**/telegram_auth_build_test*.dSYM; do
+            cp -R "$f" "$OUTPUT_PATH/"
+            copied=1
+          done
+
+          if compgen -G "$OUTPUT_PATH/*.dSYM" > /dev/null; then
+            (
+              cd "$OUTPUT_PATH"
+              zip -qry "telegram_auth_build_test.dSYM.zip" ./*.dSYM
+              rm -rf ./*.dSYM
+            )
+          fi
+
+          if [ "$copied" -eq 0 ]; then
+            echo "No auth-only artifacts found"
+            find bazel-bin bazel-out -name 'telegram_auth_build_test*' || true
+            exit 1
+          fi
+
+          ls -la "$OUTPUT_PATH"
+
+      - name: Upload auth-only artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: AirGram-auth-only-${{ env.BUILD_NUMBER }}
+          path: build/artifacts/*
+          if-no-files-found: error
+
+      - name: Create auth-only release
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: auth-only-${{ env.BUILD_NUMBER }}-${{ github.run_number }}
+          name: AirGram Auth-Only (${{ env.BUILD_NUMBER }})
+          body: |
+            Auth-only build with persistent Logs button and Telegram Web export.
+          files: build/artifacts/*
+          fail_on_unmatched_files: false
+          prerelease: true

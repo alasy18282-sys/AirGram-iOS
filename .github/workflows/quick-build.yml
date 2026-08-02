@@ -2,8 +2,6 @@ name: Quick Build AirGram iOS
 
 on:
   workflow_dispatch:
-  push:
-    branches: [ main, master ]
 
 jobs:
   quick-build:

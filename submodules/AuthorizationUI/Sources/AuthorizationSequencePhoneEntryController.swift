@@ -123,8 +123,11 @@ public final class AuthorizationSequencePhoneEntryController: ViewController, MF
         
         if layout.size.width < 360.0 {
             if self.inProgress {
-                let progressItem = UIBarButtonItem(customDisplayNode: ProgressNavigationButtonNode(color: self.presentationData.theme.rootController.navigationBar.accentTextColor))
-                self.navigationItem.rightBarButtonItems = [progressItem, logsItem]
+                if let progressItem = UIBarButtonItem(customDisplayNode: ProgressNavigationButtonNode(color: self.presentationData.theme.rootController.navigationBar.accentTextColor)) {
+                    self.navigationItem.rightBarButtonItems = [progressItem, logsItem]
+                } else {
+                    self.navigationItem.rightBarButtonItems = [logsItem]
+                }
             } else {
                 let nextItem = UIBarButtonItem(title: self.presentationData.strings.Common_Next, style: .done, target: self, action: #selector(self.nextPressed))
                 self.navigationItem.rightBarButtonItems = [nextItem, logsItem]
