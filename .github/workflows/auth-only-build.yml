@@ -72,37 +72,77 @@ jobs:
           OUTPUT_PATH="build/artifacts"
           rm -rf "$OUTPUT_PATH"
           mkdir -p "$OUTPUT_PATH"
+          python3 - <<'PY'
+          import glob
+          import os
+          import shutil
+          import sys
+          import zipfile
 
-          copied=0
-          while IFS= read -r -d '' f; do
-            cp "$f" "$OUTPUT_PATH/"
-            copied=1
-          done < <(find bazel-bin bazel-out -type f -name 'telegram_auth_build_test*.ipa' -print0 2>/dev/null || true)
+          output_path = "build/artifacts"
+          search_roots = ["bazel-bin", "bazel-out", "/private/var/tmp/_bazel_containerhost"]
 
-          app_bundle="$(find bazel-bin bazel-out -type d -name 'telegram_auth_build_test.app' -print -quit 2>/dev/null || true)"
-          if [ -n "$app_bundle" ]; then
-            zip -qry "$OUTPUT_PATH/telegram_auth_build_test.app.zip" "$app_bundle"
-            copied=1
-          fi
+          def collect(pattern: str, expect_dir: bool):
+              matches = []
+              for root in search_roots:
+                  if not os.path.exists(root):
+                      continue
+                  root_matches = glob.glob(os.path.join(root, "**", pattern), recursive=True)
+                  for path in root_matches:
+                      if expect_dir and os.path.isdir(path):
+                          matches.append(os.path.abspath(path))
+                      if not expect_dir and os.path.isfile(path):
+                          matches.append(os.path.abspath(path))
+              return sorted(set(matches), key=os.path.getmtime, reverse=True)
 
-          while IFS= read -r -d '' f; do
-            cp -R "$f" "$OUTPUT_PATH/"
-            copied=1
-          done < <(find bazel-bin bazel-out -type d -name 'telegram_auth_build_test*.dSYM' -print0 2>/dev/null || true)
+          ipa_candidates = collect("telegram_auth_build_test.ipa", expect_dir=False)
+          if not ipa_candidates:
+              print("No auth-only IPA artifacts found.", file=sys.stderr)
+              debug = collect("telegram_auth_build_test*", expect_dir=False)[:20]
+              for item in debug:
+                  print(f"debug-file: {item}", file=sys.stderr)
+              debug_dirs = collect("telegram_auth_build_test*", expect_dir=True)[:20]
+              for item in debug_dirs:
+                  print(f"debug-dir: {item}", file=sys.stderr)
+              sys.exit(1)
 
-          if ls "$OUTPUT_PATH"/*.dSYM >/dev/null 2>&1; then
-            (
-              cd "$OUTPUT_PATH"
-              zip -qry "telegram_auth_build_test.dSYM.zip" ./*.dSYM
-              rm -rf ./*.dSYM
-            )
-          fi
+          ipa_path = ipa_candidates[0]
+          print(f"Using IPA: {ipa_path}")
+          shutil.copy2(ipa_path, os.path.join(output_path, os.path.basename(ipa_path)))
 
-          if [ "$copied" -eq 0 ]; then
-            echo "No auth-only artifacts found"
-            find bazel-bin bazel-out -name 'telegram_auth_build_test*' || true
-            exit 1
-          fi
+          base_dir = os.path.dirname(ipa_path)
+          app_bundle = os.path.join(base_dir, "telegram_auth_build_test.app")
+          if os.path.isdir(app_bundle):
+              shutil.make_archive(os.path.join(output_path, "telegram_auth_build_test.app"), "zip", root_dir=os.path.dirname(app_bundle), base_dir=os.path.basename(app_bundle))
+              print(f"Packed app bundle: {app_bundle}")
+
+          dsym_candidates = []
+          local_dsym = glob.glob(os.path.join(base_dir, "telegram_auth_build_test*.dSYM"))
+          dsym_candidates.extend([p for p in local_dsym if os.path.isdir(p)])
+          if not dsym_candidates:
+              dsym_candidates = collect("telegram_auth_build_test*.dSYM", expect_dir=True)
+
+          copied_dsyms = []
+          for dsym in dsym_candidates:
+              target = os.path.join(output_path, os.path.basename(dsym))
+              if os.path.exists(target):
+                  continue
+              shutil.copytree(dsym, target)
+              copied_dsyms.append(target)
+
+          if copied_dsyms:
+              dsym_zip = os.path.join(output_path, "telegram_auth_build_test.dSYM.zip")
+              with zipfile.ZipFile(dsym_zip, "w", compression=zipfile.ZIP_DEFLATED) as zf:
+                  for dsym_dir in copied_dsyms:
+                      for root, _, files in os.walk(dsym_dir):
+                          for file_name in files:
+                              file_path = os.path.join(root, file_name)
+                              archive_path = os.path.relpath(file_path, output_path)
+                              zf.write(file_path, arcname=archive_path)
+              for dsym_dir in copied_dsyms:
+                  shutil.rmtree(dsym_dir)
+              print(f"Packed dSYM count: {len(copied_dsyms)}")
+          PY
 
           ls -la "$OUTPUT_PATH"
 
