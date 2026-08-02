@@ -249,7 +249,8 @@ typedef enum {
             {
 #if DEBUG
                 if (arc4random_uniform(100) < 50) {
-                    [mtProto simulateDisconnection];
+                    // Keep auth flow stable in debug/custom-server builds.
+                    // [mtProto simulateDisconnection];
                 }
 #endif
                 
