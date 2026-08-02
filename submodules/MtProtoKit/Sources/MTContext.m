@@ -1505,17 +1505,19 @@ static void copyKeychainDictionaryKey(NSString * _Nonnull group, NSString * _Non
 {
     [[MTContext contextQueue] dispatchOnQueue:^
     {
-        if (!_useTempAuthKeys && (selector == MTDatacenterAuthInfoSelectorEphemeralMain || selector == MTDatacenterAuthInfoSelectorEphemeralMedia)) {
-            selector = MTDatacenterAuthInfoSelectorPersistent;
-            allowUnboundEphemeralKeys = true;
+        MTDatacenterAuthInfoSelector effectiveSelector = selector;
+        bool effectiveAllowUnboundEphemeralKeys = allowUnboundEphemeralKeys;
+        if (!_useTempAuthKeys && (effectiveSelector == MTDatacenterAuthInfoSelectorEphemeralMain || effectiveSelector == MTDatacenterAuthInfoSelectorEphemeralMedia)) {
+            effectiveSelector = MTDatacenterAuthInfoSelectorPersistent;
+            effectiveAllowUnboundEphemeralKeys = true;
         }
         
-        NSNumber *infoKey = authInfoMapIntegerKey((int32_t)datacenterId, selector);
+        NSNumber *infoKey = authInfoMapIntegerKey((int32_t)datacenterId, effectiveSelector);
         
         if (_datacenterAuthActions[infoKey] == nil)
         {
             __weak MTContext *weakSelf = self;
-            MTDatacenterAuthAction *authAction = [[MTDatacenterAuthAction alloc] initWithAuthKeyInfoSelector:selector isCdn:isCdn skipBind:allowUnboundEphemeralKeys completion:^(MTDatacenterAuthAction *action, __unused bool success) {
+            MTDatacenterAuthAction *authAction = [[MTDatacenterAuthAction alloc] initWithAuthKeyInfoSelector:effectiveSelector isCdn:isCdn skipBind:effectiveAllowUnboundEphemeralKeys completion:^(MTDatacenterAuthAction *action, __unused bool success) {
                 [[MTContext contextQueue] dispatchOnQueue:^{
                     __strong MTContext *strongSelf = weakSelf;
                     if (strongSelf == nil) {
@@ -1532,10 +1534,10 @@ static void copyKeychainDictionaryKey(NSString * _Nonnull group, NSString * _Non
             }];
             _datacenterAuthActions[infoKey] = authAction;
             
-            switch (selector) {
+            switch (effectiveSelector) {
                 case MTDatacenterAuthInfoSelectorEphemeralMain:
                 case MTDatacenterAuthInfoSelectorEphemeralMedia: {
-                    if ([self authInfoForDatacenterWithId:datacenterId selector:MTDatacenterAuthInfoSelectorPersistent] == nil && !allowUnboundEphemeralKeys) {
+                    if ([self authInfoForDatacenterWithId:datacenterId selector:MTDatacenterAuthInfoSelectorPersistent] == nil && !effectiveAllowUnboundEphemeralKeys) {
                         [self authInfoForDatacenterWithIdRequired:datacenterId isCdn:false selector:MTDatacenterAuthInfoSelectorPersistent allowUnboundEphemeralKeys:false];
                     } else {
                         [authAction execute:self datacenterId:datacenterId];
