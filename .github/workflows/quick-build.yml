@@ -65,6 +65,5 @@ jobs:
             --configurationPath="build-system/appstore-configuration.json" \
             --codesigningInformationPath=build-system/fake-codesigning \
             --configuration=release_arm64 \
-            --disableProvisioningProfiles \
             --target=Telegram/spm_build_app \
             --buildNumber="$BUILD_NUMBER"
