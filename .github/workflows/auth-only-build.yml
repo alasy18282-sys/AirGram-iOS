@@ -55,7 +55,6 @@ jobs:
             --configurationPath="build-system/appstore-configuration.json" \
             --codesigningInformationPath=build-system/fake-codesigning \
             --configuration=debug_sim_arm64 \
-            --enableParallelSwiftmoduleGeneration \
             --target=Telegram/telegram_auth_build_test \
             --buildNumber="$BUILD_NUMBER"
 
