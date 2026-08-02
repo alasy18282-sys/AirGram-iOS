@@ -1646,6 +1646,17 @@ static const NSUInteger MTMaxUnacknowledgedMessageCount = 64;
     
     NSData *decryptedData = [MTProto paddedDataV1:[decryptedOs currentBytes]];
     
+    // MyTelegram/AirGram servers expect bindTempAuthKey encrypted_message size
+    // of exactly 104 bytes (8 auth_key_id + 16 msg_key + 80 ciphertext).
+    // Plain bind_auth_key_inner is 72 bytes and already 16-aligned, so pad +8.
+    if (decryptedData.length < 80) {
+        NSMutableData *padded = [[NSMutableData alloc] initWithData:decryptedData];
+        uint8_t extraPadding[16];
+        arc4random_buf(extraPadding, sizeof(extraPadding));
+        [padded appendBytes:extraPadding length:(80 - padded.length)];
+        decryptedData = padded;
+    }
+    
     NSData *messageKeyFull = MTSubdataSha1(decryptedData, 0, 32 + preparedData.length);
     NSData *messageKey = [[NSData alloc] initWithBytes:(((int8_t *)messageKeyFull.bytes) + messageKeyFull.length - 16) length:16];
     

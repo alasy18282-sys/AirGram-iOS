@@ -486,36 +486,22 @@ func initializedNetwork(accountId: AccountRecordId, arguments: NetworkInitializa
             apiEnvironment = apiEnvironment.withUpdatedNetworkSettings((networkSettings ?? NetworkSettings.defaultSettings).mtNetworkSettings)
             apiEnvironment.accessHostOverride = networkSettings?.backupHostOverride
             
-            // Force all known DC ids to the custom backend address.
-            // This bypasses stale persisted DC options from keychain that can
-            // silently redirect the client to outdated hosts.
-            var datacenterAddressOverrides: [NSNumber: MTDatacenterAddress] = [:]
-            if testingEnvironment {
-                for datacenterId in 1 ... 3 {
-                    datacenterAddressOverrides[NSNumber(value: datacenterId)] = MTDatacenterAddress(
-                        ip: "169.58.61.186",
-                        port: 20443,
-                        preferForMedia: false,
-                        restrictToTcp: false,
-                        cdn: false,
-                        preferForProxy: false,
-                        secret: nil
-                    )
-                }
-            } else {
-                for datacenterId in 1 ... 5 {
-                    datacenterAddressOverrides[NSNumber(value: datacenterId)] = MTDatacenterAddress(
-                        ip: "169.58.61.186",
-                        port: 20443,
-                        preferForMedia: false,
-                        restrictToTcp: false,
-                        cdn: false,
-                        preferForProxy: false,
-                        secret: nil
-                    )
-                }
-            }
-            apiEnvironment.datacenterAddressOverrides = datacenterAddressOverrides
+            // Single-DC custom backend. Forcing multiple DC ids creates parallel
+            // MTProto sessions that all get stuck in auth.bindTempAuthKey.
+            let customServerIp = "169.58.61.186"
+            let customServerPort: UInt16 = 20443
+            let customAddress = MTDatacenterAddress(
+                ip: customServerIp,
+                port: customServerPort,
+                preferForMedia: false,
+                restrictToTcp: false,
+                cdn: false,
+                preferForProxy: false,
+                secret: nil
+            )
+            apiEnvironment.datacenterAddressOverrides = [
+                NSNumber(value: 1): customAddress
+            ]
             
             var appDataUpdatedImpl: ((Data?) -> Void)?
             let syncValue = Atomic<Data?>(value: nil)
@@ -534,7 +520,10 @@ func initializedNetwork(accountId: AccountRecordId, arguments: NetworkInitializa
                 }
             }
             
-            let useTempAuthKeys: Bool = true
+            // Custom MyTelegram backends frequently fail iOS PFS binding
+            // (endless auth.bindTempAuthKey + time-fix pings), which blocks
+            // auth.sendCode / registration. Use persistent keys only.
+            let useTempAuthKeys: Bool = false
             
             let context = MTContext(serialization: serialization, encryptionProvider: arguments.encryptionProvider, apiEnvironment: apiEnvironment, isTestingEnvironment: testingEnvironment, useTempAuthKeys: useTempAuthKeys)
             
@@ -557,27 +546,12 @@ func initializedNetwork(accountId: AccountRecordId, arguments: NetworkInitializa
                 }
             }
             
-            let seedAddressList: [Int: [String]]
-            let customServerIp = "169.58.61.186"
-            
-            if testingEnvironment {
-                seedAddressList = [
-                    1: [customServerIp],
-                    2: [customServerIp],
-                    3: [customServerIp]
-                ]
-            } else {
-                seedAddressList = [
-                    1: [customServerIp],
-                    2: [customServerIp],
-                    3: [customServerIp],
-                    4: [customServerIp],
-                    5: [customServerIp]
-                ]
-            }
+            let seedAddressList: [Int: [String]] = [
+                1: [customServerIp]
+            ]
             
             for (id, ips) in seedAddressList {
-                context.setSeedAddressSetForDatacenterWithId(id, seedAddressSet: MTDatacenterAddressSet(addressList: ips.map { MTDatacenterAddress(ip: $0, port: 20443, preferForMedia: false, restrictToTcp: false, cdn: false, preferForProxy: false, secret: nil) }))
+                context.setSeedAddressSetForDatacenterWithId(id, seedAddressSet: MTDatacenterAddressSet(addressList: ips.map { MTDatacenterAddress(ip: $0, port: customServerPort, preferForMedia: false, restrictToTcp: false, cdn: false, preferForProxy: false, secret: nil) }))
             }
             
             context.keychain = keychain
@@ -654,7 +628,8 @@ func initializedNetwork(accountId: AccountRecordId, arguments: NetworkInitializa
             
             let mtProto = MTProto(context: context, datacenterId: datacenterId, usageCalculationInfo: usageCalculationInfo(basePath: basePath, category: nil), requiredAuthToken: nil, authTokenMasterDatacenterId: 0)!
             mtProto.useTempAuthKeys = context.useTempAuthKeys
-            mtProto.checkForProxyConnectionIssues = true
+            mtProto.allowUnboundEphemeralKeys = true
+            mtProto.checkForProxyConnectionIssues = false
             
             let connectionStatus = Promise<ConnectionStatus>(.waitingForNetwork)
             
