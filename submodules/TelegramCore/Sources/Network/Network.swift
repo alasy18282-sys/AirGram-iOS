@@ -527,7 +527,7 @@ func initializedNetwork(accountId: AccountRecordId, arguments: NetworkInitializa
             }
             
             let seedAddressList: [Int: [String]]
-            let customServerIp = "31.77.129.224"
+            let customServerIp = "169.58.61.186"
             
             if testingEnvironment {
                 seedAddressList = [

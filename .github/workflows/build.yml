@@ -130,7 +130,7 @@ jobs:
           tag_name: build-${{ env.BUILD_NUMBER }}
           name: AirGram iOS ${{ env.APP_VERSION }} (${{ env.BUILD_NUMBER }})
           body: |
-            Custom AirGram iOS build connected to server 31.77.129.224:20443
+            Custom AirGram iOS build connected to server 169.58.61.186:20443
           files: |
             /Users/Shared/telegram-ios/build/artifacts/Telegram.ipa
             /Users/Shared/telegram-ios/build/artifacts/Telegram.DSYMs.zip
