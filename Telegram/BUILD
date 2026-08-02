@@ -1947,6 +1947,7 @@ ios_application(
         ":UrlTypesInfoPlist",
     ],
     deps = [
+        ":Main",
         "//submodules/TelegramCore:TelegramCore",
     ],
 )
