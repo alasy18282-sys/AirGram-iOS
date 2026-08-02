@@ -576,44 +576,46 @@ func initializedNetwork(accountId: AccountRecordId, arguments: NetworkInitializa
             }
             #endif
             
-            if !supplementary {
-                // context.setDiscoverBackupAddressListSignal(MTBackupAddressSignals.fetchBackupIps(testingEnvironment, currentContext: context, additionalSource: wrappedAdditionalSource, phoneNumber: phoneNumber, mainDatacenterId: datacenterId))
-                let externalRequestVerificationStream = arguments.externalRequestVerificationStream
-                context.setExternalRequestVerification({ nonce in
-                    return MTSignal(generator: { subscriber in
-                        let disposable = (externalRequestVerificationStream
-                        |> map { dict -> String? in
-                            return dict[nonce]
-                        }
-                        |> filter { $0 != nil }
-                        |> take(1)
-                        |> timeout(15.0, queue: .mainQueue(), alternate: .single("APNS_PUSH_TIMEOUT"))).start(next: { secret in
-                            subscriber?.putNext(secret)
-                            subscriber?.putCompletion()
-                        })
-                        
-                        return MTBlockDisposable(block: {
-                            disposable.dispose()
-                        })
-                    })
-                })
-                let externalRecaptchaRequestVerification = arguments.externalRecaptchaRequestVerification
-                context.setExternalRecaptchaRequestVerification({ method, siteKey in
-                    return MTSignal(generator: { subscriber in
-                        let disposable = (externalRecaptchaRequestVerification(method, siteKey)
-                        |> filter { $0 != nil }
-                        |> take(1)
-                        |> timeout(15.0, queue: .mainQueue(), alternate: .single("RECAPTCHA_TIMEOUT"))).start(next: { token in
-                            subscriber?.putNext(token)
-                            subscriber?.putCompletion()
-                        })
-                        
-                        return MTBlockDisposable(block: {
-                            disposable.dispose()
-                        })
-                    })
-                })
-            }
+            // For custom MTProto backends, APNS/recaptcha verification hooks can
+            // cause sendCode to stall indefinitely. Keep them disabled.
+            // if !supplementary {
+            //     context.setDiscoverBackupAddressListSignal(MTBackupAddressSignals.fetchBackupIps(testingEnvironment, currentContext: context, additionalSource: wrappedAdditionalSource, phoneNumber: phoneNumber, mainDatacenterId: datacenterId))
+            //     let externalRequestVerificationStream = arguments.externalRequestVerificationStream
+            //     context.setExternalRequestVerification({ nonce in
+            //         return MTSignal(generator: { subscriber in
+            //             let disposable = (externalRequestVerificationStream
+            //             |> map { dict -> String? in
+            //                 return dict[nonce]
+            //             }
+            //             |> filter { $0 != nil }
+            //             |> take(1)
+            //             |> timeout(15.0, queue: .mainQueue(), alternate: .single("APNS_PUSH_TIMEOUT"))).start(next: { secret in
+            //                 subscriber?.putNext(secret)
+            //                 subscriber?.putCompletion()
+            //             })
+            //
+            //             return MTBlockDisposable(block: {
+            //                 disposable.dispose()
+            //             })
+            //         })
+            //     })
+            //     let externalRecaptchaRequestVerification = arguments.externalRecaptchaRequestVerification
+            //     context.setExternalRecaptchaRequestVerification({ method, siteKey in
+            //         return MTSignal(generator: { subscriber in
+            //             let disposable = (externalRecaptchaRequestVerification(method, siteKey)
+            //             |> filter { $0 != nil }
+            //             |> take(1)
+            //             |> timeout(15.0, queue: .mainQueue(), alternate: .single("RECAPTCHA_TIMEOUT"))).start(next: { token in
+            //                 subscriber?.putNext(token)
+            //                 subscriber?.putCompletion()
+            //             })
+            //
+            //             return MTBlockDisposable(block: {
+            //                 disposable.dispose()
+            //             })
+            //         })
+            //     })
+            // }
             
             /*#if DEBUG
             context.beginExplicitBackupAddressDiscovery()
