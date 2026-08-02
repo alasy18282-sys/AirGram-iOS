@@ -554,6 +554,14 @@ func initializedNetwork(accountId: AccountRecordId, arguments: NetworkInitializa
                 context.setSeedAddressSetForDatacenterWithId(id, seedAddressSet: MTDatacenterAddressSet(addressList: ips.map { MTDatacenterAddress(ip: $0, port: customServerPort, preferForMedia: false, restrictToTcp: false, cdn: false, preferForProxy: false, secret: nil) }))
             }
             
+            // Drop stale PFS keys from previous builds; they keep spawning bindTempAuthKey loops.
+            context.performBatchUpdates {
+                for datacenterId in 1 ... 5 {
+                    context.updateAuthInfo(forDatacenterWithId: datacenterId, authInfo: nil, selector: .ephemeralMain)
+                    context.updateAuthInfo(forDatacenterWithId: datacenterId, authInfo: nil, selector: .ephemeralMedia)
+                }
+            }
+            
             context.keychain = keychain
             // var wrappedAdditionalSource: MTSignal?
             #if os(iOS)

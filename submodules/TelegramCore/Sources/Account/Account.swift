@@ -195,18 +195,22 @@ public class UnauthorizedAccount {
         })
         
         network.context.performBatchUpdates({
-            var datacenterIds: [Int] = [1, 2]
-            if testingEnvironment {
-                datacenterIds = [3]
-            } else {
-                datacenterIds.append(contentsOf: [4])
-            }
-            for id in datacenterIds {
-                if network.context.authInfoForDatacenter(withId: id, selector: .persistent) == nil {
-                    network.context.authInfoForDatacenter(withIdRequired: id, isCdn: false, selector: .ephemeralMain, allowUnboundEphemeralKeys: false)
+            if network.context.useTempAuthKeys {
+                var datacenterIds: [Int] = [1, 2]
+                if testingEnvironment {
+                    datacenterIds = [3]
+                } else {
+                    datacenterIds.append(contentsOf: [4])
                 }
+                for id in datacenterIds {
+                    if network.context.authInfoForDatacenter(withId: id, selector: .persistent) == nil {
+                        network.context.authInfoForDatacenter(withIdRequired: id, isCdn: false, selector: .ephemeralMain, allowUnboundEphemeralKeys: false)
+                    }
+                }
+                network.context.beginExplicitBackupAddressDiscovery()
+            } else if network.context.authInfoForDatacenter(withId: Int(network.mtProto.datacenterId), selector: .persistent) == nil {
+                network.context.authInfoForDatacenter(withIdRequired: Int(network.mtProto.datacenterId), isCdn: false, selector: .persistent, allowUnboundEphemeralKeys: true)
             }
-            network.context.beginExplicitBackupAddressDiscovery()
         })
         
         self.stateManager.reset()

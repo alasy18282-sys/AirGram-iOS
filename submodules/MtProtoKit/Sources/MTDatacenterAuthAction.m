@@ -54,6 +54,11 @@
     _datacenterId = datacenterId;
     _context = context;
     
+    if (_authKeyInfoSelector != MTDatacenterAuthInfoSelectorPersistent && !context.useTempAuthKeys) {
+        [self complete];
+        return;
+    }
+    
     if (_datacenterId != 0 && context != nil)
     {
         bool alreadyCompleted = false;

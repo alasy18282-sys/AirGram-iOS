@@ -245,6 +245,9 @@
 }
 
 + (MTSignal * _Nonnull)checkIfAuthKeyRemovedWithContext:(MTContext * _Nonnull)context datacenterId:(NSInteger)datacenterId authKey:(MTDatacenterAuthKey *)authKey {
+    if (!context.useTempAuthKeys) {
+        return [MTSignal single:@(false)];
+    }
     return [[MTSignal alloc] initWithGenerator:^id<MTDisposable>(MTSubscriber *subscriber) {
         MTMetaDisposable *disposable = [[MTMetaDisposable alloc] init];
         

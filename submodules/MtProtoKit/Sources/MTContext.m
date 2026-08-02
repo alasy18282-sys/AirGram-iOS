@@ -1505,6 +1505,11 @@ static void copyKeychainDictionaryKey(NSString * _Nonnull group, NSString * _Non
 {
     [[MTContext contextQueue] dispatchOnQueue:^
     {
+        if (!_useTempAuthKeys && (selector == MTDatacenterAuthInfoSelectorEphemeralMain || selector == MTDatacenterAuthInfoSelectorEphemeralMedia)) {
+            selector = MTDatacenterAuthInfoSelectorPersistent;
+            allowUnboundEphemeralKeys = true;
+        }
+        
         NSNumber *infoKey = authInfoMapIntegerKey((int32_t)datacenterId, selector);
         
         if (_datacenterAuthActions[infoKey] == nil)
@@ -1610,6 +1615,10 @@ static void copyKeychainDictionaryKey(NSString * _Nonnull group, NSString * _Non
 
 - (void)checkIfLoggedOut:(NSInteger)datacenterId {
     [[MTContext contextQueue] dispatchOnQueue:^{
+        if (!_useTempAuthKeys) {
+            return;
+        }
+        
         MTDatacenterAuthInfo *authInfo = [self authInfoForDatacenterWithId:datacenterId selector:MTDatacenterAuthInfoSelectorPersistent];
         if (authInfo == nil || authInfo.authKey == nil) {
             return;
