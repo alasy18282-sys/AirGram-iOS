@@ -15,7 +15,7 @@ jobs:
       - uses: actions/checkout@v4
         with:
           submodules: recursive
-          fetch-depth: 0
+          fetch-depth: 1
 
       - name: Select Xcode
         run: |
@@ -38,6 +38,14 @@ jobs:
           fi
           sudo xcode-select -s "$XCODE_APP/Contents/Developer"
           xcodebuild -version
+
+      - name: Restore Bazel cache
+        uses: actions/cache@v4
+        with:
+          path: /private/var/tmp/_bazel_containerhost
+          key: ${{ runner.os }}-bazel-auth-only-v2-${{ hashFiles('WORKSPACE', 'WORKSPACE.bzlmod', 'MODULE.bazel', '.bazelrc', 'build-system/Make/Make.py', 'Telegram/BUILD', 'submodules/AuthorizationUI/BUILD', 'submodules/LegacyComponents/BUILD') }}
+          restore-keys: |
+            ${{ runner.os }}-bazel-auth-only-v2-
 
       - name: Compile auth-only target
         run: |
