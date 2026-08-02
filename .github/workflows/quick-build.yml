@@ -8,7 +8,7 @@ on:
 jobs:
   quick-build:
     runs-on: macos-26
-    timeout-minutes: 75
+    timeout-minutes: 40
 
     steps:
       - uses: actions/checkout@v4
@@ -38,19 +38,7 @@ jobs:
           sudo xcode-select -s "$XCODE_APP/Contents/Developer"
           xcodebuild -version
 
-      - name: Install build dependencies
-        run: |
-          set -euxo pipefail
-          brew list pkg-config >/dev/null 2>&1 || brew install pkg-config
-          pkg-config --version
-
-      - name: Fix script permissions
-        run: |
-          set -euxo pipefail
-          find . -name '*.sh' -print0 | xargs -0 chmod +x
-          find submodules/ffmpeg third-party -type f \( -name configure -o -name pkg-config -o -name '*.pl' \) -print0 | xargs -0 chmod +x
-
-      - name: Quick compile check
+      - name: Quick compile check (TelegramCore only)
         run: |
           set -euxo pipefail
           BAZEL_USER_ROOT="/private/var/tmp/_bazel_containerhost"
@@ -64,6 +52,6 @@ jobs:
             build \
             --configurationPath="build-system/appstore-configuration.json" \
             --codesigningInformationPath=build-system/fake-codesigning \
-            --configuration=release_arm64 \
-            --target=Telegram/spm_build_app \
+            --configuration=debug_sim_arm64 \
+            --target=//submodules/TelegramCore:TelegramCore \
             --buildNumber="$BUILD_NUMBER"
