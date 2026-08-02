@@ -486,6 +486,37 @@ func initializedNetwork(accountId: AccountRecordId, arguments: NetworkInitializa
             apiEnvironment = apiEnvironment.withUpdatedNetworkSettings((networkSettings ?? NetworkSettings.defaultSettings).mtNetworkSettings)
             apiEnvironment.accessHostOverride = networkSettings?.backupHostOverride
             
+            // Force all known DC ids to the custom backend address.
+            // This bypasses stale persisted DC options from keychain that can
+            // silently redirect the client to outdated hosts.
+            var datacenterAddressOverrides: [NSNumber: MTDatacenterAddress] = [:]
+            if testingEnvironment {
+                for datacenterId in 1 ... 3 {
+                    datacenterAddressOverrides[NSNumber(value: datacenterId)] = MTDatacenterAddress(
+                        ip: "169.58.61.186",
+                        port: 20443,
+                        preferForMedia: false,
+                        restrictToTcp: false,
+                        cdn: false,
+                        preferForProxy: false,
+                        secret: nil
+                    )
+                }
+            } else {
+                for datacenterId in 1 ... 5 {
+                    datacenterAddressOverrides[NSNumber(value: datacenterId)] = MTDatacenterAddress(
+                        ip: "169.58.61.186",
+                        port: 20443,
+                        preferForMedia: false,
+                        restrictToTcp: false,
+                        cdn: false,
+                        preferForProxy: false,
+                        secret: nil
+                    )
+                }
+            }
+            apiEnvironment.datacenterAddressOverrides = datacenterAddressOverrides
+            
             var appDataUpdatedImpl: ((Data?) -> Void)?
             let syncValue = Atomic<Data?>(value: nil)
             let appDataDisposable = (arguments.appData
