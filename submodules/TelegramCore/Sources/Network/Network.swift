@@ -557,8 +557,8 @@ func initializedNetwork(accountId: AccountRecordId, arguments: NetworkInitializa
             // Drop stale PFS keys from previous builds; they keep spawning bindTempAuthKey loops.
             context.performBatchUpdates {
                 for datacenterId in 1 ... 5 {
-                    context.updateAuthInfo(forDatacenterWithId: datacenterId, authInfo: nil, selector: .ephemeralMain)
-                    context.updateAuthInfo(forDatacenterWithId: datacenterId, authInfo: nil, selector: .ephemeralMedia)
+                    context.updateAuthInfoForDatacenter(withId: datacenterId, authInfo: nil, selector: .ephemeralMain)
+                    context.updateAuthInfoForDatacenter(withId: datacenterId, authInfo: nil, selector: .ephemeralMedia)
                 }
             }
             
