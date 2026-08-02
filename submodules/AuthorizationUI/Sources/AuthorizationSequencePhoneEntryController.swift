@@ -230,55 +230,6 @@ public final class AuthorizationSequencePhoneEntryController: ViewController, MF
     
     private func loadAndPresentPasskey(force: Bool) {
         // Custom MyTelegram backends do not support Telegram passkey login yet.
-        return
-        if #available(iOS 16.0, *) {
-            Task { @MainActor [weak self] in
-                guard let self, let account = self.account else {
-                    return
-                }
-                
-                let decodeBase64: (String) -> Data? = { string in
-                    var string = string.replacingOccurrences(of: "-", with: "+")
-                        .replacingOccurrences(of: "_", with: "/")
-                    while string.count % 4 != 0 {
-                        string.append("=")
-                    }
-                    return Data(base64Encoded: string)
-                }
-                
-                let engine = TelegramEngineUnauthorized(account: account)
-                let passkeyDataString = await engine.auth.requestPasskeyLoginData(apiId: self.apiId, apiHash: self.apiHash).get()
-                guard let passkeyDataString, let passkeyData = passkeyDataString.data(using: .utf8) else {
-                    return
-                }
-                guard let params = try? JSONSerialization.jsonObject(with: passkeyData) as? [String: Any] else {
-                    return
-                }
-                guard let pkDict = params["publicKey"] as? [String: Any] else {
-                    return
-                }
-                guard let relyingPartyIdentifier = pkDict["rpId"] as? String else {
-                    return
-                }
-                guard let challengeBase64 = pkDict["challenge"] as? String else {
-                    return
-                }
-                guard let challengeData = decodeBase64(challengeBase64) else {
-                    return
-                }
-                
-                let platformProvider = ASAuthorizationPlatformPublicKeyCredentialProvider(relyingPartyIdentifier: relyingPartyIdentifier)
-                let platformKeyRequest = platformProvider.createCredentialAssertionRequest(challenge: challengeData)
-                let authController = ASAuthorizationController(authorizationRequests: [platformKeyRequest])
-                authController.delegate = self
-                authController.presentationContextProvider = self
-                if force {
-                    authController.performRequests()
-                } else {
-                    authController.performRequests(options: [.preferImmediatelyAvailableCredentials])
-                }
-            }
-        }
     }
     
     public func authorizationController(controller: ASAuthorizationController, didCompleteWithAuthorization authorization: ASAuthorization) {
