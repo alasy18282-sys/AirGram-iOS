@@ -1951,3 +1951,28 @@ ios_application(
         "//submodules/TelegramCore:TelegramCore",
     ],
 )
+
+ios_application(
+    name = "telegram_auth_build_test",
+    bundle_id = "{telegram_bundle_id}".format(
+        telegram_bundle_id = telegram_bundle_id,
+    ),
+    families = ["iphone", "ipad"],
+    minimum_os_version = minimum_os_version,
+    provisioning_profile = select({
+        ":disableProvisioningProfilesSetting": None,
+        "//conditions:default": "@build_configuration//provisioning:Telegram.mobileprovision",
+    }),
+    entitlements = ":TelegramEntitlements.entitlements",
+    infoplists = [
+        ":TelegramInfoPlist",
+        ":BuildNumberInfoPlist",
+        ":VersionInfoPlist",
+        ":RequiredDeviceCapabilitiesPlist",
+        ":UrlTypesInfoPlist",
+    ],
+    deps = [
+        ":Main",
+        "//submodules/AuthorizationUI:AuthorizationUI",
+    ],
+)
