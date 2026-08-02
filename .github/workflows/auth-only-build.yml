@@ -72,26 +72,25 @@ jobs:
           OUTPUT_PATH="build/artifacts"
           rm -rf "$OUTPUT_PATH"
           mkdir -p "$OUTPUT_PATH"
-          shopt -s globstar nullglob
 
           copied=0
-          for f in bazel-bin/**/telegram_auth_build_test*.ipa bazel-out/**/telegram_auth_build_test*.ipa; do
+          while IFS= read -r -d '' f; do
             cp "$f" "$OUTPUT_PATH/"
             copied=1
-          done
+          done < <(find bazel-bin bazel-out -type f -name 'telegram_auth_build_test*.ipa' -print0 2>/dev/null || true)
 
-          for f in bazel-bin/**/telegram_auth_build_test.app bazel-out/**/telegram_auth_build_test.app; do
-            zip -qry "$OUTPUT_PATH/telegram_auth_build_test.app.zip" "$f"
+          app_bundle="$(find bazel-bin bazel-out -type d -name 'telegram_auth_build_test.app' -print -quit 2>/dev/null || true)"
+          if [ -n "$app_bundle" ]; then
+            zip -qry "$OUTPUT_PATH/telegram_auth_build_test.app.zip" "$app_bundle"
             copied=1
-            break
-          done
+          fi
 
-          for f in bazel-bin/**/telegram_auth_build_test*.dSYM bazel-out/**/telegram_auth_build_test*.dSYM; do
+          while IFS= read -r -d '' f; do
             cp -R "$f" "$OUTPUT_PATH/"
             copied=1
-          done
+          done < <(find bazel-bin bazel-out -type d -name 'telegram_auth_build_test*.dSYM' -print0 2>/dev/null || true)
 
-          if compgen -G "$OUTPUT_PATH/*.dSYM" > /dev/null; then
+          if ls "$OUTPUT_PATH"/*.dSYM >/dev/null 2>&1; then
             (
               cd "$OUTPUT_PATH"
               zip -qry "telegram_auth_build_test.dSYM.zip" ./*.dSYM
