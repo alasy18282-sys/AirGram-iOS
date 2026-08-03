@@ -56,12 +56,10 @@ class Download: NSObject, MTRequestMessageServiceDelegate {
 
         var requiredAuthToken: Any?
         var authTokenMasterDatacenterId: Int = 0
-        // Single-host MyTelegram: all logical DCs share one IP. Waiting for
-        // auth.exportAuthorization/importAuthorization before media workers
-        // start is what leaves gifts/reactions/patterns as empty color tiles.
-        // Each DC still creates its own persistent auth key via handshake.
-        let skipCrossDatacenterAuthTransfer = true
-        if !isCdn && datacenterId != masterDatacenterId && !skipCrossDatacenterAuthTransfer {
+        // Required for media on secondary DCs (gift model/pattern documents are
+        // commonly dc_id=2 on MyTelegram). Skipping this leaves workers with
+        // unbound keys → empty gift tiles / static reactions / uzory.
+        if !isCdn && datacenterId != masterDatacenterId {
             authTokenMasterDatacenterId = masterDatacenterId
             requiredAuthToken = Int(datacenterId) as NSNumber
         }
