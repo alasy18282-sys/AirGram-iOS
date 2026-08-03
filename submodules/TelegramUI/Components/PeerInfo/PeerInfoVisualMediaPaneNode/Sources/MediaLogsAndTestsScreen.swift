@@ -12,7 +12,6 @@ import ComponentFlow
 import ViewControllerComponent
 import MultilineTextComponent
 import ButtonComponent
-import ButtonComponent
 
 private func describeResourceStatus(_ status: MediaResourceStatus) -> String {
     switch status {
@@ -86,7 +85,7 @@ private func runGiftMediaDiagnostics(context: AccountContext, peerId: PeerId, gi
         case let .unique(uniqueGift):
             giftLabel = "unique slug=\(uniqueGift.slug) num=\(uniqueGift.number)"
         case let .generic(starGift):
-            giftLabel = "starGift id=\(starGift.id) title=\(starGift.title)"
+            giftLabel = "starGift id=\(starGift.id) title=\(starGift.title ?? "nil")"
         }
         
         let mediaFiles = collectGiftMediaFiles(from: gift)
@@ -272,17 +271,18 @@ final class MediaLogsAndTestsScreenComponent: Component {
             })
         }
         
-        func update(component: MediaLogsAndTestsScreenComponent, availableSize: CGSize, state: EmptyComponentState, environment: Environment<Empty>, transition: ComponentTransition) -> CGSize {
+        func update(component: MediaLogsAndTestsScreenComponent, availableSize: CGSize, state: EmptyComponentState, environment: Environment<MediaLogsAndTestsScreenComponent.EnvironmentType>, transition: ComponentTransition) -> CGSize {
             self.component = component
-            self.environment = environment[EnvironmentType.self].value
+            let environmentValue = environment[MediaLogsAndTestsScreenComponent.EnvironmentType.self].value
+            self.environment = environmentValue
             
-            let theme = environment[EnvironmentType.self].value.theme
+            let theme = environmentValue.theme
             self.backgroundColor = theme.list.plainBackgroundColor
             self.textView.textColor = theme.list.itemPrimaryTextColor
             
             let sideInset: CGFloat = 16.0
             let buttonHeight: CGFloat = 50.0
-            let bottomInset = environment[EnvironmentType.self].value.safeInsets.bottom
+            let bottomInset = environmentValue.safeInsets.bottom
             
             let runButtonSize = self.runButton.update(
                 transition: transition,
@@ -373,7 +373,7 @@ final class MediaLogsAndTestsScreenComponent: Component {
         return View()
     }
     
-    func update(view: View, availableSize: CGSize, state: EmptyComponentState, environment: Environment<ViewControllerComponentContainer.Environment>, transition: ComponentTransition) -> CGSize {
+    func update(view: View, availableSize: CGSize, state: EmptyComponentState, environment: Environment<EnvironmentType>, transition: ComponentTransition) -> CGSize {
         return view.update(component: self, availableSize: availableSize, state: state, environment: environment, transition: transition)
     }
 }
