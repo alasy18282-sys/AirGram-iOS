@@ -654,7 +654,8 @@ private func extractAccountManagerState(records: AccountRecordsView<TelegramAcco
             isDebugConfiguration = true
         }
         
-        if isDebugConfiguration || buildConfig.isInternalBuild {
+        let isAirGramBuild = (Bundle.main.bundleIdentifier ?? "").hasPrefix("org.airgram")
+        if isDebugConfiguration || buildConfig.isInternalBuild || isAirGramBuild {
             LoggingSettings.defaultSettings = LoggingSettings(logToFile: true, logToConsole: false, redactSensitiveData: true)
         } else {
             LoggingSettings.defaultSettings = LoggingSettings(logToFile: false, logToConsole: false, redactSensitiveData: true)
@@ -1197,9 +1198,14 @@ private func extractAccountManagerState(records: AccountRecordsView<TelegramAcco
         }
         self.sharedContextPromise.set(sharedContextSignal
         |> mapToSignal { sharedApplicationContext, loggingSettings -> Signal<SharedApplicationContext, NoError> in
-            Logger.shared.logToFile = loggingSettings.logToFile
-            Logger.shared.logToConsole = loggingSettings.logToConsole
-            Logger.shared.redactSensitiveData = loggingSettings.redactSensitiveData
+            var effectiveSettings = loggingSettings
+            let isAirGramBuild = (Bundle.main.bundleIdentifier ?? "").hasPrefix("org.airgram")
+            if isAirGramBuild && !effectiveSettings.logToFile {
+                effectiveSettings = LoggingSettings(logToFile: true, logToConsole: effectiveSettings.logToConsole, redactSensitiveData: effectiveSettings.redactSensitiveData)
+            }
+            Logger.shared.logToFile = effectiveSettings.logToFile
+            Logger.shared.logToConsole = effectiveSettings.logToConsole
+            Logger.shared.redactSensitiveData = effectiveSettings.redactSensitiveData
             
             return .single(sharedApplicationContext)
         })

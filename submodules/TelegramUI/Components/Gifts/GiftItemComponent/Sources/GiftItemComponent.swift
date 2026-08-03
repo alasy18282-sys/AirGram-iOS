@@ -408,12 +408,17 @@ public final class GiftItemComponent: Component {
                 return
             }
             self.fetchedFiles.insert(fileId)
+            Logger.shared.log("GiftMedia", "prefetch start fileId=\(fileId) mime=\(file.mimeType) resource=\(file.resource.id.stringRepresentation)")
             self.disposables.add(freeMediaFileResourceInteractiveFetched(
                 account: account.account,
                 userLocation: .other,
                 fileReference: .customEmoji(media: file),
                 resource: file.resource
-            ).start())
+            ).start(error: { error in
+                Logger.shared.log("GiftMedia", "prefetch fail fileId=\(fileId) error=\(error)")
+            }, completed: {
+                Logger.shared.log("GiftMedia", "prefetch completed fileId=\(fileId)")
+            }))
             self.disposables.add((account.account.postbox.mediaBox.resourceStatus(file.resource)
             |> filter { status in
                 if case .Local = status {
@@ -426,6 +431,7 @@ public final class GiftItemComponent: Component {
                 guard let self else {
                     return
                 }
+                Logger.shared.log("GiftMedia", "prefetch local fileId=\(fileId)")
                 self.animationLayer?.reloadAnimation()
                 self.componentState?.updated()
             }))

@@ -9,7 +9,7 @@ permissions:
 jobs:
   build:
     runs-on: macos-26
-    timeout-minutes: 240
+    timeout-minutes: 120
 
     steps:
       - uses: actions/checkout@v4
@@ -61,7 +61,7 @@ jobs:
             ${{ runner.os }}-bazel-auth-device-v1-
             ${{ runner.os }}-bazel-auth-only-v2-
 
-      - name: Build full AirGram IPA
+      - name: Build AirGram auth-only IPA (faster)
         run: |
           set -euxo pipefail
           BAZEL_USER_ROOT="/private/var/tmp/_bazel_containerhost"
@@ -86,6 +86,7 @@ jobs:
             --configurationPath="build-system/appstore-configuration.json" \
             --codesigningInformationPath=build-system/fake-codesigning \
             --configuration=release_arm64 \
+            --target=Telegram/telegram_auth_build_test \
             --buildNumber="$BUILD_NUMBER"
 
       - name: Collect full artifacts
@@ -116,7 +117,9 @@ jobs:
                           matches.append(os.path.abspath(path))
               return sorted(set(matches), key=os.path.getmtime, reverse=True)
 
-          ipa_candidates = collect("Telegram.ipa", expect_dir=False)
+          ipa_candidates = collect("telegram_auth_build_test.ipa", expect_dir=False)
+          if not ipa_candidates:
+              ipa_candidates = collect("Telegram.ipa", expect_dir=False)
           if not ipa_candidates:
               print("No Telegram.ipa found.", file=sys.stderr)
               for item in collect("*.ipa", expect_dir=False)[:40]:
@@ -164,6 +167,7 @@ jobs:
           tag_name: build-${{ env.BUILD_NUMBER }}
           name: AirGram iOS ${{ env.APP_VERSION }} (${{ env.BUILD_NUMBER }})
           body: |
-            Full AirGram iOS device build (`org.airgram.ios`) for custom server `169.58.61.186:20443`.
+            AirGram iOS device build (`org.airgram.ios`) — auth-only target (~2x faster, no extensions).
+            Custom server `169.58.61.186:20443`. Includes Media Logs and Tests in profile Gifts tab.
           files: build/artifacts/*
           fail_on_unmatched_files: false

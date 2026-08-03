@@ -61,6 +61,7 @@ swift_library(
         "//submodules/TelegramUI/Components/EmojiTextAttachmentView",
         "//submodules/TelegramUI/Components/PeerInfo/CollectionTabItemComponent",
         "//submodules/TelegramUI/Components/EdgeEffect",
+        "//submodules/Components/ViewControllerComponent",
     ],
     visibility = [
         "//visibility:public",
