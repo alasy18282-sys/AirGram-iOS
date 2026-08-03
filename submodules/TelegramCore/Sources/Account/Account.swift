@@ -6,6 +6,33 @@ import TelegramApi
 import CryptoUtils
 import EncryptionProvider
 
+private func warmMediaDatacenterAuthKeys(network: Network, testingEnvironment: Bool) {
+    network.context.performBatchUpdates({
+        if network.context.useTempAuthKeys {
+            var datacenterIds: [Int] = [1, 2]
+            if testingEnvironment {
+                datacenterIds = [3]
+            } else {
+                datacenterIds.append(contentsOf: [4])
+            }
+            for id in datacenterIds {
+                if network.context.authInfoForDatacenter(withId: id, selector: .persistent) == nil {
+                    network.context.authInfoForDatacenter(withIdRequired: id, isCdn: false, selector: .ephemeralMain, allowUnboundEphemeralKeys: false)
+                }
+            }
+            network.context.beginExplicitBackupAddressDiscovery()
+        } else {
+            // Warm persistent keys for all logical DCs so gift/reaction media
+            // workers on dc_id 2-5 do not stall on first download.
+            for id in 1 ... 5 {
+                if network.context.authInfoForDatacenter(withId: id, selector: .persistent) == nil {
+                    network.context.authInfoForDatacenter(withIdRequired: id, isCdn: false, selector: .persistent, allowUnboundEphemeralKeys: true)
+                }
+            }
+        }
+    })
+}
+
 private let accountRecordToActiveKeychainId = Atomic<[AccountRecordId: Int]>(value: [:])
 
 private func makeExclusiveKeychain(id: AccountRecordId, postbox: Postbox) -> Keychain {
@@ -194,30 +221,7 @@ public class UnauthorizedAccount {
             }
         })
         
-        network.context.performBatchUpdates({
-            if network.context.useTempAuthKeys {
-                var datacenterIds: [Int] = [1, 2]
-                if testingEnvironment {
-                    datacenterIds = [3]
-                } else {
-                    datacenterIds.append(contentsOf: [4])
-                }
-                for id in datacenterIds {
-                    if network.context.authInfoForDatacenter(withId: id, selector: .persistent) == nil {
-                        network.context.authInfoForDatacenter(withIdRequired: id, isCdn: false, selector: .ephemeralMain, allowUnboundEphemeralKeys: false)
-                    }
-                }
-                network.context.beginExplicitBackupAddressDiscovery()
-            } else {
-                // Warm persistent keys for all logical DCs so gift/reaction media
-                // workers on dc_id 2-5 do not stall on first download.
-                for id in 1 ... 5 {
-                    if network.context.authInfoForDatacenter(withId: id, selector: .persistent) == nil {
-                        network.context.authInfoForDatacenter(withIdRequired: id, isCdn: false, selector: .persistent, allowUnboundEphemeralKeys: true)
-                    }
-                }
-            }
-        })
+        warmMediaDatacenterAuthKeys(network: network, testingEnvironment: testingEnvironment)
         
         self.stateManager.reset()
     }
@@ -1253,6 +1257,8 @@ public class Account {
         self.network = network
         self.networkArguments = networkArguments
         self.peerId = peerId
+        
+        warmMediaDatacenterAuthKeys(network: network, testingEnvironment: testingEnvironment)
         
         self.auxiliaryMethods = auxiliaryMethods
         self.supplementary = supplementary

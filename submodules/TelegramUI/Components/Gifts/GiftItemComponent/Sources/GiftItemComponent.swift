@@ -402,6 +402,35 @@ public final class GiftItemComponent: Component {
             self.component?.action?()
         }
         
+        private func prefetchUniqueGiftMedia(account: AccountContext, file: TelegramMediaFile) {
+            let fileId = file.fileId.id
+            guard !self.fetchedFiles.contains(fileId) else {
+                return
+            }
+            self.fetchedFiles.insert(fileId)
+            self.disposables.add(freeMediaFileResourceInteractiveFetched(
+                account: account.account,
+                userLocation: .other,
+                fileReference: .standalone(media: file),
+                resource: file.resource
+            ).start())
+            self.disposables.add((account.account.postbox.mediaBox.resourceStatus(file.resource)
+            |> filter { status in
+                if case .Local = status {
+                    return true
+                }
+                return false
+            }
+            |> take(1)
+            |> deliverOnMainQueue).start(next: { [weak self] _ in
+                guard let self else {
+                    return
+                }
+                self.animationLayer?.reloadAnimation()
+                self.componentState?.updated()
+            }))
+        }
+        
         func update(component: GiftItemComponent, availableSize: CGSize, state: EmptyComponentState, environment: Environment<Empty>, transition: ComponentTransition) -> CGSize {
             let isFirstTime = self.component == nil
             let previousComponent = self.component
@@ -556,17 +585,11 @@ public final class GiftItemComponent: Component {
                     switch attribute {
                     case let .model(_, file, _, _):
                         animationFile = file
-                        if !self.fetchedFiles.contains(file.fileId.id) {
-                            self.disposables.add(freeMediaFileResourceInteractiveFetched(account: component.context.account, userLocation: .other, fileReference: .standalone(media: file), resource: file.resource).start())
-                            self.fetchedFiles.insert(file.fileId.id)
-                        }
+                        self.prefetchUniqueGiftMedia(account: component.context, file: file)
                     case let .pattern(_, file, _):
                         patternFile = file
                         files[file.fileId.id] = file
-                        if !self.fetchedFiles.contains(file.fileId.id) {
-                            self.disposables.add(freeMediaFileResourceInteractiveFetched(account: component.context.account, userLocation: .other, fileReference: .standalone(media: file), resource: file.resource).start())
-                            self.fetchedFiles.insert(file.fileId.id)
-                        }
+                        self.prefetchUniqueGiftMedia(account: component.context, file: file)
                     case let .backdrop(_, _, innerColorValue, outerColorValue, patternColorValue, _, _):
                         backgroundColor = UIColor(rgb: UInt32(bitPattern: outerColorValue))
                         secondBackgroundColor = UIColor(rgb: UInt32(bitPattern: innerColorValue))
@@ -651,17 +674,11 @@ public final class GiftItemComponent: Component {
                     switch attribute {
                     case let .model(_, file, _, _):
                         animationFile = file
-                        if !self.fetchedFiles.contains(file.fileId.id) {
-                            self.disposables.add(freeMediaFileResourceInteractiveFetched(account: component.context.account, userLocation: .other, fileReference: .standalone(media: file), resource: file.resource).start())
-                            self.fetchedFiles.insert(file.fileId.id)
-                        }
+                        self.prefetchUniqueGiftMedia(account: component.context, file: file)
                     case let .pattern(_, file, _):
                         patternFile = file
                         files[file.fileId.id] = file
-                        if !self.fetchedFiles.contains(file.fileId.id) {
-                            self.disposables.add(freeMediaFileResourceInteractiveFetched(account: component.context.account, userLocation: .other, fileReference: .standalone(media: file), resource: file.resource).start())
-                            self.fetchedFiles.insert(file.fileId.id)
-                        }
+                        self.prefetchUniqueGiftMedia(account: component.context, file: file)
                     case let .backdrop(_, _, innerColorValue, outerColorValue, patternColorValue, _, _):
                         backgroundColor = UIColor(rgb: UInt32(bitPattern: outerColorValue))
                         secondBackgroundColor = UIColor(rgb: UInt32(bitPattern: innerColorValue))

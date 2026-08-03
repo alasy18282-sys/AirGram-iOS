@@ -102,6 +102,11 @@ func fetchResource(
             parameters: parameters
         ))
     } else if let cloudResource = resource as? TelegramMultipartFetchableResource {
+        var datacenterId = cloudResource.datacenterId
+        if datacenterId != network.datacenterId {
+            // Single-host MyTelegram: all logical DCs share one endpoint.
+            datacenterId = network.datacenterId
+        }
         return .single(.dataPart(resourceOffset: 0, data: Data(), range: 0 ..< 0, complete: false))
         |> then(fetchCloudMediaLocation(
             accountPeerId: accountPeerId,
@@ -110,7 +115,7 @@ func fetchResource(
             mediaReferenceRevalidationContext: mediaReferenceRevalidationContext,
             networkStatsContext: networkStatsContext,
             resource: cloudResource,
-            datacenterId: cloudResource.datacenterId,
+            datacenterId: datacenterId,
             size: resource.size == 0 ? nil : resource.size,
             intervals: intervals,
             parameters: parameters
