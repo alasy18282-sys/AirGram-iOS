@@ -658,6 +658,10 @@ public final class GiftCompositionComponent: Component {
                     case let .pattern(_, file, _):
                         patternFile = file
                         files[file.fileId.id] = file
+                        if !self.fetchedFiles.contains(file.fileId.id) {
+                            self.disposables.add(freeMediaFileResourceInteractiveFetched(account: component.context.account, userLocation: .other, fileReference: .standalone(media: file), resource: file.resource).start())
+                            self.fetchedFiles.insert(file.fileId.id)
+                        }
                     case let .backdrop(_, _, innerColorValue, outerColorValue, patternColorValue, _, _):
                         backgroundColor = UIColor(rgb: UInt32(bitPattern: outerColorValue))
                         secondBackgroundColor = UIColor(rgb: UInt32(bitPattern: innerColorValue))

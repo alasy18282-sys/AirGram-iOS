@@ -168,21 +168,33 @@ private func runGiftMediaDiagnostics(context: AccountContext, peerId: PeerId, gi
     let shortLogs = Logger.shared.collectShortLog()
     |> take(1)
     |> timeout(2.0, queue: Queue.mainQueue(), alternate: .single([]))
-    |> map { events -> String in
-        var lines = ["-----", "Recent GiftMedia / network logs:"]
-        let filtered = events.filter { _, message in
-            message.contains("GiftMedia") || message.contains("upload.getFile") || message.contains("FILE_REFERENCE") || message.contains("LOCATION_INVALID")
-        }.suffix(40)
-        if filtered.isEmpty {
-            lines.append("(no matching short logs yet)")
-        } else {
-            let formatter = ISO8601DateFormatter()
-            for (timestamp, message) in filtered {
-                let time = formatter.string(from: Date(timeIntervalSince1970: timestamp))
-                lines.append("\(time) \(message)")
+    |> mapToSignal { events -> Signal<String, NoError> in
+        return Logger.shared.collectLogs(prefix: "log-")
+        |> take(1)
+        |> map { logFiles -> String in
+            var lines = ["-----", "Recent GiftMedia / network logs (short):"]
+            let filtered = events.filter { _, message in
+                message.contains("GiftMedia") || message.contains("upload.getFile") || message.contains("FILE_REFERENCE") || message.contains("LOCATION_INVALID")
+            }.suffix(40)
+            if filtered.isEmpty {
+                lines.append("(no matching short logs yet)")
+            } else {
+                let formatter = ISO8601DateFormatter()
+                for (timestamp, message) in filtered {
+                    let time = formatter.string(from: Date(timeIntervalSince1970: timestamp))
+                    lines.append("\(time) \(message)")
+                }
             }
+            if !logFiles.isEmpty, let (_, path) = logFiles.last {
+                if let data = try? String(contentsOf: URL(fileURLWithPath: path), encoding: .utf8) {
+                    let tail = data.split(separator: "\n").suffix(30).joined(separator: "\n")
+                    lines.append("-----")
+                    lines.append("File log tail (\(URL(fileURLWithPath: path).lastPathComponent)):")
+                    lines.append(String(tail))
+                }
+            }
+            return lines.joined(separator: "\n")
         }
-        return lines.joined(separator: "\n")
     }
     
     return combineLatest(giftsReport, shortLogs)
@@ -257,7 +269,7 @@ final class MediaLogsAndTestsScreenComponent: Component {
                 return
             }
             self.isRunning = true
-            Logger.shared.log("GiftMedia", "MediaLogsAndTests: runTests peerId=\(component.peerId.id._internalGetInt64Value())")
+            Logger.shared.shortLog("GiftMedia", "MediaLogsAndTests: runTests peerId=\(component.peerId.id._internalGetInt64Value())")
             self.setReportText("Running tests...\n")
             
             self.disposable?.dispose()
@@ -271,7 +283,7 @@ final class MediaLogsAndTestsScreenComponent: Component {
                 }
                 self.isRunning = false
                 self.setReportText(text)
-                Logger.shared.log("GiftMedia", "MediaLogsAndTests: completed (\(text.count) chars)")
+                Logger.shared.shortLog("GiftMedia", "MediaLogsAndTests: completed (\(text.count) chars)")
             })
         }
         
@@ -326,7 +338,7 @@ final class MediaLogsAndTestsScreenComponent: Component {
                                 return
                             }
                             UIPasteboard.general.string = self.reportText
-                            Logger.shared.log("GiftMedia", "MediaLogsAndTests: copied report")
+                            Logger.shared.shortLog("GiftMedia", "MediaLogsAndTests: copied report")
                         }
                     )
                 ),
@@ -418,7 +430,7 @@ public final class MediaLogsAndTestsScreen: ViewControllerComponentContainer {
         let presentationData = context.sharedContext.currentPresentationData.with { $0 }
         self.navigationItem.leftBarButtonItem = UIBarButtonItem(title: presentationData.strings.Common_Close, style: .plain, target: self, action: #selector(self.closePressed))
         
-        Logger.shared.log("GiftMedia", "MediaLogsAndTestsScreen opened peerId=\(peerId.id._internalGetInt64Value())")
+        Logger.shared.shortLog("GiftMedia", "MediaLogsAndTestsScreen opened peerId=\(peerId.id._internalGetInt64Value())")
     }
     
     required public init(coder aDecoder: NSCoder) {

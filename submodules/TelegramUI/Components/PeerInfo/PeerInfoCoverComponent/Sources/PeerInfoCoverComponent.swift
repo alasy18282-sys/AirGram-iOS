@@ -285,6 +285,10 @@ public final class PeerInfoCoverComponent: Component {
             }
         }
         
+        public func reloadPattern() {
+            self.loadPatternFromFile()
+        }
+        
         public func animateIn() {
             guard let _ = self.currentSize, let component = self.component else {
                 return

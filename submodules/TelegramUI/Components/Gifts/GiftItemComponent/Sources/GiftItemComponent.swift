@@ -402,22 +402,22 @@ public final class GiftItemComponent: Component {
             self.component?.action?()
         }
         
-        private func prefetchUniqueGiftMedia(account: AccountContext, file: TelegramMediaFile) {
+        private func prefetchGiftMedia(account: AccountContext, file: TelegramMediaFile, reloadPattern: Bool = false) {
             let fileId = file.fileId.id
             guard !self.fetchedFiles.contains(fileId) else {
                 return
             }
             self.fetchedFiles.insert(fileId)
-            Logger.shared.log("GiftMedia", "prefetch start fileId=\(fileId) mime=\(file.mimeType) resource=\(file.resource.id.stringRepresentation)")
+            Logger.shared.shortLog("GiftMedia", "prefetch start fileId=\(fileId) mime=\(file.mimeType) resource=\(file.resource.id.stringRepresentation)")
             self.disposables.add(freeMediaFileResourceInteractiveFetched(
                 account: account.account,
                 userLocation: .other,
-                fileReference: .customEmoji(media: file),
+                fileReference: .standalone(media: file),
                 resource: file.resource
             ).start(error: { error in
-                Logger.shared.log("GiftMedia", "prefetch fail fileId=\(fileId) error=\(error)")
+                Logger.shared.shortLog("GiftMedia", "prefetch fail fileId=\(fileId) error=\(error)")
             }, completed: {
-                Logger.shared.log("GiftMedia", "prefetch completed fileId=\(fileId)")
+                Logger.shared.shortLog("GiftMedia", "prefetch completed fileId=\(fileId)")
             }))
             self.disposables.add((account.account.postbox.mediaBox.resourceStatus(file.resource)
             |> filter { status in
@@ -431,8 +431,11 @@ public final class GiftItemComponent: Component {
                 guard let self else {
                     return
                 }
-                Logger.shared.log("GiftMedia", "prefetch local fileId=\(fileId)")
+                Logger.shared.shortLog("GiftMedia", "prefetch local fileId=\(fileId)")
                 self.animationLayer?.reloadAnimation()
+                if reloadPattern, let patternView = self.patternView.view as? PeerInfoCoverComponent.View {
+                    patternView.reloadPattern()
+                }
                 self.componentState?.updated()
             }))
         }
@@ -579,6 +582,7 @@ public final class GiftItemComponent: Component {
                 )
             case let .starGift(gift, _):
                 animationFile = gift.file
+                self.prefetchGiftMedia(account: component.context, file: gift.file)
                 emoji = ChatTextInputTextCustomEmojiAttribute(
                     interactivelySelectedFromPackId: nil,
                     fileId: gift.file.fileId.id,
@@ -591,11 +595,11 @@ public final class GiftItemComponent: Component {
                     switch attribute {
                     case let .model(_, file, _, _):
                         animationFile = file
-                        self.prefetchUniqueGiftMedia(account: component.context, file: file)
+                        self.prefetchGiftMedia(account: component.context, file: file)
                     case let .pattern(_, file, _):
                         patternFile = file
                         files[file.fileId.id] = file
-                        self.prefetchUniqueGiftMedia(account: component.context, file: file)
+                        self.prefetchGiftMedia(account: component.context, file: file, reloadPattern: true)
                     case let .backdrop(_, _, innerColorValue, outerColorValue, patternColorValue, _, _):
                         backgroundColor = UIColor(rgb: UInt32(bitPattern: outerColorValue))
                         secondBackgroundColor = UIColor(rgb: UInt32(bitPattern: innerColorValue))
@@ -621,6 +625,7 @@ public final class GiftItemComponent: Component {
                 animationOffset = 16.0
                 explicitAnimationOffset = -16.0
                 animationFile = gift.file
+                self.prefetchGiftMedia(account: component.context, file: gift.file)
                 
                 if let background = gift.background {
                     backgroundColor = UIColor(rgb: UInt32(bitPattern: background.edgeColor))
@@ -680,11 +685,11 @@ public final class GiftItemComponent: Component {
                     switch attribute {
                     case let .model(_, file, _, _):
                         animationFile = file
-                        self.prefetchUniqueGiftMedia(account: component.context, file: file)
+                        self.prefetchGiftMedia(account: component.context, file: file)
                     case let .pattern(_, file, _):
                         patternFile = file
                         files[file.fileId.id] = file
-                        self.prefetchUniqueGiftMedia(account: component.context, file: file)
+                        self.prefetchGiftMedia(account: component.context, file: file, reloadPattern: true)
                     case let .backdrop(_, _, innerColorValue, outerColorValue, patternColorValue, _, _):
                         backgroundColor = UIColor(rgb: UInt32(bitPattern: outerColorValue))
                         secondBackgroundColor = UIColor(rgb: UInt32(bitPattern: innerColorValue))
@@ -740,7 +745,7 @@ public final class GiftItemComponent: Component {
                 let animationLayer = InlineStickerItemLayer(
                     context: .account(component.context),
                     userLocation: .other,
-                    attemptSynchronousLoad: false,
+                    attemptSynchronousLoad: true,
                     emoji: emoji,
                     file: animationFile,
                     cache: component.context.animationCache,
