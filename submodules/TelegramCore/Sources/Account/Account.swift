@@ -208,8 +208,14 @@ public class UnauthorizedAccount {
                     }
                 }
                 network.context.beginExplicitBackupAddressDiscovery()
-            } else if network.context.authInfoForDatacenter(withId: Int(network.mtProto.datacenterId), selector: .persistent) == nil {
-                network.context.authInfoForDatacenter(withIdRequired: Int(network.mtProto.datacenterId), isCdn: false, selector: .persistent, allowUnboundEphemeralKeys: true)
+            } else {
+                // Warm persistent keys for all logical DCs so gift/reaction media
+                // workers on dc_id 2-5 do not stall on first download.
+                for id in 1 ... 5 {
+                    if network.context.authInfoForDatacenter(withId: id, selector: .persistent) == nil {
+                        network.context.authInfoForDatacenter(withIdRequired: id, isCdn: false, selector: .persistent, allowUnboundEphemeralKeys: true)
+                    }
+                }
             }
         })
         

@@ -563,13 +563,17 @@ public final class GiftItemComponent: Component {
                     case let .pattern(_, file, _):
                         patternFile = file
                         files[file.fileId.id] = file
+                        if !self.fetchedFiles.contains(file.fileId.id) {
+                            self.disposables.add(freeMediaFileResourceInteractiveFetched(account: component.context.account, userLocation: .other, fileReference: .standalone(media: file), resource: file.resource).start())
+                            self.fetchedFiles.insert(file.fileId.id)
+                        }
                     case let .backdrop(_, _, innerColorValue, outerColorValue, patternColorValue, _, _):
                         backgroundColor = UIColor(rgb: UInt32(bitPattern: outerColorValue))
                         secondBackgroundColor = UIColor(rgb: UInt32(bitPattern: innerColorValue))
                         patternColor = UIColor(rgb: UInt32(bitPattern: patternColorValue))
-                        if let backgroundColor {
-                            placeholderColor = backgroundColor
-                        }
+                        // Keep a visible placeholder tint so embedded path thumbnails
+                        // remain readable while the full static sticker downloads.
+                        placeholderColor = UIColor(white: 1.0, alpha: 0.18)
                     default:
                         break
                     }
@@ -654,13 +658,17 @@ public final class GiftItemComponent: Component {
                     case let .pattern(_, file, _):
                         patternFile = file
                         files[file.fileId.id] = file
+                        if !self.fetchedFiles.contains(file.fileId.id) {
+                            self.disposables.add(freeMediaFileResourceInteractiveFetched(account: component.context.account, userLocation: .other, fileReference: .standalone(media: file), resource: file.resource).start())
+                            self.fetchedFiles.insert(file.fileId.id)
+                        }
                     case let .backdrop(_, _, innerColorValue, outerColorValue, patternColorValue, _, _):
                         backgroundColor = UIColor(rgb: UInt32(bitPattern: outerColorValue))
                         secondBackgroundColor = UIColor(rgb: UInt32(bitPattern: innerColorValue))
                         patternColor = UIColor(rgb: UInt32(bitPattern: patternColorValue))
-                        if let backgroundColor {
-                            placeholderColor = backgroundColor
-                        }
+                        // Keep a visible placeholder tint so embedded path thumbnails
+                        // remain readable while the full static sticker downloads.
+                        placeholderColor = UIColor(white: 1.0, alpha: 0.18)
                     default:
                         break
                     }

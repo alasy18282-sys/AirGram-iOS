@@ -56,7 +56,12 @@ class Download: NSObject, MTRequestMessageServiceDelegate {
 
         var requiredAuthToken: Any?
         var authTokenMasterDatacenterId: Int = 0
-        if !isCdn && datacenterId != masterDatacenterId {
+        // Single-host MyTelegram: all logical DCs share one IP. Waiting for
+        // auth.exportAuthorization/importAuthorization before media workers
+        // start is what leaves gifts/reactions/patterns as empty color tiles.
+        // Each DC still creates its own persistent auth key via handshake.
+        let skipCrossDatacenterAuthTransfer = true
+        if !isCdn && datacenterId != masterDatacenterId && !skipCrossDatacenterAuthTransfer {
             authTokenMasterDatacenterId = masterDatacenterId
             requiredAuthToken = Int(datacenterId) as NSNumber
         }
@@ -69,6 +74,8 @@ class Download: NSObject, MTRequestMessageServiceDelegate {
         self.mtProto.cdn = isCdn
         self.mtProto.useTempAuthKeys = self.context.useTempAuthKeys && !isCdn
         self.mtProto.media = isMedia
+        self.mtProto.allowUnboundEphemeralKeys = true
+        self.mtProto.checkForProxyConnectionIssues = false
         self.requestService = MTRequestMessageService(context: self.context)
         self.requestService.forceBackgroundRequests = true
         
