@@ -9,6 +9,7 @@ permissions:
 jobs:
   build:
     runs-on: macos-26
+    timeout-minutes: 240
 
     steps:
       - uses: actions/checkout@v4
@@ -37,14 +38,6 @@ jobs:
           fi
           sudo xcode-select -s "$XCODE_APP/Contents/Developer"
           xcodebuild -version
-          xcode-select -p
-
-      - name: Create canonical source directory
-        run: |
-          set -euxo pipefail
-          sudo mkdir -p /Users/Shared
-          cp -R "$GITHUB_WORKSPACE" /Users/Shared/
-          mv "/Users/Shared/$(basename "$GITHUB_WORKSPACE")" /Users/Shared/telegram-ios
 
       - name: Install build dependencies
         run: |
@@ -58,23 +51,34 @@ jobs:
           find . -name '*.sh' -print0 | xargs -0 chmod +x
           find submodules/ffmpeg third-party -type f \( -name configure -o -name pkg-config -o -name '*.pl' \) -print0 | xargs -0 chmod +x
 
-      - name: Build the App
-        timeout-minutes: 180
+      - name: Restore Bazel cache
+        uses: actions/cache@v4
+        with:
+          path: /private/var/tmp/_bazel_containerhost
+          key: ${{ runner.os }}-bazel-full-device-v1-${{ hashFiles('WORKSPACE', 'WORKSPACE.bzlmod', 'MODULE.bazel', '.bazelrc', 'build-system/Make/Make.py', 'Telegram/BUILD') }}
+          restore-keys: |
+            ${{ runner.os }}-bazel-full-device-v1-
+            ${{ runner.os }}-bazel-auth-device-v1-
+            ${{ runner.os }}-bazel-auth-only-v2-
+
+      - name: Build full AirGram IPA
         run: |
           set -euxo pipefail
-          SOURCE_DIR=/Users/Shared/telegram-ios
           BAZEL_USER_ROOT="/private/var/tmp/_bazel_containerhost"
-          cd "$SOURCE_DIR"
-
           BUILD_NUMBER_OFFSET="$(cat build_number_offset)"
-          export APP_VERSION=$(python3 -c 'import json; print(json.load(open("versions.json"))["app"])')
-          export COMMIT_COUNT=$(git rev-list --count HEAD)
-          export COMMIT_COUNT="$((COMMIT_COUNT + BUILD_NUMBER_OFFSET))"
-          export BUILD_NUMBER="$COMMIT_COUNT"
+          COMMIT_COUNT=$(git rev-list --count HEAD)
+          BUILD_NUMBER="$((COMMIT_COUNT + BUILD_NUMBER_OFFSET))"
+          APP_VERSION=$(python3 -c 'import json; print(json.load(open("versions.json"))["app"])')
           echo "BUILD_NUMBER=$BUILD_NUMBER" >> "$GITHUB_ENV"
           echo "APP_VERSION=$APP_VERSION" >> "$GITHUB_ENV"
 
           python3 build-system/Make/ImportCertificates.py --path build-system/fake-codesigning/certs
+          python3 build-system/Make/RewriteProfilesBundleId.py \
+            --profiles build-system/fake-codesigning/profiles \
+            --certs build-system/fake-codesigning/certs \
+            --old-bundle ph.telegra.Telegraph \
+            --new-bundle org.airgram.ios
+
           python3 -u build-system/Make/Make.py \
             --bazelUserRoot="$BAZEL_USER_ROOT" \
             --overrideXcodeVersion \
@@ -84,42 +88,74 @@ jobs:
             --configuration=release_arm64 \
             --buildNumber="$BUILD_NUMBER"
 
+      - name: Collect full artifacts
+        run: |
+          set -euxo pipefail
           OUTPUT_PATH="build/artifacts"
           rm -rf "$OUTPUT_PATH"
           mkdir -p "$OUTPUT_PATH"
-          shopt -s nullglob
+          python3 - <<'PY'
+          import glob
+          import os
+          import shutil
+          import sys
+          import zipfile
 
-          # Newer Bazel layouts place IPA in bazel-bin; keep legacy bazel-out fallback.
-          if [ -f "bazel-bin/Telegram/Telegram.ipa" ]; then
-            cp "bazel-bin/Telegram/Telegram.ipa" "$OUTPUT_PATH/"
-          else
-            for f in bazel-out/applebin_ios-ios_arm*-opt-ST-*/bin/Telegram/Telegram.ipa; do
-              cp "$f" "$OUTPUT_PATH/"
-            done
-          fi
+          output_path = "build/artifacts"
+          search_roots = ["bazel-bin", "bazel-out", "/private/var/tmp/_bazel_containerhost"]
 
-          if [ ! -f "$OUTPUT_PATH/Telegram.ipa" ]; then
-            echo "Telegram.ipa was not produced"
-            find bazel-bin bazel-out -name '*.ipa' || true
-            exit 1
-          fi
+          def collect(pattern: str, expect_dir: bool):
+              matches = []
+              for root in search_roots:
+                  if not os.path.exists(root):
+                      continue
+                  for path in glob.glob(os.path.join(root, "**", pattern), recursive=True):
+                      if expect_dir and os.path.isdir(path):
+                          matches.append(os.path.abspath(path))
+                      if not expect_dir and os.path.isfile(path):
+                          matches.append(os.path.abspath(path))
+              return sorted(set(matches), key=os.path.getmtime, reverse=True)
 
-          mkdir -p build/DSYMs
-          for f in bazel-bin/Telegram/*.dSYM; do
-            cp -R "$f" build/DSYMs/
-          done
-          for f in bazel-out/applebin_ios-ios_arm*-opt-ST-*/bin/Telegram/*.dSYM; do
-            cp -R "$f" build/DSYMs/
-          done
-          if [ -d build/DSYMs ] && [ "$(ls -A build/DSYMs)" ]; then
-            zip -r "$OUTPUT_PATH/Telegram.DSYMs.zip" build/DSYMs
-          fi
+          ipa_candidates = collect("Telegram.ipa", expect_dir=False)
+          if not ipa_candidates:
+              print("No Telegram.ipa found.", file=sys.stderr)
+              for item in collect("*.ipa", expect_dir=False)[:40]:
+                  print(f"debug-ipa: {item}", file=sys.stderr)
+              sys.exit(1)
+
+          ipa_path = ipa_candidates[0]
+          print(f"Using IPA: {ipa_path}")
+          shutil.copy2(ipa_path, os.path.join(output_path, "AirGram.ipa"))
+          shutil.copy2(ipa_path, os.path.join(output_path, "Telegram.ipa"))
+
+          base_dir = os.path.dirname(ipa_path)
+          dsym_candidates = [p for p in glob.glob(os.path.join(base_dir, "*.dSYM")) if os.path.isdir(p)]
+          if not dsym_candidates:
+              dsym_candidates = collect("Telegram*.dSYM", expect_dir=True)
+
+          if dsym_candidates:
+              dsym_root = os.path.join(output_path, "DSYMs")
+              os.makedirs(dsym_root, exist_ok=True)
+              for dsym in dsym_candidates:
+                  target = os.path.join(dsym_root, os.path.basename(dsym))
+                  if os.path.exists(target):
+                      continue
+                  shutil.copytree(dsym, target)
+              dsym_zip = os.path.join(output_path, "AirGram.DSYMs.zip")
+              with zipfile.ZipFile(dsym_zip, "w", compression=zipfile.ZIP_DEFLATED) as zf:
+                  for root, _, files in os.walk(dsym_root):
+                      for file_name in files:
+                          file_path = os.path.join(root, file_name)
+                          zf.write(file_path, arcname=os.path.relpath(file_path, output_path))
+              shutil.rmtree(dsym_root)
+          PY
+          ls -la "$OUTPUT_PATH"
 
       - name: Upload IPA artifact
         uses: actions/upload-artifact@v4
         with:
           name: AirGram-iOS-${{ env.APP_VERSION }}-${{ env.BUILD_NUMBER }}
-          path: /Users/Shared/telegram-ios/build/artifacts/Telegram.ipa
+          path: build/artifacts/*
           if-no-files-found: error
 
       - name: Create GitHub Release
@@ -128,8 +164,6 @@ jobs:
           tag_name: build-${{ env.BUILD_NUMBER }}
           name: AirGram iOS ${{ env.APP_VERSION }} (${{ env.BUILD_NUMBER }})
           body: |
-            Custom AirGram iOS build connected to server 169.58.61.186:20443
-          files: |
-            /Users/Shared/telegram-ios/build/artifacts/Telegram.ipa
-            /Users/Shared/telegram-ios/build/artifacts/Telegram.DSYMs.zip
+            Full AirGram iOS device build (`org.airgram.ios`) for custom server `169.58.61.186:20443`.
+          files: build/artifacts/*
           fail_on_unmatched_files: false

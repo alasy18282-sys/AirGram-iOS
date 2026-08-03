@@ -46,9 +46,8 @@ public final class AuthorizationSequenceController: NavigationController, ASAuth
     private let openUrl: (String) -> Void
     private let authorizationCompleted: () -> Void
     
-    // Temporary validation mode: keep the app in authorization flow after login.
-    // This helps test only auth connectivity without entering the full UI.
-    private let authorizationOnlyMode = true
+    // Keep false for full app builds. Auth-only CI can re-enable for login-only testing.
+    private let authorizationOnlyMode = false
     private var didPresentAuthorizationOnlyAlert = false
     
     private var stateDisposable: Disposable?

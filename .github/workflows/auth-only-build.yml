@@ -58,6 +58,7 @@ jobs:
           key: ${{ runner.os }}-bazel-auth-device-v1-${{ hashFiles('WORKSPACE', 'WORKSPACE.bzlmod', 'MODULE.bazel', '.bazelrc', 'build-system/Make/Make.py', 'Telegram/BUILD') }}
           restore-keys: |
             ${{ runner.os }}-bazel-auth-device-v1-
+            ${{ runner.os }}-bazel-full-device-v1-
             ${{ runner.os }}-bazel-auth-only-v2-
 
       - name: Compile auth-only device IPA
