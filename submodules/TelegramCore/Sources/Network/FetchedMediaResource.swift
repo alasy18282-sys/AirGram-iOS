@@ -1053,14 +1053,15 @@ func revalidateMediaResourceReference(accountPeerId: PeerId, postbox: Postbox, n
                                 }
                             }
                         }
-                    }
-                    return revalidationContext.customEmoji(postbox: postbox, network: network, background: info.preferBackgroundReferenceRevalidation, fileId: file.fileId.id)
-                    |> mapToSignal { result -> Signal<RevalidatedMediaResource, RevalidateMediaReferenceError> in
-                        if let updatedResource = findUpdatedMediaResource(media: result, previousMedia: media, resource: resource) {
-                            return .single(RevalidatedMediaResource(updatedResource: updatedResource, updatedReference: nil))
+                        return revalidationContext.customEmoji(postbox: postbox, network: network, background: info.preferBackgroundReferenceRevalidation, fileId: file.fileId.id)
+                        |> mapToSignal { result -> Signal<RevalidatedMediaResource, RevalidateMediaReferenceError> in
+                            if let updatedResource = findUpdatedMediaResource(media: result, previousMedia: media, resource: resource) {
+                                return .single(RevalidatedMediaResource(updatedResource: updatedResource, updatedReference: nil))
+                            }
+                            return .fail(.generic)
                         }
-                        return .fail(.generic)
                     }
+                    return .fail(.generic)
                 case let .customEmoji(media):
                     if let file = media as? TelegramMediaFile {
                         return revalidationContext.customEmoji(postbox: postbox, network: network, background: info.preferBackgroundReferenceRevalidation, fileId: file.fileId.id)
