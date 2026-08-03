@@ -18,14 +18,14 @@ public let sharedReactionStaticImage = Queue(name: "SharedReactionStaticImage", 
 public func reactionStaticImage(context: AccountContext, animation: TelegramMediaFile, pixelSize: CGSize, queue: Queue) -> Signal<EngineMediaResource.ResourceData, NoError> {
     return context.engine.resources.custom(id: "\(animation.resource.id.stringRepresentation):reaction-static-\(pixelSize.width)x\(pixelSize.height)-v10", fetch: EngineMediaResource.Fetch {
         return Signal { subscriber in
-            let fetchDisposable = fetchedMediaResource(mediaBox: context.account.postbox.mediaBox, userLocation: .other, userContentType: .image, reference: MediaResourceReference.standalone(resource: animation.resource)).start()
+            let fetchDisposable = fetchedMediaResource(mediaBox: context.account.postbox.mediaBox, userLocation: .other, userContentType: .image, reference: MediaResourceReference.media(media: .standalone(media: animation), resource: animation.resource)).start()
             
             var customColor: UIColor?
             if animation.isCustomTemplateEmoji {
                 customColor = nil
             }
             
-            let fetchFrame = animationCacheFetchFile(context: context, userLocation: .other, userContentType: .sticker, resource: MediaResourceReference.standalone(resource: animation.resource), type: AnimationCacheAnimationType(file: animation), keyframeOnly: true, customColor: customColor)
+            let fetchFrame = animationCacheFetchFile(context: context, userLocation: .other, userContentType: .sticker, resource: MediaResourceReference.media(media: .standalone(media: animation), resource: animation.resource), type: AnimationCacheAnimationType(file: animation), keyframeOnly: true, customColor: customColor)
             
             class AnimationCacheItemWriterImpl: AnimationCacheItemWriter {
                 let queue: Queue

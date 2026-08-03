@@ -411,7 +411,7 @@ public final class GiftItemComponent: Component {
             self.disposables.add(freeMediaFileResourceInteractiveFetched(
                 account: account.account,
                 userLocation: .other,
-                fileReference: .standalone(media: file),
+                fileReference: .customEmoji(media: file),
                 resource: file.resource
             ).start())
             self.disposables.add((account.account.postbox.mediaBox.resourceStatus(file.resource)

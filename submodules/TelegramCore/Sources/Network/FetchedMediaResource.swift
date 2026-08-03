@@ -1054,7 +1054,13 @@ func revalidateMediaResourceReference(accountPeerId: PeerId, postbox: Postbox, n
                             }
                         }
                     }
-                    return .fail(.generic)
+                    return revalidationContext.customEmoji(postbox: postbox, network: network, background: info.preferBackgroundReferenceRevalidation, fileId: file.fileId.id)
+                    |> mapToSignal { result -> Signal<RevalidatedMediaResource, RevalidateMediaReferenceError> in
+                        if let updatedResource = findUpdatedMediaResource(media: result, previousMedia: media, resource: resource) {
+                            return .single(RevalidatedMediaResource(updatedResource: updatedResource, updatedReference: nil))
+                        }
+                        return .fail(.generic)
+                    }
                 case let .customEmoji(media):
                     if let file = media as? TelegramMediaFile {
                         return revalidationContext.customEmoji(postbox: postbox, network: network, background: info.preferBackgroundReferenceRevalidation, fileId: file.fileId.id)
@@ -1187,7 +1193,16 @@ func revalidateMediaResourceReference(accountPeerId: PeerId, postbox: Postbox, n
                 }
                 return .fail(.generic)
             }
-        case .standalone:
+        case let .standalone(staleResource):
+            if let cloud = staleResource as? CloudDocumentMediaResource {
+                return revalidationContext.customEmoji(postbox: postbox, network: network, background: info.preferBackgroundReferenceRevalidation, fileId: cloud.fileId)
+                |> mapToSignal { result -> Signal<RevalidatedMediaResource, RevalidateMediaReferenceError> in
+                    if let updatedResource = findUpdatedMediaResource(media: result, previousMedia: nil, resource: resource) {
+                        return .single(RevalidatedMediaResource(updatedResource: updatedResource, updatedReference: nil))
+                    }
+                    return .fail(.generic)
+                }
+            }
             return .fail(.generic)
     }
 }
