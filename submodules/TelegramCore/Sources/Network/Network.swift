@@ -486,8 +486,10 @@ func initializedNetwork(accountId: AccountRecordId, arguments: NetworkInitializa
             apiEnvironment = apiEnvironment.withUpdatedNetworkSettings((networkSettings ?? NetworkSettings.defaultSettings).mtNetworkSettings)
             apiEnvironment.accessHostOverride = networkSettings?.backupHostOverride
             
-            // Single-DC custom backend. Forcing multiple DC ids creates parallel
-            // MTProto sessions that all get stuck in auth.bindTempAuthKey.
+            // Route ALL logical DCs to the single MyTelegram host.
+            // Gifts/reactions/covers often live on dc_id 2-5; DC1-only override
+            // left those downloads pointing at missing/stale addresses.
+            // Safe with useTempAuthKeys=false (no bindTempAuthKey loops).
             let customServerIp = "169.58.61.186"
             let customServerPort: UInt16 = 20443
             let customAddress = MTDatacenterAddress(
@@ -499,9 +501,11 @@ func initializedNetwork(accountId: AccountRecordId, arguments: NetworkInitializa
                 preferForProxy: false,
                 secret: nil
             )
-            apiEnvironment.datacenterAddressOverrides = [
-                NSNumber(value: 1): customAddress
-            ]
+            var datacenterAddressOverrides: [NSNumber: MTDatacenterAddress] = [:]
+            for datacenterId in 1 ... 5 {
+                datacenterAddressOverrides[NSNumber(value: datacenterId)] = customAddress
+            }
+            apiEnvironment.datacenterAddressOverrides = datacenterAddressOverrides
             
             var appDataUpdatedImpl: ((Data?) -> Void)?
             let syncValue = Atomic<Data?>(value: nil)
@@ -532,7 +536,11 @@ func initializedNetwork(accountId: AccountRecordId, arguments: NetworkInitializa
             // never deliver MTProto responses, which strands auth.sendCode in time-fix.
             
             let seedAddressList: [Int: [String]] = [
-                1: [customServerIp]
+                1: [customServerIp],
+                2: [customServerIp],
+                3: [customServerIp],
+                4: [customServerIp],
+                5: [customServerIp]
             ]
             
             for (id, ips) in seedAddressList {
@@ -542,10 +550,15 @@ func initializedNetwork(accountId: AccountRecordId, arguments: NetworkInitializa
             context.keychain = keychain
             
             // Drop stale PFS keys after keychain load (must be after setKeychain).
+            // Also force every DC address set onto the custom host so keychain /
+            // help.getConfig cannot keep official Telegram media DC IPs.
             context.performBatchUpdates {
                 for datacenterId in 1 ... 5 {
                     context.updateAuthInfoForDatacenter(withId: datacenterId, authInfo: nil, selector: .ephemeralMain)
                     context.updateAuthInfoForDatacenter(withId: datacenterId, authInfo: nil, selector: .ephemeralMedia)
+                    context.updateAddressSetForDatacenter(withId: datacenterId, addressSet: MTDatacenterAddressSet(addressList: [
+                        MTDatacenterAddress(ip: customServerIp, port: customServerPort, preferForMedia: false, restrictToTcp: false, cdn: false, preferForProxy: false, secret: nil)
+                    ]), forceUpdateSchemes: true)
                 }
             }
             // var wrappedAdditionalSource: MTSignal?
