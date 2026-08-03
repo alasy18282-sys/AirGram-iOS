@@ -854,7 +854,13 @@ public final class InlineStickerItemLayer: MultiAnimationRenderTarget {
     }
     
     public func reloadAnimation() {
-        self.updateFile(attemptSynchronousLoad: false)
+        guard let file = self.file else {
+            return
+        }
+        self.loadDisposable?.dispose()
+        self.disposable?.dispose()
+        self.file = nil
+        self.updateFile(file: file, attemptSynchronousLoad: false)
     }
     
     private func loadAnimation() {
@@ -885,7 +891,7 @@ public final class InlineStickerItemLayer: MultiAnimationRenderTarget {
                     cacheStillSticker(path: result.path, width: Int(options.size.width), height: Int(options.size.height), writer: options.writer, customColor: isTemplate ? .white : nil)
                 })
                 
-                let fetchDisposable = freeMediaFileResourceInteractiveFetched(postbox: context.postbox, userLocation: arguments.userLocation, fileReference: .customEmoji(media: file), resource: file.resource).start()
+                let fetchDisposable = freeMediaFileResourceInteractiveFetched(postbox: context.postbox, userLocation: arguments.userLocation, fileReference: .standalone(media: file), resource: file.resource).start()
                 
                 return ActionDisposable {
                     dataDisposable.dispose()

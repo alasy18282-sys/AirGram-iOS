@@ -402,6 +402,13 @@ public final class GiftItemComponent: Component {
             self.component?.action?()
         }
         
+        private func forceReloadGiftAnimation() {
+            self.animationLayer?.removeFromSuperlayer()
+            self.animationLayer = nil
+            self.animationFile = nil
+            self.componentState?.updated(transition: .immediate)
+        }
+        
         private func prefetchGiftMedia(account: AccountContext, file: TelegramMediaFile, reloadPattern: Bool = false) {
             let fileId = file.fileId.id
             guard !self.fetchedFiles.contains(fileId) else {
@@ -432,11 +439,10 @@ public final class GiftItemComponent: Component {
                     return
                 }
                 Logger.shared.shortLog("GiftMedia", "prefetch local fileId=\(fileId)")
-                self.animationLayer?.reloadAnimation()
+                self.forceReloadGiftAnimation()
                 if reloadPattern, let patternView = self.patternView.view as? PeerInfoCoverComponent.View {
                     patternView.reloadPattern()
                 }
-                self.componentState?.updated()
             }))
         }
         
@@ -445,6 +451,13 @@ public final class GiftItemComponent: Component {
             let previousComponent = self.component
             self.component = component
             self.componentState = state
+            
+            if previousComponent?.subject != component.subject {
+                self.fetchedFiles.removeAll()
+                self.animationLayer?.removeFromSuperlayer()
+                self.animationLayer = nil
+                self.animationFile = nil
+            }
                         
             self.isGestureEnabled = component.contextAction != nil
             
@@ -726,7 +739,8 @@ public final class GiftItemComponent: Component {
             
             var animationTransition = transition
             var animateBackgroundChange = false
-            if self.animationLayer == nil || self.animationFile?.fileId != animationFile?.fileId, let emoji {
+            let shouldRecreateAnimationLayer = self.animationLayer == nil || self.animationFile?.fileId != animationFile?.fileId
+            if shouldRecreateAnimationLayer, let emoji {
                 animationTransition = .immediate
                 self.animationFile = animationFile
                 var animateAppearance = false
