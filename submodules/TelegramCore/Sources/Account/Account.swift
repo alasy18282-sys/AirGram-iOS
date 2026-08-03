@@ -1258,7 +1258,9 @@ public class Account {
         self.networkArguments = networkArguments
         self.peerId = peerId
         
-        warmMediaDatacenterAuthKeys(network: network, testingEnvironment: testingEnvironment)
+        Queue.concurrentDefaultQueue().after(1.0, {
+            warmMediaDatacenterAuthKeys(network: network, testingEnvironment: testingEnvironment)
+        })
         
         self.auxiliaryMethods = auxiliaryMethods
         self.supplementary = supplementary

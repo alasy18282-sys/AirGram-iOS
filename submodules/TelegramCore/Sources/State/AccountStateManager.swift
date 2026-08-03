@@ -803,6 +803,21 @@ public final class AccountStateManager {
             case let .pollDifference(_, currentEvents):
                 self.operationTimer?.invalidate()
                 self.currentIsUpdatingValue = true
+                let pollTimeoutTimer = SignalKitTimer(timeout: 45.0, repeat: false, completion: { [weak self] in
+                    guard let strongSelf = self else {
+                        return
+                    }
+                    guard case .pollDifference = strongSelf.operations.first?.content else {
+                        return
+                    }
+                    Logger.shared.log("AccountStateManager", "pollDifference timeout — clearing isUpdating")
+                    strongSelf.currentIsUpdatingValue = false
+                    strongSelf.operationTimer?.invalidate()
+                    strongSelf.replaceOperations(with: .pollDifference(strongSelf.getNextId(), AccountFinalStateEvents()))
+                    strongSelf.startFirstOperation()
+                }, queue: self.queue)
+                self.operationTimer = pollTimeoutTimer
+                pollTimeoutTimer.start()
                 let queue = self.queue
                 let accountManager = self.accountManager
                 let postbox = self.postbox
@@ -942,6 +957,7 @@ public final class AccountStateManager {
                     guard let strongSelf = self else {
                         return
                     }
+                    strongSelf.operationTimer?.invalidate()
                     if resetState {
                         let _ = (_internal_resetAccountState(postbox: postbox, network: network, accountPeerId: accountPeerId)
                         |> deliverOn(strongSelf.queue)).start(completed: {
@@ -982,6 +998,7 @@ public final class AccountStateManager {
                                 if !events.isEmpty {
                                     strongSelf.insertProcessEvents(events)
                                 }
+                                strongSelf.currentIsUpdatingValue = false
                             } else {
                                 if !events.isEmpty {
                                     strongSelf.insertProcessEvents(events)
