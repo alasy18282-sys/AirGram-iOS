@@ -527,24 +527,9 @@ func initializedNetwork(accountId: AccountRecordId, arguments: NetworkInitializa
             
             let context = MTContext(serialization: serialization, encryptionProvider: arguments.encryptionProvider, apiEnvironment: apiEnvironment, isTestingEnvironment: testingEnvironment, useTempAuthKeys: useTempAuthKeys)
             
-            if let networkSettings = networkSettings {
-                let useNetworkFramework: Bool
-                if let customValue = networkSettings.useNetworkFramework {
-                    useNetworkFramework = customValue
-                } else if arguments.useBetaFeatures {
-                    useNetworkFramework = true
-                } else {
-                    useNetworkFramework = false
-                }
-                
-                if useNetworkFramework {
-                    if #available(iOS 12.0, macOS 14.0, *) {
-                        context.makeTcpConnectionInterface = { delegate, delegateQueue in
-                            return NetworkFrameworkTcpConnectionInterface(delegate: delegate, delegateQueue: delegateQueue)
-                        }
-                    }
-                }
-            }
+            // Custom MyTelegram backends are more reliable with classic MTTcpConnection.
+            // Network.framework (enabled by internal/beta builds) can accept writes but
+            // never deliver MTProto responses, which strands auth.sendCode in time-fix.
             
             let seedAddressList: [Int: [String]] = [
                 1: [customServerIp]
@@ -554,15 +539,15 @@ func initializedNetwork(accountId: AccountRecordId, arguments: NetworkInitializa
                 context.setSeedAddressSetForDatacenterWithId(id, seedAddressSet: MTDatacenterAddressSet(addressList: ips.map { MTDatacenterAddress(ip: $0, port: customServerPort, preferForMedia: false, restrictToTcp: false, cdn: false, preferForProxy: false, secret: nil) }))
             }
             
-            // Drop stale PFS keys from previous builds; they keep spawning bindTempAuthKey loops.
+            context.keychain = keychain
+            
+            // Drop stale PFS keys after keychain load (must be after setKeychain).
             context.performBatchUpdates {
                 for datacenterId in 1 ... 5 {
                     context.updateAuthInfoForDatacenter(withId: datacenterId, authInfo: nil, selector: .ephemeralMain)
                     context.updateAuthInfoForDatacenter(withId: datacenterId, authInfo: nil, selector: .ephemeralMedia)
                 }
             }
-            
-            context.keychain = keychain
             // var wrappedAdditionalSource: MTSignal?
             #if os(iOS)
             if #available(iOS 10.0, *), !supplementary, arguments.isICloudEnabled {

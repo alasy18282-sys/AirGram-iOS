@@ -120,6 +120,7 @@ typedef enum {
     NSData *_dhEncryptedData;
     
     MTDatacenterAuthKey *_authKey;
+    int64_t _serverSalt;
     NSData *_encryptedClientData;
     
     NSArray<MTDatacenterAuthPublicKey *> *_publicKeys;
@@ -702,6 +703,9 @@ static NSData *encryptRSAModernPadding(id<EncryptionProvider> encryptionProvider
                     int8_t x = a ^ b;
                     [serverSaltData appendBytes:&x length:1];
                 }
+                int64_t serverSalt = 0;
+                [serverSaltData getBytes:&serverSalt length:8];
+                _serverSalt = serverSalt;
                 
                 int32_t validUntilTimestamp = ((int32_t)([NSDate date].timeIntervalSince1970)) + mtProto.context.tempKeyExpiration;
                 _authKey = [[MTDatacenterAuthKey alloc] initWithAuthKey:authKey authKeyId:authKeyId validUntilTimestamp:validUntilTimestamp notBound:_tempAuth];
@@ -792,8 +796,8 @@ static NSData *encryptRSAModernPadding(id<EncryptionProvider> encryptionProvider
                     _currentStageTransactionId = nil;
                     
                     id<MTDatacenterAuthMessageServiceDelegate> delegate = _delegate;
-                    if ([delegate respondsToSelector:@selector(authMessageServiceCompletedWithAuthKey:timestamp:)])
-                        [delegate authMessageServiceCompletedWithAuthKey:_authKey timestamp:message.messageId];
+                    if ([delegate respondsToSelector:@selector(authMessageServiceCompletedWithAuthKey:timestamp:serverSalt:)])
+                        [delegate authMessageServiceCompletedWithAuthKey:_authKey timestamp:message.messageId serverSalt:_serverSalt];
                 }
             }
             else if ([setClientDhParamsResponseMessage isKindOfClass:[MTSetClientDhParamsResponseRetryMessage class]])

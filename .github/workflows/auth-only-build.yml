@@ -70,6 +70,11 @@ jobs:
           echo "BUILD_NUMBER=$BUILD_NUMBER" >> "$GITHUB_ENV"
 
           python3 build-system/Make/ImportCertificates.py --path build-system/fake-codesigning/certs
+          python3 build-system/Make/RewriteProfilesBundleId.py \
+            --profiles build-system/fake-codesigning/profiles \
+            --certs build-system/fake-codesigning/certs \
+            --old-bundle ph.telegra.Telegraph \
+            --new-bundle org.airgram.ios
           python3 -u build-system/Make/Make.py \
             --bazelUserRoot="$BAZEL_USER_ROOT" \
             --overrideXcodeVersion \
