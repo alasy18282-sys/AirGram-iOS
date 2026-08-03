@@ -1,12 +1,10 @@
 import Foundation
 import UIKit
 import Display
-import AsyncDisplayKit
 import SwiftSignalKit
 import Postbox
 import TelegramCore
 import TelegramPresentationData
-import PresentationDataUtils
 import AccountContext
 import ComponentFlow
 import ViewControllerComponent
@@ -58,6 +56,78 @@ private func collectGiftMediaFiles(from gift: ProfileGiftsContext.State.StarGift
     return result
 }
 
+private func inspectMediaFile(account: Account, role: String, file: TelegramMediaFile) -> Signal<String, NoError> {
+    let fileId = file.fileId.id
+    let resourceId = file.resource.id.stringRepresentation
+    let localDataSignal = account.postbox.mediaBox.resourceData(file.resource, attemptSynchronously: true)
+    |> take(1)
+    |> map { data -> String in
+        if data.complete && data.size > 0 {
+            return "localData=complete size=\(data.size)"
+        } else if data.size > 0 {
+            return "localData=partial size=\(data.size)"
+        } else {
+            return "localData=missing"
+        }
+    }
+    |> timeout(1.5, queue: Queue.mainQueue(), alternate: .single("localData=timeout"))
+    
+    return combineLatest(
+        account.postbox.mediaBox.resourceStatus(file.resource)
+        |> take(1)
+        |> timeout(1.5, queue: Queue.mainQueue(), alternate: .single(.Remote(progress: 0))),
+        localDataSignal
+    )
+    |> take(1)
+    |> map { status, localData in
+        var lines: [String] = []
+        lines.append("  \(role)")
+        lines.append("    fileId=\(fileId) size=\(file.size ?? 0)")
+        lines.append("    mime=\(file.mimeType) resource=\(resourceId)")
+        lines.append("    stickerPack=\(stickerPackSummary(for: file))")
+        lines.append("    status=\(describeResourceStatus(status))")
+        lines.append("    \(localData)")
+        return lines.joined(separator: "\n")
+    }
+}
+
+private func inspectGift(account: Account, index: Int, gift: ProfileGiftsContext.State.StarGift) -> Signal<String, NoError> {
+    let giftNumber = gift.number.map { "#\($0)" } ?? "n/a"
+    let giftLabel: String
+    switch gift.gift {
+    case let .unique(uniqueGift):
+        giftLabel = "unique slug=\(uniqueGift.slug) num=\(uniqueGift.number)"
+    case let .generic(starGift):
+        giftLabel = "starGift id=\(starGift.id) title=\(starGift.title ?? "nil")"
+    }
+    
+    let mediaFiles = collectGiftMediaFiles(from: gift)
+    if mediaFiles.isEmpty {
+        return .single("[\(index + 1)] \(giftNumber) \(giftLabel)\n  (no media files in gift payload)")
+    }
+    
+    let fileSignals = mediaFiles.map { role, file in
+        inspectMediaFile(account: account, role: role, file: file)
+    }
+    return combineLatest(fileSignals)
+    |> take(1)
+    |> map { fileLines in
+        var lines = ["[\(index + 1)] \(giftNumber) \(giftLabel)"]
+        lines.append(contentsOf: fileLines)
+        return lines.joined(separator: "\n")
+    }
+}
+
+private func giftsForDiagnostics(profileGifts: ProfileGiftsContext) -> Signal<[ProfileGiftsContext.State.StarGift], NoError> {
+    if let state = profileGifts.currentState {
+        return .single(state.gifts)
+    }
+    return profileGifts.state
+    |> take(1)
+    |> map { $0.gifts }
+    |> timeout(3.0, queue: Queue.mainQueue(), alternate: .single([]))
+}
+
 private func runGiftMediaDiagnostics(context: AccountContext, peerId: PeerId, gifts: [ProfileGiftsContext.State.StarGift]) -> Signal<String, NoError> {
     let account = context.account
     let appVersion = (Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String) ?? "unknown"
@@ -75,106 +145,36 @@ private func runGiftMediaDiagnostics(context: AccountContext, peerId: PeerId, gi
     header.append("giftsTotal=\(gifts.count)")
     header.append("-----")
     
-    let sampleGifts = Array(gifts.prefix(12))
-    var giftSignals: [Signal<String, NoError>] = []
-    
-    for (index, gift) in sampleGifts.enumerated() {
-        let giftNumber = gift.number.map { "#\($0)" } ?? "n/a"
-        let giftLabel: String
-        switch gift.gift {
-        case let .unique(uniqueGift):
-            giftLabel = "unique slug=\(uniqueGift.slug) num=\(uniqueGift.number)"
-        case let .generic(starGift):
-            giftLabel = "starGift id=\(starGift.id) title=\(starGift.title ?? "nil")"
-        }
-        
-        let mediaFiles = collectGiftMediaFiles(from: gift)
-        if mediaFiles.isEmpty {
-            giftSignals.append(.single("[\(index + 1)] \(giftNumber) \(giftLabel)\n  (no media files in gift payload)"))
-            continue
-        }
-        
-        var fileSignals: [Signal<String, NoError>] = []
-        for (role, file) in mediaFiles {
-            let fileId = file.fileId.id
-            let resourceId = file.resource.id.stringRepresentation
-            let statusSignal = account.postbox.mediaBox.resourceStatus(file.resource)
-            |> take(1)
-            |> map { status -> String in
-                var lines: [String] = []
-                lines.append("  \(role)")
-                lines.append("    fileId=\(fileId) size=\(file.size ?? 0)")
-                lines.append("    mime=\(file.mimeType) resource=\(resourceId)")
-                lines.append("    stickerPack=\(stickerPackSummary(for: file))")
-                lines.append("    status=\(describeResourceStatus(status))")
-                return lines.joined(separator: "\n")
-            }
-            
-            let customEmojiFetch = freeMediaFileResourceInteractiveFetched(
-                account: account,
-                userLocation: .other,
-                fileReference: .customEmoji(media: file),
-                resource: file.resource
-            )
-            |> map { _ -> String in "customEmoji=OK" }
-            |> `catch` { error -> Signal<String, NoError> in
-                return .single("customEmoji=FAIL(\(error))")
-            }
-            |> timeout(8.0, queue: Queue.mainQueue(), alternate: .single("customEmoji=TIMEOUT"))
-            
-            let standaloneFetch = freeMediaFileResourceInteractiveFetched(
-                account: account,
-                userLocation: .other,
-                fileReference: .standalone(media: file),
-                resource: file.resource
-            )
-            |> map { _ -> String in "standalone=OK" }
-            |> `catch` { error -> Signal<String, NoError> in
-                return .single("standalone=FAIL(\(error))")
-            }
-            |> timeout(8.0, queue: Queue.mainQueue(), alternate: .single("standalone=TIMEOUT"))
-            
-            fileSignals.append(
-                statusSignal
-                |> mapToSignal { statusText -> Signal<String, NoError> in
-                    return combineLatest(customEmojiFetch, standaloneFetch)
-                    |> take(1)
-                    |> map { customEmoji, standalone in
-                        return statusText + "\n    fetch \(customEmoji), \(standalone)"
-                    }
-                }
-            )
-        }
-        
-        giftSignals.append(
-            combineLatest(fileSignals)
-            |> take(1)
-            |> map { fileLines in
-                var lines = ["[\(index + 1)] \(giftNumber) \(giftLabel)"]
-                lines.append(contentsOf: fileLines)
-                return lines.joined(separator: "\n")
-            }
-        )
-    }
-    
+    let sampleGifts = Array(gifts.prefix(6))
     let giftsReport: Signal<String, NoError>
-    if giftSignals.isEmpty {
-        giftsReport = .single("(no gifts to test)")
+    if sampleGifts.isEmpty {
+        giftsReport = .single("(no gifts loaded — open Gifts tab first, then retry)")
     } else {
-        giftsReport = combineLatest(giftSignals)
-        |> take(1)
-        |> map { $0.joined(separator: "\n\n") }
+        var chain: Signal<String, NoError> = .single("")
+        for (index, gift) in sampleGifts.enumerated() {
+            chain = chain |> mapToSignal { accumulated -> Signal<String, NoError> in
+                return inspectGift(account: account, index: index, gift: gift)
+                |> map { giftReport in
+                    if accumulated.isEmpty {
+                        return giftReport
+                    }
+                    return accumulated + "\n\n" + giftReport
+                }
+            }
+        }
+        giftsReport = chain
     }
     
     let shortLogs = Logger.shared.collectShortLog()
     |> take(1)
+    |> timeout(2.0, queue: Queue.mainQueue(), alternate: .single([]))
     |> map { events -> String in
         var lines = ["-----", "Recent GiftMedia / network logs:"]
         let filtered = events.filter { _, message in
             message.contains("GiftMedia") || message.contains("upload.getFile") || message.contains("FILE_REFERENCE") || message.contains("LOCATION_INVALID")
         }.suffix(40)
         if filtered.isEmpty {
-            lines.append("(no matching short logs — enable Log to File in Debug menu)")
+            lines.append("(no matching short logs yet)")
         } else {
             let formatter = ISO8601DateFormatter()
             for (timestamp, message) in filtered {
@@ -190,6 +190,7 @@ private func runGiftMediaDiagnostics(context: AccountContext, peerId: PeerId, gi
     |> map { giftsText, logsText in
         (header + [giftsText, logsText]).joined(separator: "\n")
     }
+    |> timeout(20.0, queue: Queue.mainQueue(), alternate: .single((header + ["(diagnostics timed out after 20s — try Copy Report and retry with fewer gifts)"]).joined(separator: "\n")))
 }
 
 final class MediaLogsAndTestsScreenComponent: Component {
@@ -211,7 +212,8 @@ final class MediaLogsAndTestsScreenComponent: Component {
     
     final class View: UIView {
         private let scrollView = UIScrollView()
-        private let textView = UITextView()
+        private let textLabel = UILabel()
+        private let bottomContainer = UIView()
         private let runButton = ComponentView<Empty>()
         private let copyButton = ComponentView<Empty>()
         
@@ -219,18 +221,21 @@ final class MediaLogsAndTestsScreenComponent: Component {
         private var environment: EnvironmentType?
         private var disposable: Disposable?
         private var reportText: String = "Tap Run Tests to diagnose gift media loading."
+        private var didAutoRun = false
+        private var isRunning = false
         
         override init(frame: CGRect) {
             super.init(frame: frame)
             
             self.scrollView.alwaysBounceVertical = true
+            self.scrollView.showsVerticalScrollIndicator = true
             self.addSubview(self.scrollView)
             
-            self.textView.isEditable = false
-            self.textView.font = UIFont.monospacedSystemFont(ofSize: 12.0, weight: .regular)
-            self.textView.backgroundColor = .clear
-            self.textView.textContainerInset = UIEdgeInsets(top: 12.0, left: 12.0, bottom: 12.0, right: 12.0)
-            self.scrollView.addSubview(self.textView)
+            self.textLabel.numberOfLines = 0
+            self.textLabel.font = UIFont.monospacedSystemFont(ofSize: 12.0, weight: .regular)
+            self.scrollView.addSubview(self.textLabel)
+            
+            self.addSubview(self.bottomContainer)
         }
         
         required init?(coder: NSCoder) {
@@ -241,48 +246,41 @@ final class MediaLogsAndTestsScreenComponent: Component {
             self.disposable?.dispose()
         }
         
-        private func updateText() {
-            self.textView.text = self.reportText
-            self.textView.sizeToFit()
+        private func setReportText(_ text: String) {
+            self.reportText = text
+            self.textLabel.text = text
             self.setNeedsLayout()
         }
         
         private func runTests() {
-            guard let component = self.component else {
+            guard let component = self.component, !self.isRunning else {
                 return
             }
+            self.isRunning = true
             Logger.shared.log("GiftMedia", "MediaLogsAndTests: runTests peerId=\(component.peerId.id._internalGetInt64Value())")
-            self.reportText = "Running tests...\n"
-            self.updateText()
+            self.setReportText("Running tests...\n")
             
             self.disposable?.dispose()
-            self.disposable = (component.profileGifts.state
-            |> take(1)
-            |> mapToSignal { state -> Signal<String, NoError> in
-                return runGiftMediaDiagnostics(context: component.context, peerId: component.peerId, gifts: state.gifts)
+            self.disposable = (giftsForDiagnostics(profileGifts: component.profileGifts)
+            |> mapToSignal { gifts -> Signal<String, NoError> in
+                return runGiftMediaDiagnostics(context: component.context, peerId: component.peerId, gifts: gifts)
             }
             |> deliverOnMainQueue).start(next: { [weak self] text in
                 guard let self else {
                     return
                 }
-                self.reportText = text
-                self.updateText()
+                self.isRunning = false
+                self.setReportText(text)
                 Logger.shared.log("GiftMedia", "MediaLogsAndTests: completed (\(text.count) chars)")
             })
         }
         
-        func update(component: MediaLogsAndTestsScreenComponent, availableSize: CGSize, state: EmptyComponentState, environment: Environment<MediaLogsAndTestsScreenComponent.EnvironmentType>, transition: ComponentTransition) -> CGSize {
-            self.component = component
-            let environmentValue = environment[MediaLogsAndTestsScreenComponent.EnvironmentType.self].value
-            self.environment = environmentValue
-            
-            let theme = environmentValue.theme
-            self.backgroundColor = theme.list.plainBackgroundColor
-            self.textView.textColor = theme.list.itemPrimaryTextColor
-            
-            let sideInset: CGFloat = 16.0
-            let buttonHeight: CGFloat = 50.0
+        private func layoutContent(availableSize: CGSize, environmentValue: EnvironmentType, theme: PresentationTheme, sideInset: CGFloat, buttonHeight: CGFloat, transition: ComponentTransition) {
             let bottomInset = environmentValue.safeInsets.bottom
+            let bottomPanelHeight = bottomInset + buttonHeight * 2.0 + 8.0 + 16.0
+            
+            transition.setFrame(view: self.bottomContainer, frame: CGRect(x: 0.0, y: availableSize.height - bottomPanelHeight, width: availableSize.width, height: bottomPanelHeight))
+            self.bottomContainer.backgroundColor = theme.list.plainBackgroundColor
             
             let runButtonSize = self.runButton.update(
                 transition: transition,
@@ -298,7 +296,7 @@ final class MediaLogsAndTestsScreenComponent: Component {
                             id: "run",
                             component: AnyComponent(MultilineTextComponent(text: .plain(NSAttributedString(string: "Run Tests", font: Font.semibold(17.0), textColor: theme.list.itemCheckColors.foregroundColor, paragraphAlignment: .center))))
                         ),
-                        isEnabled: true,
+                        isEnabled: !self.isRunning,
                         action: { [weak self] in
                             self?.runTests()
                         }
@@ -338,31 +336,54 @@ final class MediaLogsAndTestsScreenComponent: Component {
             
             if let runView = self.runButton.view {
                 if runView.superview == nil {
-                    self.addSubview(runView)
+                    self.bottomContainer.addSubview(runView)
                 }
-                transition.setFrame(view: runView, frame: CGRect(x: sideInset, y: availableSize.height - bottomInset - buttonHeight - 8.0 - buttonHeight - 8.0, width: runButtonSize.width, height: runButtonSize.height))
+                transition.setFrame(view: runView, frame: CGRect(x: sideInset, y: 8.0, width: runButtonSize.width, height: runButtonSize.height))
             }
             if let copyView = self.copyButton.view {
                 if copyView.superview == nil {
-                    self.addSubview(copyView)
+                    self.bottomContainer.addSubview(copyView)
                 }
-                transition.setFrame(view: copyView, frame: CGRect(x: sideInset, y: availableSize.height - bottomInset - buttonHeight - 8.0, width: copyButtonSize.width, height: copyButtonSize.height))
+                transition.setFrame(view: copyView, frame: CGRect(x: sideInset, y: 8.0 + buttonHeight + 8.0, width: copyButtonSize.width, height: copyButtonSize.height))
             }
             
-            let scrollFrame = CGRect(x: 0.0, y: 0.0, width: availableSize.width, height: availableSize.height - bottomInset - buttonHeight * 2.0 - 24.0)
+            let scrollFrame = CGRect(x: 0.0, y: 0.0, width: availableSize.width, height: max(0.0, availableSize.height - bottomPanelHeight))
             transition.setFrame(view: self.scrollView, frame: scrollFrame)
             
-            let textWidth = scrollFrame.width - 24.0
-            let textSize = self.textView.sizeThatFits(CGSize(width: textWidth, height: .greatestFiniteMagnitude))
-            transition.setFrame(view: self.textView, frame: CGRect(x: 12.0, y: 0.0, width: textWidth, height: max(textSize.height, scrollFrame.height)))
-            self.scrollView.contentSize = CGSize(width: scrollFrame.width, height: max(textSize.height, scrollFrame.height))
+            let textWidth = scrollFrame.width - sideInset * 2.0
+            let textHeight = self.textLabel.sizeThatFits(CGSize(width: textWidth, height: .greatestFiniteMagnitude)).height
+            let contentHeight = max(textHeight + 24.0, scrollFrame.height)
+            transition.setFrame(view: self.textLabel, frame: CGRect(x: sideInset, y: 12.0, width: textWidth, height: textHeight))
+            self.scrollView.contentSize = CGSize(width: scrollFrame.width, height: contentHeight)
+        }
+        
+        func update(component: MediaLogsAndTestsScreenComponent, availableSize: CGSize, state: EmptyComponentState, environment: Environment<MediaLogsAndTestsScreenComponent.EnvironmentType>, transition: ComponentTransition) -> CGSize {
+            self.component = component
+            let environmentValue = environment[MediaLogsAndTestsScreenComponent.EnvironmentType.self].value
+            self.environment = environmentValue
             
-            if self.textView.text != self.reportText {
-                self.updateText()
+            let theme = environmentValue.theme
+            self.backgroundColor = theme.list.plainBackgroundColor
+            self.textLabel.textColor = theme.list.itemPrimaryTextColor
+            
+            if self.textLabel.text != self.reportText {
+                self.textLabel.text = self.reportText
             }
             
-            if self.reportText == "Tap Run Tests to diagnose gift media loading." {
-                self.runTests()
+            self.layoutContent(
+                availableSize: availableSize,
+                environmentValue: environmentValue,
+                theme: theme,
+                sideInset: 16.0,
+                buttonHeight: 50.0,
+                transition: transition
+            )
+            
+            if !self.didAutoRun {
+                self.didAutoRun = true
+                Queue.mainQueue().justDispatch {
+                    self.runTests()
+                }
             }
             
             return availableSize
