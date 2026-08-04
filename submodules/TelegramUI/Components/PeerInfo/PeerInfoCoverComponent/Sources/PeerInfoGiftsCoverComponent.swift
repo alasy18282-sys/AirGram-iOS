@@ -9,10 +9,10 @@ import MultiAnimationRenderer
 import TelegramCore
 import AccountContext
 import SwiftSignalKit
-import EmojiTextAttachmentView
 import LokiRng
-import TextFormat
 import HierarchyTrackingLayer
+import AnimatedStickerNode
+import TelegramAnimatedStickerNode
 
 public final class PeerInfoGiftsCoverComponent: Component {
     public let context: AccountContext
@@ -111,7 +111,7 @@ public final class PeerInfoGiftsCoverComponent: Component {
         private var gifts: [ProfileGiftsContext.State.StarGift] = []
         private var appliedGiftIds: [Int64] = []
         
-        private var iconLayers: [AnyHashable: GiftIconLayer] = [:]
+        private var iconViews: [AnyHashable: GiftIconView] = [:]
         private var iconPositions: [PositionGenerator.Position] = []
         private let seed = UInt(Date().timeIntervalSince1970)
         
@@ -158,17 +158,17 @@ public final class PeerInfoGiftsCoverComponent: Component {
                 return
             }
             let location = gestureRecognizer.location(in: self)
-            for (_, iconLayer) in self.iconLayers {
-                if iconLayer.frame.contains(location) {
-                    component.action(iconLayer.gift)
+            for (_, iconView) in self.iconViews {
+                if iconView.frame.contains(location) {
+                    component.action(iconView.gift)
                     break
                 }
             }
         }
         
         public override func point(inside point: CGPoint, with event: UIEvent?) -> Bool {
-            for (_, iconLayer) in self.iconLayers {
-                if iconLayer.frame.contains(point) {
+            for (_, iconView) in self.iconViews {
+                if iconView.frame.contains(point) {
                     return true
                 }
             }
@@ -177,9 +177,9 @@ public final class PeerInfoGiftsCoverComponent: Component {
         
         func updateAnimations() {
             var index = 0
-            for (_, iconLayer) in self.iconLayers {
+            for (_, iconView) in self.iconViews {
                 if self.isCurrentlyInHierarchy {
-                    iconLayer.startAnimations(index: index)
+                    iconView.startAnimations(index: index)
                 }
                 index += 1
             }
@@ -188,8 +188,8 @@ public final class PeerInfoGiftsCoverComponent: Component {
         private var scheduledAnimateIn = false
         public func willAnimateIn() {
             self.scheduledAnimateIn = true
-            for (_, layer) in self.iconLayers {
-                layer.opacity = 0.0
+            for (_, view) in self.iconViews {
+                view.alpha = 0.0
             }
         }
         
@@ -199,11 +199,11 @@ public final class PeerInfoGiftsCoverComponent: Component {
             }
             self.scheduledAnimateIn = false
             
-            for (_, layer) in self.iconLayers {
-                layer.opacity = 1.0
-                layer.animatePosition(
+            for (_, view) in self.iconViews {
+                view.alpha = 1.0
+                view.layer.animatePosition(
                     from: component.avatarCenter,
-                    to: layer.position,
+                    to: view.center,
                     duration: 0.4,
                     timingFunction: kCAMediaTimingFunctionSpring
                 )
@@ -312,25 +312,25 @@ public final class PeerInfoGiftsCoverComponent: Component {
                 
                 var iconTransition = transition
                 let iconPosition = self.iconPositions[index]
-                let iconLayer: GiftIconLayer
-                if let current = self.iconLayers[id] {
-                    iconLayer = current
+                let iconView: GiftIconView
+                if let current = self.iconViews[id] {
+                    iconView = current
                 } else {
                     iconTransition = .immediate
-                    iconLayer = GiftIconLayer(context: component.context, gift: gift, size: iconSize, glowing: component.hasBackground)
-                    self.iconLayers[id] = iconLayer
-                    self.layer.addSublayer(iconLayer)
+                    iconView = GiftIconView(context: component.context, gift: gift, size: iconSize, glowing: component.hasBackground)
+                    self.iconViews[id] = iconView
+                    self.addSubview(iconView)
                     
                     if self.scheduledAnimateIn {
-                        iconLayer.opacity = 0.0
+                        iconView.alpha = 0.0
                     } else {
-                        iconLayer.animateAlpha(from: 0.0, to: 1.0, duration: 0.2)
-                        iconLayer.animateScale(from: 0.01, to: 1.0, duration: 0.2)
+                        iconView.layer.animateAlpha(from: 0.0, to: 1.0, duration: 0.2)
+                        iconView.layer.animateScale(from: 0.01, to: 1.0, duration: 0.2)
                     }
                     
-                    iconLayer.startAnimations(index: index)
+                    iconView.startAnimations(index: index)
                 }
-                iconLayer.glowing = component.hasBackground
+                iconView.glowing = component.hasBackground
                 
                 let itemDistanceFraction = max(0.0, min(0.5, (iconPosition.distance - component.avatarSize.width / 2.0) / 144.0))
                 let itemScaleFraction = patternScaleValueAt(fraction: min(1.0, component.avatarTransitionFraction * 1.33), t: itemDistanceFraction, reverse: false)
@@ -351,30 +351,29 @@ public final class PeerInfoGiftsCoverComponent: Component {
                 
                 let absolutePosition = getAbsolutePosition(position: effectivePosition, centerPoint: component.avatarCenter)
                                 
-                iconTransition.setBounds(layer: iconLayer, bounds: CGRect(origin: .zero, size: iconSize))
-                iconTransition.setPosition(layer: iconLayer, position: absolutePosition)
-                iconLayer.updateRotation(effectiveAngle, transition: iconTransition)
-                iconTransition.setScale(layer: iconLayer, scale: iconPosition.scale * (1.0 - itemScaleFraction))
+                iconTransition.setFrame(view: iconView, frame: CGRect(origin: CGPoint(x: absolutePosition.x - iconSize.width / 2.0, y: absolutePosition.y - iconSize.height / 2.0), size: iconSize))
+                iconView.updateRotation(effectiveAngle, transition: iconTransition)
+                iconTransition.setScale(view: iconView, scale: iconPosition.scale * (1.0 - itemScaleFraction))
                 
                 if !self.scheduledAnimateIn {
-                    iconTransition.setAlpha(layer: iconLayer, alpha: 1.0 - itemScaleFraction)
+                    iconTransition.setAlpha(view: iconView, alpha: 1.0 - itemScaleFraction)
                 }
                 
                 index += 1
             }
             
             var removeIds: [AnyHashable] = []
-            for (id, layer) in self.iconLayers {
+            for (id, view) in self.iconViews {
                 if !validIds.contains(id) {
                     removeIds.append(id)
-                    layer.animateScale(from: 1.0, to: 0.01, duration: 0.25, removeOnCompletion: false)
-                    layer.animateAlpha(from: 1.0, to: 0.0, duration: 0.25, removeOnCompletion: false, completion: { _ in
-                        layer.removeFromSuperlayer()
+                    view.layer.animateScale(from: 1.0, to: 0.01, duration: 0.25, removeOnCompletion: false)
+                    view.layer.animateAlpha(from: 1.0, to: 0.0, duration: 0.25, removeOnCompletion: false, completion: { _ in
+                        view.removeFromSuperview()
                     })
                 }
             }
             for id in removeIds {
-                self.iconLayers.removeValue(forKey: id)
+                self.iconViews.removeValue(forKey: id)
             }
             return availableSize
         }
@@ -459,98 +458,35 @@ private final class StarsEffectLayer: SimpleLayer {
     }
 }
 
-private class GiftIconLayer: SimpleLayer {
+private final class GiftIconView: UIView {
     private let context: AccountContext
     let gift: ProfileGiftsContext.State.StarGift
-    private let size: CGSize
+    private let iconSize: CGSize
+    private var fetchDisposable: Disposable?
+    
     var glowing: Bool {
         didSet {
-            self.shadowLayer.opacity = self.glowing ? 1.0 : 0.0
+            self.shadowView.alpha = self.glowing ? 1.0 : 0.0
             
             let color: UIColor
             if self.glowing {
                 color = .white
-            } else if let layerTintColor = self.shadowLayer.layerTintColor {
-                color = UIColor(cgColor: layerTintColor)
+            } else if let tintColor = self.shadowView.tintColor {
+                color = tintColor
             } else {
                 color = .white
             }
             
-            let side = floor(self.size.width * 1.25)
-            let starsFrame = CGSize(width: side, height: side).centered(in: CGRect(origin: .zero, size: self.size))
+            let side = floor(self.iconSize.width * 1.25)
+            let starsFrame = CGSize(width: side, height: side).centered(in: CGRect(origin: .zero, size: self.iconSize))
             self.starsLayer.frame = starsFrame
             self.starsLayer.update(color: color, size: starsFrame.size)
         }
     }
     
-    let shadowLayer = SimpleLayer()
-    let starsLayer = StarsEffectLayer()
-    let animationLayer: InlineStickerItemLayer
-    
-    override init(layer: Any) {
-        guard let layer = layer as? GiftIconLayer else {
-            fatalError()
-        }
-                
-        let context = layer.context
-        let gift = layer.gift
-        let size = layer.size
-        let glowing = layer.glowing
-        
-        var file: TelegramMediaFile?
-        var color: UIColor = .white
-        switch gift.gift {
-        case let .generic(gift):
-            file = gift.file
-        case let .unique(gift):
-            for attribute in gift.attributes {
-                if case let .model(_, fileValue, _, _) = attribute {
-                    file = fileValue
-                } else if case let .backdrop(_, _, innerColor, _, _, _, _) = attribute {
-                    color = UIColor(rgb: UInt32(bitPattern: innerColor))
-                }
-            }
-        }
-        
-        let emoji = ChatTextInputTextCustomEmojiAttribute(
-            interactivelySelectedFromPackId: nil,
-            fileId: file?.fileId.id ?? 0,
-            file: file
-        )
-        self.animationLayer = InlineStickerItemLayer(
-            context: .account(context),
-            userLocation: .other,
-            attemptSynchronousLoad: false,
-            emoji: emoji,
-            file: file,
-            cache: context.animationCache,
-            renderer: context.animationRenderer,
-            unique: true,
-            placeholderColor: UIColor.white.withAlphaComponent(0.2),
-            pointSize: CGSize(width: size.width * 2.0, height: size.height * 2.0),
-            loopCount: 1
-        )
-        
-        self.shadowLayer.contents = shadowImage?.cgImage
-        self.shadowLayer.layerTintColor = color.cgColor
-        self.shadowLayer.opacity = glowing ? 1.0 : 0.0
-        
-        self.context = context
-        self.gift = gift
-        self.size = size
-        self.glowing = glowing
-        
-        super.init()
-        
-        let side = floor(size.width * 1.25)
-        let starsFrame = CGSize(width: side, height: side).centered(in: CGRect(origin: .zero, size: size))
-        self.starsLayer.frame = starsFrame
-        self.starsLayer.update(color: glowing ? .white : color, size: starsFrame.size)
-        
-        self.addSublayer(self.shadowLayer)
-        self.addSublayer(self.starsLayer)
-        self.addSublayer(self.animationLayer)
-    }
+    private let shadowView = UIImageView()
+    private let starsLayer = StarsEffectLayer()
+    private let animationNode: DefaultAnimatedStickerNodeImpl
     
     init(
         context: AccountContext,
@@ -560,8 +496,7 @@ private class GiftIconLayer: SimpleLayer {
     ) {
         self.context = context
         self.gift = gift
-        self.size = size
-        self.glowing = glowing
+        self.iconSize = size
         
         var file: TelegramMediaFile?
         var color: UIColor = .white
@@ -578,59 +513,69 @@ private class GiftIconLayer: SimpleLayer {
             }
         }
         
-        let emoji = ChatTextInputTextCustomEmojiAttribute(
-            interactivelySelectedFromPackId: nil,
-            fileId: file?.fileId.id ?? 0,
-            file: file
-        )
-        self.animationLayer = InlineStickerItemLayer(
-            context: .account(context),
-            userLocation: .other,
-            attemptSynchronousLoad: false,
-            emoji: emoji,
-            file: file,
-            cache: context.animationCache,
-            renderer: context.animationRenderer,
-            unique: true,
-            placeholderColor: UIColor.white.withAlphaComponent(0.2),
-            pointSize: CGSize(width: size.width * 2.0, height: size.height * 2.0),
-            loopCount: 1
-        )
+        let node = DefaultAnimatedStickerNodeImpl()
+        node.isUserInteractionEnabled = false
+        self.animationNode = node
         
-        self.shadowLayer.contents = shadowImage?.cgImage
-        self.shadowLayer.layerTintColor = color.cgColor
-        self.shadowLayer.opacity = glowing ? 1.0 : 0.0
+        self.glowing = glowing
         
-        super.init()
+        super.init(frame: CGRect(origin: .zero, size: size))
+        
+        self.isUserInteractionEnabled = false
+        
+        self.shadowView.image = shadowImage?.withRenderingMode(.alwaysTemplate)
+        self.shadowView.tintColor = color
+        self.shadowView.alpha = glowing ? 1.0 : 0.0
+        self.shadowView.frame = CGRect(origin: .zero, size: size).insetBy(dx: -8.0, dy: -8.0)
+        self.addSubview(self.shadowView)
         
         let side = floor(size.width * 1.25)
         let starsFrame = CGSize(width: side, height: side).centered(in: CGRect(origin: .zero, size: size))
         self.starsLayer.frame = starsFrame
         self.starsLayer.update(color: glowing ? .white : color, size: starsFrame.size)
+        self.layer.addSublayer(self.starsLayer)
         
-        self.addSublayer(self.shadowLayer)
-        self.addSublayer(self.starsLayer)
-        self.addSublayer(self.animationLayer)
+        self.addSubview(node.view)
+        
+        if let file {
+            let pathPrefix = context.account.postbox.mediaBox.shortLivedResourceCachePathPrefix(file.resource.id)
+            node.setup(
+                source: AnimatedStickerResourceSource(account: context.account, resource: file.resource, isVideo: file.isVideoSticker),
+                width: Int(size.width * 1.6),
+                height: Int(size.height * 1.6),
+                playbackMode: .once,
+                mode: .direct(cachePathPrefix: pathPrefix)
+            )
+            node.visibility = true
+            node.updateLayout(size: size)
+            node.view.frame = CGRect(origin: .zero, size: size)
+            node.playOnce()
+            
+            self.fetchDisposable = freeMediaFileResourceInteractiveFetched(
+                account: context.account,
+                userLocation: .other,
+                fileReference: .standalone(media: file),
+                resource: file.resource
+            ).start()
+        }
     }
     
     required init?(coder: NSCoder) {
-        preconditionFailure()
+        fatalError("init(coder:) has not been implemented")
     }
     
-    override func layoutSublayers() {
-        self.shadowLayer.frame = CGRect(origin: .zero, size: self.bounds.size).insetBy(dx: -8.0, dy: -8.0)
-        self.animationLayer.bounds = CGRect(origin: .zero, size: self.bounds.size)
-        self.animationLayer.position = CGPoint(x: self.bounds.width / 2.0, y: self.bounds.height / 2.0)
+    deinit {
+        self.fetchDisposable?.dispose()
     }
     
     func updateRotation(_ angle: CGFloat, transition: ComponentTransition) {
-        self.animationLayer.transform = CATransform3DMakeRotation(angle, 0.0, 0.0, 1.0)
+        self.animationNode.view.transform = CGAffineTransform(rotationAngle: angle)
     }
     
     func startAnimations(index: Int) {
         let beginTime = Double(index) * 1.5
         
-        if self.animation(forKey: "hover") == nil {
+        if self.layer.animation(forKey: "hover") == nil {
             let upDistance = CGFloat.random(in: 1.0 ..< 2.0)
             let downDistance = CGFloat.random(in: 1.0 ..< 2.0)
             let hoverDuration = TimeInterval.random(in: 3.5 ..< 4.5)
@@ -644,10 +589,10 @@ private class GiftIconLayer: SimpleLayer {
             hoverAnimation.timingFunction = CAMediaTimingFunction(name: .easeInEaseOut)
             hoverAnimation.beginTime = beginTime
             hoverAnimation.isAdditive = true
-            self.add(hoverAnimation, forKey: "hover")
+            self.layer.add(hoverAnimation, forKey: "hover")
         }
         
-        if self.animationLayer.animation(forKey: "wiggle") == nil {
+        if self.animationNode.layer.animation(forKey: "wiggle") == nil {
             let fromRotationAngle = CGFloat.random(in: 0.025 ..< 0.05)
             let toRotationAngle = CGFloat.random(in: 0.025 ..< 0.05)
             let wiggleDuration = TimeInterval.random(in: 2.0 ..< 3.0)
@@ -661,10 +606,10 @@ private class GiftIconLayer: SimpleLayer {
             wiggleAnimation.timingFunction = CAMediaTimingFunction(name: .easeInEaseOut)
             wiggleAnimation.beginTime = beginTime
             wiggleAnimation.isAdditive = true
-            self.animationLayer.add(wiggleAnimation, forKey: "wiggle")
+            self.animationNode.layer.add(wiggleAnimation, forKey: "wiggle")
         }
         
-        if self.shadowLayer.animation(forKey: "glow") == nil {
+        if self.shadowView.layer.animation(forKey: "glow") == nil {
             let glowDuration = TimeInterval.random(in: 2.0 ..< 3.0)
             
             let glowAnimation = CABasicAnimation(keyPath: "transform.scale")
@@ -675,7 +620,7 @@ private class GiftIconLayer: SimpleLayer {
             glowAnimation.repeatCount = .infinity
             glowAnimation.timingFunction = CAMediaTimingFunction(name: .easeInEaseOut)
             glowAnimation.beginTime = beginTime
-            self.shadowLayer.add(glowAnimation, forKey: "glow")
+            self.shadowView.layer.add(glowAnimation, forKey: "glow")
         }
     }
 }

@@ -22,6 +22,8 @@ swift_library(
         "//submodules/Components/ComponentDisplayAdapters",
         "//submodules/Components/HierarchyTrackingLayer",
         "//submodules/TelegramUI/Components/EmojiTextAttachmentView",
+        "//submodules/AnimatedStickerNode",
+        "//submodules/TelegramAnimatedStickerNode",
         "//submodules/Utils/LokiRng",
         "//submodules/TextFormat",
         "//submodules/AvatarNode",

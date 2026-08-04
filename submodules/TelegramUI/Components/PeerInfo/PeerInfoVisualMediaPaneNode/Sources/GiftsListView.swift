@@ -520,6 +520,8 @@ final class GiftsListView: UIView {
                 }
                 
                 let itemReferenceId = product.reference?.stringValue ?? ""
+                let giftOpenIndex = Int(index)
+                let giftOpenReference = product.reference
                 
                 var isAdded = false
                 if let ignoreCollection = self.ignoreCollection, let collectionIds = product.collectionIds, collectionIds.contains(ignoreCollection) {
@@ -594,14 +596,19 @@ final class GiftsListView: UIView {
                                     }
                                 } else {
                                     let allSubjects: [GiftViewScreen.Subject] = (self.starsProducts ?? []).map { .profileGift(self.peerId, $0) }
-                                    let index = self.starsProducts?.firstIndex(where: { $0 == product }) ?? 0
+                                    let openIndex: Int
+                                    if let giftOpenReference, let resolvedIndex = self.starsProducts?.firstIndex(where: { $0.reference == giftOpenReference }) {
+                                        openIndex = resolvedIndex
+                                    } else {
+                                        openIndex = giftOpenIndex
+                                    }
                                     
                                     var dismissImpl: (() -> Void)?
                                     let controller = GiftViewScreen(
                                         context: self.context,
                                         subject: .profileGift(self.peerId, product),
                                         allSubjects: allSubjects,
-                                        index: index,
+                                        index: openIndex,
                                         profileGiftsContext: self.profileGifts,
                                         updateSavedToProfile: { [weak self] reference, added in
                                             guard let self else {

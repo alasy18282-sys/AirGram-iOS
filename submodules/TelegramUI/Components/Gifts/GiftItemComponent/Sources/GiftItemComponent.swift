@@ -900,7 +900,8 @@ public final class GiftItemComponent: Component {
                         avatarScale: 1.0,
                         defaultHeight: backgroundSize.height,
                         avatarTransitionFraction: 0.0,
-                        patternTransitionFraction: 0.0
+                        patternTransitionFraction: 1.0,
+                        patternIconScale: component.mode == .profile || component.mode == .grid || component.mode == .select ? 0.85 : 1.0
                     )),
                     environment: {},
                     containerSize: backgroundSize

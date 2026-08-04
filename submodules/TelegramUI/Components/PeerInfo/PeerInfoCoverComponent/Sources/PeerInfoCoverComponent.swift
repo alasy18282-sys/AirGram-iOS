@@ -383,6 +383,7 @@ public final class PeerInfoCoverComponent: Component {
                 if component.context.animationRenderer.loadFirstFrameSynchronously(target: patternContentsTarget, cache: component.context.animationCache, itemId: patternFile.resource.id.stringRepresentation, size: CGSize(width: 96, height: 96)) {
                     self.updatePatternLayerImages(animated: false)
                 } else {
+                    let isTemplate = patternFile.isCustomTemplateEmoji
                     let animated = self.patternContentsTarget?.contents == nil
                     self.patternImageDisposable = component.context.animationRenderer.loadFirstFrame(
                         target: patternContentsTarget,
@@ -396,7 +397,7 @@ public final class PeerInfoCoverComponent: Component {
                             resource: .media(media: .standalone(media: patternFile), resource: patternFile.resource),
                             type: AnimationCacheAnimationType(file: patternFile),
                             keyframeOnly: false,
-                            customColor: .white
+                            customColor: isTemplate ? .white : nil
                         ),
                         completion: { [weak self] _, _ in
                             guard let self else {
