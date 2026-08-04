@@ -1340,7 +1340,7 @@ public class Account {
         let networkStateQueue = Queue()
         
         let networkStateSignal = combineLatest(queue: networkStateQueue, self.stateManager.isUpdating, network.connectionStatus)
-        |> map { isUpdating, connectionStatus -> AccountNetworkState in
+        |> map { _, connectionStatus -> AccountNetworkState in
             switch connectionStatus {
                 case .waitingForNetwork:
                     return .waitingForNetwork
@@ -1362,11 +1362,7 @@ public class Account {
                         proxyState = AccountNetworkProxyState(address: proxyAddress, hasConnectionIssues: false)
                     }
                     
-                    if isUpdating {
-                        return .updating(proxy: proxyState)
-                    } else {
-                        return .online(proxy: proxyState)
-                    }
+                    return .online(proxy: proxyState)
             }
         }
         self.networkStateValue.set(networkStateSignal

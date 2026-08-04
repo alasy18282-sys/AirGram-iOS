@@ -563,7 +563,7 @@ public final class EmojiStatusComponent: Component {
                                 }
                             )),
                             userLocation: .other,
-                            attemptSynchronousLoad: false,
+                            attemptSynchronousLoad: true,
                             emoji: ChatTextInputTextCustomEmojiAttribute(interactivelySelectedFromPackId: nil, fileId: emojiFile.fileId.id, file: emojiFile),
                             file: emojiFile,
                             cache: component.animationCache,
@@ -609,6 +609,16 @@ public final class EmojiStatusComponent: Component {
                     
                     animationLayer.frame = CGRect(origin: CGPoint(), size: size)
                     animationLayer.isVisibleForAnimations = component.isVisibleForAnimations
+                    animationLayer.playOnce()
+                    
+                    let _ = freeMediaFileResourceInteractiveFetched(
+                        postbox: component.postbox,
+                        userLocation: .other,
+                        fileReference: .standalone(media: emojiFile),
+                        resource: emojiFile.resource
+                    ).start(completed: { [weak animationLayer] in
+                        animationLayer?.reloadAnimation()
+                    })
                 } else {
                     if self.emojiFileDisposable == nil {
                         self.emojiFileDisposable = (component.resolveInlineStickers([emojiFileId])

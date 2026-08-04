@@ -243,7 +243,7 @@ public final class ReactionIconView: PortalSourceView {
         let animationLayer = InlineStickerItemLayer(
             context: .account(context),
             userLocation: .other,
-            attemptSynchronousLoad: false,
+            attemptSynchronousLoad: true,
             emoji: ChatTextInputTextCustomEmojiAttribute(
                 interactivelySelectedFromPackId: nil,
                 fileId: file.fileId.id,
@@ -274,7 +274,17 @@ public final class ReactionIconView: PortalSourceView {
         animationLayer.frame = CGRect(origin: CGPoint(x: floor((size.width - iconSize.width) / 2.0), y: floor((size.height - iconSize.height) / 2.0)), size: iconSize)
         
         animationLayer.isVisibleForAnimations = !self.isPaused && animateIdle && context.sharedContext.energyUsageSettings.loopEmoji
+        animationLayer.playOnce()
         self.updateTintColor()
+        
+        let _ = freeMediaFileResourceInteractiveFetched(
+            postbox: context.account.postbox,
+            userLocation: .other,
+            fileReference: .standalone(media: file),
+            resource: file.resource
+        ).start(completed: { [weak self] in
+            self?.animationLayer?.reloadAnimation()
+        })
     }
     
     private func updateTintColor() {

@@ -146,7 +146,7 @@ private final class GiftsTabItemComponent: Component {
                         animationLayer = InlineStickerItemLayer(
                             context: .account(component.context),
                             userLocation: .other,
-                            attemptSynchronousLoad: false,
+                            attemptSynchronousLoad: true,
                             emoji: emoji,
                             file: file,
                             cache: component.context.animationCache,
@@ -157,8 +157,18 @@ private final class GiftsTabItemComponent: Component {
                             loopCount: 1
                         )
                         animationLayer.isVisibleForAnimations = true
+                        animationLayer.playOnce()
                         self.iconLayers[id] = animationLayer
                         self.layer.addSublayer(animationLayer)
+                        
+                        let _ = freeMediaFileResourceInteractiveFetched(
+                            postbox: component.context.account.postbox,
+                            userLocation: .other,
+                            fileReference: .standalone(media: file),
+                            resource: file.resource
+                        ).start(completed: { [weak animationLayer] in
+                            animationLayer?.reloadAnimation()
+                        })
                         
                         animationLayer.animateAlpha(from: 0.0, to: 1.0, duration: 0.2)
                         animationLayer.animateScale(from: 0.01, to: 1.0, duration: 0.2)
@@ -287,7 +297,7 @@ final class PeerInfoPaneTabsContainerPaneNode: ASDisplayNode {
                     let animationLayer = InlineStickerItemLayer(
                         context: .account(context),
                         userLocation: .other,
-                        attemptSynchronousLoad: false,
+                        attemptSynchronousLoad: true,
                         emoji: emoji,
                         file: file,
                         cache: context.animationCache,
@@ -298,8 +308,18 @@ final class PeerInfoPaneTabsContainerPaneNode: ASDisplayNode {
                         loopCount: 1
                     )
                     animationLayer.isVisibleForAnimations = true
+                    animationLayer.playOnce()
                     self.iconLayers[id] = animationLayer
                     self.layer.addSublayer(animationLayer)
+                    
+                    let _ = freeMediaFileResourceInteractiveFetched(
+                        postbox: context.account.postbox,
+                        userLocation: .other,
+                        fileReference: .standalone(media: file),
+                        resource: file.resource
+                    ).start(completed: { [weak animationLayer] in
+                        animationLayer?.reloadAnimation()
+                    })
                     
                     animationLayer.animateAlpha(from: 0.0, to: 1.0, duration: 0.2)
                     animationLayer.animateScale(from: 0.01, to: 1.0, duration: 0.2)
