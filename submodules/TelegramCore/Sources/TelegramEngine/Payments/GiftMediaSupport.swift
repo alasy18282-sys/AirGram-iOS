@@ -1,5 +1,4 @@
 import Foundation
-import SwiftSignalKit
 import Postbox
 
 public enum GiftMediaSupport {
@@ -47,18 +46,5 @@ public enum GiftMediaSupport {
             }
         }
         return nil
-    }
-    
-    public static func prefetchFiles(postbox: Postbox, files: [TelegramMediaFile]) -> Disposable {
-        let set = DisposableSet()
-        for file in files {
-            set.add(freeMediaFileResourceInteractiveFetched(
-                postbox: postbox,
-                userLocation: .other,
-                fileReference: .standalone(media: file),
-                resource: file.resource
-            ).start())
-        }
-        return set
     }
 }

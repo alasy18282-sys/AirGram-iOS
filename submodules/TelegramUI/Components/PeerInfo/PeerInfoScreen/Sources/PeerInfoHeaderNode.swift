@@ -2479,7 +2479,16 @@ final class PeerInfoHeaderNode: ASDisplayNode {
         var backgroundCoverFiles: [Int64: TelegramMediaFile] = [:]
         if let status = peer?.emojiStatus, case .starGift = status.content {
             backgroundCoverFiles = GiftMediaSupport.mediaFiles(for: status, gifts: profileGifts)
-            self.giftMediaPrefetchDisposable.set(GiftMediaSupport.prefetchFiles(postbox: self.context.account.postbox, files: Array(backgroundCoverFiles.values)))
+            let prefetchSet = DisposableSet()
+            for file in backgroundCoverFiles.values {
+                prefetchSet.add(freeMediaFileResourceInteractiveFetched(
+                    postbox: self.context.account.postbox,
+                    userLocation: .other,
+                    fileReference: .standalone(media: file),
+                    resource: file.resource
+                ).start())
+            }
+            self.giftMediaPrefetchDisposable.set(prefetchSet)
         } else {
             self.giftMediaPrefetchDisposable.set(nil)
         }
