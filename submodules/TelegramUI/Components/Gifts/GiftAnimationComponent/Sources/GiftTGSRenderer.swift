@@ -8,6 +8,7 @@ import AccountContext
 import AnimatedStickerNode
 import TelegramAnimatedStickerNode
 import EmojiTextAttachmentView
+import TextFormat
 
 public enum GiftTGSRenderer {
     public enum PlaybackMode {
