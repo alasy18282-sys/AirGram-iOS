@@ -34,6 +34,7 @@ swift_library(
         "//submodules/TelegramAnimatedStickerNode",
         "//submodules/TelegramUI/Components/Stars/ItemShimmeringLoadingComponent",
         "//submodules/TelegramUI/Components/PeerInfo/PeerInfoCoverComponent",
+        "//submodules/TelegramUI/Components/Gifts/GiftAnimationComponent",
         "//submodules/Components/BundleIconComponent",
         "//submodules/TelegramUI/Components/AnimatedTextComponent"
     ],

@@ -130,6 +130,7 @@ swift_library(
         "//submodules/TelegramUI/Components/Chat/ChatMessageSelectionInputPanelNode",
         "//submodules/TelegramUI/Components/Chat/ChatHistorySearchContainerNode",
         "//submodules/TelegramUI/Components/PeerInfo/PeerInfoCoverComponent",
+        "//submodules/TelegramUI/Components/Gifts/GiftAnimationComponent",
         "//submodules/TelegramUI/Components/LottieComponent",
         "//submodules/SolidRoundedButtonNode",
         "//submodules/TelegramUI/Components/PeerInfo/PeerInfoPaneNode",

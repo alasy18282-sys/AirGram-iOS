@@ -198,6 +198,8 @@ final class PeerInfoHeaderNode: ASDisplayNode {
     
     var emojiStatusPackDisposable = MetaDisposable()
     var giftMediaPrefetchDisposable = MetaDisposable()
+    var giftMediaResolveDisposable = MetaDisposable()
+    private var cachedLocalGiftMediaFiles: [Int64: TelegramMediaFile] = [:]
     var emojiStatusFileAndPackTitle = Promise<(TelegramMediaFile, LoadedStickerPack)?>()
     
     var customNavigationContentNode: PeerInfoPanelNodeNavigationContentNode?
@@ -385,6 +387,7 @@ final class PeerInfoHeaderNode: ASDisplayNode {
     deinit {
         self.emojiStatusPackDisposable.dispose()
         self.giftMediaPrefetchDisposable.dispose()
+        self.giftMediaResolveDisposable.dispose()
     }
     
     override func didLoad() {
@@ -495,6 +498,19 @@ final class PeerInfoHeaderNode: ASDisplayNode {
     private var currentStatusIcon: CredibilityIcon?
     
     private var currentPanelStatusData: PeerInfoStatusData?
+    
+    private func giftEmojiStatusAnimationContent(
+        emojiStatus: PeerEmojiStatus,
+        profileGifts: [ProfileGiftsContext.State.StarGift],
+        placeholderColor: UIColor,
+        themeColor: UIColor
+    ) -> EmojiStatusComponent.Content {
+        if let file = GiftMediaSupport.modelFile(for: emojiStatus, gifts: profileGifts, localFiles: self.cachedLocalGiftMediaFiles) {
+            return .animation(content: .file(file: file), size: CGSize(width: 80.0, height: 80.0), placeholderColor: placeholderColor, themeColor: themeColor, loopMode: .forever)
+        }
+        return .animation(content: .customEmoji(fileId: emojiStatus.fileId), size: CGSize(width: 80.0, height: 80.0), placeholderColor: placeholderColor, themeColor: themeColor, loopMode: .forever)
+    }
+    
     func update(width: CGFloat, containerHeight: CGFloat, containerInset: CGFloat, statusBarHeight: CGFloat, navigationHeight: CGFloat, isModalOverlay: Bool, isMediaOnly: Bool, contentOffset: CGFloat, paneContainerY: CGFloat, presentationData: PresentationData, peer: Peer?, cachedData: CachedPeerData?, threadData: MessageHistoryThreadData?, peerNotificationSettings: TelegramPeerNotificationSettings?, threadNotificationSettings: TelegramPeerNotificationSettings?, globalNotificationSettings: EngineGlobalNotificationSettings?, statusData: PeerInfoStatusData?, panelStatusData: (PeerInfoStatusData?, PeerInfoStatusData?, CGFloat?), isSecretChat: Bool, isContact: Bool, isSettings: Bool, state: PeerInfoState, profileGiftsContext: ProfileGiftsContext?, screenData: PeerInfoScreenData?, isSearching: Bool, metrics: LayoutMetrics, deviceMetrics: DeviceMetrics, transition: ContainedViewLayoutTransition, additive: Bool, animateHeader: Bool) -> CGFloat {
         if self.appliedCustomNavigationContentNode !== self.customNavigationContentNode {
             if let previous = self.appliedCustomNavigationContentNode {
@@ -590,6 +606,28 @@ final class PeerInfoHeaderNode: ASDisplayNode {
         let bottomInset: CGFloat = currentSavedMusic != nil ? musicHeight : 0.0
         
         let profileGifts = profileGiftsContext?.currentState?.gifts ?? []
+        
+        if let emojiStatus = peer?.emojiStatus, case .starGift = emojiStatus.content {
+            let mergedFiles = GiftMediaSupport.combinedMediaFiles(for: emojiStatus, gifts: profileGifts, localFiles: self.cachedLocalGiftMediaFiles)
+            if mergedFiles.count < GiftMediaSupport.fileIds(for: emojiStatus).count {
+                self.giftMediaResolveDisposable.set(GiftMediaSupport.resolveLocalFiles(postbox: self.context.account.postbox, emojiStatus: emojiStatus)
+                |> deliverOnMainQueue
+                |> start(next: { [weak self] files in
+                    guard let self else {
+                        return
+                    }
+                    if self.cachedLocalGiftMediaFiles != files {
+                        self.cachedLocalGiftMediaFiles = files
+                        self.setNeedsLayout()
+                    }
+                }))
+            } else {
+                self.giftMediaResolveDisposable.set(nil)
+            }
+        } else {
+            self.cachedLocalGiftMediaFiles = [:]
+            self.giftMediaResolveDisposable.set(nil)
+        }
         
         let isLandscape = containerInset > 16.0
         
@@ -921,13 +959,8 @@ final class PeerInfoHeaderNode: ASDisplayNode {
                 emojiExpandedStatusContent = emojiRegularStatusContent
             case let .emojiStatus(emojiStatus):
                 currentEmojiStatus = emojiStatus
-                if let file = GiftMediaSupport.modelFile(for: emojiStatus, gifts: profileGifts) {
-                    emojiRegularStatusContent = .animation(content: .file(file: file), size: CGSize(width: 80.0, height: 80.0), placeholderColor: presentationData.theme.list.mediaPlaceholderColor, themeColor: navigationContentsAccentColor, loopMode: .forever)
-                    emojiExpandedStatusContent = .animation(content: .file(file: file), size: CGSize(width: 80.0, height: 80.0), placeholderColor: navigationContentsAccentColor, themeColor: navigationContentsAccentColor, loopMode: .forever)
-                } else {
-                    emojiRegularStatusContent = .animation(content: .customEmoji(fileId: emojiStatus.fileId), size: CGSize(width: 80.0, height: 80.0), placeholderColor: presentationData.theme.list.mediaPlaceholderColor, themeColor: navigationContentsAccentColor, loopMode: .forever)
-                    emojiExpandedStatusContent = .animation(content: .customEmoji(fileId: emojiStatus.fileId), size: CGSize(width: 80.0, height: 80.0), placeholderColor: navigationContentsAccentColor, themeColor: navigationContentsAccentColor, loopMode: .forever)
-                }
+                emojiRegularStatusContent = self.giftEmojiStatusAnimationContent(emojiStatus: emojiStatus, profileGifts: profileGifts, placeholderColor: presentationData.theme.list.mediaPlaceholderColor, themeColor: navigationContentsAccentColor)
+                emojiExpandedStatusContent = self.giftEmojiStatusAnimationContent(emojiStatus: emojiStatus, profileGifts: profileGifts, placeholderColor: navigationContentsAccentColor, themeColor: navigationContentsAccentColor)
             }
             
             let iconSize = self.titleCredibilityIconView.update(
@@ -991,13 +1024,8 @@ final class PeerInfoHeaderNode: ASDisplayNode {
             switch statusIcon {
             case let .emojiStatus(emojiStatus):
                 currentEmojiStatus = emojiStatus
-                if let file = GiftMediaSupport.modelFile(for: emojiStatus, gifts: profileGifts) {
-                    emojiRegularStatusContent = .animation(content: .file(file: file), size: CGSize(width: 80.0, height: 80.0), placeholderColor: presentationData.theme.list.mediaPlaceholderColor, themeColor: navigationContentsAccentColor, loopMode: .forever)
-                    emojiExpandedStatusContent = .animation(content: .file(file: file), size: CGSize(width: 80.0, height: 80.0), placeholderColor: navigationContentsAccentColor, themeColor: navigationContentsAccentColor, loopMode: .forever)
-                } else {
-                    emojiRegularStatusContent = .animation(content: .customEmoji(fileId: emojiStatus.fileId), size: CGSize(width: 80.0, height: 80.0), placeholderColor: presentationData.theme.list.mediaPlaceholderColor, themeColor: navigationContentsAccentColor, loopMode: .forever)
-                    emojiExpandedStatusContent = .animation(content: .customEmoji(fileId: emojiStatus.fileId), size: CGSize(width: 80.0, height: 80.0), placeholderColor: navigationContentsAccentColor, themeColor: navigationContentsAccentColor, loopMode: .forever)
-                }
+                emojiRegularStatusContent = self.giftEmojiStatusAnimationContent(emojiStatus: emojiStatus, profileGifts: profileGifts, placeholderColor: presentationData.theme.list.mediaPlaceholderColor, themeColor: navigationContentsAccentColor)
+                emojiExpandedStatusContent = self.giftEmojiStatusAnimationContent(emojiStatus: emojiStatus, profileGifts: profileGifts, placeholderColor: navigationContentsAccentColor, themeColor: navigationContentsAccentColor)
                 if case let .starGift(_, _, _, slug, _, _, _, _, _) = emojiStatus.content {
                     particleColor = UIColor.white
                     uniqueGiftSlug = slug
@@ -1107,13 +1135,8 @@ final class PeerInfoHeaderNode: ASDisplayNode {
                 emojiRegularStatusContent = .verified(fillColor: presentationData.theme.list.itemCheckColors.fillColor, foregroundColor: presentationData.theme.list.itemCheckColors.foregroundColor, sizeType: .large)
                 emojiExpandedStatusContent = .verified(fillColor: navigationContentsAccentColor, foregroundColor: .clear, sizeType: .large)
             case let .emojiStatus(emojiStatus):
-                if let file = GiftMediaSupport.modelFile(for: emojiStatus, gifts: profileGifts) {
-                    emojiRegularStatusContent = .animation(content: .file(file: file), size: CGSize(width: 80.0, height: 80.0), placeholderColor: presentationData.theme.list.mediaPlaceholderColor, themeColor: navigationContentsAccentColor, loopMode: .forever)
-                    emojiExpandedStatusContent = .animation(content: .file(file: file), size: CGSize(width: 80.0, height: 80.0), placeholderColor: navigationContentsAccentColor, themeColor: navigationContentsAccentColor, loopMode: .forever)
-                } else {
-                    emojiRegularStatusContent = .animation(content: .customEmoji(fileId: emojiStatus.fileId), size: CGSize(width: 80.0, height: 80.0), placeholderColor: presentationData.theme.list.mediaPlaceholderColor, themeColor: navigationContentsAccentColor, loopMode: .forever)
-                    emojiExpandedStatusContent = .animation(content: .customEmoji(fileId: emojiStatus.fileId), size: CGSize(width: 80.0, height: 80.0), placeholderColor: navigationContentsAccentColor, themeColor: navigationContentsAccentColor, loopMode: .forever)
-                }
+                emojiRegularStatusContent = self.giftEmojiStatusAnimationContent(emojiStatus: emojiStatus, profileGifts: profileGifts, placeholderColor: presentationData.theme.list.mediaPlaceholderColor, themeColor: navigationContentsAccentColor)
+                emojiExpandedStatusContent = self.giftEmojiStatusAnimationContent(emojiStatus: emojiStatus, profileGifts: profileGifts, placeholderColor: navigationContentsAccentColor, themeColor: navigationContentsAccentColor)
             default:
                 emojiRegularStatusContent = .none
                 emojiExpandedStatusContent = .none
@@ -2478,7 +2501,7 @@ final class PeerInfoHeaderNode: ASDisplayNode {
         
         var backgroundCoverFiles: [Int64: TelegramMediaFile] = [:]
         if let status = peer?.emojiStatus, case .starGift = status.content {
-            backgroundCoverFiles = GiftMediaSupport.mediaFiles(for: status, gifts: profileGifts)
+            backgroundCoverFiles = GiftMediaSupport.combinedMediaFiles(for: status, gifts: profileGifts, localFiles: self.cachedLocalGiftMediaFiles)
             let prefetchSet = DisposableSet()
             for file in backgroundCoverFiles.values {
                 prefetchSet.add(freeMediaFileResourceInteractiveFetched(
@@ -2506,7 +2529,7 @@ final class PeerInfoHeaderNode: ASDisplayNode {
                 defaultHeight: backgroundDefaultHeight,
                 gradientCenter: CGPoint(x: 0.5, y: buttonKeys.isEmpty ? 0.5 : 0.45),
                 avatarTransitionFraction: max(0.0, min(1.0, titleCollapseFraction + transitionFraction * 2.0)),
-                patternTransitionFraction: buttonsTransitionFraction * backgroundTransitionFraction
+                patternTransitionFraction: hasBackground ? 1.0 : buttonsTransitionFraction * backgroundTransitionFraction
             )),
             environment: {},
             containerSize: CGSize(width: width + bannerInset * 2.0, height: apparentBackgroundHeight + bannerInset)

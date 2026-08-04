@@ -24,6 +24,7 @@ import UndoUI
 import HorizontalTabsComponent
 import GlassBackgroundComponent
 import EdgeEffect
+import GiftAnimationComponent
 
 final class PeerInfoPaneWrapper {
     let key: PeerInfoPaneKey
@@ -82,8 +83,13 @@ private final class GiftsTabItemComponent: Component {
         private let title = ComponentView<Empty>()
         private let icon = ComponentView<Empty>()
         private var iconLayers: [AnyHashable: InlineStickerItemLayer] = [:]
+        private let iconDisposables = DisposableSet()
                 
         private var component: GiftsTabItemComponent?
+        
+        deinit {
+            self.iconDisposables.dispose()
+        }
                 
         func update(component: GiftsTabItemComponent, availableSize: CGSize, state: State, environment: Environment<Empty>, transition: ComponentTransition) -> CGSize {
             self.component = component
@@ -138,37 +144,16 @@ private final class GiftsTabItemComponent: Component {
                             continue
                         }
                         
-                        let emoji = ChatTextInputTextCustomEmojiAttribute(
-                            interactivelySelectedFromPackId: nil,
-                            fileId: file.fileId.id,
-                            file: file
-                        )
-                        animationLayer = InlineStickerItemLayer(
-                            context: .account(component.context),
-                            userLocation: .other,
-                            attemptSynchronousLoad: true,
-                            emoji: emoji,
+                        animationLayer = GiftTGSRenderer.attachInlineLayer(
+                            context: component.context,
                             file: file,
-                            cache: component.context.animationCache,
-                            renderer: component.context.animationRenderer,
-                            unique: true,
+                            size: iconSize,
                             placeholderColor: component.theme.list.mediaPlaceholderColor,
-                            pointSize: iconSize,
+                            to: self.layer,
+                            disposables: self.iconDisposables,
                             loopCount: 1
                         )
-                        animationLayer.isVisibleForAnimations = true
-                        animationLayer.playOnce()
                         self.iconLayers[id] = animationLayer
-                        self.layer.addSublayer(animationLayer)
-                        
-                        let _ = freeMediaFileResourceInteractiveFetched(
-                            postbox: component.context.account.postbox,
-                            userLocation: .other,
-                            fileReference: .standalone(media: file),
-                            resource: file.resource
-                        ).start(completed: { [weak animationLayer] in
-                            animationLayer?.reloadAnimation()
-                        })
                         
                         animationLayer.animateAlpha(from: 0.0, to: 1.0, duration: 0.2)
                         animationLayer.animateScale(from: 0.01, to: 1.0, duration: 0.2)
@@ -228,6 +213,7 @@ final class PeerInfoPaneTabsContainerPaneNode: ASDisplayNode {
     private let titleNode: ImmediateTextNode
     private let buttonNode: HighlightTrackingButtonNode
     private var iconLayers: [AnyHashable: InlineStickerItemLayer] = [:]
+    private let iconDisposables = DisposableSet()
     
     private var isSelected: Bool = false
     private var icons: [ProfileGiftsContext.State.StarGift] = []
@@ -247,6 +233,10 @@ final class PeerInfoPaneTabsContainerPaneNode: ASDisplayNode {
         self.addSubnode(self.buttonNode)
         
         self.buttonNode.addTarget(self, action: #selector(self.buttonPressed), forControlEvents: .touchUpInside)
+    }
+    
+    deinit {
+        self.iconDisposables.dispose()
     }
     
     @objc private func buttonPressed() {
@@ -289,37 +279,16 @@ final class PeerInfoPaneTabsContainerPaneNode: ASDisplayNode {
                         continue
                     }
                     
-                    let emoji = ChatTextInputTextCustomEmojiAttribute(
-                        interactivelySelectedFromPackId: nil,
-                        fileId: file.fileId.id,
-                        file: file
-                    )
-                    let animationLayer = InlineStickerItemLayer(
-                        context: .account(context),
-                        userLocation: .other,
-                        attemptSynchronousLoad: true,
-                        emoji: emoji,
+                    let animationLayer = GiftTGSRenderer.attachInlineLayer(
+                        context: context,
                         file: file,
-                        cache: context.animationCache,
-                        renderer: context.animationRenderer,
-                        unique: true,
+                        size: iconSize,
                         placeholderColor: presentationData.theme.list.mediaPlaceholderColor,
-                        pointSize: iconSize,
+                        to: self.layer,
+                        disposables: self.iconDisposables,
                         loopCount: 1
                     )
-                    animationLayer.isVisibleForAnimations = true
-                    animationLayer.playOnce()
                     self.iconLayers[id] = animationLayer
-                    self.layer.addSublayer(animationLayer)
-                    
-                    let _ = freeMediaFileResourceInteractiveFetched(
-                        postbox: context.account.postbox,
-                        userLocation: .other,
-                        fileReference: .standalone(media: file),
-                        resource: file.resource
-                    ).start(completed: { [weak animationLayer] in
-                        animationLayer?.reloadAnimation()
-                    })
                     
                     animationLayer.animateAlpha(from: 0.0, to: 1.0, duration: 0.2)
                     animationLayer.animateScale(from: 0.01, to: 1.0, duration: 0.2)

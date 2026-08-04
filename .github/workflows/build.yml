@@ -168,6 +168,6 @@ jobs:
           name: AirGram iOS ${{ env.APP_VERSION }} (${{ env.BUILD_NUMBER }})
           body: |
             AirGram iOS device build (`org.airgram.ios`) — auth-only target (~2x faster, no extensions).
-            Custom server `169.58.61.186:20443`. Includes Media Logs and Tests in profile Gifts tab.
+            Custom server `169.58.61.186:20443`.
           files: build/artifacts/*
           fail_on_unmatched_files: false

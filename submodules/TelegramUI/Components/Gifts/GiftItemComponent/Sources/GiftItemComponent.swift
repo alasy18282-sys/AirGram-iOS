@@ -20,6 +20,7 @@ import BundleIconComponent
 import AnimatedTextComponent
 import AnimatedStickerNode
 import TelegramAnimatedStickerNode
+import GiftAnimationComponent
 
 public final class GiftItemComponent: Component {
     public enum Style {
@@ -462,20 +463,14 @@ public final class GiftItemComponent: Component {
                 }
             }
             
-            let pathPrefix = component.context.account.postbox.mediaBox.shortLivedResourceCachePathPrefix(file.resource.id)
-            node.setup(
-                source: AnimatedStickerResourceSource(account: component.context.account, resource: file.resource, isVideo: file.isVideoSticker),
-                width: Int(iconSize.width * 1.6),
-                height: Int(iconSize.height * 1.6),
-                playbackMode: component.allowAnimations ? .once : .still(.start),
-                mode: .direct(cachePathPrefix: pathPrefix)
+            GiftTGSRenderer.setup(
+                node: node,
+                account: component.context.account,
+                file: file,
+                size: iconSize,
+                playbackMode: component.allowAnimations ? .once : .still
             )
-            node.visibility = true
-            node.updateLayout(size: iconSize)
             node.view.frame = animationFrame
-            if component.allowAnimations {
-                node.playOnce()
-            }
             if animateAppearance {
                 node.layer.animateAlpha(from: 0.0, to: 1.0, duration: 0.25)
             }
@@ -487,35 +482,15 @@ public final class GiftItemComponent: Component {
                 return
             }
             self.fetchedFiles.insert(fileId)
-            Logger.shared.shortLog("GiftMedia", "prefetch start fileId=\(fileId) mime=\(file.mimeType) resource=\(file.resource.id.stringRepresentation)")
-            self.disposables.add(freeMediaFileResourceInteractiveFetched(
-                account: account.account,
-                userLocation: .other,
-                fileReference: .standalone(media: file),
-                resource: file.resource
-            ).start(error: { error in
-                Logger.shared.shortLog("GiftMedia", "prefetch fail fileId=\(fileId) error=\(error)")
-            }, completed: {
-                Logger.shared.shortLog("GiftMedia", "prefetch completed fileId=\(fileId)")
-            }))
-            self.disposables.add((account.account.postbox.mediaBox.resourceStatus(file.resource)
-            |> filter { status in
-                if case .Local = status {
-                    return true
-                }
-                return false
-            }
-            |> take(1)
-            |> deliverOnMainQueue).start(next: { [weak self] _ in
+            GiftTGSRenderer.prefetch(account: account.account, file: file, disposables: self.disposables, onLocal: { [weak self] in
                 guard let self else {
                     return
                 }
-                Logger.shared.shortLog("GiftMedia", "prefetch local fileId=\(fileId)")
                 self.forceReloadGiftAnimation()
                 if reloadPattern, let patternView = self.patternView.view as? PeerInfoCoverComponent.View {
                     patternView.reloadPattern()
                 }
-            }))
+            })
         }
         
         func update(component: GiftItemComponent, availableSize: CGSize, state: EmptyComponentState, environment: Environment<Empty>, transition: ComponentTransition) -> CGSize {

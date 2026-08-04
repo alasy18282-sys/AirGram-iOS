@@ -96,7 +96,6 @@ public final class PeerInfoGiftsPaneNode: ASDisplayNode, PeerInfoPaneNode, UIScr
     private var panelEdgeEffectView: EdgeEffectView?
     private var panelContentContainer: UIView?
     private var panelButton: ComponentView<Empty>?
-    private var mediaLogsButton: ComponentView<Empty>?
     private var panelCheck: ComponentView<Empty>?
         
     private var currentParams: (size: CGSize, topInset: CGFloat, sideInset: CGFloat, bottomInset: CGFloat, deviceMetrics: DeviceMetrics, visibleHeight: CGFloat, isScrollingLockedAtTop: Bool, expandProgress: CGFloat, navigationHeight: CGFloat, presentationData: PresentationData)?
@@ -727,44 +726,6 @@ public final class PeerInfoGiftsPaneNode: ASDisplayNode, PeerInfoPaneNode, UIScr
                 })
             }
             
-            let mediaLogsButton: ComponentView<Empty>
-            if let current = self.mediaLogsButton {
-                mediaLogsButton = current
-            } else {
-                mediaLogsButton = ComponentView<Empty>()
-                self.mediaLogsButton = mediaLogsButton
-            }
-            let mediaLogsButtonSize = mediaLogsButton.update(
-                transition: transition,
-                component: AnyComponent(
-                    ButtonComponent(
-                        background: ButtonComponent.Background(
-                            style: .glass,
-                            color: params.presentationData.theme.list.itemBlocksBackgroundColor,
-                            foreground: params.presentationData.theme.list.itemAccentColor,
-                            pressedColor: params.presentationData.theme.list.itemBlocksBackgroundColor.withMultipliedAlpha(0.85)
-                        ),
-                        content: AnyComponentWithIdentity(
-                            id: "mediaLogs",
-                            component: AnyComponent(MultilineTextComponent(text: .plain(NSAttributedString(string: "Media Logs and Tests", font: Font.medium(14.0), textColor: params.presentationData.theme.list.itemAccentColor, paragraphAlignment: .center))))
-                        ),
-                        isEnabled: true,
-                        action: { [weak self] in
-                            self?.openMediaLogsAndTests()
-                        }
-                    )
-                ),
-                environment: {},
-                containerSize: CGSize(width: params.size.width - params.sideInset * 2.0 - 28.0, height: 36.0)
-            )
-            if let mediaLogsButtonView = mediaLogsButton.view {
-                if mediaLogsButtonView.superview == nil {
-                    self.scrollNode.view.insertSubview(mediaLogsButtonView, at: 0)
-                }
-                transition.setFrame(view: mediaLogsButtonView, frame: CGRect(origin: CGPoint(x: floor((params.size.width - mediaLogsButtonSize.width) / 2.0), y: topInset), size: mediaLogsButtonSize))
-                topInset += mediaLogsButtonSize.height + 8.0
-            }
-            
             var contentHeight = self.giftsListView.updateScrolling(topInset: topInset, visibleBounds: visibleBounds, transition: transition)
             
             var bottomScrollInset: CGFloat = 0.0
@@ -973,12 +934,6 @@ public final class PeerInfoGiftsPaneNode: ASDisplayNode, PeerInfoPaneNode, UIScr
                 self.giftsListView.loadMore()
             }
         }
-    }
-        
-    private func openMediaLogsAndTests() {
-        let screen = MediaLogsAndTestsScreen(context: self.context, peerId: self.peerId, profileGifts: self.profileGifts)
-        screen.navigationPresentation = .modal
-        self.parentController?.present(screen, in: .window(.root))
     }
         
     @objc private func buttonPressed() {
