@@ -612,7 +612,7 @@ final class PeerInfoHeaderNode: ASDisplayNode {
             if mergedFiles.count < GiftMediaSupport.fileIds(for: emojiStatus).count {
                 self.giftMediaResolveDisposable.set(GiftMediaSupport.resolveLocalFiles(postbox: self.context.account.postbox, emojiStatus: emojiStatus)
                 |> deliverOnMainQueue
-                |> start(next: { [weak self] files in
+                |> startStrict(next: { [weak self] files in
                     guard let self else {
                         return
                     }
