@@ -18,6 +18,8 @@ import Markdown
 import CheckNode
 import BundleIconComponent
 import AnimatedTextComponent
+import AnimatedStickerNode
+import TelegramAnimatedStickerNode
 
 public final class GiftItemComponent: Component {
     public enum Style {
@@ -342,6 +344,7 @@ public final class GiftItemComponent: Component {
         private let ribbonText = ComponentView<Empty>()
         
         private var animationLayer: InlineStickerItemLayer?
+        private var animationNode: AnimatedStickerNode?
         private var selectionLayer: SimpleShapeLayer?
         private var checkLayer: CheckLayer?
         private var outlineLayer: SimpleLayer?
@@ -402,11 +405,80 @@ public final class GiftItemComponent: Component {
             self.component?.action?()
         }
         
-        private func forceReloadGiftAnimation() {
+        private func clearGiftAnimation() {
             self.animationLayer?.removeFromSuperlayer()
             self.animationLayer = nil
+            if let animationNode = self.animationNode {
+                animationNode.view.removeFromSuperview()
+                self.animationNode = nil
+            }
             self.animationFile = nil
-            self.componentState?.updated(transition: .immediate)
+        }
+        
+        private func forceReloadGiftAnimation() {
+            self.clearGiftAnimation()
+            Queue.mainQueue().justDispatch { [weak self] in
+                self?.componentState?.updated(transition: .immediate)
+            }
+        }
+        
+        private func shouldUseAnimatedStickerNode(for mode: GiftItemComponent.Mode, animationFile: TelegramMediaFile?) -> Bool {
+            guard animationFile != nil else {
+                return false
+            }
+            switch mode {
+            case .buttonIcon, .tableIcon:
+                return false
+            default:
+                return true
+            }
+        }
+        
+        private func setupAnimatedStickerNode(
+            component: GiftItemComponent,
+            file: TelegramMediaFile,
+            iconSize: CGSize,
+            animationFrame: CGRect,
+            animateAppearance: Bool
+        ) {
+            let node: DefaultAnimatedStickerNodeImpl
+            if let current = self.animationNode as? DefaultAnimatedStickerNodeImpl {
+                node = current
+            } else {
+                if let animationLayer = self.animationLayer {
+                    animationLayer.removeFromSuperlayer()
+                    self.animationLayer = nil
+                }
+                if let currentNode = self.animationNode {
+                    currentNode.view.removeFromSuperview()
+                }
+                node = DefaultAnimatedStickerNodeImpl()
+                node.isUserInteractionEnabled = false
+                self.animationNode = node
+                if let patternView = self.patternView.view {
+                    self.insertSubview(node.view, aboveSubview: patternView)
+                } else {
+                    self.addSubview(node.view)
+                }
+            }
+            
+            let pathPrefix = component.context.account.postbox.mediaBox.shortLivedResourceCachePathPrefix(file.resource.id)
+            node.setup(
+                source: AnimatedStickerResourceSource(account: component.context.account, resource: file.resource, isVideo: file.isVideoSticker),
+                width: Int(iconSize.width * 1.6),
+                height: Int(iconSize.height * 1.6),
+                playbackMode: component.allowAnimations ? .once : .still(.start),
+                mode: .direct(cachePathPrefix: pathPrefix)
+            )
+            node.visibility = true
+            node.updateLayout(size: iconSize)
+            node.view.frame = animationFrame
+            if component.allowAnimations {
+                node.playOnce()
+            }
+            if animateAppearance {
+                node.layer.animateAlpha(from: 0.0, to: 1.0, duration: 0.25)
+            }
         }
         
         private func prefetchGiftMedia(account: AccountContext, file: TelegramMediaFile, reloadPattern: Bool = false) {
@@ -454,9 +526,7 @@ public final class GiftItemComponent: Component {
             
             if previousComponent?.subject != component.subject {
                 self.fetchedFiles.removeAll()
-                self.animationLayer?.removeFromSuperlayer()
-                self.animationLayer = nil
-                self.animationFile = nil
+                self.clearGiftAnimation()
             }
                         
             self.isGestureEnabled = component.contextAction != nil
@@ -739,52 +809,78 @@ public final class GiftItemComponent: Component {
             
             var animationTransition = transition
             var animateBackgroundChange = false
-            let shouldRecreateAnimationLayer = self.animationLayer == nil || self.animationFile?.fileId != animationFile?.fileId
-            if shouldRecreateAnimationLayer, let emoji {
+            let animationFrame = CGRect(origin: CGPoint(x: floorToScreenPixels((size.width - iconSize.width) / 2.0), y: component.mode == .generic ? animationOffset : (floorToScreenPixels((size.height - iconSize.height) / 2.0) + explicitAnimationOffset)), size: iconSize)
+            let shouldRecreateAnimation = self.animationFile?.fileId != animationFile?.fileId || (self.shouldUseAnimatedStickerNode(for: component.mode, animationFile: animationFile) ? self.animationNode == nil : self.animationLayer == nil)
+            if shouldRecreateAnimation, let emoji {
                 animationTransition = .immediate
-                self.animationFile = animationFile
                 var animateAppearance = false
-                if let animationLayer = self.animationLayer {
-                    self.animationLayer = nil
-                    if component.animateChanges {
-                        animateAppearance = true
-                        animateBackgroundChange = true
-                        animationLayer.animateAlpha(from: 1.0, to: 0.0, duration: 0.25, removeOnCompletion: false, completion: { _ in
+                if self.animationLayer != nil || self.animationNode != nil {
+                    animateAppearance = component.animateChanges
+                    animateBackgroundChange = animateAppearance
+                    if let animationLayer = self.animationLayer {
+                        self.animationLayer = nil
+                        if animateAppearance {
+                            animationLayer.animateAlpha(from: 1.0, to: 0.0, duration: 0.25, removeOnCompletion: false, completion: { _ in
+                                animationLayer.removeFromSuperlayer()
+                            })
+                        } else {
                             animationLayer.removeFromSuperlayer()
-                        })
-                    } else {
-                        animationLayer.removeFromSuperlayer()
+                        }
+                    }
+                    if let animationNode = self.animationNode {
+                        self.animationNode = nil
+                        if animateAppearance {
+                            animationNode.view.layer.animateAlpha(from: 1.0, to: 0.0, duration: 0.25, removeOnCompletion: false, completion: { _ in
+                                animationNode.view.removeFromSuperview()
+                            })
+                        } else {
+                            animationNode.view.removeFromSuperview()
+                        }
                     }
                 }
-                let animationLayer = InlineStickerItemLayer(
-                    context: .account(component.context),
-                    userLocation: .other,
-                    attemptSynchronousLoad: true,
-                    emoji: emoji,
-                    file: animationFile,
-                    cache: component.context.animationCache,
-                    renderer: component.context.animationRenderer,
-                    unique: false,
-                    placeholderColor: placeholderColor,
-                    pointSize: CGSize(width: iconSize.width * 2.0, height: iconSize.height * 2.0),
-                    loopCount: 1
-                )
-                animationLayer.isVisibleForAnimations = component.allowAnimations
-                self.animationLayer = animationLayer
                 
-                if let patternView = self.patternView.view {
-                    self.layer.insertSublayer(animationLayer, above: patternView.layer)
+                self.animationFile = animationFile
+                if self.shouldUseAnimatedStickerNode(for: component.mode, animationFile: animationFile), let animationFile {
+                    self.setupAnimatedStickerNode(
+                        component: component,
+                        file: animationFile,
+                        iconSize: iconSize,
+                        animationFrame: animationFrame,
+                        animateAppearance: animateAppearance
+                    )
                 } else {
-                    self.layer.insertSublayer(animationLayer, above: self.backgroundLayer)
-                }
-                if animateAppearance {
-                    animationLayer.animateAlpha(from: 0.0, to: 1.0, duration: 0.25)
+                    let animationLayer = InlineStickerItemLayer(
+                        context: .account(component.context),
+                        userLocation: .other,
+                        attemptSynchronousLoad: true,
+                        emoji: emoji,
+                        file: animationFile,
+                        cache: component.context.animationCache,
+                        renderer: component.context.animationRenderer,
+                        unique: false,
+                        placeholderColor: placeholderColor,
+                        pointSize: CGSize(width: iconSize.width * 2.0, height: iconSize.height * 2.0),
+                        loopCount: 1
+                    )
+                    animationLayer.isVisibleForAnimations = component.allowAnimations
+                    self.animationLayer = animationLayer
+                    
+                    if let patternView = self.patternView.view {
+                        self.layer.insertSublayer(animationLayer, above: patternView.layer)
+                    } else {
+                        self.layer.insertSublayer(animationLayer, above: self.backgroundLayer)
+                    }
+                    if component.allowAnimations {
+                        animationLayer.playOnce()
+                    }
+                    if animateAppearance {
+                        animationLayer.animateAlpha(from: 0.0, to: 1.0, duration: 0.25)
+                    }
                 }
             }
             
-            let animationFrame = CGRect(origin: CGPoint(x: floorToScreenPixels((size.width - iconSize.width) / 2.0), y: component.mode == .generic ? animationOffset : (floorToScreenPixels((size.height - iconSize.height) / 2.0) + explicitAnimationOffset)), size: iconSize)
             if let animationLayer = self.animationLayer {
-                animationTransition.setFrame(layer: animationLayer, frame: animationFrame)
+                animationLayer.isVisibleForAnimations = component.allowAnimations
             }
             
             if let backgroundColor {
@@ -820,6 +916,21 @@ public final class GiftItemComponent: Component {
                     }
                     backgroundView.frame = CGRect(origin: CGPoint(x: floorToScreenPixels((size.width - backgroundSize.width) / 2.0), y: floorToScreenPixels((size.height - backgroundSize.height) / 2.0)), size: backgroundSize)
                 }
+            }
+            
+            if let animationLayer = self.animationLayer {
+                animationTransition.setFrame(layer: animationLayer, frame: animationFrame)
+                animationLayer.isVisibleForAnimations = component.allowAnimations
+                if let patternView = self.patternView.view {
+                    self.layer.insertSublayer(animationLayer, above: patternView.layer)
+                }
+            }
+            if let animationNode = self.animationNode {
+                if let patternView = self.patternView.view {
+                    self.insertSubview(animationNode.view, aboveSubview: patternView)
+                }
+                animationTransition.setFrame(view: animationNode.view, frame: animationFrame)
+                animationNode.visibility = true
             }
                         
             if case .upgradePreview = component.mode, case let .preview(attributes, rarity) = component.subject, let rarity {

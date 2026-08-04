@@ -548,6 +548,15 @@ public final class InlineStickerItemLayer: MultiAnimationRenderTarget {
         return nullAction
     }
     
+    override public func didMoveToSuperlayer() {
+        super.didMoveToSuperlayer()
+        let inHierarchy = self.superlayer != nil
+        if self.isInHierarchyValue != inHierarchy {
+            self.isInHierarchyValue = inHierarchy
+            self.updatePlayback()
+        }
+    }
+    
     public func updateTintColor(contentTintColor: UIColor?, dynamicColor: UIColor?, transition: ComponentTransition) {
         self._contentTintColor = contentTintColor
         self._dynamicColor = dynamicColor

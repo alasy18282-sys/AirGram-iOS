@@ -30,6 +30,8 @@ swift_library(
         "//submodules/AvatarNode",
         "//submodules/CheckNode",
         "//submodules/TelegramUI/Components/EmojiTextAttachmentView",
+        "//submodules/AnimatedStickerNode",
+        "//submodules/TelegramAnimatedStickerNode",
         "//submodules/TelegramUI/Components/Stars/ItemShimmeringLoadingComponent",
         "//submodules/TelegramUI/Components/PeerInfo/PeerInfoCoverComponent",
         "//submodules/Components/BundleIconComponent",
