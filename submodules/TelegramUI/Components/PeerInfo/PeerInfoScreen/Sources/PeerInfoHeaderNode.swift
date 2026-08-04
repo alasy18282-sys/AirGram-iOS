@@ -589,7 +589,7 @@ final class PeerInfoHeaderNode: ASDisplayNode {
         let musicHeight: CGFloat = hasBackground || self.isAvatarExpanded ? 24.0 : 16.0
         let bottomInset: CGFloat = currentSavedMusic != nil ? musicHeight : 0.0
         
-        let profileGifts = profileGiftsContext?.state?.gifts ?? []
+        let profileGifts = profileGiftsContext?.currentState?.gifts ?? []
         
         let isLandscape = containerInset > 16.0
         
