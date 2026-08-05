@@ -1385,7 +1385,7 @@ public class ChatMessageGiftBubbleContentNode: ChatMessageBubbleContentNode {
                                         avatarScale: 1.0,
                                         defaultHeight: patternSize.height,
                                         avatarTransitionFraction: 0.0,
-                                        patternTransitionFraction: 0.0
+                                        patternTransitionFraction: 1.0
                                     )),
                                     environment: {},
                                     containerSize: patternSize

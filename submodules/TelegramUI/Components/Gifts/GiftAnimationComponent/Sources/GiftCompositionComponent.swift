@@ -829,7 +829,7 @@ public final class GiftCompositionComponent: Component {
                         defaultHeight: 300.0,
                         gradientOnTop: true,
                         avatarTransitionFraction: 0.0,
-                        patternTransitionFraction: 0.0
+                        patternTransitionFraction: 1.0
                     )),
                     environment: {},
                     containerSize: availableSize

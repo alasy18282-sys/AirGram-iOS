@@ -364,6 +364,20 @@ public final class PeerInfoCoverComponent: Component {
             }
         }
         
+        private func patternTintColor(from component: PeerInfoCoverComponent) -> UIColor? {
+            switch component.subject {
+            case let .custom(_, _, patternColor, _):
+                return patternColor
+            case let .status(status):
+                if case let .starGift(_, _, _, _, _, _, _, patternColorValue, _) = status.content {
+                    return UIColor(rgb: UInt32(bitPattern: patternColorValue))
+                }
+                return nil
+            default:
+                return nil
+            }
+        }
+        
         private func loadPatternFromFile() {
             guard let component = self.component else {
                 return
@@ -385,6 +399,7 @@ public final class PeerInfoCoverComponent: Component {
                 } else {
                     let isTemplate = patternFile.isCustomTemplateEmoji
                     let animated = self.patternContentsTarget?.contents == nil
+                    let patternTintColor = self.patternTintColor(from: component)
                     self.patternImageDisposable = component.context.animationRenderer.loadFirstFrame(
                         target: patternContentsTarget,
                         cache: component.context.animationCache,
@@ -397,7 +412,7 @@ public final class PeerInfoCoverComponent: Component {
                             resource: .media(media: .standalone(media: patternFile), resource: patternFile.resource),
                             type: AnimationCacheAnimationType(file: patternFile),
                             keyframeOnly: false,
-                            customColor: isTemplate ? .white : nil
+                            customColor: patternTintColor ?? (isTemplate ? .white : nil)
                         ),
                         completion: { [weak self] _, _ in
                             guard let self else {
@@ -426,7 +441,7 @@ public final class PeerInfoCoverComponent: Component {
             self.component = component
             self.currentSize = availableSize
                         
-            if previousComponent?.subject?.fileId != component.subject?.fileId {
+            if previousComponent?.subject?.fileId != component.subject?.fileId || previousComponent?.files != component.files {
                 if let fileId = component.subject?.fileId, fileId != 0 {
                     if self.patternContentsTarget == nil {
                         self.patternContentsTarget = PatternContentsTarget(imageUpdated: { [weak self] hadContents in
@@ -632,7 +647,11 @@ public final class PeerInfoCoverComponent: Component {
                     }
                     
                     itemLayer.frame = itemFrame
-                    itemLayer.layerTintColor = UIColor(white: 0.0, alpha: 0.8).cgColor
+                    if let patternTintColor = self.patternTintColor(from: component) {
+                        itemLayer.layerTintColor = patternTintColor.withAlphaComponent(0.85).cgColor
+                    } else {
+                        itemLayer.layerTintColor = UIColor(white: 0.0, alpha: 0.8).cgColor
+                    }
                     transition.setAlpha(layer: itemLayer, alpha: 1.0 - itemScaleFraction)
                     
                     avatarBackgroundPatternLayerCount += 1

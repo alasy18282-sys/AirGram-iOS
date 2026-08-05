@@ -36,6 +36,7 @@ import ComponentDisplayAdapters
 import ChatAvatarNavigationNode
 import MultiScaleTextNode
 import PeerInfoCoverComponent
+import GiftAnimationComponent
 import PeerInfoPaneNode
 import MultilineTextComponent
 import PeerInfoRatingComponent
@@ -2501,25 +2502,37 @@ final class PeerInfoHeaderNode: ASDisplayNode {
         }
         
         var backgroundCoverFiles: [Int64: TelegramMediaFile] = [:]
+        var backgroundCoverComponent: PeerInfoCoverComponent?
         if let status = peer?.emojiStatus, case .starGift = status.content {
-            backgroundCoverFiles = GiftMediaSupport.combinedMediaFiles(for: status, gifts: profileGifts, localFiles: self.cachedLocalGiftMediaFiles)
+            let appearance = GiftPatternRenderer.appearance(for: status, gifts: profileGifts, localFiles: self.cachedLocalGiftMediaFiles)
+            backgroundCoverFiles = appearance.files
             let prefetchSet = DisposableSet()
-            for file in backgroundCoverFiles.values {
-                prefetchSet.add(freeMediaFileResourceInteractiveFetched(
-                    postbox: self.context.account.postbox,
-                    userLocation: .other,
-                    fileReference: .standalone(media: file),
-                    resource: file.resource
-                ).start())
+            GiftPatternRenderer.prefetch(account: self.context.account, appearance: appearance, disposables: prefetchSet) { [weak self] in
+                guard let self, let backgroundCoverView = self.backgroundCover.view as? PeerInfoCoverComponent.View else {
+                    return
+                }
+                backgroundCoverView.reloadPattern()
             }
             self.giftMediaPrefetchDisposable.set(prefetchSet)
+            backgroundCoverComponent = GiftPatternRenderer.makeCoverComponent(
+                context: self.context,
+                appearance: appearance,
+                avatarCenter: apparentAvatarFrame.center.offsetBy(dx: bannerInset, dy: 0.0),
+                avatarSize: apparentAvatarFrame.size,
+                avatarScale: avatarScale,
+                defaultHeight: backgroundDefaultHeight,
+                isDark: presentationData.theme.overallDarkAppearance,
+                gradientCenter: CGPoint(x: 0.5, y: buttonKeys.isEmpty ? 0.5 : 0.45),
+                avatarTransitionFraction: max(0.0, min(1.0, titleCollapseFraction + transitionFraction * 2.0)),
+                patternTransitionFraction: 1.0
+            )
         } else {
             self.giftMediaPrefetchDisposable.set(nil)
         }
                         
         let backgroundCoverSize = self.backgroundCover.update(
             transition: ComponentTransition(transition),
-            component: AnyComponent(PeerInfoCoverComponent(
+            component: AnyComponent(backgroundCoverComponent ?? PeerInfoCoverComponent(
                 context: self.context,
                 subject: backgroundCoverSubject,
                 files: backgroundCoverFiles,
