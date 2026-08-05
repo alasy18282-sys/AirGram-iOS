@@ -814,7 +814,7 @@ public final class GiftCompositionComponent: Component {
                     avatarCenter = CGPoint(x: avatarCenter.x, y: 67.0)
                 }
                 
-                var patternAppearance = GiftPatternAppearance(
+                let patternAppearance = GiftPatternAppearance(
                     outerColor: backgroundColor,
                     innerColor: secondBackgroundColor,
                     patternColor: patternColor,
