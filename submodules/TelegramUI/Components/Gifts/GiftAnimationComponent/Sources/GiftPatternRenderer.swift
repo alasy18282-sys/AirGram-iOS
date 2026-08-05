@@ -76,7 +76,16 @@ public enum GiftPatternRenderer {
     }
     
     public static func appearance(from uniqueGift: StarGift.UniqueGift) -> GiftPatternAppearance {
-        return self.appearance(from: GiftMediaSupport.mediaBundle(from: uniqueGift))
+        return self.appearance(from: uniqueGift.attributes)
+    }
+    
+    public static func prefetchAndReloadPattern(
+        account: Account,
+        appearance: GiftPatternAppearance,
+        disposables: DisposableSet,
+        reload: @escaping () -> Void
+    ) {
+        self.prefetch(account: account, appearance: appearance, disposables: disposables, onReady: reload)
     }
     
     public static func appearance(from bundle: GiftMediaBundle) -> GiftPatternAppearance {

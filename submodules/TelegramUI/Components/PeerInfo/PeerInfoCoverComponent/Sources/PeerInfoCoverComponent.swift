@@ -228,6 +228,7 @@ public final class PeerInfoCoverComponent: Component {
         private var patternFile: TelegramMediaFile?
         private var patternFileDisposable: Disposable?
         private var patternImageDisposable: Disposable?
+        private var patternResourceDisposable: Disposable?
         
         override public init(frame: CGRect) {
             self.backgroundView = UIView()
@@ -277,6 +278,7 @@ public final class PeerInfoCoverComponent: Component {
         deinit {
             self.patternFileDisposable?.dispose()
             self.patternImageDisposable?.dispose()
+            self.patternResourceDisposable?.dispose()
         }
         
         public func willAnimateIn() {
@@ -378,6 +380,26 @@ public final class PeerInfoCoverComponent: Component {
             }
         }
         
+        private func observePatternResourceAvailability(for patternFile: TelegramMediaFile, component: PeerInfoCoverComponent) {
+            self.patternResourceDisposable?.dispose()
+            self.patternResourceDisposable = (component.context.account.postbox.mediaBox.resourceStatus(patternFile.resource)
+            |> filter { status in
+                if case .Local = status {
+                    return true
+                }
+                return false
+            }
+            |> take(1)
+            |> deliverOnMainQueue).startStrict(next: { [weak self] _ in
+                guard let self else {
+                    return
+                }
+                if self.patternContentsTarget?.contents == nil {
+                    self.loadPatternFromFile()
+                }
+            })
+        }
+        
         private func loadPatternFromFile() {
             guard let component = self.component else {
                 return
@@ -394,12 +416,15 @@ public final class PeerInfoCoverComponent: Component {
                     return
                 }
                 
+                self.observePatternResourceAvailability(for: patternFile, component: component)
+                
                 if component.context.animationRenderer.loadFirstFrameSynchronously(target: patternContentsTarget, cache: component.context.animationCache, itemId: patternFile.resource.id.stringRepresentation, size: CGSize(width: 96, height: 96)) {
                     self.updatePatternLayerImages(animated: false)
                 } else {
                     let isTemplate = patternFile.isCustomTemplateEmoji
                     let animated = self.patternContentsTarget?.contents == nil
                     let patternTintColor = self.patternTintColor(from: component)
+                    self.patternImageDisposable?.dispose()
                     self.patternImageDisposable = component.context.animationRenderer.loadFirstFrame(
                         target: patternContentsTarget,
                         cache: component.context.animationCache,

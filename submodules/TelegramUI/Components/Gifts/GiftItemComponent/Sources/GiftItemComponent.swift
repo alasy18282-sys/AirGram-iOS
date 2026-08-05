@@ -864,20 +864,37 @@ public final class GiftItemComponent: Component {
                         backgroundView.animateTransition(background: true, bounce: false)
                     }
                 }
+                let patternAppearance = GiftPatternAppearance(
+                    outerColor: backgroundColor,
+                    innerColor: secondBackgroundColor,
+                    patternColor: patternColor,
+                    patternFile: patternFile,
+                    patternFileId: patternFile?.fileId.id,
+                    files: files
+                )
+                let coverComponent = GiftPatternRenderer.makeCoverComponent(
+                    context: component.context,
+                    appearance: patternAppearance,
+                    avatarCenter: CGPoint(x: backgroundSize.width / 2.0, y: animationFrame.midY),
+                    defaultHeight: backgroundSize.height,
+                    avatarTransitionFraction: 0.0,
+                    patternTransitionFraction: 1.0,
+                    patternIconScale: component.mode == .profile || component.mode == .grid || component.mode == .select ? 0.85 : 1.0
+                ) ?? PeerInfoCoverComponent(
+                    context: component.context,
+                    subject: .custom(backgroundColor, secondBackgroundColor, patternColor, patternFile?.fileId.id),
+                    files: files,
+                    isDark: false,
+                    avatarCenter: CGPoint(x: backgroundSize.width / 2.0, y: animationFrame.midY),
+                    avatarScale: 1.0,
+                    defaultHeight: backgroundSize.height,
+                    avatarTransitionFraction: 0.0,
+                    patternTransitionFraction: 1.0,
+                    patternIconScale: component.mode == .profile || component.mode == .grid || component.mode == .select ? 0.85 : 1.0
+                )
                 let _ = self.patternView.update(
                     transition: .immediate,
-                    component: AnyComponent(PeerInfoCoverComponent(
-                        context: component.context,
-                        subject: .custom(backgroundColor, secondBackgroundColor, patternColor, patternFile?.fileId.id),
-                        files: files,
-                        isDark: false,
-                        avatarCenter: CGPoint(x: backgroundSize.width / 2.0, y: animationFrame.midY),
-                        avatarScale: 1.0,
-                        defaultHeight: backgroundSize.height,
-                        avatarTransitionFraction: 0.0,
-                        patternTransitionFraction: 1.0,
-                        patternIconScale: component.mode == .profile || component.mode == .grid || component.mode == .select ? 0.85 : 1.0
-                    )),
+                    component: AnyComponent(coverComponent),
                     environment: {},
                     containerSize: backgroundSize
                 )

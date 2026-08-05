@@ -658,10 +658,6 @@ public final class GiftCompositionComponent: Component {
                     case let .pattern(_, file, _):
                         patternFile = file
                         files[file.fileId.id] = file
-                        if !self.fetchedFiles.contains(file.fileId.id) {
-                            self.disposables.add(freeMediaFileResourceInteractiveFetched(account: component.context.account, userLocation: .other, fileReference: .standalone(media: file), resource: file.resource).start())
-                            self.fetchedFiles.insert(file.fileId.id)
-                        }
                     case let .backdrop(_, _, innerColorValue, outerColorValue, patternColorValue, _, _):
                         backgroundColor = UIColor(rgb: UInt32(bitPattern: outerColorValue))
                         secondBackgroundColor = UIColor(rgb: UInt32(bitPattern: innerColorValue))
@@ -817,20 +813,52 @@ public final class GiftCompositionComponent: Component {
                 if let _ = component.animationScale {
                     avatarCenter = CGPoint(x: avatarCenter.x, y: 67.0)
                 }
+                
+                var patternAppearance = GiftPatternAppearance(
+                    outerColor: backgroundColor,
+                    innerColor: secondBackgroundColor,
+                    patternColor: patternColor,
+                    patternFile: patternFile,
+                    patternFileId: patternFile?.fileId.id,
+                    files: files
+                )
+                GiftPatternRenderer.prefetchAndReloadPattern(
+                    account: component.context.account,
+                    appearance: patternAppearance,
+                    disposables: self.disposables,
+                    reload: { [weak self] in
+                        guard let self, let backgroundView = self.background.view as? PeerInfoCoverComponent.View else {
+                            return
+                        }
+                        backgroundView.reloadPattern()
+                    }
+                )
+                
+                let coverComponent = GiftPatternRenderer.makeCoverComponent(
+                    context: component.context,
+                    appearance: patternAppearance,
+                    avatarCenter: avatarCenter,
+                    avatarScale: 1.0,
+                    defaultHeight: 300.0,
+                    gradientOnTop: true,
+                    avatarTransitionFraction: 0.0,
+                    patternTransitionFraction: 1.0
+                ) ?? PeerInfoCoverComponent(
+                    context: component.context,
+                    subject: .custom(backgroundColor, secondBackgroundColor, patternColor, patternFile?.fileId.id),
+                    files: files,
+                    isDark: false,
+                    avatarCenter: avatarCenter,
+                    avatarScale: 1.0,
+                    defaultHeight: 300.0,
+                    gradientOnTop: true,
+                    avatarTransitionFraction: 0.0,
+                    patternTransitionFraction: 1.0
+                )
+                
                 let _ = self.background.update(
                     transition: backgroundTransition,
-                    component: AnyComponent(PeerInfoCoverComponent(
-                        context: component.context,
-                        subject: .custom(backgroundColor, secondBackgroundColor, patternColor, patternFile?.fileId.id),
-                        files: files,
-                        isDark: false,
-                        avatarCenter: avatarCenter,
-                        avatarScale: 1.0,
-                        defaultHeight: 300.0,
-                        gradientOnTop: true,
-                        avatarTransitionFraction: 0.0,
-                        patternTransitionFraction: 1.0
-                    )),
+                    component: AnyComponent(coverComponent),
                     environment: {},
                     containerSize: availableSize
                 )
