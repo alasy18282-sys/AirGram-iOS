@@ -105,8 +105,10 @@ public enum GiftPatternRenderer {
             if patternFileId != 0 {
                 fileIds.append(patternFileId)
             }
-            disposables.add(GiftMediaSupport.resolveLocalFiles(postbox: account.postbox, fileIds: fileIds)
-            |> deliverOnMainQueue).startStrict(next: { files in
+            disposables.add((
+                GiftMediaSupport.resolveLocalFiles(postbox: account.postbox, fileIds: fileIds)
+                |> deliverOnMainQueue
+            ).startStrict(next: { files in
                 for file in files.values {
                     GiftTGSRenderer.prefetch(account: account, file: file, disposables: disposables, onLocal: onReady)
                 }
@@ -181,8 +183,10 @@ public enum GiftPatternRenderer {
         guard let patternFileId = appearance.resolvedPatternFileId, patternFileId != 0 else {
             return
         }
-        disposables.add(GiftMediaSupport.resolveLocalFiles(postbox: account.postbox, fileIds: [patternFileId])
-        |> deliverOnMainQueue).startStrict(next: { files in
+        disposables.add((
+            GiftMediaSupport.resolveLocalFiles(postbox: account.postbox, fileIds: [patternFileId])
+            |> deliverOnMainQueue
+        ).startStrict(next: { files in
             guard let file = files[patternFileId] else {
                 return
             }
