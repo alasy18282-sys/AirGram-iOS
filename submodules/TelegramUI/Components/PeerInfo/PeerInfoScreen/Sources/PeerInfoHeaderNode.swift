@@ -510,9 +510,22 @@ final class PeerInfoHeaderNode: ASDisplayNode {
         themeColor: UIColor
     ) -> EmojiStatusComponent.Content {
         let iconSize = CGSize(width: 26.0, height: 26.0)
-        if let file = GiftMediaSupport.modelFile(for: emojiStatus, gifts: profileGifts, localFiles: self.cachedLocalGiftMediaFiles) {
+        var localFiles = self.cachedLocalGiftMediaFiles
+        if case let .starGift(giftId, _, _, slug, _, _, _, _, _) = emojiStatus.content {
+            for gift in profileGifts {
+                if case let .unique(uniqueGift) = gift.gift, uniqueGift.id == giftId || uniqueGift.slug == slug {
+                    for (fileId, file) in GiftMediaSupport.mediaFiles(from: uniqueGift) where localFiles[fileId] == nil {
+                        localFiles[fileId] = file
+                    }
+                    break
+                }
+            }
+        }
+        if let file = GiftMediaSupport.modelFile(for: emojiStatus, gifts: profileGifts, localFiles: localFiles) {
+            GiftTGSRenderer.log("giftStatus icon file giftId=\(file.fileId.id)")
             return .animation(content: .file(file: file), size: iconSize, placeholderColor: placeholderColor, themeColor: themeColor, loopMode: .forever)
         }
+        GiftTGSRenderer.log("giftStatus icon fallback customEmoji fileId=\(emojiStatus.fileId)")
         return .animation(content: .customEmoji(fileId: emojiStatus.fileId), size: iconSize, placeholderColor: placeholderColor, themeColor: themeColor, loopMode: .forever)
     }
     
@@ -613,6 +626,16 @@ final class PeerInfoHeaderNode: ASDisplayNode {
         let profileGifts = profileGiftsContext?.currentState?.gifts ?? []
         
         if let emojiStatus = peer?.emojiStatus, case .starGift = emojiStatus.content {
+            if case let .starGift(giftId, _, _, slug, _, _, _, _, _) = emojiStatus.content {
+                for gift in profileGifts {
+                    if case let .unique(uniqueGift) = gift.gift, uniqueGift.id == giftId || uniqueGift.slug == slug {
+                        for (fileId, file) in GiftMediaSupport.mediaFiles(from: uniqueGift) where self.cachedLocalGiftMediaFiles[fileId] == nil {
+                            self.cachedLocalGiftMediaFiles[fileId] = file
+                        }
+                        break
+                    }
+                }
+            }
             self.giftStatusMediaPrefetchSet.dispose()
             self.giftStatusMediaPrefetchSet = DisposableSet()
             GiftPatternRenderer.prefetchStatusMedia(

@@ -145,6 +145,10 @@ public extension TelegramEngine {
             return _internal_starGiftUpgradePreview(account: self.account, giftId: giftId)
         }
         
+        public func starGiftUpgradePreviewResult(giftId: Int64) -> Signal<StarGiftUpgradePreviewResult, NoError> {
+            return _internal_starGiftUpgradePreviewResult(account: self.account, giftId: giftId)
+        }
+        
         public func checkCanSendStarGift(giftId: Int64) -> Signal<CanSendGiftResult, NoError> {
             return _internal_checkCanSendStarGift(account: self.account, giftId: giftId)
         }

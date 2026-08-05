@@ -1724,6 +1724,21 @@ func _internal_upgradeStarGift(account: Account, formId: Int64?, reference: Star
     }
 }
 
+public enum StarGiftUpgradePreviewError: Equatable {
+    case unavailable
+    case generic
+}
+
+public struct StarGiftUpgradePreviewResult: Equatable {
+    public let preview: StarGiftUpgradePreview?
+    public let error: StarGiftUpgradePreviewError?
+    
+    public init(preview: StarGiftUpgradePreview?, error: StarGiftUpgradePreviewError?) {
+        self.preview = preview
+        self.error = error
+    }
+}
+
 public struct StarGiftUpgradePreview: Equatable {
     public struct Price: Equatable {
         public let stars: Int64
@@ -1744,16 +1759,9 @@ public struct StarGiftUpgradePreview: Equatable {
     }
 }
 
-func _internal_starGiftUpgradePreview(account: Account, giftId: Int64) -> Signal<StarGiftUpgradePreview?, NoError> {
+func _internal_starGiftUpgradePreviewResult(account: Account, giftId: Int64) -> Signal<StarGiftUpgradePreviewResult, NoError> {
     return account.network.request(Api.functions.payments.getStarGiftUpgradePreview(giftId: giftId))
-    |> map(Optional.init)
-    |> `catch` { _ -> Signal<Api.payments.StarGiftUpgradePreview?, NoError> in
-        return .single(nil)
-    }
-    |> map { result in
-        guard let result else {
-            return nil
-        }
+    |> map { result -> StarGiftUpgradePreviewResult in
         switch result {
         case let .starGiftUpgradePreview(starGiftUpgradePreviewData):
             let (apiSampleAttributes, apiPrices, apiNextPrices) = (starGiftUpgradePreviewData.sampleAttributes, starGiftUpgradePreviewData.prices, starGiftUpgradePreviewData.nextPrices)
@@ -1774,9 +1782,23 @@ func _internal_starGiftUpgradePreview(account: Account, giftId: Int64) -> Signal
                     nextPrices.append(StarGiftUpgradePreview.Price(stars: upgradeStars, date: date))
                 }
             }
-            return StarGiftUpgradePreview(attributes: attributes, prices: prices, nextPrices: nextPrices)
+            return StarGiftUpgradePreviewResult(
+                preview: StarGiftUpgradePreview(attributes: attributes, prices: prices, nextPrices: nextPrices),
+                error: nil
+            )
         }
     }
+    |> `catch` { error -> Signal<StarGiftUpgradePreviewResult, NoError> in
+        if error.errorDescription == "STARGIFT_UPGRADE_UNAVAILABLE" {
+            return .single(StarGiftUpgradePreviewResult(preview: nil, error: .unavailable))
+        }
+        return .single(StarGiftUpgradePreviewResult(preview: nil, error: .generic))
+    }
+}
+
+func _internal_starGiftUpgradePreview(account: Account, giftId: Int64) -> Signal<StarGiftUpgradePreview?, NoError> {
+    return _internal_starGiftUpgradePreviewResult(account: account, giftId: giftId)
+    |> map { $0.preview }
 }
 
 public enum CanSendGiftResult {

@@ -56,15 +56,23 @@ public struct GiftPatternAppearance: Equatable {
 }
 
 public enum GiftPatternRenderer {
+    public static func log(_ message: String) {
+        GiftTGSRenderer.log("Pattern: \(message)")
+    }
+    
     public static func appearance(from attributes: [StarGift.UniqueGift.Attribute]) -> GiftPatternAppearance {
         var appearance = GiftPatternAppearance()
+        var patternName: String?
+        var backdropName: String?
         for attribute in attributes {
             switch attribute {
-            case let .pattern(_, file, _):
+            case let .pattern(name, file, _):
+                patternName = name
                 appearance.patternFile = file
                 appearance.patternFileId = file.fileId.id
                 appearance.files[file.fileId.id] = file
-            case let .backdrop(_, _, innerColor, outerColor, patternColor, _, _):
+            case let .backdrop(name, _, innerColor, outerColor, patternColor, _, _):
+                backdropName = name
                 appearance.innerColor = UIColor(rgb: UInt32(bitPattern: innerColor))
                 appearance.outerColor = UIColor(rgb: UInt32(bitPattern: outerColor))
                 appearance.patternColor = UIColor(rgb: UInt32(bitPattern: patternColor))
@@ -72,6 +80,7 @@ public enum GiftPatternRenderer {
                 break
             }
         }
+        Self.log("appearance pattern=\(patternName ?? "nil") fileId=\(appearance.patternFileId.map(String.init) ?? "nil") file=\(appearance.patternFile != nil) backdrop=\(backdropName ?? "nil") colors=\(appearance.innerColor != nil)/\(appearance.outerColor != nil)/\(appearance.patternColor != nil)")
         return appearance
     }
     
@@ -177,19 +186,24 @@ public enum GiftPatternRenderer {
         onReady: (() -> Void)? = nil
     ) {
         if let patternFile = appearance.patternFile ?? appearance.resolvedPatternFileId.flatMap({ appearance.files[$0] }) {
+            Self.log("prefetch pattern fileId=\(patternFile.fileId.id)")
             GiftTGSRenderer.prefetch(account: account, file: patternFile, disposables: disposables, onLocal: onReady)
             return
         }
         guard let patternFileId = appearance.resolvedPatternFileId, patternFileId != 0 else {
+            Self.log("prefetch skipped: no pattern fileId")
             return
         }
+        Self.log("prefetch resolve pattern fileId=\(patternFileId)")
         disposables.add((
             GiftMediaSupport.resolveLocalFiles(postbox: account.postbox, fileIds: [patternFileId])
             |> deliverOnMainQueue
         ).startStrict(next: { files in
             guard let file = files[patternFileId] else {
+                Self.log("prefetch resolve failed fileId=\(patternFileId)")
                 return
             }
+            Self.log("prefetch resolved pattern fileId=\(patternFileId)")
             GiftTGSRenderer.prefetch(account: account, file: file, disposables: disposables, onLocal: onReady)
         }))
     }

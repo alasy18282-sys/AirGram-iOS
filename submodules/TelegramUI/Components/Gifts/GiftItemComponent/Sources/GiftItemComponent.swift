@@ -872,6 +872,17 @@ public final class GiftItemComponent: Component {
                     patternFileId: patternFile?.fileId.id,
                     files: files
                 )
+                GiftPatternRenderer.prefetchAndReloadPattern(
+                    account: component.context.account,
+                    appearance: patternAppearance,
+                    disposables: self.disposables,
+                    reload: { [weak self] in
+                        guard let self, let patternView = self.patternView.view as? PeerInfoCoverComponent.View else {
+                            return
+                        }
+                        patternView.reloadPattern()
+                    }
+                )
                 let coverComponent = GiftPatternRenderer.makeCoverComponent(
                     context: component.context,
                     appearance: patternAppearance,

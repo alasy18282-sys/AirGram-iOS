@@ -142,8 +142,11 @@ private final class GiftViewSheetContent: CombinedComponent {
         var inUpgradePreview = false
         var scheduledUpgradePreview = false
         var upgradePreview: StarGiftUpgradePreview?
+        var upgradePreviewError: StarGiftUpgradePreviewError?
         let upgradePreviewDisposable = DisposableSet()
         var upgradePreviewTimer: SwiftSignalKit.Timer?
+        var wearMediaDisposable = MetaDisposable()
+        var wearStatusApplied = false
         
         var keepOriginalInfo = false
                 
@@ -266,20 +269,25 @@ private final class GiftViewSheetContent: CombinedComponent {
                     }
                     let shouldFetchUpgradePreview = arguments.canUpgrade || arguments.upgradeStars != nil || arguments.prepaidUpgradeHash != nil || gift.upgradeStars != nil
                     if shouldFetchUpgradePreview {
-                        self.upgradePreviewDisposable.add((context.engine.payments.starGiftUpgradePreview(giftId: gift.id)
-                        |> deliverOnMainQueue).startStrict(next: { [weak self] upgradePreview in
+                        GiftTGSRenderer.log("upgradePreview fetch giftId=\(gift.id) canUpgrade=\(arguments.canUpgrade) upgradeStars=\(arguments.upgradeStars.map(String.init) ?? "nil") prepaidUpgradeHash=\(arguments.prepaidUpgradeHash ?? "nil") giftUpgradeStars=\(gift.upgradeStars.map(String.init) ?? "nil")")
+                        self.upgradePreviewDisposable.add((context.engine.payments.starGiftUpgradePreviewResult(giftId: gift.id)
+                        |> deliverOnMainQueue).startStrict(next: { [weak self] result in
                             guard let self else {
                                 return
                             }
-                            guard let upgradePreview else {
+                            self.upgradePreviewError = result.error
+                            guard let upgradePreview = result.preview else {
+                                GiftTGSRenderer.log("upgradePreview nil giftId=\(gift.id) error=\(String(describing: result.error)) scheduled=\(self.scheduledUpgradePreview)")
                                 if self.scheduledUpgradePreview {
                                     self.scheduledUpgradePreview = false
                                     self.inProgress = false
+                                    self.showUpgradePreviewErrorAlert(error: result.error)
                                     self.updated()
                                 }
                                 return
                             }
                             self.upgradePreview = upgradePreview
+                            GiftTGSRenderer.log("upgradePreview ok giftId=\(gift.id) attributes=\(upgradePreview.attributes.count) prices=\(upgradePreview.prices.count)")
                             
                             for attribute in upgradePreview.attributes {
                                 switch attribute {
@@ -1699,21 +1707,82 @@ private final class GiftViewSheetContent: CombinedComponent {
             self.pendingWear = true
             self.pendingTakeOff = false
             self.inWearPreview = false
+            self.wearStatusApplied = false
             self.updated(transition: .spring(duration: 0.4))
             
-            GiftPatternRenderer.prefetchUniqueGiftMedia(
-                account: self.context.account,
-                uniqueGift: uniqueGift,
-                disposables: self.upgradePreviewDisposable
-            )
+            let mediaFiles = Array(GiftMediaSupport.mediaFiles(from: uniqueGift).values)
+            GiftTGSRenderer.log("commitWear start giftId=\(uniqueGift.id) slug=\(uniqueGift.slug) files=\(mediaFiles.map { $0.fileId.id })")
             
-            if let arguments = self.subject.arguments, let peerId = arguments.peerId, peerId.namespace == Namespaces.Peer.CloudChannel {
-                let _ = self.context.engine.peers.updatePeerStarGiftStatus(peerId: peerId, starGift: uniqueGift, expirationDate: nil).startStandalone()
-            } else {
-                let _ = self.context.engine.accountData.setStarGiftStatus(starGift: uniqueGift, expirationDate: nil).startStandalone()
+            let applyWearStatus: () -> Void = { [weak self] in
+                guard let self, !self.wearStatusApplied else {
+                    return
+                }
+                self.wearStatusApplied = true
+                GiftTGSRenderer.log("commitWear applyStatus giftId=\(uniqueGift.id)")
+                if let arguments = self.subject.arguments, let peerId = arguments.peerId, peerId.namespace == Namespaces.Peer.CloudChannel {
+                    let _ = self.context.engine.peers.updatePeerStarGiftStatus(peerId: peerId, starGift: uniqueGift, expirationDate: nil).startStandalone()
+                } else {
+                    let _ = self.context.engine.accountData.setStarGiftStatus(starGift: uniqueGift, expirationDate: nil).startStandalone()
+                }
+                let _ = ApplicationSpecificNotice.incrementStarGiftWearTips(accountManager: self.context.sharedContext.accountManager).startStandalone()
             }
             
-            let _ = ApplicationSpecificNotice.incrementStarGiftWearTips(accountManager: self.context.sharedContext.accountManager).startStandalone()
+            guard !mediaFiles.isEmpty else {
+                applyWearStatus()
+                return
+            }
+            
+            let wearSet = DisposableSet()
+            var completedFileIds = Set<Int64>()
+            let expectedFileIds = Set(mediaFiles.map { $0.fileId.id })
+            let wearLock = NSLock()
+            
+            func markFileReady(_ fileId: Int64) {
+                wearLock.lock()
+                completedFileIds.insert(fileId)
+                let isComplete = completedFileIds.isSuperset(of: expectedFileIds)
+                wearLock.unlock()
+                if isComplete {
+                    applyWearStatus()
+                }
+            }
+            
+            for file in mediaFiles {
+                GiftTGSRenderer.prefetch(account: self.context.account, file: file, disposables: wearSet) {
+                    markFileReady(file.fileId.id)
+                }
+            }
+            self.wearMediaDisposable.set(wearSet)
+            
+            Queue.mainQueue().after(5.0, { [weak self] in
+                guard let self, self.pendingWear, !self.wearStatusApplied else {
+                    return
+                }
+                GiftTGSRenderer.log("commitWear timeout giftId=\(uniqueGift.id) completed=\(completedFileIds.count)/\(expectedFileIds.count)")
+                applyWearStatus()
+            })
+        }
+        
+        private func showUpgradePreviewErrorAlert(error: StarGiftUpgradePreviewError?) {
+            guard let controller = self.getController() as? GiftViewScreen else {
+                return
+            }
+            let presentationData = self.context.sharedContext.currentPresentationData.with { $0 }
+            let text: String
+            switch error {
+            case .unavailable:
+                text = presentationData.strings.Gift_Send_ErrorUnknown
+            case .generic, .none:
+                text = presentationData.strings.Gift_Send_ErrorUnknown
+            }
+            let alertController = textAlertController(
+                context: self.context,
+                title: nil,
+                text: text,
+                actions: [TextAlertAction(type: .defaultAction, title: presentationData.strings.Common_OK, action: {})],
+                parseMarkdown: true
+            )
+            controller.present(alertController, in: .window(.root))
         }
         
         func commitTakeOff() {

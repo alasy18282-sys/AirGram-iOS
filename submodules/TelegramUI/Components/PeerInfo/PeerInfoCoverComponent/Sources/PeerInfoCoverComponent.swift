@@ -413,17 +413,21 @@ public final class PeerInfoCoverComponent: Component {
                 self.updatePatternLayerImages(animated: false)
             } else {
                 guard let patternFile = self.patternFile else {
+                    Logger.shared.shortLog("GiftMedia", "PeerInfoCover: loadPattern skipped, patternFile=nil fileId=\(component.subject?.fileId.map(String.init) ?? "nil")")
                     return
                 }
+                
+                let patternTintColor = self.patternTintColor(from: component)
+                Logger.shared.shortLog("GiftMedia", "PeerInfoCover: loadPattern fileId=\(patternFile.fileId.id) tint=\(patternTintColor != nil) transition=\(component.patternTransitionFraction)")
                 
                 self.observePatternResourceAvailability(for: patternFile, component: component)
                 
                 if component.context.animationRenderer.loadFirstFrameSynchronously(target: patternContentsTarget, cache: component.context.animationCache, itemId: patternFile.resource.id.stringRepresentation, size: CGSize(width: 96, height: 96)) {
+                    Logger.shared.shortLog("GiftMedia", "PeerInfoCover: pattern sync load ok fileId=\(patternFile.fileId.id)")
                     self.updatePatternLayerImages(animated: false)
                 } else {
                     let isTemplate = patternFile.isCustomTemplateEmoji
                     let animated = self.patternContentsTarget?.contents == nil
-                    let patternTintColor = self.patternTintColor(from: component)
                     self.patternImageDisposable?.dispose()
                     self.patternImageDisposable = component.context.animationRenderer.loadFirstFrame(
                         target: patternContentsTarget,
@@ -443,6 +447,7 @@ public final class PeerInfoCoverComponent: Component {
                             guard let self else {
                                 return
                             }
+                            Logger.shared.shortLog("GiftMedia", "PeerInfoCover: pattern async load done fileId=\(patternFile.fileId.id) hasImage=\(self.patternContentsTarget?.contents != nil)")
                             self.updatePatternLayerImages(animated: animated)
                         }
                     )
