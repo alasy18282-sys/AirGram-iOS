@@ -1710,8 +1710,7 @@ private final class GiftViewSheetContent: CombinedComponent {
             self.wearStatusApplied = false
             self.updated(transition: .spring(duration: 0.4))
             
-            let mediaFiles = Array(GiftMediaSupport.mediaFiles(from: uniqueGift).values)
-            GiftTGSRenderer.log("commitWear start giftId=\(uniqueGift.id) slug=\(uniqueGift.slug) files=\(mediaFiles.map { $0.fileId.id })")
+            GiftTGSRenderer.log("commitWear start giftId=\(uniqueGift.id) slug=\(uniqueGift.slug)")
             
             let applyWearStatus: () -> Void = { [weak self] in
                 guard let self, !self.wearStatusApplied else {
@@ -1727,38 +1726,20 @@ private final class GiftViewSheetContent: CombinedComponent {
                 let _ = ApplicationSpecificNotice.incrementStarGiftWearTips(accountManager: self.context.sharedContext.accountManager).startStandalone()
             }
             
-            guard !mediaFiles.isEmpty else {
-                applyWearStatus()
-                return
-            }
-            
             let wearSet = DisposableSet()
-            var completedFileIds = Set<Int64>()
-            let expectedFileIds = Set(mediaFiles.map { $0.fileId.id })
-            let wearLock = NSLock()
-            
-            func markFileReady(_ fileId: Int64) {
-                wearLock.lock()
-                completedFileIds.insert(fileId)
-                let isComplete = completedFileIds.isSuperset(of: expectedFileIds)
-                wearLock.unlock()
-                if isComplete {
-                    applyWearStatus()
-                }
-            }
-            
-            for file in mediaFiles {
-                GiftTGSRenderer.prefetch(account: self.context.account, file: file, disposables: wearSet) {
-                    markFileReady(file.fileId.id)
-                }
-            }
+            GiftPatternRenderer.prefetchUniqueGiftMedia(
+                account: self.context.account,
+                uniqueGift: uniqueGift,
+                disposables: wearSet,
+                onReady: applyWearStatus
+            )
             self.wearMediaDisposable.set(wearSet)
             
             Queue.mainQueue().after(5.0, { [weak self] in
                 guard let self, self.pendingWear, !self.wearStatusApplied else {
                     return
                 }
-                GiftTGSRenderer.log("commitWear timeout giftId=\(uniqueGift.id) completed=\(completedFileIds.count)/\(expectedFileIds.count)")
+                GiftTGSRenderer.log("commitWear timeout giftId=\(uniqueGift.id)")
                 applyWearStatus()
             })
         }

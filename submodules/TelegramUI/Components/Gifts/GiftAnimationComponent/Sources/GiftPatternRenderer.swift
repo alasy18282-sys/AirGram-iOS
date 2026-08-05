@@ -115,7 +115,7 @@ public enum GiftPatternRenderer {
                 fileIds.append(patternFileId)
             }
             disposables.add((
-                GiftMediaSupport.resolveLocalFiles(postbox: account.postbox, fileIds: fileIds)
+                GiftMediaSupport.resolveMediaFiles(account: account, fileIds: fileIds)
                 |> deliverOnMainQueue
             ).startStrict(next: { files in
                 for file in files.values {
@@ -128,11 +128,36 @@ public enum GiftPatternRenderer {
     public static func prefetchUniqueGiftMedia(
         account: Account,
         uniqueGift: StarGift.UniqueGift,
-        disposables: DisposableSet
+        disposables: DisposableSet,
+        onReady: (() -> Void)? = nil
     ) {
-        for file in GiftMediaSupport.mediaFiles(from: uniqueGift).values {
-            GiftTGSRenderer.prefetch(account: account, file: file, disposables: disposables)
+        let fileIds = Array(GiftMediaSupport.mediaFiles(from: uniqueGift).keys)
+        guard !fileIds.isEmpty else {
+            onReady?()
+            return
         }
+        disposables.add((
+            GiftMediaSupport.resolveMediaFiles(account: account, fileIds: fileIds)
+            |> deliverOnMainQueue
+        ).startStrict(next: { files in
+            if files.isEmpty {
+                onReady?()
+                return
+            }
+            var remaining = files.count
+            let completionLock = NSLock()
+            for file in files.values {
+                GiftTGSRenderer.prefetch(account: account, file: file, disposables: disposables, onLocal: {
+                    completionLock.lock()
+                    remaining -= 1
+                    let isComplete = remaining <= 0
+                    completionLock.unlock()
+                    if isComplete {
+                        onReady?()
+                    }
+                })
+            }
+        }))
     }
     
     public static func appearance(from bundle: GiftMediaBundle) -> GiftPatternAppearance {
@@ -196,7 +221,7 @@ public enum GiftPatternRenderer {
         }
         Self.log("prefetch resolve pattern fileId=\(patternFileId)")
         disposables.add((
-            GiftMediaSupport.resolveLocalFiles(postbox: account.postbox, fileIds: [patternFileId])
+            GiftMediaSupport.resolveMediaFiles(account: account, fileIds: [patternFileId])
             |> deliverOnMainQueue
         ).startStrict(next: { files in
             guard let file = files[patternFileId] else {
@@ -206,6 +231,41 @@ public enum GiftPatternRenderer {
             Self.log("prefetch resolved pattern fileId=\(patternFileId)")
             GiftTGSRenderer.prefetch(account: account, file: file, disposables: disposables, onLocal: onReady)
         }))
+    }
+    
+    public static func makeStatusCoverComponent(
+        context: AccountContext,
+        status: PeerEmojiStatus,
+        files: [Int64: TelegramMediaFile],
+        avatarCenter: CGPoint,
+        avatarSize: CGSize = CGSize(width: 100.0, height: 100.0),
+        avatarScale: CGFloat = 1.0,
+        defaultHeight: CGFloat,
+        isDark: Bool = false,
+        gradientOnTop: Bool = false,
+        gradientCenter: CGPoint = CGPoint(x: 0.5, y: 0.5),
+        avatarTransitionFraction: CGFloat = 0.0,
+        patternTransitionFraction: CGFloat = 1.0,
+        patternIconScale: CGFloat = 1.0
+    ) -> PeerInfoCoverComponent? {
+        guard case .starGift = status.content else {
+            return nil
+        }
+        return PeerInfoCoverComponent(
+            context: context,
+            subject: .status(status),
+            files: files,
+            isDark: isDark,
+            avatarCenter: avatarCenter,
+            avatarSize: avatarSize,
+            avatarScale: avatarScale,
+            defaultHeight: defaultHeight,
+            gradientOnTop: gradientOnTop,
+            gradientCenter: gradientCenter,
+            avatarTransitionFraction: avatarTransitionFraction,
+            patternTransitionFraction: patternTransitionFraction,
+            patternIconScale: patternIconScale
+        )
     }
     
     public static func makeCoverComponent(

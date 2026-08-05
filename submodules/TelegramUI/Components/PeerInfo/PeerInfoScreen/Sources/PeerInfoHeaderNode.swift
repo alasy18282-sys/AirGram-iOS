@@ -657,7 +657,7 @@ final class PeerInfoHeaderNode: ASDisplayNode {
             let mergedFiles = GiftMediaSupport.combinedMediaFiles(for: emojiStatus, gifts: profileGifts, localFiles: self.cachedLocalGiftMediaFiles)
             if mergedFiles.count < GiftMediaSupport.fileIds(for: emojiStatus).count {
                 self.giftMediaResolveDisposable.set((
-                    GiftMediaSupport.resolveLocalFiles(postbox: self.context.account.postbox, emojiStatus: emojiStatus)
+                    GiftMediaSupport.resolveMediaFiles(account: self.context.account, emojiStatus: emojiStatus)
                     |> deliverOnMainQueue
                 ).startStrict(next: { [weak self] files in
                     guard let self else {
@@ -2563,9 +2563,10 @@ final class PeerInfoHeaderNode: ASDisplayNode {
                 backgroundCoverView.reloadPattern()
             }
             self.giftMediaPrefetchDisposable.set(prefetchSet)
-            backgroundCoverComponent = GiftPatternRenderer.makeCoverComponent(
+            backgroundCoverComponent = GiftPatternRenderer.makeStatusCoverComponent(
                 context: self.context,
-                appearance: appearance,
+                status: status,
+                files: backgroundCoverFiles,
                 avatarCenter: apparentAvatarFrame.center.offsetBy(dx: bannerInset, dy: 0.0),
                 avatarSize: apparentAvatarFrame.size,
                 avatarScale: avatarScale,

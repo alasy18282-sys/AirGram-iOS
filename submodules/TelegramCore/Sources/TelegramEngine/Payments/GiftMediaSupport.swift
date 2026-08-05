@@ -145,6 +145,31 @@ public enum GiftMediaSupport {
         return _internal_resolveInlineStickersLocal(postbox: postbox, fileIds: fileIds)
     }
     
+    public static func resolveMediaFiles(account: Account, fileIds: [Int64]) -> Signal<[Int64: TelegramMediaFile], NoError> {
+        if fileIds.isEmpty {
+            return .single([:])
+        }
+        return self.resolveLocalFiles(postbox: account.postbox, fileIds: fileIds)
+        |> mapToSignal { localFiles -> Signal<[Int64: TelegramMediaFile], NoError> in
+            let missing = fileIds.filter { localFiles[$0] == nil }
+            if missing.isEmpty {
+                return .single(localFiles)
+            }
+            return _internal_resolveInlineStickers(postbox: account.postbox, network: account.network, fileIds: missing)
+            |> map { remoteFiles in
+                var merged = localFiles
+                for (fileId, file) in remoteFiles where merged[fileId] == nil {
+                    merged[fileId] = file
+                }
+                return merged
+            }
+        }
+    }
+    
+    public static func resolveMediaFiles(account: Account, emojiStatus: PeerEmojiStatus) -> Signal<[Int64: TelegramMediaFile], NoError> {
+        return self.resolveMediaFiles(account: account, fileIds: self.fileIds(for: emojiStatus))
+    }
+    
     public static func fileIds(for emojiStatus: PeerEmojiStatus) -> [Int64] {
         guard case let .starGift(_, fileId, _, _, patternFileId, _, _, _, _) = emojiStatus.content else {
             return []

@@ -803,7 +803,7 @@ public final class AccountStateManager {
             case let .pollDifference(_, currentEvents):
                 self.operationTimer?.invalidate()
                 self.currentIsUpdatingValue = true
-                let pollTimeoutTimer = SignalKitTimer(timeout: 45.0, repeat: false, completion: { [weak self] in
+                let pollTimeoutTimer = SignalKitTimer(timeout: 20.0, repeat: false, completion: { [weak self] in
                     guard let strongSelf = self else {
                         return
                     }
