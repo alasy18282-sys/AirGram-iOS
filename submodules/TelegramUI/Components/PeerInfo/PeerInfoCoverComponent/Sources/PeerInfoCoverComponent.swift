@@ -488,11 +488,20 @@ public final class PeerInfoCoverComponent: Component {
                     } else {
                         self.patternFileDisposable = (component.context.engine.stickers.resolveInlineStickers(fileIds: [fileId])
                         |> deliverOnMainQueue).startStrict(next: { [weak self] files in
-                            guard let self else {
+                            guard let self, let component = self.component else {
                                 return
                             }
                             if let file = files[fileId] {
                                 self.patternFile = file
+                                self.patternFileDisposable?.dispose()
+                                self.patternFileDisposable = freeMediaFileResourceInteractiveFetched(
+                                    postbox: component.context.account.postbox,
+                                    userLocation: .other,
+                                    fileReference: .standalone(media: file),
+                                    resource: file.resource
+                                ).start(completed: { [weak self] in
+                                    self?.loadPatternFromFile()
+                                })
                                 self.loadPatternFromFile()
                             }
                         })

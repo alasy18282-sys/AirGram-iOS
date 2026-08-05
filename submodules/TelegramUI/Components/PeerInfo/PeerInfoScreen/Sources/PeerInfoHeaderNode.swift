@@ -389,6 +389,7 @@ final class PeerInfoHeaderNode: ASDisplayNode {
         self.emojiStatusPackDisposable.dispose()
         self.giftMediaPrefetchDisposable.dispose()
         self.giftMediaResolveDisposable.dispose()
+        self.giftStatusMediaPrefetchSet.dispose()
     }
     
     override func didLoad() {
@@ -500,16 +501,19 @@ final class PeerInfoHeaderNode: ASDisplayNode {
     
     private var currentPanelStatusData: PeerInfoStatusData?
     
+    private var giftStatusMediaPrefetchSet = DisposableSet()
+    
     private func giftEmojiStatusAnimationContent(
         emojiStatus: PeerEmojiStatus,
         profileGifts: [ProfileGiftsContext.State.StarGift],
         placeholderColor: UIColor,
         themeColor: UIColor
     ) -> EmojiStatusComponent.Content {
+        let iconSize = CGSize(width: 26.0, height: 26.0)
         if let file = GiftMediaSupport.modelFile(for: emojiStatus, gifts: profileGifts, localFiles: self.cachedLocalGiftMediaFiles) {
-            return .animation(content: .file(file: file), size: CGSize(width: 80.0, height: 80.0), placeholderColor: placeholderColor, themeColor: themeColor, loopMode: .forever)
+            return .animation(content: .file(file: file), size: iconSize, placeholderColor: placeholderColor, themeColor: themeColor, loopMode: .forever)
         }
-        return .animation(content: .customEmoji(fileId: emojiStatus.fileId), size: CGSize(width: 80.0, height: 80.0), placeholderColor: placeholderColor, themeColor: themeColor, loopMode: .forever)
+        return .animation(content: .customEmoji(fileId: emojiStatus.fileId), size: iconSize, placeholderColor: placeholderColor, themeColor: themeColor, loopMode: .forever)
     }
     
     func update(width: CGFloat, containerHeight: CGFloat, containerInset: CGFloat, statusBarHeight: CGFloat, navigationHeight: CGFloat, isModalOverlay: Bool, isMediaOnly: Bool, contentOffset: CGFloat, paneContainerY: CGFloat, presentationData: PresentationData, peer: Peer?, cachedData: CachedPeerData?, threadData: MessageHistoryThreadData?, peerNotificationSettings: TelegramPeerNotificationSettings?, threadNotificationSettings: TelegramPeerNotificationSettings?, globalNotificationSettings: EngineGlobalNotificationSettings?, statusData: PeerInfoStatusData?, panelStatusData: (PeerInfoStatusData?, PeerInfoStatusData?, CGFloat?), isSecretChat: Bool, isContact: Bool, isSettings: Bool, state: PeerInfoState, profileGiftsContext: ProfileGiftsContext?, screenData: PeerInfoScreenData?, isSearching: Bool, metrics: LayoutMetrics, deviceMetrics: DeviceMetrics, transition: ContainedViewLayoutTransition, additive: Bool, animateHeader: Bool) -> CGFloat {
@@ -609,6 +613,24 @@ final class PeerInfoHeaderNode: ASDisplayNode {
         let profileGifts = profileGiftsContext?.currentState?.gifts ?? []
         
         if let emojiStatus = peer?.emojiStatus, case .starGift = emojiStatus.content {
+            self.giftStatusMediaPrefetchSet.dispose()
+            self.giftStatusMediaPrefetchSet = DisposableSet()
+            GiftPatternRenderer.prefetchStatusMedia(
+                account: self.context.account,
+                emojiStatus: emojiStatus,
+                gifts: profileGifts,
+                localFiles: self.cachedLocalGiftMediaFiles,
+                disposables: self.giftStatusMediaPrefetchSet,
+                onReady: { [weak self] in
+                    guard let self else {
+                        return
+                    }
+                    self.setNeedsLayout()
+                    if let backgroundCoverView = self.backgroundCover.view as? PeerInfoCoverComponent.View {
+                        backgroundCoverView.reloadPattern()
+                    }
+                }
+            )
             let mergedFiles = GiftMediaSupport.combinedMediaFiles(for: emojiStatus, gifts: profileGifts, localFiles: self.cachedLocalGiftMediaFiles)
             if mergedFiles.count < GiftMediaSupport.fileIds(for: emojiStatus).count {
                 self.giftMediaResolveDisposable.set((
@@ -620,10 +642,14 @@ final class PeerInfoHeaderNode: ASDisplayNode {
                     }
                     if self.cachedLocalGiftMediaFiles != files {
                         self.cachedLocalGiftMediaFiles = files
+                        if let backgroundCoverView = self.backgroundCover.view as? PeerInfoCoverComponent.View {
+                            backgroundCoverView.reloadPattern()
+                        }
                         self.setNeedsLayout()
                     }
                 }))
             } else {
+                self.cachedLocalGiftMediaFiles = mergedFiles
                 self.giftMediaResolveDisposable.set(nil)
             }
         } else {

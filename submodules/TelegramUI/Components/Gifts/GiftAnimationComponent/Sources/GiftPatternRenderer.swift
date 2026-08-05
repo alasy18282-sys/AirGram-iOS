@@ -88,6 +88,42 @@ public enum GiftPatternRenderer {
         self.prefetch(account: account, appearance: appearance, disposables: disposables, onReady: reload)
     }
     
+    public static func prefetchStatusMedia(
+        account: Account,
+        emojiStatus: PeerEmojiStatus,
+        gifts: [ProfileGiftsContext.State.StarGift],
+        localFiles: [Int64: TelegramMediaFile] = [:],
+        disposables: DisposableSet,
+        onReady: (() -> Void)? = nil
+    ) {
+        let appearance = self.appearance(for: emojiStatus, gifts: gifts, localFiles: localFiles)
+        self.prefetch(account: account, appearance: appearance, disposables: disposables, onReady: onReady)
+        if let modelFile = GiftMediaSupport.modelFile(for: emojiStatus, gifts: gifts, localFiles: localFiles) {
+            GiftTGSRenderer.prefetch(account: account, file: modelFile, disposables: disposables, onLocal: onReady)
+        } else if case let .starGift(_, fileId, _, _, patternFileId, _, _, _, _) = emojiStatus.content {
+            var fileIds: [Int64] = [fileId]
+            if patternFileId != 0 {
+                fileIds.append(patternFileId)
+            }
+            disposables.add((_internal_resolveInlineStickersLocal(postbox: account.postbox, fileIds: fileIds)
+            |> deliverOnMainQueue).startStrict(next: { files in
+                for file in files.values {
+                    GiftTGSRenderer.prefetch(account: account, file: file, disposables: disposables, onLocal: onReady)
+                }
+            }))
+        }
+    }
+    
+    public static func prefetchUniqueGiftMedia(
+        account: Account,
+        uniqueGift: StarGift.UniqueGift,
+        disposables: DisposableSet
+    ) {
+        for file in GiftMediaSupport.mediaFiles(from: uniqueGift).values {
+            GiftTGSRenderer.prefetch(account: account, file: file, disposables: disposables)
+        }
+    }
+    
     public static func appearance(from bundle: GiftMediaBundle) -> GiftPatternAppearance {
         var appearance = GiftPatternAppearance(files: bundle.files)
         if let outerColor = bundle.outerColor {
@@ -138,11 +174,20 @@ public enum GiftPatternRenderer {
         disposables: DisposableSet,
         onReady: (() -> Void)? = nil
     ) {
-        var filesToPrefetch: [TelegramMediaFile] = []
-        if let patternFile = appearance.patternFile {
-            filesToPrefetch.append(patternFile)
+        if let patternFile = appearance.patternFile ?? appearance.resolvedPatternFileId.flatMap({ appearance.files[$0] }) {
+            GiftTGSRenderer.prefetch(account: account, file: patternFile, disposables: disposables, onLocal: onReady)
+            return
         }
-        GiftTGSRenderer.prefetch(account: account, files: filesToPrefetch, disposables: disposables, onAnyLocal: onReady)
+        guard let patternFileId = appearance.resolvedPatternFileId, patternFileId != 0 else {
+            return
+        }
+        disposables.add((_internal_resolveInlineStickersLocal(postbox: account.postbox, fileIds: [patternFileId])
+        |> deliverOnMainQueue).startStrict(next: { files in
+            guard let file = files[patternFileId] else {
+                return
+            }
+            GiftTGSRenderer.prefetch(account: account, file: file, disposables: disposables, onLocal: onReady)
+        }))
     }
     
     public static func makeCoverComponent(

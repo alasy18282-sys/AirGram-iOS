@@ -264,10 +264,19 @@ private final class GiftViewSheetContent: CombinedComponent {
                     if let releasedBy = gift.releasedBy {
                         peerIds.append(releasedBy)
                     }
-                    if arguments.canUpgrade || arguments.upgradeStars != nil || arguments.prepaidUpgradeHash != nil {
+                    let shouldFetchUpgradePreview = arguments.canUpgrade || arguments.upgradeStars != nil || arguments.prepaidUpgradeHash != nil || gift.upgradeStars != nil
+                    if shouldFetchUpgradePreview {
                         self.upgradePreviewDisposable.add((context.engine.payments.starGiftUpgradePreview(giftId: gift.id)
-                        |> deliverOnMainQueue).start(next: { [weak self] upgradePreview in
-                            guard let self, let upgradePreview else {
+                        |> deliverOnMainQueue).startStrict(next: { [weak self] upgradePreview in
+                            guard let self else {
+                                return
+                            }
+                            guard let upgradePreview else {
+                                if self.scheduledUpgradePreview {
+                                    self.scheduledUpgradePreview = false
+                                    self.inProgress = false
+                                    self.updated()
+                                }
                                 return
                             }
                             self.upgradePreview = upgradePreview
@@ -1691,6 +1700,12 @@ private final class GiftViewSheetContent: CombinedComponent {
             self.pendingTakeOff = false
             self.inWearPreview = false
             self.updated(transition: .spring(duration: 0.4))
+            
+            GiftPatternRenderer.prefetchUniqueGiftMedia(
+                account: self.context.account,
+                uniqueGift: uniqueGift,
+                disposables: self.upgradePreviewDisposable
+            )
             
             if let arguments = self.subject.arguments, let peerId = arguments.peerId, peerId.namespace == Namespaces.Peer.CloudChannel {
                 let _ = self.context.engine.peers.updatePeerStarGiftStatus(peerId: peerId, starGift: uniqueGift, expirationDate: nil).startStandalone()
@@ -5080,7 +5095,7 @@ private final class GiftViewSheetContent: CombinedComponent {
                     availableSize: buttonSize,
                     transition: context.transition
                 )
-            } else if (incoming && !converted && !upgraded && canUpgrade) || canGiftUpgrade {
+            } else if (incoming && !converted && !upgraded && canUpgrade) || canGiftUpgrade || (!converted && !upgraded && canUpgrade && subject.arguments?.peerId == component.context.account.peerId) {
                 let buttonTitle: String
                 if canGiftUpgrade {
                     buttonTitle = strings.Gift_View_GiftUpgrade
