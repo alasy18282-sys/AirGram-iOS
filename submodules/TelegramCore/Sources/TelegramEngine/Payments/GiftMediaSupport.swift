@@ -138,6 +138,10 @@ public enum GiftMediaSupport {
         if patternFileId != 0 {
             fileIds.append(patternFileId)
         }
+        return self.resolveLocalFiles(postbox: postbox, fileIds: fileIds)
+    }
+    
+    public static func resolveLocalFiles(postbox: Postbox, fileIds: [Int64]) -> Signal<[Int64: TelegramMediaFile], NoError> {
         return _internal_resolveInlineStickersLocal(postbox: postbox, fileIds: fileIds)
     }
     
