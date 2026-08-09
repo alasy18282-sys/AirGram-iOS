@@ -417,8 +417,7 @@ public final class PeerInfoCoverComponent: Component {
                     return
                 }
                 
-                let patternTintColor = self.patternTintColor(from: component)
-                Logger.shared.shortLog("GiftMedia", "PeerInfoCover: loadPattern fileId=\(patternFile.fileId.id) tint=\(patternTintColor != nil) transition=\(component.patternTransitionFraction)")
+                Logger.shared.shortLog("GiftMedia", "PeerInfoCover: loadPattern fileId=\(patternFile.fileId.id) transition=\(component.patternTransitionFraction)")
                 
                 self.observePatternResourceAvailability(for: patternFile, component: component)
                 
@@ -426,7 +425,6 @@ public final class PeerInfoCoverComponent: Component {
                     Logger.shared.shortLog("GiftMedia", "PeerInfoCover: pattern sync load ok fileId=\(patternFile.fileId.id)")
                     self.updatePatternLayerImages(animated: false)
                 } else {
-                    let isTemplate = patternFile.isCustomTemplateEmoji
                     let animated = self.patternContentsTarget?.contents == nil
                     self.patternImageDisposable?.dispose()
                     self.patternImageDisposable = component.context.animationRenderer.loadFirstFrame(
@@ -441,7 +439,9 @@ public final class PeerInfoCoverComponent: Component {
                             resource: .media(media: .standalone(media: patternFile), resource: patternFile.resource),
                             type: AnimationCacheAnimationType(file: patternFile),
                             keyframeOnly: false,
-                            customColor: patternTintColor ?? (isTemplate ? .white : nil)
+                            // The rendered frame is used as an alpha mask. A white
+                            // template preserves the symbol's alpha for every gift.
+                            customColor: .white
                         ),
                         completion: { [weak self] _, _ in
                             guard let self else {
@@ -591,6 +591,12 @@ public final class PeerInfoCoverComponent: Component {
             }
             let avatarPatternFrame = CGSize(width: patternWidth, height: floor(component.defaultHeight * 1.0)).centered(around: component.avatarCenter)
             transition.setFrame(layer: self.avatarBackgroundPatternContentsLayer, frame: avatarPatternFrame)
+            // A mask does not inherit its host layer's bounds. Without an explicit
+            // frame its bounds stay empty and every gift pattern is clipped out.
+            // Pattern item frames below are expressed in the contents layer's
+            // local coordinate space, so keep the mask aligned with its bounds.
+            self.avatarBackgroundPatternMaskLayer.frame = CGRect(origin: .zero, size: avatarPatternFrame.size)
+            transition.setAlpha(layer: self.avatarBackgroundPatternContentsLayer, alpha: component.patternTransitionFraction)
             
             if case let .custom(_, _, patternColor, _) = component.subject, let patternColor {
                 self.avatarBackgroundPatternContentsLayer.compositingFilter = nil
@@ -686,17 +692,13 @@ public final class PeerInfoCoverComponent: Component {
                     }
                     
                     itemLayer.frame = itemFrame
-                    if let patternTintColor = self.patternTintColor(from: component) {
-                        itemLayer.layerTintColor = patternTintColor.withAlphaComponent(0.85).cgColor
-                    } else {
-                        itemLayer.layerTintColor = UIColor(white: 0.0, alpha: 0.8).cgColor
-                    }
+                    itemLayer.layerTintColor = UIColor(white: 0.0, alpha: 0.8).cgColor
                     transition.setAlpha(layer: itemLayer, alpha: 1.0 - itemScaleFraction)
                     
                     avatarBackgroundPatternLayerCount += 1
                 }
             }
-            if avatarBackgroundPatternLayerCount > self.avatarPatternContentLayers.count {
+            if avatarBackgroundPatternLayerCount < self.avatarPatternContentLayers.count {
                 for i in avatarBackgroundPatternLayerCount ..< self.avatarPatternContentLayers.count {
                     self.avatarPatternContentLayers[i].removeFromSuperlayer()
                 }
@@ -746,3 +748,4 @@ public final class PeerInfoCoverComponent: Component {
         return view.update(component: self, availableSize: availableSize, state: state, environment: environment, transition: transition)
     }
 }
+
