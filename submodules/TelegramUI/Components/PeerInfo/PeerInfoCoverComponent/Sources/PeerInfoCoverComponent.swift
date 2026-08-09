@@ -591,6 +591,12 @@ public final class PeerInfoCoverComponent: Component {
             }
             let avatarPatternFrame = CGSize(width: patternWidth, height: floor(component.defaultHeight * 1.0)).centered(around: component.avatarCenter)
             transition.setFrame(layer: self.avatarBackgroundPatternContentsLayer, frame: avatarPatternFrame)
+            // A mask does not inherit its host layer's bounds. Without an explicit
+            // frame its bounds stay empty and every gift pattern is clipped out.
+            // Pattern item frames below are expressed in the contents layer's
+            // local coordinate space, so keep the mask aligned with its bounds.
+            self.avatarBackgroundPatternMaskLayer.frame = CGRect(origin: .zero, size: avatarPatternFrame.size)
+            transition.setAlpha(layer: self.avatarBackgroundPatternContentsLayer, alpha: component.patternTransitionFraction)
             
             if case let .custom(_, _, patternColor, _) = component.subject, let patternColor {
                 self.avatarBackgroundPatternContentsLayer.compositingFilter = nil
@@ -696,7 +702,7 @@ public final class PeerInfoCoverComponent: Component {
                     avatarBackgroundPatternLayerCount += 1
                 }
             }
-            if avatarBackgroundPatternLayerCount > self.avatarPatternContentLayers.count {
+            if avatarBackgroundPatternLayerCount < self.avatarPatternContentLayers.count {
                 for i in avatarBackgroundPatternLayerCount ..< self.avatarPatternContentLayers.count {
                     self.avatarPatternContentLayers[i].removeFromSuperlayer()
                 }
@@ -746,3 +752,4 @@ public final class PeerInfoCoverComponent: Component {
         return view.update(component: self, availableSize: availableSize, state: state, environment: environment, transition: transition)
     }
 }
+
