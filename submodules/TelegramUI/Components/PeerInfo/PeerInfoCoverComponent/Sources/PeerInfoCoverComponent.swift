@@ -417,8 +417,7 @@ public final class PeerInfoCoverComponent: Component {
                     return
                 }
                 
-                let patternTintColor = self.patternTintColor(from: component)
-                Logger.shared.shortLog("GiftMedia", "PeerInfoCover: loadPattern fileId=\(patternFile.fileId.id) tint=\(patternTintColor != nil) transition=\(component.patternTransitionFraction)")
+                Logger.shared.shortLog("GiftMedia", "PeerInfoCover: loadPattern fileId=\(patternFile.fileId.id) transition=\(component.patternTransitionFraction)")
                 
                 self.observePatternResourceAvailability(for: patternFile, component: component)
                 
@@ -426,7 +425,6 @@ public final class PeerInfoCoverComponent: Component {
                     Logger.shared.shortLog("GiftMedia", "PeerInfoCover: pattern sync load ok fileId=\(patternFile.fileId.id)")
                     self.updatePatternLayerImages(animated: false)
                 } else {
-                    let isTemplate = patternFile.isCustomTemplateEmoji
                     let animated = self.patternContentsTarget?.contents == nil
                     self.patternImageDisposable?.dispose()
                     self.patternImageDisposable = component.context.animationRenderer.loadFirstFrame(
@@ -441,7 +439,9 @@ public final class PeerInfoCoverComponent: Component {
                             resource: .media(media: .standalone(media: patternFile), resource: patternFile.resource),
                             type: AnimationCacheAnimationType(file: patternFile),
                             keyframeOnly: false,
-                            customColor: patternTintColor ?? (isTemplate ? .white : nil)
+                            // The rendered frame is used as an alpha mask. A white
+                            // template preserves the symbol's alpha for every gift.
+                            customColor: .white
                         ),
                         completion: { [weak self] _, _ in
                             guard let self else {
@@ -692,11 +692,7 @@ public final class PeerInfoCoverComponent: Component {
                     }
                     
                     itemLayer.frame = itemFrame
-                    if let patternTintColor = self.patternTintColor(from: component) {
-                        itemLayer.layerTintColor = patternTintColor.withAlphaComponent(0.85).cgColor
-                    } else {
-                        itemLayer.layerTintColor = UIColor(white: 0.0, alpha: 0.8).cgColor
-                    }
+                    itemLayer.layerTintColor = UIColor(white: 0.0, alpha: 0.8).cgColor
                     transition.setAlpha(layer: itemLayer, alpha: 1.0 - itemScaleFraction)
                     
                     avatarBackgroundPatternLayerCount += 1
