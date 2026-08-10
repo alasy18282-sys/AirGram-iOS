@@ -131,33 +131,24 @@ public enum GiftPatternRenderer {
         disposables: DisposableSet,
         onReady: (() -> Void)? = nil
     ) {
-        let fileIds = Array(GiftMediaSupport.mediaFiles(from: uniqueGift).keys)
-        guard !fileIds.isEmpty else {
+        let files = GiftMediaSupport.mediaFiles(from: uniqueGift)
+        guard !files.isEmpty else {
             onReady?()
             return
         }
-        disposables.add((
-            GiftMediaSupport.resolveMediaFiles(account: account, fileIds: fileIds)
-            |> deliverOnMainQueue
-        ).startStrict(next: { files in
-            if files.isEmpty {
-                onReady?()
-                return
-            }
-            var remaining = files.count
-            let completionLock = NSLock()
-            for file in files.values {
-                GiftTGSRenderer.prefetch(account: account, file: file, disposables: disposables, onLocal: {
-                    completionLock.lock()
-                    remaining -= 1
-                    let isComplete = remaining <= 0
-                    completionLock.unlock()
-                    if isComplete {
-                        onReady?()
-                    }
-                })
-            }
-        }))
+        var remaining = files.count
+        let completionLock = NSLock()
+        for file in files.values {
+            GiftTGSRenderer.prefetch(account: account, file: file, disposables: disposables, onLocal: {
+                completionLock.lock()
+                remaining -= 1
+                let isComplete = remaining <= 0
+                completionLock.unlock()
+                if isComplete {
+                    onReady?()
+                }
+            })
+        }
     }
     
     public static func appearance(from bundle: GiftMediaBundle) -> GiftPatternAppearance {
