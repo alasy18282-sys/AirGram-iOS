@@ -1503,6 +1503,20 @@ private final class GiftViewSheetContent: CombinedComponent {
                 guard let self, let attributes else {
                     return
                 }
+                GiftTGSRenderer.log("upgradeVariants loaded giftId=\(gift.giftId) attributes=\(attributes.count)")
+                for attribute in attributes {
+                    switch attribute {
+                    case let .model(_, file, _, _), let .pattern(_, file, _):
+                        self.upgradePreviewDisposable.add(freeMediaFileResourceInteractiveFetched(
+                            account: self.context.account,
+                            userLocation: .other,
+                            fileReference: .standalone(media: file),
+                            resource: file.resource
+                        ).start())
+                    default:
+                        break
+                    }
+                }
                 let variantsController = self.context.sharedContext.makeGiftUpgradeVariantsScreen(
                     context: self.context,
                     gift: gift,
