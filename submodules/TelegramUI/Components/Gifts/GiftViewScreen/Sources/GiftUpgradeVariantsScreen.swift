@@ -358,8 +358,11 @@ private final class GiftUpgradeVariantsScreenComponent: Component {
                 }
             case .backdrops:
                 let previewModels = self.displayCraftableModels ? self.previewCraftableModels : previewPrimaryModels
-                let selectedModel = self.selectedModel ?? previewModels[self.previewModelIndex]
-                let selectedSymbol = self.selectedSymbol ?? self.previewSymbols[self.previewSymbolIndex]
+                guard let selectedModel = self.selectedModel ?? previewModels.first,
+                      let selectedSymbol = self.selectedSymbol ?? self.previewSymbols.first else {
+                    self.effectiveGifts = []
+                    return
+                }
                 let backdrops = Array(attributes.filter({ attribute in
                     if case .backdrop = attribute {
                         return true
@@ -375,7 +378,10 @@ private final class GiftUpgradeVariantsScreenComponent: Component {
                     ])
                 }
             case .symbols:
-                let selectedBackdrop = self.selectedBackdrop ?? self.previewBackdrops[self.previewBackdropIndex]
+                guard let selectedBackdrop = self.selectedBackdrop ?? self.previewBackdrops.first else {
+                    self.effectiveGifts = []
+                    return
+                }
                 let symbols = Array(attributes.filter({ attribute in
                     if case .pattern = attribute {
                         return true
@@ -743,18 +749,24 @@ private final class GiftUpgradeVariantsScreenComponent: Component {
             let previewModels = self.displayCraftableModels ? self.previewCraftableModels : self.previewPrimaryModels
             if !previewModels.isEmpty {
                 if self.isPlaying {
-                    attributes.append(previewModels[self.previewModelIndex])
-                    attributes.append(self.previewBackdrops[self.previewBackdropIndex])
-                    attributes.append(self.previewSymbols[self.previewSymbolIndex])
+                    if previewModels.indices.contains(self.previewModelIndex) {
+                        attributes.append(previewModels[self.previewModelIndex])
+                    }
+                    if self.previewBackdrops.indices.contains(self.previewBackdropIndex) {
+                        attributes.append(self.previewBackdrops[self.previewBackdropIndex])
+                    }
+                    if self.previewSymbols.indices.contains(self.previewSymbolIndex) {
+                        attributes.append(self.previewSymbols[self.previewSymbolIndex])
+                    }
                 } else {
                     if self.selectedModel == nil {
-                        self.selectedModel = previewModels[self.previewModelIndex]
+                        self.selectedModel = previewModels.first
                     }
                     if self.selectedBackdrop == nil {
-                        self.selectedBackdrop = self.previewBackdrops[self.previewBackdropIndex]
+                        self.selectedBackdrop = self.previewBackdrops.first
                     }
                     if self.selectedSymbol == nil {
-                        self.selectedSymbol = self.previewSymbols[self.previewSymbolIndex]
+                        self.selectedSymbol = self.previewSymbols.first
                     }
                     if let model = self.selectedModel {
                         attributes.append(model)
