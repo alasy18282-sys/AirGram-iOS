@@ -358,11 +358,8 @@ private final class GiftUpgradeVariantsScreenComponent: Component {
                 }
             case .backdrops:
                 let previewModels = self.displayCraftableModels ? self.previewCraftableModels : previewPrimaryModels
-                guard let selectedModel = self.selectedModel ?? previewModels.first,
-                      let selectedSymbol = self.selectedSymbol ?? self.previewSymbols.first else {
-                    self.effectiveGifts = []
-                    return
-                }
+                let selectedModel = self.selectedModel ?? previewModels.first
+                let selectedSymbol = self.selectedSymbol ?? self.previewSymbols.first
                 let backdrops = Array(attributes.filter({ attribute in
                     if case .backdrop = attribute {
                         return true
@@ -371,17 +368,10 @@ private final class GiftUpgradeVariantsScreenComponent: Component {
                     }
                 }))
                 for backdrop in backdrops {
-                    effectiveGifts.append([
-                        selectedModel,
-                        backdrop,
-                        selectedSymbol
-                    ])
+                    effectiveGifts.append([selectedModel, backdrop, selectedSymbol].compactMap { $0 })
                 }
             case .symbols:
-                guard let selectedBackdrop = self.selectedBackdrop ?? self.previewBackdrops.first else {
-                    self.effectiveGifts = []
-                    return
-                }
+                let selectedBackdrop = self.selectedBackdrop ?? self.previewBackdrops.first
                 let symbols = Array(attributes.filter({ attribute in
                     if case .pattern = attribute {
                         return true
@@ -390,10 +380,7 @@ private final class GiftUpgradeVariantsScreenComponent: Component {
                     }
                 }))
                 for symbol in symbols {
-                    effectiveGifts.append([
-                        selectedBackdrop,
-                        symbol
-                    ])
+                    effectiveGifts.append([selectedBackdrop, symbol].compactMap { $0 })
                 }
             }
             self.effectiveGifts = effectiveGifts
@@ -747,36 +734,34 @@ private final class GiftUpgradeVariantsScreenComponent: Component {
             
             var attributes: [StarGift.UniqueGift.Attribute] = []
             let previewModels = self.displayCraftableModels ? self.previewCraftableModels : self.previewPrimaryModels
-            if !previewModels.isEmpty {
-                if self.isPlaying {
-                    if previewModels.indices.contains(self.previewModelIndex) {
-                        attributes.append(previewModels[self.previewModelIndex])
-                    }
-                    if self.previewBackdrops.indices.contains(self.previewBackdropIndex) {
-                        attributes.append(self.previewBackdrops[self.previewBackdropIndex])
-                    }
-                    if self.previewSymbols.indices.contains(self.previewSymbolIndex) {
-                        attributes.append(self.previewSymbols[self.previewSymbolIndex])
-                    }
-                } else {
-                    if self.selectedModel == nil {
-                        self.selectedModel = previewModels.first
-                    }
-                    if self.selectedBackdrop == nil {
-                        self.selectedBackdrop = self.previewBackdrops.first
-                    }
-                    if self.selectedSymbol == nil {
-                        self.selectedSymbol = self.previewSymbols.first
-                    }
-                    if let model = self.selectedModel {
-                        attributes.append(model)
-                    }
-                    if let backdrop = self.selectedBackdrop {
-                        attributes.append(backdrop)
-                    }
-                    if let symbol = self.selectedSymbol {
-                        attributes.append(symbol)
-                    }
+            if self.isPlaying {
+                if previewModels.indices.contains(self.previewModelIndex) {
+                    attributes.append(previewModels[self.previewModelIndex])
+                }
+                if self.previewBackdrops.indices.contains(self.previewBackdropIndex) {
+                    attributes.append(self.previewBackdrops[self.previewBackdropIndex])
+                }
+                if self.previewSymbols.indices.contains(self.previewSymbolIndex) {
+                    attributes.append(self.previewSymbols[self.previewSymbolIndex])
+                }
+            } else {
+                if self.selectedModel == nil {
+                    self.selectedModel = previewModels.first
+                }
+                if self.selectedBackdrop == nil {
+                    self.selectedBackdrop = self.previewBackdrops.first
+                }
+                if self.selectedSymbol == nil {
+                    self.selectedSymbol = self.previewSymbols.first
+                }
+                if let model = self.selectedModel {
+                    attributes.append(model)
+                }
+                if let backdrop = self.selectedBackdrop {
+                    attributes.append(backdrop)
+                }
+                if let symbol = self.selectedSymbol {
+                    attributes.append(symbol)
                 }
             }
             
@@ -889,7 +874,7 @@ private final class GiftUpgradeVariantsScreenComponent: Component {
             }
             
             let attributeSpacing: CGFloat = 10.0
-            let attributeWidth: CGFloat = floor((fillingSize - 32.0 - attributeSpacing * CGFloat(attributes.count - 1)) / CGFloat(attributes.count))
+            let attributeWidth: CGFloat = attributes.isEmpty ? 0.0 : floor((fillingSize - 32.0 - attributeSpacing * CGFloat(attributes.count - 1)) / CGFloat(attributes.count))
             let attributeHeight: CGFloat = 45.0
             
             for i in 0 ..< attributes.count {
@@ -923,6 +908,12 @@ private final class GiftUpgradeVariantsScreenComponent: Component {
                     }
                     transition.setFrame(view: attributeInfoView, frame: attributeFrame)
                 }
+            }
+            if attributes.count < self.attributeInfos.count {
+                for i in attributes.count ..< self.attributeInfos.count {
+                    self.attributeInfos[i].view?.removeFromSuperview()
+                }
+                self.attributeInfos.removeSubrange(attributes.count ..< self.attributeInfos.count)
             }
             
             let edgeEffectHeight: CGFloat = 44.0
