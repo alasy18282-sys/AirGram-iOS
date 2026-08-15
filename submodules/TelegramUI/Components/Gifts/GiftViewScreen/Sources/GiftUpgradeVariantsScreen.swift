@@ -979,11 +979,21 @@ private final class GiftUpgradeVariantsScreenComponent: Component {
             switch self.selectedSection {
             case .models:
                 if self.displayCraftableModels {
-                    descriptionText = environment.strings.Gift_Variants_CollectionInfo(environment.strings.Gift_Variants_CollectionInfo_CraftableModel(self.craftableModelCount)).string
+                    if self.craftableModelCount == 0 {
+                        descriptionText = environment.strings.Gift_Variants_NoCraftableModels
+                    } else {
+                        descriptionText = environment.strings.Gift_Variants_CollectionInfo(environment.strings.Gift_Variants_CollectionInfo_CraftableModel(self.craftableModelCount)).string
+                    }
                     itemCount = self.craftableModelCount
-                    descriptionText += "\n[\(environment.strings.Gift_Variants_ViewPrimaryModels) >]()"
+                    if self.primaryModelCount > 0 {
+                        descriptionText += "\n[\(environment.strings.Gift_Variants_ViewPrimaryModels) >]()"
+                    }
                 } else {
-                    descriptionText = environment.strings.Gift_Variants_CollectionInfo(environment.strings.Gift_Variants_CollectionInfo_Model(self.primaryModelCount)).string
+                    if self.primaryModelCount == 0 {
+                        descriptionText = environment.strings.Gift_Variants_NoUpgradeModels
+                    } else {
+                        descriptionText = environment.strings.Gift_Variants_CollectionInfo(environment.strings.Gift_Variants_CollectionInfo_Model(self.primaryModelCount)).string
+                    }
                     itemCount = self.primaryModelCount
                     
                     if self.craftableModelCount > 0 {

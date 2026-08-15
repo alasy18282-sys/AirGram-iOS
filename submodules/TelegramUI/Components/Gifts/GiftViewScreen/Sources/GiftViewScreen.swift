@@ -1503,7 +1503,17 @@ private final class GiftViewSheetContent: CombinedComponent {
                 guard let self, let attributes else {
                     return
                 }
-                GiftTGSRenderer.log("upgradeVariants loaded giftId=\(gift.giftId) attributes=\(attributes.count)")
+                let primaryModelCount = attributes.reduce(into: 0) { count, attribute in
+                    if case let .model(_, _, _, crafted) = attribute, !crafted {
+                        count += 1
+                    }
+                }
+                let craftedModelCount = attributes.reduce(into: 0) { count, attribute in
+                    if case let .model(_, _, _, crafted) = attribute, crafted {
+                        count += 1
+                    }
+                }
+                GiftTGSRenderer.log("upgradeVariants loaded giftId=\(gift.giftId) attributes=\(attributes.count) primaryModels=\(primaryModelCount) craftedModels=\(craftedModelCount)")
                 for attribute in attributes {
                     switch attribute {
                     case let .model(_, file, _, _), let .pattern(_, file, _):
