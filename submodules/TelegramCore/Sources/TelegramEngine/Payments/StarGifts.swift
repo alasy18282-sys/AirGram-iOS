@@ -4402,6 +4402,34 @@ final class CachedStartGiftUpgradeAttributes: Codable {
     }
 }
 
+private func areValidStarGiftUpgradeAttributes(_ attributes: [StarGift.UniqueGift.Attribute]) -> Bool {
+    var hasModel = false
+    var hasPattern = false
+    var hasBackdrop = false
+    for attribute in attributes {
+        switch attribute {
+        case let .model(name, file, _, _):
+            guard !name.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty, file.fileId.id != 0 else {
+                return false
+            }
+            hasModel = true
+        case let .pattern(name, file, _):
+            guard !name.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty, file.fileId.id != 0 else {
+                return false
+            }
+            hasPattern = true
+        case let .backdrop(name, _, _, _, _, _, _):
+            guard !name.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty else {
+                return false
+            }
+            hasBackdrop = true
+        default:
+            break
+        }
+    }
+    return hasModel && hasPattern && hasBackdrop
+}
+
 func _internal_getStarGiftUpgradeAttributes(account: Account, giftId: Int64) -> Signal<[StarGift.UniqueGift.Attribute]?, NoError> {
     return account.postbox.transaction { transaction in
         let remote = account.network.request(Api.functions.payments.getStarGiftUpgradeAttributes(giftId: giftId))
@@ -4418,7 +4446,7 @@ func _internal_getStarGiftUpgradeAttributes(account: Account, giftId: Int64) -> 
                 let apiAttributes = starGiftUpgradeAttributesData.attributes
                 let attributes = apiAttributes.compactMap { StarGift.UniqueGift.Attribute(apiAttribute: $0) }
                 return account.postbox.transaction { transaction in
-                    if !attributes.isEmpty {
+                    if areValidStarGiftUpgradeAttributes(attributes) {
                         if let entry = CodableEntry(CachedStartGiftUpgradeAttributes(attributes: attributes)) {
                             transaction.putItemCacheEntry(id: giftUpgradesId(giftId: giftId), entry: entry)
                         }
@@ -4427,10 +4455,11 @@ func _internal_getStarGiftUpgradeAttributes(account: Account, giftId: Int64) -> 
                 }
             }
         }
-        if let cachedGifts = transaction.retrieveItemCacheEntry(id: giftUpgradesId(giftId: giftId))?.get(CachedStartGiftUpgradeAttributes.self) {
+        if let cachedGifts = transaction.retrieveItemCacheEntry(id: giftUpgradesId(giftId: giftId))?.get(CachedStartGiftUpgradeAttributes.self), areValidStarGiftUpgradeAttributes(cachedGifts.attributes) {
             return .single(cachedGifts.attributes)
             |> then(remote)
         } else {
+            transaction.removeItemCacheEntry(id: giftUpgradesId(giftId: giftId))
             return remote
         }
     }

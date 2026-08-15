@@ -15721,6 +15721,8 @@ Error: %8$@";
 "Gift.Variants.CollectionInfo.CraftableModel_any" = "**%@** craftable models";
 "Gift.Variants.ViewCraftableModels" = "View Craftable Models";
 "Gift.Variants.ViewPrimaryModels" = "View Primary Models";
+"Gift.Variants.NoUpgradeModels" = "No upgrade models available for this gift.";
+"Gift.Variants.NoCraftableModels" = "No craftable models available for this gift.";
 
 "Gift.View.OnSale" = "On sale for %@";
 

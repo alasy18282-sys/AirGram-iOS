@@ -1619,12 +1619,14 @@ final class GiftOptionsScreenComponent: Component {
                     title: strings.Gift_Options_Gift_Filter_AllGifts
                 ))
                 
-                if hasTransferGifts {
-                    tabSelectorItems.append(TabSelectorComponent.Item(
-                        id: AnyHashable(StarsFilter.transfer.rawValue),
-                        title: strings.Gift_Options_Gift_Filter_MyGifts
-                    ))
-                }
+                // Keep the tab stable after the last transferable gift is sent.
+                // Its contents are driven by ProfileGiftsContext and may become
+                // empty, but removing the tab leaves the selector in a stale
+                // state until the screen is recreated.
+                tabSelectorItems.append(TabSelectorComponent.Item(
+                    id: AnyHashable(StarsFilter.transfer.rawValue),
+                    title: strings.Gift_Options_Gift_Filter_MyGifts
+                ))
                 
                 var hasResale = false
                 var starsAmountsSet = Set<Int64>()
