@@ -304,19 +304,25 @@ private final class GiftUpgradeVariantsScreenComponent: Component {
             guard !previewModels.isEmpty else { return }
             self.previewModelIndex = (self.previewModelIndex + 1) % previewModels.count
             
-            let previousSymbolIndex = self.previewSymbolIndex
-            var randomSymbolIndex = previousSymbolIndex
-            while randomSymbolIndex == previousSymbolIndex && !self.previewSymbols.isEmpty {
-                randomSymbolIndex = Int.random(in: 0 ..< self.previewSymbols.count)
+            if self.previewSymbols.count > 1 {
+                var randomSymbolIndex = Int.random(in: 0 ..< self.previewSymbols.count)
+                if randomSymbolIndex == self.previewSymbolIndex {
+                    randomSymbolIndex = (self.previewSymbolIndex + 1) % self.previewSymbols.count
+                }
+                self.previewSymbolIndex = randomSymbolIndex
+            } else if self.previewSymbols.count == 1 {
+                self.previewSymbolIndex = 0
             }
-            if !self.previewSymbols.isEmpty { self.previewSymbolIndex = randomSymbolIndex }
             
-            let previousBackdropIndex = self.previewBackdropIndex
-            var randomBackdropIndex = previousBackdropIndex
-            while randomBackdropIndex == previousBackdropIndex && !self.previewBackdrops.isEmpty {
-                randomBackdropIndex = Int.random(in: 0 ..< self.previewBackdrops.count)
+            if self.previewBackdrops.count > 1 {
+                var randomBackdropIndex = Int.random(in: 0 ..< self.previewBackdrops.count)
+                if randomBackdropIndex == self.previewBackdropIndex {
+                    randomBackdropIndex = (self.previewBackdropIndex + 1) % self.previewBackdrops.count
+                }
+                self.previewBackdropIndex = randomBackdropIndex
+            } else if self.previewBackdrops.count == 1 {
+                self.previewBackdropIndex = 0
             }
-            if !self.previewBackdrops.isEmpty { self.previewBackdropIndex = randomBackdropIndex }
             
             self.state?.updated(transition: .easeInOut(duration: 0.25))
         }

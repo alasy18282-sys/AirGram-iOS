@@ -125,6 +125,11 @@ final class SlotsComponent<ChildEnvironment: Equatable>: Component {
         required init?(coder: NSCoder) {
             fatalError("init(coder:) has not been implemented")
         }
+        
+        deinit {
+            self.animationLink?.invalidate()
+            self.animationLink = nil
+        }
 
         private func spawnRandomSlot(availableSize: CGSize) {
             guard var items = self.component?.items, !items.isEmpty else { return }

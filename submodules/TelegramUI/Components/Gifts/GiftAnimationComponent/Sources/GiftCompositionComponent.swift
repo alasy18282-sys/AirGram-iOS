@@ -173,6 +173,68 @@ public final class GiftCompositionComponent: Component {
         deinit {
             self.disposables.dispose()
             self.previewTimer?.invalidate()
+            self.stopSpinIfNeeded()
+        }
+        
+        private func nextRandomIndex(current: Int32, count: Int) -> Int32 {
+            guard count > 1 else {
+                return count == 1 ? 0 : current
+            }
+            var next = Int32.random(in: 0 ..< Int32(count))
+            if next == current {
+                next = (current + 1) % Int32(count)
+            }
+            return next
+        }
+        
+        private func clampPreviewIndices() {
+            if self.previewModels.isEmpty {
+                self.previewModelIndex = 0
+            } else {
+                self.previewModelIndex = max(0, min(self.previewModelIndex, Int32(self.previewModels.count - 1)))
+            }
+            if self.previewPatterns.isEmpty {
+                if self.previewPatternIndex != -1 {
+                    self.previewPatternIndex = 0
+                }
+            } else if self.previewPatternIndex >= 0 {
+                self.previewPatternIndex = min(self.previewPatternIndex, Int32(self.previewPatterns.count - 1))
+            }
+            if self.previewBackdrops.isEmpty {
+                if self.previewBackdropIndex != -1 {
+                    self.previewBackdropIndex = 0
+                }
+            } else if self.previewBackdropIndex >= 0 {
+                self.previewBackdropIndex = min(self.previewBackdropIndex, Int32(self.previewBackdrops.count - 1))
+            }
+        }
+        
+        private func applySampleAttributes(_ sampleAttributes: [StarGift.UniqueGift.Attribute]) {
+            var models: [StarGift.UniqueGift.Attribute] = []
+            var patterns: [StarGift.UniqueGift.Attribute] = []
+            var backdrops: [StarGift.UniqueGift.Attribute] = []
+            for attribute in sampleAttributes {
+                switch attribute {
+                case .model:
+                    models.append(attribute)
+                case .pattern:
+                    patterns.append(attribute)
+                case .backdrop:
+                    backdrops.append(attribute)
+                default:
+                    break
+                }
+            }
+            if !models.isEmpty {
+                self.previewModels = models
+            }
+            if !patterns.isEmpty {
+                self.previewPatterns = patterns
+            }
+            if !backdrops.isEmpty {
+                self.previewBackdrops = backdrops
+            }
+            self.clampPreviewIndices()
         }
         
         @objc private func handleTap() {
@@ -187,6 +249,8 @@ public final class GiftCompositionComponent: Component {
             self.spinLink?.invalidate()
             self.spinLink = nil
             self.lastSpawnTime = nil
+            self.lastPatternChangeTime = nil
+            self.lastBackdropChangeTime = nil
             self.currentInterval = 0.0
             self.deceleraionQueue.removeAll()
             self.decelerationTotalSteps = 0
@@ -312,7 +376,10 @@ public final class GiftCompositionComponent: Component {
 
             self.spinState = .spinning
             self.lastSpawnTime = nil
-            self.currentInterval = 0
+            let now = CACurrentMediaTime()
+            self.lastPatternChangeTime = now
+            self.lastBackdropChangeTime = now
+            self.currentInterval = 0.08
             self.ensureDisplayLink()
         }
 
@@ -463,7 +530,7 @@ public final class GiftCompositionComponent: Component {
 
             switch self.spinState {
             case .spinning:
-                if self.lastSpawnTime == nil || now - (self.lastSpawnTime ?? now) >= self.currentInterval {
+                if self.lastSpawnTime == nil || now - (self.lastSpawnTime ?? now) >= max(self.currentInterval, 0.04) {
                     self.lastSpawnTime = now
 
                     guard !self.spinPool.isEmpty else { return }
@@ -476,7 +543,7 @@ public final class GiftCompositionComponent: Component {
                 }
                 
                 var updateNeeded = false
-                if self.lastPatternChangeTime == nil || now - (self.lastPatternChangeTime ?? now) >= self.currentInterval * 6.0 {
+                if self.lastPatternChangeTime == nil || now - (self.lastPatternChangeTime ?? now) >= max(self.currentInterval, 0.08) * 6.0 {
                     self.lastPatternChangeTime = now
                     
                     if component.revealedAttributes.contains(.pattern) {
@@ -485,19 +552,13 @@ public final class GiftCompositionComponent: Component {
                             self.animatePreviewTransition = true
                             updateNeeded = true
                         }
-                    } else {
-                        let previousPatternIndex = self.previewPatternIndex
-                        var randomPatternIndex = previousPatternIndex
-                        while randomPatternIndex == previousPatternIndex && !self.previewPatterns.isEmpty {
-                            randomPatternIndex = Int32.random(in: 0 ..< Int32(self.previewPatterns.count))
-                        }
-                        if !self.previewPatterns.isEmpty { self.previewPatternIndex = randomPatternIndex }
-                        
+                    } else if !self.previewPatterns.isEmpty {
+                        self.previewPatternIndex = self.nextRandomIndex(current: self.previewPatternIndex, count: self.previewPatterns.count)
                         self.animatePreviewTransition = true
                         updateNeeded = true
                     }
                 }
-                if self.lastBackdropChangeTime == nil || now - (self.lastBackdropChangeTime ?? now) >= self.currentInterval * 3.55 {
+                if self.lastBackdropChangeTime == nil || now - (self.lastBackdropChangeTime ?? now) >= max(self.currentInterval, 0.08) * 3.55 {
                     self.lastBackdropChangeTime = now
                     
                     if component.revealedAttributes.contains(.backdrop) {
@@ -506,14 +567,8 @@ public final class GiftCompositionComponent: Component {
                             self.animateBackdropSwipe = true
                             updateNeeded = true
                         }
-                    } else {
-                        let previousBackdropIndex = self.previewBackdropIndex
-                        var randomBackdropIndex = previousBackdropIndex
-                        while randomBackdropIndex == previousBackdropIndex && !self.previewBackdrops.isEmpty {
-                            randomBackdropIndex = Int32.random(in: 0 ..< Int32(self.previewBackdrops.count))
-                        }
-                        if !self.previewBackdrops.isEmpty { self.previewBackdropIndex = randomBackdropIndex }
-                        
+                    } else if !self.previewBackdrops.isEmpty {
+                        self.previewBackdropIndex = self.nextRandomIndex(current: self.previewBackdropIndex, count: self.previewBackdrops.count)
                         self.animateBackdropSwipe = true
                         updateNeeded = true
                     }
@@ -667,11 +722,12 @@ public final class GiftCompositionComponent: Component {
                     }
                 }
                 if let previewAttributes = previewAttributesOpt, !previewAttributes.isEmpty {
-                    if self.previewPatternIndex != -1, case let .pattern(_, file, _) = self.previewPatterns[Int(self.previewPatternIndex)] {
+                    self.applySampleAttributes(previewAttributes)
+                    if self.previewPatternIndex >= 0, self.previewPatternIndex < Int32(self.previewPatterns.count), case let .pattern(_, file, _) = self.previewPatterns[Int(self.previewPatternIndex)] {
                         patternFile = file
                         files[file.fileId.id] = file
                     }
-                    if self.previewBackdropIndex != -1, case let .backdrop(_, _, innerColorValue, outerColorValue, patternColorValue, _, _) = self.previewBackdrops[Int(self.previewBackdropIndex)] {
+                    if self.previewBackdropIndex >= 0, self.previewBackdropIndex < Int32(self.previewBackdrops.count), case let .backdrop(_, _, innerColorValue, outerColorValue, patternColorValue, _, _) = self.previewBackdrops[Int(self.previewBackdropIndex)] {
                         backgroundColor = UIColor(rgb: UInt32(bitPattern: outerColorValue))
                         secondBackgroundColor = UIColor(rgb: UInt32(bitPattern: innerColorValue))
                         patternColor = UIColor(rgb: UInt32(bitPattern: patternColorValue))
@@ -704,6 +760,7 @@ public final class GiftCompositionComponent: Component {
                     self.previewModels = models
                     self.previewPatterns = patterns
                     self.previewBackdrops = backdrops
+                    self.clampPreviewIndices()
                 }
                 
                 for case let .model(_, file, _, _) in self.previewModels where !self.fetchedFiles.contains(file.fileId.id) {
@@ -723,16 +780,17 @@ public final class GiftCompositionComponent: Component {
                     if self.previewBackdropIndex < 0 {
                         self.previewBackdropIndex = 0
                     }
-                    if case let .model(_, file, _, _) = self.previewModels[Int(self.previewModelIndex)] {
+                    self.clampPreviewIndices()
+                    if self.previewModelIndex >= 0, self.previewModelIndex < Int32(self.previewModels.count), case let .model(_, file, _, _) = self.previewModels[Int(self.previewModelIndex)] {
                         animationFile = file
                         component.externalState?.previewModel = self.previewModels[Int(self.previewModelIndex)]
                     }
-                    if !self.previewPatterns.isEmpty, case let .pattern(_, file, _) = self.previewPatterns[Int(self.previewPatternIndex)] {
+                    if !self.previewPatterns.isEmpty, self.previewPatternIndex >= 0, self.previewPatternIndex < Int32(self.previewPatterns.count), case let .pattern(_, file, _) = self.previewPatterns[Int(self.previewPatternIndex)] {
                         patternFile = file
                         files[file.fileId.id] = file
                         component.externalState?.previewSymbol = self.previewPatterns[Int(self.previewPatternIndex)]
                     }
-                    if !self.previewBackdrops.isEmpty, case let .backdrop(_, _, innerColorValue, outerColorValue, patternColorValue, _, _) = self.previewBackdrops[Int(self.previewBackdropIndex)] {
+                    if !self.previewBackdrops.isEmpty, self.previewBackdropIndex >= 0, self.previewBackdropIndex < Int32(self.previewBackdrops.count), case let .backdrop(_, _, innerColorValue, outerColorValue, patternColorValue, _, _) = self.previewBackdrops[Int(self.previewBackdropIndex)] {
                         backgroundColor = UIColor(rgb: UInt32(bitPattern: outerColorValue))
                         secondBackgroundColor = UIColor(rgb: UInt32(bitPattern: innerColorValue))
                         patternColor = UIColor(rgb: UInt32(bitPattern: patternColorValue))
@@ -745,19 +803,12 @@ public final class GiftCompositionComponent: Component {
                         guard let self, !self.previewModels.isEmpty else { return }
                         self.previewModelIndex = (self.previewModelIndex + 1) % Int32(self.previewModels.count)
                         
-                        let previousPatternIndex = self.previewPatternIndex
-                        var randomPatternIndex = previousPatternIndex
-                        while randomPatternIndex == previousPatternIndex && !self.previewPatterns.isEmpty {
-                            randomPatternIndex = Int32.random(in: 0 ..< Int32(self.previewPatterns.count))
+                        if !self.previewPatterns.isEmpty {
+                            self.previewPatternIndex = self.nextRandomIndex(current: self.previewPatternIndex, count: self.previewPatterns.count)
                         }
-                        if !self.previewPatterns.isEmpty { self.previewPatternIndex = randomPatternIndex }
-                        
-                        let previousBackdropIndex = self.previewBackdropIndex
-                        var randomBackdropIndex = previousBackdropIndex
-                        while randomBackdropIndex == previousBackdropIndex && !self.previewBackdrops.isEmpty {
-                            randomBackdropIndex = Int32.random(in: 0 ..< Int32(self.previewBackdrops.count))
+                        if !self.previewBackdrops.isEmpty {
+                            self.previewBackdropIndex = self.nextRandomIndex(current: self.previewBackdropIndex, count: self.previewBackdrops.count)
                         }
-                        if !self.previewBackdrops.isEmpty { self.previewBackdropIndex = randomBackdropIndex }
                         
                         self.animatePreviewTransition = true
                         self.componentState?.updated(transition: .easeInOut(duration: 0.25))
@@ -896,76 +947,76 @@ public final class GiftCompositionComponent: Component {
                     }
                 }
 
-                if models.isEmpty, let _ = mainModelFile {
+                if models.isEmpty {
+                    self.stopSpinIfNeeded()
+                } else {
+                    for case let .model(_, file, _, _) in models where !self.fetchedFiles.contains(file.fileId.id) {
+                        self.disposables.add(freeMediaFileResourceInteractiveFetched(
+                            account: component.context.account,
+                            userLocation: .other,
+                            fileReference: .standalone(media: file),
+                            resource: file.resource
+                        ).start())
+                        self.fetchedFiles.insert(file.fileId.id)
+                    }
+                    if let mainModelFile, !self.fetchedFiles.contains(mainModelFile.fileId.id) {
+                        self.disposables.add(freeMediaFileResourceInteractiveFetched(
+                            account: component.context.account,
+                            userLocation: .other,
+                            fileReference: .standalone(media: mainModelFile),
+                            resource: mainModelFile.resource
+                        ).start())
+                        self.fetchedFiles.insert(mainModelFile.fileId.id)
+                    }
+                    
+                    let wasAnimatingModel = previousComponent != nil && !(previousComponent!.revealedAttributes.contains(.model))
+                    let isAnimatingModel = !component.revealedAttributes.contains(.model)
+                    
+                    let wasAnimating = wasAnimatingModel
+                    let nowAnimating = isAnimatingModel
+
+                    if nowAnimating {
+                        if let disappearing = self.animationNode {
+                            self.animationNode = nil
+                            disappearing.layer.animateAlpha(from: 1.0, to: 0.0, duration: 0.12, removeOnCompletion: false, completion: { _ in
+                                disappearing.view.removeFromSuperview()
+                            })
+                        }
+                    }
+
+                    let scaleValue: CGFloat = component.animationScale ?? 1.0
+
+                    if nowAnimating && (!wasAnimating || self.spinState != .spinning) {
+                        self.startSpinningUnique(
+                            availableSize: availableSize,
+                            iconSize: iconSize,
+                            scale: scaleValue,
+                            pool: models
+                        )
+                    } else if !nowAnimating && wasAnimating {
+                        var tail = Array(models.shuffled().prefix(6))
+                        if let mainModelFile {
+                            tail.append(.model(name: "", file: mainModelFile, rarity: .rare, crafted: false))
+                        }
+                        self.beginDecelerationWithQueue(
+                            tail: tail,
+                            availableSize: availableSize,
+                            iconSize: iconSize,
+                            scale: scaleValue
+                        )
+                    } else if self.spinState == .spinning {
+                        let centerY = 88.0 + (component.animationOffset?.y ?? 0.0)
+                        self.spinGeom = SpinParams(
+                            availableSize: availableSize,
+                            iconSize: iconSize,
+                            scale: scaleValue,
+                            centerX: availableSize.width / 2.0 + (component.animationOffset?.x ?? 0.0),
+                            centerY: centerY
+                        )
+                    }
+
                     return availableSize
                 }
-
-                for case let .model(_, file, _, _) in models where !self.fetchedFiles.contains(file.fileId.id) {
-                    self.disposables.add(freeMediaFileResourceInteractiveFetched(
-                        account: component.context.account,
-                        userLocation: .other,
-                        fileReference: .standalone(media: file),
-                        resource: file.resource
-                    ).start())
-                    self.fetchedFiles.insert(file.fileId.id)
-                }
-                if let mainModelFile, !self.fetchedFiles.contains(mainModelFile.fileId.id) {
-                    self.disposables.add(freeMediaFileResourceInteractiveFetched(
-                        account: component.context.account,
-                        userLocation: .other,
-                        fileReference: .standalone(media: mainModelFile),
-                        resource: mainModelFile.resource
-                    ).start())
-                    self.fetchedFiles.insert(mainModelFile.fileId.id)
-                }
-                
-                let wasAnimatingModel = previousComponent != nil && !(previousComponent!.revealedAttributes.contains(.model))
-                let isAnimatingModel = !component.revealedAttributes.contains(.model)
-                
-                let wasAnimating = wasAnimatingModel
-                let nowAnimating = isAnimatingModel
-
-                if nowAnimating {
-                    if let disappearing = self.animationNode {
-                        self.animationNode = nil
-                        disappearing.layer.animateAlpha(from: 1.0, to: 0.0, duration: 0.12, removeOnCompletion: false, completion: { _ in
-                            disappearing.view.removeFromSuperview()
-                        })
-                    }
-                }
-
-                let scaleValue: CGFloat = component.animationScale ?? 1.0
-
-                if nowAnimating && (!wasAnimating || self.spinState != .spinning) {
-                    self.startSpinningUnique(
-                        availableSize: availableSize,
-                        iconSize: iconSize,
-                        scale: scaleValue,
-                        pool: models
-                    )
-                } else if !nowAnimating && wasAnimating {
-                    var tail = Array(models.shuffled().prefix(6))
-                    if let mainModelFile {
-                        tail.append(.model(name: "", file: mainModelFile, rarity: .rare, crafted: false))
-                    }
-                    self.beginDecelerationWithQueue(
-                        tail: tail,
-                        availableSize: availableSize,
-                        iconSize: iconSize,
-                        scale: scaleValue
-                    )
-                } else if self.spinState == .spinning {
-                    let centerY = 88.0 + (component.animationOffset?.y ?? 0.0)
-                    self.spinGeom = SpinParams(
-                        availableSize: availableSize,
-                        iconSize: iconSize,
-                        scale: scaleValue,
-                        centerX: availableSize.width / 2.0 + (component.animationOffset?.x ?? 0.0),
-                        centerY: centerY
-                    )
-                }
-
-                return availableSize
             }
 
             if self.spinState != .idle && self.spinState != .settled {
