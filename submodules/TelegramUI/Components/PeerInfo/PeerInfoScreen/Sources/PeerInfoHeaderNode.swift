@@ -201,6 +201,8 @@ final class PeerInfoHeaderNode: ASDisplayNode {
     var giftMediaPrefetchDisposable = MetaDisposable()
     var giftMediaResolveDisposable = MetaDisposable()
     private var cachedLocalGiftMediaFiles: [Int64: TelegramMediaFile] = [:]
+    private var lastPrefetchedGiftStatusKey: String?
+    private var lastPrefetchedPatternFileId: Int64?
     var emojiStatusFileAndPackTitle = Promise<(TelegramMediaFile, LoadedStickerPack)?>()
     
     var customNavigationContentNode: PeerInfoPanelNodeNavigationContentNode?
@@ -636,24 +638,27 @@ final class PeerInfoHeaderNode: ASDisplayNode {
                     }
                 }
             }
-            self.giftStatusMediaPrefetchSet.dispose()
-            self.giftStatusMediaPrefetchSet = DisposableSet()
-            GiftPatternRenderer.prefetchStatusMedia(
-                account: self.context.account,
-                emojiStatus: emojiStatus,
-                gifts: profileGifts,
-                localFiles: self.cachedLocalGiftMediaFiles,
-                disposables: self.giftStatusMediaPrefetchSet,
-                onReady: { [weak self] in
-                    guard let self else {
-                        return
+            let prefetchKey = "\(emojiStatus.fileId):\(self.cachedLocalGiftMediaFiles.keys.sorted().map(String.init).joined(separator: ","))"
+            if self.lastPrefetchedGiftStatusKey != prefetchKey {
+                self.lastPrefetchedGiftStatusKey = prefetchKey
+                self.giftStatusMediaPrefetchSet.dispose()
+                self.giftStatusMediaPrefetchSet = DisposableSet()
+                GiftPatternRenderer.prefetchStatusMedia(
+                    account: self.context.account,
+                    emojiStatus: emojiStatus,
+                    gifts: profileGifts,
+                    localFiles: self.cachedLocalGiftMediaFiles,
+                    disposables: self.giftStatusMediaPrefetchSet,
+                    onReady: { [weak self] in
+                        guard let self else {
+                            return
+                        }
+                        if let backgroundCoverView = self.backgroundCover.view as? PeerInfoCoverComponent.View {
+                            backgroundCoverView.reloadPattern()
+                        }
                     }
-                    self.setNeedsLayout()
-                    if let backgroundCoverView = self.backgroundCover.view as? PeerInfoCoverComponent.View {
-                        backgroundCoverView.reloadPattern()
-                    }
-                }
-            )
+                )
+            }
             let mergedFiles = GiftMediaSupport.combinedMediaFiles(for: emojiStatus, gifts: profileGifts, localFiles: self.cachedLocalGiftMediaFiles)
             if mergedFiles.count < GiftMediaSupport.fileIds(for: emojiStatus).count {
                 self.giftMediaResolveDisposable.set((
@@ -665,10 +670,10 @@ final class PeerInfoHeaderNode: ASDisplayNode {
                     }
                     if self.cachedLocalGiftMediaFiles != files {
                         self.cachedLocalGiftMediaFiles = files
+                        self.lastPrefetchedGiftStatusKey = nil
                         if let backgroundCoverView = self.backgroundCover.view as? PeerInfoCoverComponent.View {
                             backgroundCoverView.reloadPattern()
                         }
-                        self.setNeedsLayout()
                     }
                 }))
             } else {
@@ -677,6 +682,10 @@ final class PeerInfoHeaderNode: ASDisplayNode {
             }
         } else {
             self.cachedLocalGiftMediaFiles = [:]
+            self.lastPrefetchedGiftStatusKey = nil
+            self.lastPrefetchedPatternFileId = nil
+            self.giftStatusMediaPrefetchSet.dispose()
+            self.giftStatusMediaPrefetchSet = DisposableSet()
             self.giftMediaResolveDisposable.set(nil)
         }
         
@@ -2555,14 +2564,17 @@ final class PeerInfoHeaderNode: ASDisplayNode {
         if let status = peer?.emojiStatus, case .starGift = status.content {
             let appearance = GiftPatternRenderer.appearance(for: status, gifts: profileGifts, localFiles: self.cachedLocalGiftMediaFiles)
             backgroundCoverFiles = appearance.files
-            let prefetchSet = DisposableSet()
-            GiftPatternRenderer.prefetch(account: self.context.account, appearance: appearance, disposables: prefetchSet) { [weak self] in
-                guard let self, let backgroundCoverView = self.backgroundCover.view as? PeerInfoCoverComponent.View else {
-                    return
+            if self.lastPrefetchedPatternFileId != appearance.resolvedPatternFileId {
+                self.lastPrefetchedPatternFileId = appearance.resolvedPatternFileId
+                let prefetchSet = DisposableSet()
+                GiftPatternRenderer.prefetch(account: self.context.account, appearance: appearance, disposables: prefetchSet) { [weak self] in
+                    guard let self, let backgroundCoverView = self.backgroundCover.view as? PeerInfoCoverComponent.View else {
+                        return
+                    }
+                    backgroundCoverView.reloadPattern()
                 }
-                backgroundCoverView.reloadPattern()
+                self.giftMediaPrefetchDisposable.set(prefetchSet)
             }
-            self.giftMediaPrefetchDisposable.set(prefetchSet)
             backgroundCoverComponent = GiftPatternRenderer.makeStatusCoverComponent(
                 context: self.context,
                 status: status,

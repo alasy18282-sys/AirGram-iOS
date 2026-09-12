@@ -1795,6 +1795,16 @@ private final class GiftViewSheetContent: CombinedComponent {
                     self.scheduledUpgradeCommit = false
                     self.commitUpgrade()
                 }
+            }, error: { [weak self] _ in
+                guard let self else {
+                    return
+                }
+                if self.scheduledUpgradeCommit {
+                    self.scheduledUpgradeCommit = false
+                    self.inProgress = false
+                    self.updated()
+                    self.showUpgradePreviewErrorAlert(error: .generic)
+                }
             })
         }
         
@@ -2088,6 +2098,8 @@ private final class GiftViewSheetContent: CombinedComponent {
                 let upgradeGiftImpl: ((Int64?, Bool) -> Signal<ProfileGiftsContext.State.StarGift, UpgradeStarGiftError>)
                 if let upgradeGift = controller.upgradeGift {
                     guard let reference = arguments.reference else {
+                        self.inProgress = false
+                        self.updated()
                         return
                     }
                     upgradeGiftImpl = { formId, keepOriginalInfo in
@@ -2095,6 +2107,8 @@ private final class GiftViewSheetContent: CombinedComponent {
                     }
                 } else {
                     guard let reference = arguments.reference else {
+                        self.inProgress = false
+                        self.updated()
                         return
                     }
                     upgradeGiftImpl = { formId, keepOriginalInfo in
@@ -2104,7 +2118,12 @@ private final class GiftViewSheetContent: CombinedComponent {
             
                 self.upgradeDisposable = (upgradeGiftImpl(formId, self.keepOriginalInfo)
                 |> deliverOnMainQueue).start(next: { [weak self, weak starsContext] result in
-                    guard let self, let controller = self.getController() as? GiftViewScreen else {
+                    guard let self else {
+                        return
+                    }
+                    guard let controller = self.getController() as? GiftViewScreen else {
+                        self.inProgress = false
+                        self.updated()
                         return
                     }
                     self.canSkip = true
@@ -2162,6 +2181,20 @@ private final class GiftViewSheetContent: CombinedComponent {
                     Queue.mainQueue().after(2.5) {
                         starsContext?.load(force: true)
                     }
+                }, error: { [weak self] _ in
+                    guard let self else {
+                        return
+                    }
+                    self.inProgress = false
+                    self.canSkip = false
+                    self.updated()
+                    self.showUpgradePreviewErrorAlert(error: .generic)
+                }, completed: { [weak self] in
+                    guard let self, self.inProgress else {
+                        return
+                    }
+                    self.inProgress = false
+                    self.updated()
                 })
             }
             
