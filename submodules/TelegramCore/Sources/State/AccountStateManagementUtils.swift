@@ -2143,7 +2143,7 @@ private func finalStateWithUpdatesAndServerTime(accountPeerId: PeerId, postbox: 
                 |> mapToSignal { resultingState -> Signal<AccountFinalState, NoError> in
                     return resolveMissingPeerChatInfos(accountPeerId: accountPeerId, network: network, state: resultingState)
                     |> map { resultingState, resolveError -> AccountFinalState in
-                        return AccountFinalState(state: resultingState, shouldPoll: shouldPoll || hadError || resolveError, incomplete: missingUpdates, missingUpdatesFromChannels: Set(), discard: resolveError)
+                        return AccountFinalState(state: resultingState, shouldPoll: shouldPoll || hadError || resolveError, incomplete: missingUpdates, missingUpdatesFromChannels: Set(), discard: false)
                     }
                 }
             }

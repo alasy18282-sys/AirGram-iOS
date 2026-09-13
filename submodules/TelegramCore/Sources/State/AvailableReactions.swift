@@ -316,23 +316,14 @@ private extension AvailableReactions.Reaction {
         switch apiReaction {
         case let .availableReaction(availableReactionData):
             let (flags, reaction, title, staticIcon, appearAnimation, selectAnimation, activateAnimation, effectAnimation, aroundAnimation, centerIcon) = (availableReactionData.flags, availableReactionData.reaction, availableReactionData.title, availableReactionData.staticIcon, availableReactionData.appearAnimation, availableReactionData.selectAnimation, availableReactionData.activateAnimation, availableReactionData.effectAnimation, availableReactionData.aroundAnimation, availableReactionData.centerIcon)
-            guard let staticIconFile = telegramMediaFileFromApiDocument(staticIcon, altDocuments: []) else {
-                return nil
-            }
-            guard let appearAnimationFile = telegramMediaFileFromApiDocument(appearAnimation, altDocuments: []) else {
-                return nil
-            }
-            guard let selectAnimationFile = telegramMediaFileFromApiDocument(selectAnimation, altDocuments: []) else {
-                return nil
-            }
-            guard let activateAnimationFile = telegramMediaFileFromApiDocument(activateAnimation, altDocuments: []) else {
-                return nil
-            }
-            guard let effectAnimationFile = telegramMediaFileFromApiDocument(effectAnimation, altDocuments: []) else {
-                return nil
-            }
+            let placeholderFile = generateStarsReactionFile(kind: 20, isAnimatedSticker: false)
+            let staticIconFile = telegramMediaFileFromApiDocument(staticIcon, altDocuments: []) ?? placeholderFile
+            let appearAnimationFile = telegramMediaFileFromApiDocument(appearAnimation, altDocuments: []) ?? staticIconFile
+            let selectAnimationFile = telegramMediaFileFromApiDocument(selectAnimation, altDocuments: []) ?? staticIconFile
+            let activateAnimationFile = telegramMediaFileFromApiDocument(activateAnimation, altDocuments: []) ?? staticIconFile
+            let effectAnimationFile = telegramMediaFileFromApiDocument(effectAnimation, altDocuments: []) ?? staticIconFile
             let aroundAnimationFile = aroundAnimation.flatMap { telegramMediaFileFromApiDocument($0, altDocuments: []) }
-            let centerAnimationFile = centerIcon.flatMap { telegramMediaFileFromApiDocument($0, altDocuments: []) }
+            let centerAnimationFile = centerIcon.flatMap { telegramMediaFileFromApiDocument($0, altDocuments: []) } ?? telegramMediaFileFromApiDocument(staticIcon, altDocuments: [])
             let isEnabled = (flags & (1 << 0)) == 0
             let isPremium = (flags & (1 << 2)) != 0
             self.init(
@@ -352,9 +343,20 @@ private extension AvailableReactions.Reaction {
     }
 }
 
+private func availableReactionsCacheEntryId() -> ItemCacheEntryId {
+    let key = ValueBoxKey(length: 8)
+    key.setInt64(0, value: 0)
+    return ItemCacheEntryId(collectionId: Namespaces.CachedItemCollection.availableReactions, key: key)
+}
+
 func _internal_cachedAvailableReactions(postbox: Postbox) -> Signal<AvailableReactions?, NoError> {
-    return postbox.transaction { transaction -> AvailableReactions? in
-        return _internal_cachedAvailableReactions(transaction: transaction)
+    let cacheKey = availableReactionsCacheEntryId()
+    return postbox.combinedView(keys: [PostboxViewKey.cachedItem(cacheKey)])
+    |> map { views -> AvailableReactions? in
+        guard let view = views.views[PostboxViewKey.cachedItem(cacheKey)] as? CachedItemView else {
+            return nil
+        }
+        return view.value?.get(AvailableReactions.self)
     }
 }
 

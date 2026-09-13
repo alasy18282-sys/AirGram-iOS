@@ -4,6 +4,21 @@ import MtProtoKit
 import SwiftSignalKit
 import TelegramApi
 
+private func starGiftPlaceholderFile() -> TelegramMediaFile {
+    return TelegramMediaFile(
+        fileId: MediaId(namespace: Namespaces.Media.LocalFile, id: 0),
+        partialReference: nil,
+        resource: LocalFileMediaResource(fileId: 0),
+        previewRepresentations: [],
+        videoThumbnails: [],
+        immediateThumbnailData: nil,
+        mimeType: "application/octet-stream",
+        size: nil,
+        attributes: [],
+        alternativeRepresentations: []
+    )
+}
+
 public final class StarGiftsList: Codable, Equatable {
     public let items: [StarGift]
     public let hashValue: Int32
@@ -278,7 +293,7 @@ public enum StarGift: Equatable, Codable, PostboxCoding {
         public init(decoder: PostboxDecoder) {
             self.id = decoder.decodeInt64ForKey(CodingKeys.id.rawValue, orElse: 0)
             self.title = decoder.decodeOptionalStringForKey(CodingKeys.title.rawValue)
-            self.file = decoder.decodeObjectForKey(CodingKeys.file.rawValue) as! TelegramMediaFile
+            self.file = (decoder.decodeObjectForKey(CodingKeys.file.rawValue) as? TelegramMediaFile) ?? starGiftPlaceholderFile()
             self.price = decoder.decodeInt64ForKey(CodingKeys.price.rawValue, orElse: 0)
             self.convertStars = decoder.decodeInt64ForKey(CodingKeys.convertStars.rawValue, orElse: 0)
             self.availability = decoder.decodeObjectForKey(CodingKeys.availability.rawValue, decoder: { StarGift.Gift.Availability(decoder: $0) }) as? StarGift.Gift.Availability
@@ -582,14 +597,14 @@ public enum StarGift: Equatable, Codable, PostboxCoding {
                 case 0:
                     self = .model(
                         name: decoder.decodeStringForKey(CodingKeys.name.rawValue, orElse: ""),
-                        file: decoder.decodeObjectForKey(CodingKeys.file.rawValue) as! TelegramMediaFile,
+                        file: (decoder.decodeObjectForKey(CodingKeys.file.rawValue) as? TelegramMediaFile) ?? starGiftPlaceholderFile(),
                         rarity: decodeRarity(),
                         crafted: decoder.decodeBoolForKey(CodingKeys.crafted.rawValue, orElse: false)
                     )
                 case 1:
                     self = .pattern(
                         name: decoder.decodeStringForKey(CodingKeys.name.rawValue, orElse: ""),
-                        file: decoder.decodeObjectForKey(CodingKeys.file.rawValue) as! TelegramMediaFile,
+                        file: (decoder.decodeObjectForKey(CodingKeys.file.rawValue) as? TelegramMediaFile) ?? starGiftPlaceholderFile(),
                         rarity: decodeRarity()
                     )
                 case 2:
@@ -611,7 +626,15 @@ public enum StarGift: Equatable, Codable, PostboxCoding {
                         entities: decoder.decodeObjectArrayWithDecoderForKey(CodingKeys.entities.rawValue)
                     )
                 default:
-                    fatalError()
+                    self = .backdrop(
+                        name: decoder.decodeStringForKey(CodingKeys.name.rawValue, orElse: ""),
+                        id: decoder.decodeInt32ForKey(CodingKeys.id.rawValue, orElse: 0),
+                        innerColor: decoder.decodeInt32ForKey(CodingKeys.innerColor.rawValue, orElse: 0),
+                        outerColor: decoder.decodeInt32ForKey(CodingKeys.outerColor.rawValue, orElse: 0),
+                        patternColor: decoder.decodeInt32ForKey(CodingKeys.patternColor.rawValue, orElse: 0),
+                        textColor: decoder.decodeInt32ForKey(CodingKeys.textColor.rawValue, orElse: 0),
+                        rarity: decodeRarity()
+                    )
                 }
             }
         
@@ -887,7 +910,7 @@ public enum StarGift: Equatable, Codable, PostboxCoding {
                 self.owner = nil
             }
             self.attributes = (try? decoder.decodeObjectArrayWithCustomDecoderForKey(CodingKeys.attributes.rawValue, decoder: { UniqueGift.Attribute(decoder: $0) })) ?? []
-            self.availability = decoder.decodeObjectForKey(CodingKeys.availability.rawValue, decoder: { UniqueGift.Availability(decoder: $0) }) as! UniqueGift.Availability
+            self.availability = (decoder.decodeObjectForKey(CodingKeys.availability.rawValue, decoder: { UniqueGift.Availability(decoder: $0) }) as? UniqueGift.Availability) ?? UniqueGift.Availability(issued: 0, total: 0)
             self.giftAddress = decoder.decodeOptionalStringForKey(CodingKeys.giftAddress.rawValue)
             if let resellAmounts = decoder.decodeCodable([CurrencyAmount].self, forKey: CodingKeys.resellAmounts.rawValue) {
                 self.resellAmounts = resellAmounts
@@ -1150,11 +1173,19 @@ public enum StarGift: Equatable, Codable, PostboxCoding {
         case -1:
             self = .generic(Gift(decoder: decoder))
         case 0:
-            self = .generic(decoder.decodeObjectForKey(CodingKeys.value.rawValue, decoder: { StarGift.Gift(decoder: $0) }) as! StarGift.Gift)
+            if let gift = decoder.decodeObjectForKey(CodingKeys.value.rawValue, decoder: { StarGift.Gift(decoder: $0) }) as? StarGift.Gift {
+                self = .generic(gift)
+            } else {
+                self = .generic(Gift(decoder: decoder))
+            }
         case 1:
-            self = .unique(decoder.decodeObjectForKey(CodingKeys.value.rawValue, decoder: { StarGift.UniqueGift(decoder: $0) }) as! StarGift.UniqueGift)
+            if let uniqueGift = decoder.decodeObjectForKey(CodingKeys.value.rawValue, decoder: { StarGift.UniqueGift(decoder: $0) }) as? StarGift.UniqueGift {
+                self = .unique(uniqueGift)
+            } else {
+                self = .generic(Gift(decoder: decoder))
+            }
         default:
-            fatalError()
+            self = .generic(Gift(decoder: decoder))
         }
     }
 
@@ -1256,9 +1287,7 @@ extension StarGift {
             default:
                 break
             }
-            guard let file = telegramMediaFileFromApiDocument(sticker, altDocuments: nil) else {
-                return nil
-            }
+            let file = telegramMediaFileFromApiDocument(sticker, altDocuments: nil) ?? starGiftPlaceholderFile()
             self = .generic(StarGift.Gift(
                 id: id,
                 title: title,
@@ -1609,7 +1638,7 @@ func _internal_transferStarGift(account: Account, prepaid: Bool, reference: Star
                 return .generic
             }
             |> mapToSignal { updates -> Signal<Void, TransferStarGiftError> in
-                account.stateManager.addUpdates(updates)
+                applyPaymentUpdatesImmediately(account: account, updates: updates)
                 return .complete()
             }
             |> ignoreValues
@@ -1672,7 +1701,7 @@ func _internal_upgradeStarGift(account: Account, formId: Int64?, reference: Star
                 return .generic
             }
             |> mapToSignal { updates in
-                account.stateManager.addUpdates(updates)
+                applyPaymentUpdatesImmediately(account: account, updates: updates)
                 for update in updates.allUpdates {
                     switch update {
                     case let .updateNewMessage(updateNewMessageData):
@@ -3597,16 +3626,12 @@ extension StarGift.UniqueGift.Attribute {
         switch apiAttribute {
         case let .starGiftAttributeModel(starGiftAttributeModelData):
             let (flags, name, document, rarity) = (starGiftAttributeModelData.flags, starGiftAttributeModelData.name, starGiftAttributeModelData.document, starGiftAttributeModelData.rarity)
-            guard let file = telegramMediaFileFromApiDocument(document, altDocuments: nil) else {
-                return nil
-            }
+            let file = telegramMediaFileFromApiDocument(document, altDocuments: nil) ?? starGiftPlaceholderFile()
             let crafted = (flags & (1 << 0)) != 0
             self = .model(name: name, file: file, rarity: parseRarity(rarity), crafted: crafted)
         case let .starGiftAttributePattern(starGiftAttributePatternData):
             let (name, document, rarity) = (starGiftAttributePatternData.name, starGiftAttributePatternData.document, starGiftAttributePatternData.rarity)
-            guard let file = telegramMediaFileFromApiDocument(document, altDocuments: nil) else {
-                return nil
-            }
+            let file = telegramMediaFileFromApiDocument(document, altDocuments: nil) ?? starGiftPlaceholderFile()
             self = .pattern(name: name, file: file, rarity: parseRarity(rarity))
         case let .starGiftAttributeBackdrop(starGiftAttributeBackdropData):
             let (name, id, centerColor, edgeColor, patternColor, textColor, rarity) = (starGiftAttributeBackdropData.name, starGiftAttributeBackdropData.backdropId, starGiftAttributeBackdropData.centerColor, starGiftAttributeBackdropData.edgeColor, starGiftAttributeBackdropData.patternColor, starGiftAttributeBackdropData.textColor, starGiftAttributeBackdropData.rarity)

@@ -152,7 +152,7 @@ public final class MessageReactionButtonsNode: ASDisplayNode {
                 if let availableReactions = availableReactions {
                     for availableReaction in availableReactions.reactions {
                         if availableReaction.value == reaction.value {
-                            centerAnimation = availableReaction.centerAnimation?._parse()
+                            centerAnimation = availableReaction.centerAnimation?._parse() ?? availableReaction.staticIcon._parse()
                             break
                         }
                     }
@@ -164,7 +164,7 @@ public final class MessageReactionButtonsNode: ASDisplayNode {
                 if let availableReactions = availableReactions {
                     for availableReaction in availableReactions.reactions {
                         if availableReaction.value == reaction.value {
-                            centerAnimation = availableReaction.centerAnimation?._parse()
+                            centerAnimation = availableReaction.centerAnimation?._parse() ?? availableReaction.staticIcon._parse()
                             break
                         }
                     }
