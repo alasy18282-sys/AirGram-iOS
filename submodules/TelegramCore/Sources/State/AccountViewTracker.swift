@@ -846,7 +846,7 @@ public final class AccountViewTracker {
             let timestamp = Int32(CFAbsoluteTimeGetCurrent())
             for messageId in messageIds {
                 let messageTimestamp = self.updatedReactionsMessageIdsAndTimestamps[messageId]
-                if messageTimestamp == nil || messageTimestamp! < timestamp - 1 * 20 || force {
+                if messageTimestamp == nil || messageTimestamp! < timestamp - 2 || force {
                     self.updatedReactionsMessageIdsAndTimestamps[messageId] = timestamp
                     addedMessageIds.append(messageId)
                 }

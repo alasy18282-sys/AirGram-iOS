@@ -280,7 +280,7 @@ public final class ReactionIconView: PortalSourceView {
         let _ = freeMediaFileResourceInteractiveFetched(
             postbox: context.account.postbox,
             userLocation: .other,
-            fileReference: .standalone(media: file),
+            fileReference: .customEmoji(media: file),
             resource: file.resource
         ).start(completed: { [weak self] in
             self?.animationLayer?.reloadAnimation()

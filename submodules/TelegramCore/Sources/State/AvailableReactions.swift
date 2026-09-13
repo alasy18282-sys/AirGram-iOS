@@ -434,25 +434,25 @@ func managedSynchronizeAvailableReactions(postbox: Postbox, network: Network) ->
                     var signals: [Signal<Never, NoError>] = []
                     
                     if let availableReactions = _internal_cachedAvailableReactions(transaction: transaction) {
-                        var resources: [MediaResource] = []
+                        var files: [TelegramMediaFile] = []
                         
                         for reaction in availableReactions.reactions {
-                            resources.append(reaction.staticIcon._parse().resource)
-                            resources.append(reaction.appearAnimation._parse().resource)
-                            resources.append(reaction.selectAnimation._parse().resource)
-                            resources.append(reaction.activateAnimation._parse().resource)
-                            resources.append(reaction.effectAnimation._parse().resource)
+                            files.append(reaction.staticIcon._parse())
+                            files.append(reaction.appearAnimation._parse())
+                            files.append(reaction.selectAnimation._parse())
+                            files.append(reaction.activateAnimation._parse())
+                            files.append(reaction.effectAnimation._parse())
                             if let centerAnimation = reaction.centerAnimation {
-                                resources.append(centerAnimation._parse().resource)
+                                files.append(centerAnimation._parse())
                             }
                             if let aroundAnimation = reaction.aroundAnimation {
-                                resources.append(aroundAnimation._parse().resource)
+                                files.append(aroundAnimation._parse())
                             }
                         }
                         
-                        for resource in resources {
+                        for file in files {
                             signals.append(
-                                fetchedMediaResource(mediaBox: postbox.mediaBox, userLocation: .other, userContentType: .other, reference: .standalone(resource: resource))
+                                fetchedMediaResource(mediaBox: postbox.mediaBox, userLocation: .other, userContentType: .sticker, reference: .media(media: .customEmoji(media: file), resource: file.resource))
                                 |> ignoreValues
                                 |> `catch` { _ -> Signal<Never, NoError> in
                                     return .complete()

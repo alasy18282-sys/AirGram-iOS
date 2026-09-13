@@ -48,6 +48,8 @@ class BazelCommandLine:
         self.disable_provisioning_profiles = False
         self.profile_swift = False
 
+        cpu_count = os.cpu_count() or 4
+
         self.common_args = [
             # https://docs.bazel.build/versions/master/command-line-reference.html
             # Ask bazel to print the actual resolved command line options.
@@ -69,12 +71,22 @@ class BazelCommandLine:
 
             # Asynchronously upload cache artifacts
             '--remote_cache_async',
+
+            # Start persistent workers immediately and keep the local action cache warm.
+            '--jobs={}'.format(cpu_count),
+            '--local_cpu_resources={}'.format(cpu_count),
+            '--worker_max_instances={}'.format(cpu_count),
+            '--spawn_strategy=worker,local',
+            '--strategy=SwiftCompile=worker,local',
+            '--strategy=ObjcCompile=worker,local',
+            '--strategy=Genrule=standalone',
+            '--worker_quit_after_build=false',
         ]
 
         self.common_build_args = [
         ]
 
-        num_threads = max(os.cpu_count() - 2, 2)
+        num_threads = cpu_count
         self.common_debug_args = [
             '--@build_bazel_rules_swift//swift:copt="-j"',
             f'--@build_bazel_rules_swift//swift:copt="{num_threads}"',
@@ -108,6 +120,14 @@ class BazelCommandLine:
 
     def add_cache_dir(self, path):
         self.cache_dir = path
+
+    def apply_default_disk_cache(self):
+        if self.remote_cache is not None or self.cache_dir is not None:
+            return
+        if self.bazel_user_root:
+            self.cache_dir = os.path.join(os.path.abspath(self.bazel_user_root), 'disk_cache')
+        else:
+            self.cache_dir = os.path.expanduser('~/.cache/airgram-bazel-disk')
 
     def add_additional_args(self, additional_args):
         self.additional_args = additional_args
@@ -220,6 +240,7 @@ class BazelCommandLine:
         combined_arguments += self.common_debug_args
         combined_arguments += self.get_define_arguments()
 
+        self.apply_default_disk_cache()
         if self.remote_cache is not None:
             combined_arguments += [
                 '--remote_cache={}'.format(self.remote_cache),
@@ -281,6 +302,7 @@ class BazelCommandLine:
         combined_arguments += self.get_define_arguments()
         combined_arguments += self.get_additional_build_arguments()
 
+        self.apply_default_disk_cache()
         if self.remote_cache is not None:
             combined_arguments += [
                 '--remote_cache={}'.format(self.remote_cache),
@@ -316,6 +338,7 @@ class BazelCommandLine:
         combined_arguments += self.get_define_arguments()
         combined_arguments += self.get_additional_build_arguments()
 
+        self.apply_default_disk_cache()
         if self.remote_cache is not None:
             combined_arguments += [
                 '--remote_cache={}'.format(self.remote_cache),
@@ -346,6 +369,7 @@ class BazelCommandLine:
 
         combined_arguments += self.get_define_arguments()
 
+        self.apply_default_disk_cache()
         if self.remote_cache is not None:
             combined_arguments += [
                 '--remote_cache={}'.format(self.remote_cache),
@@ -389,6 +413,7 @@ class BazelCommandLine:
         combined_arguments += self.get_define_arguments()
         combined_arguments += self.get_additional_build_arguments()
 
+        self.apply_default_disk_cache()
         if self.remote_cache is not None:
             combined_arguments += [
                 '--remote_cache={}'.format(self.remote_cache),

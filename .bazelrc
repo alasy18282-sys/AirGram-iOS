@@ -15,10 +15,16 @@ build --features=swift.debug_prefix_map
 build --features=swift.enable_vfsoverlays
 build:dbg --features=swift.emit_swiftsourceinfo
 
+build --jobs=HOST_CPUS
+build --local_cpu_resources=HOST_CPUS
+build --worker_max_instances=HOST_CPUS
+build --spawn_strategy=worker,local
+build --strategy=SwiftCompile=worker,local
+build --strategy=ObjcCompile=worker,local
 build --strategy=Genrule=standalone
-build --spawn_strategy=standalone
-
-build --strategy=SwiftCompile=worker
+build --worker_quit_after_build=false
+build --disk_cache=~/.cache/airgram-bazel-disk
+build --remote_cache_async
 
 #common --registry=https://raw.githubusercontent.com/bazelbuild/bazel-central-registry/main/
 
