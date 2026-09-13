@@ -3053,7 +3053,7 @@ public final class ChatHistoryListNodeImpl: ListViewImpl, ChatHistoryNode, ChatH
                         }
                     }
                     switch message.id.peerId.namespace {
-                    case Namespaces.Peer.CloudGroup, Namespaces.Peer.CloudChannel:
+                    case Namespaces.Peer.CloudUser, Namespaces.Peer.CloudGroup, Namespaces.Peer.CloudChannel:
                         messageIdsWithPossibleReactions.append(message.id)
                     default:
                         break
@@ -3070,7 +3070,7 @@ public final class ChatHistoryListNodeImpl: ListViewImpl, ChatHistoryNode, ChatH
                             }
                         }
                         switch message.id.peerId.namespace {
-                        case Namespaces.Peer.CloudGroup, Namespaces.Peer.CloudChannel:
+                        case Namespaces.Peer.CloudUser, Namespaces.Peer.CloudGroup, Namespaces.Peer.CloudChannel:
                             messageIdsWithPossibleReactions.append(message.id)
                         default:
                             break

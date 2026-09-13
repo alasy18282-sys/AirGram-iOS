@@ -610,6 +610,13 @@ func finalStateWithUpdateGroups(accountPeerId: PeerId, postbox: Postbox, network
                 Logger.shared.log("State", "update pts hole: \(update.ptsRange.0) != \(updatedState.state.pts) + \(update.ptsRange.1)")
             }
             ptsUpdatesAfterHole.append(update)
+            // Custom backends often send incorrect pts/ptsCount. Still apply the
+            // payload so messages appear immediately. Do not advance pts — getDifference will fill the gap.
+            updatedState.mergeChats(update.chats)
+            updatedState.mergeUsers(update.users)
+            if let ptsUpdate = update.update {
+                collectedUpdates.append(ptsUpdate)
+            }
         }
     }
     
@@ -630,6 +637,9 @@ func finalStateWithUpdateGroups(accountPeerId: PeerId, postbox: Postbox, network
                 Logger.shared.log("State", "update qts hole: \(update.qtsRange.0) != \(updatedState.state.qts) + \(update.qtsRange.1)")
             }
             qtsUpdatesAfterHole.append(update)
+            updatedState.mergeChats(update.chats)
+            updatedState.mergeUsers(update.users)
+            collectedUpdates.append(update.update)
         }
     }
     
@@ -648,6 +658,9 @@ func finalStateWithUpdateGroups(accountPeerId: PeerId, postbox: Postbox, network
                 Logger.shared.log("State", "update seq hole: \(group.seqRange.0) != \(updatedState.state.seq) + \(group.seqRange.1)")
             }
             seqGroupsAfterHole.append(group)
+            collectedUpdates.append(contentsOf: group.updates)
+            updatedState.mergeChats(group.chats)
+            updatedState.mergeUsers(group.users)
         }
     }
     
@@ -997,6 +1010,19 @@ private func finalStateWithUpdatesAndServerTime(accountPeerId: PeerId, postbox: 
                                 Logger.shared.log("State", "channel \(peerId) (\((updatedState.peers[peerId] as? TelegramChannel)?.title ?? "nil")) edit message pts hole \(previousState.pts) + \(ptsCount) != \(pts)")
                                 missingUpdatesFromChannels.insert(peerId)
                             }
+                            if let preCachedResources = apiMessage.preCachedResources {
+                                for (resource, data) in preCachedResources {
+                                    updatedState.addPreCachedResource(resource, data: data)
+                                }
+                            }
+                            if let preCachedStories = apiMessage.preCachedStories {
+                                for (id, story) in preCachedStories {
+                                    updatedState.addPreCachedStory(id: id, story: story)
+                                }
+                            }
+                            var attributes = message.attributes
+                            attributes.append(ChannelMessageStateVersionAttribute(pts: pts))
+                            updatedState.editMessage(messageId, message: message.withUpdatedAttributes(attributes))
                         }
                     } else {
                         if case .none = channelsToPoll[peerId] {
@@ -1112,9 +1138,21 @@ private func finalStateWithUpdatesAndServerTime(accountPeerId: PeerId, postbox: 
                         } else {
                             if !missingUpdatesFromChannels.contains(message.id.peerId) {
                                 Logger.shared.log("State", "channel \(message.id.peerId) (\((updatedState.peers[message.id.peerId] as? TelegramChannel)?.title ?? "nil")) message pts hole \(previousState.pts) + \(ptsCount) != \(pts)")
-                                ;
                                 missingUpdatesFromChannels.insert(message.id.peerId)
                             }
+                            if let preCachedResources = apiMessage.preCachedResources {
+                                for (resource, data) in preCachedResources {
+                                    updatedState.addPreCachedResource(resource, data: data)
+                                }
+                            }
+                            if let preCachedStories = apiMessage.preCachedStories {
+                                for (id, story) in preCachedStories {
+                                    updatedState.addPreCachedStory(id: id, story: story)
+                                }
+                            }
+                            var attributes = message.attributes
+                            attributes.append(ChannelMessageStateVersionAttribute(pts: pts))
+                            updatedState.addMessages([message.withUpdatedAttributes(attributes)], location: .UpperHistoryBlock)
                         }
                     } else {
                         if case .none = channelsToPoll[message.id.peerId] {
