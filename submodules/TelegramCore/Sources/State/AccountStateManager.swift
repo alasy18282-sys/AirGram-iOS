@@ -558,6 +558,8 @@ public final class AccountStateManager {
                     replacedOperations.append(self.operations[i])
                 } else {
                     switch self.operations[i].content {
+                    case let .collectUpdateGroups(groups, _):
+                        collectedProcessUpdateGroups.append(.processUpdateGroups(groups))
                     case .processUpdateGroups:
                         collectedProcessUpdateGroups.append(self.operations[i].content)
                     case let .pollCompletion(_, messageIds, subscribers):
@@ -803,18 +805,15 @@ public final class AccountStateManager {
             case let .pollDifference(_, currentEvents):
                 self.operationTimer?.invalidate()
                 self.currentIsUpdatingValue = true
-                let pollTimeoutTimer = SignalKitTimer(timeout: 20.0, repeat: false, completion: { [weak self] in
+                let pollTimeoutTimer = SignalKitTimer(timeout: 45.0, repeat: false, completion: { [weak self] in
                     guard let strongSelf = self else {
                         return
                     }
                     guard case .pollDifference = strongSelf.operations.first?.content else {
                         return
                     }
-                    Logger.shared.log("AccountStateManager", "pollDifference timeout — clearing isUpdating")
+                    Logger.shared.log("AccountStateManager", "pollDifference still running — clearing isUpdating so live messages and reactions can apply")
                     strongSelf.currentIsUpdatingValue = false
-                    strongSelf.operationTimer?.invalidate()
-                    strongSelf.replaceOperations(with: .pollDifference(strongSelf.getNextId(), AccountFinalStateEvents()))
-                    strongSelf.startFirstOperation()
                 }, queue: self.queue)
                 self.operationTimer = pollTimeoutTimer
                 pollTimeoutTimer.start()

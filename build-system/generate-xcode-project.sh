@@ -57,16 +57,23 @@ CORE_COUNT_MINUS_ONE=$(expr ${CORE_COUNT} \- 1)
 
 BAZEL_OPTIONS=(\
 	--features=swift.use_global_module_cache \
-	--spawn_strategy=standalone \
-	--strategy=SwiftCompile=standalone \
+	--jobs=${CORE_COUNT} \
+	--local_cpu_resources=${CORE_COUNT} \
+	--worker_max_instances=${CORE_COUNT} \
+	--spawn_strategy=worker,local \
+	--strategy=SwiftCompile=worker,local \
+	--strategy=ObjcCompile=worker,local \
+	--worker_quit_after_build=false \
 	--features=swift.enable_batch_mode \
-	--swiftcopt=-j${CORE_COUNT_MINUS_ONE} \
+	--swiftcopt=-j${CORE_COUNT} \
 )
 
 if [ "$BAZEL_HTTP_CACHE_URL" != "" ]; then
 	BAZEL_OPTIONS=("${BAZEL_OPTIONS[@]}" --remote_cache="$(echo $BAZEL_HTTP_CACHE_URL | sed -e 's/[\/&]/\\&/g')")
 elif [ "$BAZEL_CACHE_DIR" != "" ]; then
 	BAZEL_OPTIONS=("${BAZEL_OPTIONS[@]}" --disk_cache="$(echo $BAZEL_CACHE_DIR | sed -e 's/[\/&]/\\&/g')")
+else
+	BAZEL_OPTIONS=("${BAZEL_OPTIONS[@]}" --disk_cache="$HOME/.cache/airgram-bazel-disk")
 fi
 
 "$TULSI" -- \
