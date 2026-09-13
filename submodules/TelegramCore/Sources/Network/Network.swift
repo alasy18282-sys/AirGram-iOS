@@ -641,22 +641,30 @@ func initializedNetwork(accountId: AccountRecordId, arguments: NetworkInitializa
             
             let requestService = MTRequestMessageService(context: context)!
             let connectionStatusDelegate = MTProtoConnectionStatusDelegate()
+            let updatingStatusDebounce = MetaDisposable()
             connectionStatusDelegate.action = { [weak connectionStatus] info in
                 if info.flags.contains(.Connected) {
-                    if !info.flags.intersection([.UpdatingConnectionContext, .PerformingServiceTasks]).isEmpty {
-                        connectionStatus?.set(.single(.updating(proxyAddress: info.proxyAddress)))
+                    // Custom backends run frequent time-fix / service-task pings after a long
+                    // session. Treating PerformingServiceTasks as "updating" freezes the UI
+                    // ("Updating...") and blocks history preload. Ignore service tasks, and
+                    // only surface a real connection-context rebuild after it lasts > 1.5s.
+                    if info.flags.contains(.UpdatingConnectionContext) {
+                        updatingStatusDebounce.set((
+                            Signal<Never, NoError>.complete()
+                            |> delay(1.5, queue: Queue.mainQueue())
+                        ).start(completed: {
+                            connectionStatus?.set(.single(.updating(proxyAddress: info.proxyAddress)))
+                        }))
                     } else {
+                        updatingStatusDebounce.set(nil)
                         connectionStatus?.set(.single(.online(proxyAddress: info.proxyAddress)))
                     }
                 } else {
+                    updatingStatusDebounce.set(nil)
                     if !info.flags.contains(.NetworkAvailable) {
                         connectionStatus?.set(.single(ConnectionStatus.waitingForNetwork))
-                    } else if !info.flags.contains(.Connected) {
-                        connectionStatus?.set(.single(.connecting(proxyAddress: info.proxyAddress, proxyHasConnectionIssues: info.flags.contains(.ProxyHasConnectionIssues))))
-                    } else if !info.flags.intersection([.UpdatingConnectionContext, .PerformingServiceTasks]).isEmpty {
-                        connectionStatus?.set(.single(.updating(proxyAddress: info.proxyAddress)))
                     } else {
-                        connectionStatus?.set(.single(.online(proxyAddress: info.proxyAddress)))
+                        connectionStatus?.set(.single(.connecting(proxyAddress: info.proxyAddress, proxyHasConnectionIssues: info.flags.contains(.ProxyHasConnectionIssues))))
                     }
                 }
             }
