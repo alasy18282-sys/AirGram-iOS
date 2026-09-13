@@ -828,18 +828,21 @@ public final class AccountStateManager {
             operation.isRunning = true
             let currentValidityMarker = self.currentValidityMarker
             switch operation.content {
-            case let .pollDifference(_, currentEvents):
+            case let .pollDifference(initialId, currentEvents):
                 self.operationTimer?.invalidate()
                 self.currentIsUpdatingValue = true
                 let pollTimeoutTimer = SignalKitTimer(timeout: 45.0, repeat: false, completion: { [weak self] in
                     guard let strongSelf = self else {
                         return
                     }
-                    guard case .pollDifference = strongSelf.operations.first?.content else {
+                    guard case let .pollDifference(id, _) = strongSelf.operations.first?.content, id == initialId else {
                         return
                     }
-                    Logger.shared.log("AccountStateManager", "pollDifference still running — clearing isUpdating so live messages and reactions can apply")
+                    Logger.shared.log("AccountStateManager", "pollDifference still running — abandoning hung poll so live messages and reactions can apply")
                     strongSelf.currentIsUpdatingValue = false
+                    strongSelf.operations.removeFirst()
+                    strongSelf.operations.append(AccountStateManagerOperation(content: .pollDifference(strongSelf.getNextId(), AccountFinalStateEvents())))
+                    strongSelf.startFirstOperation()
                 }, queue: self.queue)
                 self.operationTimer = pollTimeoutTimer
                 pollTimeoutTimer.start()
@@ -989,70 +992,74 @@ public final class AccountStateManager {
                             guard let strongSelf = self else {
                                 return
                             }
-                            if case .pollDifference = strongSelf.operations.removeFirst().content {
-                                strongSelf.startFirstOperation()
+                            guard case let .pollDifference(id, _) = strongSelf.operations.first?.content, id == initialId else {
+                                return
                             }
+                            strongSelf.operations.removeFirst()
+                            strongSelf.startFirstOperation()
                         })
                     } else {
-                        if case .pollDifference = strongSelf.operations.removeFirst().content {
-                            let events: AccountFinalStateEvents
-                            if let finalState = finalState {
-                                events = currentEvents.union(with: AccountFinalStateEvents(state: finalState))
-                            } else {
-                                events = currentEvents
-                            }
-                            if let difference = difference {
-                                switch difference {
-                                case .differenceSlice:
-                                    strongSelf.consecutivePollFailures = 0
-                                    strongSelf.addOperation(.pollDifference(strongSelf.getNextId(), events), position: .first)
-                                default:
-                                    strongSelf.consecutivePollFailures = 0
-                                    if let currentChannelOperationsContext = strongSelf.currentChannelOperationsContext {
-                                        currentChannelOperationsContext.canComplete = true
-                                        currentChannelOperationsContext.events = currentChannelOperationsContext.events.union(with: events)
-                                        strongSelf.startChannelOperationsWatchdog()
-                                        strongSelf.checkChannelOperationsCompletion()
-                                    } else {
-                                        if !events.isEmpty {
-                                            strongSelf.insertProcessEvents(events)
-                                        }
-                                        strongSelf.currentIsUpdatingValue = false
-                                        strongSelf.significantStateUpdateCompletedPipe.putNext(Void())
-                                    }
-                                }
-                            } else if skipBecauseOfError {
-                                strongSelf.consecutivePollFailures = 0
-                                if !events.isEmpty {
-                                    strongSelf.insertProcessEvents(events)
-                                }
-                                strongSelf.currentIsUpdatingValue = false
-                            } else {
-                                strongSelf.consecutivePollFailures += 1
-                                if !events.isEmpty {
-                                    strongSelf.insertProcessEvents(events)
-                                }
-                                strongSelf.currentIsUpdatingValue = false
-                                let delay: Double
-                                if strongSelf.consecutivePollFailures >= 3 {
-                                    Logger.shared.log("AccountStateManager", "pollDifference failed \(strongSelf.consecutivePollFailures) times — backing off before retry so the UI can stay online")
-                                    delay = 30.0
-                                } else {
-                                    delay = min(pow(2.0, Double(strongSelf.consecutivePollFailures)), 8.0)
-                                }
-                                strongSelf.queue.after(delay, {
-                                    guard let strongSelf = self else {
-                                        return
-                                    }
-                                    if let first = strongSelf.operations.first, first.isRunning {
-                                        return
-                                    }
-                                    strongSelf.replaceOperations(with: .pollDifference(strongSelf.getNextId(), AccountFinalStateEvents()))
-                                    strongSelf.startFirstOperation()
-                                })
-                            }
-                            strongSelf.startFirstOperation()
+                        guard case let .pollDifference(id, _) = strongSelf.operations.first?.content, id == initialId else {
+                            return
                         }
+                        strongSelf.operations.removeFirst()
+                        let events: AccountFinalStateEvents
+                        if let finalState = finalState {
+                            events = currentEvents.union(with: AccountFinalStateEvents(state: finalState))
+                        } else {
+                            events = currentEvents
+                        }
+                        if let difference = difference {
+                            switch difference {
+                            case .differenceSlice:
+                                strongSelf.consecutivePollFailures = 0
+                                strongSelf.addOperation(.pollDifference(strongSelf.getNextId(), events), position: .first)
+                            default:
+                                strongSelf.consecutivePollFailures = 0
+                                if let currentChannelOperationsContext = strongSelf.currentChannelOperationsContext {
+                                    currentChannelOperationsContext.canComplete = true
+                                    currentChannelOperationsContext.events = currentChannelOperationsContext.events.union(with: events)
+                                    strongSelf.startChannelOperationsWatchdog()
+                                    strongSelf.checkChannelOperationsCompletion()
+                                } else {
+                                    if !events.isEmpty {
+                                        strongSelf.insertProcessEvents(events)
+                                    }
+                                    strongSelf.currentIsUpdatingValue = false
+                                    strongSelf.significantStateUpdateCompletedPipe.putNext(Void())
+                                }
+                            }
+                        } else if skipBecauseOfError {
+                            strongSelf.consecutivePollFailures = 0
+                            if !events.isEmpty {
+                                strongSelf.insertProcessEvents(events)
+                            }
+                            strongSelf.currentIsUpdatingValue = false
+                        } else {
+                            strongSelf.consecutivePollFailures += 1
+                            if !events.isEmpty {
+                                strongSelf.insertProcessEvents(events)
+                            }
+                            strongSelf.currentIsUpdatingValue = false
+                            let delay: Double
+                            if strongSelf.consecutivePollFailures >= 3 {
+                                Logger.shared.log("AccountStateManager", "pollDifference failed \(strongSelf.consecutivePollFailures) times — backing off before retry so the UI can stay online")
+                                delay = 30.0
+                            } else {
+                                delay = min(pow(2.0, Double(strongSelf.consecutivePollFailures)), 8.0)
+                            }
+                            strongSelf.queue.after(delay, {
+                                guard let strongSelf = self else {
+                                    return
+                                }
+                                if let first = strongSelf.operations.first, first.isRunning {
+                                    return
+                                }
+                                strongSelf.replaceOperations(with: .pollDifference(strongSelf.getNextId(), AccountFinalStateEvents()))
+                                strongSelf.startFirstOperation()
+                            })
+                        }
+                        strongSelf.startFirstOperation()
                     }
                 })
             case let .collectUpdateGroups(_, timeout):
@@ -1061,12 +1068,10 @@ public final class AccountStateManager {
                     if let strongSelf = self {
                         let firstOperation = strongSelf.operations.removeFirst()
                         if case let .collectUpdateGroups(groups, _) = firstOperation.content {
-                            if timeout.isEqual(to: 0.0) {
-                                strongSelf.addOperation(.processUpdateGroups(groups), position: .first)
-                            } else {
-                                Logger.shared.log("AccountStateManager", "timeout while waiting for updates")
-                                strongSelf.replaceOperations(with: .pollDifference(strongSelf.getNextId(), AccountFinalStateEvents()))
+                            if !timeout.isEqual(to: 0.0) {
+                                Logger.shared.log("AccountStateManager", "timeout while waiting for updates — applying collected groups instead of dropping them")
                             }
+                            strongSelf.addOperation(.processUpdateGroups(groups), position: .first)
                             strongSelf.startFirstOperation()
                         } else {
                             assertionFailure()
@@ -1125,22 +1130,16 @@ public final class AccountStateManager {
                 let _ = signal.start(next: { [weak self] replayedState, finalState in
                     if let strongSelf = self {
                         if case let .processUpdateGroups(groups) = strongSelf.operations.removeFirst().content {
-                            if let replayedState = replayedState, !finalState.shouldPoll {
+                            if let replayedState = replayedState {
                                 let events = AccountFinalStateEvents(state: replayedState)
                                 if !events.isEmpty {
                                     strongSelf.insertProcessEvents(events)
                                 }
-                                if finalState.incomplete || !finalState.missingUpdatesFromChannels.isEmpty {
-                                    strongSelf.addOperation(.collectUpdateGroups(groups, 2.0), position: .last)
-                                }
-                            } else {
-                                if let replayedState = replayedState {
-                                    let events = AccountFinalStateEvents(state: replayedState)
-                                    if !events.displayAlerts.isEmpty {
-                                        strongSelf.insertProcessEvents(AccountFinalStateEvents(displayAlerts: events.displayAlerts))
-                                    }
-                                }
+                            }
+                            if finalState.shouldPoll {
                                 strongSelf.replaceOperations(with: .pollDifference(strongSelf.getNextId(), AccountFinalStateEvents()))
+                            } else if finalState.incomplete || !finalState.missingUpdatesFromChannels.isEmpty {
+                                strongSelf.addOperation(.collectUpdateGroups(groups, 2.0), position: .last)
                             }
                             strongSelf.startFirstOperation()
                         } else {
