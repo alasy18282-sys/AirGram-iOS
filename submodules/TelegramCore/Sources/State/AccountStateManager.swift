@@ -220,6 +220,8 @@ public final class AccountStateManager {
         }
         private let operationDisposable = MetaDisposable()
         private var operationTimer: SignalKitTimer?
+        private var channelOperationsWatchdog: SignalKitTimer?
+        private var consecutivePollFailures: Int = 0
         
         private var currentChannelOperationsContext: ChannelOperationsContext?
         
@@ -416,6 +418,8 @@ public final class AccountStateManager {
             self.appliedQtsDisposable.dispose()
             self.reportMessageDeliveryDisposable.dispose()
             self.updateEmojiGameInfoDisposable.dispose()
+            self.operationTimer?.invalidate()
+            self.channelOperationsWatchdog?.invalidate()
         }
         
         public func reset() {
@@ -430,6 +434,7 @@ public final class AccountStateManager {
                     self.network.mtProto.add(self.updateService)
                 }
                 self.operationDisposable.set(nil)
+                self.consecutivePollFailures = 0
                 self.replaceOperations(with: .pollDifference(self.getNextId(), AccountFinalStateEvents()))
                 self.startFirstOperation()
                 
@@ -705,6 +710,23 @@ public final class AccountStateManager {
             }
         }
         
+        private func startChannelOperationsWatchdog() {
+            self.channelOperationsWatchdog?.invalidate()
+            let timer = SignalKitTimer(timeout: 15.0, repeat: false, completion: { [weak self] in
+                guard let self, let channelOperationsContext = self.currentChannelOperationsContext else {
+                    return
+                }
+                Logger.shared.log("AccountStateManager", "channel reset watchdog — forcing completion so the client can leave updating")
+                for (_, data) in channelOperationsContext.pendingChannels {
+                    data.isCompleted = true
+                }
+                channelOperationsContext.canComplete = true
+                self.checkChannelOperationsCompletion()
+            }, queue: self.queue)
+            self.channelOperationsWatchdog = timer
+            timer.start()
+        }
+        
         private func checkChannelOperationsCompletion() {
             guard let channelOperationsContext = self.currentChannelOperationsContext else {
                 return
@@ -770,6 +792,8 @@ public final class AccountStateManager {
                     guard let strongSelf = self else {
                         return
                     }
+                    strongSelf.channelOperationsWatchdog?.invalidate()
+                    strongSelf.channelOperationsWatchdog = nil
                     strongSelf.currentChannelOperationsContext = nil
                     if let finalState = finalState {
                         var mergedEvents = events
@@ -782,6 +806,8 @@ public final class AccountStateManager {
                     strongSelf.significantStateUpdateCompletedPipe.putNext(Void())
                 })
             } else {
+                self.channelOperationsWatchdog?.invalidate()
+                self.channelOperationsWatchdog = nil
                 self.currentChannelOperationsContext = nil
                 let events = channelOperationsContext.events
                 if !events.isEmpty {
@@ -978,12 +1004,14 @@ public final class AccountStateManager {
                             if let difference = difference {
                                 switch difference {
                                 case .differenceSlice:
+                                    strongSelf.consecutivePollFailures = 0
                                     strongSelf.addOperation(.pollDifference(strongSelf.getNextId(), events), position: .first)
                                 default:
+                                    strongSelf.consecutivePollFailures = 0
                                     if let currentChannelOperationsContext = strongSelf.currentChannelOperationsContext {
                                         currentChannelOperationsContext.canComplete = true
                                         currentChannelOperationsContext.events = currentChannelOperationsContext.events.union(with: events)
-                                        
+                                        strongSelf.startChannelOperationsWatchdog()
                                         strongSelf.checkChannelOperationsCompletion()
                                     } else {
                                         if !events.isEmpty {
@@ -994,15 +1022,34 @@ public final class AccountStateManager {
                                     }
                                 }
                             } else if skipBecauseOfError {
+                                strongSelf.consecutivePollFailures = 0
                                 if !events.isEmpty {
                                     strongSelf.insertProcessEvents(events)
                                 }
                                 strongSelf.currentIsUpdatingValue = false
                             } else {
+                                strongSelf.consecutivePollFailures += 1
                                 if !events.isEmpty {
                                     strongSelf.insertProcessEvents(events)
                                 }
-                                strongSelf.replaceOperations(with: .pollDifference(strongSelf.getNextId(), AccountFinalStateEvents()))
+                                strongSelf.currentIsUpdatingValue = false
+                                let delay: Double
+                                if strongSelf.consecutivePollFailures >= 3 {
+                                    Logger.shared.log("AccountStateManager", "pollDifference failed \(strongSelf.consecutivePollFailures) times — backing off before retry so the UI can stay online")
+                                    delay = 30.0
+                                } else {
+                                    delay = min(pow(2.0, Double(strongSelf.consecutivePollFailures)), 8.0)
+                                }
+                                strongSelf.queue.after(delay, {
+                                    guard let strongSelf = self else {
+                                        return
+                                    }
+                                    if let first = strongSelf.operations.first, first.isRunning {
+                                        return
+                                    }
+                                    strongSelf.replaceOperations(with: .pollDifference(strongSelf.getNextId(), AccountFinalStateEvents()))
+                                    strongSelf.startFirstOperation()
+                                })
                             }
                             strongSelf.startFirstOperation()
                         }
