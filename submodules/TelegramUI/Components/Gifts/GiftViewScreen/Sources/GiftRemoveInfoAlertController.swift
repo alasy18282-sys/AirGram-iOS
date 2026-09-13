@@ -59,26 +59,28 @@ public func giftRemoveInfoAlertController(
                 let attributedText = stringWithAppliedEntities(text, entities: entities ?? [], baseColor: textColor, linkColor: linkColor, baseFont: textFont, linkFont: textFont, boldFont: boldTextFont, italicFont: italicTextFont, boldItalicFont: boldItalicTextFont, fixedFont: fixedTextFont, blockQuoteFont: textFont, message: nil)
                 
                 let format = senderName != nil ? strings.Gift_Unique_OriginalInfoSenderWithText(senderName!, recipientName, dateString, "") : strings.Gift_Unique_OriginalInfoWithText(recipientName, dateString, "")
-                let string = NSMutableAttributedString(string: format.string, font: textFont, textColor: textColor)
-                string.replaceCharacters(in: format.ranges[format.ranges.count - 1].range, with: attributedText)
-                if let _ = senderPeerId {
-                    string.addAttribute(.foregroundColor, value: linkColor, range: format.ranges[0].range)
-                    string.addAttribute(.foregroundColor, value: linkColor, range: format.ranges[1].range)
-                } else {
-                    string.addAttribute(.foregroundColor, value: linkColor, range: format.ranges[0].range)
-                }
-                value = string
+                value = makeUniqueGiftOriginalInfoString(
+                    format: format,
+                    font: textFont,
+                    textColor: textColor,
+                    linkColor: linkColor,
+                    attributedText: attributedText,
+                    senderPeerId: senderPeerId,
+                    recipientPeerId: recipientPeerId,
+                    includeMentions: false
+                )
             } else {
                 let format = senderName != nil ? strings.Gift_Unique_OriginalInfoSender(senderName!, recipientName, dateString) : strings.Gift_Unique_OriginalInfo(recipientName, dateString)
-                let string = NSMutableAttributedString(string: format.string, font: textFont, textColor: textColor)
-                if let _ = senderPeerId {
-                    string.addAttribute(.foregroundColor, value: linkColor, range: format.ranges[0].range)
-                    string.addAttribute(.foregroundColor, value: linkColor, range: format.ranges[1].range)
-                } else {
-                    string.addAttribute(.foregroundColor, value: linkColor, range: format.ranges[0].range)
-                }
-                
-                value = string
+                value = makeUniqueGiftOriginalInfoString(
+                    format: format,
+                    font: textFont,
+                    textColor: textColor,
+                    linkColor: linkColor,
+                    attributedText: nil,
+                    senderPeerId: senderPeerId,
+                    recipientPeerId: recipientPeerId,
+                    includeMentions: false
+                )
             }
             
             content.append(AnyComponentWithIdentity(

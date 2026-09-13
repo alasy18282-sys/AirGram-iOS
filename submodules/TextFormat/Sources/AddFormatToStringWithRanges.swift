@@ -15,6 +15,9 @@ public func addAttributesToStringWithRanges(_ stringWithRanges: (String, [(Int, 
     result.append(NSAttributedString(string: stringWithRanges.0, attributes: bodyAttributes))
     
     for (index, range) in stringWithRanges.1 {
+        guard range.location != NSNotFound, range.location >= 0, NSMaxRange(range) <= result.length else {
+            continue
+        }
         if let attributes = argumentAttributes[index] {
             var argumentAttributes: [NSAttributedString.Key: Any] = [NSAttributedString.Key.font: attributes.font, NSAttributedString.Key.foregroundColor: attributes.textColor, NSAttributedString.Key.paragraphStyle: paragraphStyleWithAlignment(textAlignment)]
             if !attributes.additionalAttributes.isEmpty {

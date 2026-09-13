@@ -186,7 +186,8 @@ final class GiftPagerComponent: Component {
             }
             
             if firstTime {
-                let initialOffset = CGFloat(component.index) * (itemWidth + component.itemSpacing * 2.0)
+                let safeIndex = component.items.isEmpty ? 0 : max(0, min(component.index, component.items.count - 1))
+                let initialOffset = CGFloat(safeIndex) * (itemWidth + component.itemSpacing * 2.0)
                 self.scrollView.contentOffset = CGPoint(x: initialOffset, y: 0.0)
                 
                 var position: CGFloat
