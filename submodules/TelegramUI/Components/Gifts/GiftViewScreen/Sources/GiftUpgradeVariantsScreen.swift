@@ -364,8 +364,10 @@ private final class GiftUpgradeVariantsScreenComponent: Component {
                 }
             case .backdrops:
                 let previewModels = self.displayCraftableModels ? self.previewCraftableModels : previewPrimaryModels
-                let selectedModel = self.selectedModel ?? previewModels[self.previewModelIndex]
-                let selectedSymbol = self.selectedSymbol ?? self.previewSymbols[self.previewSymbolIndex]
+                guard let selectedModel = self.selectedModel ?? GiftSafeCollections.value(previewModels, at: self.previewModelIndex),
+                      let selectedSymbol = self.selectedSymbol ?? GiftSafeCollections.value(self.previewSymbols, at: self.previewSymbolIndex) else {
+                    break
+                }
                 let backdrops = Array(attributes.filter({ attribute in
                     if case .backdrop = attribute {
                         return true
@@ -381,7 +383,9 @@ private final class GiftUpgradeVariantsScreenComponent: Component {
                     ])
                 }
             case .symbols:
-                let selectedBackdrop = self.selectedBackdrop ?? self.previewBackdrops[self.previewBackdropIndex]
+                guard let selectedBackdrop = self.selectedBackdrop ?? GiftSafeCollections.value(self.previewBackdrops, at: self.previewBackdropIndex) else {
+                    break
+                }
                 let symbols = Array(attributes.filter({ attribute in
                     if case .pattern = attribute {
                         return true
@@ -749,18 +753,24 @@ private final class GiftUpgradeVariantsScreenComponent: Component {
             let previewModels = self.displayCraftableModels ? self.previewCraftableModels : self.previewPrimaryModels
             if !previewModels.isEmpty {
                 if self.isPlaying {
-                    attributes.append(previewModels[self.previewModelIndex])
-                    attributes.append(self.previewBackdrops[self.previewBackdropIndex])
-                    attributes.append(self.previewSymbols[self.previewSymbolIndex])
+                    if let model = GiftSafeCollections.value(previewModels, at: self.previewModelIndex) {
+                        attributes.append(model)
+                    }
+                    if let backdrop = GiftSafeCollections.value(self.previewBackdrops, at: self.previewBackdropIndex) {
+                        attributes.append(backdrop)
+                    }
+                    if let symbol = GiftSafeCollections.value(self.previewSymbols, at: self.previewSymbolIndex) {
+                        attributes.append(symbol)
+                    }
                 } else {
                     if self.selectedModel == nil {
-                        self.selectedModel = previewModels[self.previewModelIndex]
+                        self.selectedModel = GiftSafeCollections.value(previewModels, at: self.previewModelIndex)
                     }
                     if self.selectedBackdrop == nil {
-                        self.selectedBackdrop = self.previewBackdrops[self.previewBackdropIndex]
+                        self.selectedBackdrop = GiftSafeCollections.value(self.previewBackdrops, at: self.previewBackdropIndex)
                     }
                     if self.selectedSymbol == nil {
-                        self.selectedSymbol = self.previewSymbols[self.previewSymbolIndex]
+                        self.selectedSymbol = GiftSafeCollections.value(self.previewSymbols, at: self.previewSymbolIndex)
                     }
                     if let model = self.selectedModel {
                         attributes.append(model)

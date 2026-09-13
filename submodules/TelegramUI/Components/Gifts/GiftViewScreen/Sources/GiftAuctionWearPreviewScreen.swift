@@ -242,13 +242,13 @@ private final class GiftAuctionWearPreviewSheetContent: CombinedComponent {
             let animationScale: CGFloat = 0.19
 
             var attributes: [StarGift.UniqueGift.Attribute] = []
-            if !state.previewModels.isEmpty {
-                attributes.append(state.previewModels[state.previewModelIndex])
-                if !state.previewBackdrops.isEmpty {
-                    attributes.append(state.previewBackdrops[state.previewBackdropIndex])
+            if let model = GiftSafeCollections.value(state.previewModels, at: state.previewModelIndex) {
+                attributes.append(model)
+                if let backdrop = GiftSafeCollections.value(state.previewBackdrops, at: state.previewBackdropIndex) {
+                    attributes.append(backdrop)
                 }
-                if !state.previewSymbols.isEmpty {
-                    attributes.append(state.previewSymbols[state.previewSymbolIndex])
+                if let symbol = GiftSafeCollections.value(state.previewSymbols, at: state.previewSymbolIndex) {
+                    attributes.append(symbol)
                 }
             }
             let animation = animation.update(
