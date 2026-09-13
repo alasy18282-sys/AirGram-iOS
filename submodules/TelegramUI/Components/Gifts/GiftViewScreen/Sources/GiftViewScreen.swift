@@ -4320,32 +4320,28 @@ private final class GiftViewSheetContent: CombinedComponent {
                                     let attributedText = stringWithAppliedEntities(text, entities: entities ?? [], baseColor: tableTextColor, linkColor: tableLinkColor, baseFont: tableFont, linkFont: tableFont, boldFont: tableBoldFont, italicFont: tableItalicFont, boldItalicFont: tableBoldItalicFont, fixedFont: tableMonospaceFont, blockQuoteFont: tableFont, message: nil)
                                     
                                     let format = senderName != nil ? strings.Gift_Unique_OriginalInfoSenderWithText(senderName!, recipientName, dateString, "") : strings.Gift_Unique_OriginalInfoWithText(recipientName, dateString, "")
-                                    let string = NSMutableAttributedString(string: format.string, font: tableFont, textColor: tableTextColor)
-                                    string.replaceCharacters(in: format.ranges[format.ranges.count - 1].range, with: attributedText)
-                                    if let senderPeerId {
-                                        string.addAttribute(.foregroundColor, value: tableLinkColor, range: format.ranges[0].range)
-                                        string.addAttribute(NSAttributedString.Key(rawValue: TelegramTextAttributes.PeerMention), value: TelegramPeerMention(peerId: senderPeerId, mention: ""), range: format.ranges[0].range)
-                                        string.addAttribute(.foregroundColor, value: tableLinkColor, range: format.ranges[1].range)
-                                        string.addAttribute(NSAttributedString.Key(rawValue: TelegramTextAttributes.PeerMention), value: TelegramPeerMention(peerId: recipientPeerId, mention: ""), range: format.ranges[1].range)
-                                    } else {
-                                        string.addAttribute(.foregroundColor, value: tableLinkColor, range: format.ranges[0].range)
-                                        string.addAttribute(NSAttributedString.Key(rawValue: TelegramTextAttributes.PeerMention), value: TelegramPeerMention(peerId: recipientPeerId, mention: ""), range: format.ranges[0].range)
-                                    }
-                                    value = string
+                                    value = makeUniqueGiftOriginalInfoString(
+                                        format: format,
+                                        font: tableFont,
+                                        textColor: tableTextColor,
+                                        linkColor: tableLinkColor,
+                                        attributedText: attributedText,
+                                        senderPeerId: senderPeerId,
+                                        recipientPeerId: recipientPeerId,
+                                        includeMentions: true
+                                    )
                                 } else {
                                     let format = senderName != nil ? strings.Gift_Unique_OriginalInfoSender(senderName!, recipientName, dateString) : strings.Gift_Unique_OriginalInfo(recipientName, dateString)
-                                    let string = NSMutableAttributedString(string: format.string, font: tableFont, textColor: tableTextColor)
-                                    if let senderPeerId {
-                                        string.addAttribute(.foregroundColor, value: tableLinkColor, range: format.ranges[0].range)
-                                        string.addAttribute(NSAttributedString.Key(rawValue: TelegramTextAttributes.PeerMention), value: TelegramPeerMention(peerId: senderPeerId, mention: ""), range: format.ranges[0].range)
-                                        string.addAttribute(.foregroundColor, value: tableLinkColor, range: format.ranges[1].range)
-                                        string.addAttribute(NSAttributedString.Key(rawValue: TelegramTextAttributes.PeerMention), value: TelegramPeerMention(peerId: recipientPeerId, mention: ""), range: format.ranges[1].range)
-                                    } else {
-                                        string.addAttribute(.foregroundColor, value: tableLinkColor, range: format.ranges[0].range)
-                                        string.addAttribute(NSAttributedString.Key(rawValue: TelegramTextAttributes.PeerMention), value: TelegramPeerMention(peerId: recipientPeerId, mention: ""), range: format.ranges[0].range)
-                                    }
-                                    
-                                    value = string
+                                    value = makeUniqueGiftOriginalInfoString(
+                                        format: format,
+                                        font: tableFont,
+                                        textColor: tableTextColor,
+                                        linkColor: tableLinkColor,
+                                        attributedText: nil,
+                                        senderPeerId: senderPeerId,
+                                        recipientPeerId: recipientPeerId,
+                                        includeMentions: true
+                                    )
                                 }
                                 rarity = nil
                                 tag = nil

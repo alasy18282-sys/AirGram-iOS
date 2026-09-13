@@ -28,11 +28,15 @@ public func formatWithArgumentRanges(_ value: String, _ ranges: [(Int, NSRange)]
 
     let result = NSMutableString()
     for (index, range) in ranges {
+        guard range.location != NSNotFound, range.location >= 0, NSMaxRange(range) <= string.length else {
+            continue
+        }
         if currentLocation < range.location {
             result.append(string.substring(with: NSRange(location: currentLocation, length: range.location - currentLocation)))
         }
-        resultingRanges.append((index, NSRange(location: result.length, length: (arguments[index] as NSString).length)))
-        result.append(arguments[index])
+        let argument = (index >= 0 && index < arguments.count) ? arguments[index] : ""
+        resultingRanges.append((index, NSRange(location: result.length, length: (argument as NSString).length)))
+        result.append(argument)
         currentLocation = range.location + range.length
     }
     if currentLocation != string.length {

@@ -638,7 +638,8 @@ final class PeerInfoHeaderNode: ASDisplayNode {
                     }
                 }
             }
-            let prefetchKey = "\(emojiStatus.fileId):\(self.cachedLocalGiftMediaFiles.keys.sorted().map(String.init).joined(separator: ","))"
+            let statusFileIds = GiftMediaSupport.fileIds(for: emojiStatus)
+            let prefetchKey = statusFileIds.map(String.init).joined(separator: ",")
             if self.lastPrefetchedGiftStatusKey != prefetchKey {
                 self.lastPrefetchedGiftStatusKey = prefetchKey
                 self.giftStatusMediaPrefetchSet.dispose()
@@ -660,7 +661,7 @@ final class PeerInfoHeaderNode: ASDisplayNode {
                 )
             }
             let mergedFiles = GiftMediaSupport.combinedMediaFiles(for: emojiStatus, gifts: profileGifts, localFiles: self.cachedLocalGiftMediaFiles)
-            if mergedFiles.count < GiftMediaSupport.fileIds(for: emojiStatus).count {
+            if mergedFiles.count < statusFileIds.count {
                 self.giftMediaResolveDisposable.set((
                     GiftMediaSupport.resolveMediaFiles(account: self.context.account, emojiStatus: emojiStatus)
                     |> deliverOnMainQueue
@@ -668,12 +669,18 @@ final class PeerInfoHeaderNode: ASDisplayNode {
                     guard let self else {
                         return
                     }
-                    if self.cachedLocalGiftMediaFiles != files {
-                        self.cachedLocalGiftMediaFiles = files
-                        self.lastPrefetchedGiftStatusKey = nil
-                        if let backgroundCoverView = self.backgroundCover.view as? PeerInfoCoverComponent.View {
-                            backgroundCoverView.reloadPattern()
-                        }
+                    var updated = self.cachedLocalGiftMediaFiles
+                    var didChange = false
+                    for (fileId, file) in files where updated[fileId] == nil {
+                        updated[fileId] = file
+                        didChange = true
+                    }
+                    guard didChange else {
+                        return
+                    }
+                    self.cachedLocalGiftMediaFiles = updated
+                    if let backgroundCoverView = self.backgroundCover.view as? PeerInfoCoverComponent.View {
+                        backgroundCoverView.reloadPattern()
                     }
                 }))
             } else {

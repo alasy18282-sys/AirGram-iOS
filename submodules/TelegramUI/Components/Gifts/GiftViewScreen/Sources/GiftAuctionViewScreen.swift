@@ -737,13 +737,13 @@ private final class GiftAuctionViewSheetContent: CombinedComponent {
                     if let background = genericGift.background {
                         attributes.append(.backdrop(name: "", id: 0, innerColor: background.centerColor, outerColor: background.edgeColor, patternColor: 0, textColor: 0, rarity: .rare))
                     }
-                } else if !state.previewModels.isEmpty {
-                    attributes.append(state.previewModels[state.previewModelIndex])
-                    if !state.previewBackdrops.isEmpty {
-                        attributes.append(state.previewBackdrops[state.previewBackdropIndex])
+                } else if let model = GiftSafeCollections.value(state.previewModels, at: state.previewModelIndex) {
+                    attributes.append(model)
+                    if let backdrop = GiftSafeCollections.value(state.previewBackdrops, at: state.previewBackdropIndex) {
+                        attributes.append(backdrop)
                     }
-                    if !state.previewSymbols.isEmpty {
-                        attributes.append(state.previewSymbols[state.previewSymbolIndex])
+                    if let symbol = GiftSafeCollections.value(state.previewSymbols, at: state.previewSymbolIndex) {
+                        attributes.append(symbol)
                     }
                 }
                 
