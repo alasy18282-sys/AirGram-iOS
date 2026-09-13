@@ -1828,7 +1828,7 @@ private final class GiftViewSheetContent: CombinedComponent {
                             transition = .spring(duration: 0.4)
                             self.nextUpgradePrice = nil
                         }
-                        if upgradePreview.nextPrices[upgradePreview.nextPrices.count - 2] == price {
+                        if upgradePreview.nextPrices.count >= 2, upgradePreview.nextPrices[upgradePreview.nextPrices.count - 2] == price {
                             self.upgradePreviewDisposable.add((context.engine.payments.starGiftUpgradePreview(giftId: gift.id)
                             |> deliverOnMainQueue).start(next: { [weak self] nextUpgradePreview in
                                 guard let self, let nextUpgradePreview else {
@@ -4981,7 +4981,9 @@ private final class GiftViewSheetContent: CombinedComponent {
                 )
             } else if state.inUpgradePreview {
                 if state.cachedStarImage == nil || state.cachedStarImage?.1 !== theme {
-                    state.cachedStarImage = (generateTintedImage(image: UIImage(bundleImageName: "Item List/PremiumIcon"), color: theme.list.itemCheckColors.foregroundColor)!, theme)
+                    if let starImage = generateTintedImage(image: UIImage(bundleImageName: "Item List/PremiumIcon"), color: theme.list.itemCheckColors.foregroundColor) {
+                        state.cachedStarImage = (starImage, theme)
+                    }
                 }
                 var buttonTitleItems: [AnyComponentWithIdentity<Empty>] = []
                 var upgradeString = strings.Gift_Upgrade_Upgrade
@@ -5231,7 +5233,9 @@ private final class GiftViewSheetContent: CombinedComponent {
                 )
             } else if !incoming, let resellAmount, !isMyOwnedUniqueGift {
                 if state.cachedStarImage == nil || state.cachedStarImage?.1 !== theme {
-                    state.cachedStarImage = (generateTintedImage(image: UIImage(bundleImageName: "Item List/PremiumIcon"), color: theme.list.itemCheckColors.foregroundColor)!, theme)
+                    if let starImage = generateTintedImage(image: UIImage(bundleImageName: "Item List/PremiumIcon"), color: theme.list.itemCheckColors.foregroundColor) {
+                        state.cachedStarImage = (starImage, theme)
+                    }
                 }
                 if state.cachedTonImage == nil || state.cachedTonImage?.1 !== theme {
                     state.cachedTonImage = (generateTintedImage(image: UIImage(bundleImageName: "Ads/TonAbout"), color: theme.list.itemCheckColors.foregroundColor)!, theme)

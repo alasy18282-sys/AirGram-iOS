@@ -309,9 +309,18 @@ final class AuthorizedApplicationContext {
                     }
                     if let maybeChatListIndex = chatListIndexMap[message.id.peerId], maybeChatListIndex != nil {
                         return true
-                    } else {
-                        return false
                     }
+                    for media in message.media {
+                        if let action = media as? TelegramMediaAction {
+                            switch action.action {
+                            case .starGift, .starGiftUnique:
+                                return true
+                            default:
+                                break
+                            }
+                        }
+                    }
+                    return false
                 }
             }
         }

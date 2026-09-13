@@ -661,7 +661,11 @@ public class ChatMessageGiftBubbleContentNode: ChatMessageBubbleContentNode {
                                                 let formattedString = item.presentationData.strings.Notification_StarGift_Subtitle_Other(peerName, starsString)
                                                 text = formattedString.string
                                                 if let starsRange = formattedString.ranges.last {
-                                                    entities.append(MessageTextEntity(range: starsRange.range.lowerBound ..< starsRange.range.upperBound, type: .Bold))
+                                                    let nsLength = (formattedString.string as NSString).length
+                                                    let nsRange = NSRange(location: starsRange.range.lowerBound, length: starsRange.range.upperBound - starsRange.range.lowerBound)
+                                                    if nsRange.location != NSNotFound, nsRange.location >= 0, NSMaxRange(nsRange) <= nsLength {
+                                                        entities.append(MessageTextEntity(range: starsRange.range.lowerBound ..< starsRange.range.upperBound, type: .Bold))
+                                                    }
                                                 }
                                             } else {
                                                 text = item.presentationData.strings.Notification_StarGift_Subtitle_OtherNoConvert

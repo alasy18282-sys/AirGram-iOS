@@ -815,7 +815,7 @@ public class ChatMessageDateAndStatusNode: ASDisplayNode {
                             if let availableReactions = arguments.availableReactions {
                                 for availableReaction in availableReactions.reactions {
                                     if availableReaction.value == reaction.value {
-                                        centerAnimation = availableReaction.centerAnimation?._parse()
+                                        centerAnimation = availableReaction.centerAnimation?._parse() ?? availableReaction.staticIcon._parse()
                                         break
                                     }
                                 }

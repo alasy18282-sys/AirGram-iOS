@@ -1592,6 +1592,27 @@ public final class StarsSubscriptionsContext {
 }
 
 
+func applyPaymentUpdatesImmediately(account: Account, updates: Api.Updates) {
+    account.stateManager.addUpdates(updates)
+    let _ = account.postbox.transaction({ transaction in
+        let peers = AccumulatedPeers(transaction: transaction, chats: updates.chats, users: updates.users)
+        updatePeers(transaction: transaction, accountPeerId: account.peerId, peers: peers)
+        
+        var storeMessages: [StoreMessage] = []
+        for apiMessage in updates.messages {
+            guard let message = StoreMessage(apiMessage: apiMessage, accountPeerId: account.peerId, peerIsForum: false) else {
+                continue
+            }
+            if case let .Id(id) = message.id, transaction.getMessage(id) == nil {
+                storeMessages.append(message)
+            }
+        }
+        if !storeMessages.isEmpty {
+            let _ = transaction.addMessages(storeMessages, location: .UpperHistoryBlock)
+        }
+    }).start()
+}
+
 func _internal_sendStarsPaymentForm(account: Account, formId: Int64, source: BotPaymentInvoiceSource) -> Signal<SendBotPaymentResult, SendBotPaymentFormError> {
     return account.postbox.transaction { transaction -> Api.InputInvoice? in
         return _internal_parseInputInvoice(transaction: transaction, source: source)
@@ -1606,7 +1627,7 @@ func _internal_sendStarsPaymentForm(account: Account, formId: Int64, source: Bot
             switch result {
                 case let .paymentResult(paymentResultData):
                     let updates = paymentResultData.updates
-                    account.stateManager.addUpdates(updates)
+                    applyPaymentUpdatesImmediately(account: account, updates: updates)
                 
                     switch source {
                     case .starsChatSubscription:

@@ -82,6 +82,7 @@ private final class StarsButtonEffectLayer: SimpleLayer {
 
 public final class ReactionIconView: PortalSourceView {
     private var animationLayer: InlineStickerItemLayer?
+    private var fallbackEmojiLabel: UILabel?
     
     private var context: AccountContext?
     private var fileId: Int64?
@@ -122,7 +123,7 @@ public final class ReactionIconView: PortalSourceView {
         size: CGSize,
         context: AccountContext,
         file: TelegramMediaFile?,
-        fileId: Int64,
+        fileId: Int64?,
         animationCache: AnimationCache,
         animationRenderer: MultiAnimationRenderer,
         tintColor: UIColor?,
@@ -152,7 +153,7 @@ public final class ReactionIconView: PortalSourceView {
                 self.disposable = nil
                 
                 self.reloadFile()
-            } else {
+            } else if let fileId {
                 self.disposable?.dispose()
                 
                 self.disposable = (context.engine.stickers.resolveInlineStickers(fileIds: [fileId])
@@ -163,8 +164,13 @@ public final class ReactionIconView: PortalSourceView {
                     strongSelf.file = files[fileId]
                     strongSelf.reloadFile()
                 }).strict()
+            } else {
+                self.disposable?.dispose()
+                self.disposable = nil
             }
         }
+        
+        self.updateFallbackEmoji()
         
         if let animationLayer = self.animationLayer {
             let iconSize: CGSize
@@ -222,10 +228,42 @@ public final class ReactionIconView: PortalSourceView {
         }
     }
     
+    private func updateFallbackEmoji() {
+        let emoji: String?
+        if self.file == nil, case let .builtin(value) = self.reaction, !value.isEmpty {
+            emoji = value
+        } else {
+            emoji = nil
+        }
+        
+        if let emoji, let size = self.size {
+            let label: UILabel
+            if let current = self.fallbackEmojiLabel {
+                label = current
+            } else {
+                label = UILabel()
+                label.textAlignment = .center
+                label.adjustsFontSizeToFitWidth = true
+                label.minimumScaleFactor = 0.5
+                self.addSubview(label)
+                self.fallbackEmojiLabel = label
+            }
+            label.isHidden = false
+            label.text = emoji
+            label.font = UIFont.systemFont(ofSize: max(11.0, size.height * 0.86))
+            label.frame = CGRect(origin: .zero, size: size)
+        } else {
+            self.fallbackEmojiLabel?.isHidden = true
+        }
+    }
+    
     private func reloadFile() {
         guard let context = self.context, let file = self.file, let animationCache = self.animationCache, let animationRenderer = self.animationRenderer, let placeholderColor = self.placeholderColor, let size = self.size, let animateIdle = self.animateIdle, let reaction = self.reaction else {
+            self.updateFallbackEmoji()
             return
         }
+        
+        self.fallbackEmojiLabel?.isHidden = true
         
         self.animationLayer?.removeFromSuperlayer()
         self.animationLayer = nil
@@ -1236,43 +1274,42 @@ public final class ReactionButtonAsyncNode: ContextControllerSourceView {
         if let iconView = self.iconView {
             animation.animator.updateFrame(layer: iconView.layer, frame: layout.imageFrame, completion: nil)
             
-            if let fileId = layout.spec.component.reaction.animationFileId ?? layout.spec.component.reaction.centerAnimation?.fileId.id {
-                let animateIdle: Bool
-                if layout.spec.component.isTag {
-                    animateIdle = false
-                } else if case .custom = layout.spec.component.reaction.value {
-                    animateIdle = true
-                } else {
-                    animateIdle = false
-                }
-                
-                let tintColor: UIColor
-                if layout.backgroundLayout.colors.isSelected {
-                    if layout.spec.component.colors.selectedIconTintColor != 0 {
-                        tintColor = UIColor(argb: layout.spec.component.colors.selectedIconTintColor)
-                    } else if layout.spec.component.colors.selectedForeground != 0 {
-                        tintColor = UIColor(argb: layout.spec.component.colors.selectedForeground)
-                    } else {
-                        tintColor = .white
-                    }
-                } else {
-                    tintColor = UIColor(argb: layout.spec.component.colors.deselectedForeground)
-                }
-                
-                iconView.update(
-                    size: layout.imageFrame.size,
-                    context: layout.spec.component.context,
-                    file: layout.spec.component.reaction.centerAnimation,
-                    fileId: fileId,
-                    animationCache: arguments.animationCache,
-                    animationRenderer: arguments.animationRenderer,
-                    tintColor: tintColor,
-                    placeholderColor: layout.spec.component.chosenOrder != nil ? UIColor(argb: layout.spec.component.colors.selectedMediaPlaceholder) : UIColor(argb: layout.spec.component.colors.deselectedMediaPlaceholder),
-                    animateIdle: animateIdle,
-                    reaction: layout.spec.component.reaction.value,
-                    transition: animation.transition
-                )
+            let fileId = layout.spec.component.reaction.animationFileId ?? layout.spec.component.reaction.centerAnimation?.fileId.id
+            let animateIdle: Bool
+            if layout.spec.component.isTag {
+                animateIdle = false
+            } else if case .custom = layout.spec.component.reaction.value {
+                animateIdle = true
+            } else {
+                animateIdle = false
             }
+            
+            let tintColor: UIColor
+            if layout.backgroundLayout.colors.isSelected {
+                if layout.spec.component.colors.selectedIconTintColor != 0 {
+                    tintColor = UIColor(argb: layout.spec.component.colors.selectedIconTintColor)
+                } else if layout.spec.component.colors.selectedForeground != 0 {
+                    tintColor = UIColor(argb: layout.spec.component.colors.selectedForeground)
+                } else {
+                    tintColor = .white
+                }
+            } else {
+                tintColor = UIColor(argb: layout.spec.component.colors.deselectedForeground)
+            }
+            
+            iconView.update(
+                size: layout.imageFrame.size,
+                context: layout.spec.component.context,
+                file: layout.spec.component.reaction.centerAnimation,
+                fileId: fileId,
+                animationCache: arguments.animationCache,
+                animationRenderer: arguments.animationRenderer,
+                tintColor: tintColor,
+                placeholderColor: layout.spec.component.chosenOrder != nil ? UIColor(argb: layout.spec.component.colors.selectedMediaPlaceholder) : UIColor(argb: layout.spec.component.colors.deselectedMediaPlaceholder),
+                animateIdle: animateIdle,
+                reaction: layout.spec.component.reaction.value,
+                transition: animation.transition
+            )
         }
         
         if !layout.spec.component.avatarPeers.isEmpty {
