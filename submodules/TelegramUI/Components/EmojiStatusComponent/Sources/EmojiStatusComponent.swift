@@ -414,7 +414,11 @@ public final class EmojiStatusComponent: Component {
                     emojiLoopMode = loopMode
                     
                     if case let .animation(previousAnimationContent, _, _, _, _) = self.component?.content {
-                        if previousAnimationContent.fileId != animationContent.fileId {
+                        // Star-gift statuses start with a file id and are replaced
+                        // with the resolved file later. Recreate the animation even
+                        // when both representations share the same id, otherwise
+                        // the white placeholder remains attached after download.
+                        if previousAnimationContent != animationContent {
                             self.emojiFileDisposable?.dispose()
                             self.emojiFileDisposable = nil
                             self.emojiFileDataPathDisposable?.dispose()
@@ -751,3 +755,4 @@ public final class StarsEffectLayer: SimpleLayer {
         self.emitterLayer.emitterPosition = CGPoint(x: size.width / 2.0, y: size.height / 2.0)
     }
 }
+
