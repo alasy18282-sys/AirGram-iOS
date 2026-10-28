@@ -1,0 +1,477 @@
+--- _airgram_ref/handlers/rpc.py	2026-07-12 16:57:34.415532978 +0000
++++ handlers/rpc.py	2026-07-12 16:47:41.548458335 +0000
+@@ -122,7 +122,8 @@
+ 
+ 
+ def _bind_user_session(session, storage, user_id, registry: Optional[ConnectionRegistry],
+-                       push_queue: Optional[PushQueue] = None):
++                       push_queue: Optional[PushQueue] = None,
++                       *, push_updates: bool = True):
+     storage.bind_session(session.auth_key_id, user_id)
+     perm_id = getattr(session, 'perm_auth_key_id', None)
+     if perm_id and perm_id != session.auth_key_id:
+@@ -138,7 +139,7 @@
+             conn._user_id = user_id
+             registry.attach_user_connection(user_id, conn)
+     storage.set_user_online(user_id)
+-    if push_queue is not None and user_id:
++    if push_updates and push_queue is not None and user_id:
+         try:
+             import config
+             balance = storage.get_ton_balance(user_id)
+@@ -183,17 +184,15 @@
+ 
+ 
+ def handle_help_get_config(session, req_msg_id, r, storage, push_queue, registry):
+-    from config import DC_ID, SERVER_PORT
+-    import socket
+-    try:
+-        s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
+-        s.connect(('8.8.8.8', 80))
+-        my_ip = s.getsockname()[0]
+-        s.close()
+-    except Exception:
+-        my_ip = '127.0.0.1'
+-
+-    return packers.pack_config(DC_ID, my_ip, SERVER_PORT)
++    public_ip = getattr(config, 'SERVER_PUBLIC_IP', None)
++    if not public_ip:
++        import os
++        public_ip = (
++            os.environ.get('MYTELEGRAM_PUBLIC_IP', '5.231.230.141').strip()
++            or '5.231.230.141'
++        )
++        log.warning('config.SERVER_PUBLIC_IP missing; using %s', public_ip)
++    return packers.pack_config(config.DC_ID, public_ip, config.SERVER_PORT)
+ 
+ 
+ def handle_auth_bind_temp_auth_key(session, req_msg_id, r, storage, push_queue, registry):
+@@ -207,17 +206,20 @@
+     storage.save_temp_auth_binding(
+         temp_auth_key_id, perm_auth_key_id, expires_at)
+     storage.migrate_session_auth_key(temp_auth_key_id, perm_auth_key_id)
+-    if registry is not None:
+-        user_id = storage.get_session_user(perm_auth_key_id)
+-        if user_id:
+-            registry.bind_user(temp_auth_key_id, user_id)
+-            registry.bind_user(perm_auth_key_id, user_id)
+-            conn = registry.get_connection(temp_auth_key_id)
+-            if conn is not None:
+-                conn._user_id = user_id
+-                registry.attach_user_connection(user_id, conn)
+-    log.debug('bindTempAuthKey ok (temp=%#018x perm=%#018x, expires=%d)',
+-             temp_auth_key_id, perm_auth_key_id, expires_at)
++    user_id = storage.resolve_session_user(perm_auth_key_id)
++    if user_id:
++        storage.bind_session(temp_auth_key_id, int(user_id))
++        storage.bind_related_auth_keys(temp_auth_key_id, int(user_id))
++    if registry is not None and user_id:
++        registry.bind_user(temp_auth_key_id, int(user_id))
++        registry.bind_user(perm_auth_key_id, int(user_id))
++        conn = registry.get_connection(temp_auth_key_id)
++        if conn is not None:
++            conn._user_id = int(user_id)
++            registry.attach_user_connection(int(user_id), conn)
++    log.info('bindTempAuthKey temp=%#018x perm=%#018x user=%s expires=%d %s',
++             temp_auth_key_id, perm_auth_key_id, user_id, expires_at,
++             format_client_log(session))
+     w = tl.Writer()
+     w.u32(tl.BOOL_TRUE)
+     return w.bytes_out()
+@@ -227,12 +229,40 @@
+     return b'mtg-auth-v1:' + str(int(user_id)).encode('ascii')
+ 
+ 
++def _fresh_user_for_auth(storage, user_id: int) -> Optional[dict]:
++    """Reload user after bind_session/set_user_online for auth.* responses."""
++    storage.set_user_online(int(user_id))
++    return storage.get_user_by_id(int(user_id))
++
++
++def _bootstrap_user_after_auth(storage, phone: str, user_id: int) -> Optional[dict]:
++    """Create the initial Telegram service dialog for brand-new accounts.
++
++    Real Telegram delivers the login-code chat (777000) on first auth. Without
++    it, clients get empty getDialogs / pts=0 and iOS may wipe auth keys and
++    re-handshake right after signUp.
++    """
++    try:
++        return storage.ensure_service_dialog_bootstrap(int(user_id), phone=phone)
++    except Exception:
++        log.exception('Failed to bootstrap service dialog for user %s', user_id)
++        return None
++
++
++def _push_post_signup_updates(storage, user_id: int, msg: Optional[dict],
++                              push_queue: Optional[PushQueue]) -> None:
++    """Post-signup state is pulled via getDialogs/getState; skip push to avoid races."""
++    return
++
++
+ def handle_auth_export_authorization(session, req_msg_id, r, storage,
+                                      push_queue, registry):
+     _dc_id = r.i32()
+     user, err = require_auth(session, storage)
+     if user is None:
+         return err
++    log.info('exportAuthorization user=%d dc=%d %s',
++             int(user['id']), _dc_id, format_client_log(session))
+     w = tl.Writer()
+     w.u32(tl.AUTH_EXPORTED_AUTH)
+     w.i64(int(user['id']))
+@@ -249,8 +279,10 @@
+     user = storage.get_user_by_id(user_id)
+     if not user:
+         return rpc_error(400, 'USER_ID_INVALID')
+-    _bind_user_session(session, storage, user_id, registry, push_queue)
++    _bind_user_session(session, storage, user_id, registry, push_queue,
++                       push_updates=False)
+     log.info('User imported session: id=%d %s', user_id, format_client_log(session))
++    user = _fresh_user_for_auth(storage, user_id) or user
+     return packers.pack_auth_authorization(user, storage=storage)
+ 
+ 
+@@ -285,15 +317,60 @@
+ 
+ def handle_auth_init_passkey_login(session, req_msg_id, r, storage,
+                                    push_queue, registry):
++    import json
+     _api_id = r.i32()
+     _api_hash = r.string()
+     w = tl.Writer()
+     w.u32(tl.AUTH_PASSKEY_LOGIN_OPTIONS)
+-    # Minimal passkey options object so clients can continue auth flow.
+-    w.raw(packers.pack_json_object({'clientData': ''}))
++    w.raw(packers.pack_data_json(json.dumps({'clientData': ''})))
+     return w.bytes_out()
+ 
+ 
++def handle_auth_export_login_token(session, req_msg_id, r, storage,
++                                   push_queue, registry):
++    api_id = r.i32()
++    _api_hash = r.string()
++    if r.u32() != tl.VECTOR:
++        return rpc_error(400, 'VECTOR_EXPECTED')
++    count = r.i32()
++    for _ in range(max(0, count)):
++        r.i64()
++    expires, token = storage.create_login_token(api_id)
++    return packers.pack_auth_login_token(expires, token)
++
++
++def handle_auth_accept_login_token(session, req_msg_id, r, storage,
++                                   push_queue, registry):
++    viewer, err = require_auth(session, storage)
++    if viewer is None:
++        return err
++    token = r.tl_bytes()
++    if not storage.accept_login_token(token, viewer['id']):
++        return rpc_error(400, 'AUTH_TOKEN_INVALID')
++    viewer = _fresh_user_for_auth(storage, viewer['id']) or viewer
++    return packers.pack_auth_authorization(viewer, storage=storage)
++
++
++def handle_auth_import_login_token(session, req_msg_id, r, storage,
++                                   push_queue, registry):
++    token = r.tl_bytes()
++    result = storage.resolve_login_token(token)
++    if not result:
++        return rpc_error(400, 'AUTH_TOKEN_INVALID')
++    if result.get('expired'):
++        return rpc_error(400, 'AUTH_TOKEN_EXPIRED')
++    user_id = result.get('user_id')
++    if user_id:
++        user = storage.get_user_by_id(int(user_id))
++        if not user:
++            return rpc_error(400, 'AUTH_TOKEN_INVALID')
++        _bind_user_session(session, storage, user['id'], registry, push_queue,
++                           push_updates=False)
++        user = _fresh_user_for_auth(storage, user['id']) or user
++        return packers.pack_auth_login_token_success(user, storage=storage)
++    return packers.pack_auth_login_token(int(result['expires']), token)
++
++
+ def handle_auth_resend_code(session, req_msg_id, r, storage, push_queue, registry):
+     phone_number = r.string()
+     _code_hash = r.string()
+@@ -359,10 +436,11 @@
+     if not storage.consume_phone_code(phone, code_hash):
+         return rpc_error(400, 'PHONE_CODE_EXPIRED')
+ 
+-    storage.deliver_pending_login_message(phone, user['id'])
+-    _bind_user_session(session, storage, user['id'], registry, push_queue)
++    _bind_user_session(session, storage, user['id'], registry, push_queue,
++                       push_updates=False)
+     log.info('User signed in: id=%d phone=+%s %s',
+              user['id'], phone, format_client_log(session))
++    user = _fresh_user_for_auth(storage, user['id']) or user
+     return packers.pack_auth_authorization(user, storage=storage)
+ 
+ 
+@@ -374,21 +452,98 @@
+     return w.bytes_out()
+ 
+ 
+-def handle_help_get_peer_colors(session, req_msg_id, r, storage, push_queue, registry):
+-    _hash = r.i32()
++_HELP_PEER_COLORS_HASH = 0
++_HELP_PEER_COLOR_OPTION = 0xadec6ebe
++_HELP_PEER_COLOR_SET = 0x26219a58
++_HELP_PEER_COLOR_PROFILE_SET = 0x767D61EB
++_HELP_PEER_BASE_COLORS = (
++    0x6FB9F0,  # blue
++    0x5FCF7C,  # green
++    0xF9A84B,  # orange
++    0xF06EA9,  # pink
++    0x9B8AFB,  # violet
++    0x57C7C9,  # cyan
++    0xC9A77A,  # sand
++)
++
++
++def _pack_help_peer_color_set(colors: list[int]) -> bytes:
+     w = tl.Writer()
+-    w.u32(tl.HELP_PEER_COLORS_NOT_MODIFIED)
++    w.u32(_HELP_PEER_COLOR_SET)  # help.peerColorSet
++    w.u32(tl.VECTOR)
++    w.i32(len(colors))
++    for c in colors:
++        w.i32(int(c) & 0xFFFFFF)
+     return w.bytes_out()
+ 
+ 
+-def handle_help_get_peer_profile_colors(session, req_msg_id, r, storage,
+-                                        push_queue, registry):
+-    _hash = r.i32()
++def _pack_help_peer_color_profile_set(base_color: int) -> bytes:
++    """help.peerColorProfileSet for help.getPeerProfileColors."""
++    palette = int(base_color) & 0xFFFFFF
++    bg = _darken_rgb(palette, num=9, den=10)
++    story = _darken_rgb(palette, num=7, den=10)
++    w = tl.Writer()
++    w.u32(_HELP_PEER_COLOR_PROFILE_SET)  # help.peerColorProfileSet
++    # palette_colors
++    w.u32(tl.VECTOR)
++    w.i32(1)
++    w.i32(palette)
++    # bg_colors
++    w.u32(tl.VECTOR)
++    w.i32(1)
++    w.i32(bg)
++    # story_colors
++    w.u32(tl.VECTOR)
++    w.i32(1)
++    w.i32(story)
++    return w.bytes_out()
++
++
++def _darken_rgb(color: int, num: int = 7, den: int = 10) -> int:
++    r = (color >> 16) & 0xFF
++    g = (color >> 8) & 0xFF
++    b = color & 0xFF
++    r = max(0, min(255, (r * num) // den))
++    g = max(0, min(255, (g * num) // den))
++    b = max(0, min(255, (b * num) // den))
++    return (r << 16) | (g << 8) | b
++
++
++def _pack_help_peer_colors(req_hash: int, *, profile: bool = False) -> bytes:
++    if req_hash and int(req_hash) == _HELP_PEER_COLORS_HASH:
++        w = tl.Writer()
++        w.u32(tl.HELP_PEER_COLORS_NOT_MODIFIED)
++        return w.bytes_out()
+     w = tl.Writer()
+-    w.u32(tl.HELP_PEER_COLORS_NOT_MODIFIED)
++    w.u32(0xf8ed08)  # help.peerColors
++    w.i32(_HELP_PEER_COLORS_HASH)
++    w.u32(tl.VECTOR)
++    w.i32(7)
++    for color_id in range(7):
++        base = _HELP_PEER_BASE_COLORS[color_id % len(_HELP_PEER_BASE_COLORS)]
++        dark = _darken_rgb(base)
++        w.u32(_HELP_PEER_COLOR_OPTION)
++        # flags.1 colors + flags.2 dark_colors
++        w.i32((1 << 1) | (1 << 2))
++        w.i32(color_id)
++        if profile:
++            w.raw(_pack_help_peer_color_profile_set(base))
++            w.raw(_pack_help_peer_color_profile_set(dark))
++        else:
++            w.raw(_pack_help_peer_color_set([base]))
++            w.raw(_pack_help_peer_color_set([dark]))
+     return w.bytes_out()
+ 
+ 
++def handle_help_get_peer_colors(session, req_msg_id, r, storage, push_queue, registry):
++    return _pack_help_peer_colors(r.i32(), profile=False)
++
++
++def handle_help_get_peer_profile_colors(session, req_msg_id, r, storage,
++                                        push_queue, registry):
++    return _pack_help_peer_colors(r.i32(), profile=True)
++
++
+ def handle_help_get_invite_text(session, req_msg_id, r, storage, push_queue, registry):
+     w = tl.Writer()
+     w.u32(tl.HELP_INVITE_TEXT)
+@@ -427,9 +582,13 @@
+             user = storage.recreate_banned_user(
+                 phone, first_name.strip(), last_name.strip(),
+             )
+-            _bind_user_session(session, storage, user['id'], registry, push_queue)
++            _bind_user_session(session, storage, user['id'], registry, push_queue,
++                               push_updates=False)
++            boot_msg = _bootstrap_user_after_auth(storage, phone, user['id'])
++            _push_post_signup_updates(storage, user['id'], boot_msg, push_queue)
+             log.info('Recreated deleted user: id=%d +%s %s',
+                      user['id'], phone, format_client_log(session))
++            user = _fresh_user_for_auth(storage, user['id']) or user
+             return packers.pack_auth_authorization(user, storage=storage)
+         return rpc_error(400, 'PHONE_NUMBER_OCCUPIED')
+ 
+@@ -437,9 +596,15 @@
+         return rpc_error(400, 'PHONE_CODE_EXPIRED')
+ 
+     user = storage.create_user(phone, first_name.strip(), last_name.strip())
+-    _bind_user_session(session, storage, user['id'], registry, push_queue)
++    if not user:
++        return rpc_error(500, 'INTERNAL_SERVER_ERROR')
++    _bind_user_session(session, storage, user['id'], registry, push_queue,
++                       push_updates=False)
++    boot_msg = _bootstrap_user_after_auth(storage, phone, user['id'])
++    _push_post_signup_updates(storage, user['id'], boot_msg, push_queue)
+     log.info('New user registered: id=%d +%s "%s %s" %s',
+              user['id'], phone, first_name, last_name, format_client_log(session))
++    user = _fresh_user_for_auth(storage, user['id']) or user
+     return packers.pack_auth_authorization(user, storage=storage)
+ 
+ 
+@@ -1241,18 +1406,48 @@
+ def handle_messages_get_recent_reactions(session, req_msg_id, r, storage,
+                                          push_queue, registry):
+     _limit = r.i32()
+-    _hash = r.i64()
++    req_hash = r.i64()
++    if req_hash and int(req_hash) == 0:
++        w = tl.Writer()
++        w.u32(tl.MESSAGES_REACTIONS_NOT_MODIFIED)
++        return w.bytes_out()
+     w = tl.Writer()
+-    w.u32(tl.MESSAGES_REACTIONS_NOT_MODIFIED)
++    w.u32(0xeafdf716)  # messages.reactions
++    w.i64(0)
++    w.u32(tl.VECTOR)
++    w.i32(0)
+     return w.bytes_out()
+ 
+ 
+ def handle_messages_get_top_reactions(session, req_msg_id, r, storage,
+                                       push_queue, registry):
+     _limit = r.i32()
+-    _hash = r.i64()
++    req_hash = r.i64()
++    if req_hash and int(req_hash) == 0:
++        w = tl.Writer()
++        w.u32(tl.MESSAGES_REACTIONS_NOT_MODIFIED)
++        return w.bytes_out()
+     w = tl.Writer()
+-    w.u32(tl.MESSAGES_REACTIONS_NOT_MODIFIED)
++    w.u32(0xeafdf716)  # messages.reactions
++    w.i64(0)
++    w.u32(tl.VECTOR)
++    w.i32(0)
++    return w.bytes_out()
++
++
++def handle_messages_get_default_tag_reactions(session, req_msg_id, r, storage,
++                                              push_queue, registry):
++    req_hash = r.i64()
++    reactions_hash = 0
++    if req_hash and int(req_hash) == reactions_hash:
++        w = tl.Writer()
++        w.u32(tl.MESSAGES_REACTIONS_NOT_MODIFIED)
++        return w.bytes_out()
++    w = tl.Writer()
++    w.u32(0xeafdf716)  # messages.reactions
++    w.i64(reactions_hash)
++    w.u32(tl.VECTOR)
++    w.i32(0)
+     return w.bytes_out()
+ 
+ 
+@@ -2817,9 +3012,18 @@
+ 
+ def handle_contacts_get_contacts(session, req_msg_id, r, storage,
+                                  push_queue, registry):
+-    _hash = r.i64()
++    req_hash = r.i64()
++    if req_hash and int(req_hash) == 0:
++        w = tl.Writer()
++        w.u32(tl.CONTACTS_NOT_MODIFIED)
++        return w.bytes_out()
+     w = tl.Writer()
+-    w.u32(tl.CONTACTS_NOT_MODIFIED)
++    w.u32(0xeae87e42)  # contacts.contacts
++    w.u32(tl.VECTOR)
++    w.i32(0)
++    w.i32(0)  # saved_count
++    w.u32(tl.VECTOR)
++    w.i32(0)
+     return w.bytes_out()
+ 
+ 
+@@ -3191,6 +3395,9 @@
+     tl.AUTH_IMPORT_AUTH: handle_auth_import_authorization,
+     tl.AUTH_SEND_CODE: handle_auth_send_code,
+     tl.AUTH_INIT_PASSKEY_LOGIN: handle_auth_init_passkey_login,
++    tl.AUTH_EXPORT_LOGIN_TOKEN: handle_auth_export_login_token,
++    tl.AUTH_ACCEPT_LOGIN_TOKEN: handle_auth_accept_login_token,
++    tl.AUTH_IMPORT_LOGIN_TOKEN: handle_auth_import_login_token,
+     tl.AUTH_RESEND_CODE: handle_auth_resend_code,
+     tl.AUTH_CANCEL_CODE: handle_auth_cancel_code,
+     tl.AUTH_SIGN_IN: handle_auth_sign_in,
+@@ -3236,6 +3443,7 @@
+     tl.MESSAGES_GET_DIALOGS: handle_messages_get_dialogs,
+     tl.MESSAGES_GET_RECENT_REACTIONS: handle_messages_get_recent_reactions,
+     tl.MESSAGES_GET_TOP_REACTIONS: handle_messages_get_top_reactions,
++    0xbdf93428: handle_messages_get_default_tag_reactions,
+     tl.MESSAGES_GET_ARCHIVED_STICKERS: handle_messages_get_archived_stickers,
+     tl.MESSAGES_GET_SAVED_GIFS: handle_messages_get_saved_gifs,
+     tl.MESSAGES_GET_FAVED_STICKERS: handle_messages_get_faved_stickers,
+@@ -3348,25 +3556,25 @@
+     r = tl.Reader(body)
+     cid = tl.unwrap_rpc_query(r, session)
+ 
++    log.info('RPC %#010x auth=%#018x req_msg_id=%s %s',
++             cid, getattr(session, 'auth_key_id', 0), req_msg_id,
++             format_client_log(session))
++
+     handler = HANDLERS.get(cid)
+     if handler is None:
+         if cid not in _warned_methods:
+             _warned_methods.add(cid)
+             remaining = body[r.pos:r.pos + 32].hex()
+-            log.debug(
+-                'Unhandled RPC method: %#010x remaining=%s next=%s',
+-                cid, r.remaining(), remaining)
++            log.warning(
++                'Unhandled RPC %#010x auth=%#018x remaining=%s next=%s %s',
++                cid, getattr(session, 'auth_key_id', 0), r.remaining(), remaining,
++                format_client_log(session))
+         return rpc_error(400, 'METHOD_NOT_IMPLEMENTED')
+ 
+-    if cid in (tl.AUTH_SEND_CODE, tl.AUTH_SIGN_IN,
+-               tl.AUTH_SIGN_UP, tl.AUTH_SIGN_UP_LAYER,
+-               0xd18b4d16):  # auth.checkPassword
+-        log.debug('RPC %#010x auth=%#018x req_msg_id=%s %s',
+-                  cid, getattr(session, 'auth_key_id', 0), req_msg_id,
+-                  format_client_log(session))
+-
+     try:
+         return handler(session, req_msg_id, r, storage, push_queue, registry)
+     except Exception as exc:
+-        log.exception('Error in handler %#010x: %s', cid, exc)
++        log.exception('RPC handler %#010x failed auth=%#018x %s: %s',
++                      cid, getattr(session, 'auth_key_id', 0),
++                      format_client_log(session), exc)
+         return rpc_error(500, 'INTERNAL_SERVER_ERROR')

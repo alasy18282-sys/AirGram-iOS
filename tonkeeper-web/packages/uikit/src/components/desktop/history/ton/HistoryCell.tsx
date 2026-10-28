@@ -1,0 +1,246 @@
+import styled, { css } from 'styled-components';
+import { hexToRGBA } from '../../../../libs/css';
+import { useTranslation } from '../../../../hooks/translation';
+import { ArrowDownIcon, ArrowUpIcon, XMarkCircleIcon } from '../../../Icon';
+import { FC, PropsWithChildren, ReactNode } from 'react';
+import { Body2, Body2Class } from '../../../Text';
+import { formatAddress, toShortValue } from '@tonkeeper/core/dist/utils/common';
+import { useFormatCoinValue } from '../../../../hooks/balance';
+import { HistoryGridCell, HistoryGridCellFillRow } from './HistoryGrid';
+import { useActiveTonNetwork } from '../../../../state/wallet';
+import { sanitizeJetton } from '../../../../libs/common';
+import { JettonVerificationType } from '@tonkeeper/core/dist/tonApiV2';
+
+export const HistoryCellAction = styled(HistoryGridCell).attrs({ className: 'grid-area-action' })`
+    display: flex;
+    gap: 6px;
+    height: 20px;
+    align-items: center;
+`;
+
+const ArrowDownIconStyled = styled(ArrowDownIcon)`
+    color: ${p => p.theme.iconPrimary};
+`;
+
+const ArrowUpIconStyled = styled(ArrowUpIcon)`
+    color: ${p => p.theme.iconPrimary};
+`;
+
+export const HistoryCellActionGeneric: FC<{
+    icon: ReactNode;
+    children: ReactNode;
+    isFailed: boolean;
+    isScam?: boolean;
+}> = ({ icon, children, isFailed, isScam }) => {
+    const { t } = useTranslation();
+    return (
+        <HistoryCellAction>
+            {isFailed ? <XMarkCircleIcon color="accentRed" /> : icon}
+            <Body2>{isScam ? t('spam_action') : children}</Body2>
+            {isScam && !isFailed && <HistoryBadgeScam />}
+            {isFailed && <HistoryBadgeFailed />}
+        </HistoryCellAction>
+    );
+};
+
+export const HistoryCellActionReceived: FC<{
+    isScam: boolean;
+    isFailed: boolean;
+}> = ({ isScam, isFailed }) => {
+    const { t } = useTranslation();
+    return (
+        <HistoryCellAction>
+            {isFailed ? <XMarkCircleIcon color="accentRed" /> : <ArrowDownIconStyled />}
+            <Body2>{isScam ? t('spam_action') : t('transaction_type_receive')}</Body2>
+            {isScam && !isFailed && <HistoryBadgeScam />}
+            {isFailed && <HistoryBadgeFailed />}
+        </HistoryCellAction>
+    );
+};
+
+export const HistoryCellActionSent: FC<{
+    isFailed: boolean;
+}> = ({ isFailed }) => {
+    const { t } = useTranslation();
+    return (
+        <HistoryCellAction>
+            {isFailed ? <XMarkCircleIcon color="accentRed" /> : <ArrowUpIconStyled />}
+            <Body2>{t('transaction_type_sent')}</Body2>
+            {isFailed && <HistoryBadgeFailed />}
+        </HistoryCellAction>
+    );
+};
+
+export const HistoryBadge = styled.div<{ color: string }>`
+    padding: 2px 4px;
+    color: ${p => p.theme[p.color]};
+    border-radius: ${p => p.theme.corner3xSmall};
+    background-color: ${p => hexToRGBA(p.theme[p.color], 0.16)};
+    text-transform: uppercase;
+    font-style: normal;
+    font-size: 8.5px;
+    font-weight: 510;
+    line-height: 12px;
+    height: fit-content;
+`;
+
+export const HistoryBadgeFailed = () => {
+    const { t } = useTranslation();
+    return <HistoryBadge color="accentRed">{t('transactions_failed')}</HistoryBadge>;
+};
+
+export const HistoryBadgeScam = () => {
+    const { t } = useTranslation();
+    return <HistoryBadge color="accentOrange">{t('transactions_spam')}</HistoryBadge>;
+};
+
+const HistoryCellAccountStyled = styled(HistoryGridCell).attrs({
+    className: 'grid-area-account'
+})`
+    ${Body2Class};
+
+    color: ${p => p.theme.textSecondary};
+    font-family: ${p => p.theme.fontMono};
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+`;
+export const HistoryCellAccount: FC<{
+    account?: { address?: string; name?: string };
+    fallbackAddress?: string;
+}> = ({ account, fallbackAddress }) => {
+    const network = useActiveTonNetwork();
+    const { t } = useTranslation();
+
+    return (
+        <HistoryCellAccountStyled>
+            {account?.name
+                ? account.name
+                : account?.address
+                ? toShortValue(formatAddress(account.address, network))
+                : fallbackAddress
+                ? toShortValue(formatAddress(fallbackAddress, network))
+                : t('transactions_unknown')}
+        </HistoryCellAccountStyled>
+    );
+};
+
+const HistoryCellCommentStyled = styled(Body2).attrs({ className: 'grid-area-comment' })`
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    min-width: 40px;
+
+    ${p =>
+        p.theme.proDisplayType === 'mobile' &&
+        css`
+            padding: 6px 10px;
+            background: ${p.theme.backgroundContent};
+            border-radius: ${p.theme.corner2xSmall};
+            width: fit-content;
+            word-break: break-word;
+            white-space: break-spaces;
+            max-height: 58px;
+            display: -webkit-box;
+            -webkit-line-clamp: 3;
+            -webkit-box-orient: vertical;
+        `}
+`;
+
+export const HistoryCellComment: FC<{ comment?: string; isScam?: boolean; className?: string }> = ({
+    comment,
+    isScam,
+    className
+}) => {
+    if (!comment || isScam) {
+        return <div className="grid-area-comment" />;
+    }
+    return <HistoryCellCommentStyled className={className}>{comment}</HistoryCellCommentStyled>;
+};
+
+export const HistoryCellCommentSecondary = styled(HistoryCellComment)`
+    color: ${p => p.theme.textSecondary};
+`;
+
+const HistoryCellAmountStyled = styled(Body2).attrs({ className: 'grid-area-amount' })<{
+    color?: string;
+}>`
+    color: ${p => (p.color ? p.theme[p.color] : p.theme.textPrimary)};
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+`;
+
+export const HistoryCellAmountContent: FC<
+    PropsWithChildren<{
+        color?: string;
+        isFailed?: boolean;
+        isSpam?: boolean;
+        isNegative?: boolean;
+    }>
+> = ({ children, isNegative, color, isFailed, isSpam }) => {
+    const finalColor = color
+        ? color
+        : isSpam
+        ? 'accentRed'
+        : isFailed
+        ? 'textTertiary'
+        : !isNegative
+        ? 'accentGreen'
+        : 'textPrimary';
+
+    return <HistoryCellAmountStyled color={finalColor}>{children}</HistoryCellAmountStyled>;
+};
+
+export const HistoryCellAmount: FC<{
+    amount: string | number;
+    symbol: string;
+    decimals: number;
+    color?: string;
+    isNegative?: boolean;
+    isFailed?: boolean;
+    isSpam?: boolean;
+    jettonVerification?: JettonVerificationType;
+}> = ({ amount, symbol, decimals, jettonVerification, isSpam, ...rest }) => {
+    const format = useFormatCoinValue();
+
+    return (
+        <HistoryCellAmountContent
+            {...rest}
+            isSpam={isSpam || jettonVerification === JettonVerificationType.Blacklist}
+        >
+            {rest.isNegative ? '−' : '+'}&nbsp;
+            {format(amount, decimals)}&nbsp;
+            {sanitizeJetton(symbol, jettonVerification === JettonVerificationType.Blacklist)}
+        </HistoryCellAmountContent>
+    );
+};
+
+export const HistoryCellAmountText = styled(HistoryGridCell).attrs({
+    className: 'grid-area-amount'
+})`
+    ${Body2Class};
+    color: ${p => p.theme.textTertiary};
+`;
+
+export const ActionRow = styled(HistoryGridCell)`
+    display: grid;
+    gap: 0.5rem;
+    grid-template-columns: 1fr max-content;
+
+    ${p =>
+        p.theme.proDisplayType === 'mobile' &&
+        css`
+            display: contents;
+        `}
+`;
+
+export const ErrorRow: FC<{ children?: ReactNode }> = ({ children }) => {
+    return (
+        <>
+            <HistoryGridCellFillRow>
+                <Body2 color="textTertiary">{children || 'Unknown error'}</Body2>
+            </HistoryGridCellFillRow>
+        </>
+    );
+};

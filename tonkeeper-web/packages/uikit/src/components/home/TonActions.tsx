@@ -1,0 +1,38 @@
+import { BLOCKCHAIN_NAME } from '@tonkeeper/core/dist/entries/crypto';
+import { TON_ASSET } from '@tonkeeper/core/dist/entries/crypto/asset/constants';
+import { FC } from 'react';
+import { useActiveTonNetwork, useIsActiveWalletWatchOnly } from '../../state/wallet';
+import { SendAction } from '../transfer/SendActionButton';
+import { ActionsRow } from './Actions';
+import { BuyAction } from './BuyAction';
+import { ReceiveAction } from './ReceiveAction';
+import { SwapAction } from './SwapAction';
+import { Network } from '@tonkeeper/core/dist/entries/network';
+import { HideOnReview } from '../ios/HideOnReview';
+import { IfFeatureEnabled } from '../shared/IfFeatureEnabled';
+import { FLAGGED_FEATURE } from '../../state/tonendpoint';
+import { StakeAction } from './StakeAction';
+
+export const HomeActions: FC<{ chain?: BLOCKCHAIN_NAME }> = () => {
+    const isReadOnly = useIsActiveWalletWatchOnly();
+    const network = useActiveTonNetwork();
+    const isTestnet = network === Network.TESTNET;
+    return (
+        <ActionsRow>
+            {!isTestnet && <BuyAction />}
+            {!isReadOnly && <SendAction />}
+            <ReceiveAction />
+            <HideOnReview>
+                <IfFeatureEnabled feature={FLAGGED_FEATURE.SWAPS}>
+                    {!isTestnet && !isReadOnly && <SwapAction fromAsset={TON_ASSET} />}
+                </IfFeatureEnabled>
+            </HideOnReview>
+            <HideOnReview>
+                <IfFeatureEnabled feature={FLAGGED_FEATURE.STAKING}>
+                    {!isTestnet && !isReadOnly && <StakeAction />}
+                </IfFeatureEnabled>
+            </HideOnReview>
+            {/* <SellAction sell={sell} /> */}
+        </ActionsRow>
+    );
+};

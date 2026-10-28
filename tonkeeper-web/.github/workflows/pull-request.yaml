@@ -1,0 +1,65 @@
+name: PR
+run-name:
+    "PR #${{ github.event.pull_request.number }} — ${{ github.event.action == 'labeled' &&
+    format('label: {0}', github.event.label.name) || github.event.action }}"
+on:
+    pull_request:
+        types: [opened, synchronize, reopened, labeled]
+
+permissions:
+    contents: read
+    pull-requests: write
+
+# Opt-in builds gated by PR labels (save CI compute on routine PRs):
+#   build:desktop    → run the desktop matrix (6 jobs)
+#   build:extension  → run the Chrome/Firefox extension build
+#   build:ipad       → run the iPad TestFlight build
+#   build:twa        → build the TWA and deploy a Cloudflare preview
+# Web build runs on every PR so reviewers always get a Cloudflare preview.
+# All gated builds also expose workflow_dispatch for off-PR manual runs.
+#
+# The `if:` on each gated job runs the build when:
+#   - the build's label was just added (labeled event with matching name), OR
+#   - any non-label event fires and the label is already on the PR
+# This prevents unrelated label changes from re-running builds.
+
+jobs:
+    web-build:
+        # Skip on label events so adding labels doesn't redeploy the preview.
+        if: github.event.action != 'labeled'
+        uses: ./.github/workflows/web-build.yaml
+        with:
+            environment: ${{ github.head_ref }}
+        secrets: inherit
+
+    desktop-build:
+        if: |
+            (github.event.action == 'labeled' && github.event.label.name == 'build:desktop') ||
+            (github.event.action != 'labeled' && contains(github.event.pull_request.labels.*.name, 'build:desktop'))
+        uses: ./.github/workflows/desktop-build.yaml
+        secrets: inherit
+
+    extension-build:
+        if: |
+            (github.event.action == 'labeled' && github.event.label.name == 'build:extension') ||
+            (github.event.action != 'labeled' && contains(github.event.pull_request.labels.*.name, 'build:extension'))
+        uses: ./.github/workflows/build-extension.yaml
+        secrets: inherit
+
+    ipad-build:
+        if: |
+            (github.event.action == 'labeled' && github.event.label.name == 'build:ipad') ||
+            (github.event.action != 'labeled' && contains(github.event.pull_request.labels.*.name, 'build:ipad'))
+        uses: ./.github/workflows/ipad-build.yaml
+        with:
+            version-mode: next-patch
+        secrets: inherit
+
+    twa-build:
+        if: |
+            (github.event.action == 'labeled' && github.event.label.name == 'build:twa') ||
+            (github.event.action != 'labeled' && contains(github.event.pull_request.labels.*.name, 'build:twa'))
+        uses: ./.github/workflows/twa-deploy.yaml
+        with:
+            branch: twa-${{ github.head_ref }}
+        secrets: inherit

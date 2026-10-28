@@ -1,0 +1,249 @@
+name: Pre-release
+
+on:
+    push:
+        tags:
+            - 'v*-*'
+    workflow_dispatch:
+        inputs:
+            tag:
+                description: 'Pre-release tag (must already exist, e.g. v4.5.0-beta.1)'
+                required: true
+                type: string
+
+# Prevent concurrent pre-release runs; cancel stale runs when a new one starts
+concurrency:
+    group: pre-release-${{ github.ref }}
+    cancel-in-progress: true
+
+permissions:
+    contents: write
+
+env:
+    node-version: 20.11.1
+    RELEASE_TAG: ${{ inputs.tag || github.ref_name }}
+
+jobs:
+    # Strip assets from existing pre-releases/drafts of the SAME base version
+    # before the build jobs run, so retagging within a version (e.g. rc.1 → rc.2)
+    # doesn't leave the previous iteration's binaries attached alongside the new
+    # ones. Scoped by base version so cleaning v4.7.0-rc.3 only touches other
+    # v4.7.0-* pre-releases — never unrelated versions.
+    cleanup-old-assets:
+        name: cleanup-old-assets
+        runs-on: ubuntu-latest
+        steps:
+            - name: Delete assets from existing pre-releases
+              env:
+                  GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+                  REPO: ${{ github.repository }}
+              run: |
+                  set -euo pipefail
+
+                  # Base version is everything before the first '-'
+                  # e.g. v4.7.0-rc.3 -> v4.7.0
+                  BASE="${RELEASE_TAG%%-*}"
+                  echo "Cleaning pre-releases/drafts for base version: $BASE"
+
+                  tags=$(gh release list --repo "$REPO" --limit 100 \
+                      --json tagName,isPrerelease,isDraft \
+                      | jq -r --arg base "$BASE" \
+                        '.[] | select(.isPrerelease or .isDraft) | select(.tagName | startswith($base + "-")) | .tagName')
+
+                  if [ -z "$tags" ]; then
+                      echo "No pre-releases or drafts matching $BASE-* — nothing to clean."
+                      exit 0
+                  fi
+
+                  while IFS= read -r tag; do
+                      [ -z "$tag" ] && continue
+                      echo "Cleaning assets on $tag"
+                      assets=$(gh release view "$tag" --repo "$REPO" \
+                          --json assets --jq '.assets[].name' || true)
+                      if [ -z "$assets" ]; then
+                          echo "  (no assets)"
+                          continue
+                      fi
+                      while IFS= read -r asset; do
+                          [ -z "$asset" ] && continue
+                          echo "  deleting $asset"
+                          gh release delete-asset "$tag" "$asset" --repo "$REPO" --yes
+                      done <<< "$assets"
+                  done <<< "$tags"
+
+    desktop-build:
+        name: desktop-build
+        needs: cleanup-old-assets
+        strategy:
+            matrix:
+                include:
+                    - os: ubuntu-latest
+                      command: publish:intel
+                    - os: ubuntu-latest
+                      command: publish:arm
+                    - os: windows-latest
+                      command: publish:intel
+                    - os: macos-15-intel
+                      command: publish:intel
+                    - os: macos-latest
+                      command: publish:arm
+                    - os: macos-latest
+                      command: publish:universal
+
+        runs-on: ${{ matrix.os }}
+        timeout-minutes: 30
+        env:
+            APPLE_API_KEY: ${{ github.workspace }}/AuthKey.p8
+            APPLE_API_KEY_ID: ${{ secrets.APPLE_API_KEY_ID }}
+            APPLE_API_ISSUER: ${{ secrets.APPLE_API_ISSUER }}
+            GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+            DEBUG: electron*
+            LINUXDEPLOY_PATH: ${{ github.workspace }}/.cache/linuxdeploy-x86_64.AppImage
+            LIBSECRET_PATH: /usr/lib/x86_64-linux-gnu/libsecret-1.so.0
+
+        steps:
+            - name: Checkout
+              uses: actions/checkout@v4
+              with:
+                  ref: ${{ env.RELEASE_TAG }}
+
+            - name: Set up Node
+              uses: actions/setup-node@v4
+              with:
+                  node-version: ${{ env.node-version }}
+
+            - name: Enable Corepack
+              run: corepack enable
+
+            - name: Set up Linux AppImage packaging
+              if: runner.os == 'Linux' && matrix.command == 'publish:intel'
+              run: |
+                  sudo apt-get update
+                  sudo apt-get install --yes fakeroot libarchive-tools libfuse2 libsecret-1-0 libsecret-1-dev rpm zip
+                  mkdir -p "$(dirname "$LINUXDEPLOY_PATH")"
+                  curl --fail --location --output "$LINUXDEPLOY_PATH" \
+                      https://github.com/linuxdeploy/linuxdeploy/releases/download/1-alpha-20251107-1/linuxdeploy-x86_64.AppImage
+                  echo "c20cd71e3a4e3b80c3483cef793cda3f4e990aca14014d23c544ca3ce1270b4d  $LINUXDEPLOY_PATH" | sha256sum --check
+                  chmod +x "$LINUXDEPLOY_PATH"
+
+            - name: Set version from tag
+              run: node scripts/set-version.js
+              env:
+                  RELEASE_TAG: ${{ env.RELEASE_TAG }}
+
+            - name: Decode Apple API key
+              if: runner.os == 'macOS'
+              env:
+                  CREDENTIALS: ${{ secrets.APPLE_API_KEY }}
+              run: echo $CREDENTIALS | base64 -d > ${{ github.workspace }}/AuthKey.p8
+
+            - name: Configure keychain
+              if: runner.os == 'macOS'
+              uses: apple-actions/import-codesign-certs@v2
+              with:
+                  p12-file-base64: ${{ secrets.IDENTITY_P12_B64 }}
+                  p12-password: ${{ secrets.IDENTITY_PASSPHRASE }}
+
+            - name: Install dependencies
+              uses: borales/actions-yarn@v5
+              with:
+                  cmd: install
+
+            - name: Build packages
+              uses: borales/actions-yarn@v5
+              with:
+                  cmd: build:pkg
+
+            - name: Publish desktop
+              uses: borales/actions-yarn@v5
+              with:
+                  cmd: ${{ matrix.command }}
+                  dir: 'apps/desktop'
+
+            - name: Clean up credentials
+              if: always() && runner.os == 'macOS'
+              run: rm ${{ github.workspace }}/AuthKey.p8
+
+    ipad-build:
+        needs: cleanup-old-assets
+        uses: ./.github/workflows/ipad-build.yaml
+        with:
+            release_tag: ${{ inputs.tag || github.ref_name }}
+        secrets: inherit
+
+    # Deploys to 'rc' Cloudflare preview — never touches prod
+    web-build:
+        needs: cleanup-old-assets
+        uses: ./.github/workflows/web-build.yaml
+        with:
+            environment: 'rc'
+            release_tag: ${{ inputs.tag || github.ref_name }}
+        secrets: inherit
+
+    extension-build:
+        name: extension-build
+        needs: cleanup-old-assets
+        runs-on: macos-14
+        timeout-minutes: 10
+
+        steps:
+            - name: Checkout
+              uses: actions/checkout@v4
+              with:
+                  ref: ${{ env.RELEASE_TAG }}
+
+            - name: Set up Node
+              uses: actions/setup-node@v4
+              with:
+                  node-version: ${{ env.node-version }}
+
+            - name: Enable Corepack
+              run: corepack enable
+
+            - name: Set version from tag
+              run: node scripts/set-version.js
+              env:
+                  RELEASE_TAG: ${{ env.RELEASE_TAG }}
+
+            - name: Install dependencies
+              uses: borales/actions-yarn@v5
+              with:
+                  cmd: install
+
+            - name: Build extension
+              uses: borales/actions-yarn@v5
+              with:
+                  cmd: build:extension
+
+            - name: Upload extension to draft pre-release
+              uses: softprops/action-gh-release@v2
+              with:
+                  tag_name: ${{ env.RELEASE_TAG }}
+                  name: 'Tonkeeper ${{ env.RELEASE_TAG }}'
+                  draft: true
+                  prerelease: true
+                  files: |
+                      ${{ github.workspace }}/apps/extension/dist/tonkeeper_chrome_${{ env.RELEASE_TAG }}.zip
+                      ${{ github.workspace }}/apps/extension/dist/tonkeeper_firefox_${{ env.RELEASE_TAG }}.zip
+
+    # Runs after all builds succeed — flips the draft to published.
+    # Body and title are left untouched so manually authored release notes survive.
+    publish-pre-release:
+        name: publish-pre-release
+        needs: [desktop-build, ipad-build, web-build, extension-build]
+        runs-on: ubuntu-latest
+        steps:
+            - name: Publish GitHub pre-release
+              uses: softprops/action-gh-release@v2
+              with:
+                  tag_name: ${{ env.RELEASE_TAG }}
+                  draft: false
+                  prerelease: true
+
+            - name: Summary
+              run: |
+                  echo "### Pre-release ${{ env.RELEASE_TAG }} published 🚀" >> $GITHUB_STEP_SUMMARY
+                  echo "" >> $GITHUB_STEP_SUMMARY
+                  echo "**Demo:** ${{ needs.web-build.outputs.deployment-url }}" >> $GITHUB_STEP_SUMMARY
+                  echo "" >> $GITHUB_STEP_SUMMARY
+                  echo "**Release:** https://github.com/${{ github.repository }}/releases/tag/${{ env.RELEASE_TAG }}" >> $GITHUB_STEP_SUMMARY

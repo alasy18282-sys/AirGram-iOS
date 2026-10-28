@@ -1,0 +1,207 @@
+--- _airgram_ref/handlers/packers.py	2026-07-12 16:57:34.439533432 +0000
++++ handlers/packers.py	2026-07-12 16:08:59.911595275 +0000
+@@ -497,6 +497,7 @@
+         flags |= (1 << 14)
+     w = tl.Writer()
+     w.u32(tl.PEER_SETTINGS)
++    # flags.N?true → no payload bytes; only typed optionals follow.
+     w.i32(flags)
+     if flags & (1 << 14):
+         w.i64(int(charge_paid_message_stars))
+@@ -648,6 +649,7 @@
+     """Minimal deleted user — client shows localized «Deleted Account»."""
+     w = tl.Writer()
+     w.u32(tl.USER)
++    # flags.N?true writes ZERO bytes — only the flag bit itself.
+     w.i32((1 << 0) | (1 << 13))
+     w.i32(0)
+     w.i64(int(u['id']))
+@@ -854,7 +856,7 @@
+     """Min user (id + access_hash only) for auction leaderboards."""
+     w = tl.Writer()
+     w.u32(tl.USER)
+-    w.i32(1 << 20)  # min
++    w.i32((1 << 0) | (1 << 20))  # access_hash + min
+     w.i32(0)
+     w.i64(int(u['id']))
+     w.i64(int(u['access_hash']))
+@@ -1389,6 +1391,14 @@
+     return w.bytes_out()
+ 
+ 
++def _write_user_full_preamble(w: tl.Writer, *, flags: int, flags2: int,
++                              user_id: int) -> None:
++    """userFull — flags.N?true has zero-length serialization (bit only)."""
++    w.i32(flags)
++    w.i32(flags2)
++    w.i64(int(user_id))
++
++
+ def _write_user_full_body(w: tl.Writer, *, flags: int, flags2: int,
+                           about: str = '',
+                           profile_photo=None,
+@@ -1497,9 +1507,7 @@
+ def pack_user_full_deleted(u: dict) -> bytes:
+     w = tl.Writer()
+     w.u32(tl.USER_FULL)
+-    w.i32(0)
+-    w.i32(0)
+-    w.i64(int(u['id']))
++    _write_user_full_preamble(w, flags=0, flags2=0, user_id=int(u['id']))
+     _write_user_full_body(w, flags=0, flags2=0,
+                           show_add_contact=False)
+     return w.bytes_out()
+@@ -1524,9 +1532,7 @@
+ 
+     w = tl.Writer()
+     w.u32(tl.USER_FULL)
+-    w.i32(flags)
+-    w.i32(flags2)
+-    w.i64(int(u['id']))
++    _write_user_full_preamble(w, flags=flags, flags2=flags2, user_id=int(u['id']))
+     _write_user_full_body(
+         w, flags=flags, flags2=flags2,
+         show_add_contact=False,
+@@ -1678,17 +1684,11 @@
+ 
+     from handlers.paid_messages import (
+         peer_charge_stars,
+-        can_view_paid_messages_revenue,
+     )
+-    if viewer_is_self:
+-        show_revenue = can_view_paid_messages_revenue(u, viewer_is_self=True)
+-        if not show_revenue and storage is not None:
+-            show_revenue = (
+-                config.can_use_ton_payments(u['id'])
+-                or storage.get_ton_balance(u['id']) > 0
+-            )
+-        if show_revenue:
+-            flags2 |= 1 << 9  # can_view_revenue — paid messages / GRAM revenue
++    if viewer_is_self and storage is not None:
++        # Desktop crashes (NaN in credits UI) if this flag is set with zero GRAM.
++        if storage.get_ton_balance(u['id']) > 0:
++            flags2 |= 1 << 9  # can_view_revenue — GRAM balance page
+ 
+     settings_charge = None
+     if storage is not None and viewer_id is not None and not viewer_is_self:
+@@ -1727,9 +1727,7 @@
+ 
+     w = tl.Writer()
+     w.u32(tl.USER_FULL)
+-    w.i32(flags)
+-    w.i32(flags2)
+-    w.i64(u['id'])
++    _write_user_full_preamble(w, flags=flags, flags2=flags2, user_id=int(u['id']))
+     _write_user_full_body(
+         w,
+         flags=flags,
+@@ -2027,6 +2025,7 @@
+ 
+     w = tl.Writer()
+     w.u32(tl.MESSAGE)
++    # flags.N?true / flags2.N?true → bit only, no BoolTrue payload.
+     w.i32(flags)
+     w.i32(flags2)
+     w.i32(msg['id'])
+@@ -2618,10 +2617,15 @@
+     return w.bytes_out()
+ 
+ 
+-def pack_auth_authorization(u: dict, storage=None) -> bytes:
++def pack_auth_authorization(u: dict, storage=None, *,
++                            future_auth_token: Optional[bytes] = None) -> bytes:
++    import os
++    token = future_auth_token if future_auth_token is not None else os.urandom(20)
++    flags = 1 << 2  # future_auth_token — Desktop expects this after signUp/signIn
+     w = tl.Writer()
+     w.u32(tl.AUTH_AUTHORIZATION)
+-    w.i32(0)
++    w.i32(flags)
++    w.tl_bytes(token)
+     w.raw(pack_user(u, is_self=True, storage=storage))
+     return w.bytes_out()
+ 
+@@ -2633,6 +2637,21 @@
+     return w.bytes_out()
+ 
+ 
++def pack_auth_login_token(expires: int, token: bytes) -> bytes:
++    w = tl.Writer()
++    w.u32(tl.AUTH_LOGIN_TOKEN)
++    w.i32(int(expires))
++    w.tl_bytes(token)
++    return w.bytes_out()
++
++
++def pack_auth_login_token_success(u: dict, storage=None) -> bytes:
++    w = tl.Writer()
++    w.u32(tl.AUTH_LOGIN_TOKEN_SUCCESS)
++    w.raw(pack_auth_authorization(u, storage=storage))
++    return w.bytes_out()
++
++
+ def pack_json_bool(value: bool) -> bytes:
+     w = tl.Writer()
+     w.u32(tl.JSON_BOOL)
+@@ -2648,10 +2667,14 @@
+ 
+ 
+ def pack_json_number(value: float) -> bytes:
++    import math
+     import struct
++    value = float(value)
++    if not math.isfinite(value):
++        value = 0.0
+     w = tl.Writer()
+     w.u32(tl.JSON_NUMBER)
+-    w.raw(struct.pack('<d', float(value)))
++    w.raw(struct.pack('<d', value))
+     return w.bytes_out()
+ 
+ 
+@@ -2686,6 +2709,13 @@
+     return pack_json_object({})
+ 
+ 
++def pack_data_json(data: str) -> bytes:
++    w = tl.Writer()
++    w.u32(tl.DATA_JSON)
++    w.string(data)
++    return w.bytes_out()
++
++
+ def build_app_config_entries(user: Optional[dict] = None,
+                              storage=None) -> dict:
+     """Client config from help.getAppConfig — corefork.telegram.org/api/config."""
+@@ -2748,6 +2778,31 @@
+         ]),
+         'ton_blockchain_explorer_url': pack_json_string('https://t.me/nft/'),
+         'inapp_update_check_delay': pack_json_number(365 * 86400),
++        'premium_promo_order': pack_json_array([
++            'stories',
++            'double_limits',
++            'more_upload',
++            'faster_download',
++            'voice_to_text',
++            'no_ads',
++            'infinite_reactions',
++            'premium_stickers',
++            'animated_avatar',
++            'advanced_chat_management',
++            'profile_badge',
++            'animated_emoji',
++            'emoji_status',
++            'translations',
++            'wallpapers',
++            'saved_tags',
++            'last_seen',
++            'message_privacy',
++            'priority_order',
++            'business',
++            'business_chat_links',
++            'business_greeting',
++            'business_work_hours',
++        ]),
+     }
+     if config.TON_TOPUP_URL:
+         entries['ton_topup_url'] = pack_json_string(config.TON_TOPUP_URL)

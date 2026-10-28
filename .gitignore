@@ -1,0 +1,47 @@
+# Secrets and credentials
+/keys/
+/.telegram_api.env
+/.telegram_auth_bot.env
+/.server_salt
+/proxy_secret.txt
+/proxy_secret.txt.bak-*
+/auth.json
+/.gh_token
+/.git-credentials
+*.session
+*.session-journal
+/tonkeeper-web/.git.upstream/
+
+# Runtime data and databases
+*.db
+*.db-shm
+*.db-wal
+*.db-journal
+/data/*
+!/data/phone_countries.json
+/logs/
+/backups/
+/crash/
+/push_wake
+/db/*.lock
+
+# Build artifacts and caches
+/__pycache__/
+**/__pycache__/
+*.py[cod]
+/node_modules/
+**/node_modules/
+/tonkeeper-web/.turbo/
+**/dist/
+**/.next/
+/tonkeeper-web/.yarn/cache/
+/tonkeeper-web/.yarn/unplugged/
+/tonkeeper-web/.yarn/install-state.gz
+/webapp/static/
+/webapp/certs/
+/build/
+/apk_layer229/
+/MyTelegram-layer229-unpacked/
+*.apk
+*.idsig
+*.log

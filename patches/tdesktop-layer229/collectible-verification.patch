@@ -1,0 +1,22 @@
+--- a/Telegram/SourceFiles/info/profile/info_profile_top_bar.cpp
++++ b/Telegram/SourceFiles/info/profile/info_profile_top_bar.cpp
+@@
+-	const auto shouldOverrideBadges = shouldOverride(
+-		st::infoBotVerifyBadge.premiumFg);
++	const auto shouldOverrideBadges = effectiveCollectible()
++		|| shouldOverride(st::infoBotVerifyBadge.premiumFg);
+@@
+ 		const auto copySt = [&](const style::InfoPeerBadge &st) {
+ 			auto result = std::make_unique<style::InfoPeerBadge>(
+ 				base::duplicate(st));
++			if (collectible) {
++				auto fg = std::make_shared<style::owned_color>(
++					collectible->textColor);
++				result->premiumFg = fg->color();
++				return std::shared_ptr<style::InfoPeerBadge>(
++					result.release(),
++					[fg](style::InfoPeerBadge *ptr) { delete ptr; });
++			}
+ 			result->premiumFg = st::groupCallVideoSubTextFg;
+ 			return std::shared_ptr<style::InfoPeerBadge>(result.release());
+ 		};

@@ -1,0 +1,409 @@
+import { BRAND_CONFIG } from '@tonkeeper/core/dist/config/brand';
+import { Action } from '@tonkeeper/core/dist/tonApiV2';
+import { formatAddress, seeIfAddressEqual } from '@tonkeeper/core/dist/utils/common';
+import React, { FC, useMemo } from 'react';
+import {
+    ActivityIcon,
+    ContractDeployIcon,
+    PurchaseIcon28,
+    SentIcon
+} from '../../../components/activity/ActivityIcons';
+import { useFormatCoinValue } from '../../../hooks/balance';
+import { useTranslation } from '../../../hooks/translation';
+import { FailedNote, ReceiveActivityAction, SendActivityAction } from '../ActivityActionLayout';
+import {
+    AmountText,
+    ColumnLayout,
+    Description,
+    ErrorAction,
+    FirstLabel,
+    FirstLine,
+    ListItemGrid,
+    SecondLine,
+    SecondaryText,
+    AddressText,
+    toAddressTextValue
+} from '../CommonAction';
+import { ContractDeployAction } from './ContractDeployAction';
+import {
+    JettonBurnAction,
+    JettonMintAction,
+    JettonSwapAction,
+    JettonTransferAction
+} from './JettonActivity';
+import { NftItemTransferAction, NftPurchaseAction } from './NftActivity';
+import {
+    DepositStakeAction,
+    WithdrawRequestStakeAction,
+    WithdrawStakeAction
+} from './StakeActivity';
+import { SubscribeAction, UnSubscribeAction } from './SubscribeAction';
+import { useActiveTonNetwork, useActiveWallet } from '../../../state/wallet';
+import { assertUnreachableSoft } from '@tonkeeper/core/dist/utils/types';
+import { AssetAmount } from '@tonkeeper/core/dist/entries/crypto/asset/asset-amount';
+import { scaledUIMultiplierOne } from '@tonkeeper/core/dist/entries/crypto/asset/scaled-ui';
+
+const TonTransferAction: FC<{
+    action: Action;
+    date: string;
+    isScam: boolean;
+}> = ({ action, date, isScam }) => {
+    const wallet = useActiveWallet();
+    const { tonTransfer } = action;
+    const network = useActiveTonNetwork();
+
+    const format = useFormatCoinValue();
+
+    if (!tonTransfer) {
+        return <ErrorAction />;
+    }
+
+    if (tonTransfer.recipient.address === wallet.rawAddress) {
+        return (
+            <ReceiveActivityAction
+                amount={format(tonTransfer.amount)}
+                sender={toAddressTextValue(
+                    tonTransfer.sender.name,
+                    formatAddress(tonTransfer.sender.address, network)
+                )}
+                symbol={BRAND_CONFIG.coinSymbolWithEx}
+                date={date}
+                isScam={tonTransfer.sender.isScam || isScam}
+                comment={tonTransfer.comment}
+                status={action.status}
+            />
+        );
+    }
+    return (
+        <SendActivityAction
+            amount={format(tonTransfer.amount)}
+            symbol={BRAND_CONFIG.coinSymbolWithEx}
+            recipient={toAddressTextValue(
+                tonTransfer.recipient.name,
+                formatAddress(tonTransfer.recipient.address, network)
+            )}
+            date={date}
+            isScam={isScam}
+            comment={tonTransfer.comment}
+            status={action.status}
+        />
+    );
+};
+
+const ExtraCurrencyTransferAction: FC<{
+    action: Action;
+    date: string;
+    isScam: boolean;
+}> = ({ action, date, isScam }) => {
+    const wallet = useActiveWallet();
+    const { extraCurrencyTransfer } = action;
+    const network = useActiveTonNetwork();
+
+    const format = useFormatCoinValue();
+
+    if (!extraCurrencyTransfer) {
+        return <ErrorAction />;
+    }
+
+    if (extraCurrencyTransfer.recipient.address === wallet.rawAddress) {
+        return (
+            <ReceiveActivityAction
+                amount={format(
+                    extraCurrencyTransfer.amount,
+                    extraCurrencyTransfer.currency.decimals
+                )}
+                sender={toAddressTextValue(
+                    extraCurrencyTransfer.sender.name,
+                    formatAddress(extraCurrencyTransfer.sender.address, network)
+                )}
+                symbol={extraCurrencyTransfer.currency.symbol}
+                date={date}
+                isScam={extraCurrencyTransfer.sender.isScam || isScam}
+                comment={extraCurrencyTransfer.comment}
+                status={action.status}
+            />
+        );
+    }
+    return (
+        <SendActivityAction
+            amount={format(extraCurrencyTransfer.amount, extraCurrencyTransfer.currency.decimals)}
+            symbol={extraCurrencyTransfer.currency.symbol}
+            recipient={toAddressTextValue(
+                extraCurrencyTransfer.recipient.name,
+                formatAddress(extraCurrencyTransfer.recipient.address, network)
+            )}
+            date={date}
+            isScam={isScam}
+            comment={extraCurrencyTransfer.comment}
+            status={action.status}
+        />
+    );
+};
+
+export const SmartContractExecAction: FC<{
+    action: Action;
+    date: string;
+}> = ({ action, date }) => {
+    const { t } = useTranslation();
+    const { smartContractExec } = action;
+    const wallet = useActiveWallet();
+    const format = useFormatCoinValue();
+    const network = useActiveTonNetwork();
+
+    if (!smartContractExec) {
+        return <ErrorAction />;
+    }
+
+    if (seeIfAddressEqual(smartContractExec.contract.address, wallet.rawAddress)) {
+        return (
+            <ListItemGrid>
+                <ActivityIcon status={action.status}>
+                    <ContractDeployIcon />
+                </ActivityIcon>
+                <ColumnLayout
+                    title={t('transactions_smartcontract_exec')}
+                    amount={<>+&thinsp;{format(smartContractExec.tonAttached)}</>}
+                    green
+                    entry={BRAND_CONFIG.coinSymbolWithEx}
+                    address={formatAddress(smartContractExec.contract.address, network)}
+                    date={date}
+                />
+                <FailedNote status={action.status} />
+            </ListItemGrid>
+        );
+    } else {
+        return (
+            <ListItemGrid>
+                <ActivityIcon status={action.status}>
+                    <ContractDeployIcon />
+                </ActivityIcon>
+                <ColumnLayout
+                    title={t('transactions_smartcontract_exec')}
+                    amount={<>-&thinsp;{format(smartContractExec.tonAttached)}</>}
+                    entry={BRAND_CONFIG.coinSymbolWithEx}
+                    address={formatAddress(smartContractExec.contract.address, network, true)}
+                    date={date}
+                />
+                <FailedNote status={action.status} />
+            </ListItemGrid>
+        );
+    }
+};
+
+const AuctionBidAction: FC<{
+    action: Action;
+    date: string;
+}> = ({ action, date }) => {
+    const { t } = useTranslation();
+    const { auctionBid } = action;
+    const network = useActiveTonNetwork();
+    const format = useFormatCoinValue();
+
+    if (!auctionBid) {
+        return <ErrorAction />;
+    }
+
+    return (
+        <ListItemGrid>
+            <ActivityIcon status={action.status}>
+                <SentIcon />
+            </ActivityIcon>
+            <Description>
+                <FirstLine>
+                    <FirstLabel>{t('transaction_type_bid')}</FirstLabel>
+                    <AmountText>-&thinsp;{format(auctionBid.amount.value)}</AmountText>
+                    <AmountText>{auctionBid.amount.tokenName}</AmountText>
+                </FirstLine>
+                <SecondLine>
+                    {(auctionBid.auctionType as string) !== '' ? (
+                        <SecondaryText>{auctionBid.auctionType}</SecondaryText>
+                    ) : (
+                        <AddressText>
+                            {formatAddress(auctionBid.auction.address, network, true)}
+                        </AddressText>
+                    )}
+                    <SecondaryText>{date}</SecondaryText>
+                </SecondLine>
+            </Description>
+            <FailedNote status={action.status} />
+        </ListItemGrid>
+    );
+};
+
+const DomainRenewAction: FC<{
+    action: Action;
+    date: string;
+}> = ({ action, date }) => {
+    const { domainRenew, simplePreview } = action;
+
+    if (!domainRenew) {
+        return <ErrorAction />;
+    }
+
+    return (
+        <ListItemGrid>
+            <ActivityIcon status={action.status}>
+                <SentIcon />
+            </ActivityIcon>
+            <Description>
+                <FirstLine>
+                    <FirstLabel>{simplePreview.name}</FirstLabel>
+                </FirstLine>
+                <SecondLine>
+                    <SecondaryText>{domainRenew.domain}</SecondaryText>
+                    <SecondaryText>{date}</SecondaryText>
+                </SecondLine>
+            </Description>
+            <FailedNote status={action.status} />
+        </ListItemGrid>
+    );
+};
+
+export const PurchaseAction: FC<{
+    action: Action;
+    date: string;
+}> = ({ action, date }) => {
+    const { purchase } = action;
+    const { t } = useTranslation();
+
+    const tokenAmount = useMemo(() => {
+        if (!purchase) {
+            return '';
+        }
+
+        return new AssetAmount({
+            weiAmount: purchase.amount.value,
+            asset: {
+                id: '',
+                decimals: purchase.amount.decimals,
+                symbol: purchase.amount.tokenName,
+                scaledUIMultiplier: scaledUIMultiplierOne
+            }
+        }).stringAssetRelativeAmount;
+    }, [purchase]);
+
+    if (!purchase) {
+        return <ErrorAction />;
+    }
+
+    return (
+        <ListItemGrid>
+            <ActivityIcon status={action.status}>
+                <PurchaseIcon28 />
+            </ActivityIcon>
+            <Description>
+                <FirstLine>
+                    <FirstLabel>{t('transaction_type_purchase')}</FirstLabel>
+                    <AmountText>-&thinsp;{tokenAmount}</AmountText>
+                </FirstLine>
+                <SecondLine>
+                    <SecondaryText>
+                        {t('transaction_type_purchase_description', {
+                            invoice: purchase.invoiceId
+                        })}
+                    </SecondaryText>
+                    <SecondaryText>{date}</SecondaryText>
+                </SecondLine>
+            </Description>
+            <FailedNote status={action.status} />
+        </ListItemGrid>
+    );
+};
+
+export const SimplePreviewAction: FC<{
+    action: Action;
+    date: string;
+    isScam: boolean;
+}> = ({ action, date, isScam }) => {
+    const { t } = useTranslation();
+    const { simplePreview } = action;
+
+    if (!simplePreview) {
+        return <ErrorAction />;
+    }
+
+    return (
+        <ListItemGrid>
+            <ActivityIcon status={action.status}>
+                <ContractDeployIcon />
+            </ActivityIcon>
+            <Description>
+                <FirstLine>
+                    <FirstLabel>{isScam ? t('spam_action') : simplePreview.name}</FirstLabel>
+                    {simplePreview.value && !isScam && (
+                        <AmountText>{simplePreview.value}</AmountText>
+                    )}
+                </FirstLine>
+                <SecondLine>
+                    {!isScam && <SecondaryText>{simplePreview.description}</SecondaryText>}
+                    <SecondaryText>{date}</SecondaryText>
+                </SecondLine>
+            </Description>
+            <FailedNote status={action.status} />
+        </ListItemGrid>
+    );
+};
+
+export const ActivityAction: FC<{
+    action: Action;
+    date: string;
+    isScam: boolean;
+    // eslint-disable-next-line complexity
+}> = ({ action, isScam, date }) => {
+    const { t } = useTranslation();
+
+    switch (action.type) {
+        case 'TonTransfer':
+            return <TonTransferAction action={action} date={date} isScam={isScam} />;
+        case 'NftItemTransfer':
+            return <NftItemTransferAction action={action} date={date} />;
+        case 'NftPurchase':
+            return <NftPurchaseAction action={action} date={date} />;
+        case 'ContractDeploy':
+            return <ContractDeployAction action={action} date={date} />;
+        case 'UnSubscribe':
+            return <UnSubscribeAction action={action} date={date} />;
+        case 'Subscribe':
+            return <SubscribeAction action={action} date={date} />;
+        case 'AuctionBid':
+            return <AuctionBidAction action={action} date={date} />;
+        case 'SmartContractExec':
+            return <SmartContractExecAction action={action} date={date} />;
+        case 'JettonTransfer':
+            return <JettonTransferAction action={action} date={date} />;
+        case 'JettonSwap':
+            return <JettonSwapAction action={action} date={date} />;
+        case 'JettonBurn':
+            return <JettonBurnAction action={action} date={date} />;
+        case 'JettonMint':
+            return <JettonMintAction action={action} date={date} />;
+        case 'DepositStake':
+            return <DepositStakeAction action={action} date={date} />;
+        case 'WithdrawStake':
+            return <WithdrawStakeAction action={action} date={date} />;
+        case 'WithdrawStakeRequest':
+            return <WithdrawRequestStakeAction action={action} date={date} />;
+        case 'DomainRenew':
+            return <DomainRenewAction action={action} date={date} />;
+        case 'ExtraCurrencyTransfer':
+            return <ExtraCurrencyTransferAction action={action} date={date} isScam={isScam} />;
+        case 'Purchase':
+            return <PurchaseAction action={action} date={date} />;
+        case 'ElectionsDepositStake':
+        case 'ElectionsRecoverStake':
+        case 'AddExtension':
+        case 'RemoveExtension':
+        case 'SetSignatureAllowedAction':
+        case 'GasRelay':
+        case 'DepositTokenStake':
+        case 'WithdrawTokenStakeRequest':
+        case 'LiquidityDeposit':
+            return <SimplePreviewAction action={action} date={date} isScam={isScam} />;
+        case 'Unknown':
+            return <ErrorAction>{t('txActions_signRaw_types_unknownTransaction')}</ErrorAction>;
+        default: {
+            assertUnreachableSoft(action.type);
+            return <SimplePreviewAction action={action} date={date} isScam={isScam} />;
+        }
+    }
+};

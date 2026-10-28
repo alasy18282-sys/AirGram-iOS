@@ -1,0 +1,242 @@
+import { useMutation } from '@tanstack/react-query';
+import {
+    RpcMethod,
+    WalletResponse,
+    TonConnectAppRequest,
+    TonConnectAppRequestPayload
+} from '@tonkeeper/core/dist/entries/tonConnect';
+import { TonConnectError } from '@tonkeeper/core/dist/entries/exception';
+import {
+    replyHttpBadRequestResponse,
+    replyHttpDisconnectResponse
+} from '@tonkeeper/core/dist/service/tonConnect/actionService';
+import { checkTonConnectFromAndNetwork } from '@tonkeeper/core/dist/service/tonConnect/connectService';
+import { subscribeTonConnect } from '@tonkeeper/core/dist/service/tonConnect/httpBridge';
+import { useCallback, useEffect, useState } from 'react';
+import { useAppSdk } from '../../hooks/appSdk';
+import {
+    tonConnectAppManuallyDisconnected$,
+    useAppTonConnectConnections,
+    useDisconnectTonConnectConnection,
+    useTonConnectLastEventId
+} from '../../state/tonConnect';
+import { useActiveWallet, useMutateActiveTonWallet } from '../../state/wallet';
+import { listenBroadcastMessages, sendBroadcastMessage } from '../../libs/web';
+import { TonConnectRequestNotification } from './TonConnectRequestNotification';
+import { useTonConnectHttpResponseMutation } from './connectHook';
+import { useAppContext } from '../../hooks/appContext';
+
+const useUnSupportMethodMutation = () => {
+    return useMutation<void, Error, TonConnectAppRequest<'http'> & { bridgeEndpoint: string }>(
+        replyHttpBadRequestResponse
+    );
+};
+
+const BROADCAST_TAG = 'TK_WEB::TON_CONNECT';
+
+const WebTonConnectSubscription = () => {
+    const [request, setRequest] = useState<TonConnectAppRequestPayload | undefined>(undefined);
+
+    const sdk = useAppSdk();
+    const wallet = useActiveWallet();
+    const { data: appConnections } = useAppTonConnectConnections('http');
+    const { data: lastEventId } = useTonConnectLastEventId();
+
+    const disconnect = useDisconnectTonConnectConnection({ skipEmit: true });
+    const { mutate: badRequestResponse } = useUnSupportMethodMutation();
+
+    const { mutateAsync: setActiveWallet } = useMutateActiveTonWallet();
+    const { mutateAsync: sendResponse } = useTonConnectHttpResponseMutation();
+
+    const { mainnetConfig } = useAppContext();
+
+    useEffect(() => {
+        const openNotification = (clientSessionId: string, value: TonConnectAppRequestPayload) => {
+            const walletToActivate = appConnections?.find(i =>
+                i.connections.some(c => c.clientSessionId === clientSessionId)
+            );
+
+            if (walletToActivate) {
+                setActiveWallet(walletToActivate.wallet.id).then(() =>
+                    setTimeout(() => {
+                        setRequest(value);
+                    }, 100)
+                );
+            } else {
+                setTimeout(() => {
+                    setRequest(value);
+                }, 100);
+            }
+        };
+        const isValidRequest = async (
+            params: TonConnectAppRequest<'http'>,
+            payload: TonConnectAppRequestPayload['payload']
+        ): Promise<boolean> => {
+            const walletToActivate = appConnections?.find(i =>
+                i.connections.some(c => c.clientSessionId === params.connection.clientSessionId)
+            )?.wallet;
+
+            if (!walletToActivate) {
+                await replyHttpBadRequestResponse({
+                    ...params,
+                    message: 'Unknown session',
+                    bridgeEndpoint: mainnetConfig.ton_connect_bridge
+                });
+                return false;
+            }
+
+            try {
+                await checkTonConnectFromAndNetwork(sdk.storage, walletToActivate, payload);
+                return true;
+            } catch (e) {
+                await replyHttpBadRequestResponse({
+                    ...params,
+                    message: e instanceof TonConnectError ? e.message : 'Bad request',
+                    bridgeEndpoint: mainnetConfig.ton_connect_bridge
+                });
+                return false;
+            }
+        };
+
+        const handleMessage = async (params: TonConnectAppRequest<'http'>) => {
+            switch (params.request.method) {
+                case 'disconnect': {
+                    return disconnect(params.connection).then(() =>
+                        replyHttpDisconnectResponse({
+                            ...params,
+                            bridgeEndpoint: mainnetConfig.ton_connect_bridge
+                        })
+                    );
+                }
+                case 'sendTransaction': {
+                    const value: TonConnectAppRequestPayload = {
+                        connection: params.connection,
+                        id: params.request.id,
+                        kind: 'sendTransaction',
+                        payload: JSON.parse(params.request.params[0])
+                    };
+                    if (!(await isValidRequest(params, value.payload))) {
+                        return;
+                    }
+                    setRequest(undefined);
+                    return openNotification(params.connection.clientSessionId, value);
+                }
+                case 'signData': {
+                    const value: TonConnectAppRequestPayload = {
+                        connection: params.connection,
+                        id: params.request.id,
+                        kind: 'signData',
+                        payload: JSON.parse(params.request.params[0])
+                    };
+                    if (!(await isValidRequest(params, value.payload))) {
+                        return;
+                    }
+                    setRequest(undefined);
+                    return openNotification(params.connection.clientSessionId, value);
+                }
+                default: {
+                    return badRequestResponse({
+                        ...params,
+                        bridgeEndpoint: mainnetConfig.ton_connect_bridge
+                    });
+                }
+            }
+        };
+
+        const { notifications } = sdk;
+        (async () => {
+            if (notifications && appConnections) {
+                try {
+                    const enable = await notifications.subscribed(wallet.rawAddress);
+                    if (enable) {
+                        for (const connection of appConnections.flatMap(i => i.connections)) {
+                            await notifications.subscribeTonConnect(
+                                connection.clientSessionId,
+                                new URL(connection.manifest.url).host
+                            );
+                        }
+                    }
+                } catch (e) {
+                    if (e instanceof Error) sdk.topMessage(e.message);
+                }
+            }
+        })();
+
+        const close = subscribeTonConnect({
+            storage: sdk.storage,
+            handleMessage,
+            connections: appConnections?.flatMap(i => i.connections),
+            lastEventId,
+            bridgeEndpoint: mainnetConfig.ton_connect_bridge
+        });
+
+        return () => {
+            close();
+        };
+    }, [
+        sdk,
+        appConnections,
+        lastEventId,
+        disconnect,
+        setRequest,
+        setActiveWallet,
+        badRequestResponse,
+        mainnetConfig.ton_connect_bridge,
+        wallet.rawAddress
+    ]);
+
+    const handleClose = useCallback(
+        async (result: WalletResponse<RpcMethod>) => {
+            if (!request) return;
+            setRequest(undefined);
+
+            if (request.connection.type === 'http') {
+                await sendResponse({
+                    connection: request.connection,
+                    response: result
+                });
+            }
+            sendBroadcastMessage(
+                BROADCAST_TAG,
+                JSON.stringify({ event: 'close-tx-confirmation', id: request.id })
+            );
+        },
+        [request, setRequest, sendResponse]
+    );
+
+    useEffect(() => {
+        if (!request) {
+            return;
+        }
+
+        return listenBroadcastMessages(BROADCAST_TAG, message => {
+            const val = JSON.parse(message);
+            if (val.id !== request.id) {
+                return;
+            }
+
+            if (val.event === 'close-tx-confirmation') {
+                setRequest(undefined);
+            }
+        });
+    }, [request]);
+
+    useEffect(() => {
+        return tonConnectAppManuallyDisconnected$.subscribe(connection => {
+            const connectionsToDisconnect = Array.isArray(connection) ? connection : [connection];
+            connectionsToDisconnect.forEach((item, index) => {
+                if (item.type === 'http') {
+                    replyHttpDisconnectResponse({
+                        connection: item,
+                        request: { id: (Date.now() + index).toString() },
+                        bridgeEndpoint: mainnetConfig.ton_connect_bridge
+                    });
+                }
+            });
+        });
+    }, [mainnetConfig.ton_connect_bridge]);
+
+    return <TonConnectRequestNotification request={request} handleClose={handleClose} />;
+};
+
+export default WebTonConnectSubscription;

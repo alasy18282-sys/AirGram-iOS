@@ -1,0 +1,39 @@
+--- _airgram_ref/handlers/media.py	2026-07-12 16:57:34.423533130 +0000
++++ handlers/media.py	2026-07-12 16:15:25.626111821 +0000
+@@ -97,24 +97,18 @@
+     return path if path.is_file() else None
+ 
+ 
+-def _jpg_to_stripped(jpeg: bytes, width: int, height: int) -> Optional[bytes]:
+-    """Build photoStrippedSize payload from JPEG bytes (Telegram format)."""
+-    if len(jpeg) < 10 or jpeg[:2] != b'\xff\xd8':
+-        return None
+-    body = jpeg
+-    if body.endswith(b'\xff\xd9'):
+-        body = body[:-2]
+-    start = body.find(b'\xff\xc0')
+-    if start < 0:
+-        start = body.find(b'\xff\xc2')
+-    if start < 0:
+-        return None
+-    body = body[start:]
+-    if len(body) > 600:
+-        body = body[:600]
+-    w = max(1, min(255, int(width)))
+-    h = max(1, min(255, int(height)))
+-    return bytes([1, w, h]) + body
++def _jpg_to_stripped(jpeg: bytes, width: int = 0, height: int = 0) -> Optional[bytes]:
++    """Build Telegram stripped-thumb bytes (version + h + w + JPEG scan).
++
++    Desktop reconstructs thumbs by prepending a *fixed* JPEG header (see
++    tdesktop image.cpp / Telethon stripped_photo_to_jpg). Arbitrary JPEG bodies
++    (wrong DQT/DHT) produce corrupt images; decode/scale then hits
++    SafeRound(NaN) → Assertion Failed "!std::isnan(value)".
++
++    We omit stripped thumbs until we can emit header-compatible payloads.
++    Profile photos still work via photoSize + download.
++    """
++    return None
+ 
+ 
+ def _photo_inline_bytes(path: Path, *, max_bytes: int = 65536) -> Optional[bytes]:

@@ -1,0 +1,144 @@
+import { APIConfig } from '../../../entries/apis';
+import { walletContractFromState } from '../../wallet/contractService';
+import { externalMessage, getServerTime, getTTL, getWalletSeqNo } from '../utils';
+import { CellSigner } from '../../../entries/signer';
+import { WalletOutgoingMessage } from '../encoder/types';
+import { BlockchainApi, EmulationApi } from '../../../tonApiV2';
+import { isW5Version, TonWalletStandard, WalletVersion } from '../../../entries/wallet';
+import { WalletContractV5R1 } from '@ton/ton/dist/wallets/WalletContractV5R1';
+import { ISender } from './ISender';
+import { AssetAmount } from '../../../entries/crypto/asset/asset-amount';
+import { TON_ASSET } from '../../../entries/crypto/asset/constants';
+import { OutActionWalletV5 } from '@ton/ton/dist/wallets/v5beta/WalletV5OutActions';
+import { WalletContractV5Beta } from '@ton/ton/dist/wallets/WalletContractV5Beta';
+import { OutActionWalletV4, WalletContractV4 } from '@ton/ton/dist/wallets/WalletContractV4';
+
+type Outgoing = WalletOutgoingMessage | OutActionWalletV5[] | OutActionWalletV4;
+
+function isWalletOutgoing(msg: Outgoing): msg is WalletOutgoingMessage {
+    return typeof msg === 'object' && msg !== null && 'messages' in msg;
+}
+
+function isV4Action(msg: Outgoing): msg is OutActionWalletV4 {
+    return (
+        typeof msg === 'object' &&
+        'type' in msg &&
+        (msg.type === 'sendMsg' ||
+            msg.type === 'addAndDeployPlugin' ||
+            msg.type === 'addPlugin' ||
+            msg.type === 'removePlugin')
+    );
+}
+
+export class WalletMessageSender implements ISender {
+    constructor(
+        public readonly api: APIConfig,
+        private readonly wallet: TonWalletStandard,
+        private readonly signer: CellSigner
+    ) {}
+
+    public get excessAddress() {
+        return this.wallet.rawAddress;
+    }
+
+    public async send(outgoing: Outgoing) {
+        if (!isW5Version(this.wallet.version) && Array.isArray(outgoing)) {
+            throw new Error('This type of message can be sent only with wallet V5');
+        }
+
+        const external = await this.toExternal(outgoing);
+
+        await new BlockchainApi(this.api.tonApiV2).sendBlockchainMessage({
+            sendBlockchainMessageRequest: { boc: external.toBoc().toString('base64') }
+        });
+
+        return external;
+    }
+
+    public async estimate(outgoing: Outgoing) {
+        const external = await this.toExternal(outgoing);
+
+        const result = await new EmulationApi(this.api.tonApiV2).emulateMessageToWallet({
+            emulateMessageToWalletRequest: { boc: external.toBoc().toString('base64') }
+        });
+
+        return {
+            fee: {
+                type: 'ton-asset' as const,
+                extra: new AssetAmount({ asset: TON_ASSET, weiAmount: result.event.extra * -1 })
+            },
+            event: result.event
+        };
+    }
+
+    public async toExternal(msg: Outgoing) {
+        const timestamp = await getServerTime(this.api);
+        const seqno = await getWalletSeqNo(this.api, this.wallet.rawAddress);
+        const contract = walletContractFromState(this.wallet);
+
+        if (isV4Action(msg)) {
+            if (
+                !(contract instanceof WalletContractV4) ||
+                this.wallet.version !== WalletVersion.V4R2
+            ) {
+                throw new Error('V4 actions are supported only for V4R2');
+            }
+
+            const transfer = await contract.createRequest({
+                seqno,
+                signer: this.signer,
+                timeout: getTTL(timestamp),
+                action: msg
+            });
+
+            return externalMessage(contract, seqno, transfer);
+        }
+
+        if (Array.isArray(msg)) {
+            if (
+                !(
+                    contract instanceof WalletContractV5R1 ||
+                    contract instanceof WalletContractV5Beta
+                ) ||
+                !isW5Version(this.wallet.version)
+            ) {
+                throw new Error('V5 actions are supported only for V5R1');
+            }
+
+            let transfer;
+            if (contract instanceof WalletContractV5R1) {
+                transfer = await contract.createRequest({
+                    seqno,
+                    signer: this.signer,
+                    timeout: getTTL(timestamp),
+                    actions: msg
+                });
+            } else {
+                transfer = await contract.createRequest({
+                    seqno,
+                    signer: this.signer,
+                    timeout: getTTL(timestamp),
+                    actions: msg
+                });
+            }
+
+            return externalMessage(contract, seqno, transfer);
+        }
+
+        /**
+         * Handles v3r1/v3r2 wallets and generic messages for all wallet versions.
+         */
+        if (isWalletOutgoing(msg)) {
+            const transfer = await (contract as WalletContractV5R1).createTransfer({
+                seqno,
+                signer: this.signer,
+                timeout: getTTL(timestamp),
+                ...msg
+            });
+
+            return externalMessage(contract, seqno, transfer);
+        }
+
+        throw new Error('Unsupported wallet or message type');
+    }
+}

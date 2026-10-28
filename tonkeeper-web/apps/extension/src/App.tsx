@@ -1,0 +1,409 @@
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+import { localizationFrom } from '@tonkeeper/core/dist/entries/language';
+import { getApiConfig, setProApiUrl } from '@tonkeeper/core/dist/entries/network';
+import { WalletVersion } from '@tonkeeper/core/dist/entries/wallet';
+import { InnerBody, useWindowsScroll } from '@tonkeeper/uikit/dist/components/Body';
+import { CopyNotification } from '@tonkeeper/uikit/dist/components/CopyNotification';
+import { Footer, FooterGlobalStyle } from '@tonkeeper/uikit/dist/components/Footer';
+import { Header, HeaderGlobalStyle } from '@tonkeeper/uikit/dist/components/Header';
+import { GlobalListStyle } from '@tonkeeper/uikit/dist/components/List';
+import { Loading } from '@tonkeeper/uikit/dist/components/Loading';
+import MemoryScroll from '@tonkeeper/uikit/dist/components/MemoryScroll';
+import {
+    ActivitySkeletonPage,
+    BrowserSkeletonPage,
+    CoinSkeletonPage,
+    HomeSkeleton,
+    SettingsSkeletonPage
+} from '@tonkeeper/uikit/dist/components/Skeleton';
+import { SybHeaderGlobalStyle } from '@tonkeeper/uikit/dist/components/SubHeader';
+import {
+    AddFavoriteNotification,
+    EditFavoriteNotification
+} from '@tonkeeper/uikit/dist/components/transfer/FavoriteNotification';
+import { useTrackLocation } from '@tonkeeper/uikit/dist/hooks/analytics';
+import { AppContext, IAppContext } from '@tonkeeper/uikit/dist/hooks/appContext';
+import { AppSdkContext } from '@tonkeeper/uikit/dist/hooks/appSdk';
+import { useLock } from '@tonkeeper/uikit/dist/hooks/lock';
+import { StorageContext } from '@tonkeeper/uikit/dist/hooks/storage';
+import {
+    I18nContext,
+    TranslationContext,
+    useTWithReplaces
+} from '@tonkeeper/uikit/dist/hooks/translation';
+import { AppRoute, SettingsRoute } from '@tonkeeper/uikit/dist/libs/routes';
+import { Unlock } from '@tonkeeper/uikit/dist/pages/home/Unlock';
+import { UnlockNotification } from '@tonkeeper/uikit/dist/pages/home/UnlockNotification';
+import Initialize, { InitializeContainer } from '@tonkeeper/uikit/dist/pages/import/Initialize';
+import { UserThemeProvider } from '@tonkeeper/uikit/dist/providers/UserThemeProvider';
+import { useUserFiatQuery } from '@tonkeeper/uikit/dist/state/fiat';
+import { useTonendpoint, useTonenpointConfig } from '@tonkeeper/uikit/dist/state/tonendpoint';
+import { useActiveAccountQuery, useAccountsStateQuery } from '@tonkeeper/uikit/dist/state/wallet';
+import { Container, GlobalStyleCss } from '@tonkeeper/uikit/dist/styles/globalStyle';
+import React, { FC, PropsWithChildren, Suspense, useCallback, useEffect, useMemo } from 'react';
+import { MemoryRouter, Route, Switch, useLocation } from 'react-router-dom';
+import styled, { createGlobalStyle, css } from 'styled-components';
+import browser from 'webextension-polyfill';
+import { TonConnectSubscription } from './components/TonConnectSubscription';
+import { connectToBackground } from './event';
+import { ExtensionAppSdk } from './libs/appSdk';
+import { useAnalytics, useAppWidth } from './libs/hooks';
+import { useMutateUserLanguage } from '@tonkeeper/uikit/dist/state/language';
+import { useDevSettings } from '@tonkeeper/uikit/dist/state/dev';
+import { ModalsRoot } from '@tonkeeper/uikit/dist/components/ModalsRoot';
+import { Account } from '@tonkeeper/core/dist/entries/account';
+import { useDebuggingTools } from '@tonkeeper/uikit/dist/hooks/useDebuggingTools';
+import { useGlobalPreferencesQuery } from '@tonkeeper/uikit/dist/state/global-preferences';
+import { useGlobalSetup } from '@tonkeeper/uikit/dist/state/globalSetup';
+import { useNavigate } from '@tonkeeper/uikit/dist/hooks/router/useNavigate';
+import { useRealtimeUpdatesInvalidation } from '@tonkeeper/uikit/dist/hooks/realtime';
+import { RedirectFromDesktopSettings } from '@tonkeeper/uikit/dist/pages/settings/RedirectFromDesktopSettings';
+import { Notifications } from './components/Notifications';
+import { useProApiUrl } from '@tonkeeper/uikit/dist/state/pro';
+import { CustomConfirmNotificationControlled } from '@tonkeeper/uikit/dist/components/modals/CustomConfirmControlled';
+
+const Settings = React.lazy(() => import('@tonkeeper/uikit/dist/pages/settings'));
+const Browser = React.lazy(() => import('@tonkeeper/uikit/dist/pages/browser'));
+const Activity = React.lazy(() => import('@tonkeeper/uikit/dist/pages/activity/Activity'));
+const Home = React.lazy(() => import('@tonkeeper/uikit/dist/pages/home/Home'));
+const Coin = React.lazy(() => import('@tonkeeper/uikit/dist/pages/coin/Coin'));
+const SwapPage = React.lazy(() => import('@tonkeeper/uikit/dist/pages/swap'));
+const StakingPage = React.lazy(() => import('@tonkeeper/uikit/dist/pages/staking'));
+const QrScanner = React.lazy(() => import('@tonkeeper/uikit/dist/components/QrScanner'));
+const SendActionNotification = React.lazy(
+    () => import('@tonkeeper/uikit/dist/components/transfer/SendNotifications')
+);
+const ReceiveNotification = React.lazy(
+    () => import('@tonkeeper/uikit/dist/components/home/ReceiveNotification')
+);
+const NftNotification = React.lazy(
+    () => import('@tonkeeper/uikit/dist/components/nft/NftNotification')
+);
+const SendNftNotification = React.lazy(
+    () => import('@tonkeeper/uikit/dist/components/transfer/nft/SendNftNotification')
+);
+const ConnectLedgerNotification = React.lazy(
+    () => import('@tonkeeper/uikit/dist/components/ConnectLedgerNotification')
+);
+const SwapMobileNotification = React.lazy(
+    () => import('@tonkeeper/uikit/dist/pages/swap/SwapMobileNotification')
+);
+const PairKeystoneNotification = React.lazy(
+    () => import('@tonkeeper/uikit/dist/components/PairKeystoneNotification')
+);
+
+const ConnectLedgerPage = React.lazy(() => import('./components/ConnectLedgerPage'));
+
+const queryClient = new QueryClient({
+    defaultOptions: {
+        queries: {
+            staleTime: 30000,
+            refetchOnWindowFocus: false
+        }
+    }
+});
+
+const sdk = new ExtensionAppSdk();
+connectToBackground();
+
+const ExtensionGlobalStyle = createGlobalStyle`
+  ${GlobalStyleCss}
+  
+  body {
+      overflow-y: auto;
+  }
+`;
+
+export const App: FC<{ isInCustomPopup: boolean }> = ({ isInCustomPopup }) => {
+    const browserT = useCallback((key: string) => browser.i18n.getMessage(key), []);
+    const t = useTWithReplaces(browserT);
+
+    sdk.addWalletPage.isInCustomPopup = isInCustomPopup;
+
+    const translation = useMemo(() => {
+        const client: I18nContext = {
+            t,
+            i18n: {
+                enable: false,
+                reloadResources: async () => {},
+                changeLanguage: async () => {},
+                language: browser.i18n.getUILanguage(),
+                languages: []
+            }
+        };
+        return client;
+    }, [t]);
+
+    return (
+        <QueryClientProvider client={queryClient}>
+            <MemoryRouter>
+                <InitialRedirect>
+                    <AppSdkContext.Provider value={sdk}>
+                        <StorageContext.Provider value={sdk.storage}>
+                            <TranslationContext.Provider value={translation}>
+                                <UserThemeProvider>
+                                    <ExtensionGlobalStyle />
+                                    <HeaderGlobalStyle />
+                                    <FooterGlobalStyle />
+                                    <SybHeaderGlobalStyle />
+                                    <GlobalListStyle />
+                                    <Suspense
+                                        fallback={
+                                            <FullSizeWrapper standalone={false}>
+                                                <Loading />
+                                            </FullSizeWrapper>
+                                        }
+                                    >
+                                        <Loader />
+                                    </Suspense>
+                                    <UnlockNotification sdk={sdk} />
+                                </UserThemeProvider>
+                            </TranslationContext.Provider>
+                        </StorageContext.Provider>
+                    </AppSdkContext.Provider>
+                </InitialRedirect>
+            </MemoryRouter>
+        </QueryClientProvider>
+    );
+};
+
+const PageWrapper = styled(Container)`
+    min-width: 385px;
+
+    > * {
+        overflow: auto;
+        width: var(--app-width);
+        max-width: 548px;
+        box-sizing: border-box;
+    }
+`;
+
+const FullSizeWrapper = styled(Container)<{ standalone: boolean }>`
+    min-width: 385px;
+    height: 600px;
+    width: var(--app-width);
+
+    > * {
+        ${props =>
+            props.standalone &&
+            css`
+                overflow: auto;
+                width: var(--app-width);
+                max-width: 548px;
+                box-sizing: border-box;
+            `}
+    }
+`;
+
+const Wrapper = styled(FullSizeWrapper)<{
+    standalone: boolean;
+    recovery: boolean;
+}>`
+    box-sizing: border-box;
+    padding-top: ${props => (props.recovery ? 0 : 64)}px;
+    padding-bottom: 80px;
+`;
+
+export const Loader: FC = React.memo(() => {
+    const { data: activeAccount, isLoading: activeWalletLoading } = useActiveAccountQuery();
+    const { data: accounts, isLoading: isWalletsLoading } = useAccountsStateQuery();
+    const { data: fiat } = useUserFiatQuery();
+    const { mutate: setLang } = useMutateUserLanguage();
+    const { data: devSettings } = useDevSettings();
+    const { isLoading: globalPreferencesLoading } = useGlobalPreferencesQuery();
+    const { isLoading: globalSetupLoading } = useGlobalSetup();
+
+    useEffect(() => {
+        setLang(localizationFrom(browser.i18n.getUILanguage()));
+    }, [setLang]);
+
+    const lock = useLock(sdk);
+    const tonendpoint = useTonendpoint({
+        build: sdk.version,
+        lang: localizationFrom(browser.i18n.getUILanguage()),
+        platform: 'extension'
+    });
+    const { data: serverConfig } = useTonenpointConfig(tonendpoint);
+    const { data: proApiUrl } = useProApiUrl(serverConfig?.mainnetConfig);
+
+    const { data: tracker } = useAnalytics(
+        serverConfig?.mainnetConfig,
+        activeAccount || undefined,
+        accounts
+    );
+
+    if (
+        activeWalletLoading ||
+        isWalletsLoading ||
+        !serverConfig ||
+        lock === undefined ||
+        fiat === undefined ||
+        proApiUrl === undefined ||
+        !devSettings ||
+        globalPreferencesLoading ||
+        globalSetupLoading
+    ) {
+        return (
+            <FullSizeWrapper standalone={false}>
+                <Loading />
+            </FullSizeWrapper>
+        );
+    }
+
+    // set api url synchronously
+    setProApiUrl(proApiUrl);
+
+    const context: IAppContext = {
+        mainnetApi: getApiConfig(serverConfig.mainnetConfig),
+        testnetApi: getApiConfig(serverConfig.testnetConfig),
+        fiat,
+        mainnetConfig: serverConfig.mainnetConfig,
+        testnetConfig: serverConfig.testnetConfig,
+        tonendpoint,
+        ios: false,
+        standalone: true,
+        extension: true,
+        proFeatures: false,
+        hideQrScanner: true,
+        hideSigner: true,
+        hideMam: true,
+        hideMultisig: true,
+        hideFireblocks: true,
+        defaultWalletVersion: WalletVersion.V5R1,
+        tracker: tracker?.track
+    };
+
+    return (
+        <AppContext.Provider value={context}>
+            <Content activeAccount={activeAccount} lock={lock} />
+            <CopyNotification />
+            <Suspense fallback={<></>}>
+                <QrScanner />
+            </Suspense>
+            <ModalsRoot />
+            <CustomConfirmNotificationControlled />
+        </AppContext.Provider>
+    );
+});
+
+const InitialRedirect: FC<PropsWithChildren> = ({ children }) => {
+    const navigate = useNavigate();
+
+    useEffect(() => {
+        if (window.location.hash) {
+            navigate(window.location.hash.substring(1));
+        }
+    }, [navigate]);
+
+    return <>{children}</>;
+};
+
+export const Content: FC<{
+    activeAccount?: Account | null;
+    lock: boolean;
+}> = ({ activeAccount, lock }) => {
+    const location = useLocation();
+
+    const pageView = !activeAccount || location.pathname.startsWith(AppRoute.import);
+
+    useWindowsScroll(!pageView);
+    useAppWidth();
+    useTrackLocation();
+    useDebuggingTools();
+    useRealtimeUpdatesInvalidation();
+
+    if (location.pathname === AppRoute.connectLedger) {
+        return (
+            <PageWrapper>
+                <Suspense fallback={<Loading />}>
+                    <ConnectLedgerPage />
+                </Suspense>
+            </PageWrapper>
+        );
+    }
+
+    if (lock) {
+        return <Unlock />;
+    }
+
+    if (pageView) {
+        return (
+            <PageWrapper>
+                <Suspense fallback={<Loading />}>
+                    <InitializeContainer>
+                        <Initialize />
+                    </InitializeContainer>
+                </Suspense>
+            </PageWrapper>
+        );
+    }
+
+    return (
+        <Wrapper standalone recovery={location.pathname.includes(SettingsRoute.recovery)}>
+            <Switch>
+                <Route path={AppRoute.activity}>
+                    <Suspense fallback={<ActivitySkeletonPage />}>
+                        <Activity />
+                    </Suspense>
+                </Route>
+                <Route path={AppRoute.browser}>
+                    <Suspense fallback={<BrowserSkeletonPage />}>
+                        <Browser />
+                    </Suspense>
+                </Route>
+                <Route path={AppRoute.settings}>
+                    <Suspense fallback={<SettingsSkeletonPage />}>
+                        <Settings />
+                    </Suspense>
+                </Route>
+                <Route path={AppRoute.walletSettings}>
+                    <RedirectFromDesktopSettings />
+                </Route>
+                <Route path={`${AppRoute.coins}/:name`}>
+                    <Suspense fallback={<CoinSkeletonPage />}>
+                        <Coin />
+                    </Suspense>
+                </Route>
+                <Route path={AppRoute.swap}>
+                    <Suspense fallback={null}>
+                        <SwapPage />
+                    </Suspense>
+                </Route>
+                <Route path={AppRoute.staking}>
+                    <Suspense fallback={null}>
+                        <StakingPage />
+                    </Suspense>
+                </Route>
+                <Route path="*" component={IndexPage} />
+            </Switch>
+            <Footer />
+            <MemoryScroll />
+            <Notifications />
+            <TonConnectSubscription />
+            <Suspense>
+                <SendActionNotification />
+                <ReceiveNotification />
+                <NftNotification />
+                <SendNftNotification />
+                <AddFavoriteNotification />
+                <EditFavoriteNotification />
+                <ConnectLedgerNotification />
+                <SwapMobileNotification />
+                <PairKeystoneNotification />
+            </Suspense>
+        </Wrapper>
+    );
+};
+
+const IndexPage = () => {
+    return (
+        <>
+            <Header showQrScan={false} />
+            <InnerBody>
+                <Suspense fallback={<HomeSkeleton />}>
+                    <Home />
+                </Suspense>
+            </InnerBody>
+        </>
+    );
+};

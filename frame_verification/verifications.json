@@ -1,0 +1,90 @@
+{
+  "telegram": {
+    "title": "Telegram",
+    "organization": "Telegram",
+    "pack": "https://t.me/addemoji/VerifiedTgUser",
+    "index": 1,
+    "indexBase": 1,
+    "documentId": 5208598288302890241,
+    "price": 0,
+    "adminOnly": true,
+    "description": ""
+  },
+  "gift": {
+    "title": "Gift",
+    "organization": "Gift",
+    "pack": "https://t.me/addemoji/VerifiedTgUser",
+    "index": 7,
+    "indexBase": 1,
+    "documentId": 5206299458597319119,
+    "price": 0,
+    "adminOnly": true,
+    "description": ""
+  },
+  "major": {
+    "title": "Major",
+    "organization": "Major",
+    "pack": "https://t.me/addemoji/MajorVerification",
+    "index": 1,
+    "indexBase": 1,
+    "documentId": 5229027828527309057,
+    "price": 0,
+    "adminOnly": true,
+    "description": ""
+  },
+  "hold": {
+    "title": "Hold",
+    "organization": "Hold",
+    "pack": "https://t.me/addemoji/holdverification",
+    "index": 1,
+    "indexBase": 1,
+    "documentId": 5454206456981130690,
+    "price": 0,
+    "adminOnly": true,
+    "description": ""
+  },
+  "gosuslugi": {
+    "title": "Gosuslugi",
+    "organization": "Gosuslugi",
+    "pack": "https://t.me/addemoji/VerifiedTgUser",
+    "index": 11,
+    "indexBase": 1,
+    "documentId": 5208433275659378741,
+    "price": 0,
+    "adminOnly": true,
+    "description": ""
+  },
+  "rkn": {
+    "title": "RKN",
+    "organization": "RKN",
+    "pack": "https://t.me/addemoji/VerifiedTgUser",
+    "index": 12,
+    "indexBase": 1,
+    "documentId": 5208765749077762361,
+    "price": 0,
+    "adminOnly": true,
+    "description": ""
+  },
+  "aplus": {
+    "title": "A+",
+    "organization": "A+",
+    "pack": "https://t.me/addemoji/UtilityTgs",
+    "index": 1,
+    "indexBase": 1,
+    "documentId": 5456352553354685757,
+    "price": 0,
+    "adminOnly": true,
+    "description": ""
+  },
+  "frame": {
+    "title": "Frame",
+    "organization": "Frame",
+    "pack": "https://t.me/addemoji/CustomVerifications",
+    "index": 2,
+    "indexBase": 1,
+    "documentId": 5341801360344000141,
+    "price": 0,
+    "adminOnly": true,
+    "description": ""
+  }
+}

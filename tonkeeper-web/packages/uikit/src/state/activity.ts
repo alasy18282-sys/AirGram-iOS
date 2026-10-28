@@ -1,0 +1,713 @@
+import { useInfiniteQuery, useQueryClient } from '@tanstack/react-query';
+import type { QueryClient } from '@tanstack/react-query';
+import { CryptoCurrency } from '@tonkeeper/core/dist/entries/crypto';
+import {
+    isTon,
+    tonAssetAddressToString
+} from '@tonkeeper/core/dist/entries/crypto/asset/ton-asset';
+import { intlLocale } from '@tonkeeper/core/dist/entries/language';
+import { AccountEvent, AccountEvents, AccountsApi, Action } from '@tonkeeper/core/dist/tonApiV2';
+import { Dispatch, SetStateAction, useCallback, useEffect, useLayoutEffect, useMemo, useState } from 'react';
+import { useAtom } from '../libs/useAtom';
+import { QueryKey } from '../libs/queryKey';
+import { useGlobalPreferences, useMutateGlobalPreferences } from './global-preferences';
+import { seeIfExtraCurrencyTransfer, seeIfTonTransfer } from './ton/tonActivity';
+import { useActiveApi, useActiveWallet } from './wallet';
+import { debounce, seeIfValidTonAddress } from '@tonkeeper/core/dist/utils/common';
+import { useTwoFAWalletConfig } from './two-fa';
+import { useActiveTronWallet, useTronApi } from './tron/tron';
+import { APIConfig } from '@tonkeeper/core/dist/entries/apis';
+import { TonContract } from '@tonkeeper/core/dist/entries/wallet';
+import { TronApi, TronHistoryItem } from '@tonkeeper/core/dist/tronApi';
+import { TRON_USDT_ASSET } from '@tonkeeper/core/dist/entries/crypto/asset/constants';
+import { Asset, isTonAsset } from '@tonkeeper/core/dist/entries/crypto/asset/asset';
+import { useBatteryAuthToken } from './battery';
+import { atom } from '@tonkeeper/core/dist/entries/atom';
+import { useTranslation } from '../hooks/translation';
+import { TronTonSender } from '@tonkeeper/core/dist/service/tron-blockchain/sender/tron-ton-sender';
+import {
+    KOALGRAM_KEY,
+    KoalGramWallet,
+    koalGramAccount,
+    koalGramGet,
+    koalGramSystemAccount,
+    useKoalGramLinkedAddress
+} from './koalgram';
+
+export const formatActivityDate = (language: string, key: string, timestamp: number): string => {
+    const date = new Date(timestamp);
+    language = intlLocale(language);
+
+    if (date.getFullYear() < new Date().getFullYear()) {
+        return new Intl.DateTimeFormat(language, {
+            day: 'numeric',
+            month: 'short'
+        }).format(date);
+    } else if (key.startsWith('year')) {
+        return new Intl.DateTimeFormat(language, {
+            day: 'numeric',
+            month: 'short',
+            hour: '2-digit',
+            minute: '2-digit'
+        }).format(date);
+    } else {
+        return new Intl.DateTimeFormat(language, { timeStyle: 'short' }).format(date);
+    }
+};
+
+const capitalize = (str: string) => str.charAt(0).toUpperCase() + str.slice(1);
+
+export const getActivityTitle = (language: string, key: string, timestamp: number) => {
+    language = intlLocale(language);
+
+    if (key === 'today') {
+        return capitalize(
+            new Intl.RelativeTimeFormat(language, { numeric: 'auto' }).format(0, 'day')
+        );
+    }
+    if (key === 'yesterday') {
+        return capitalize(
+            new Intl.RelativeTimeFormat(language, { numeric: 'auto' }).format(-1, 'day')
+        );
+    }
+    const date = new Date(timestamp);
+    if (key.startsWith('month')) {
+        return capitalize(
+            new Intl.DateTimeFormat(language, {
+                day: 'numeric',
+                month: 'long'
+            }).format(date)
+        );
+    } else if (date.getFullYear() < new Date().getFullYear()) {
+        return capitalize(
+            new Intl.DateTimeFormat(language, {
+                month: 'long',
+                year: 'numeric'
+            }).format(date)
+        );
+    } else {
+        return capitalize(
+            new Intl.DateTimeFormat(language, {
+                month: 'long'
+            }).format(date)
+        );
+    }
+};
+
+const getEventGroup = (timestamp: number, today: Date, yesterday: Date): string => {
+    const date = new Date(timestamp);
+
+    if (today.toDateString() === date.toDateString()) {
+        return 'today';
+    }
+    if (yesterday.toDateString() === date.toDateString() && today.getMonth() === date.getMonth()) {
+        return 'yesterday';
+    }
+    if (today.getMonth() === date.getMonth() && today.getFullYear() === date.getFullYear()) {
+        return `month-${date.getDate()}`;
+    }
+
+    return `year-${date.getFullYear()}-${date.getMonth() + 1}`;
+};
+
+type ActivityItemCommon = { timestamp: number; key: string };
+type ActivityItemTon = ActivityItemCommon & { type: 'ton'; event: AccountEvent };
+type ActivityItemTron = ActivityItemCommon & { type: 'tron'; event: TronHistoryItem };
+
+export type ActivityItem = ActivityItemTon | ActivityItemTron;
+export type ActivityItemsDatedGroup = [string, ActivityItem[]];
+
+type KoalGramActivityFilter = 'all' | 'ton' | 'none';
+
+type KoalGramLabels = { receive: string; sent: string };
+
+const buildKoalGramEvents = (
+    address: string,
+    displayAddress: string,
+    data: KoalGramWallet,
+    filter: KoalGramActivityFilter,
+    labels: KoalGramLabels
+): AccountEvent[] => {
+    if (filter === 'none') {
+        return [];
+    }
+
+    const walletAccount = koalGramAccount(displayAddress);
+    const systemAccount = koalGramSystemAccount();
+    const events: AccountEvent[] = [];
+
+    const event = (eventId: string, timestamp: number, action: Action): AccountEvent => ({
+        eventId,
+        account: walletAccount,
+        timestamp,
+        actions: [action],
+        isScam: false,
+        lt: timestamp,
+        inProgress: false,
+        extra: 0,
+        progress: 0
+    });
+
+    for (const tx of data.transactions ?? []) {
+        const rawAmount = Number(tx.amount) || 0;
+        if (!rawAmount) continue;
+        const isReceive = rawAmount > 0;
+        const action: Action = {
+            type: 'TonTransfer',
+            status: 'ok',
+            tonTransfer: {
+                sender: isReceive ? systemAccount : walletAccount,
+                recipient: isReceive ? walletAccount : systemAccount,
+                amount: Math.abs(rawAmount),
+                comment: tx.title || undefined
+            },
+            simplePreview: {
+                name: isReceive ? labels.receive : labels.sent,
+                description: tx.title || '',
+                accounts: []
+            },
+            baseTransactions: [tx.tx_id]
+        };
+        events.push(event(`koalgram-gram-${tx.tx_id}`, Number(tx.date) || 0, action));
+    }
+
+    if (filter === 'all') {
+        for (const item of data.activity ?? []) {
+            if (!item.nft_address || !item.kind?.startsWith('nft_')) continue;
+            const isSent = /(burn|withdraw|sent|transfer_out)/.test(item.kind);
+            const action: Action = {
+                type: 'NftItemTransfer',
+                status: 'ok',
+                nftItemTransfer: {
+                    sender: isSent ? walletAccount : systemAccount,
+                    recipient: isSent ? systemAccount : walletAccount,
+                    nft: item.nft_address,
+                    comment: item.data?.title || undefined
+                },
+                simplePreview: {
+                    name: isSent ? labels.sent : labels.receive,
+                    description: item.data?.title || '',
+                    accounts: []
+                },
+                baseTransactions: [item.tx_hash]
+            };
+            events.push(
+                event(
+                    `koalgram-${item.kind}-${item.tx_hash || item.nft_address}`,
+                    Number(item.ts) || 0,
+                    action
+                )
+            );
+        }
+    }
+
+    return events;
+};
+
+async function fetchKoalGramActivity(
+    client: QueryClient,
+    address: string,
+    displayAddress: string,
+    filter: KoalGramActivityFilter,
+    labels: KoalGramLabels
+): Promise<AccountEvent[]> {
+    if (filter === 'none') {
+        return [];
+    }
+    try {
+        const data = await client.fetchQuery<KoalGramWallet>(
+            [KOALGRAM_KEY, 'wallet', address],
+            () =>
+                koalGramGet<KoalGramWallet>(
+                    `/api/koalgram-nfts?address=${encodeURIComponent(address)}`
+                ),
+            { staleTime: 10000 }
+        );
+        return buildKoalGramEvents(address, displayAddress, data, filter, labels);
+    } catch (e) {
+        console.error('KoalGram wallet activity is unavailable', e);
+        return [];
+    }
+}
+
+export const groupActivityItems = (list: ActivityItem[]) => {
+    list.sort((a, b) => b.timestamp - a.timestamp);
+
+    const todayDate = new Date();
+    const yesterdayDate = new Date();
+    yesterdayDate.setDate(yesterdayDate.getDate() - 1);
+
+    const { today, yesterday, ...rest } = list.reduce((acc, item) => {
+        const group = getEventGroup(item.timestamp, todayDate, yesterdayDate);
+        if (acc[group]) {
+            acc[group].push(item);
+        } else {
+            acc[group] = [item];
+        }
+        return acc;
+    }, {} as Record<string, ActivityItem[]>);
+
+    const result = [] as ActivityItemsDatedGroup[];
+    if (today) {
+        result.push(['today', today]);
+    }
+    if (yesterday) {
+        result.push(['yesterday', yesterday]);
+    }
+
+    Object.entries(rest)
+        .filter(([key]) => key.startsWith('month'))
+        .forEach(item => result.push(item));
+
+    Object.entries(rest)
+        .filter(([key]) => key.startsWith('year'))
+        .forEach(item => result.push(item));
+
+    return result;
+};
+
+export const useFetchFilteredActivity = (assetAddress?: string) => {
+    const wallet = useActiveWallet();
+    const koalGramAddress = useKoalGramLinkedAddress(wallet.rawAddress) ?? wallet.rawAddress;
+    const api = useActiveApi();
+    const client = useQueryClient();
+    const { asset: selectedAsset, filterSpam, onlyInitiator } = useHistoryFilters();
+    const { data: twoFAConfig } = useTwoFAWalletConfig();
+    const twoFaPlugin = twoFAConfig?.status === 'active' ? twoFAConfig.pluginAddress : undefined;
+    const tronApi = useTronApi();
+    const tronWallet = useActiveTronWallet();
+    const { data: batteryAuthToken } = useBatteryAuthToken();
+    const {
+        t,
+        i18n: { language }
+    } = useTranslation();
+    const koalGramLabels = useMemo<KoalGramLabels>(
+        () => ({
+            receive: t('transaction_type_receive'),
+            sent: t('transaction_type_sent')
+        }),
+        [t, language]
+    );
+
+    const koalGramFilter = useMemo<KoalGramActivityFilter>(() => {
+        if (selectedAsset) {
+            return isTonAsset(selectedAsset) && isTon(selectedAsset.address) ? 'ton' : 'none';
+        }
+        if (assetAddress) {
+            return assetAddress.toLowerCase() === CryptoCurrency.TON.toLowerCase()
+                ? 'ton'
+                : 'none';
+        }
+        return 'all';
+    }, [selectedAsset, assetAddress]);
+
+    const query = useInfiniteQuery({
+        queryKey: [
+            wallet.rawAddress,
+            koalGramAddress,
+            QueryKey.activity,
+            assetAddress,
+            selectedAsset?.id,
+            onlyInitiator,
+            filterSpam,
+            twoFaPlugin,
+            tronWallet,
+            batteryAuthToken,
+            language
+        ],
+        queryFn: async ({ pageParam = undefined }) => {
+            let assetTonApiId: string | undefined;
+            let isTronUSDTAsset = false;
+            if (selectedAsset) {
+                if (selectedAsset.id === TRON_USDT_ASSET.id) {
+                    isTronUSDTAsset = true;
+                } else if (isTonAsset(selectedAsset)) {
+                    assetTonApiId = tonAssetAddressToString(selectedAsset.address);
+                }
+            }
+            if (assetAddress) {
+                if (assetAddress === TRON_USDT_ASSET.address) {
+                    isTronUSDTAsset = true;
+                } else {
+                    assetTonApiId =
+                        assetAddress.toLowerCase() === CryptoCurrency.TON.toLowerCase()
+                            ? 'TON'
+                            : assetAddress;
+                }
+            }
+
+            const emptyResult = Promise.resolve({
+                nextFrom: 0,
+                events: [] as never[]
+            });
+
+            const [tonActivity, tronActivity, koalGramEvents] = await Promise.all([
+                isTronUSDTAsset
+                    ? emptyResult
+                    : fetchTonActivity({
+                          pageParam: pageParam?.tonNextFrom,
+                          assetTonApiId,
+                          api,
+                          wallet,
+                          onlyInitiator,
+                          filterSpam,
+                          twoFaPluginAddress: twoFaPlugin,
+                          acceptLanguage: language.replaceAll('_', '-').split('-')[0]
+                      }).catch(e => {
+                          console.error('TonAPI activity fetch failed:', e);
+                          return emptyResult;
+                      }),
+                assetTonApiId
+                    ? emptyResult
+                    : fetchTronActivity({
+                          tronApi,
+                          tronWalletAddress: tronWallet?.address,
+                          pageParam: pageParam?.tronNextFrom,
+                          onlyInitiator,
+                          filterSpam,
+                          batteryAuthToken: batteryAuthToken ?? undefined
+                      }).catch(e => {
+                          console.error('Tron activity fetch failed:', e);
+                          return emptyResult;
+                      }),
+                pageParam
+                    ? Promise.resolve<AccountEvent[]>([])
+                    : fetchKoalGramActivity(
+                          client,
+                          koalGramAddress,
+                          wallet.rawAddress,
+                          koalGramFilter,
+                          koalGramLabels
+                      )
+            ]);
+
+            return {
+                tonNextFrom: tonActivity.nextFrom,
+                tronNextFrom: tronActivity.nextFrom,
+                events: sortAndPackActivityItems(
+                    [...tonActivity.events, ...koalGramEvents],
+                    tronActivity.events
+                )
+            };
+        },
+        getNextPageParam: lastPage =>
+            lastPage.tronNextFrom > 0 || lastPage.tonNextFrom > 0
+                ? { tonNextFrom: lastPage.tonNextFrom, tronNextFrom: lastPage.tronNextFrom }
+                : undefined,
+        keepPreviousData: true
+    });
+
+    const data = query.data ? query.data.pages.flatMap(i => i.events) : undefined;
+
+    return { ...query, data };
+};
+
+const sortAndPackActivityItems = (
+    tonItems: AccountEvent[],
+    tronItems: TronHistoryItem[]
+): ActivityItem[] => {
+    return [
+        ...tonItems.map(
+            item =>
+                ({
+                    type: 'ton' as const,
+                    timestamp: item.timestamp * 1000,
+                    key: item.eventId,
+                    event: item
+                } satisfies ActivityItemTon)
+        ),
+        ...tronItems.map(
+            item =>
+                ({
+                    type: 'tron' as const,
+                    timestamp: item.timestamp,
+                    key: item.transactionHash,
+                    event: item
+                } satisfies ActivityItemTron)
+        )
+    ].sort((a, b) => b.timestamp - a.timestamp);
+};
+
+async function fetchTronActivity({
+    tronApi,
+    tronWalletAddress,
+    pageParam,
+    onlyInitiator,
+    filterSpam,
+    batteryAuthToken
+}: {
+    tronApi: TronApi;
+    tronWalletAddress?: string;
+    pageParam?: number;
+    onlyInitiator: boolean;
+    filterSpam: boolean;
+    batteryAuthToken: string | undefined;
+}) {
+    if (pageParam === 0 || !tronWalletAddress) {
+        return {
+            nextFrom: 0,
+            events: []
+        };
+    }
+
+    const pageLimit = 20;
+
+    const tronActivity = await tronApi.getTransfersHistory(
+        tronWalletAddress,
+        {
+            limit: pageLimit,
+            maxTimestamp: pageParam ? pageParam - 1 : undefined,
+            onlyInitiator,
+            filterSpam
+        },
+        batteryAuthToken
+    );
+
+    const nextFrom =
+        tronActivity.length < pageLimit ? 0 : tronActivity[tronActivity.length - 1].timestamp;
+
+    return {
+        nextFrom,
+        events: tronActivity
+    };
+}
+
+async function fetchTonActivity({
+    pageParam = undefined,
+    assetTonApiId,
+    api,
+    wallet,
+    onlyInitiator,
+    filterSpam,
+    twoFaPluginAddress,
+    acceptLanguage
+}: {
+    pageParam?: number;
+    assetTonApiId?: string;
+    api: APIConfig;
+    wallet: TonContract;
+    onlyInitiator: boolean;
+    filterSpam: boolean;
+    twoFaPluginAddress?: string;
+    acceptLanguage: string | undefined;
+}) {
+    if (pageParam === 0) {
+        return {
+            nextFrom: 0,
+            events: []
+        };
+    }
+
+    let tonActivity: AccountEvents;
+    if (!assetTonApiId) {
+        tonActivity = await new AccountsApi(api.tonApiV2).getAccountEvents({
+            accountId: wallet.rawAddress,
+            limit: 20,
+            beforeLt: pageParam,
+            subjectOnly: true,
+            initiator: onlyInitiator ? onlyInitiator : undefined,
+            acceptLanguage
+        });
+    } else {
+        if (seeIfValidTonAddress(assetTonApiId)) {
+            tonActivity = await new AccountsApi(api.tonApiV2).getAccountJettonHistoryByID({
+                accountId: wallet.rawAddress,
+                jettonId: assetTonApiId!,
+                limit: 20,
+                beforeLt: pageParam,
+                acceptLanguage
+            });
+        } else if (assetTonApiId === 'TON') {
+            tonActivity = await new AccountsApi(api.tonApiV2).getAccountEvents({
+                accountId: wallet.rawAddress,
+                limit: 20,
+                beforeLt: pageParam,
+                subjectOnly: true,
+                initiator: onlyInitiator ? onlyInitiator : undefined,
+                acceptLanguage
+            });
+
+            tonActivity.events = tonActivity.events.filter(event => {
+                event.actions = event.actions.filter(seeIfTonTransfer);
+                return event.actions.length > 0;
+            });
+        } else {
+            tonActivity = await new AccountsApi(api.tonApiV2).getAccountEvents({
+                accountId: wallet.rawAddress,
+                limit: 20,
+                beforeLt: pageParam,
+                subjectOnly: true,
+                initiator: onlyInitiator ? onlyInitiator : undefined,
+                acceptLanguage
+            });
+
+            tonActivity.events = tonActivity.events.filter(event => {
+                event.actions = event.actions.filter(seeIfExtraCurrencyTransfer(assetTonApiId));
+                return event.actions.length > 0;
+            });
+        }
+    }
+
+    if (filterSpam) {
+        tonActivity.events = tonActivity.events.filter(e => !isScamEvent(e));
+    }
+
+    if (twoFaPluginAddress) {
+        tonActivity.events = tonActivity.events.map(event => {
+            if (
+                event.actions[0].tonTransfer &&
+                event.actions[0].tonTransfer.sender.address === twoFaPluginAddress
+            ) {
+                event.actions = event.actions.slice(1);
+            }
+
+            return event;
+        });
+    }
+
+    tonActivity.events = tonActivity.events.filter(e => !isTonTransfer(e));
+
+    return tonActivity;
+}
+
+function isTonTransfer(event: AccountEvent): boolean {
+    if (event.actions.length !== 1) {
+        return false;
+    }
+
+    if (event.actions[0].type !== 'TonTransfer' || !event.actions[0].tonTransfer) {
+        return false;
+    }
+
+    return event.actions[0].tonTransfer.comment === TronTonSender.identifyingComment;
+}
+
+function isScamEvent(e: AccountEvent): boolean {
+    if (
+        e.actions.some(
+            a =>
+                a.jettonTransfer?.jetton.verification === 'blacklist' ||
+                a.jettonMint?.jetton.verification === 'blacklist' ||
+                a.jettonSwap?.jettonMasterIn?.verification === 'blacklist' ||
+                a.jettonSwap?.jettonMasterOut?.verification === 'blacklist'
+        )
+    ) {
+        return true;
+    }
+
+    return e.isScam;
+}
+
+export type CategorizedActivityItemSingle = {
+    type: 'single';
+    item: ActivityItem;
+    key: string;
+};
+
+export type CategorizedActivityItemGroup = {
+    type: 'group';
+    items: ActivityItem[];
+    category: 'spam'; // probably will be other groupBy categories in the future
+    key: string;
+};
+
+export type CategorizedActivityItem = CategorizedActivityItemSingle | CategorizedActivityItemGroup;
+export type CategorizedActivity = CategorizedActivityItem[];
+
+export const defaultHistoryFilters = {
+    asset: undefined,
+    onlyInitiator: false,
+    filterSpam: false
+};
+
+const historyFilters$ = atom<{
+    asset: Asset | undefined;
+    onlyInitiator: boolean;
+    filterSpam: boolean;
+}>(defaultHistoryFilters);
+
+let isInited = false;
+
+export const useHistoryFilters = () => {
+    const [filters, setFilters] = useAtom(historyFilters$);
+    const { historyFilterSpam } = useGlobalPreferences();
+    const { mutate, reset } = useMutateGlobalPreferences();
+
+    useEffect(() => {
+        if (!isInited) {
+            isInited = true;
+            setFilters(f => ({ ...f, filterSpam: historyFilterSpam }));
+        }
+    }, [historyFilterSpam, setFilters]);
+
+    const toggleOnlyInitiator = useCallback(() => {
+        setFilters(f => ({ ...f, onlyInitiator: !f.onlyInitiator }));
+    }, [setFilters]);
+
+    const toggleFilterSpam = useCallback(() => {
+        reset();
+        mutate({ historyFilterSpam: !filters.filterSpam });
+        setFilters(f => ({ ...f, filterSpam: !f.filterSpam }));
+    }, [setFilters, mutate, filters.filterSpam, reset]);
+
+    const setAsset = useCallback(
+        (asset: Asset | undefined) => {
+            setFilters(f => ({ ...f, asset }));
+        },
+        [setFilters]
+    );
+
+    return {
+        ...filters,
+        toggleOnlyInitiator,
+        toggleFilterSpam,
+        setAsset,
+        setFilters
+    };
+};
+
+export const isInitiatorFiltrationForAssetAvailable = (asset: Asset | undefined): boolean => {
+    if (!asset) {
+        return true;
+    }
+    return !isTonAsset(asset) || isTon(asset.address);
+};
+
+export const useScrollMonitor = (
+    callback: () => void,
+    timeout: number,
+    elementRef?: React.RefObject<HTMLDivElement>
+) => {
+    const [isAtTop, setIsAtTop] = useState(true);
+    const [element, setElement] = useState(elementRef?.current);
+
+    useEffect(() => {
+        const el = element ?? elementRef?.current;
+        const handleScroll = debounce(() => {
+            if (el && el.scrollTop < 5) {
+                setIsAtTop(true);
+            } else {
+                setIsAtTop(false);
+            }
+        }, 20);
+
+        handleScroll();
+        el?.addEventListener('scroll', handleScroll);
+        return () => {
+            el?.removeEventListener('scroll', handleScroll);
+        };
+    }, [element, elementRef]);
+
+    useLayoutEffect(() => {
+        const timer = setInterval(() => {
+            if (isAtTop) {
+                callback();
+            }
+        }, timeout);
+        return () => {
+            clearInterval(timer);
+        };
+    }, [isAtTop, callback, timeout]);
+
+    return setElement as Dispatch<SetStateAction<HTMLDivElement | null>>;
+};

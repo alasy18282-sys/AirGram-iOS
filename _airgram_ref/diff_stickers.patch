@@ -1,0 +1,225 @@
+--- _airgram_ref/handlers/stickers.py	2026-07-12 16:57:34.419533054 +0000
++++ handlers/stickers.py	2026-07-12 16:24:12.327737867 +0000
+@@ -81,7 +81,8 @@
+ # Fallback when system sets were not imported yet (see tools/import_sticker_sets.py --defaults).
+ SLUG_FALLBACKS = {
+     'GiftsTons': ('GiftsTons', 'DMJTGStarsEmoji', 'PremiumGiftStickers'),
+-    'StatusPack': ('StatusPack', 'CherryEmoji'),
++    # StatusPack: no fallback — wrong custom-emoji sets crash Desktop (NaN/SafeRound).
++    'StatusPack': ('StatusPack',),
+     'AnimatedEmojies': ('AnimatedEmojies', 'CherryEmoji'),
+     'EmojiAnimations': ('EmojiAnimations', 'CherryEmoji'),
+     'EmojiGenericAnimations': ('EmojiGenericAnimations', 'CherryEmoji'),
+@@ -95,6 +96,10 @@
+     'RestrictedEmoji', 'CustomVerifications', 'MajorVerification',
+ })
+ 
++# Do NOT fall back StatusPack → random custom-emoji set: Desktop loads those
++# TGS as emoji statuses and can crash (SafeRound/NaN) on bad animation data.
++_EMOJI_STATUS_FALLBACK_SLUGS = frozenset()
++
+ DICE_SLUG_MAP = {
+     '🎲': 'AnimatedDice2',
+     '🎯': 'AnimatedDart',
+@@ -253,12 +258,58 @@
+     return w.bytes_out()
+ 
+ 
++STICKER_KEYWORD = 0xfcfeb29c
++
++
++def pack_sticker_keyword(document_id: int, keywords: List[str]) -> bytes:
++    """stickerKeyword#fcfeb29c document_id:long keyword:Vector<string>"""
++    w = tl.Writer()
++    w.u32(STICKER_KEYWORD)
++    w.i64(int(document_id))
++    w.u32(tl.VECTOR)
++    w.i32(len(keywords))
++    for kw in keywords:
++        w.string(kw)
++    return w.bytes_out()
++
++
++def _pack_keywords_vector(docs: List[dict]) -> bytes:
++    """Layer 224 messages.stickerSet requires keywords between packs and documents."""
++    items: List[bytes] = []
++    for doc in docs:
++        alt = (doc.get('alt') or '').strip()
++        if not alt:
++            continue
++        items.append(pack_sticker_keyword(int(doc['id']), [alt]))
++    w = tl.Writer()
++    w.u32(tl.VECTOR)
++    w.i32(len(items))
++    for item in items:
++        w.raw(item)
++    return w.bytes_out()
++
++
++def _sticker_packs_for_set(storage: Storage, set_id: int,
++                           docs: List[dict]) -> List[tuple]:
++    """Return sticker packs; synthesize from documents when DB packs are missing."""
++    packs = storage.get_sticker_packs(set_id)
++    if packs:
++        return packs
++    if not docs:
++        return []
++    out = []
++    for doc in docs:
++        emo = (doc.get('alt') or '').strip() or '\U0001f600'
++        out.append((emo, [int(doc['id'])]))
++    return out
++
++
+ def pack_messages_sticker_set(storage: Storage, set_id: int) -> bytes:
+     ss = storage.get_sticker_set_by_id(set_id)
+     if not ss:
+         raise KeyError(set_id)
+     docs = storage.get_sticker_documents(set_id)
+-    packs = storage.get_sticker_packs(set_id)
++    packs = _sticker_packs_for_set(storage, set_id, docs)
+     w = tl.Writer()
+     w.u32(MESSAGES_STICKER_SET)
+     w.raw(pack_sticker_set(ss))
+@@ -266,8 +317,8 @@
+     w.i32(len(packs))
+     for emoticon, ids in packs:
+         w.raw(pack_sticker_pack(emoticon, ids))
+-    w.u32(tl.VECTOR)
+-    w.i32(0)
++    # Layer 224: packs → keywords → documents (keywords was missing → Desktop desync)
++    w.raw(_pack_keywords_vector(docs))
+     w.u32(tl.VECTOR)
+     w.i32(len(docs))
+     for d in docs:
+@@ -293,11 +344,11 @@
+     w.i32(0)
+     w.i32(0)
+     w.u32(tl.VECTOR)
+-    w.i32(0)
++    w.i32(0)  # packs
+     w.u32(tl.VECTOR)
+-    w.i32(0)
++    w.i32(0)  # keywords (required in layer 224)
+     w.u32(tl.VECTOR)
+-    w.i32(0)
++    w.i32(0)  # documents
+     return w.bytes_out()
+ 
+ 
+@@ -312,7 +363,7 @@
+ def _catalog_gift_docs(storage: Storage) -> List[dict]:
+     docs = []
+     seen = set()
+-    for gift in storage.list_star_gifts():
++    for gift in storage.list_shop_star_gifts():
+         doc_id = int(gift.get('document_id') or 0)
+         if not doc_id or doc_id in seen:
+             continue
+@@ -370,12 +421,12 @@
+     w.u32(tl.VECTOR)
+     w.i32(1)
+     w.raw(pack_sticker_pack('\U0001f381', doc_ids))
++    gift_docs = [_doc_for_virtual_gift_set(doc, ss) for doc in docs]
++    w.raw(_pack_keywords_vector(gift_docs))
+     w.u32(tl.VECTOR)
+-    w.i32(0)
+-    w.u32(tl.VECTOR)
+-    w.i32(len(docs))
+-    for doc in docs:
+-        w.raw(pack_document(_doc_for_virtual_gift_set(doc, ss), ss))
++    w.i32(len(gift_docs))
++    for doc in gift_docs:
++        w.raw(pack_document(doc, ss))
+     return w.bytes_out()
+ 
+ 
+@@ -425,18 +476,32 @@
+ 
+ 
+ def _resolve_sticker_set(storage: Storage, ref: dict) -> Optional[dict]:
++    def _is_blocked(ss: Optional[dict]) -> bool:
++        return bool(ss and (ss.get('short_name') or '').lower() == 'airgrambanneremoji')
++
+     if ref['kind'] == 'id':
+-        return storage.get_sticker_set_by_id(ref['id'])
++        ss = storage.get_sticker_set_by_id(ref['id'])
++        if _is_blocked(ss):
++            log.warning('getStickerSet: blocked banner set by id=%s', ref.get('id'))
++            return None
++        return ss
+     if ref['kind'] == 'short_name':
+         alias = SLUG_ALIASES.get(ref['short_name'])
+         if alias:
+             ss = storage.get_sticker_set_by_short_name(alias)
++            if _is_blocked(ss):
++                log.warning('getStickerSet: blocked banner set alias=%s', alias)
++                return None
+             if ss:
+                 return ss
+         ss = storage.get_sticker_set_by_short_name(ref['short_name'])
++        if _is_blocked(ss):
++            log.warning('getStickerSet: blocked banner set short_name=%s',
++                        ref.get('short_name'))
++            return None
+         if ss:
+             return ss
+-        if ref['short_name'] in _SYSTEM_EMOJI_SLUGS:
++        if ref['short_name'] in _EMOJI_STATUS_FALLBACK_SLUGS:
+             return storage.get_emoji_sticker_set()
+         return None
+     if ref['kind'] == 'slug':
+@@ -444,13 +509,21 @@
+         candidates = SLUG_FALLBACKS.get(slug, (slug,))
+         for name in candidates:
+             ss = storage.get_sticker_set_by_short_name(name)
++            if _is_blocked(ss):
++                log.warning('getStickerSet: blocked banner set slug=%s', name)
++                return None
+             if ss:
+                 return ss
+         if ref['slug'] in _SYSTEM_EMOJI_SLUGS:
+             ss = storage.get_sticker_set_by_short_name(ref['slug'])
++            if _is_blocked(ss):
++                log.warning('getStickerSet: blocked banner set system slug=%s',
++                            ref.get('slug'))
++                return None
+             if ss:
+                 return ss
+-            return storage.get_emoji_sticker_set()
++            if ref['slug'] in _EMOJI_STATUS_FALLBACK_SLUGS:
++                return storage.get_emoji_sticker_set()
+         return None
+     if ref['kind'] == 'dice':
+         slug = DICE_SLUG_MAP.get(ref['emoticon'], '')
+@@ -686,6 +759,7 @@
+     w = tl.Writer()
+     w.u32(PREMIUM_SUBSCRIPTION_OPTION)
+     w.i32(flags)
++    # current / can_purchase_upgrade are flags.N?true — bit only, no payload.
+     w.i32(months)
+     w.string(currency)
+     w.i64(amount)
+@@ -807,12 +881,18 @@
+ 
+ 
+ def _pack_account_emoji_statuses(storage: Storage, *, limit: int = 100) -> list:
++    """Default/recent emoji statuses — only a real StatusPack, else empty.
++
++    Never substitute AirgramBannerEmoji / AnimatedEmojies: Desktop can crash
++    decoding unsuitable TGS while building the status picker after signup.
++    """
+     from handlers import packers as p
+-    ss = storage.get_emoji_sticker_set()
++    ss = storage.get_sticker_set_by_short_name('StatusPack')
++    if not ss:
++        return []
+     statuses = []
+-    if ss:
+-        for doc in storage.get_sticker_documents(ss['id'])[:limit]:
+-            statuses.append(p.pack_emoji_status(doc['id']))
++    for doc in storage.get_sticker_documents(ss['id'])[:limit]:
++        statuses.append(p.pack_emoji_status(doc['id']))
+     return statuses
+ 
+ 

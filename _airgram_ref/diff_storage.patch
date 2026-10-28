@@ -1,0 +1,330 @@
+--- _airgram_ref/db/storage.py	2026-07-12 16:57:34.443533508 +0000
++++ db/storage.py	2026-07-12 16:20:27.143592360 +0000
+@@ -243,6 +243,15 @@
+                 PRIMARY KEY (phone, code_hash)
+             );
+ 
++            CREATE TABLE IF NOT EXISTS login_tokens (
++                token             BLOB PRIMARY KEY,
++                expires_at        INTEGER NOT NULL,
++                api_id            INTEGER NOT NULL,
++                accepted_user_id  INTEGER,
++                created_at        INTEGER NOT NULL,
++                accepted_at       INTEGER
++            );
++
+             CREATE TABLE IF NOT EXISTS messages (
+                 owner_id      INTEGER NOT NULL,
+                 id            INTEGER NOT NULL,
+@@ -449,6 +458,8 @@
+             'ALTER TABLE users ADD COLUMN username_sort_order INTEGER NOT NULL DEFAULT 0',
+             'ALTER TABLE star_gifts ADD COLUMN sort_order INTEGER NOT NULL DEFAULT 0',
+             'ALTER TABLE star_gifts ADD COLUMN upgrade_importing INTEGER NOT NULL DEFAULT 0',
++            'ALTER TABLE star_gifts ADD COLUMN shop_hidden INTEGER NOT NULL DEFAULT 0',
++            'ALTER TABLE star_gifts ADD COLUMN is_auction INTEGER NOT NULL DEFAULT 0',
+             'ALTER TABLE pending_updates ADD COLUMN auth_key_id INTEGER',
+         ):
+             try:
+@@ -2243,7 +2254,7 @@
+ 
+     def create_user(self, phone: str, first_name: str, last_name: str) -> Dict[str, Any]:
+         phone = normalize_phone(phone)
+-        access_hash = random.getrandbits(63)
++        access_hash = self._random_access_hash()
+         self._conn.execute(
+             '''INSERT OR IGNORE INTO users
+                (phone, first_name, last_name, access_hash, about, created_at,
+@@ -2253,7 +2264,14 @@
+         )
+         self._conn.commit()
+         user = self.get_user_by_phone(phone)
+-        self.deliver_pending_login_message(phone, user['id'])
++        if user:
++            self._conn.execute(
++                '''INSERT OR IGNORE INTO stars_balances (user_id, balance, stars_peak)
++                   VALUES (?, 0, 0)''',
++                (int(user['id']),),
++            )
++            self._conn.commit()
++            self.ensure_user_stars(int(user['id']))
+         return user
+ 
+     def get_user_by_phone(self, phone: str) -> Optional[Dict[str, Any]]:
+@@ -3833,6 +3851,69 @@
+         self._conn.commit()
+         return True
+ 
++    # ── QR login tokens ────────────────────────
++
++    _LOGIN_TOKEN_TTL = 30
++
++    def create_login_token(self, api_id: int,
++                           except_ids: Optional[List[int]] = None) -> tuple[int, bytes]:
++        now = int(time.time())
++        self._conn.execute(
++            'DELETE FROM login_tokens WHERE expires_at <= ?',
++            (now,),
++        )
++        token = secrets.token_bytes(32)
++        expires = now + self._LOGIN_TOKEN_TTL
++        self._conn.execute(
++            '''INSERT INTO login_tokens
++               (token, expires_at, api_id, accepted_user_id, created_at, accepted_at)
++               VALUES (?, ?, ?, NULL, ?, NULL)''',
++            (token, expires, int(api_id), now),
++        )
++        self._conn.commit()
++        return expires, token
++
++    def accept_login_token(self, token: bytes, user_id: int) -> bool:
++        now = int(time.time())
++        row = self._conn.execute(
++            '''SELECT expires_at, accepted_user_id FROM login_tokens
++               WHERE token=?''',
++            (token,),
++        ).fetchone()
++        if not row or int(row['expires_at']) <= now:
++            return False
++        if row['accepted_user_id'] is not None:
++            return int(row['accepted_user_id']) == int(user_id)
++        self._conn.execute(
++            '''UPDATE login_tokens
++               SET accepted_user_id=?, accepted_at=?
++               WHERE token=?''',
++            (int(user_id), now, token),
++        )
++        self._conn.commit()
++        return True
++
++    def resolve_login_token(self, token: bytes) -> Optional[dict]:
++        now = int(time.time())
++        row = self._conn.execute(
++            '''SELECT expires_at, accepted_user_id FROM login_tokens
++               WHERE token=?''',
++            (token,),
++        ).fetchone()
++        if not row:
++            return None
++        expires = int(row['expires_at'])
++        if expires <= now:
++            self._conn.execute('DELETE FROM login_tokens WHERE token=?', (token,))
++            self._conn.commit()
++            return {'expired': True}
++        accepted_user_id = row['accepted_user_id']
++        if accepted_user_id is not None:
++            self._conn.execute('DELETE FROM login_tokens WHERE token=?', (token,))
++            self._conn.commit()
++            return {'user_id': int(accepted_user_id)}
++        return {'expires': expires}
++
+     def verify_phone_code(self, phone: str, code_hash: str, code: str) -> bool:
+         if not self.check_phone_code(phone, code_hash, code):
+             return False
+@@ -5105,19 +5186,41 @@
+         self._conn.commit()
+ 
+     def deliver_pending_login_message(self, phone: str, user_id: int) -> Optional[dict]:
+-        phone = normalize_phone(phone)
++        from handlers.phone_countries import anon_phone_lookup_variants
++        for variant in anon_phone_lookup_variants(phone):
++            row = self._conn.execute(
++                'SELECT * FROM pending_login_messages WHERE phone=?', (variant,)
++            ).fetchone()
++            if not row:
++                continue
++            entities = json.loads(row['entities'])
++            msg = self.add_service_message(user_id, row['text'], entities)
++            self._conn.execute(
++                'DELETE FROM pending_login_messages WHERE phone=?', (variant,)
++            )
++            self._conn.commit()
++            return msg
++        return None
++
++    def ensure_service_dialog_bootstrap(self, user_id: int, *,
++                                        phone: str = '') -> Optional[dict]:
++        """Ensure brand-new accounts have the Telegram service chat (777000)."""
++        uid = int(user_id)
+         row = self._conn.execute(
+-            'SELECT * FROM pending_login_messages WHERE phone=?', (phone,)
++            'SELECT 1 FROM dialogs WHERE owner_id=? AND peer_id=?',
++            (uid, SERVICE_USER_ID),
+         ).fetchone()
+-        if not row:
++        if row:
+             return None
+-        entities = json.loads(row['entities'])
+-        msg = self.add_service_message(user_id, row['text'], entities)
+-        self._conn.execute(
+-            'DELETE FROM pending_login_messages WHERE phone=?', (phone,)
++        if phone:
++            msg = self.deliver_pending_login_message(phone, uid)
++            if msg:
++                return msg
++        welcome = (
++            'Добро пожаловать в Airgram! '
++            'Здесь будут приходить коды входа и уведомления от сервиса.'
+         )
+-        self._conn.commit()
+-        return msg
++        return self.add_service_message(uid, welcome, [])
+ 
+     def send_login_code_message(self, phone: str, code: str) -> Optional[dict]:
+         user = self.get_user_by_phone(phone)
+@@ -5270,8 +5373,12 @@
+             ).fetchone()
+             if row:
+                 return dict(row)
++        # Never treat shop banner custom-emoji as the system emoji set —
++        # Desktop loads those TGS during signup and can crash (SafeRound/NaN).
+         row = self._conn.execute(
+-            'SELECT * FROM sticker_sets WHERE flags & 128 != 0 ORDER BY id LIMIT 1'
++            "SELECT * FROM sticker_sets WHERE flags & 128 != 0 "
++            "AND lower(short_name) != 'airgrambanneremoji' "
++            "ORDER BY id LIMIT 1"
+         ).fetchone()
+         return dict(row) if row else None
+ 
+@@ -5290,15 +5397,20 @@
+         return [dict(r) for r in rows]
+ 
+     def list_emoji_sticker_sets(self, *, installed_only: bool = True) -> List[dict]:
++        # Exclude shop-only banner pack from client emoji sticker catalogs.
++        ban = " AND lower(short_name) != 'airgrambanneremoji' "
+         if installed_only:
+             rows = self._conn.execute(
+                 'SELECT * FROM sticker_sets '
+                 'WHERE flags & 128 != 0 AND (flags & 1) != 0 '
++                + ban +
+                 'ORDER BY title'
+             ).fetchall()
+         else:
+             rows = self._conn.execute(
+-                'SELECT * FROM sticker_sets WHERE flags & 128 != 0 ORDER BY title'
++                'SELECT * FROM sticker_sets WHERE flags & 128 != 0 '
++                + ban +
++                'ORDER BY title'
+             ).fetchall()
+         return [dict(r) for r in rows]
+ 
+@@ -5629,6 +5741,48 @@
+         ).fetchall()
+         return [dict(r) for r in rows]
+ 
++    def list_shop_star_gifts(self) -> List[dict]:
++        """Gifts visible in Send a Gift / payments.getStarGifts catalog."""
++        rows = self._conn.execute(
++            '''SELECT * FROM star_gifts
++               WHERE COALESCE(shop_hidden, 0) = 0
++               ORDER BY sort_order, gift_id''',
++        ).fetchall()
++        out: List[dict] = []
++        for row in rows:
++            gift = dict(row)
++            doc_id = int(gift.get('document_id') or 0)
++            if doc_id <= 0:
++                continue
++            if not self.get_sticker_document_by_id(doc_id):
++                continue
++            out.append(gift)
++        return out
++
++    def hide_star_gift_from_shop(self, gift_id: int) -> bool:
++        gift = self.get_star_gift(int(gift_id))
++        if not gift:
++            return False
++        self._conn.execute(
++            'UPDATE star_gifts SET shop_hidden=1 WHERE gift_id=?',
++            (int(gift_id),),
++        )
++        self._conn.commit()
++        self.recompute_star_gifts_catalog_hash()
++        return True
++
++    def restore_star_gift_to_shop(self, gift_id: int) -> bool:
++        gift = self.get_star_gift(int(gift_id))
++        if not gift:
++            return False
++        self._conn.execute(
++            'UPDATE star_gifts SET shop_hidden=0 WHERE gift_id=?',
++            (int(gift_id),),
++        )
++        self._conn.commit()
++        self.recompute_star_gifts_catalog_hash()
++        return True
++
+     def count_star_gift_purchases(self, user_id: int, gift_id: int) -> int:
+         row = self._conn.execute(
+             '''SELECT COUNT(*) AS c FROM saved_star_gifts
+@@ -5794,12 +5948,11 @@
+         ).fetchone()
+         if row:
+             return int(row['balance'])
+-        bal = int(config.DEFAULT_STARS_BALANCE)
+         self._conn.execute(
+-            'INSERT INTO stars_balances (user_id, balance, stars_peak) VALUES (?, ?, ?)',
+-            (user_id, bal, bal))
++            'INSERT INTO stars_balances (user_id, balance, stars_peak) VALUES (?, 0, 0)',
++            (user_id,))
+         self._conn.commit()
+-        return bal
++        return 0
+ 
+     def sum_active_star_gift_offer_holds(self, buyer_id: int) -> int:
+         now = int(time.time())
+@@ -6284,11 +6437,11 @@
+             self._conn.execute(
+                 '''UPDATE saved_star_gifts SET owner_user_id=?, msg_id=?,
+                    pinned_to_top=0, resell_stars=NULL, resell_stars_nanos=0,
+-                   resell_ton=0
++                   resell_ton=0, date=?
+                    WHERE saved_id=? AND (
+                        COALESCE(resell_stars, 0) > 0
+                        OR (resell_ton=1 AND resell_stars_nanos > 0))''',
+-                (recipient_id, new_msg_id, saved['saved_id']),
++                (recipient_id, new_msg_id, now, saved['saved_id']),
+             )
+             if self._conn.total_changes == 0:
+                 raise ValueError('STARGIFT_NOT_FOUND')
+@@ -6534,9 +6687,9 @@
+         self._conn.execute(
+             '''UPDATE saved_star_gifts SET owner_user_id=?, msg_id=?,
+                pinned_to_top=0, resell_stars=NULL, resell_stars_nanos=0,
+-               resell_ton=0
++               resell_ton=0, date=?
+                WHERE saved_id=?''',
+-            (buyer_id, new_msg_id, saved['saved_id']),
++            (buyer_id, new_msg_id, now, saved['saved_id']),
+         )
+ 
+         commission = config.STARGIFT_RESALE_COMMISSION_PERMILLE
+@@ -6671,9 +6824,9 @@
+         self._conn.execute(
+             '''UPDATE saved_star_gifts SET owner_user_id=?, msg_id=?,
+                pinned_to_top=0, resell_stars=NULL, resell_stars_nanos=0,
+-               resell_ton=0
++               resell_ton=0, date=?
+                WHERE saved_id=?''',
+-            (recipient_id, new_msg_id, saved['saved_id']),
++            (recipient_id, new_msg_id, now, saved['saved_id']),
+         )
+         if int(self._conn.execute(
+                 'SELECT emoji_status_collectible_id FROM users WHERE id=?',
+@@ -6769,7 +6922,7 @@
+         self._conn.commit()
+ 
+     def recompute_star_gifts_catalog_hash(self) -> int:
+-        gifts = self.list_star_gifts()
++        gifts = self.list_shop_star_gifts()
+         h = 0x53484F50  # 'SHOP'
+         for g in gifts:
+             gid = int(g['gift_id'])
+@@ -6783,7 +6936,7 @@
+             min_price = self.min_resell_price(gid) or 0
+             h = (h * 31 + min_price) & 0x7FFFFFFF
+         self.set_star_gifts_catalog_hash(h)
+-        for g in gifts:
++        for g in self.list_star_gifts():
+             variants = (self.count_star_gift_upgrade_attrs(g['gift_id'])
+                         if self._gift_has_upgrade_pool(g['gift_id'])
+                         and not int(g.get('upgrade_importing') or 0) else 0)

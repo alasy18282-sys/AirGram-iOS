@@ -1,0 +1,69 @@
+--- _airgram_ref/handlers/stubs.py	2026-07-12 16:57:34.431533281 +0000
++++ handlers/stubs.py	2026-07-12 15:45:18.136173260 +0000
+@@ -175,14 +175,20 @@
+     return w.bytes_out()
+ 
+ 
+-def handle_account_get_reactions_notify_settings(session, req_msg_id, r, storage,
+-                                                 push_queue, registry):
++def _pack_reactions_notify_settings() -> bytes:
+     w = Writer()
+-    w.u32(0x56e6f1e4)  # reactionsNotifySettings
++    w.u32(0x71e4ea58)  # reactionsNotifySettings (layer 227)
+     w.i32(0)
++    w.u32(0x97e8bebe)  # notificationSoundDefault
++    w.u32(tl.BOOL_TRUE)
+     return w.bytes_out()
+ 
+ 
++def handle_account_get_reactions_notify_settings(session, req_msg_id, r, storage,
++                                                 push_queue, registry):
++    return _pack_reactions_notify_settings()
++
++
+ def handle_messages_get_sponsored_messages(session, req_msg_id, r, storage,
+                                            push_queue, registry):
+     from handlers import packers
+@@ -221,9 +227,16 @@
+     if flags & 1:
+         from handlers import packers
+         packers.skip_input_peer(r)
+-    r.i64()  # hash
++    req_hash = r.i64()
++    if req_hash and int(req_hash) == 0:
++        w = Writer()
++        w.u32(0x889b59ef)  # messages.savedReactionTagsNotModified
++        return w.bytes_out()
+     w = Writer()
+-    w.u32(0x889b59ef)  # messages.savedReactionTagsNotModified
++    w.u32(0x3259950a)  # messages.savedReactionTags
++    w.u32(tl.VECTOR)
++    w.i32(0)
++    w.i64(0)
+     return w.bytes_out()
+ 
+ 
+@@ -342,7 +355,23 @@
+     return w.bytes_out()
+ 
+ 
++def handle_premium_get_my_boosts(session, req_msg_id, r, storage,
++                                 push_queue, registry):
++    # premium.getMyBoosts#be77b4a has no parameters.
++    w = Writer()
++    w.u32(0x9ae228e2)  # premium.myBoosts
++    w.i32(0)  # flags
++    w.u32(tl.VECTOR)
++    w.i32(0)  # my_boosts
++    w.u32(tl.VECTOR)
++    w.i32(0)  # chats
++    w.u32(tl.VECTOR)
++    w.i32(0)  # users
++    return w.bytes_out()
++
++
+ STUB_HANDLERS = {
++    0x0be77b4a: handle_premium_get_my_boosts,
+     0x2ca51fd1: handle_help_get_terms_of_service_update,
+     0x9f07c728: handle_account_get_contact_signup_notification,
+     0x8b9b4dae: handle_account_get_content_settings,

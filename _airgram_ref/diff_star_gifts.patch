@@ -1,0 +1,81 @@
+--- _airgram_ref/handlers/star_gifts.py	2026-07-12 16:57:34.431533281 +0000
++++ handlers/star_gifts.py	2026-07-12 15:01:59.643155071 +0000
+@@ -60,10 +60,8 @@
+ PAYMENTS_SAVE_STAR_GIFT = 0x2a2a697c
+ PAYMENTS_CONVERT_STAR_GIFT = 0x74bf076b
+ PAYMENTS_GET_STAR_GIFT_COLLECTIONS = 0x981b91dd
+-PAYMENTS_GET_STAR_GIFT_COLLECTIONS_V2 = 0x3637e05b
+ PAYMENTS_CREATE_STAR_GIFT_COLLECTION = 0xa29cd42c
+ PAYMENTS_CREATE_STAR_GIFT_COLLECTION_V2 = 0x1f4a0e87
+-PAYMENTS_EDIT_STAR_GIFT_COLLECTION = 0xbdf93428
+ PAYMENTS_UPDATE_STAR_GIFT_COLLECTION = 0x4fddbee7
+ PAYMENTS_DELETE_STAR_GIFT_COLLECTION = 0xa1b70815
+ PAYMENTS_DELETE_STAR_GIFT_COLLECTION_V2 = 0xad5648e8
+@@ -991,7 +989,7 @@
+ def handle_payments_get_star_gifts(session, req_msg_id, r, storage, push_queue, registry):
+     req_hash = r.i32()
+     catalog_hash = storage.get_star_gifts_catalog_hash()
+-    gifts = storage.list_star_gifts()
++    gifts = storage.list_shop_star_gifts()
+     viewer_id = None
+     if session is not None and getattr(session, 'auth_key_id', None):
+         viewer_id = storage.get_session_user(session.auth_key_id)
+@@ -1294,7 +1292,7 @@
+     if ton:
+         recent, _ = storage.list_ton_transactions(viewer['id'], limit=5)
+         recent = _ton_history_rows(recent)
+-        if push_queue is not None:
++        if push_queue is not None and storage.get_ton_balance(viewer['id']) > 0:
+             _push_ton_balance_refresh(
+                 storage, push_queue, viewer['id'],
+                 exclude_auth_key_id=getattr(session, 'auth_key_id', None))
+@@ -1303,10 +1301,6 @@
+     _prepare_stars_user(storage, viewer['id'])
+     recent, _ = storage.list_stars_transactions(viewer['id'], limit=5)
+     recent = _client_stars_history_rows(recent)
+-    if push_queue is not None:
+-        _push_stars_balance_refresh(
+-            storage, push_queue, viewer['id'],
+-            exclude_auth_key_id=getattr(session, 'auth_key_id', None))
+     return _pack_stars_status(storage, viewer['id'], history=recent)
+ 
+ 
+@@ -1335,7 +1329,7 @@
+         rows = _ton_history_rows(rows)
+         if ascending:
+             rows = list(reversed(rows))
+-        if push_queue is not None:
++        if push_queue is not None and storage.get_ton_balance(viewer['id']) > 0:
+             _push_ton_balance_refresh(
+                 storage, push_queue, viewer['id'],
+                 exclude_auth_key_id=getattr(session, 'auth_key_id', None))
+@@ -1349,10 +1343,6 @@
+     rows = _client_stars_history_rows(rows)
+     if ascending:
+         rows = list(reversed(rows))
+-    if push_queue is not None:
+-        _push_stars_balance_refresh(
+-            storage, push_queue, viewer['id'],
+-            exclude_auth_key_id=getattr(session, 'auth_key_id', None))
+     return _pack_stars_status(
+         storage, viewer['id'], history=rows, next_offset=next_off)
+ 
+@@ -1381,10 +1371,6 @@
+     _prepare_stars_user(storage, viewer['id'])
+     rows = storage.get_stars_transactions_by_ids(viewer['id'], ids)
+     rows = _client_stars_history_rows(rows)
+-    if push_queue is not None:
+-        _push_stars_balance_refresh(
+-            storage, push_queue, viewer['id'],
+-            exclude_auth_key_id=getattr(session, 'auth_key_id', None))
+     return _pack_stars_status(storage, viewer['id'], history=rows)
+ 
+ 
+@@ -3937,7 +3923,6 @@
+     PAYMENTS_CREATE_STAR_GIFT_COLLECTION: handle_payments_create_star_gift_collection,
+     PAYMENTS_CREATE_STAR_GIFT_COLLECTION_V2: (
+         handle_payments_create_star_gift_collection_v2),
+-    PAYMENTS_EDIT_STAR_GIFT_COLLECTION: handle_payments_edit_star_gift_collection,
+     PAYMENTS_UPDATE_STAR_GIFT_COLLECTION: (
+         handle_payments_update_star_gift_collection),
+     PAYMENTS_DELETE_STAR_GIFT_COLLECTION: handle_payments_delete_star_gift_collection,

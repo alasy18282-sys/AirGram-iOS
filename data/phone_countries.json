@@ -1,0 +1,3553 @@
+{
+  "hash": 2037398197,
+  "countries": [
+    {
+      "iso2": "AD",
+      "default_name": "Andorra",
+      "name": "Андорра",
+      "hidden": false,
+      "country_codes": [
+        {
+          "country_code": "376",
+          "prefixes": [],
+          "patterns": [
+            "XXXXXX"
+          ]
+        }
+      ]
+    },
+    {
+      "iso2": "AE",
+      "default_name": "United Arab Emirates",
+      "name": "ОАЭ",
+      "hidden": false,
+      "country_codes": [
+        {
+          "country_code": "971",
+          "prefixes": [],
+          "patterns": [
+            "XX XXX XXXX"
+          ]
+        }
+      ]
+    },
+    {
+      "iso2": "AF",
+      "default_name": "Afghanistan",
+      "name": "Афганистан",
+      "hidden": false,
+      "country_codes": [
+        {
+          "country_code": "93",
+          "prefixes": [],
+          "patterns": [
+            "XXX XXX XXX"
+          ]
+        }
+      ]
+    },
+    {
+      "iso2": "AG",
+      "default_name": "Antigua & Barbuda",
+      "name": "Антигуа и Барбуда",
+      "hidden": false,
+      "country_codes": [
+        {
+          "country_code": "1268",
+          "prefixes": [],
+          "patterns": [
+            "XXX XXXX"
+          ]
+        }
+      ]
+    },
+    {
+      "iso2": "AI",
+      "default_name": "Anguilla",
+      "name": "Ангилья",
+      "hidden": false,
+      "country_codes": [
+        {
+          "country_code": "1264",
+          "prefixes": [],
+          "patterns": [
+            "XXX XXXX"
+          ]
+        }
+      ]
+    },
+    {
+      "iso2": "AL",
+      "default_name": "Albania",
+      "name": "Албания",
+      "hidden": false,
+      "country_codes": [
+        {
+          "country_code": "355",
+          "prefixes": [],
+          "patterns": [
+            "XX XXX XXXX"
+          ]
+        }
+      ]
+    },
+    {
+      "iso2": "AM",
+      "default_name": "Armenia",
+      "name": "Армения",
+      "hidden": false,
+      "country_codes": [
+        {
+          "country_code": "374",
+          "prefixes": [],
+          "patterns": [
+            "XX XXXXXX"
+          ]
+        }
+      ]
+    },
+    {
+      "iso2": "AO",
+      "default_name": "Angola",
+      "name": "Ангола",
+      "hidden": false,
+      "country_codes": [
+        {
+          "country_code": "244",
+          "prefixes": [],
+          "patterns": [
+            "XXX XXX XXX"
+          ]
+        }
+      ]
+    },
+    {
+      "iso2": "AR",
+      "default_name": "Argentina",
+      "name": "Аргентина",
+      "hidden": false,
+      "country_codes": [
+        {
+          "country_code": "54",
+          "prefixes": [],
+          "patterns": []
+        }
+      ]
+    },
+    {
+      "iso2": "AS",
+      "default_name": "American Samoa",
+      "name": "Американское Самоа",
+      "hidden": false,
+      "country_codes": [
+        {
+          "country_code": "1684",
+          "prefixes": [],
+          "patterns": [
+            "XXX XXXX"
+          ]
+        }
+      ]
+    },
+    {
+      "iso2": "AT",
+      "default_name": "Austria",
+      "name": "Австрия",
+      "hidden": false,
+      "country_codes": [
+        {
+          "country_code": "43",
+          "prefixes": [],
+          "patterns": []
+        }
+      ]
+    },
+    {
+      "iso2": "AU",
+      "default_name": "Australia",
+      "name": "Австралия",
+      "hidden": false,
+      "country_codes": [
+        {
+          "country_code": "61",
+          "prefixes": [],
+          "patterns": [
+            "X XXXX XXXX"
+          ]
+        }
+      ]
+    },
+    {
+      "iso2": "AW",
+      "default_name": "Aruba",
+      "name": "Аруба",
+      "hidden": false,
+      "country_codes": [
+        {
+          "country_code": "297",
+          "prefixes": [],
+          "patterns": [
+            "XXX XXXX"
+          ]
+        }
+      ]
+    },
+    {
+      "iso2": "AZ",
+      "default_name": "Azerbaijan",
+      "name": "Азербайджан",
+      "hidden": false,
+      "country_codes": [
+        {
+          "country_code": "994",
+          "prefixes": [],
+          "patterns": [
+            "XX XXX XXXX"
+          ]
+        }
+      ]
+    },
+    {
+      "iso2": "BA",
+      "default_name": "Bosnia & Herzegovina",
+      "name": "Босния и Герцеговина",
+      "hidden": false,
+      "country_codes": [
+        {
+          "country_code": "387",
+          "prefixes": [],
+          "patterns": [
+            "XX XXX XXX"
+          ]
+        }
+      ]
+    },
+    {
+      "iso2": "BB",
+      "default_name": "Barbados",
+      "name": "Барбадос",
+      "hidden": false,
+      "country_codes": [
+        {
+          "country_code": "1246",
+          "prefixes": [],
+          "patterns": [
+            "XXX XXXX"
+          ]
+        }
+      ]
+    },
+    {
+      "iso2": "BD",
+      "default_name": "Bangladesh",
+      "name": "Бангладеш",
+      "hidden": false,
+      "country_codes": [
+        {
+          "country_code": "880",
+          "prefixes": [],
+          "patterns": [
+            "XX XXX XXX"
+          ]
+        }
+      ]
+    },
+    {
+      "iso2": "BE",
+      "default_name": "Belgium",
+      "name": "Бельгия",
+      "hidden": false,
+      "country_codes": [
+        {
+          "country_code": "32",
+          "prefixes": [],
+          "patterns": [
+            "XXX XX XX XX"
+          ]
+        }
+      ]
+    },
+    {
+      "iso2": "BF",
+      "default_name": "Burkina Faso",
+      "name": "Буркина-Фасо",
+      "hidden": false,
+      "country_codes": [
+        {
+          "country_code": "226",
+          "prefixes": [],
+          "patterns": [
+            "XX XX XX XX"
+          ]
+        }
+      ]
+    },
+    {
+      "iso2": "BG",
+      "default_name": "Bulgaria",
+      "name": "Болгария",
+      "hidden": false,
+      "country_codes": [
+        {
+          "country_code": "359",
+          "prefixes": [],
+          "patterns": []
+        }
+      ]
+    },
+    {
+      "iso2": "BH",
+      "default_name": "Bahrain",
+      "name": "Бахрейн",
+      "hidden": false,
+      "country_codes": [
+        {
+          "country_code": "973",
+          "prefixes": [],
+          "patterns": [
+            "XXXX XXXX"
+          ]
+        }
+      ]
+    },
+    {
+      "iso2": "BI",
+      "default_name": "Burundi",
+      "name": "Бурунди",
+      "hidden": false,
+      "country_codes": [
+        {
+          "country_code": "257",
+          "prefixes": [],
+          "patterns": [
+            "XX XX XXXX"
+          ]
+        }
+      ]
+    },
+    {
+      "iso2": "BJ",
+      "default_name": "Benin",
+      "name": "Бенин",
+      "hidden": false,
+      "country_codes": [
+        {
+          "country_code": "229",
+          "prefixes": [],
+          "patterns": [
+            "XX XX XX XX XX"
+          ]
+        }
+      ]
+    },
+    {
+      "iso2": "BM",
+      "default_name": "Bermuda",
+      "name": "Бермудские Острова",
+      "hidden": false,
+      "country_codes": [
+        {
+          "country_code": "1441",
+          "prefixes": [],
+          "patterns": [
+            "XXX XXXX"
+          ]
+        }
+      ]
+    },
+    {
+      "iso2": "BN",
+      "default_name": "Brunei Darussalam",
+      "name": "Бруней",
+      "hidden": false,
+      "country_codes": [
+        {
+          "country_code": "673",
+          "prefixes": [],
+          "patterns": [
+            "XXX XXXX"
+          ]
+        }
+      ]
+    },
+    {
+      "iso2": "BO",
+      "default_name": "Bolivia",
+      "name": "Боливия",
+      "hidden": false,
+      "country_codes": [
+        {
+          "country_code": "591",
+          "prefixes": [],
+          "patterns": [
+            "X XXX XXXX"
+          ]
+        }
+      ]
+    },
+    {
+      "iso2": "BQ",
+      "default_name": "Bonaire, Sint Eustatius & Saba",
+      "name": "Бонэйр, Синт-Эстатиус и Саба",
+      "hidden": false,
+      "country_codes": [
+        {
+          "country_code": "599",
+          "prefixes": [],
+          "patterns": []
+        }
+      ]
+    },
+    {
+      "iso2": "BR",
+      "default_name": "Brazil",
+      "name": "Бразилия",
+      "hidden": false,
+      "country_codes": [
+        {
+          "country_code": "55",
+          "prefixes": [],
+          "patterns": [
+            "XX XXXXX XXXX"
+          ]
+        }
+      ]
+    },
+    {
+      "iso2": "BS",
+      "default_name": "Bahamas",
+      "name": "Багамы",
+      "hidden": false,
+      "country_codes": [
+        {
+          "country_code": "1242",
+          "prefixes": [],
+          "patterns": [
+            "XXX XXXX"
+          ]
+        }
+      ]
+    },
+    {
+      "iso2": "BT",
+      "default_name": "Bhutan",
+      "name": "Бутан",
+      "hidden": false,
+      "country_codes": [
+        {
+          "country_code": "975",
+          "prefixes": [],
+          "patterns": [
+            "XX XXX XXX"
+          ]
+        }
+      ]
+    },
+    {
+      "iso2": "BW",
+      "default_name": "Botswana",
+      "name": "Ботсвана",
+      "hidden": false,
+      "country_codes": [
+        {
+          "country_code": "267",
+          "prefixes": [],
+          "patterns": [
+            "XX XXX XXX"
+          ]
+        }
+      ]
+    },
+    {
+      "iso2": "BY",
+      "default_name": "Belarus",
+      "name": "Беларусь",
+      "hidden": false,
+      "country_codes": [
+        {
+          "country_code": "375",
+          "prefixes": [],
+          "patterns": [
+            "XX XXX XXXX"
+          ]
+        }
+      ]
+    },
+    {
+      "iso2": "BZ",
+      "default_name": "Belize",
+      "name": "Белиз",
+      "hidden": false,
+      "country_codes": [
+        {
+          "country_code": "501",
+          "prefixes": [],
+          "patterns": []
+        }
+      ]
+    },
+    {
+      "iso2": "CA",
+      "default_name": "Canada",
+      "name": "Канада",
+      "hidden": false,
+      "country_codes": [
+        {
+          "country_code": "1",
+          "prefixes": [
+            "403",
+            "587",
+            "780",
+            "825",
+            "236",
+            "250",
+            "604",
+            "672",
+            "778",
+            "204",
+            "431",
+            "506",
+            "709",
+            "902",
+            "782",
+            "226",
+            "249",
+            "289",
+            "343",
+            "365",
+            "416",
+            "437",
+            "519",
+            "548",
+            "613",
+            "647",
+            "705",
+            "807",
+            "905",
+            "418",
+            "438",
+            "450",
+            "514",
+            "579",
+            "581",
+            "819",
+            "873",
+            "306",
+            "639",
+            "867"
+          ],
+          "patterns": [
+            "XXX XXX XXXX"
+          ]
+        }
+      ]
+    },
+    {
+      "iso2": "CD",
+      "default_name": "Congo (Dem. Rep.)",
+      "name": "Конго (ДРК)",
+      "hidden": false,
+      "country_codes": [
+        {
+          "country_code": "243",
+          "prefixes": [],
+          "patterns": [
+            "XX XXX XXXX"
+          ]
+        }
+      ]
+    },
+    {
+      "iso2": "CF",
+      "default_name": "Central African Rep.",
+      "name": "ЦАР",
+      "hidden": false,
+      "country_codes": [
+        {
+          "country_code": "236",
+          "prefixes": [],
+          "patterns": [
+            "XX XX XX XX"
+          ]
+        }
+      ]
+    },
+    {
+      "iso2": "CG",
+      "default_name": "Congo (Rep.)",
+      "name": "Конго (Республика)",
+      "hidden": false,
+      "country_codes": [
+        {
+          "country_code": "242",
+          "prefixes": [],
+          "patterns": [
+            "XX XXX XXXX"
+          ]
+        }
+      ]
+    },
+    {
+      "iso2": "CH",
+      "default_name": "Switzerland",
+      "name": "Швейцария",
+      "hidden": false,
+      "country_codes": [
+        {
+          "country_code": "41",
+          "prefixes": [],
+          "patterns": [
+            "XX XXX XXXX"
+          ]
+        }
+      ]
+    },
+    {
+      "iso2": "CI",
+      "default_name": "Côte d'Ivoire",
+      "name": "Кот-д'Ивуар",
+      "hidden": false,
+      "country_codes": [
+        {
+          "country_code": "225",
+          "prefixes": [],
+          "patterns": [
+            "XX XX XX XXXX"
+          ]
+        }
+      ]
+    },
+    {
+      "iso2": "CK",
+      "default_name": "Cook Islands",
+      "name": "Острова Кука",
+      "hidden": false,
+      "country_codes": [
+        {
+          "country_code": "682",
+          "prefixes": [],
+          "patterns": []
+        }
+      ]
+    },
+    {
+      "iso2": "CL",
+      "default_name": "Chile",
+      "name": "Чили",
+      "hidden": false,
+      "country_codes": [
+        {
+          "country_code": "56",
+          "prefixes": [],
+          "patterns": [
+            "X XXXX XXXX"
+          ]
+        }
+      ]
+    },
+    {
+      "iso2": "CM",
+      "default_name": "Cameroon",
+      "name": "Камерун",
+      "hidden": false,
+      "country_codes": [
+        {
+          "country_code": "237",
+          "prefixes": [],
+          "patterns": [
+            "XXXX XXXX"
+          ]
+        }
+      ]
+    },
+    {
+      "iso2": "CN",
+      "default_name": "China",
+      "name": "Китай",
+      "hidden": false,
+      "country_codes": [
+        {
+          "country_code": "86",
+          "prefixes": [],
+          "patterns": [
+            "XXX XXXX XXXX"
+          ]
+        }
+      ]
+    },
+    {
+      "iso2": "CO",
+      "default_name": "Colombia",
+      "name": "Колумбия",
+      "hidden": false,
+      "country_codes": [
+        {
+          "country_code": "57",
+          "prefixes": [],
+          "patterns": [
+            "XXX XXX XXXX"
+          ]
+        }
+      ]
+    },
+    {
+      "iso2": "CR",
+      "default_name": "Costa Rica",
+      "name": "Коста-Рика",
+      "hidden": false,
+      "country_codes": [
+        {
+          "country_code": "506",
+          "prefixes": [],
+          "patterns": [
+            "XXXX XXXX"
+          ]
+        }
+      ]
+    },
+    {
+      "iso2": "CU",
+      "default_name": "Cuba",
+      "name": "Куба",
+      "hidden": false,
+      "country_codes": [
+        {
+          "country_code": "53",
+          "prefixes": [],
+          "patterns": [
+            "X XXX XXXX"
+          ]
+        }
+      ]
+    },
+    {
+      "iso2": "CV",
+      "default_name": "Cape Verde",
+      "name": "Кабо-Верде",
+      "hidden": false,
+      "country_codes": [
+        {
+          "country_code": "238",
+          "prefixes": [],
+          "patterns": [
+            "XXX XXXX"
+          ]
+        }
+      ]
+    },
+    {
+      "iso2": "CW",
+      "default_name": "Curaçao",
+      "name": "Кюрасао",
+      "hidden": false,
+      "country_codes": [
+        {
+          "country_code": "599",
+          "prefixes": [
+            "9"
+          ],
+          "patterns": []
+        }
+      ]
+    },
+    {
+      "iso2": "CY",
+      "default_name": "Cyprus",
+      "name": "Кипр",
+      "hidden": false,
+      "country_codes": [
+        {
+          "country_code": "357",
+          "prefixes": [],
+          "patterns": [
+            "XXXX XXXX"
+          ]
+        }
+      ]
+    },
+    {
+      "iso2": "CZ",
+      "default_name": "Czech Republic",
+      "name": "Чехия",
+      "hidden": false,
+      "country_codes": [
+        {
+          "country_code": "420",
+          "prefixes": [],
+          "patterns": [
+            "XXX XXX XXX"
+          ]
+        }
+      ]
+    },
+    {
+      "iso2": "DE",
+      "default_name": "Germany",
+      "name": "Германия",
+      "hidden": false,
+      "country_codes": [
+        {
+          "country_code": "49",
+          "prefixes": [],
+          "patterns": []
+        }
+      ]
+    },
+    {
+      "iso2": "DJ",
+      "default_name": "Djibouti",
+      "name": "Джибути",
+      "hidden": false,
+      "country_codes": [
+        {
+          "country_code": "253",
+          "prefixes": [],
+          "patterns": [
+            "XX XX XX XX"
+          ]
+        }
+      ]
+    },
+    {
+      "iso2": "DK",
+      "default_name": "Denmark",
+      "name": "Дания",
+      "hidden": false,
+      "country_codes": [
+        {
+          "country_code": "45",
+          "prefixes": [],
+          "patterns": [
+            "XXXX XXXX"
+          ]
+        }
+      ]
+    },
+    {
+      "iso2": "DM",
+      "default_name": "Dominica",
+      "name": "Доминика",
+      "hidden": false,
+      "country_codes": [
+        {
+          "country_code": "1767",
+          "prefixes": [],
+          "patterns": [
+            "XXX XXXX"
+          ]
+        }
+      ]
+    },
+    {
+      "iso2": "DO",
+      "default_name": "Dominican Rep.",
+      "name": "Доминиканская Республика",
+      "hidden": false,
+      "country_codes": [
+        {
+          "country_code": "1809",
+          "prefixes": [],
+          "patterns": [
+            "XXX XXXX"
+          ]
+        },
+        {
+          "country_code": "1829",
+          "prefixes": [],
+          "patterns": [
+            "XXX XXXX"
+          ]
+        },
+        {
+          "country_code": "1849",
+          "prefixes": [],
+          "patterns": [
+            "XXX XXXX"
+          ]
+        }
+      ]
+    },
+    {
+      "iso2": "DZ",
+      "default_name": "Algeria",
+      "name": "Алжир",
+      "hidden": false,
+      "country_codes": [
+        {
+          "country_code": "213",
+          "prefixes": [],
+          "patterns": [
+            "XXX XX XX XX"
+          ]
+        }
+      ]
+    },
+    {
+      "iso2": "EC",
+      "default_name": "Ecuador",
+      "name": "Эквадор",
+      "hidden": false,
+      "country_codes": [
+        {
+          "country_code": "593",
+          "prefixes": [],
+          "patterns": [
+            "XX XXX XXXX"
+          ]
+        }
+      ]
+    },
+    {
+      "iso2": "EE",
+      "default_name": "Estonia",
+      "name": "Эстония",
+      "hidden": false,
+      "country_codes": [
+        {
+          "country_code": "372",
+          "prefixes": [],
+          "patterns": [
+            "XXXX XXX"
+          ]
+        }
+      ]
+    },
+    {
+      "iso2": "EG",
+      "default_name": "Egypt",
+      "name": "Египет",
+      "hidden": false,
+      "country_codes": [
+        {
+          "country_code": "20",
+          "prefixes": [],
+          "patterns": [
+            "XX XXXX XXXX"
+          ]
+        }
+      ]
+    },
+    {
+      "iso2": "ER",
+      "default_name": "Eritrea",
+      "name": "Эритрея",
+      "hidden": false,
+      "country_codes": [
+        {
+          "country_code": "291",
+          "prefixes": [],
+          "patterns": [
+            "X XXX XXX"
+          ]
+        }
+      ]
+    },
+    {
+      "iso2": "ES",
+      "default_name": "Spain",
+      "name": "Испания",
+      "hidden": false,
+      "country_codes": [
+        {
+          "country_code": "34",
+          "prefixes": [],
+          "patterns": [
+            "XXX XXX XXX"
+          ]
+        }
+      ]
+    },
+    {
+      "iso2": "ET",
+      "default_name": "Ethiopia",
+      "name": "Эфиопия",
+      "hidden": false,
+      "country_codes": [
+        {
+          "country_code": "251",
+          "prefixes": [],
+          "patterns": [
+            "XX XXX XXX"
+          ]
+        }
+      ]
+    },
+    {
+      "iso2": "FI",
+      "default_name": "Finland",
+      "name": "Финляндия",
+      "hidden": false,
+      "country_codes": [
+        {
+          "country_code": "358",
+          "prefixes": [],
+          "patterns": []
+        }
+      ]
+    },
+    {
+      "iso2": "FJ",
+      "default_name": "Fiji",
+      "name": "Фиджи",
+      "hidden": false,
+      "country_codes": [
+        {
+          "country_code": "679",
+          "prefixes": [],
+          "patterns": [
+            "XXX XXXX"
+          ]
+        }
+      ]
+    },
+    {
+      "iso2": "FK",
+      "default_name": "Falkland Islands",
+      "name": "Фолклендские острова",
+      "hidden": false,
+      "country_codes": [
+        {
+          "country_code": "500",
+          "prefixes": [],
+          "patterns": []
+        }
+      ]
+    },
+    {
+      "iso2": "FM",
+      "default_name": "Micronesia",
+      "name": "Микронезия",
+      "hidden": false,
+      "country_codes": [
+        {
+          "country_code": "691",
+          "prefixes": [],
+          "patterns": []
+        }
+      ]
+    },
+    {
+      "iso2": "FO",
+      "default_name": "Faroe Islands",
+      "name": "Фарерские острова",
+      "hidden": false,
+      "country_codes": [
+        {
+          "country_code": "298",
+          "prefixes": [],
+          "patterns": [
+            "XXX XXX"
+          ]
+        }
+      ]
+    },
+    {
+      "iso2": "FR",
+      "default_name": "France",
+      "name": "Франция",
+      "hidden": false,
+      "country_codes": [
+        {
+          "country_code": "33",
+          "prefixes": [],
+          "patterns": [
+            "X XX XX XX XX"
+          ]
+        }
+      ]
+    },
+    {
+      "iso2": "FT",
+      "default_name": "Anonymous Numbers",
+      "name": "Анонимные номера",
+      "hidden": false,
+      "country_codes": [
+        {
+          "country_code": "888",
+          "prefixes": [],
+          "patterns": [
+            "8 XXX",
+            "XXXX XXXX"
+          ]
+        }
+      ]
+    },
+    {
+      "iso2": "GA",
+      "default_name": "Gabon",
+      "name": "Габон",
+      "hidden": false,
+      "country_codes": [
+        {
+          "country_code": "241",
+          "prefixes": [],
+          "patterns": [
+            "X XX XX XX"
+          ]
+        }
+      ]
+    },
+    {
+      "iso2": "GB",
+      "default_name": "United Kingdom",
+      "name": "Великобритания",
+      "hidden": false,
+      "country_codes": [
+        {
+          "country_code": "44",
+          "prefixes": [],
+          "patterns": [
+            "XX XXXX XXXX"
+          ]
+        }
+      ]
+    },
+    {
+      "iso2": "GD",
+      "default_name": "Grenada",
+      "name": "Гренада",
+      "hidden": false,
+      "country_codes": [
+        {
+          "country_code": "1473",
+          "prefixes": [],
+          "patterns": [
+            "XXX XXXX"
+          ]
+        }
+      ]
+    },
+    {
+      "iso2": "GE",
+      "default_name": "Georgia",
+      "name": "Грузия",
+      "hidden": false,
+      "country_codes": [
+        {
+          "country_code": "995",
+          "prefixes": [],
+          "patterns": [
+            "XXX XXX XXX"
+          ]
+        }
+      ]
+    },
+    {
+      "iso2": "GF",
+      "default_name": "French Guiana",
+      "name": "Гвиана",
+      "hidden": false,
+      "country_codes": [
+        {
+          "country_code": "594",
+          "prefixes": [],
+          "patterns": [
+            "XXX XX XX XX"
+          ]
+        }
+      ]
+    },
+    {
+      "iso2": "GH",
+      "default_name": "Ghana",
+      "name": "Гана",
+      "hidden": false,
+      "country_codes": [
+        {
+          "country_code": "233",
+          "prefixes": [],
+          "patterns": [
+            "XX XXX XXXX"
+          ]
+        }
+      ]
+    },
+    {
+      "iso2": "GI",
+      "default_name": "Gibraltar",
+      "name": "Гибралтар",
+      "hidden": false,
+      "country_codes": [
+        {
+          "country_code": "350",
+          "prefixes": [],
+          "patterns": [
+            "XXXX XXXX"
+          ]
+        }
+      ]
+    },
+    {
+      "iso2": "GL",
+      "default_name": "Greenland",
+      "name": "Гренландия",
+      "hidden": false,
+      "country_codes": [
+        {
+          "country_code": "299",
+          "prefixes": [],
+          "patterns": [
+            "XXX XXX"
+          ]
+        }
+      ]
+    },
+    {
+      "iso2": "GM",
+      "default_name": "Gambia",
+      "name": "Гамбия",
+      "hidden": false,
+      "country_codes": [
+        {
+          "country_code": "220",
+          "prefixes": [],
+          "patterns": [
+            "XXX XXXX"
+          ]
+        }
+      ]
+    },
+    {
+      "iso2": "GN",
+      "default_name": "Guinea",
+      "name": "Гвинея",
+      "hidden": false,
+      "country_codes": [
+        {
+          "country_code": "224",
+          "prefixes": [],
+          "patterns": [
+            "XXX XXX XXX"
+          ]
+        }
+      ]
+    },
+    {
+      "iso2": "GP",
+      "default_name": "Guadeloupe",
+      "name": "Гваделупа",
+      "hidden": false,
+      "country_codes": [
+        {
+          "country_code": "590",
+          "prefixes": [],
+          "patterns": [
+            "XXX XX XX XX"
+          ]
+        }
+      ]
+    },
+    {
+      "iso2": "GQ",
+      "default_name": "Equatorial Guinea",
+      "name": "Экваториальная Гвинея",
+      "hidden": false,
+      "country_codes": [
+        {
+          "country_code": "240",
+          "prefixes": [],
+          "patterns": [
+            "XXX XXX XXX"
+          ]
+        }
+      ]
+    },
+    {
+      "iso2": "GR",
+      "default_name": "Greece",
+      "name": "Греция",
+      "hidden": false,
+      "country_codes": [
+        {
+          "country_code": "30",
+          "prefixes": [],
+          "patterns": [
+            "XXX XXX XXXX"
+          ]
+        }
+      ]
+    },
+    {
+      "iso2": "GT",
+      "default_name": "Guatemala",
+      "name": "Гватемала",
+      "hidden": false,
+      "country_codes": [
+        {
+          "country_code": "502",
+          "prefixes": [],
+          "patterns": [
+            "X XXX XXXX"
+          ]
+        }
+      ]
+    },
+    {
+      "iso2": "GU",
+      "default_name": "Guam",
+      "name": "Гуам",
+      "hidden": false,
+      "country_codes": [
+        {
+          "country_code": "1671",
+          "prefixes": [],
+          "patterns": [
+            "XXX XXXX"
+          ]
+        }
+      ]
+    },
+    {
+      "iso2": "GW",
+      "default_name": "Guinea-Bissau",
+      "name": "Гвинея-Бисау",
+      "hidden": false,
+      "country_codes": [
+        {
+          "country_code": "245",
+          "prefixes": [],
+          "patterns": [
+            "XXX XX XX XX"
+          ]
+        }
+      ]
+    },
+    {
+      "iso2": "GY",
+      "default_name": "Guyana",
+      "name": "Гайана",
+      "hidden": false,
+      "country_codes": [
+        {
+          "country_code": "592",
+          "prefixes": [],
+          "patterns": [
+            "XXX XXXX"
+          ]
+        }
+      ]
+    },
+    {
+      "iso2": "HK",
+      "default_name": "Hong Kong",
+      "name": "Гонконг",
+      "hidden": false,
+      "country_codes": [
+        {
+          "country_code": "852",
+          "prefixes": [],
+          "patterns": [
+            "X XXX XXXX"
+          ]
+        }
+      ]
+    },
+    {
+      "iso2": "HN",
+      "default_name": "Honduras",
+      "name": "Гондурас",
+      "hidden": false,
+      "country_codes": [
+        {
+          "country_code": "504",
+          "prefixes": [],
+          "patterns": [
+            "XXXX XXXX"
+          ]
+        }
+      ]
+    },
+    {
+      "iso2": "HR",
+      "default_name": "Croatia",
+      "name": "Хорватия",
+      "hidden": false,
+      "country_codes": [
+        {
+          "country_code": "385",
+          "prefixes": [],
+          "patterns": [
+            "XX XXX XXX"
+          ]
+        }
+      ]
+    },
+    {
+      "iso2": "HT",
+      "default_name": "Haiti",
+      "name": "Гаити",
+      "hidden": false,
+      "country_codes": [
+        {
+          "country_code": "509",
+          "prefixes": [],
+          "patterns": [
+            "XXXX XXXX"
+          ]
+        }
+      ]
+    },
+    {
+      "iso2": "HU",
+      "default_name": "Hungary",
+      "name": "Венгрия",
+      "hidden": false,
+      "country_codes": [
+        {
+          "country_code": "36",
+          "prefixes": [],
+          "patterns": [
+            "XXX XXX XXX"
+          ]
+        }
+      ]
+    },
+    {
+      "iso2": "ID",
+      "default_name": "Indonesia",
+      "name": "Индонезия",
+      "hidden": false,
+      "country_codes": [
+        {
+          "country_code": "62",
+          "prefixes": [],
+          "patterns": [
+            "XXX XXXXXX"
+          ]
+        }
+      ]
+    },
+    {
+      "iso2": "IE",
+      "default_name": "Ireland",
+      "name": "Ирландия",
+      "hidden": false,
+      "country_codes": [
+        {
+          "country_code": "353",
+          "prefixes": [],
+          "patterns": [
+            "XX XXX XXXX"
+          ]
+        }
+      ]
+    },
+    {
+      "iso2": "IL",
+      "default_name": "Israel",
+      "name": "Израиль",
+      "hidden": false,
+      "country_codes": [
+        {
+          "country_code": "972",
+          "prefixes": [],
+          "patterns": [
+            "XX XXX XXXX"
+          ]
+        }
+      ]
+    },
+    {
+      "iso2": "IN",
+      "default_name": "India",
+      "name": "Индия",
+      "hidden": false,
+      "country_codes": [
+        {
+          "country_code": "91",
+          "prefixes": [],
+          "patterns": [
+            "XXXXX XXXXX"
+          ]
+        }
+      ]
+    },
+    {
+      "iso2": "IO",
+      "default_name": "Diego Garcia",
+      "name": "Диего-Гарсия",
+      "hidden": false,
+      "country_codes": [
+        {
+          "country_code": "246",
+          "prefixes": [],
+          "patterns": [
+            "XXX XXXX"
+          ]
+        }
+      ]
+    },
+    {
+      "iso2": "IQ",
+      "default_name": "Iraq",
+      "name": "Ирак",
+      "hidden": false,
+      "country_codes": [
+        {
+          "country_code": "964",
+          "prefixes": [],
+          "patterns": [
+            "XXX XXX XXXX"
+          ]
+        }
+      ]
+    },
+    {
+      "iso2": "IR",
+      "default_name": "Iran",
+      "name": "Иран",
+      "hidden": false,
+      "country_codes": [
+        {
+          "country_code": "98",
+          "prefixes": [],
+          "patterns": [
+            "XXX XXX XXXX"
+          ]
+        }
+      ]
+    },
+    {
+      "iso2": "IS",
+      "default_name": "Iceland",
+      "name": "Исландия",
+      "hidden": false,
+      "country_codes": [
+        {
+          "country_code": "354",
+          "prefixes": [],
+          "patterns": [
+            "XXX XXXX"
+          ]
+        }
+      ]
+    },
+    {
+      "iso2": "IT",
+      "default_name": "Italy",
+      "name": "Италия",
+      "hidden": false,
+      "country_codes": [
+        {
+          "country_code": "39",
+          "prefixes": [],
+          "patterns": [
+            "XXX XXX XXXX"
+          ]
+        }
+      ]
+    },
+    {
+      "iso2": "JM",
+      "default_name": "Jamaica",
+      "name": "Ямайка",
+      "hidden": false,
+      "country_codes": [
+        {
+          "country_code": "1876",
+          "prefixes": [],
+          "patterns": [
+            "XXX XXXX"
+          ]
+        }
+      ]
+    },
+    {
+      "iso2": "JO",
+      "default_name": "Jordan",
+      "name": "Иордания",
+      "hidden": false,
+      "country_codes": [
+        {
+          "country_code": "962",
+          "prefixes": [],
+          "patterns": [
+            "X XXXX XXXX"
+          ]
+        }
+      ]
+    },
+    {
+      "iso2": "JP",
+      "default_name": "Japan",
+      "name": "Япония",
+      "hidden": false,
+      "country_codes": [
+        {
+          "country_code": "81",
+          "prefixes": [],
+          "patterns": [
+            "XX XXXX XXXX"
+          ]
+        }
+      ]
+    },
+    {
+      "iso2": "KE",
+      "default_name": "Kenya",
+      "name": "Кения",
+      "hidden": false,
+      "country_codes": [
+        {
+          "country_code": "254",
+          "prefixes": [],
+          "patterns": [
+            "XXX XXX XXX"
+          ]
+        }
+      ]
+    },
+    {
+      "iso2": "KG",
+      "default_name": "Kyrgyzstan",
+      "name": "Киргизия",
+      "hidden": false,
+      "country_codes": [
+        {
+          "country_code": "996",
+          "prefixes": [],
+          "patterns": [
+            "XXX XXXXXX"
+          ]
+        }
+      ]
+    },
+    {
+      "iso2": "KH",
+      "default_name": "Cambodia",
+      "name": "Камбоджа",
+      "hidden": false,
+      "country_codes": [
+        {
+          "country_code": "855",
+          "prefixes": [],
+          "patterns": [
+            "XX XXX XXXX"
+          ]
+        }
+      ]
+    },
+    {
+      "iso2": "KI",
+      "default_name": "Kiribati",
+      "name": "Кирибати",
+      "hidden": false,
+      "country_codes": [
+        {
+          "country_code": "686",
+          "prefixes": [],
+          "patterns": [
+            "XXXX XXXX"
+          ]
+        }
+      ]
+    },
+    {
+      "iso2": "KM",
+      "default_name": "Comoros",
+      "name": "Коморы",
+      "hidden": false,
+      "country_codes": [
+        {
+          "country_code": "269",
+          "prefixes": [],
+          "patterns": [
+            "XXX XXXX"
+          ]
+        }
+      ]
+    },
+    {
+      "iso2": "KN",
+      "default_name": "Saint Kitts & Nevis",
+      "name": "Сент-Китс и Невис",
+      "hidden": false,
+      "country_codes": [
+        {
+          "country_code": "1869",
+          "prefixes": [],
+          "patterns": [
+            "XXX XXXX"
+          ]
+        }
+      ]
+    },
+    {
+      "iso2": "KP",
+      "default_name": "North Korea",
+      "name": "Северная Корея",
+      "hidden": false,
+      "country_codes": [
+        {
+          "country_code": "850",
+          "prefixes": [],
+          "patterns": []
+        }
+      ]
+    },
+    {
+      "iso2": "KR",
+      "default_name": "South Korea",
+      "name": "Южная Корея",
+      "hidden": false,
+      "country_codes": [
+        {
+          "country_code": "82",
+          "prefixes": [],
+          "patterns": [
+            "XX XXXX XXX"
+          ]
+        }
+      ]
+    },
+    {
+      "iso2": "KW",
+      "default_name": "Kuwait",
+      "name": "Кувейт",
+      "hidden": false,
+      "country_codes": [
+        {
+          "country_code": "965",
+          "prefixes": [],
+          "patterns": [
+            "XXXX XXXX"
+          ]
+        }
+      ]
+    },
+    {
+      "iso2": "KY",
+      "default_name": "Cayman Islands",
+      "name": "Каймановы острова",
+      "hidden": false,
+      "country_codes": [
+        {
+          "country_code": "1345",
+          "prefixes": [],
+          "patterns": [
+            "XXX XXXX"
+          ]
+        }
+      ]
+    },
+    {
+      "iso2": "KZ",
+      "default_name": "Kazakhstan",
+      "name": "Казахстан",
+      "hidden": false,
+      "country_codes": [
+        {
+          "country_code": "7",
+          "prefixes": [
+            "6",
+            "7"
+          ],
+          "patterns": [
+            "XXX XXX XX XX"
+          ]
+        }
+      ]
+    },
+    {
+      "iso2": "LA",
+      "default_name": "Laos",
+      "name": "Лаос",
+      "hidden": false,
+      "country_codes": [
+        {
+          "country_code": "856",
+          "prefixes": [],
+          "patterns": [
+            "XX XX XXX XXX"
+          ]
+        }
+      ]
+    },
+    {
+      "iso2": "LB",
+      "default_name": "Lebanon",
+      "name": "Ливан",
+      "hidden": false,
+      "country_codes": [
+        {
+          "country_code": "961",
+          "prefixes": [],
+          "patterns": []
+        }
+      ]
+    },
+    {
+      "iso2": "LC",
+      "default_name": "Saint Lucia",
+      "name": "Сент-Люсия",
+      "hidden": false,
+      "country_codes": [
+        {
+          "country_code": "1758",
+          "prefixes": [],
+          "patterns": [
+            "XXX XXXX"
+          ]
+        }
+      ]
+    },
+    {
+      "iso2": "LI",
+      "default_name": "Liechtenstein",
+      "name": "Лихтенштейн",
+      "hidden": false,
+      "country_codes": [
+        {
+          "country_code": "423",
+          "prefixes": [],
+          "patterns": [
+            "XXX XXXX"
+          ]
+        }
+      ]
+    },
+    {
+      "iso2": "LK",
+      "default_name": "Sri Lanka",
+      "name": "Шри-Ланка",
+      "hidden": false,
+      "country_codes": [
+        {
+          "country_code": "94",
+          "prefixes": [],
+          "patterns": [
+            "XX XXX XXXX"
+          ]
+        }
+      ]
+    },
+    {
+      "iso2": "LR",
+      "default_name": "Liberia",
+      "name": "Либерия",
+      "hidden": false,
+      "country_codes": [
+        {
+          "country_code": "231",
+          "prefixes": [],
+          "patterns": [
+            "XX XXX XXXX"
+          ]
+        }
+      ]
+    },
+    {
+      "iso2": "LS",
+      "default_name": "Lesotho",
+      "name": "Лесото",
+      "hidden": false,
+      "country_codes": [
+        {
+          "country_code": "266",
+          "prefixes": [],
+          "patterns": [
+            "XX XXX XXX"
+          ]
+        }
+      ]
+    },
+    {
+      "iso2": "LT",
+      "default_name": "Lithuania",
+      "name": "Литва",
+      "hidden": false,
+      "country_codes": [
+        {
+          "country_code": "370",
+          "prefixes": [],
+          "patterns": [
+            "XXX XXXXX"
+          ]
+        }
+      ]
+    },
+    {
+      "iso2": "LU",
+      "default_name": "Luxembourg",
+      "name": "Люксембург",
+      "hidden": false,
+      "country_codes": [
+        {
+          "country_code": "352",
+          "prefixes": [],
+          "patterns": [
+            "XXX XXX XXX"
+          ]
+        }
+      ]
+    },
+    {
+      "iso2": "LV",
+      "default_name": "Latvia",
+      "name": "Латвия",
+      "hidden": false,
+      "country_codes": [
+        {
+          "country_code": "371",
+          "prefixes": [],
+          "patterns": [
+            "XXX XXXXX"
+          ]
+        }
+      ]
+    },
+    {
+      "iso2": "LY",
+      "default_name": "Libya",
+      "name": "Ливия",
+      "hidden": false,
+      "country_codes": [
+        {
+          "country_code": "218",
+          "prefixes": [],
+          "patterns": [
+            "XX XXX XXXX"
+          ]
+        }
+      ]
+    },
+    {
+      "iso2": "MA",
+      "default_name": "Morocco",
+      "name": "Марокко",
+      "hidden": false,
+      "country_codes": [
+        {
+          "country_code": "212",
+          "prefixes": [],
+          "patterns": [
+            "XX XXX XXXX"
+          ]
+        }
+      ]
+    },
+    {
+      "iso2": "MC",
+      "default_name": "Monaco",
+      "name": "Монако",
+      "hidden": false,
+      "country_codes": [
+        {
+          "country_code": "377",
+          "prefixes": [],
+          "patterns": [
+            "XXXX XXXX"
+          ]
+        }
+      ]
+    },
+    {
+      "iso2": "MD",
+      "default_name": "Moldova",
+      "name": "Молдавия",
+      "hidden": false,
+      "country_codes": [
+        {
+          "country_code": "373",
+          "prefixes": [],
+          "patterns": [
+            "XX XXX XXX"
+          ]
+        }
+      ]
+    },
+    {
+      "iso2": "ME",
+      "default_name": "Montenegro",
+      "name": "Черногория",
+      "hidden": false,
+      "country_codes": [
+        {
+          "country_code": "382",
+          "prefixes": [],
+          "patterns": []
+        }
+      ]
+    },
+    {
+      "iso2": "MG",
+      "default_name": "Madagascar",
+      "name": "Мадагаскар",
+      "hidden": false,
+      "country_codes": [
+        {
+          "country_code": "261",
+          "prefixes": [],
+          "patterns": [
+            "XX XX XXX XX"
+          ]
+        }
+      ]
+    },
+    {
+      "iso2": "MH",
+      "default_name": "Marshall Islands",
+      "name": "Маршалловы Острова",
+      "hidden": false,
+      "country_codes": [
+        {
+          "country_code": "692",
+          "prefixes": [],
+          "patterns": []
+        }
+      ]
+    },
+    {
+      "iso2": "MK",
+      "default_name": "North Macedonia",
+      "name": "Северная Македония",
+      "hidden": false,
+      "country_codes": [
+        {
+          "country_code": "389",
+          "prefixes": [],
+          "patterns": [
+            "XX XXXXXX"
+          ]
+        }
+      ]
+    },
+    {
+      "iso2": "ML",
+      "default_name": "Mali",
+      "name": "Мали",
+      "hidden": false,
+      "country_codes": [
+        {
+          "country_code": "223",
+          "prefixes": [],
+          "patterns": [
+            "XX XX XX XX"
+          ]
+        }
+      ]
+    },
+    {
+      "iso2": "MM",
+      "default_name": "Myanmar",
+      "name": "Мьянма",
+      "hidden": false,
+      "country_codes": [
+        {
+          "country_code": "95",
+          "prefixes": [],
+          "patterns": []
+        }
+      ]
+    },
+    {
+      "iso2": "MN",
+      "default_name": "Mongolia",
+      "name": "Монголия",
+      "hidden": false,
+      "country_codes": [
+        {
+          "country_code": "976",
+          "prefixes": [],
+          "patterns": [
+            "XX XX XXXX"
+          ]
+        }
+      ]
+    },
+    {
+      "iso2": "MO",
+      "default_name": "Macau",
+      "name": "Макао",
+      "hidden": false,
+      "country_codes": [
+        {
+          "country_code": "853",
+          "prefixes": [],
+          "patterns": [
+            "XXXX XXXX"
+          ]
+        }
+      ]
+    },
+    {
+      "iso2": "MP",
+      "default_name": "Northern Mariana Islands",
+      "name": "Северные Марианские Острова",
+      "hidden": false,
+      "country_codes": [
+        {
+          "country_code": "1670",
+          "prefixes": [],
+          "patterns": [
+            "XXX XXXX"
+          ]
+        }
+      ]
+    },
+    {
+      "iso2": "MQ",
+      "default_name": "Martinique",
+      "name": "Мартиника",
+      "hidden": false,
+      "country_codes": [
+        {
+          "country_code": "596",
+          "prefixes": [],
+          "patterns": []
+        }
+      ]
+    },
+    {
+      "iso2": "MR",
+      "default_name": "Mauritania",
+      "name": "Мавритания",
+      "hidden": false,
+      "country_codes": [
+        {
+          "country_code": "222",
+          "prefixes": [],
+          "patterns": [
+            "XXXX XXXX"
+          ]
+        }
+      ]
+    },
+    {
+      "iso2": "MS",
+      "default_name": "Montserrat",
+      "name": "Монтсеррат",
+      "hidden": false,
+      "country_codes": [
+        {
+          "country_code": "1664",
+          "prefixes": [],
+          "patterns": [
+            "XXX XXXX"
+          ]
+        }
+      ]
+    },
+    {
+      "iso2": "MT",
+      "default_name": "Malta",
+      "name": "Мальта",
+      "hidden": false,
+      "country_codes": [
+        {
+          "country_code": "356",
+          "prefixes": [],
+          "patterns": [
+            "XX XX XX XX"
+          ]
+        }
+      ]
+    },
+    {
+      "iso2": "MU",
+      "default_name": "Mauritius",
+      "name": "Маврикий",
+      "hidden": false,
+      "country_codes": [
+        {
+          "country_code": "230",
+          "prefixes": [],
+          "patterns": [
+            "XXXX XXXX"
+          ]
+        }
+      ]
+    },
+    {
+      "iso2": "MV",
+      "default_name": "Maldives",
+      "name": "Мальдивы",
+      "hidden": false,
+      "country_codes": [
+        {
+          "country_code": "960",
+          "prefixes": [],
+          "patterns": [
+            "XXX XXXX"
+          ]
+        }
+      ]
+    },
+    {
+      "iso2": "MW",
+      "default_name": "Malawi",
+      "name": "Малави",
+      "hidden": false,
+      "country_codes": [
+        {
+          "country_code": "265",
+          "prefixes": [],
+          "patterns": [
+            "XX XXX XXXX"
+          ]
+        }
+      ]
+    },
+    {
+      "iso2": "MX",
+      "default_name": "Mexico",
+      "name": "Мексика",
+      "hidden": false,
+      "country_codes": [
+        {
+          "country_code": "52",
+          "prefixes": [],
+          "patterns": []
+        }
+      ]
+    },
+    {
+      "iso2": "MY",
+      "default_name": "Malaysia",
+      "name": "Малайзия",
+      "hidden": false,
+      "country_codes": [
+        {
+          "country_code": "60",
+          "prefixes": [],
+          "patterns": []
+        }
+      ]
+    },
+    {
+      "iso2": "MZ",
+      "default_name": "Mozambique",
+      "name": "Мозамбик",
+      "hidden": false,
+      "country_codes": [
+        {
+          "country_code": "258",
+          "prefixes": [],
+          "patterns": [
+            "XX XXX XXXX"
+          ]
+        }
+      ]
+    },
+    {
+      "iso2": "NA",
+      "default_name": "Namibia",
+      "name": "Намибия",
+      "hidden": false,
+      "country_codes": [
+        {
+          "country_code": "264",
+          "prefixes": [],
+          "patterns": [
+            "XX XXX XXXX"
+          ]
+        }
+      ]
+    },
+    {
+      "iso2": "NC",
+      "default_name": "New Caledonia",
+      "name": "Новая Каледония",
+      "hidden": false,
+      "country_codes": [
+        {
+          "country_code": "687",
+          "prefixes": [],
+          "patterns": [
+            "XX XX XX"
+          ]
+        }
+      ]
+    },
+    {
+      "iso2": "NE",
+      "default_name": "Niger",
+      "name": "Нигер",
+      "hidden": false,
+      "country_codes": [
+        {
+          "country_code": "227",
+          "prefixes": [],
+          "patterns": [
+            "XX XX XX XX"
+          ]
+        }
+      ]
+    },
+    {
+      "iso2": "NF",
+      "default_name": "Norfolk Island",
+      "name": "Остров Норфолк",
+      "hidden": false,
+      "country_codes": [
+        {
+          "country_code": "672",
+          "prefixes": [],
+          "patterns": []
+        }
+      ]
+    },
+    {
+      "iso2": "NG",
+      "default_name": "Nigeria",
+      "name": "Нигерия",
+      "hidden": false,
+      "country_codes": [
+        {
+          "country_code": "234",
+          "prefixes": [],
+          "patterns": [
+            "XX XXXX XXXX"
+          ]
+        }
+      ]
+    },
+    {
+      "iso2": "NI",
+      "default_name": "Nicaragua",
+      "name": "Никарагуа",
+      "hidden": false,
+      "country_codes": [
+        {
+          "country_code": "505",
+          "prefixes": [],
+          "patterns": [
+            "XXXX XXXX"
+          ]
+        }
+      ]
+    },
+    {
+      "iso2": "NL",
+      "default_name": "Netherlands",
+      "name": "Нидерланды",
+      "hidden": false,
+      "country_codes": [
+        {
+          "country_code": "31",
+          "prefixes": [],
+          "patterns": [
+            "X XX XX XX XX"
+          ]
+        }
+      ]
+    },
+    {
+      "iso2": "NO",
+      "default_name": "Norway",
+      "name": "Норвегия",
+      "hidden": false,
+      "country_codes": [
+        {
+          "country_code": "47",
+          "prefixes": [],
+          "patterns": [
+            "XXX XX XXX"
+          ]
+        }
+      ]
+    },
+    {
+      "iso2": "NP",
+      "default_name": "Nepal",
+      "name": "Непал",
+      "hidden": false,
+      "country_codes": [
+        {
+          "country_code": "977",
+          "prefixes": [],
+          "patterns": [
+            "XX XXXX XXXX"
+          ]
+        }
+      ]
+    },
+    {
+      "iso2": "NR",
+      "default_name": "Nauru",
+      "name": "Науру",
+      "hidden": false,
+      "country_codes": [
+        {
+          "country_code": "674",
+          "prefixes": [],
+          "patterns": []
+        }
+      ]
+    },
+    {
+      "iso2": "NU",
+      "default_name": "Niue",
+      "name": "Ниуэ",
+      "hidden": false,
+      "country_codes": [
+        {
+          "country_code": "683",
+          "prefixes": [],
+          "patterns": []
+        }
+      ]
+    },
+    {
+      "iso2": "NZ",
+      "default_name": "New Zealand",
+      "name": "Новая Зеландия",
+      "hidden": false,
+      "country_codes": [
+        {
+          "country_code": "64",
+          "prefixes": [],
+          "patterns": [
+            "XXXX XXXX"
+          ]
+        }
+      ]
+    },
+    {
+      "iso2": "OM",
+      "default_name": "Oman",
+      "name": "Оман",
+      "hidden": false,
+      "country_codes": [
+        {
+          "country_code": "968",
+          "prefixes": [],
+          "patterns": [
+            "XXXX XXXX"
+          ]
+        }
+      ]
+    },
+    {
+      "iso2": "PA",
+      "default_name": "Panama",
+      "name": "Панама",
+      "hidden": false,
+      "country_codes": [
+        {
+          "country_code": "507",
+          "prefixes": [],
+          "patterns": [
+            "XXXX XXXX"
+          ]
+        }
+      ]
+    },
+    {
+      "iso2": "PE",
+      "default_name": "Peru",
+      "name": "Перу",
+      "hidden": false,
+      "country_codes": [
+        {
+          "country_code": "51",
+          "prefixes": [],
+          "patterns": [
+            "XXX XXX XXX"
+          ]
+        }
+      ]
+    },
+    {
+      "iso2": "PF",
+      "default_name": "French Polynesia",
+      "name": "Французская Полинезия",
+      "hidden": false,
+      "country_codes": [
+        {
+          "country_code": "689",
+          "prefixes": [],
+          "patterns": []
+        }
+      ]
+    },
+    {
+      "iso2": "PG",
+      "default_name": "Papua New Guinea",
+      "name": "Папуа — Новая Гвинея",
+      "hidden": false,
+      "country_codes": [
+        {
+          "country_code": "675",
+          "prefixes": [],
+          "patterns": [
+            "XXXX XXXX"
+          ]
+        }
+      ]
+    },
+    {
+      "iso2": "PH",
+      "default_name": "Philippines",
+      "name": "Филиппины",
+      "hidden": false,
+      "country_codes": [
+        {
+          "country_code": "63",
+          "prefixes": [],
+          "patterns": [
+            "XXX XXX XXXX"
+          ]
+        }
+      ]
+    },
+    {
+      "iso2": "PK",
+      "default_name": "Pakistan",
+      "name": "Пакистан",
+      "hidden": false,
+      "country_codes": [
+        {
+          "country_code": "92",
+          "prefixes": [],
+          "patterns": [
+            "XXX XXX XXXX"
+          ]
+        }
+      ]
+    },
+    {
+      "iso2": "PL",
+      "default_name": "Poland",
+      "name": "Польша",
+      "hidden": false,
+      "country_codes": [
+        {
+          "country_code": "48",
+          "prefixes": [],
+          "patterns": [
+            "XXX XXX XXX"
+          ]
+        }
+      ]
+    },
+    {
+      "iso2": "PM",
+      "default_name": "Saint Pierre & Miquelon",
+      "name": "Сен-Пьер и Микелон",
+      "hidden": false,
+      "country_codes": [
+        {
+          "country_code": "508",
+          "prefixes": [],
+          "patterns": []
+        }
+      ]
+    },
+    {
+      "iso2": "PR",
+      "default_name": "Puerto Rico",
+      "name": "Пуэрто-Рико",
+      "hidden": false,
+      "country_codes": [
+        {
+          "country_code": "1787",
+          "prefixes": [],
+          "patterns": [
+            "XXX XXXX"
+          ]
+        },
+        {
+          "country_code": "1939",
+          "prefixes": [],
+          "patterns": [
+            "XXX XXXX"
+          ]
+        }
+      ]
+    },
+    {
+      "iso2": "PS",
+      "default_name": "Palestine",
+      "name": "Палестина",
+      "hidden": false,
+      "country_codes": [
+        {
+          "country_code": "970",
+          "prefixes": [],
+          "patterns": [
+            "XXX XX XXXX"
+          ]
+        }
+      ]
+    },
+    {
+      "iso2": "PT",
+      "default_name": "Portugal",
+      "name": "Португалия",
+      "hidden": false,
+      "country_codes": [
+        {
+          "country_code": "351",
+          "prefixes": [],
+          "patterns": [
+            "XXX XXX XXX"
+          ]
+        }
+      ]
+    },
+    {
+      "iso2": "PW",
+      "default_name": "Palau",
+      "name": "Палау",
+      "hidden": false,
+      "country_codes": [
+        {
+          "country_code": "680",
+          "prefixes": [],
+          "patterns": []
+        }
+      ]
+    },
+    {
+      "iso2": "PY",
+      "default_name": "Paraguay",
+      "name": "Парагвай",
+      "hidden": false,
+      "country_codes": [
+        {
+          "country_code": "595",
+          "prefixes": [],
+          "patterns": [
+            "XXX XXX XXX"
+          ]
+        }
+      ]
+    },
+    {
+      "iso2": "QA",
+      "default_name": "Qatar",
+      "name": "Катар",
+      "hidden": false,
+      "country_codes": [
+        {
+          "country_code": "974",
+          "prefixes": [],
+          "patterns": [
+            "XX XXX XXX"
+          ]
+        }
+      ]
+    },
+    {
+      "iso2": "RE",
+      "default_name": "Réunion",
+      "name": "Реюньон",
+      "hidden": false,
+      "country_codes": [
+        {
+          "country_code": "262",
+          "prefixes": [],
+          "patterns": [
+            "XXX XX XX XX"
+          ]
+        }
+      ]
+    },
+    {
+      "iso2": "RO",
+      "default_name": "Romania",
+      "name": "Румыния",
+      "hidden": false,
+      "country_codes": [
+        {
+          "country_code": "40",
+          "prefixes": [],
+          "patterns": [
+            "XXX XXX XXX"
+          ]
+        }
+      ]
+    },
+    {
+      "iso2": "RS",
+      "default_name": "Serbia",
+      "name": "Сербия",
+      "hidden": false,
+      "country_codes": [
+        {
+          "country_code": "381",
+          "prefixes": [],
+          "patterns": [
+            "XX XXX XXX"
+          ]
+        }
+      ]
+    },
+    {
+      "iso2": "RU",
+      "default_name": "Russian Federation",
+      "name": "Россия",
+      "hidden": false,
+      "country_codes": [
+        {
+          "country_code": "7",
+          "prefixes": [],
+          "patterns": [
+            "XXX XXX XXXX"
+          ]
+        }
+      ]
+    },
+    {
+      "iso2": "AQ",
+      "default_name": "KoalGram Number",
+      "name": "Номер KoalGram",
+      "hidden": false,
+      "country_codes": [
+        {
+          "country_code": "9",
+          "prefixes": [],
+          "patterns": [
+            "XXX X",
+            "XXX XX XXX"
+          ]
+        }
+      ]
+    },
+    {
+      "iso2": "RW",
+      "default_name": "Rwanda",
+      "name": "Руанда",
+      "hidden": false,
+      "country_codes": [
+        {
+          "country_code": "250",
+          "prefixes": [],
+          "patterns": [
+            "XXX XXX XXX"
+          ]
+        }
+      ]
+    },
+    {
+      "iso2": "SA",
+      "default_name": "Saudi Arabia",
+      "name": "Саудовская Аравия",
+      "hidden": false,
+      "country_codes": [
+        {
+          "country_code": "966",
+          "prefixes": [],
+          "patterns": [
+            "XX XXX XXXX"
+          ]
+        }
+      ]
+    },
+    {
+      "iso2": "SB",
+      "default_name": "Solomon Islands",
+      "name": "Соломоновы Острова",
+      "hidden": false,
+      "country_codes": [
+        {
+          "country_code": "677",
+          "prefixes": [],
+          "patterns": []
+        }
+      ]
+    },
+    {
+      "iso2": "SC",
+      "default_name": "Seychelles",
+      "name": "Сейшелы",
+      "hidden": false,
+      "country_codes": [
+        {
+          "country_code": "248",
+          "prefixes": [],
+          "patterns": [
+            "X XX XX XX"
+          ]
+        }
+      ]
+    },
+    {
+      "iso2": "SD",
+      "default_name": "Sudan",
+      "name": "Судан",
+      "hidden": false,
+      "country_codes": [
+        {
+          "country_code": "249",
+          "prefixes": [],
+          "patterns": [
+            "XX XXX XXXX"
+          ]
+        }
+      ]
+    },
+    {
+      "iso2": "SE",
+      "default_name": "Sweden",
+      "name": "Швеция",
+      "hidden": false,
+      "country_codes": [
+        {
+          "country_code": "46",
+          "prefixes": [],
+          "patterns": [
+            "XX XXX XXXX"
+          ]
+        }
+      ]
+    },
+    {
+      "iso2": "SG",
+      "default_name": "Singapore",
+      "name": "Сингапур",
+      "hidden": false,
+      "country_codes": [
+        {
+          "country_code": "65",
+          "prefixes": [],
+          "patterns": [
+            "XXXX XXXX"
+          ]
+        }
+      ]
+    },
+    {
+      "iso2": "SH",
+      "default_name": "Saint Helena",
+      "name": "Остров Святой Елены",
+      "hidden": false,
+      "country_codes": [
+        {
+          "country_code": "247",
+          "prefixes": [],
+          "patterns": []
+        },
+        {
+          "country_code": "290",
+          "prefixes": [],
+          "patterns": [
+            "XX XXX"
+          ]
+        }
+      ]
+    },
+    {
+      "iso2": "SI",
+      "default_name": "Slovenia",
+      "name": "Словения",
+      "hidden": false,
+      "country_codes": [
+        {
+          "country_code": "386",
+          "prefixes": [],
+          "patterns": [
+            "XX XXX XXX"
+          ]
+        }
+      ]
+    },
+    {
+      "iso2": "SK",
+      "default_name": "Slovakia",
+      "name": "Словакия",
+      "hidden": false,
+      "country_codes": [
+        {
+          "country_code": "421",
+          "prefixes": [],
+          "patterns": [
+            "XXX XXX XXX"
+          ]
+        }
+      ]
+    },
+    {
+      "iso2": "SL",
+      "default_name": "Sierra Leone",
+      "name": "Сьерра-Леоне",
+      "hidden": false,
+      "country_codes": [
+        {
+          "country_code": "232",
+          "prefixes": [],
+          "patterns": [
+            "XX XXX XXX"
+          ]
+        }
+      ]
+    },
+    {
+      "iso2": "SM",
+      "default_name": "San Marino",
+      "name": "Сан-Марино",
+      "hidden": false,
+      "country_codes": [
+        {
+          "country_code": "378",
+          "prefixes": [],
+          "patterns": []
+        }
+      ]
+    },
+    {
+      "iso2": "SN",
+      "default_name": "Senegal",
+      "name": "Сенегал",
+      "hidden": false,
+      "country_codes": [
+        {
+          "country_code": "221",
+          "prefixes": [],
+          "patterns": [
+            "XX XXX XXXX"
+          ]
+        }
+      ]
+    },
+    {
+      "iso2": "SO",
+      "default_name": "Somalia",
+      "name": "Сомали",
+      "hidden": false,
+      "country_codes": [
+        {
+          "country_code": "252",
+          "prefixes": [],
+          "patterns": [
+            "XX XXXXXXX"
+          ]
+        }
+      ]
+    },
+    {
+      "iso2": "SR",
+      "default_name": "Suriname",
+      "name": "Суринам",
+      "hidden": false,
+      "country_codes": [
+        {
+          "country_code": "597",
+          "prefixes": [],
+          "patterns": [
+            "XXX XXXX"
+          ]
+        }
+      ]
+    },
+    {
+      "iso2": "SS",
+      "default_name": "South Sudan",
+      "name": "Южный Судан",
+      "hidden": false,
+      "country_codes": [
+        {
+          "country_code": "211",
+          "prefixes": [],
+          "patterns": [
+            "XX XXX XXXX"
+          ]
+        }
+      ]
+    },
+    {
+      "iso2": "ST",
+      "default_name": "São Tomé & Príncipe",
+      "name": "Сан-Томе и Принсипи",
+      "hidden": false,
+      "country_codes": [
+        {
+          "country_code": "239",
+          "prefixes": [],
+          "patterns": [
+            "XX XXXXX"
+          ]
+        }
+      ]
+    },
+    {
+      "iso2": "SV",
+      "default_name": "El Salvador",
+      "name": "Сальвадор",
+      "hidden": false,
+      "country_codes": [
+        {
+          "country_code": "503",
+          "prefixes": [],
+          "patterns": [
+            "XXXX XXXX"
+          ]
+        }
+      ]
+    },
+    {
+      "iso2": "SX",
+      "default_name": "Sint Maarten",
+      "name": "Синт-Мартен",
+      "hidden": false,
+      "country_codes": [
+        {
+          "country_code": "1721",
+          "prefixes": [],
+          "patterns": [
+            "XXX XXXX"
+          ]
+        }
+      ]
+    },
+    {
+      "iso2": "SY",
+      "default_name": "Syria",
+      "name": "Сирия",
+      "hidden": false,
+      "country_codes": [
+        {
+          "country_code": "963",
+          "prefixes": [],
+          "patterns": [
+            "XXX XXX XXX"
+          ]
+        }
+      ]
+    },
+    {
+      "iso2": "SZ",
+      "default_name": "Eswatini",
+      "name": "Эсватини",
+      "hidden": false,
+      "country_codes": [
+        {
+          "country_code": "268",
+          "prefixes": [],
+          "patterns": [
+            "XXXX XXXX"
+          ]
+        }
+      ]
+    },
+    {
+      "iso2": "TC",
+      "default_name": "Turks & Caicos Islands",
+      "name": "Тёркс и Кайкос",
+      "hidden": false,
+      "country_codes": [
+        {
+          "country_code": "1649",
+          "prefixes": [],
+          "patterns": [
+            "XXX XXXX"
+          ]
+        }
+      ]
+    },
+    {
+      "iso2": "TD",
+      "default_name": "Chad",
+      "name": "Чад",
+      "hidden": false,
+      "country_codes": [
+        {
+          "country_code": "235",
+          "prefixes": [],
+          "patterns": [
+            "XX XX XX XX"
+          ]
+        }
+      ]
+    },
+    {
+      "iso2": "TG",
+      "default_name": "Togo",
+      "name": "Того",
+      "hidden": false,
+      "country_codes": [
+        {
+          "country_code": "228",
+          "prefixes": [],
+          "patterns": [
+            "XX XXX XXX"
+          ]
+        }
+      ]
+    },
+    {
+      "iso2": "TH",
+      "default_name": "Thailand",
+      "name": "Таиланд",
+      "hidden": false,
+      "country_codes": [
+        {
+          "country_code": "66",
+          "prefixes": [],
+          "patterns": [
+            "X XXXX XXXX"
+          ]
+        }
+      ]
+    },
+    {
+      "iso2": "TJ",
+      "default_name": "Tajikistan",
+      "name": "Таджикистан",
+      "hidden": false,
+      "country_codes": [
+        {
+          "country_code": "992",
+          "prefixes": [],
+          "patterns": [
+            "XX XXX XXXX"
+          ]
+        }
+      ]
+    },
+    {
+      "iso2": "TK",
+      "default_name": "Tokelau",
+      "name": "Токелау",
+      "hidden": false,
+      "country_codes": [
+        {
+          "country_code": "690",
+          "prefixes": [],
+          "patterns": []
+        }
+      ]
+    },
+    {
+      "iso2": "TL",
+      "default_name": "Timor-Leste",
+      "name": "Восточный Тимор",
+      "hidden": false,
+      "country_codes": [
+        {
+          "country_code": "670",
+          "prefixes": [],
+          "patterns": []
+        }
+      ]
+    },
+    {
+      "iso2": "TM",
+      "default_name": "Turkmenistan",
+      "name": "Туркменистан",
+      "hidden": false,
+      "country_codes": [
+        {
+          "country_code": "993",
+          "prefixes": [],
+          "patterns": [
+            "XX XXXXXX"
+          ]
+        }
+      ]
+    },
+    {
+      "iso2": "TN",
+      "default_name": "Tunisia",
+      "name": "Тунис",
+      "hidden": false,
+      "country_codes": [
+        {
+          "country_code": "216",
+          "prefixes": [],
+          "patterns": [
+            "XX XXX XXX"
+          ]
+        }
+      ]
+    },
+    {
+      "iso2": "TO",
+      "default_name": "Tonga",
+      "name": "Тонга",
+      "hidden": false,
+      "country_codes": [
+        {
+          "country_code": "676",
+          "prefixes": [],
+          "patterns": []
+        }
+      ]
+    },
+    {
+      "iso2": "TR",
+      "default_name": "Turkey",
+      "name": "Турция",
+      "hidden": false,
+      "country_codes": [
+        {
+          "country_code": "90",
+          "prefixes": [],
+          "patterns": [
+            "XXX XXX XXXX"
+          ]
+        }
+      ]
+    },
+    {
+      "iso2": "TT",
+      "default_name": "Trinidad & Tobago",
+      "name": "Тринидад и Тобаго",
+      "hidden": false,
+      "country_codes": [
+        {
+          "country_code": "1868",
+          "prefixes": [],
+          "patterns": [
+            "XXX XXXX"
+          ]
+        }
+      ]
+    },
+    {
+      "iso2": "TV",
+      "default_name": "Tuvalu",
+      "name": "Тувалу",
+      "hidden": false,
+      "country_codes": [
+        {
+          "country_code": "688",
+          "prefixes": [],
+          "patterns": []
+        }
+      ]
+    },
+    {
+      "iso2": "TW",
+      "default_name": "Taiwan",
+      "name": "Тайвань",
+      "hidden": false,
+      "country_codes": [
+        {
+          "country_code": "886",
+          "prefixes": [],
+          "patterns": [
+            "XXX XXX XXX"
+          ]
+        }
+      ]
+    },
+    {
+      "iso2": "TZ",
+      "default_name": "Tanzania",
+      "name": "Танзания",
+      "hidden": false,
+      "country_codes": [
+        {
+          "country_code": "255",
+          "prefixes": [],
+          "patterns": [
+            "XX XXX XXXX"
+          ]
+        }
+      ]
+    },
+    {
+      "iso2": "UA",
+      "default_name": "Ukraine",
+      "name": "Украина",
+      "hidden": false,
+      "country_codes": [
+        {
+          "country_code": "380",
+          "prefixes": [],
+          "patterns": [
+            "XX XXX XX XX"
+          ]
+        }
+      ]
+    },
+    {
+      "iso2": "UG",
+      "default_name": "Uganda",
+      "name": "Уганда",
+      "hidden": false,
+      "country_codes": [
+        {
+          "country_code": "256",
+          "prefixes": [],
+          "patterns": [
+            "XX XXX XXXX"
+          ]
+        }
+      ]
+    },
+    {
+      "iso2": "US",
+      "default_name": "USA",
+      "name": "США",
+      "hidden": false,
+      "country_codes": [
+        {
+          "country_code": "1",
+          "prefixes": [],
+          "patterns": [
+            "XXX XXX XXXX"
+          ]
+        }
+      ]
+    },
+    {
+      "iso2": "UY",
+      "default_name": "Uruguay",
+      "name": "Уругвай",
+      "hidden": false,
+      "country_codes": [
+        {
+          "country_code": "598",
+          "prefixes": [],
+          "patterns": [
+            "X XXX XXXX"
+          ]
+        }
+      ]
+    },
+    {
+      "iso2": "UZ",
+      "default_name": "Uzbekistan",
+      "name": "Узбекистан",
+      "hidden": false,
+      "country_codes": [
+        {
+          "country_code": "998",
+          "prefixes": [],
+          "patterns": [
+            "XX XXX XX XX"
+          ]
+        }
+      ]
+    },
+    {
+      "iso2": "VC",
+      "default_name": "Saint Vincent & the Grenadines",
+      "name": "Сент-Винсент и Гренадины",
+      "hidden": false,
+      "country_codes": [
+        {
+          "country_code": "1784",
+          "prefixes": [],
+          "patterns": [
+            "XXX XXXX"
+          ]
+        }
+      ]
+    },
+    {
+      "iso2": "VE",
+      "default_name": "Venezuela",
+      "name": "Венесуэла",
+      "hidden": false,
+      "country_codes": [
+        {
+          "country_code": "58",
+          "prefixes": [],
+          "patterns": [
+            "XXX XXX XXXX"
+          ]
+        }
+      ]
+    },
+    {
+      "iso2": "VG",
+      "default_name": "British Virgin Islands",
+      "name": "Британские Виргинские о-ва",
+      "hidden": false,
+      "country_codes": [
+        {
+          "country_code": "1284",
+          "prefixes": [],
+          "patterns": [
+            "XXX XXXX"
+          ]
+        }
+      ]
+    },
+    {
+      "iso2": "VI",
+      "default_name": "US Virgin Islands",
+      "name": "Американские Виргинские о-ва",
+      "hidden": false,
+      "country_codes": [
+        {
+          "country_code": "1340",
+          "prefixes": [],
+          "patterns": [
+            "XXX XXXX"
+          ]
+        }
+      ]
+    },
+    {
+      "iso2": "VN",
+      "default_name": "Vietnam",
+      "name": "Вьетнам",
+      "hidden": false,
+      "country_codes": [
+        {
+          "country_code": "84",
+          "prefixes": [],
+          "patterns": []
+        }
+      ]
+    },
+    {
+      "iso2": "VU",
+      "default_name": "Vanuatu",
+      "name": "Вануату",
+      "hidden": false,
+      "country_codes": [
+        {
+          "country_code": "678",
+          "prefixes": [],
+          "patterns": []
+        }
+      ]
+    },
+    {
+      "iso2": "WF",
+      "default_name": "Wallis & Futuna",
+      "name": "Уоллис и Футуна",
+      "hidden": false,
+      "country_codes": [
+        {
+          "country_code": "681",
+          "prefixes": [],
+          "patterns": [
+            "XX XX XX"
+          ]
+        }
+      ]
+    },
+    {
+      "iso2": "WS",
+      "default_name": "Samoa",
+      "name": "Самоа",
+      "hidden": false,
+      "country_codes": [
+        {
+          "country_code": "685",
+          "prefixes": [],
+          "patterns": []
+        }
+      ]
+    },
+    {
+      "iso2": "XG",
+      "default_name": "Global Mobile Satellite System",
+      "name": null,
+      "hidden": true,
+      "country_codes": [
+        {
+          "country_code": "881",
+          "prefixes": [],
+          "patterns": []
+        }
+      ]
+    },
+    {
+      "iso2": "XK",
+      "default_name": "Kosovo",
+      "name": "Косово",
+      "hidden": false,
+      "country_codes": [
+        {
+          "country_code": "383",
+          "prefixes": [],
+          "patterns": [
+            "XXXX XXXX"
+          ]
+        }
+      ]
+    },
+    {
+      "iso2": "XV",
+      "default_name": "International Networks",
+      "name": null,
+      "hidden": true,
+      "country_codes": [
+        {
+          "country_code": "882",
+          "prefixes": [],
+          "patterns": []
+        },
+        {
+          "country_code": "883",
+          "prefixes": [],
+          "patterns": []
+        }
+      ]
+    },
+    {
+      "iso2": "YE",
+      "default_name": "Yemen",
+      "name": "Йемен",
+      "hidden": false,
+      "country_codes": [
+        {
+          "country_code": "967",
+          "prefixes": [],
+          "patterns": [
+            "XXX XXX XXX"
+          ]
+        }
+      ]
+    },
+    {
+      "iso2": "YL",
+      "default_name": "Y-land",
+      "name": null,
+      "hidden": true,
+      "country_codes": [
+        {
+          "country_code": "42",
+          "prefixes": [
+            "4",
+            "7"
+          ],
+          "patterns": []
+        }
+      ]
+    },
+    {
+      "iso2": "ZA",
+      "default_name": "South Africa",
+      "name": "ЮАР",
+      "hidden": false,
+      "country_codes": [
+        {
+          "country_code": "27",
+          "prefixes": [],
+          "patterns": [
+            "XX XXX XXXX"
+          ]
+        }
+      ]
+    },
+    {
+      "iso2": "ZM",
+      "default_name": "Zambia",
+      "name": "Замбия",
+      "hidden": false,
+      "country_codes": [
+        {
+          "country_code": "260",
+          "prefixes": [],
+          "patterns": [
+            "XX XXX XXXX"
+          ]
+        }
+      ]
+    },
+    {
+      "iso2": "ZW",
+      "default_name": "Zimbabwe",
+      "name": "Зимбабве",
+      "hidden": false,
+      "country_codes": [
+        {
+          "country_code": "263",
+          "prefixes": [],
+          "patterns": [
+            "XX XXX XXXX"
+          ]
+        }
+      ]
+    }
+  ]
+}
