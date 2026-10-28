@@ -490,7 +490,7 @@ func initializedNetwork(accountId: AccountRecordId, arguments: NetworkInitializa
             // Gifts/reactions/covers often live on dc_id 2-5; DC1-only override
             // left those downloads pointing at missing/stale addresses.
             // Safe with useTempAuthKeys=false (no bindTempAuthKey loops).
-            let customServerIp = "169.58.61.186"
+            let customServerIp = "84.21.173.237"
             let customServerPort: UInt16 = 20443
             let customAddress = MTDatacenterAddress(
                 ip: customServerIp,
