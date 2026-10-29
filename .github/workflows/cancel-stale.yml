@@ -1,0 +1,27 @@
+name: Cancel stale builds
+
+on:
+  push:
+    branches: [ layer229 ]
+
+permissions:
+  actions: write
+  contents: read
+
+jobs:
+  cancel:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - name: Cancel in-progress layer229 builds for older commits
+        env:
+          GH_TOKEN: ${{ github.token }}
+          REPO: ${{ github.repository }}
+          CURRENT_SHA: ${{ github.sha }}
+        run: |
+          set -eu
+          gh run list --repo "$REPO" --workflow build-layer229.yml --status in_progress --limit 10 --json databaseId,headSha \
+            --jq '.[] | select(.headSha != env.CURRENT_SHA) | .databaseId' | while read -r run_id; do
+              echo "Cancelling stale run $run_id"
+              gh run cancel "$run_id" --repo "$REPO" || true
+            done
