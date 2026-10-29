@@ -425,7 +425,7 @@ plist_fragment(
             <string>{telegram_bundle_id}</string>
             <key>CFBundleURLSchemes</key>
             <array>
-                <string>telegram</string>
+                <string>airgram</string>
             </array>
         </dict>
         <dict>
@@ -435,10 +435,7 @@ plist_fragment(
             <string>{telegram_bundle_id}.compatibility</string>
             <key>CFBundleURLSchemes</key>
             <array>
-                <string>tg</string>
-                <string>tonsite</string>
-                <string>ton</string>
-                <string>tc</string>
+                <string>airgram-tg</string>
             </array>
         </dict>
     </array>
@@ -636,7 +633,7 @@ plist_fragment(
     template =
     """
     <key>CFBundleDisplayName</key>
-    <string>Telegram</string>
+    <string>AirGram</string>
     """
 )
 
@@ -1621,11 +1618,11 @@ plist_fragment(
     <key>CFBundleDevelopmentRegion</key>
     <string>en</string>
     <key>CFBundleDisplayName</key>
-    <string>Telegram</string>
+    <string>AirGram</string>
     <key>CFBundleIdentifier</key>
     <string>{telegram_bundle_id}</string>
     <key>CFBundleName</key>
-    <string>Telegram</string>
+    <string>AirGram</string>
     <key>CFBundlePackageType</key>
     <string>APPL</string>
     <key>CFBundleSignature</key>
@@ -2046,4 +2043,44 @@ filegroup(
         "Telegram-iOS/en.lproj/Localizable.strings",
     ],
     visibility = ["//submodules/ChatListUI:__pkg__"],
+)
+
+ios_application(
+    name = "telegram_auth_build_test",
+    bundle_id = "{telegram_bundle_id}".format(
+        telegram_bundle_id = telegram_bundle_id,
+    ),
+    families = ["iphone", "ipad"],
+    minimum_os_version = minimum_os_version,
+    provisioning_profile = select({
+        ":disableProvisioningProfilesSetting": None,
+        "//conditions:default": "@build_configuration//provisioning:Telegram.mobileprovision",
+    }),
+    entitlements = ":TelegramEntitlements.entitlements",
+    infoplists = [
+        ":TelegramInfoPlist",
+        ":BuildNumberInfoPlist",
+        ":VersionInfoPlist",
+        ":RequiredDeviceCapabilitiesPlist",
+        ":UrlTypesInfoPlist",
+    ],
+    app_icons = [ ":{}_icon".format(name) for name in composer_icon_folders ],
+    resources = [
+        ":LaunchScreen",
+    ],
+    frameworks = [
+        ":MtProtoKitFramework",
+        ":SwiftSignalKitFramework",
+        ":PostboxFramework",
+        ":TelegramCoreFramework",
+        ":TelegramUIFramework",
+    ],
+    strings = [
+        ":AppStringResources",
+    ],
+    # No app extensions and no watch app: faster device IPA for the AirGram sideload flow.
+    deps = [
+        ":Main",
+        ":Lib",
+    ],
 )

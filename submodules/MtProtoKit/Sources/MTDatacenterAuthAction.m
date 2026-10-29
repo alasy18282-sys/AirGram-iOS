@@ -123,12 +123,16 @@
 
 - (void)completeWithAuthKey:(MTDatacenterAuthKey *)authKey timestamp:(int64_t)timestamp serverSalt:(int64_t)serverSalt {
     if (MTLogEnabled()) {
-        MTLog(@"[MTDatacenterAuthAction#%p@%p: completeWithAuthKey %lld selector %d]", self, _context, authKey.authKeyId, _authKeyInfoSelector);
+        MTLog(@"[MTDatacenterAuthAction#%p@%p: completeWithAuthKey %lld selector %d salt %lld]", self, _context, authKey.authKeyId, _authKeyInfoSelector, serverSalt);
     }
+    
+    // Salt 0 makes MTProto clients enter an endless time-fix loop against
+    // MyTelegram backends that never answer pings with bad_server_salt.
+    int64_t effectiveSalt = serverSalt != 0 ? serverSalt : 1;
     
     switch (_authKeyInfoSelector) {
         case MTDatacenterAuthInfoSelectorPersistent: {
-            MTDatacenterAuthInfo *authInfo = [[MTDatacenterAuthInfo alloc] initWithAuthKey:authKey.authKey authKeyId:authKey.authKeyId validUntilTimestamp:INT32_MAX saltSet:@[[[MTDatacenterSaltInfo alloc] initWithSalt:serverSalt firstValidMessageId:timestamp lastValidMessageId:timestamp + (29.0 * 60.0) * 4294967296]] authKeyAttributes:nil];
+            MTDatacenterAuthInfo *authInfo = [[MTDatacenterAuthInfo alloc] initWithAuthKey:authKey.authKey authKeyId:authKey.authKeyId validUntilTimestamp:INT32_MAX saltSet:@[[[MTDatacenterSaltInfo alloc] initWithSalt:effectiveSalt firstValidMessageId:timestamp lastValidMessageId:timestamp + (29.0 * 60.0) * 4294967296]] authKeyAttributes:nil];
             
             MTContext *context = _context;
             [context updateAuthInfoForDatacenterWithId:_datacenterId authInfo:authInfo selector:_authKeyInfoSelector];
@@ -141,7 +145,7 @@
             MTContext *mainContext = _context;
             if (mainContext != nil) {
                 if (_skipBind) {
-                    MTDatacenterAuthInfo *authInfo = [[MTDatacenterAuthInfo alloc] initWithAuthKey:authKey.authKey authKeyId:authKey.authKeyId validUntilTimestamp:authKey.validUntilTimestamp saltSet:@[[[MTDatacenterSaltInfo alloc] initWithSalt:serverSalt firstValidMessageId:timestamp lastValidMessageId:timestamp + (29.0 * 60.0) * 4294967296]] authKeyAttributes:nil];
+                    MTDatacenterAuthInfo *authInfo = [[MTDatacenterAuthInfo alloc] initWithAuthKey:authKey.authKey authKeyId:authKey.authKeyId validUntilTimestamp:authKey.validUntilTimestamp saltSet:@[[[MTDatacenterSaltInfo alloc] initWithSalt:effectiveSalt firstValidMessageId:timestamp lastValidMessageId:timestamp + (29.0 * 60.0) * 4294967296]] authKeyAttributes:nil];
                     
                     [_context updateAuthInfoForDatacenterWithId:_datacenterId authInfo:authInfo selector:_authKeyInfoSelector];
                     

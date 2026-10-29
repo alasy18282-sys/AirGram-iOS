@@ -447,13 +447,14 @@ public final class PeerInfoCoverComponent: Component {
                             resource: .media(media: .standalone(media: patternFile), resource: patternFile.resource),
                             type: AnimationCacheAnimationType(file: patternFile),
                             keyframeOnly: false,
-                            customColor: .white,
+                            customColor: patternTintColor ?? (isTemplate ? .white : nil),
                             lottieSettings: component.context.lottieRenderingSettings
                         ),
                         completion: { [weak self] _, _ in
                             guard let self else {
                                 return
                             }
+                            Logger.shared.shortLog("GiftMedia", "PeerInfoCover: pattern async load done fileId=\(patternFile.fileId.id) hasImage=\(self.patternContentsTarget?.contents != nil)")
                             self.updatePatternLayerImages(animated: animated)
                         }
                     )

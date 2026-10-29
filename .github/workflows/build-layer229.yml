@@ -1,0 +1,222 @@
+name: Build AirGram iOS (layer 229)
+
+on:
+  push:
+    branches: [ layer229 ]
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: layer229-build
+  cancel-in-progress: false
+
+env:
+  BAZEL_USER_ROOT: /private/var/tmp/_bazel_containerhost
+  BUILD_BRANCH: layer229
+
+jobs:
+  build:
+    runs-on: macos-26
+    timeout-minutes: 350
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          submodules: recursive
+          fetch-depth: 1
+
+      - name: Select Xcode
+        run: |
+          set -euxo pipefail
+          python3 - <<'PY'
+          import glob
+          import json
+          import os
+          import re
+          import subprocess
+
+          want = json.load(open("versions.json"))["xcode"]
+          want_tuple = tuple(int(part) for part in want.split("."))
+          candidates = []
+          for path in glob.glob("/Applications/Xcode*.app"):
+              match = re.search(r"Xcode_([0-9][0-9.]*)\.app$", path)
+              if match:
+                  version = tuple(int(part) for part in match.group(1).split("."))
+                  candidates.append((version, path))
+          candidates.sort(reverse=True)
+          picked = None
+          for version, path in candidates:
+              if version >= want_tuple:
+                  picked = path
+                  break
+          if picked is None and candidates:
+              picked = candidates[0][1]
+          if picked is None:
+              picked = "/Applications/Xcode.app"
+          print("Selected:", picked)
+          subprocess.check_call(["sudo", "xcode-select", "-s", os.path.join(picked, "Contents", "Developer")])
+          PY
+          xcodebuild -version
+
+      - name: Install build dependencies
+        run: |
+          set -euxo pipefail
+          brew list pkg-config >/dev/null 2>&1 || brew install pkg-config
+          pkg-config --version
+
+      - name: Fix script permissions
+        run: |
+          set -euxo pipefail
+          find . -name '*.sh' -print0 | xargs -0 chmod +x
+          find submodules/ffmpeg third-party -type f \( -name configure -o -name pkg-config -o -name '*.pl' \) -print0 | xargs -0 chmod +x
+
+      - name: Restore Bazel cache
+        uses: actions/cache@v4
+        with:
+          path: /private/var/tmp/_bazel_containerhost
+          key: ${{ runner.os }}-bazel-layer229-v1-${{ hashFiles('WORKSPACE', 'WORKSPACE.bzlmod', 'MODULE.bazel', '.bazelrc', 'build-system/Make/Make.py', 'Telegram/BUILD') }}
+          restore-keys: |
+            ${{ runner.os }}-bazel-layer229-v1-
+
+      - name: Build AirGram device IPA
+        run: |
+          set -euxo pipefail
+          mkdir -p ci_logs
+          BUILD_NUMBER_OFFSET="$(cat build_number_offset)"
+          COMMIT_COUNT="${GITHUB_RUN_NUMBER:-1}"
+          BUILD_NUMBER="$((COMMIT_COUNT + BUILD_NUMBER_OFFSET))"
+          APP_VERSION=$(python3 -c 'import json; print(json.load(open("versions.json"))["app"])')
+          echo "BUILD_NUMBER=$BUILD_NUMBER" >> "$GITHUB_ENV"
+          echo "APP_VERSION=$APP_VERSION" >> "$GITHUB_ENV"
+
+          python3 build-system/Make/ImportCertificates.py --path build-system/fake-codesigning/certs
+          python3 build-system/Make/RewriteProfilesBundleId.py \
+            --profiles build-system/fake-codesigning/profiles \
+            --certs build-system/fake-codesigning/certs \
+            --old-bundle ph.telegra.Telegraph \
+            --new-bundle org.airgram.ios
+
+          python3 -u build-system/Make/Make.py \
+            --bazelUserRoot="$BAZEL_USER_ROOT" \
+            --cacheDir="$BAZEL_USER_ROOT/disk_cache" \
+            --overrideXcodeVersion \
+            build \
+            --configurationPath="build-system/appstore-configuration.json" \
+            --codesigningInformationPath=build-system/fake-codesigning \
+            --configuration=release_arm64 \
+            --target=Telegram/telegram_auth_build_test \
+            --buildNumber="$BUILD_NUMBER" 2>&1 | tee ci_logs/build.log
+
+      - name: Collect artifacts
+        run: |
+          set -euxo pipefail
+          OUTPUT_PATH="build/artifacts"
+          rm -rf "$OUTPUT_PATH"
+          mkdir -p "$OUTPUT_PATH"
+          python3 - <<'PY'
+          import glob
+          import os
+          import shutil
+          import zipfile
+
+          output_path = "build/artifacts"
+          search_roots = ["bazel-bin", "bazel-out", "/private/var/tmp/_bazel_containerhost"]
+
+          def collect(pattern, expect_dir):
+              matches = []
+              for root in search_roots:
+                  if not os.path.exists(root):
+                      continue
+                  for path in glob.glob(os.path.join(root, "**", pattern), recursive=True):
+                      if expect_dir and os.path.isdir(path):
+                          matches.append(os.path.abspath(path))
+                      if not expect_dir and os.path.isfile(path):
+                          matches.append(os.path.abspath(path))
+              return sorted(set(matches), key=os.path.getmtime, reverse=True)
+
+          ipa_candidates = collect("telegram_auth_build_test.ipa", expect_dir=False)
+          if not ipa_candidates:
+              print("No IPA artifacts found.", flush=True)
+              for item in collect("*.ipa", expect_dir=False)[:30]:
+                  print("debug-ipa:", item, flush=True)
+              raise SystemExit(1)
+
+          ipa_path = ipa_candidates[0]
+          print("Using IPA:", ipa_path, flush=True)
+          shutil.copy2(ipa_path, os.path.join(output_path, "AirGram-layer229.ipa"))
+
+          base_dir = os.path.dirname(ipa_path)
+          dsym_candidates = [
+              path for path in glob.glob(os.path.join(base_dir, "telegram_auth_build_test*.dSYM"))
+              if os.path.isdir(path)
+          ]
+          if not dsym_candidates:
+              dsym_candidates = collect("telegram_auth_build_test*.dSYM", expect_dir=True)
+
+          copied_dsyms = []
+          for dsym in dsym_candidates:
+              target = os.path.join(output_path, os.path.basename(dsym))
+              if os.path.exists(target):
+                  continue
+              shutil.copytree(dsym, target)
+              copied_dsyms.append(target)
+
+          if copied_dsyms:
+              dsym_zip = os.path.join(output_path, "telegram_auth_build_test.dSYM.zip")
+              with zipfile.ZipFile(dsym_zip, "w", compression=zipfile.ZIP_DEFLATED) as archive:
+                  for dsym_dir in copied_dsyms:
+                      for root, _, files in os.walk(dsym_dir):
+                          for file_name in files:
+                              file_path = os.path.join(root, file_name)
+                              archive.write(file_path, arcname=os.path.relpath(file_path, output_path))
+              for dsym_dir in copied_dsyms:
+                  shutil.rmtree(dsym_dir)
+          PY
+          ls -la "$OUTPUT_PATH"
+
+      - name: Upload artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: AirGram-layer229-${{ env.BUILD_NUMBER }}
+          path: build/artifacts/*
+          if-no-files-found: error
+
+      - name: Create release
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: layer229-${{ env.BUILD_NUMBER }}-${{ github.run_number }}
+          name: AirGram layer 229 (${{ env.BUILD_NUMBER }})
+          body: |
+            Device IPA (release_arm64) built from the layer229 branch: Telegram-iOS 13.0.0 base,
+            TL layer 229, AirGram branding, MyTelegram server patches.
+          files: build/artifacts/*
+          fail_on_unmatched_files: false
+          prerelease: true
+
+      - name: Commit build log
+        if: always()
+        run: |
+          set -euxo pipefail
+          mkdir -p ci_logs
+          if [ -f ci_logs/build.log ]; then
+            tail -c 4000000 ci_logs/build.log > ci_logs/build_tail.log
+          else
+            echo "build log was not produced" > ci_logs/build_tail.log
+          fi
+          {
+            echo "run: ${{ github.run_number }}"
+            echo "status: ${{ job.status }}"
+            echo "sha: ${{ github.sha }}"
+            echo "date: $(date -u +%Y-%m-%dT%H:%M:%SZ)"
+          } > ci_logs/status.txt
+          git config user.name "airgram-ci"
+          git config user.email "airgram-ci@users.noreply.github.com"
+          git add -f ci_logs/build_tail.log ci_logs/status.txt
+          if git diff --cached --quiet; then
+            exit 0
+          fi
+          git commit -m "ci(layer229): build log ${GITHUB_RUN_NUMBER} [skip ci]"
+          git push origin "HEAD:${BUILD_BRANCH}"

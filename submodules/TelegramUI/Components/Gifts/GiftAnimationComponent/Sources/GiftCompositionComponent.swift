@@ -873,21 +873,51 @@ public final class GiftCompositionComponent: Component {
                     avatarCenter = CGPoint(x: avatarCenter.x, y: 67.0 + topBackgroundExtension)
                 }
                 let backgroundSize = CGSize(width: availableSize.width, height: availableSize.height + topBackgroundExtension)
+                let patternAppearance = GiftPatternAppearance(
+                    outerColor: backgroundColor,
+                    innerColor: secondBackgroundColor,
+                    patternColor: patternColor,
+                    patternFile: patternFile,
+                    patternFileId: patternFile?.fileId.id,
+                    files: files
+                )
+                GiftPatternRenderer.prefetchAndReloadPattern(
+                    account: component.context.account,
+                    appearance: patternAppearance,
+                    disposables: self.disposables,
+                    reload: { [weak self] in
+                        guard let self, let backgroundView = self.background.view as? PeerInfoCoverComponent.View else {
+                            return
+                        }
+                        backgroundView.reloadPattern()
+                    }
+                )
+                let coverComponent = GiftPatternRenderer.makeCoverComponent(
+                    context: component.context,
+                    appearance: patternAppearance,
+                    avatarCenter: avatarCenter,
+                    avatarScale: 1.0,
+                    defaultHeight: 300.0,
+                    topBackgroundExtension: topBackgroundExtension,
+                    gradientOnTop: true,
+                    avatarTransitionFraction: 0.0,
+                    patternTransitionFraction: 1.0
+                ) ?? PeerInfoCoverComponent(
+                    context: component.context,
+                    subject: .custom(backgroundColor, secondBackgroundColor, patternColor, patternFile?.fileId.id),
+                    files: files,
+                    isDark: false,
+                    avatarCenter: avatarCenter,
+                    avatarScale: 1.0,
+                    defaultHeight: 300.0,
+                    topBackgroundExtension: topBackgroundExtension,
+                    gradientOnTop: true,
+                    avatarTransitionFraction: 0.0,
+                    patternTransitionFraction: 1.0
+                )
                 let _ = self.background.update(
                     transition: backgroundTransition,
-                    component: AnyComponent(PeerInfoCoverComponent(
-                        context: component.context,
-                        subject: .custom(backgroundColor, secondBackgroundColor, patternColor, patternFile?.fileId.id),
-                        files: files,
-                        isDark: false,
-                        avatarCenter: avatarCenter,
-                        avatarScale: 1.0,
-                        defaultHeight: 300.0,
-                        topBackgroundExtension: topBackgroundExtension,
-                        gradientOnTop: true,
-                        avatarTransitionFraction: 0.0,
-                        patternTransitionFraction: 0.0
-                    )),
+                    component: AnyComponent(coverComponent),
                     environment: {},
                     containerSize: backgroundSize
                 )

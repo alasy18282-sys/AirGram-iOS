@@ -239,11 +239,11 @@ public final class ReactionNode: ASDisplayNode, ReactionItemNode {
             strongSelf.animateInAnimationNode = nil
         }
         
-        self.fetchStickerDisposable = context.engine.resources.fetch(reference: .standalone(resource: item.appearAnimation._parse().resource), userLocation: .other, userContentType: .sticker).start()
-        self.fetchStickerDisposable = context.engine.resources.fetch(reference: .standalone(resource: item.stillAnimation._parse().resource), userLocation: .other, userContentType: .sticker).start()
-        self.fetchStickerDisposable = context.engine.resources.fetch(reference: .standalone(resource: item.listAnimation._parse().resource), userLocation: .other, userContentType: .sticker).start()
+        self.fetchStickerDisposable = context.engine.resources.fetch(reference: .media(media: .customEmoji(media: item.appearAnimation._parse()), resource: item.appearAnimation._parse().resource), userLocation: .other, userContentType: .sticker).start()
+        self.fetchStickerDisposable = context.engine.resources.fetch(reference: .media(media: .customEmoji(media: item.stillAnimation._parse()), resource: item.stillAnimation._parse().resource), userLocation: .other, userContentType: .sticker).start()
+        self.fetchStickerDisposable = context.engine.resources.fetch(reference: .media(media: .customEmoji(media: item.listAnimation._parse()), resource: item.listAnimation._parse().resource), userLocation: .other, userContentType: .sticker).start()
         if let applicationAnimation = item.applicationAnimation {
-            self.fetchFullAnimationDisposable = context.engine.resources.fetch(reference: .standalone(resource: applicationAnimation._parse().resource), userLocation: .other, userContentType: .sticker).start()
+            self.fetchFullAnimationDisposable = context.engine.resources.fetch(reference: .media(media: .customEmoji(media: applicationAnimation._parse()), resource: applicationAnimation._parse().resource), userLocation: .other, userContentType: .sticker).start()
         }
         
         if self.isLocked {

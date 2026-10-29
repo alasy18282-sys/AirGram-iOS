@@ -547,29 +547,17 @@ func initializedNetwork(accountId: AccountRecordId, arguments: NetworkInitializa
                 }
             }
             
-            let useTempAuthKeys: Bool = true
+            // Custom MyTelegram backends frequently fail iOS PFS binding
+            // (endless auth.bindTempAuthKey + time-fix pings), which blocks
+            // auth.sendCode / registration. Use persistent keys only.
+            let useTempAuthKeys: Bool = false
             
             let context = MTContext(serialization: serialization, encryptionProvider: arguments.encryptionProvider, apiEnvironment: apiEnvironment, isTestingEnvironment: testingEnvironment, useTempAuthKeys: useTempAuthKeys)
-            context.refreshesTemporaryKeys = !supplementary
+            context.refreshesTemporaryKeys = !supplementary && useTempAuthKeys
             
-            if let networkSettings = networkSettings {
-                let useNetworkFramework: Bool
-                if let customValue = networkSettings.useNetworkFramework {
-                    useNetworkFramework = customValue
-                } else if arguments.useBetaFeatures {
-                    useNetworkFramework = true
-                } else {
-                    useNetworkFramework = false
-                }
-                
-                if useNetworkFramework {
-                    if #available(iOS 12.0, macOS 14.0, *) {
-                        context.makeTcpConnectionInterface = { delegate, delegateQueue in
-                            return NetworkFrameworkTcpConnectionInterface(delegate: delegate, delegateQueue: delegateQueue)
-                        }
-                    }
-                }
-            }
+            // Custom MyTelegram backends are more reliable with classic MTTcpConnection.
+            // Network.framework can accept writes but never deliver MTProto responses,
+            // which strands auth.sendCode in time-fix.
 
             let baseTcpConnectionInterfaceFactory = context.makeTcpConnectionInterface
             let isAppExtension = Bundle.main.bundlePath.hasSuffix(".appex")
@@ -582,23 +570,13 @@ func initializedNetwork(accountId: AccountRecordId, arguments: NetworkInitializa
                 }
             }
             
-            let seedAddressList: [Int: [String]]
-            
-            if testingEnvironment {
-                seedAddressList = [
-                    1: ["149.154.175.10"],
-                    2: ["149.154.167.40"],
-                    3: ["149.154.175.117"]
-                ]
-            } else {
-                seedAddressList = [
-                    1: ["149.154.175.50", "2001:b28:f23d:f001::a"],
-                    2: ["149.154.167.50", "95.161.76.100", "2001:67c:4e8:f002::a"],
-                    3: ["149.154.175.100", "2001:b28:f23d:f003::a"],
-                    4: ["149.154.167.91", "2001:67c:4e8:f004::a"],
-                    5: ["149.154.171.5", "2001:b28:f23f:f005::a"]
-                ]
-            }
+            let seedAddressList: [Int: [String]] = [
+                1: [customServerIp],
+                2: [customServerIp],
+                3: [customServerIp],
+                4: [customServerIp],
+                5: [customServerIp]
+            ]
             
             for (id, ips) in seedAddressList {
                 context.setSeedAddressSetForDatacenterWithId(id, seedAddressSet: MTDatacenterAddressSet(addressList: ips.map { MTDatacenterAddress(ip: $0, port: 443, preferForMedia: false, restrictToTcp: false, cdn: false, preferForProxy: false, secret: nil) }))

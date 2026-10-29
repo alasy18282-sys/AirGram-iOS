@@ -1596,12 +1596,19 @@ static void copyKeychainDictionaryKey(NSString * _Nonnull group, NSString * _Non
 {
     [[MTContext contextQueue] dispatchOnQueue:^
     {
-        NSNumber *infoKey = authInfoMapIntegerKey((int32_t)datacenterId, selector);
+        MTDatacenterAuthInfoSelector effectiveSelector = selector;
+        bool effectiveAllowUnboundEphemeralKeys = allowUnboundEphemeralKeys;
+        if (!_useTempAuthKeys && (effectiveSelector == MTDatacenterAuthInfoSelectorEphemeralMain || effectiveSelector == MTDatacenterAuthInfoSelectorEphemeralMedia)) {
+            effectiveSelector = MTDatacenterAuthInfoSelectorPersistent;
+            effectiveAllowUnboundEphemeralKeys = true;
+        }
+        
+        NSNumber *infoKey = authInfoMapIntegerKey((int32_t)datacenterId, effectiveSelector);
         
         if (_datacenterAuthActions[infoKey] == nil && _datacenterAuthRetryTimers[infoKey] == nil)
         {
             __weak MTContext *weakSelf = self;
-            MTDatacenterAuthAction *authAction = [self makeAuthActionWithSelector:selector isCdn:isCdn skipBind:allowUnboundEphemeralKeys completion:^(MTDatacenterAuthAction *action, bool success) {
+            MTDatacenterAuthAction *authAction = [self makeAuthActionWithSelector:effectiveSelector isCdn:isCdn skipBind:effectiveAllowUnboundEphemeralKeys completion:^(MTDatacenterAuthAction *action, bool success) {
                 [[MTContext contextQueue] dispatchOnQueue:^{
                     __strong MTContext *strongSelf = weakSelf;
                     if (strongSelf == nil) {
