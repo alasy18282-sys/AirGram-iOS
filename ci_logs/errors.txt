@@ -1,0 +1,8 @@
+ERROR: /Users/runner/work/AirGram-iOS/AirGram-iOS/submodules/TelegramUI/Components/Gifts/GiftViewScreen/BUILD:3:14: Compiling Swift module //submodules/TelegramUI/Components/Gifts/GiftViewScreen:GiftViewScreen failed: (Exit 1): worker failed: error executing SwiftCompile command (from swift_library rule target //submodules/TelegramUI/Components/Gifts/GiftViewScreen:GiftViewScreen) 
+submodules/TelegramUI/Components/Gifts/GiftViewScreen/Sources/GiftViewScreen.swift:2651:27: error: extra argument 'error' in call
+2651 |                 }, error: { [weak self] _ in
+     |                           `- error: extra argument 'error' in call
+submodules/TelegramUI/Components/Gifts/GiftViewScreen/Sources/GiftViewScreen.swift:2651:41: error: cannot infer type of closure parameter '_' without a type annotation
+2651 |                 }, error: { [weak self] _ in
+     |                                         `- error: cannot infer type of closure parameter '_' without a type annotation
+ERROR: Build did NOT complete successfully
