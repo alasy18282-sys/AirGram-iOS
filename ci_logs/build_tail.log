@@ -1,0 +1,774 @@
+  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0
+100 57.6M  100 57.6M    0     0  76.9M      0 --:--:-- --:--:-- --:--:-- 76.9M
+TelegramBuild: running
+/Users/runner/work/AirGram-iOS/AirGram-iOS/build-input/bazel-9.2.0-darwin-arm64 --output_user_root=/private/var/tmp/_bazel_containerhost build Telegram/telegram_auth_build_test --announce_rc --features=swift.use_global_module_cache --verbose_failures --remote_cache_async --define=buildNumber=3731 --disk_cache=/private/var/tmp/_bazel_containerhost/disk_cache -c opt --ios_multi_cpus=arm64 --watchos_cpus=arm64_32 --apple_generate_dsym --output_groups=+dsyms --@rules_rust//rust/settings:lto=fat --features=swift.opt_uses_wmo --features=swift.opt_uses_osize --features=dead_strip --objc_enable_binary_stripping
+Extracting Bazel installation...
+Starting local Bazel server (9.2.0) and connecting to it...
+INFO: Invocation ID: 1b1f1fd0-e329-4612-a127-357df0d31495
+INFO: Options provided by the client:
+  Inherited 'common' options: --isatty=0 --terminal_columns=80
+INFO: Reading rc options for 'build' from /Users/runner/work/AirGram-iOS/AirGram-iOS/.bazelrc:
+  'build' options: --action_env=ZERO_AR_DATE=1 --enable_platform_specific_config --experimental_remote_downloader_local_fallback --noincompatible_target_cpu_from_platform --strategy=Genrule=standalone --spawn_strategy=standalone
+INFO: Found applicable config definition common:macos in file /Users/runner/work/AirGram-iOS/AirGram-iOS/.bazelrc: --features=swift.use_global_module_cache --features=oso_prefix_is_pwd
+INFO: Found applicable config definition build:macos in file /Users/runner/work/AirGram-iOS/AirGram-iOS/.bazelrc: --features=debug_prefix_map_pwd_is_dot --features=swift.cacheable_swiftmodules --features=swift.debug_prefix_map --features=swift.enable_vfsoverlays --strategy=SwiftCompile=worker
+Computing main repo mapping: 
+Computing main repo mapping: 
+Computing main repo mapping: 
+Computing main repo mapping: 
+Computing main repo mapping: 
+Computing main repo mapping: 
+Computing main repo mapping: 
+Computing main repo mapping: 
+Loading: 
+Loading: 1 packages loaded
+Loading: 1 packages loaded
+    currently loading: Telegram
+Analyzing: target //Telegram:telegram_auth_build_test (6 packages loaded, 6 targets configured)
+Analyzing: target //Telegram:telegram_auth_build_test (6 packages loaded, 6 targets configured)
+
+Analyzing: target //Telegram:telegram_auth_build_test (26 packages loaded, 20 targets configured)
+
+Analyzing: target //Telegram:telegram_auth_build_test (35 packages loaded, 20 targets configured)
+
+Analyzing: target //Telegram:telegram_auth_build_test (84 packages loaded, 81 targets configured)
+
+WARNING: /Users/runner/work/AirGram-iOS/AirGram-iOS/build-system/BUILD:2:15: in config_setting rule //build-system:ios_sim_arm64: select() on cpu is deprecated. Use platform constraints instead: https://bazel.build/docs/configurable-attributes#platforms.
+Analyzing: target //Telegram:telegram_auth_build_test (136 packages loaded, 3249 targets configured)
+
+Analyzing: target //Telegram:telegram_auth_build_test (143 packages loaded, 6818 targets configured)
+
+Analyzing: target //Telegram:telegram_auth_build_test (143 packages loaded, 6818 targets configured)
+
+Analyzing: target //Telegram:telegram_auth_build_test (287 packages loaded, 9825 targets configured)
+
+Analyzing: target //Telegram:telegram_auth_build_test (558 packages loaded, 10885 targets configured)
+
+Analyzing: target //Telegram:telegram_auth_build_test (707 packages loaded, 12612 targets configured)
+
+Analyzing: target //Telegram:telegram_auth_build_test (750 packages loaded, 25628 targets configured)
+
+Analyzing: target //Telegram:telegram_auth_build_test (752 packages loaded, 28527 targets configured)
+
+Analyzing: target //Telegram:telegram_auth_build_test (752 packages loaded, 28527 targets configured)
+
+Analyzing: target //Telegram:telegram_auth_build_test (752 packages loaded, 28527 targets configured)
+
+Analyzing: target //Telegram:telegram_auth_build_test (752 packages loaded, 28527 targets configured)
+
+Analyzing: target //Telegram:telegram_auth_build_test (752 packages loaded, 28527 targets configured)
+
+Analyzing: target //Telegram:telegram_auth_build_test (752 packages loaded, 28527 targets configured)
+
+Analyzing: target //Telegram:telegram_auth_build_test (752 packages loaded, 28527 targets configured)
+
+Analyzing: target //Telegram:telegram_auth_build_test (752 packages loaded, 28527 targets configured)
+
+Analyzing: target //Telegram:telegram_auth_build_test (752 packages loaded, 28527 targets configured)
+
+Analyzing: target //Telegram:telegram_auth_build_test (752 packages loaded, 28527 targets configured)
+
+Analyzing: target //Telegram:telegram_auth_build_test (752 packages loaded, 28527 targets configured)
+
+Analyzing: target //Telegram:telegram_auth_build_test (752 packages loaded, 28527 targets configured)
+
+Analyzing: target //Telegram:telegram_auth_build_test (752 packages loaded, 28527 targets configured)
+
+Analyzing: target //Telegram:telegram_auth_build_test (752 packages loaded, 28527 targets configured)
+
+Analyzing: target //Telegram:telegram_auth_build_test (829 packages loaded, 28984 targets configured)
+
+Analyzing: target //Telegram:telegram_auth_build_test (830 packages loaded, 28985 targets configured)
+
+DEBUG: Repo 'rules_rust++rust+rust_macos_aarch64__aarch64-apple-ios__stable_tools' indicated that a canonical reproducible form can be obtained by modifying arguments sha256s = {"rustc-1.98.1-aarch64-apple-darwin.tar.xz": "738e3f60114b20550fcf4f8a57c9cea0544239f214709f45594ff3fde327f577", "clippy-1.98.1-aarch64-apple-darwin.tar.xz": "1ad080040ff0f4f8af0751bd7fa1fb1901212f8d164cecaa3c47b0654e0916f2", "cargo-1.98.1-aarch64-apple-darwin.tar.xz": "de51d4fade4f31ad8ec405261cc96bedc000d905f98980027610d6e288dbe21b", "llvm-tools-1.98.1-aarch64-apple-darwin.tar.xz": "9b68ac31be7c6d25a08ce34dbd2c1d026b8006905e74415b6d9576678379ecbc", "rust-std-1.98.1-aarch64-apple-ios.tar.xz": "ce5ddfb5d970ba38e26dbf657da7a4dd11e747d215786ed44c541f521e84881a"}
+DEBUG: Repo rules_rust++rust+rust_macos_aarch64__aarch64-apple-ios__stable_tools defined by rule rust_toolchain_tools_repository in @@rules_rust+//rust/private:repositories.bzl
+Analyzing: target //Telegram:telegram_auth_build_test (837 packages loaded, 29634 targets configured)
+
+Analyzing: target //Telegram:telegram_auth_build_test (837 packages loaded, 29634 targets configured)
+
+Analyzing: target //Telegram:telegram_auth_build_test (837 packages loaded, 29634 targets configured)
+
+Analyzing: target //Telegram:telegram_auth_build_test (837 packages loaded, 29634 targets configured)
+
+Analyzing: target //Telegram:telegram_auth_build_test (837 packages loaded, 29634 targets configured)
+
+Analyzing: target //Telegram:telegram_auth_build_test (839 packages loaded, 29744 targets configured)
+
+Analyzing: target //Telegram:telegram_auth_build_test (846 packages loaded, 29744 targets configured)
+
+Analyzing: target //Telegram:telegram_auth_build_test (847 packages loaded, 29744 targets configured)
+
+Analyzing: target //Telegram:telegram_auth_build_test (854 packages loaded, 33685 targets configured)
+
+Analyzing: target //Telegram:telegram_auth_build_test (854 packages loaded, 33685 targets configured)
+
+Analyzing: target //Telegram:telegram_auth_build_test (854 packages loaded, 33685 targets configured)
+
+Analyzing: target //Telegram:telegram_auth_build_test (855 packages loaded, 43564 targets configured)
+
+Analyzing: target //Telegram:telegram_auth_build_test (870 packages loaded, 52379 targets configured)
+
+Analyzing: target //Telegram:telegram_auth_build_test (987 packages loaded, 52715 targets configured)
+
+Analyzing: target //Telegram:telegram_auth_build_test (1011 packages loaded, 56645 targets configured)
+
+Analyzing: target //Telegram:telegram_auth_build_test (1029 packages loaded, 58799 targets configured, 6 aspect applications)
+
+Analyzing: target //Telegram:telegram_auth_build_test (1073 packages loaded, 60240 targets configured, 6 aspect applications)
+
+Analyzing: target //Telegram:telegram_auth_build_test (1127 packages loaded, 62454 targets configured, 6 aspect applications)
+
+Analyzing: target //Telegram:telegram_auth_build_test (1156 packages loaded, 63981 targets configured, 6 aspect applications)
+
+Analyzing: target //Telegram:telegram_auth_build_test (1186 packages loaded, 65430 targets configured, 10 aspect applications)
+
+Analyzing: target //Telegram:telegram_auth_build_test (1222 packages loaded, 66026 targets configured, 90 aspect applications)
+
+Analyzing: target //Telegram:telegram_auth_build_test (1250 packages loaded, 66186 targets configured, 227 aspect applications)
+
+Analyzing: target //Telegram:telegram_auth_build_test (1287 packages loaded, 70178 targets configured, 227 aspect applications)
+
+Analyzing: target //Telegram:telegram_auth_build_test (1323 packages loaded, 71717 targets configured, 227 aspect applications)
+
+Analyzing: target //Telegram:telegram_auth_build_test (1335 packages loaded, 71946 targets configured, 227 aspect applications)
+
+Analyzing: target //Telegram:telegram_auth_build_test (1335 packages loaded, 71946 targets configured, 227 aspect applications)
+
+DEBUG: Repo 'rules_rust++rust+rust_macos_aarch64__aarch64-apple-darwin__stable_tools' indicated that a canonical reproducible form can be obtained by modifying arguments sha256s = {"rustc-1.98.1-aarch64-apple-darwin.tar.xz": "738e3f60114b20550fcf4f8a57c9cea0544239f214709f45594ff3fde327f577", "clippy-1.98.1-aarch64-apple-darwin.tar.xz": "1ad080040ff0f4f8af0751bd7fa1fb1901212f8d164cecaa3c47b0654e0916f2", "cargo-1.98.1-aarch64-apple-darwin.tar.xz": "de51d4fade4f31ad8ec405261cc96bedc000d905f98980027610d6e288dbe21b", "llvm-tools-1.98.1-aarch64-apple-darwin.tar.xz": "9b68ac31be7c6d25a08ce34dbd2c1d026b8006905e74415b6d9576678379ecbc", "rust-std-1.98.1-aarch64-apple-darwin.tar.xz": "2de831ef563ce772519a4d18ba2659f0f7428d497ef66dad24b5a35e8f8cd177"}
+DEBUG: Repo rules_rust++rust+rust_macos_aarch64__aarch64-apple-darwin__stable_tools defined by rule rust_toolchain_tools_repository in @@rules_rust+//rust/private:repositories.bzl
+Analyzing: target //Telegram:telegram_auth_build_test (1335 packages loaded, 71946 targets configured, 227 aspect applications)
+
+DEBUG: /private/var/tmp/_bazel_containerhost/c259e0c7803e089724afaeab1cf94801/external/rules_apple+/apple/internal/partials/support/resources_support.bzl:189:14: 
+WARNING: No assets to compile for @@//Telegram:TelegramUIFramework even though an asset catalog (.xcassets directory) was declared. Skipping asset catalog compilation.
+Analyzing: target //Telegram:telegram_auth_build_test (1336 packages loaded, 75958 targets configured, 4391 aspect applications)
+
+INFO: Analyzed target //Telegram:telegram_auth_build_test (1337 packages loaded, 75961 targets configured, 4423 aspect applications).
+[10 / 27] [Prepa] Creating runfiles tree bazel-out/darwin_arm64-opt-exec/bin/external/rules_apple+/tools/plisttool/plisttool.runfiles [for tool]
+[128 / 1,130] Creating runfiles tree bazel-out/darwin_arm64-opt-exec/bin/external/rules_apple+/tools/codesigningtool/codesigningtool.runfiles [for tool]; 0s local ... (2 actions running)
+[233 / 1,433] Executing apple_genrule @@apple_support+//crosstool:generate_layering_check_modulemap [for tool]; 0s local, disk-cache ... (3 actions, 2 running)
+[399 / 2,427] Executing apple_genrule @@apple_support+//crosstool:generate_layering_check_modulemap [for tool]; 1s local, disk-cache ... (3 actions, 2 running)
+[625 / 4,797] Executing apple_genrule @@apple_support+//crosstool:generate_layering_check_modulemap [for tool]; 2s local, disk-cache ... (3 actions, 2 running)
+[731 / 6,674] Executing apple_genrule @@apple_support+//crosstool:generate_layering_check_modulemap [for tool]; 3s local, disk-cache ... (2 actions, 1 running)
+[842 / 6,959] Executing apple_genrule @@apple_support+//crosstool:generate_layering_check_modulemap [for tool]; 4s local, disk-cache ... (2 actions, 1 running)
+[1,056 / 7,173] Executing apple_genrule @@apple_support+//crosstool:generate_layering_check_modulemap [for tool]; 5s local, disk-cache ... (3 actions, 2 running)
+[1,277 / 7,394] Executing apple_genrule @@apple_support+//crosstool:generate_layering_check_modulemap [for tool]; 6s local, disk-cache ... (3 actions, 2 running)
+[1,302 / 7,429] Executing apple_genrule @@apple_support+//crosstool:generate_layering_check_modulemap [for tool]; 8s local, disk-cache ... (3 actions running)
+[1,303 / 7,430] Executing apple_genrule @@apple_support+//crosstool:generate_layering_check_modulemap [for tool]; 11s local, disk-cache ... (3 actions, 2 running)
+[1,316 / 7,436] Executing apple_genrule @@apple_support+//crosstool:generate_layering_check_modulemap [for tool]; 12s local, disk-cache ... (3 actions, 2 running)
+[1,337 / 7,446] Executing apple_genrule @@apple_support+//crosstool:generate_layering_check_modulemap [for tool]; 13s local, disk-cache ... (3 actions, 2 running)
+[1,355 / 7,446] Executing apple_genrule @@apple_support+//crosstool:generate_layering_check_modulemap [for tool]; 14s local, disk-cache ... (3 actions, 2 running)
+[1,375 / 7,449] Executing apple_genrule @@apple_support+//crosstool:generate_layering_check_modulemap [for tool]; 15s local, disk-cache ... (3 actions, 2 running)
+[1,433 / 7,592] Executing apple_genrule @@apple_support+//crosstool:generate_layering_check_modulemap [for tool]; 17s local, disk-cache ... (3 actions, 2 running)
+[1,454 / 7,592] Executing apple_genrule @@apple_support+//crosstool:generate_layering_check_modulemap [for tool]; 19s local, disk-cache ... (2 actions running)
+[1,454 / 7,592] Executing apple_genrule @@apple_support+//crosstool:generate_layering_check_modulemap [for tool]; 24s local, disk-cache ... (3 actions, 2 running)
+[1,456 / 7,592] Executing apple_genrule @@apple_support+//crosstool:generate_layering_check_modulemap [for tool]; 25s local, disk-cache ... (3 actions running)
+[1,457 / 7,592] Executing apple_genrule @@apple_support+//crosstool:generate_layering_check_modulemap [for tool]; 29s local, disk-cache ... (3 actions, 2 running)
+[1,460 / 7,592] Executing apple_genrule @@apple_support+//crosstool:generate_layering_check_modulemap [for tool]; 30s local, disk-cache ... (2 actions running)
+[1,486 / 7,592] Executing apple_genrule @@apple_support+//crosstool:generate_layering_check_modulemap [for tool]; 31s local, disk-cache ... (2 actions running)
+[1,486 / 7,592] Executing apple_genrule @@apple_support+//crosstool:generate_layering_check_modulemap [for tool]; 32s local, disk-cache ... (3 actions running)
+INFO: From Executing genrule //third-party/webrtc:generate_field_trials_header:
++ python3 third-party/webrtc/webrtc/experiments/field_trials.py header --output bazel-out/ios_arm64-opt-ios-arm64-min15.0-ST-4fc4d341170e/bin/third-party/webrtc/field_trials_header/experiments/registered_field_trials.h
+[1,487 / 7,592] Executing apple_genrule @@apple_support+//crosstool:generate_layering_check_modulemap [for tool]; 34s local, disk-cache ... (3 actions, 2 running)
+INFO: From Executing genrule //third-party/boringssl:copy_ssl_headers:
++ cp third-party/boringssl/src/include/openssl/dtls1.h bazel-out/ios_arm64-opt-ios-arm64-min15.0-ST-4fc4d341170e/bin/third-party/boringssl/ssl_headers/src/include/openssl/dtls1.h
++ cp third-party/boringssl/src/include/openssl/srtp.h bazel-out/ios_arm64-opt-ios-arm64-min15.0-ST-4fc4d341170e/bin/third-party/boringssl/ssl_headers/src/include/openssl/srtp.h
++ cp third-party/boringssl/src/include/openssl/ssl.h bazel-out/ios_arm64-opt-ios-arm64-min15.0-ST-4fc4d341170e/bin/third-party/boringssl/ssl_headers/src/include/openssl/ssl.h
++ cp third-party/boringssl/src/include/openssl/ssl3.h bazel-out/ios_arm64-opt-ios-arm64-min15.0-ST-4fc4d341170e/bin/third-party/boringssl/ssl_headers/src/include/openssl/ssl3.h
++ cp third-party/boringssl/src/include/openssl/tls1.h bazel-out/ios_arm64-opt-ios-arm64-min15.0-ST-4fc4d341170e/bin/third-party/boringssl/ssl_headers/src/include/openssl/tls1.h
+[1,488 / 7,592] Executing apple_genrule @@apple_support+//crosstool:generate_layering_check_modulemap [for tool]; 36s local, disk-cache ... (2 actions running)
+[1,525 / 7,592] Executing apple_genrule @@apple_support+//crosstool:generate_layering_check_modulemap [for tool]; 37s local, disk-cache ... (2 actions running)
+[1,530 / 7,592] Executing apple_genrule @@apple_support+//crosstool:generate_layering_check_modulemap [for tool]; 38s local, disk-cache ... (2 actions running)
+[1,531 / 7,592] Executing genrule //third-party/flatc:flatc [for tool]; 34s local, disk-cache ... (2 actions running)
+[1,531 / 7,592] Executing genrule //third-party/flatc:flatc [for tool]; 37s local, disk-cache ... (3 actions, 2 running)
+[1,531 / 7,592] Executing genrule //third-party/flatc:flatc [for tool]; 39s local, disk-cache ... (3 actions running)
+[1,532 / 7,592] Executing genrule //third-party/flatc:flatc [for tool]; 47s local, disk-cache ... (3 actions, 2 running)
+[1,532 / 7,592] Executing genrule //third-party/flatc:flatc [for tool]; 48s local, disk-cache ... (3 actions running)
+[1,534 / 7,592] Executing genrule //third-party/flatc:flatc [for tool]; 53s local, disk-cache
+[1,535 / 7,592] Executing genrule //third-party/flatc:flatc [for tool]; 54s local, disk-cache ... (2 actions running)
+[1,536 / 7,592] Executing genrule //third-party/flatc:flatc [for tool]; 57s local, disk-cache ... (2 actions, 1 running)
+[1,538 / 7,592] Executing genrule //third-party/flatc:flatc [for tool]; 58s local, disk-cache ... (2 actions, 1 running)
+[1,539 / 7,592] Executing genrule //third-party/flatc:flatc [for tool]; 60s local, disk-cache ... (2 actions running)
+[1,543 / 7,592] Executing genrule //third-party/flatc:flatc [for tool]; 61s local, disk-cache ... (3 actions running)
+[1,546 / 7,592] Executing genrule //third-party/flatc:flatc [for tool]; 62s local, disk-cache ... (3 actions running)
+INFO: From Executing genrule //Telegram:GeneratedPresentationStrings:
+Generating strings into:
+bazel-out/ios_arm64-opt-ios-arm64-min15.0-ST-4fc4d341170e/bin/Telegram/GeneratedPresentationStrings/PublicHeaders/PresentationStrings/PresentationStrings.h
+bazel-out/ios_arm64-opt-ios-arm64-min15.0-ST-4fc4d341170e/bin/Telegram/GeneratedPresentationStrings/Sources/PresentationStrings.m
+[1,550 / 7,592] Executing genrule //third-party/flatc:flatc [for tool]; 63s local, disk-cache ... (3 actions running)
+[1,553 / 7,592] Executing genrule //third-party/flatc:flatc [for tool]; 64s local, disk-cache ... (3 actions, 2 running)
+[1,563 / 7,592] Executing genrule //third-party/flatc:flatc [for tool]; 65s local, disk-cache ... (3 actions, 2 running)
+[1,585 / 7,592] Executing genrule //third-party/flatc:flatc [for tool]; 66s local, disk-cache ... (3 actions, 2 running)
+[1,609 / 7,592] Executing genrule //third-party/flatc:flatc [for tool]; 67s local, disk-cache ... (3 actions, 2 running)
+INFO: From CopyPng Telegram/Lib-intermediates/ModernMediaEmptyAlbumIcon@2x.png:
+libpng warning: Warning: Input PNG does not have an 8 bit input depth.  Please convert your PNG to 8-bit for optimal performance on iPhone OS.
+INFO: From CopyPng Telegram/Lib-intermediates/CameraFocusCrosshairs@3x.png:
+libpng warning: Warning: Input PNG does not have an 8 bit input depth.  Please convert your PNG to 8-bit for optimal performance on iPhone OS.
+INFO: From CopyPng Telegram/Lib-intermediates/CameraFocusCrosshairs@2x.png:
+libpng warning: Warning: Input PNG does not have an 8 bit input depth.  Please convert your PNG to 8-bit for optimal performance on iPhone OS.
+INFO: From CopyPng Telegram/Lib-intermediates/CameraFocusCrosshairs.png:
+libpng warning: Warning: Input PNG does not have an 8 bit input depth.  Please convert your PNG to 8-bit for optimal performance on iPhone OS.
+[1,631 / 7,592] Executing genrule //third-party/flatc:flatc [for tool]; 68s local, disk-cache ... (3 actions, 2 running)
+INFO: From CopyPng Telegram/Lib-intermediates/CameraAutoFocusCrosshairs@3x.png:
+libpng warning: Warning: Input PNG does not have an 8 bit input depth.  Please convert your PNG to 8-bit for optimal performance on iPhone OS.
+INFO: From CopyPng Telegram/Lib-intermediates/CameraAutoFocusCrosshairs@2x.png:
+libpng warning: Warning: Input PNG does not have an 8 bit input depth.  Please convert your PNG to 8-bit for optimal performance on iPhone OS.
+[1,652 / 7,592] Executing genrule //third-party/flatc:flatc [for tool]; 70s local, disk-cache ... (2 actions running)
+[1,653 / 7,592] Executing genrule //third-party/flatc:flatc [for tool]; 71s local, disk-cache ... (2 actions running)
+INFO: From MetalCompile Telegram/cameraScreen.air:
+submodules/TelegramUI/Components/CameraScreen/MetalResources/cameraScreen.metal:123:19: warning: left operand of comma operator has no effect [-Wunused-value]
+    half2 inUV = (inTextureU.read(uvPosition).r, inTextureV.read(uvPosition).r);
+                  ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+1 warning generated.
+[1,654 / 7,592] Executing genrule //third-party/flatc:flatc [for tool]; 75s local, disk-cache ... (2 actions, 1 running)
+[1,654 / 7,592] Executing genrule //third-party/flatc:flatc [for tool]; 77s local, disk-cache ... (3 actions running)
+[1,655 / 7,592] Executing genrule //third-party/flatc:flatc [for tool]; 81s local, disk-cache ... (3 actions, 2 running)
+INFO: From MetalCompile Telegram/CallScreenShaders.air:
+submodules/TelegramUI/Components/Calls/CallScreen/Metal/CallScreenShaders.metal:261:19: warning: left operand of comma operator has no effect [-Wunused-value]
+    half2 inUV = (inTextureU.read(uvPosition).r, inTextureV.read(uvPosition).r);
+                  ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+1 warning generated.
+[1,657 / 7,592] Executing genrule //third-party/flatc:flatc [for tool]; 83s local, disk-cache ... (3 actions running)
+[1,664 / 7,592] Executing genrule //third-party/flatc:flatc [for tool]; 84s local, disk-cache ... (3 actions, 2 running)
+[1,664 / 7,592] Executing genrule //third-party/flatc:flatc [for tool]; 85s local, disk-cache ... (3 actions running)
+[1,665 / 7,592] Executing genrule //third-party/flatc:flatc [for tool]; 86s local, disk-cache ... (3 actions, 2 running)
+[1,665 / 7,592] Executing genrule //third-party/flatc:flatc [for tool]; 87s local, disk-cache ... (3 actions running)
+[1,666 / 7,592] Executing genrule //third-party/flatc:flatc [for tool]; 88s local, disk-cache ... (3 actions, 2 running)
+[1,700 / 7,592] Executing genrule //third-party/flatc:flatc [for tool]; 89s local, disk-cache ... (2 actions running)
+[1,702 / 7,592] Executing genrule //third-party/flatc:flatc [for tool]; 90s local, disk-cache ... (3 actions running)
+[1,703 / 7,592] Executing genrule //third-party/flatc:flatc [for tool]; 91s local, disk-cache ... (3 actions, 2 running)
+[1,704 / 7,592] Executing genrule //third-party/flatc:flatc [for tool]; 93s local, disk-cache ... (3 actions running)
+[1,705 / 7,592] Executing genrule //third-party/flatc:flatc [for tool]; 97s local, disk-cache ... (3 actions, 2 running)
+[1,706 / 7,592] Executing genrule //third-party/flatc:flatc [for tool]; 99s local, disk-cache ... (3 actions running)
+INFO: From Compiling Rust (without process_wrapper) bin process_wrapper (6 files) [for tool]:
+warning: linker stderr: clang: overriding '-mmacosx-version-min=11.0.0' option with '-target arm64-apple-macosx26.5' [-Woverriding-option]
+  |
+  = note: `#[warn(linker_messages)]` on by default
+
+warning: 1 warning emitted
+
+[1,709 / 7,592] Executing genrule //third-party/flatc:flatc [for tool]; 100s local, disk-cache ... (3 actions, 2 running)
+[1,715 / 7,592] Executing genrule //third-party/flatc:flatc [for tool]; 101s local, disk-cache ... (3 actions, 2 running)
+[1,719 / 7,592] Executing genrule //third-party/flatc:flatc [for tool]; 102s local, disk-cache ... (3 actions, 2 running)
+[1,726 / 7,592] Executing genrule //third-party/flatc:flatc [for tool]; 103s local, disk-cache ... (3 actions, 2 running)
+[1,737 / 7,592] Executing genrule //third-party/flatc:flatc [for tool]; 104s local, disk-cache ... (3 actions, 2 running)
+[1,742 / 7,592] Executing genrule //third-party/flatc:flatc [for tool]; 105s local, disk-cache ... (3 actions, 2 running)
+[1,745 / 7,592] Executing genrule //third-party/flatc:flatc [for tool]; 106s local, disk-cache ... (3 actions running)
+INFO: From Executing genrule //third-party/flatc:flatc [for tool]:
+++ PATH=/bin:/usr/bin:/usr/local/bin:/usr/sbin
+++ sysctl -n hw.logicalcpu
++ core_count=3
++ BUILD_DIR=bazel-out/darwin_arm64-opt-exec/bin/third-party/flatc/build
++ rm -rf bazel-out/darwin_arm64-opt-exec/bin/third-party/flatc/build
++ mkdir -p bazel-out/darwin_arm64-opt-exec/bin/third-party/flatc/build
+++ pwd
++ CMAKE_DIR=/private/var/tmp/_bazel_containerhost/c259e0c7803e089724afaeab1cf94801/execroot/_main/bazel-out/darwin_arm64-opt-exec/bin/third-party/flatc/build/cmake
++ rm -rf /private/var/tmp/_bazel_containerhost/c259e0c7803e089724afaeab1cf94801/execroot/_main/bazel-out/darwin_arm64-opt-exec/bin/third-party/flatc/build/cmake
++ mkdir -p /private/var/tmp/_bazel_containerhost/c259e0c7803e089724afaeab1cf94801/execroot/_main/bazel-out/darwin_arm64-opt-exec/bin/third-party/flatc/build/cmake
++ tar -xf external/+http_file+cmake_tar_gz/file/downloaded -C /private/var/tmp/_bazel_containerhost/c259e0c7803e089724afaeab1cf94801/execroot/_main/bazel-out/darwin_arm64-opt-exec/bin/third-party/flatc/build/cmake
++ tar -xzf external/+http_file+flatbuffers_zip/file/downloaded --directory bazel-out/darwin_arm64-opt-exec/bin/third-party/flatc/build
++ pushd bazel-out/darwin_arm64-opt-exec/bin/third-party/flatc/build/flatbuffers-24.12.23
++ mkdir build
++ cd build
++ PATH=/private/var/tmp/_bazel_containerhost/c259e0c7803e089724afaeab1cf94801/execroot/_main/bazel-out/darwin_arm64-opt-exec/bin/third-party/flatc/build/cmake/cmake-4.1.2-macos-universal/CMake.app/Contents/bin:/bin:/usr/bin:/usr/local/bin
++ cmake .. -DCMAKE_BUILD_TYPE=Release -DFLATBUFFERS_BUILD_TESTS=0 -DFLATBUFFERS_INSTALL=0 -DFLATBUFFERS_BUILD_FLATLIB=0 -DFLATBUFFERS_STATIC_FLATC=0
++ make -j 3
++ popd
++ cp bazel-out/darwin_arm64-opt-exec/bin/third-party/flatc/build/flatbuffers-24.12.23/build/flatc bazel-out/darwin_arm64-opt-exec/bin/third-party/flatc/flatc_bin
+/private/var/tmp/_bazel_containerhost/c259e0c7803e089724afaeab1cf94801/execroot/_main/bazel-out/darwin_arm64-opt-exec/bin/third-party/flatc/build/flatbuffers-24.12.23 /private/var/tmp/_bazel_containerhost/c259e0c7803e089724afaeab1cf94801/execroot/_main
+-- Proceeding with version: 24.12.23.0
+-- The CXX compiler identification is AppleClang 21.0.0.21000101
+-- Detecting CXX compiler ABI info
+-- Detecting CXX compiler ABI info - done
+-- Check for working CXX compiler: /usr/bin/c++ - skipped
+-- Detecting CXX compile features
+-- Detecting CXX compile features - done
+-- Looking for strtof_l
+-- Looking for strtof_l - not found
+-- Looking for strtoull_l
+-- Looking for strtoull_l - not found
+-- Looking for realpath
+-- Looking for realpath - found
+-- CMAKE_CXX_FLAGS: 
+-- Configuring done (9.5s)
+-- Generating done (0.0s)
+-- Build files have been written to: /private/var/tmp/_bazel_containerhost/c259e0c7803e089724afaeab1cf94801/execroot/_main/bazel-out/darwin_arm64-opt-exec/bin/third-party/flatc/build/flatbuffers-24.12.23/build
+[  2%] Building CXX object CMakeFiles/flatc.dir/src/idl_gen_text.cpp.o
+[  5%] Building CXX object CMakeFiles/flatc.dir/src/idl_parser.cpp.o
+[  7%] Building CXX object CMakeFiles/flatc.dir/src/reflection.cpp.o
+[ 10%] Building CXX object CMakeFiles/flatc.dir/src/util.cpp.o
+[ 12%] Building CXX object CMakeFiles/flatc.dir/src/idl_gen_binary.cpp.o
+[ 15%] Building CXX object CMakeFiles/flatc.dir/src/idl_gen_cpp.cpp.o
+[ 17%] Building CXX object CMakeFiles/flatc.dir/src/idl_gen_csharp.cpp.o
+[ 20%] Building CXX object CMakeFiles/flatc.dir/src/idl_gen_dart.cpp.o
+[ 23%] Building CXX object CMakeFiles/flatc.dir/src/idl_gen_kotlin.cpp.o
+[ 25%] Building CXX object CMakeFiles/flatc.dir/src/idl_gen_kotlin_kmp.cpp.o
+[ 28%] Building CXX object CMakeFiles/flatc.dir/src/idl_gen_go.cpp.o
+[ 30%] Building CXX object CMakeFiles/flatc.dir/src/idl_gen_java.cpp.o
+[ 33%] Building CXX object CMakeFiles/flatc.dir/src/idl_gen_ts.cpp.o
+[ 35%] Building CXX object CMakeFiles/flatc.dir/src/idl_gen_php.cpp.o
+[ 38%] Building CXX object CMakeFiles/flatc.dir/src/idl_gen_python.cpp.o
+[ 41%] Building CXX object CMakeFiles/flatc.dir/src/idl_gen_lobster.cpp.o
+[ 43%] Building CXX object CMakeFiles/flatc.dir/src/idl_gen_rust.cpp.o
+[ 46%] Building CXX object CMakeFiles/flatc.dir/src/idl_gen_fbs.cpp.o
+[ 48%] Building CXX object CMakeFiles/flatc.dir/src/idl_gen_grpc.cpp.o
+[ 51%] Building CXX object CMakeFiles/flatc.dir/src/idl_gen_json_schema.cpp.o
+[ 53%] Building CXX object CMakeFiles/flatc.dir/src/idl_gen_swift.cpp.o
+[ 56%] Building CXX object CMakeFiles/flatc.dir/src/file_name_saving_file_manager.cpp.o
+[ 58%] Building CXX object CMakeFiles/flatc.dir/src/file_binary_writer.cpp.o
+[ 61%] Building CXX object CMakeFiles/flatc.dir/src/file_writer.cpp.o
+[ 64%] Building CXX object CMakeFiles/flatc.dir/src/flatc.cpp.o
+[ 66%] Building CXX object CMakeFiles/flatc.dir/src/flatc_main.cpp.o
+[ 69%] Building CXX object CMakeFiles/flatc.dir/include/codegen/python.cc.o
+[ 71%] Building CXX object CMakeFiles/flatc.dir/src/binary_annotator.cpp.o
+[ 74%] Building CXX object CMakeFiles/flatc.dir/src/annotated_binary_text_gen.cpp.o
+[ 76%] Building CXX object CMakeFiles/flatc.dir/src/bfbs_gen_lua.cpp.o
+[ 79%] Building CXX object CMakeFiles/flatc.dir/src/bfbs_gen_nim.cpp.o
+[ 82%] Building CXX object CMakeFiles/flatc.dir/src/code_generators.cpp.o
+[ 84%] Building CXX object CMakeFiles/flatc.dir/grpc/src/compiler/cpp_generator.cc.o
+[ 87%] Building CXX object CMakeFiles/flatc.dir/grpc/src/compiler/go_generator.cc.o
+[ 89%] Building CXX object CMakeFiles/flatc.dir/grpc/src/compiler/java_generator.cc.o
+[ 92%] Building CXX object CMakeFiles/flatc.dir/grpc/src/compiler/python_generator.cc.o
+[ 94%] Building CXX object CMakeFiles/flatc.dir/grpc/src/compiler/swift_generator.cc.o
+[ 97%] Building CXX object CMakeFiles/flatc.dir/grpc/src/compiler/ts_generator.cc.o
+[100%] Linking CXX executable flatc
+[100%] Built target flatc
+/private/var/tmp/_bazel_containerhost/c259e0c7803e089724afaeab1cf94801/execroot/_main
+[1,749 / 7,592] Compiling Rust rlib winnow v0.7.15 (98 files) [for tool]; 3s local, disk-cache ... (3 actions running)
+INFO: From Executing genrule //submodules/TelegramCore/FlatSerialization:GenerateModels:
+++ pwd
++ FLATC=/private/var/tmp/_bazel_containerhost/c259e0c7803e089724afaeab1cf94801/execroot/_main/bazel-out/darwin_arm64-opt-exec/bin/third-party/flatc/flatc_bin
++ BUILD_DIR=bazel-out/ios_arm64-opt-ios-arm64-min15.0-ST-4fc4d341170e/bin/submodules/TelegramCore/FlatSerialization/build
++ rm -rf bazel-out/ios_arm64-opt-ios-arm64-min15.0-ST-4fc4d341170e/bin/submodules/TelegramCore/FlatSerialization/build
++ mkdir -p bazel-out/ios_arm64-opt-ios-arm64-min15.0-ST-4fc4d341170e/bin/submodules/TelegramCore/FlatSerialization/build
++ /private/var/tmp/_bazel_containerhost/c259e0c7803e089724afaeab1cf94801/execroot/_main/bazel-out/darwin_arm64-opt-exec/bin/third-party/flatc/flatc_bin --require-explicit-ids --swift -o bazel-out/ios_arm64-opt-ios-arm64-min15.0-ST-4fc4d341170e/bin/submodules/TelegramCore/FlatSerialization/build submodules/TelegramCore/FlatSerialization/Models/InstantPage.fbs submodules/TelegramCore/FlatSerialization/Models/InstantPageBlock.fbs submodules/TelegramCore/FlatSerialization/Models/ItemCollectionId.fbs submodules/TelegramCore/FlatSerialization/Models/Media.fbs submodules/TelegramCore/FlatSerialization/Models/MediaId.fbs submodules/TelegramCore/FlatSerialization/Models/MessageId.fbs submodules/TelegramCore/FlatSerialization/Models/Optional.fbs submodules/TelegramCore/FlatSerialization/Models/PartialMediaReference.fbs submodules/TelegramCore/FlatSerialization/Models/PeerAccessRestrictionInfo.fbs submodules/TelegramCore/FlatSerialization/Models/PeerCollectibleColor.fbs submodules/TelegramCore/FlatSerialization/Models/PeerEmojiStatus.fbs submodules/TelegramCore/FlatSerialization/Models/PeerId.fbs submodules/TelegramCore/FlatSerialization/Models/PeerNameColor.fbs submodules/TelegramCore/FlatSerialization/Models/PeerReference.fbs submodules/TelegramCore/FlatSerialization/Models/PixelDimensions.fbs submodules/TelegramCore/FlatSerialization/Models/RichText.fbs submodules/TelegramCore/FlatSerialization/Models/StarsAmount.fbs submodules/TelegramCore/FlatSerialization/Models/StickerPackCollectionInfo.fbs submodules/TelegramCore/FlatSerialization/Models/StickerPackReference.fbs submodules/TelegramCore/FlatSerialization/Models/StoredDeviceContactData.fbs submodules/TelegramCore/FlatSerialization/Models/TelegramChannel.fbs submodules/TelegramCore/FlatSerialization/Models/TelegramChatAdminRights.fbs submodules/TelegramCore/FlatSerialization/Models/TelegramChatBannedRights.fbs submodules/TelegramCore/FlatSerialization/Models/TelegramCommunity.fbs submodules/TelegramCore/FlatSerialization/Models/TelegramGroup.fbs submodules/TelegramCore/FlatSerialization/Models/TelegramMediaFile.fbs submodules/TelegramCore/FlatSerialization/Models/TelegramMediaFileAttribute.fbs submodules/TelegramCore/FlatSerialization/Models/TelegramMediaImage.fbs submodules/TelegramCore/FlatSerialization/Models/TelegramMediaImageRepresentation.fbs submodules/TelegramCore/FlatSerialization/Models/TelegramMediaResource.fbs submodules/TelegramCore/FlatSerialization/Models/TelegramPeerAccessHash.fbs submodules/TelegramCore/FlatSerialization/Models/TelegramPeerUsername.fbs submodules/TelegramCore/FlatSerialization/Models/TelegramUser.fbs submodules/TelegramCore/FlatSerialization/Models/VideoThumbnail.fbs
+
+warning:
+  /Users/runner/work/AirGram-iOS/AirGram-iOS/submodules/TelegramCore/FlatSerialization/Models/InstantPage.fbs:10: 14: warning: field names should be lowercase snake_case, got: isComplete
+
+
+warning:
+  /Users/runner/work/AirGram-iOS/AirGram-iOS/submodules/TelegramCore/FlatSerialization/Models/InstantPageBlock.fbs:113: 13: warning: field names should be lowercase snake_case, got: webpageId
+/Users/runner/work/AirGram-iOS/AirGram-iOS/submodules/TelegramCore/FlatSerialization/Models/InstantPageBlock.fbs:154: 18: warning: field names should be lowercase snake_case, got: stretchToWidth
+/Users/runner/work/AirGram-iOS/AirGram-iOS/submodules/TelegramCore/FlatSerialization/Models/InstantPageBlock.fbs:155: 18: warning: field names should be lowercase snake_case, got: allowScrolling
+/Users/runner/work/AirGram-iOS/AirGram-iOS/submodules/TelegramCore/FlatSerialization/Models/InstantPageBlock.fbs:156: 11: warning: field names should be lowercase snake_case, got: coverId
+/Users/runner/work/AirGram-iOS/AirGram-iOS/submodules/TelegramCore/FlatSerialization/Models/InstantPageBlock.fbs:161: 13: warning: field names should be lowercase snake_case, got: webpageId
+/Users/runner/work/AirGram-iOS/AirGram-iOS/submodules/TelegramCore/FlatSerialization/Models/InstantPageBlock.fbs:162: 12: warning: field names should be lowercase snake_case, got: avatarId
+/Users/runner/work/AirGram-iOS/AirGram-iOS/submodules/TelegramCore/FlatSerialization/Models/InstantPageBlock.fbs:245: 14: warning: field names should be lowercase snake_case, got: checkState
+/Users/runner/work/AirGram-iOS/AirGram-iOS/submodules/TelegramCore/FlatSerialization/Models/InstantPageBlock.fbs:251: 14: warning: field names should be lowercase snake_case, got: checkState
+/Users/runner/work/AirGram-iOS/AirGram-iOS/submodules/TelegramCore/FlatSerialization/Models/InstantPageBlock.fbs:260: 21: warning: field names should be lowercase snake_case, got: verticalAlignment
+/Users/runner/work/AirGram-iOS/AirGram-iOS/submodules/TelegramCore/FlatSerialization/Models/InstantPageBlock.fbs:271: 13: warning: field names should be lowercase snake_case, got: webpageId
+/Users/runner/work/AirGram-iOS/AirGram-iOS/submodules/TelegramCore/FlatSerialization/Models/InstantPageBlock.fbs:274: 11: warning: field names should be lowercase snake_case, got: photoId
+
+
+warning:
+  /Users/runner/work/AirGram-iOS/AirGram-iOS/submodules/TelegramCore/FlatSerialization/Models/MessageId.fbs:6: 10: warning: field names should be lowercase snake_case, got: peerId
+
+
+warning:
+  /Users/runner/work/AirGram-iOS/AirGram-iOS/submodules/TelegramCore/FlatSerialization/Models/PartialMediaReference.fbs:11: 13: warning: field names should be lowercase snake_case, got: messageId
+/Users/runner/work/AirGram-iOS/AirGram-iOS/submodules/TelegramCore/FlatSerialization/Models/PartialMediaReference.fbs:15: 12: warning: field names should be lowercase snake_case, got: threadId
+/Users/runner/work/AirGram-iOS/AirGram-iOS/submodules/TelegramCore/FlatSerialization/Models/PartialMediaReference.fbs:19: 13: warning: field names should be lowercase snake_case, got: webpageId
+/Users/runner/work/AirGram-iOS/AirGram-iOS/submodules/TelegramCore/FlatSerialization/Models/PartialMediaReference.fbs:28: 11: warning: field names should be lowercase snake_case, got: webPage
+/Users/runner/work/AirGram-iOS/AirGram-iOS/submodules/TelegramCore/FlatSerialization/Models/PartialMediaReference.fbs:32: 15: warning: field names should be lowercase snake_case, got: stickerPack
+
+
+warning:
+  /Users/runner/work/AirGram-iOS/AirGram-iOS/submodules/TelegramCore/FlatSerialization/Models/PeerCollectibleColor.fbs:4: 15: warning: field names should be lowercase snake_case, got: collectibleId
+/Users/runner/work/AirGram-iOS/AirGram-iOS/submodules/TelegramCore/FlatSerialization/Models/PeerCollectibleColor.fbs:5: 17: warning: field names should be lowercase snake_case, got: giftEmojiFileId
+/Users/runner/work/AirGram-iOS/AirGram-iOS/submodules/TelegramCore/FlatSerialization/Models/PeerCollectibleColor.fbs:6: 19: warning: field names should be lowercase snake_case, got: backgroundEmojiId
+/Users/runner/work/AirGram-iOS/AirGram-iOS/submodules/TelegramCore/FlatSerialization/Models/PeerCollectibleColor.fbs:7: 13: warning: field names should be lowercase snake_case, got: accentColor
+/Users/runner/work/AirGram-iOS/AirGram-iOS/submodules/TelegramCore/FlatSerialization/Models/PeerCollectibleColor.fbs:9: 17: warning: field names should be lowercase snake_case, got: darkAccentColor
+/Users/runner/work/AirGram-iOS/AirGram-iOS/submodules/TelegramCore/FlatSerialization/Models/PeerCollectibleColor.fbs:10: 12: warning: field names should be lowercase snake_case, got: darkColors
+
+
+warning:
+  /Users/runner/work/AirGram-iOS/AirGram-iOS/submodules/TelegramCore/FlatSerialization/Models/PeerEmojiStatus.fbs:4: 10: warning: field names should be lowercase snake_case, got: fileId
+/Users/runner/work/AirGram-iOS/AirGram-iOS/submodules/TelegramCore/FlatSerialization/Models/PeerEmojiStatus.fbs:9: 10: warning: field names should be lowercase snake_case, got: fileId
+/Users/runner/work/AirGram-iOS/AirGram-iOS/submodules/TelegramCore/FlatSerialization/Models/PeerEmojiStatus.fbs:12: 17: warning: field names should be lowercase snake_case, got: patternFileId
+/Users/runner/work/AirGram-iOS/AirGram-iOS/submodules/TelegramCore/FlatSerialization/Models/PeerEmojiStatus.fbs:13: 14: warning: field names should be lowercase snake_case, got: innerColor
+/Users/runner/work/AirGram-iOS/AirGram-iOS/submodules/TelegramCore/FlatSerialization/Models/PeerEmojiStatus.fbs:14: 14: warning: field names should be lowercase snake_case, got: outerColor
+/Users/runner/work/AirGram-iOS/AirGram-iOS/submodules/TelegramCore/FlatSerialization/Models/PeerEmojiStatus.fbs:15: 16: warning: field names should be lowercase snake_case, got: patternColor
+/Users/runner/work/AirGram-iOS/AirGram-iOS/submodules/TelegramCore/FlatSerialization/Models/PeerEmojiStatus.fbs:16: 13: warning: field names should be lowercase snake_case, got: textColor
+/Users/runner/work/AirGram-iOS/AirGram-iOS/submodules/TelegramCore/FlatSerialization/Models/PeerEmojiStatus.fbs:30: 18: warning: field names should be lowercase snake_case, got: expirationDate
+
+
+warning:
+  /Users/runner/work/AirGram-iOS/AirGram-iOS/submodules/TelegramCore/FlatSerialization/Models/PeerReference.fbs:5: 14: warning: field names should be lowercase snake_case, got: accessHash
+/Users/runner/work/AirGram-iOS/AirGram-iOS/submodules/TelegramCore/FlatSerialization/Models/PeerReference.fbs:14: 14: warning: field names should be lowercase snake_case, got: accessHash
+
+
+warning:
+  /Users/runner/work/AirGram-iOS/AirGram-iOS/submodules/TelegramCore/FlatSerialization/Models/RichText.fbs:73: 13: warning: field names should be lowercase snake_case, got: webpageId
+/Users/runner/work/AirGram-iOS/AirGram-iOS/submodules/TelegramCore/FlatSerialization/Models/RichText.fbs:117: 10: warning: field names should be lowercase snake_case, got: fileId
+/Users/runner/work/AirGram-iOS/AirGram-iOS/submodules/TelegramCore/FlatSerialization/Models/RichText.fbs:159: 10: warning: field names should be lowercase snake_case, got: peerId
+/Users/runner/work/AirGram-iOS/AirGram-iOS/submodules/TelegramCore/FlatSerialization/Models/RichText.fbs:207: 12: warning: field names should be lowercase snake_case, got: buttonId
+/Users/runner/work/AirGram-iOS/AirGram-iOS/submodules/TelegramCore/FlatSerialization/Models/RichText.fbs:217: 20: warning: field names should be lowercase snake_case, got: requiresPassword
+/Users/runner/work/AirGram-iOS/AirGram-iOS/submodules/TelegramCore/FlatSerialization/Models/RichText.fbs:226: 12: warning: field names should be lowercase snake_case, got: samePeer
+/Users/runner/work/AirGram-iOS/AirGram-iOS/submodules/TelegramCore/FlatSerialization/Models/RichText.fbs:227: 13: warning: field names should be lowercase snake_case, got: peerTypes
+/Users/runner/work/AirGram-iOS/AirGram-iOS/submodules/TelegramCore/FlatSerialization/Models/RichText.fbs:231: 10: warning: field names should be lowercase snake_case, got: peerId
+/Users/runner/work/AirGram-iOS/AirGram-iOS/submodules/TelegramCore/FlatSerialization/Models/RichText.fbs:246: 10: warning: field names should be lowercase snake_case, got: isLink
+
+
+warning:
+  /Users/runner/work/AirGram-iOS/AirGram-iOS/submodules/TelegramCore/FlatSerialization/Models/StickerPackCollectionInfo.fbs:9: 14: warning: field names should be lowercase snake_case, got: accessHash
+/Users/runner/work/AirGram-iOS/AirGram-iOS/submodules/TelegramCore/FlatSerialization/Models/StickerPackCollectionInfo.fbs:11: 13: warning: field names should be lowercase snake_case, got: shortName
+/Users/runner/work/AirGram-iOS/AirGram-iOS/submodules/TelegramCore/FlatSerialization/Models/StickerPackCollectionInfo.fbs:13: 19: warning: field names should be lowercase snake_case, got: thumbnailFileId
+/Users/runner/work/AirGram-iOS/AirGram-iOS/submodules/TelegramCore/FlatSerialization/Models/StickerPackCollectionInfo.fbs:14: 26: warning: field names should be lowercase snake_case, got: immediateThumbnailData
+
+
+warning:
+  /Users/runner/work/AirGram-iOS/AirGram-iOS/submodules/TelegramCore/FlatSerialization/Models/StickerPackReference.fbs:5: 14: warning: field names should be lowercase snake_case, got: accessHash
+
+
+warning:
+  /Users/runner/work/AirGram-iOS/AirGram-iOS/submodules/TelegramCore/FlatSerialization/Models/StoredDeviceContactData.fbs:9: 13: warning: field names should be lowercase snake_case, got: firstName
+/Users/runner/work/AirGram-iOS/AirGram-iOS/submodules/TelegramCore/FlatSerialization/Models/StoredDeviceContactData.fbs:10: 12: warning: field names should be lowercase snake_case, got: lastName
+/Users/runner/work/AirGram-iOS/AirGram-iOS/submodules/TelegramCore/FlatSerialization/Models/StoredDeviceContactData.fbs:11: 16: warning: field names should be lowercase snake_case, got: phoneNumbers
+
+
+warning:
+  /Users/runner/work/AirGram-iOS/AirGram-iOS/submodules/TelegramCore/FlatSerialization/Models/TelegramChannel.fbs:34: 14: warning: field names should be lowercase snake_case, got: accessHash
+/Users/runner/work/AirGram-iOS/AirGram-iOS/submodules/TelegramCore/FlatSerialization/Models/TelegramChannel.fbs:38: 16: warning: field names should be lowercase snake_case, got: creationDate
+/Users/runner/work/AirGram-iOS/AirGram-iOS/submodules/TelegramCore/FlatSerialization/Models/TelegramChannel.fbs:40: 23: warning: field names should be lowercase snake_case, got: participationStatus
+/Users/runner/work/AirGram-iOS/AirGram-iOS/submodules/TelegramCore/FlatSerialization/Models/TelegramChannel.fbs:43: 19: warning: field names should be lowercase snake_case, got: restrictionInfo
+/Users/runner/work/AirGram-iOS/AirGram-iOS/submodules/TelegramCore/FlatSerialization/Models/TelegramChannel.fbs:44: 15: warning: field names should be lowercase snake_case, got: adminRights
+/Users/runner/work/AirGram-iOS/AirGram-iOS/submodules/TelegramCore/FlatSerialization/Models/TelegramChannel.fbs:45: 16: warning: field names should be lowercase snake_case, got: bannedRights
+/Users/runner/work/AirGram-iOS/AirGram-iOS/submodules/TelegramCore/FlatSerialization/Models/TelegramChannel.fbs:46: 23: warning: field names should be lowercase snake_case, got: defaultBannedRights
+/Users/runner/work/AirGram-iOS/AirGram-iOS/submodules/TelegramCore/FlatSerialization/Models/TelegramChannel.fbs:48: 17: warning: field names should be lowercase snake_case, got: storiesHidden
+/Users/runner/work/AirGram-iOS/AirGram-iOS/submodules/TelegramCore/FlatSerialization/Models/TelegramChannel.fbs:49: 13: warning: field names should be lowercase snake_case, got: nameColor
+/Users/runner/work/AirGram-iOS/AirGram-iOS/submodules/TelegramCore/FlatSerialization/Models/TelegramChannel.fbs:50: 21: warning: field names should be lowercase snake_case, got: backgroundEmojiId
+/Users/runner/work/AirGram-iOS/AirGram-iOS/submodules/TelegramCore/FlatSerialization/Models/TelegramChannel.fbs:51: 16: warning: field names should be lowercase snake_case, got: profileColor
+/Users/runner/work/AirGram-iOS/AirGram-iOS/submodules/TelegramCore/FlatSerialization/Models/TelegramChannel.fbs:52: 28: warning: field names should be lowercase snake_case, got: profileBackgroundEmojiId
+/Users/runner/work/AirGram-iOS/AirGram-iOS/submodules/TelegramCore/FlatSerialization/Models/TelegramChannel.fbs:53: 15: warning: field names should be lowercase snake_case, got: emojiStatus
+/Users/runner/work/AirGram-iOS/AirGram-iOS/submodules/TelegramCore/FlatSerialization/Models/TelegramChannel.fbs:54: 25: warning: field names should be lowercase snake_case, got: approximateBoostLevel
+/Users/runner/work/AirGram-iOS/AirGram-iOS/submodules/TelegramCore/FlatSerialization/Models/TelegramChannel.fbs:55: 25: warning: field names should be lowercase snake_case, got: subscriptionUntilDate
+/Users/runner/work/AirGram-iOS/AirGram-iOS/submodules/TelegramCore/FlatSerialization/Models/TelegramChannel.fbs:56: 26: warning: field names should be lowercase snake_case, got: verificationIconFileId
+/Users/runner/work/AirGram-iOS/AirGram-iOS/submodules/TelegramCore/FlatSerialization/Models/TelegramChannel.fbs:57: 24: warning: field names should be lowercase snake_case, got: sendPaidMessageStars
+/Users/runner/work/AirGram-iOS/AirGram-iOS/submodules/TelegramCore/FlatSerialization/Models/TelegramChannel.fbs:58: 21: warning: field names should be lowercase snake_case, got: linkedMonoforumId
+/Users/runner/work/AirGram-iOS/AirGram-iOS/submodules/TelegramCore/FlatSerialization/Models/TelegramChannel.fbs:59: 15: warning: field names should be lowercase snake_case, got: linkedBotId
+/Users/runner/work/AirGram-iOS/AirGram-iOS/submodules/TelegramCore/FlatSerialization/Models/TelegramChannel.fbs:60: 21: warning: field names should be lowercase snake_case, got: linkedCommunityId
+
+
+warning:
+  /Users/runner/work/AirGram-iOS/AirGram-iOS/submodules/TelegramCore/FlatSerialization/Models/TelegramChatBannedRights.fbs:5: 13: warning: field names should be lowercase snake_case, got: untilDate
+
+
+warning:
+  /Users/runner/work/AirGram-iOS/AirGram-iOS/submodules/TelegramCore/FlatSerialization/Models/TelegramCommunity.fbs:12: 14: warning: field names should be lowercase snake_case, got: accessHash
+/Users/runner/work/AirGram-iOS/AirGram-iOS/submodules/TelegramCore/FlatSerialization/Models/TelegramCommunity.fbs:15: 16: warning: field names should be lowercase snake_case, got: creationDate
+/Users/runner/work/AirGram-iOS/AirGram-iOS/submodules/TelegramCore/FlatSerialization/Models/TelegramCommunity.fbs:16: 23: warning: field names should be lowercase snake_case, got: participationStatus
+/Users/runner/work/AirGram-iOS/AirGram-iOS/submodules/TelegramCore/FlatSerialization/Models/TelegramCommunity.fbs:18: 22: warning: field names should be lowercase snake_case, got: collapsedInDialogs
+/Users/runner/work/AirGram-iOS/AirGram-iOS/submodules/TelegramCore/FlatSerialization/Models/TelegramCommunity.fbs:19: 15: warning: field names should be lowercase snake_case, got: adminRights
+/Users/runner/work/AirGram-iOS/AirGram-iOS/submodules/TelegramCore/FlatSerialization/Models/TelegramCommunity.fbs:20: 23: warning: field names should be lowercase snake_case, got: defaultBannedRights
+
+
+warning:
+  /Users/runner/work/AirGram-iOS/AirGram-iOS/submodules/TelegramCore/FlatSerialization/Models/TelegramGroup.fbs:30: 10: warning: field names should be lowercase snake_case, got: peerId
+/Users/runner/work/AirGram-iOS/AirGram-iOS/submodules/TelegramCore/FlatSerialization/Models/TelegramGroup.fbs:31: 14: warning: field names should be lowercase snake_case, got: accessHash
+/Users/runner/work/AirGram-iOS/AirGram-iOS/submodules/TelegramCore/FlatSerialization/Models/TelegramGroup.fbs:38: 20: warning: field names should be lowercase snake_case, got: participantCount
+/Users/runner/work/AirGram-iOS/AirGram-iOS/submodules/TelegramCore/FlatSerialization/Models/TelegramGroup.fbs:42: 23: warning: field names should be lowercase snake_case, got: defaultBannedRights
+/Users/runner/work/AirGram-iOS/AirGram-iOS/submodules/TelegramCore/FlatSerialization/Models/TelegramGroup.fbs:43: 22: warning: field names should be lowercase snake_case, got: migrationReference
+/Users/runner/work/AirGram-iOS/AirGram-iOS/submodules/TelegramCore/FlatSerialization/Models/TelegramGroup.fbs:44: 16: warning: field names should be lowercase snake_case, got: creationDate
+
+
+warning:
+  /Users/runner/work/AirGram-iOS/AirGram-iOS/submodules/TelegramCore/FlatSerialization/Models/TelegramMediaFile.fbs:12: 10: warning: field names should be lowercase snake_case, got: fileId
+/Users/runner/work/AirGram-iOS/AirGram-iOS/submodules/TelegramCore/FlatSerialization/Models/TelegramMediaFile.fbs:13: 20: warning: field names should be lowercase snake_case, got: partialReference
+/Users/runner/work/AirGram-iOS/AirGram-iOS/submodules/TelegramCore/FlatSerialization/Models/TelegramMediaFile.fbs:15: 26: warning: field names should be lowercase snake_case, got: previewRepresentations
+/Users/runner/work/AirGram-iOS/AirGram-iOS/submodules/TelegramCore/FlatSerialization/Models/TelegramMediaFile.fbs:16: 19: warning: field names should be lowercase snake_case, got: videoThumbnails
+/Users/runner/work/AirGram-iOS/AirGram-iOS/submodules/TelegramCore/FlatSerialization/Models/TelegramMediaFile.fbs:17: 14: warning: field names should be lowercase snake_case, got: videoCover
+/Users/runner/work/AirGram-iOS/AirGram-iOS/submodules/TelegramCore/FlatSerialization/Models/TelegramMediaFile.fbs:18: 26: warning: field names should be lowercase snake_case, got: immediateThumbnailData
+/Users/runner/work/AirGram-iOS/AirGram-iOS/submodules/TelegramCore/FlatSerialization/Models/TelegramMediaFile.fbs:19: 12: warning: field names should be lowercase snake_case, got: mimeType
+/Users/runner/work/AirGram-iOS/AirGram-iOS/submodules/TelegramCore/FlatSerialization/Models/TelegramMediaFile.fbs:22: 30: warning: field names should be lowercase snake_case, got: alternativeRepresentations
+
+
+warning:
+  /Users/runner/work/AirGram-iOS/AirGram-iOS/submodules/TelegramCore/FlatSerialization/Models/TelegramMediaFileAttribute.fbs:6: 12: warning: field names should be lowercase snake_case, got: fileName
+/Users/runner/work/AirGram-iOS/AirGram-iOS/submodules/TelegramCore/FlatSerialization/Models/TelegramMediaFileAttribute.fbs:17: 15: warning: field names should be lowercase snake_case, got: displayText
+/Users/runner/work/AirGram-iOS/AirGram-iOS/submodules/TelegramCore/FlatSerialization/Models/TelegramMediaFileAttribute.fbs:18: 17: warning: field names should be lowercase snake_case, got: packReference
+/Users/runner/work/AirGram-iOS/AirGram-iOS/submodules/TelegramCore/FlatSerialization/Models/TelegramMediaFileAttribute.fbs:19: 12: warning: field names should be lowercase snake_case, got: maskData
+/Users/runner/work/AirGram-iOS/AirGram-iOS/submodules/TelegramCore/FlatSerialization/Models/TelegramMediaFileAttribute.fbs:35: 15: warning: field names should be lowercase snake_case, got: preloadSize
+/Users/runner/work/AirGram-iOS/AirGram-iOS/submodules/TelegramCore/FlatSerialization/Models/TelegramMediaFileAttribute.fbs:36: 13: warning: field names should be lowercase snake_case, got: coverTime
+/Users/runner/work/AirGram-iOS/AirGram-iOS/submodules/TelegramCore/FlatSerialization/Models/TelegramMediaFileAttribute.fbs:37: 14: warning: field names should be lowercase snake_case, got: videoCodec
+/Users/runner/work/AirGram-iOS/AirGram-iOS/submodules/TelegramCore/FlatSerialization/Models/TelegramMediaFileAttribute.fbs:41: 11: warning: field names should be lowercase snake_case, got: isVoice
+/Users/runner/work/AirGram-iOS/AirGram-iOS/submodules/TelegramCore/FlatSerialization/Models/TelegramMediaFileAttribute.fbs:61: 13: warning: field names should be lowercase snake_case, got: isPremium
+/Users/runner/work/AirGram-iOS/AirGram-iOS/submodules/TelegramCore/FlatSerialization/Models/TelegramMediaFileAttribute.fbs:62: 17: warning: field names should be lowercase snake_case, got: isSingleColor
+/Users/runner/work/AirGram-iOS/AirGram-iOS/submodules/TelegramCore/FlatSerialization/Models/TelegramMediaFileAttribute.fbs:64: 17: warning: field names should be lowercase snake_case, got: packReference
+
+
+warning:
+  /Users/runner/work/AirGram-iOS/AirGram-iOS/submodules/TelegramCore/FlatSerialization/Models/TelegramMediaImage.fbs:10: 11: warning: field names should be lowercase snake_case, got: imageId
+/Users/runner/work/AirGram-iOS/AirGram-iOS/submodules/TelegramCore/FlatSerialization/Models/TelegramMediaImage.fbs:11: 14: warning: field names should be lowercase snake_case, got: accessHash
+/Users/runner/work/AirGram-iOS/AirGram-iOS/submodules/TelegramCore/FlatSerialization/Models/TelegramMediaImage.fbs:12: 17: warning: field names should be lowercase snake_case, got: fileReference
+/Users/runner/work/AirGram-iOS/AirGram-iOS/submodules/TelegramCore/FlatSerialization/Models/TelegramMediaImage.fbs:19: 18: warning: field names should be lowercase snake_case, got: startTimestamp
+/Users/runner/work/AirGram-iOS/AirGram-iOS/submodules/TelegramCore/FlatSerialization/Models/TelegramMediaImage.fbs:23: 10: warning: field names should be lowercase snake_case, got: fileId
+/Users/runner/work/AirGram-iOS/AirGram-iOS/submodules/TelegramCore/FlatSerialization/Models/TelegramMediaImage.fbs:27: 17: warning: field names should be lowercase snake_case, got: packReference
+/Users/runner/work/AirGram-iOS/AirGram-iOS/submodules/TelegramCore/FlatSerialization/Models/TelegramMediaImage.fbs:28: 10: warning: field names should be lowercase snake_case, got: fileId
+/Users/runner/work/AirGram-iOS/AirGram-iOS/submodules/TelegramCore/FlatSerialization/Models/TelegramMediaImage.fbs:38: 20: warning: field names should be lowercase snake_case, got: backgroundColors
+/Users/runner/work/AirGram-iOS/AirGram-iOS/submodules/TelegramCore/FlatSerialization/Models/TelegramMediaImage.fbs:42: 11: warning: field names should be lowercase snake_case, got: imageId
+/Users/runner/work/AirGram-iOS/AirGram-iOS/submodules/TelegramCore/FlatSerialization/Models/TelegramMediaImage.fbs:44: 24: warning: field names should be lowercase snake_case, got: videoRepresentations
+/Users/runner/work/AirGram-iOS/AirGram-iOS/submodules/TelegramCore/FlatSerialization/Models/TelegramMediaImage.fbs:45: 26: warning: field names should be lowercase snake_case, got: immediateThumbnailData
+/Users/runner/work/AirGram-iOS/AirGram-iOS/submodules/TelegramCore/FlatSerialization/Models/TelegramMediaImage.fbs:46: 15: warning: field names should be lowercase snake_case, got: emojiMarkup
+/Users/runner/work/AirGram-iOS/AirGram-iOS/submodules/TelegramCore/FlatSerialization/Models/TelegramMediaImage.fbs:48: 20: warning: field names should be lowercase snake_case, got: partialReference
+
+
+warning:
+  /Users/runner/work/AirGram-iOS/AirGram-iOS/submodules/TelegramCore/FlatSerialization/Models/TelegramMediaImageRepresentation.fbs:15: 20: warning: field names should be lowercase snake_case, got: progressiveSizes
+/Users/runner/work/AirGram-iOS/AirGram-iOS/submodules/TelegramCore/FlatSerialization/Models/TelegramMediaImageRepresentation.fbs:16: 26: warning: field names should be lowercase snake_case, got: immediateThumbnailData
+/Users/runner/work/AirGram-iOS/AirGram-iOS/submodules/TelegramCore/FlatSerialization/Models/TelegramMediaImageRepresentation.fbs:17: 12: warning: field names should be lowercase snake_case, got: hasVideo
+/Users/runner/work/AirGram-iOS/AirGram-iOS/submodules/TelegramCore/FlatSerialization/Models/TelegramMediaImageRepresentation.fbs:18: 14: warning: field names should be lowercase snake_case, got: isPersonal
+/Users/runner/work/AirGram-iOS/AirGram-iOS/submodules/TelegramCore/FlatSerialization/Models/TelegramMediaImageRepresentation.fbs:19: 12: warning: field names should be lowercase snake_case, got: typeHint
+
+
+warning:
+  /Users/runner/work/AirGram-iOS/AirGram-iOS/submodules/TelegramCore/FlatSerialization/Models/TelegramMediaResource.fbs:4: 16: warning: field names should be lowercase snake_case, got: datacenterId
+/Users/runner/work/AirGram-iOS/AirGram-iOS/submodules/TelegramCore/FlatSerialization/Models/TelegramMediaResource.fbs:5: 12: warning: field names should be lowercase snake_case, got: volumeId
+/Users/runner/work/AirGram-iOS/AirGram-iOS/submodules/TelegramCore/FlatSerialization/Models/TelegramMediaResource.fbs:6: 11: warning: field names should be lowercase snake_case, got: localId
+/Users/runner/work/AirGram-iOS/AirGram-iOS/submodules/TelegramCore/FlatSerialization/Models/TelegramMediaResource.fbs:9: 17: warning: field names should be lowercase snake_case, got: fileReference
+/Users/runner/work/AirGram-iOS/AirGram-iOS/submodules/TelegramCore/FlatSerialization/Models/TelegramMediaResource.fbs:13: 16: warning: field names should be lowercase snake_case, got: datacenterId
+/Users/runner/work/AirGram-iOS/AirGram-iOS/submodules/TelegramCore/FlatSerialization/Models/TelegramMediaResource.fbs:14: 14: warning: field names should be lowercase snake_case, got: documentId
+/Users/runner/work/AirGram-iOS/AirGram-iOS/submodules/TelegramCore/FlatSerialization/Models/TelegramMediaResource.fbs:15: 14: warning: field names should be lowercase snake_case, got: accessHash
+/Users/runner/work/AirGram-iOS/AirGram-iOS/submodules/TelegramCore/FlatSerialization/Models/TelegramMediaResource.fbs:16: 12: warning: field names should be lowercase snake_case, got: sizeSpec
+/Users/runner/work/AirGram-iOS/AirGram-iOS/submodules/TelegramCore/FlatSerialization/Models/TelegramMediaResource.fbs:17: 17: warning: field names should be lowercase snake_case, got: fileReference
+/Users/runner/work/AirGram-iOS/AirGram-iOS/submodules/TelegramCore/FlatSerialization/Models/TelegramMediaResource.fbs:21: 16: warning: field names should be lowercase snake_case, got: datacenterId
+/Users/runner/work/AirGram-iOS/AirGram-iOS/submodules/TelegramCore/FlatSerialization/Models/TelegramMediaResource.fbs:22: 11: warning: field names should be lowercase snake_case, got: photoId
+/Users/runner/work/AirGram-iOS/AirGram-iOS/submodules/TelegramCore/FlatSerialization/Models/TelegramMediaResource.fbs:23: 14: warning: field names should be lowercase snake_case, got: accessHash
+/Users/runner/work/AirGram-iOS/AirGram-iOS/submodules/TelegramCore/FlatSerialization/Models/TelegramMediaResource.fbs:24: 12: warning: field names should be lowercase snake_case, got: sizeSpec
+/Users/runner/work/AirGram-iOS/AirGram-iOS/submodules/TelegramCore/FlatSerialization/Models/TelegramMediaResource.fbs:26: 17: warning: field names should be lowercase snake_case, got: fileReference
+/Users/runner/work/AirGram-iOS/AirGram-iOS/submodules/TelegramCore/FlatSerialization/Models/TelegramMediaResource.fbs:35: 16: warning: field names should be lowercase snake_case, got: datacenterId
+/Users/runner/work/AirGram-iOS/AirGram-iOS/submodules/TelegramCore/FlatSerialization/Models/TelegramMediaResource.fbs:36: 11: warning: field names should be lowercase snake_case, got: photoId
+/Users/runner/work/AirGram-iOS/AirGram-iOS/submodules/TelegramCore/FlatSerialization/Models/TelegramMediaResource.fbs:37: 12: warning: field names should be lowercase snake_case, got: sizeSpec
+/Users/runner/work/AirGram-iOS/AirGram-iOS/submodules/TelegramCore/FlatSerialization/Models/TelegramMediaResource.fbs:38: 12: warning: field names should be lowercase snake_case, got: volumeId
+/Users/runner/work/AirGram-iOS/AirGram-iOS/submodules/TelegramCore/FlatSerialization/Models/TelegramMediaResource.fbs:39: 11: warning: field names should be lowercase snake_case, got: localId
+/Users/runner/work/AirGram-iOS/AirGram-iOS/submodules/TelegramCore/FlatSerialization/Models/TelegramMediaResource.fbs:43: 16: warning: field names should be lowercase snake_case, got: datacenterId
+/Users/runner/work/AirGram-iOS/AirGram-iOS/submodules/TelegramCore/FlatSerialization/Models/TelegramMediaResource.fbs:44: 16: warning: field names should be lowercase snake_case, got: thumbVersion
+/Users/runner/work/AirGram-iOS/AirGram-iOS/submodules/TelegramCore/FlatSerialization/Models/TelegramMediaResource.fbs:45: 12: warning: field names should be lowercase snake_case, got: volumeId
+/Users/runner/work/AirGram-iOS/AirGram-iOS/submodules/TelegramCore/FlatSerialization/Models/TelegramMediaResource.fbs:46: 11: warning: field names should be lowercase snake_case, got: localId
+/Users/runner/work/AirGram-iOS/AirGram-iOS/submodules/TelegramCore/FlatSerialization/Models/TelegramMediaResource.fbs:50: 16: warning: field names should be lowercase snake_case, got: datacenterId
+/Users/runner/work/AirGram-iOS/AirGram-iOS/submodules/TelegramCore/FlatSerialization/Models/TelegramMediaResource.fbs:51: 10: warning: field names should be lowercase snake_case, got: fileId
+/Users/runner/work/AirGram-iOS/AirGram-iOS/submodules/TelegramCore/FlatSerialization/Models/TelegramMediaResource.fbs:52: 14: warning: field names should be lowercase snake_case, got: accessHash
+/Users/runner/work/AirGram-iOS/AirGram-iOS/submodules/TelegramCore/FlatSerialization/Models/TelegramMediaResource.fbs:54: 17: warning: field names should be lowercase snake_case, got: fileReference
+/Users/runner/work/AirGram-iOS/AirGram-iOS/submodules/TelegramCore/FlatSerialization/Models/TelegramMediaResource.fbs:55: 12: warning: field names should be lowercase snake_case, got: fileName
+/Users/runner/work/AirGram-iOS/AirGram-iOS/submodules/TelegramCore/FlatSerialization/Models/TelegramMediaResource.fbs:59: 10: warning: field names should be lowercase snake_case, got: fileId
+/Users/runner/work/AirGram-iOS/AirGram-iOS/submodules/TelegramCore/FlatSerialization/Models/TelegramMediaResource.fbs:61: 19: warning: field names should be lowercase snake_case, got: isSecretRelated
+
+
+warning:
+  /Users/runner/work/AirGram-iOS/AirGram-iOS/submodules/TelegramCore/FlatSerialization/Models/TelegramPeerAccessHash.fbs:4: 14: warning: field names should be lowercase snake_case, got: accessHash
+/Users/runner/work/AirGram-iOS/AirGram-iOS/submodules/TelegramCore/FlatSerialization/Models/TelegramPeerAccessHash.fbs:8: 14: warning: field names should be lowercase snake_case, got: accessHash
+
+
+warning:
+  /Users/runner/work/AirGram-iOS/AirGram-iOS/submodules/TelegramCore/FlatSerialization/Models/TelegramUser.fbs:16: 21: warning: field names should be lowercase snake_case, got: inlinePlaceholder
+/Users/runner/work/AirGram-iOS/AirGram-iOS/submodules/TelegramCore/FlatSerialization/Models/TelegramUser.fbs:21: 14: warning: field names should be lowercase snake_case, got: accessHash
+/Users/runner/work/AirGram-iOS/AirGram-iOS/submodules/TelegramCore/FlatSerialization/Models/TelegramUser.fbs:22: 13: warning: field names should be lowercase snake_case, got: firstName
+/Users/runner/work/AirGram-iOS/AirGram-iOS/submodules/TelegramCore/FlatSerialization/Models/TelegramUser.fbs:23: 12: warning: field names should be lowercase snake_case, got: lastName
+/Users/runner/work/AirGram-iOS/AirGram-iOS/submodules/TelegramCore/FlatSerialization/Models/TelegramUser.fbs:27: 11: warning: field names should be lowercase snake_case, got: botInfo
+/Users/runner/work/AirGram-iOS/AirGram-iOS/submodules/TelegramCore/FlatSerialization/Models/TelegramUser.fbs:28: 19: warning: field names should be lowercase snake_case, got: restrictionInfo
+/Users/runner/work/AirGram-iOS/AirGram-iOS/submodules/TelegramCore/FlatSerialization/Models/TelegramUser.fbs:30: 15: warning: field names should be lowercase snake_case, got: emojiStatus
+/Users/runner/work/AirGram-iOS/AirGram-iOS/submodules/TelegramCore/FlatSerialization/Models/TelegramUser.fbs:32: 17: warning: field names should be lowercase snake_case, got: storiesHidden
+/Users/runner/work/AirGram-iOS/AirGram-iOS/submodules/TelegramCore/FlatSerialization/Models/TelegramUser.fbs:33: 13: warning: field names should be lowercase snake_case, got: nameColor
+/Users/runner/work/AirGram-iOS/AirGram-iOS/submodules/TelegramCore/FlatSerialization/Models/TelegramUser.fbs:34: 21: warning: field names should be lowercase snake_case, got: backgroundEmojiId
+/Users/runner/work/AirGram-iOS/AirGram-iOS/submodules/TelegramCore/FlatSerialization/Models/TelegramUser.fbs:35: 16: warning: field names should be lowercase snake_case, got: profileColor
+/Users/runner/work/AirGram-iOS/AirGram-iOS/submodules/TelegramCore/FlatSerialization/Models/TelegramUser.fbs:36: 28: warning: field names should be lowercase snake_case, got: profileBackgroundEmojiId
+/Users/runner/work/AirGram-iOS/AirGram-iOS/submodules/TelegramCore/FlatSerialization/Models/TelegramUser.fbs:37: 19: warning: field names should be lowercase snake_case, got: subscriberCount
+/Users/runner/work/AirGram-iOS/AirGram-iOS/submodules/TelegramCore/FlatSerialization/Models/TelegramUser.fbs:38: 26: warning: field names should be lowercase snake_case, got: verificationIconFileId
+/Users/runner/work/AirGram-iOS/AirGram-iOS/submodules/TelegramCore/FlatSerialization/Models/TelegramUser.fbs:39: 20: warning: field names should be lowercase snake_case, got: collectibleColor
+/Users/runner/work/AirGram-iOS/AirGram-iOS/submodules/TelegramCore/FlatSerialization/Models/TelegramUser.fbs:40: 21: warning: field names should be lowercase snake_case, got: linkedCommunityId
+
++ cp bazel-out/ios_arm64-opt-ios-arm64-min15.0-ST-4fc4d341170e/bin/submodules/TelegramCore/FlatSerialization/build/InstantPage_generated.swift bazel-out/ios_arm64-opt-ios-arm64-min15.0-ST-4fc4d341170e/bin/submodules/TelegramCore/FlatSerialization/InstantPage_generated.swift
++ cp bazel-out/ios_arm64-opt-ios-arm64-min15.0-ST-4fc4d341170e/bin/submodules/TelegramCore/FlatSerialization/build/InstantPageBlock_generated.swift bazel-out/ios_arm64-opt-ios-arm64-min15.0-ST-4fc4d341170e/bin/submodules/TelegramCore/FlatSerialization/InstantPageBlock_generated.swift
++ cp bazel-out/ios_arm64-opt-ios-arm64-min15.0-ST-4fc4d341170e/bin/submodules/TelegramCore/FlatSerialization/build/ItemCollectionId_generated.swift bazel-out/ios_arm64-opt-ios-arm64-min15.0-ST-4fc4d341170e/bin/submodules/TelegramCore/FlatSerialization/ItemCollectionId_generated.swift
++ cp bazel-out/ios_arm64-opt-ios-arm64-min15.0-ST-4fc4d341170e/bin/submodules/TelegramCore/FlatSerialization/build/Media_generated.swift bazel-out/ios_arm64-opt-ios-arm64-min15.0-ST-4fc4d341170e/bin/submodules/TelegramCore/FlatSerialization/Media_generated.swift
++ cp bazel-out/ios_arm64-opt-ios-arm64-min15.0-ST-4fc4d341170e/bin/submodules/TelegramCore/FlatSerialization/build/MediaId_generated.swift bazel-out/ios_arm64-opt-ios-arm64-min15.0-ST-4fc4d341170e/bin/submodules/TelegramCore/FlatSerialization/MediaId_generated.swift
++ cp bazel-out/ios_arm64-opt-ios-arm64-min15.0-ST-4fc4d341170e/bin/submodules/TelegramCore/FlatSerialization/build/MessageId_generated.swift bazel-out/ios_arm64-opt-ios-arm64-min15.0-ST-4fc4d341170e/bin/submodules/TelegramCore/FlatSerialization/MessageId_generated.swift
++ cp bazel-out/ios_arm64-opt-ios-arm64-min15.0-ST-4fc4d341170e/bin/submodules/TelegramCore/FlatSerialization/build/Optional_generated.swift bazel-out/ios_arm64-opt-ios-arm64-min15.0-ST-4fc4d341170e/bin/submodules/TelegramCore/FlatSerialization/Optional_generated.swift
++ cp bazel-out/ios_arm64-opt-ios-arm64-min15.0-ST-4fc4d341170e/bin/submodules/TelegramCore/FlatSerialization/build/PartialMediaReference_generated.swift bazel-out/ios_arm64-opt-ios-arm64-min15.0-ST-4fc4d341170e/bin/submodules/TelegramCore/FlatSerialization/PartialMediaReference_generated.swift
++ cp bazel-out/ios_arm64-opt-ios-arm64-min15.0-ST-4fc4d341170e/bin/submodules/TelegramCore/FlatSerialization/build/PeerAccessRestrictionInfo_generated.swift bazel-out/ios_arm64-opt-ios-arm64-min15.0-ST-4fc4d341170e/bin/submodules/TelegramCore/FlatSerialization/PeerAccessRestrictionInfo_generated.swift
++ cp bazel-out/ios_arm64-opt-ios-arm64-min15.0-ST-4fc4d341170e/bin/submodules/TelegramCore/FlatSerialization/build/PeerCollectibleColor_generated.swift bazel-out/ios_arm64-opt-ios-arm64-min15.0-ST-4fc4d341170e/bin/submodules/TelegramCore/FlatSerialization/PeerCollectibleColor_generated.swift
++ cp bazel-out/ios_arm64-opt-ios-arm64-min15.0-ST-4fc4d341170e/bin/submodules/TelegramCore/FlatSerialization/build/PeerEmojiStatus_generated.swift bazel-out/ios_arm64-opt-ios-arm64-min15.0-ST-4fc4d341170e/bin/submodules/TelegramCore/FlatSerialization/PeerEmojiStatus_generated.swift
++ cp bazel-out/ios_arm64-opt-ios-arm64-min15.0-ST-4fc4d341170e/bin/submodules/TelegramCore/FlatSerialization/build/PeerId_generated.swift bazel-out/ios_arm64-opt-ios-arm64-min15.0-ST-4fc4d341170e/bin/submodules/TelegramCore/FlatSerialization/PeerId_generated.swift
++ cp bazel-out/ios_arm64-opt-ios-arm64-min15.0-ST-4fc4d341170e/bin/submodules/TelegramCore/FlatSerialization/build/PeerNameColor_generated.swift bazel-out/ios_arm64-opt-ios-arm64-min15.0-ST-4fc4d341170e/bin/submodules/TelegramCore/FlatSerialization/PeerNameColor_generated.swift
++ cp bazel-out/ios_arm64-opt-ios-arm64-min15.0-ST-4fc4d341170e/bin/submodules/TelegramCore/FlatSerialization/build/PeerReference_generated.swift bazel-out/ios_arm64-opt-ios-arm64-min15.0-ST-4fc4d341170e/bin/submodules/TelegramCore/FlatSerialization/PeerReference_generated.swift
++ cp bazel-out/ios_arm64-opt-ios-arm64-min15.0-ST-4fc4d341170e/bin/submodules/TelegramCore/FlatSerialization/build/PixelDimensions_generated.swift bazel-out/ios_arm64-opt-ios-arm64-min15.0-ST-4fc4d341170e/bin/submodules/TelegramCore/FlatSerialization/PixelDimensions_generated.swift
++ cp bazel-out/ios_arm64-opt-ios-arm64-min15.0-ST-4fc4d341170e/bin/submodules/TelegramCore/FlatSerialization/build/RichText_generated.swift bazel-out/ios_arm64-opt-ios-arm64-min15.0-ST-4fc4d341170e/bin/submodules/TelegramCore/FlatSerialization/RichText_generated.swift
++ cp bazel-out/ios_arm64-opt-ios-arm64-min15.0-ST-4fc4d341170e/bin/submodules/TelegramCore/FlatSerialization/build/StarsAmount_generated.swift bazel-out/ios_arm64-opt-ios-arm64-min15.0-ST-4fc4d341170e/bin/submodules/TelegramCore/FlatSerialization/StarsAmount_generated.swift
++ cp bazel-out/ios_arm64-opt-ios-arm64-min15.0-ST-4fc4d341170e/bin/submodules/TelegramCore/FlatSerialization/build/StickerPackCollectionInfo_generated.swift bazel-out/ios_arm64-opt-ios-arm64-min15.0-ST-4fc4d341170e/bin/submodules/TelegramCore/FlatSerialization/StickerPackCollectionInfo_generated.swift
++ cp bazel-out/ios_arm64-opt-ios-arm64-min15.0-ST-4fc4d341170e/bin/submodules/TelegramCore/FlatSerialization/build/StickerPackReference_generated.swift bazel-out/ios_arm64-opt-ios-arm64-min15.0-ST-4fc4d341170e/bin/submodules/TelegramCore/FlatSerialization/StickerPackReference_generated.swift
++ cp bazel-out/ios_arm64-opt-ios-arm64-min15.0-ST-4fc4d341170e/bin/submodules/TelegramCore/FlatSerialization/build/StoredDeviceContactData_generated.swift bazel-out/ios_arm64-opt-ios-arm64-min15.0-ST-4fc4d341170e/bin/submodules/TelegramCore/FlatSerialization/StoredDeviceContactData_generated.swift
++ cp bazel-out/ios_arm64-opt-ios-arm64-min15.0-ST-4fc4d341170e/bin/submodules/TelegramCore/FlatSerialization/build/TelegramChannel_generated.swift bazel-out/ios_arm64-opt-ios-arm64-min15.0-ST-4fc4d341170e/bin/submodules/TelegramCore/FlatSerialization/TelegramChannel_generated.swift
++ cp bazel-out/ios_arm64-opt-ios-arm64-min15.0-ST-4fc4d341170e/bin/submodules/TelegramCore/FlatSerialization/build/TelegramChatAdminRights_generated.swift bazel-out/ios_arm64-opt-ios-arm64-min15.0-ST-4fc4d341170e/bin/submodules/TelegramCore/FlatSerialization/TelegramChatAdminRights_generated.swift
++ cp bazel-out/ios_arm64-opt-ios-arm64-min15.0-ST-4fc4d341170e/bin/submodules/TelegramCore/FlatSerialization/build/TelegramChatBannedRights_generated.swift bazel-out/ios_arm64-opt-ios-arm64-min15.0-ST-4fc4d341170e/bin/submodules/TelegramCore/FlatSerialization/TelegramChatBannedRights_generated.swift
++ cp bazel-out/ios_arm64-opt-ios-arm64-min15.0-ST-4fc4d341170e/bin/submodules/TelegramCore/FlatSerialization/build/TelegramCommunity_generated.swift bazel-out/ios_arm64-opt-ios-arm64-min15.0-ST-4fc4d341170e/bin/submodules/TelegramCore/FlatSerialization/TelegramCommunity_generated.swift
++ cp bazel-out/ios_arm64-opt-ios-arm64-min15.0-ST-4fc4d341170e/bin/submodules/TelegramCore/FlatSerialization/build/TelegramGroup_generated.swift bazel-out/ios_arm64-opt-ios-arm64-min15.0-ST-4fc4d341170e/bin/submodules/TelegramCore/FlatSerialization/TelegramGroup_generated.swift
++ cp bazel-out/ios_arm64-opt-ios-arm64-min15.0-ST-4fc4d341170e/bin/submodules/TelegramCore/FlatSerialization/build/TelegramMediaFile_generated.swift bazel-out/ios_arm64-opt-ios-arm64-min15.0-ST-4fc4d341170e/bin/submodules/TelegramCore/FlatSerialization/TelegramMediaFile_generated.swift
++ cp bazel-out/ios_arm64-opt-ios-arm64-min15.0-ST-4fc4d341170e/bin/submodules/TelegramCore/FlatSerialization/build/TelegramMediaFileAttribute_generated.swift bazel-out/ios_arm64-opt-ios-arm64-min15.0-ST-4fc4d341170e/bin/submodules/TelegramCore/FlatSerialization/TelegramMediaFileAttribute_generated.swift
++ cp bazel-out/ios_arm64-opt-ios-arm64-min15.0-ST-4fc4d341170e/bin/submodules/TelegramCore/FlatSerialization/build/TelegramMediaImage_generated.swift bazel-out/ios_arm64-opt-ios-arm64-min15.0-ST-4fc4d341170e/bin/submodules/TelegramCore/FlatSerialization/TelegramMediaImage_generated.swift
++ cp bazel-out/ios_arm64-opt-ios-arm64-min15.0-ST-4fc4d341170e/bin/submodules/TelegramCore/FlatSerialization/build/TelegramMediaImageRepresentation_generated.swift bazel-out/ios_arm64-opt-ios-arm64-min15.0-ST-4fc4d341170e/bin/submodules/TelegramCore/FlatSerialization/TelegramMediaImageRepresentation_generated.swift
++ cp bazel-out/ios_arm64-opt-ios-arm64-min15.0-ST-4fc4d341170e/bin/submodules/TelegramCore/FlatSerialization/build/TelegramMediaResource_generated.swift bazel-out/ios_arm64-opt-ios-arm64-min15.0-ST-4fc4d341170e/bin/submodules/TelegramCore/FlatSerialization/TelegramMediaResource_generated.swift
++ cp bazel-out/ios_arm64-opt-ios-arm64-min15.0-ST-4fc4d341170e/bin/submodules/TelegramCore/FlatSerialization/build/TelegramPeerAccessHash_generated.swift bazel-out/ios_arm64-opt-ios-arm64-min15.0-ST-4fc4d341170e/bin/submodules/TelegramCore/FlatSerialization/TelegramPeerAccessHash_generated.swift
++ cp bazel-out/ios_arm64-opt-ios-arm64-min15.0-ST-4fc4d341170e/bin/submodules/TelegramCore/FlatSerialization/build/TelegramPeerUsername_generated.swift bazel-out/ios_arm64-opt-ios-arm64-min15.0-ST-4fc4d341170e/bin/submodules/TelegramCore/FlatSerialization/TelegramPeerUsername_generated.swift
++ cp bazel-out/ios_arm64-opt-ios-arm64-min15.0-ST-4fc4d341170e/bin/submodules/TelegramCore/FlatSerialization/build/TelegramUser_generated.swift bazel-out/ios_arm64-opt-ios-arm64-min15.0-ST-4fc4d341170e/bin/submodules/TelegramCore/FlatSerialization/TelegramUser_generated.swift
++ cp bazel-out/ios_arm64-opt-ios-arm64-min15.0-ST-4fc4d341170e/bin/submodules/TelegramCore/FlatSerialization/build/VideoThumbnail_generated.swift bazel-out/ios_arm64-opt-ios-arm64-min15.0-ST-4fc4d341170e/bin/submodules/TelegramCore/FlatSerialization/VideoThumbnail_generated.swift
+INFO: From Compiling submodules/TelegramUI/Components/LensTransition/Bridge/Sources/LensTransitionRuntime.m:
+submodules/TelegramUI/Components/LensTransition/Bridge/Sources/LensTransitionRuntime.m:121:29: warning: 'LTTransitionDriver' is only available on iOS 26.0 or newer [-Wunguarded-availability-new]
+  121 | static NSMapTable<UIView *, LTTransitionDriver *> *LTActiveTransitions;
+      |                             ^
+submodules/TelegramUI/Components/LensTransition/Bridge/PublicHeaders/LensTransitionRuntime/LensTransitionRuntime.h:4:12: note: 'LTTransitionDriver' has been marked as being introduced in iOS 26.0 here, but the deployment target is iOS 15.0.0
+    4 | @interface LTTransitionDriver : NSObject
+      |            ^
+submodules/TelegramUI/Components/LensTransition/Bridge/Sources/LensTransitionRuntime.m:121:52: note: annotate 'LTActiveTransitions' with an availability attribute to silence this warning
+  121 | static NSMapTable<UIView *, LTTransitionDriver *> *LTActiveTransitions;
+      |                                                    ^
+1 warning generated.
+[1,757 / 7,592] Compiling Rust bin _bs_ (20 files) [for tool]; 0s local, disk-cache ... (2 actions, 1 running)
+[1,772 / 7,592] XibCompile Telegram/telegram_auth_build_test-intermediates/nibs/Base.lproj/LaunchScreen; 0s local, disk-cache ... (3 actions, 2 running)
+[1,775 / 7,592] XibCompile Telegram/telegram_auth_build_test-intermediates/nibs/Base.lproj/LaunchScreen; 2s local, disk-cache ... (3 actions running)
+[1,777 / 7,592] XibCompile Telegram/telegram_auth_build_test-intermediates/nibs/Base.lproj/LaunchScreen; 3s local, disk-cache ... (3 actions running)
+[1,778 / 7,592] XibCompile Telegram/telegram_auth_build_test-intermediates/nibs/Base.lproj/LaunchScreen; 4s local, disk-cache ... (3 actions running)
+[1,781 / 7,592] XibCompile Telegram/telegram_auth_build_test-intermediates/nibs/Base.lproj/LaunchScreen; 5s local, disk-cache ... (3 actions running)
+INFO: From Compiling Rust bin runner (1 file) [for tool]:
+warning: linker stderr: clang: overriding '-mmacosx-version-min=11.0.0' option with '-target arm64-apple-macosx26.5' [-Woverriding-option]
+  |
+  = note: `#[warn(linker_messages)]` on by default
+
+warning: 1 warning emitted
+
+[1,790 / 7,592] XibCompile Telegram/telegram_auth_build_test-intermediates/nibs/Base.lproj/LaunchScreen; 6s local, disk-cache ... (3 actions running)
+[1,795 / 7,592] XibCompile Telegram/telegram_auth_build_test-intermediates/nibs/Base.lproj/LaunchScreen; 7s local, disk-cache ... (3 actions running)
+[1,800 / 7,592] XibCompile Telegram/telegram_auth_build_test-intermediates/nibs/Base.lproj/LaunchScreen; 8s local, disk-cache ... (3 actions running)
+[1,801 / 7,592] Compiling third-party/subcodec/src/frame_writer.cpp; 3s local, disk-cache ... (2 actions running)
+[1,804 / 7,592] IntentGenerate Telegram/GeneratedSources.Intent.swift; 1s local, disk-cache ... (3 actions, 2 running)
+[1,806 / 7,592] IntentGenerate Telegram/GeneratedSources.Intent.swift; 2s local, disk-cache ... (3 actions running)
+[1,810 / 7,592] Compiling Rust rlib proc_macro2 v1.0.93 (17 files) [for tool]; 1s local, disk-cache ... (2 actions running)
+[1,812 / 7,592] Compiling tools/common/process.cc [for tool]; 1s local, disk-cache ... (2 actions running)
+[1,820 / 7,592] Compiling tools/common/process.cc [for tool]; 2s local, disk-cache ... (3 actions, 2 running)
+[1,825 / 7,592] Compiling third-party/subcodec/src/mbs_encode.cpp; 1s local, disk-cache ... (3 actions running)
+[1,835 / 7,592] Compiling third-party/subcodec/src/mbs_mux_common.cpp; 0s local, disk-cache ... (3 actions, 2 running)
+[1,843 / 7,592] Compiling third-party/subcodec/src/mbs_mux_common.cpp; 1s local, disk-cache ... (2 actions, 1 running)
+[1,845 / 7,592] Compiling third-party/subcodec/src/mux_surface.cpp; 0s local, disk-cache ... (2 actions, 1 running)
+[1,847 / 7,592] Compiling third-party/subcodec/src/mux_surface.cpp; 1s local, disk-cache ... (2 actions, 1 running)
+[1,852 / 7,592] Compiling third-party/subcodec/third_party/h264bitstream/h264_stream.c; 0s local, disk-cache ... (2 actions, 1 running)
+[1,852 / 7,592] Compiling third-party/subcodec/third_party/h264bitstream/h264_stream.c; 1s local, disk-cache ... (2 actions running)
+INFO: From Compiling submodules/MonotonicTime/Sources/DeviceUptime.m:
+submodules/MonotonicTime/Sources/DeviceUptime.m:17:34: warning: implicit conversion loses integer precision: '__darwin_time_t' (aka 'long') to 'int32_t' (aka 'int') [-Wshorten-64-to-32]
+   17 |             *bootTime = boottime.tv_sec;
+      |                       ~ ~~~~~~~~~^~~~~~
+submodules/MonotonicTime/Sources/DeviceUptime.m:21:12: warning: implicit conversion loses integer precision: 'time_t' (aka 'long') to 'int32_t' (aka 'int') [-Wshorten-64-to-32]
+   21 |     return uptime;
+      |     ~~~~~~ ^~~~~~
+2 warnings generated.
+[1,853 / 7,592] Compiling third-party/subcodec/third_party/h264bitstream/h264_stream.c; 2s local, disk-cache ... (3 actions, 2 running)
+[1,858 / 7,592] Compiling Rust rlib syn v2.0.98 (96 files) [for tool]; 3s local, disk-cache ... (3 actions running)
+[1,859 / 7,592] Compiling Rust rlib syn v2.0.98 (96 files) [for tool]; 4s local, disk-cache ... (3 actions, 2 running)
+[1,861 / 7,592] Compiling Rust rlib syn v2.0.98 (96 files) [for tool]; 5s local, disk-cache ... (3 actions, 2 running)
+[1,869 / 7,592] Compiling Rust rlib syn v2.0.98 (96 files) [for tool]; 6s local, disk-cache ... (3 actions, 2 running)
+[1,874 / 7,592] Compiling Rust rlib syn v2.0.98 (96 files) [for tool]; 8s local, disk-cache ... (3 actions running)
+[1,875 / 7,592] Compiling submodules/TelegramUI/Components/AnimationCache/ImageDCT/Sources/DCT.cpp; 3s local, disk-cache ... (3 actions, 2 running)
+[1,875 / 7,592] Compiling submodules/TelegramUI/Components/AnimationCache/ImageDCT/Sources/DCT.cpp; 5s local, disk-cache ... (3 actions running)
+[1,876 / 7,592] Compiling submodules/sqlcipher/Sources/sqlite3.c; 7s local, disk-cache ... (3 actions, 2 running)
+[1,878 / 7,592] Compiling submodules/sqlcipher/Sources/sqlite3.c; 8s local, disk-cache ... (3 actions running)
+[1,880 / 7,592] Compiling submodules/sqlcipher/Sources/sqlite3.c; 9s local, disk-cache ... (3 actions running)
+[1,881 / 7,592] Compiling submodules/sqlcipher/Sources/sqlite3.c; 10s local, disk-cache ... (3 actions running)
+[1,882 / 7,592] Compiling submodules/sqlcipher/Sources/sqlite3.c; 11s local, disk-cache ... (3 actions running)
+[1,883 / 7,592] Compiling submodules/sqlcipher/Sources/sqlite3.c; 12s local, disk-cache ... (3 actions running)
+INFO: From Compiling third-party/ZipArchive/Sources/SSZipArchive.m:
+third-party/ZipArchive/Sources/SSZipArchive.m:360:18: warning: variable 'isDirectory' set but not used [-Wunused-but-set-variable]
+  360 |             BOOL isDirectory = NO;
+      |                  ^
+third-party/ZipArchive/Sources/SSZipArchive.m:309:14: warning: variable 'unzippingError' set but not used [-Wunused-but-set-variable]
+  309 |     NSError *unzippingError;
+      |              ^
+third-party/ZipArchive/Sources/SSZipArchive.m:457:18: warning: unused variable 'fileIsSymbolicLink' [-Wunused-variable]
+  457 |             BOOL fileIsSymbolicLink = _fileIsSymbolicLink(&fileInfo);
+      |                  ^~~~~~~~~~~~~~~~~~
+third-party/ZipArchive/Sources/SSZipArchive.m:472:18: warning: variable 'isDirectory' set but not used [-Wunused-but-set-variable]
+  472 |             BOOL isDirectory = NO;
+      |                  ^
+third-party/ZipArchive/Sources/SSZipArchive.m:492:22: warning: unused variable 'err' [-Wunused-variable]
+  492 |             NSError *err = nil;
+      |                      ^~~
+third-party/ZipArchive/Sources/SSZipArchive.m:493:27: warning: unused variable 'directoryAttr' [-Wunused-variable]
+  493 |             NSDictionary *directoryAttr;
+      |                           ^~~~~~~~~~~~~
+third-party/ZipArchive/Sources/SSZipArchive.m:413:10: warning: unused variable 'canceled' [-Wunused-variable]
+  413 |     BOOL canceled = NO;
+      |          ^~~~~~~~
+third-party/ZipArchive/Sources/SSZipArchive.m:417:37: warning: unused variable 'directoriesModificationDates' [-Wunused-variable]
+  417 |     NSMutableArray<NSDictionary *> *directoriesModificationDates = [[NSMutableArray alloc] init];
+      |                                     ^~~~~~~~~~~~~~~~~~~~~~~~~~~~
+third-party/ZipArchive/Sources/SSZipArchive.m:597:14: warning: variable 'retErr' set but not used [-Wunused-but-set-variable]
+  597 |     NSError *retErr = nil;
+      |              ^
+9 warnings generated.
+[1,884 / 7,592] Compiling submodules/sqlcipher/Sources/sqlite3.c; 13s local, disk-cache ... (3 actions running)
+[1,885 / 7,592] Compiling submodules/sqlcipher/Sources/sqlite3.c; 14s local, disk-cache ... (3 actions running)
+[1,888 / 7,592] Compiling submodules/sqlcipher/Sources/sqlite3.c; 15s local, disk-cache ... (3 actions running)
+[1,889 / 7,592] Compiling submodules/sqlcipher/Sources/sqlite3.c; 17s local, disk-cache ... (3 actions running)
+[1,893 / 7,592] Compiling submodules/sqlcipher/Sources/sqlite3.c; 18s local, disk-cache ... (3 actions, 2 running)
+[1,896 / 7,592] Compiling submodules/sqlcipher/Sources/sqlite3.c; 19s local, disk-cache ... (3 actions, 2 running)
+INFO: From Compiling third-party/ZipArchive/Sources/minizip/mz_strm_zlib.c:
+third-party/ZipArchive/Sources/minizip/mz_strm_zlib.c:145:14: warning: variable 'total_in' set but not used [-Wunused-but-set-variable]
+  145 |     uint32_t total_in = 0;
+      |              ^
+1 warning generated.
+[1,899 / 7,592] Compiling submodules/sqlcipher/Sources/sqlite3.c; 20s local, disk-cache ... (3 actions, 2 running)
+[1,905 / 7,592] Compiling submodules/sqlcipher/Sources/sqlite3.c; 21s local, disk-cache ... (3 actions, 2 running)
+[1,909 / 7,592] Compiling submodules/sqlcipher/Sources/sqlite3.c; 22s local, disk-cache ... (3 actions running)
+[1,912 / 7,592] Compiling submodules/sqlcipher/Sources/sqlite3.c; 23s local, disk-cache ... (3 actions running)
+[1,913 / 7,592] Compiling submodules/sqlcipher/Sources/sqlite3.c; 24s local, disk-cache ... (3 actions running)
+[1,918 / 7,592] Compiling submodules/sqlcipher/Sources/sqlite3.c; 25s local, disk-cache ... (3 actions running)
+INFO: From Compiling submodules/Sunrise/Sources/EDSunriseSet.m:
+submodules/Sunrise/Sources/EDSunriseSet.m:150:20: warning: variable 'zs' set but not used [-Wunused-but-set-variable]
+  150 |     double xs, ys, zs;
+      |                    ^
+1 warning generated.
+[1,923 / 7,592] Compiling submodules/sqlcipher/Sources/sqlite3.c; 26s local, disk-cache ... (3 actions, 2 running)
+[1,924 / 7,592] Compiling submodules/sqlcipher/Sources/sqlite3.c; 27s local, disk-cache ... (3 actions running)
+[1,926 / 7,592] Compiling submodules/sqlcipher/Sources/sqlite3.c; 29s local, disk-cache ... (3 actions running)
+[1,929 / 7,592] Compiling submodules/sqlcipher/Sources/sqlite3.c; 30s local, disk-cache ... (3 actions running)
+[1,933 / 7,592] Compiling submodules/sqlcipher/Sources/sqlite3.c; 31s local, disk-cache ... (3 actions, 2 running)
+ERROR: /Users/runner/work/AirGram-iOS/AirGram-iOS/submodules/MtProtoKit/BUILD:4:13: Compiling submodules/MtProtoKit/Sources/MTDatacenterAuthMessageService.m failed: (Exit 1): wrapped_clang failed: error executing ObjcCompile command (from objc_library rule target //submodules/MtProtoKit:MtProtoKit) 
+  (cd /private/var/tmp/_bazel_containerhost/c259e0c7803e089724afaeab1cf94801/execroot/_main && \
+  exec env - \
+    APPLE_SDK_PLATFORM=iPhoneOS \
+    APPLE_SDK_VERSION_OVERRIDE=26.5 \
+    PATH=/bin:/usr/bin:/usr/local/bin \
+    XCODE_VERSION_OVERRIDE=26.6.0.17F113 \
+    ZERO_AR_DATE=1 \
+  bazel-out/darwin_arm64-opt-exec/bin/external/apple_support+/crosstool/wrapped_clang '-D_FORTIFY_SOURCE=1' -fstack-protector -fcolor-diagnostics -Wall -Wthread-safety -Wself-assign -fno-omit-frame-pointer -g0 -O2 -DNDEBUG '-DNS_BLOCK_ASSERTIONS=1' '-fdebug-prefix-map=__BAZEL_EXECUTION_ROOT__=.' '-fdebug-prefix-map=__BAZEL_XCODE_DEVELOPER_DIR__=/PLACEHOLDER_DEVELOPER_DIR' -g '-Werror=incompatible-sysroot' -Wshorten-64-to-32 -Wbool-conversion -Wconstant-conversion -Wduplicate-method-match -Wempty-body -Wenum-conversion -Wint-conversion -Wunreachable-code -Wmismatched-return-types -Wundeclared-selector -Wuninitialized -Wunused-function -Wunused-variable -iquote . -iquote bazel-out/ios_arm64-opt-ios-arm64-min15.0-ST-4fc4d341170e/bin -Isubmodules/MtProtoKit/PublicHeaders -Ibazel-out/ios_arm64-opt-ios-arm64-min15.0-ST-4fc4d341170e/bin/submodules/MtProtoKit/PublicHeaders -Isubmodules/EncryptionProvider/PublicHeaders -Ibazel-out/ios_arm64-opt-ios-arm64-min15.0-ST-4fc4d341170e/bin/submodules/EncryptionProvider/PublicHeaders -MD -MF bazel-out/ios_arm64-opt-ios-arm64-min15.0-ST-4fc4d341170e/bin/submodules/MtProtoKit/_objs/MtProtoKit/arc/MTDatacenterAuthMessageService.d -DOS_IOS -fno-autolink -isysroot __BAZEL_XCODE_SDKROOT__ -F__BAZEL_XCODE_SDKROOT__/System/Library/Frameworks -F__BAZEL_XCODE_DEVELOPER_DIR__/Platforms/iPhoneOS.platform/Developer/Library/Frameworks -fobjc-arc -no-canonical-prefixes -target arm64-apple-ios15.0 -Werror -fmodules '-fmodules-cache-path=bazel-out/ios_arm64-opt-ios-arm64-min15.0-ST-4fc4d341170e/bin/_objc_module_cache' -Wno-builtin-macro-redefined '-D__DATE__="redacted"' '-D__TIMESTAMP__="redacted"' '-D__TIME__="redacted"' -c submodules/MtProtoKit/Sources/MTDatacenterAuthMessageService.m -o bazel-out/ios_arm64-opt-ios-arm64-min15.0-ST-4fc4d341170e/bin/submodules/MtProtoKit/_objs/MtProtoKit/arc/MTDatacenterAuthMessageService.o)
+# Configuration: 63920bd141cdb0f182827044ccbef775ebdaa3f67b27f178d3c17fd465a1095a
+# Execution platform: @@platforms//host:host
+submodules/MtProtoKit/Sources/MTDatacenterAuthMessageService.m:835:18: error: use of undeclared identifier 'serverSaltData'; did you mean 'serverSalt'?
+  835 |                 [serverSaltData getBytes:&serverSalt length:8];
+      |                  ^~~~~~~~~~~~~~
+      |                  serverSalt
+submodules/MtProtoKit/Sources/MTDatacenterAuthMessageService.m:834:25: note: 'serverSalt' declared here
+  834 |                 int64_t serverSalt = 0;
+      |                         ^
+submodules/MtProtoKit/Sources/MTDatacenterAuthMessageService.m:835:18: error: bad receiver type 'int64_t' (aka 'long long')
+  835 |                 [serverSaltData getBytes:&serverSalt length:8];
+      |                  ^~~~~~~~~~~~~~
+2 errors generated.
+Error in child process '/usr/bin/xcrun'. 1
+Target //Telegram:telegram_auth_build_test failed to build
+INFO: Elapsed time: 331.311s, Critical Path: 108.67s
+INFO: 1936 processes: 1514 internal, 422 local.
+ERROR: Build did NOT complete successfully
+Traceback (most recent call last):
+  File "/Users/runner/work/AirGram-iOS/AirGram-iOS/build-system/Make/Make.py", line 1413, in <module>
+    build(bazel=bazel_path, arguments=args)
+    ~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/runner/work/AirGram-iOS/AirGram-iOS/build-system/Make/Make.py", line 693, in build
+    bazel_command_line.invoke_build()
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "/Users/runner/work/AirGram-iOS/AirGram-iOS/build-system/Make/Make.py", line 326, in invoke_build
+    call_executable(combined_arguments)
+    ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^
+  File "/Users/runner/work/AirGram-iOS/AirGram-iOS/build-system/Make/BuildEnvironment.py", line 104, in call_executable
+    subprocess.check_call(resolved_arguments, env=resolved_env)
+    ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/homebrew/Cellar/python@3.15/3.15.0_1/Frameworks/Python.framework/Versions/3.15/lib/python3.15/subprocess.py", line 534, in check_call
+    raise CalledProcessError(retcode, cmd)
+subprocess.CalledProcessError: Command '['/Users/runner/work/AirGram-iOS/AirGram-iOS/build-input/bazel-9.2.0-darwin-arm64', '--output_user_root=/private/var/tmp/_bazel_containerhost', 'build', 'Telegram/telegram_auth_build_test', '--announce_rc', '--features=swift.use_global_module_cache', '--verbose_failures', '--remote_cache_async', '--define=buildNumber=3731', '--disk_cache=/private/var/tmp/_bazel_containerhost/disk_cache', '-c', 'opt', '--ios_multi_cpus=arm64', '--watchos_cpus=arm64_32', '--apple_generate_dsym', '--output_groups=+dsyms', '--@rules_rust//rust/settings:lto=fat', '--features=swift.opt_uses_wmo', '--features=swift.opt_uses_osize', '--features=dead_strip', '--objc_enable_binary_stripping']' returned non-zero exit status 1.
