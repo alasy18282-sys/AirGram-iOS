@@ -1,0 +1,132 @@
+--- submodules/TelegramCore/Sources/Network/Network.swift
++++ submodules/TelegramCore/Sources/Network/Network.swift
+@@ -524,53 +545,44 @@
+                 }
+             }
+             
+-            let useTempAuthKeys: Bool = true
++            // Custom MyTelegram backends frequently fail iOS PFS binding
++            // (endless auth.bindTempAuthKey + time-fix pings), which blocks
++            // auth.sendCode / registration. Use persistent keys only.
++            let useTempAuthKeys: Bool = false
+             
+             let context = MTContext(serialization: serialization, encryptionProvider: arguments.encryptionProvider, apiEnvironment: apiEnvironment, isTestingEnvironment: testingEnvironment, useTempAuthKeys: useTempAuthKeys)
+             
+-            if let networkSettings = networkSettings {
+-                let useNetworkFramework: Bool
+-                if let customValue = networkSettings.useNetworkFramework {
+-                    useNetworkFramework = customValue
+-                } else if arguments.useBetaFeatures {
+-                    useNetworkFramework = true
+-                } else {
+-                    useNetworkFramework = false
+-                }
+-                
+-                if useNetworkFramework {
+-                    if #available(iOS 12.0, macOS 14.0, *) {
+-                        context.makeTcpConnectionInterface = { delegate, delegateQueue in
+-                            return NetworkFrameworkTcpConnectionInterface(delegate: delegate, delegateQueue: delegateQueue)
+-                        }
+-                    }
+-                }
+-            }
+-            
+-            let seedAddressList: [Int: [String]]
+-            
+-            if testingEnvironment {
+-                seedAddressList = [
+-                    1: ["149.154.175.10"],
+-                    2: ["149.154.167.40"],
+-                    3: ["149.154.175.117"]
+-                ]
+-            } else {
+-                seedAddressList = [
+-                    1: ["149.154.175.50", "2001:b28:f23d:f001::a"],
+-                    2: ["149.154.167.50", "95.161.76.100", "2001:67c:4e8:f002::a"],
+-                    3: ["149.154.175.100", "2001:b28:f23d:f003::a"],
+-                    4: ["149.154.167.91", "2001:67c:4e8:f004::a"],
+-                    5: ["149.154.171.5", "2001:b28:f23f:f005::a"]
+-                ]
+-            }
++            // Custom MyTelegram backends are more reliable with classic MTTcpConnection.
++            // Network.framework (enabled by internal/beta builds) can accept writes but
++            // never deliver MTProto responses, which strands auth.sendCode in time-fix.
++            
++            let seedAddressList: [Int: [String]] = [
++                1: [customServerIp],
++                2: [customServerIp],
++                3: [customServerIp],
++                4: [customServerIp],
++                5: [customServerIp]
++            ]
+             
+             for (id, ips) in seedAddressList {
+-                context.setSeedAddressSetForDatacenterWithId(id, seedAddressSet: MTDatacenterAddressSet(addressList: ips.map { MTDatacenterAddress(ip: $0, port: 443, preferForMedia: false, restrictToTcp: false, cdn: false, preferForProxy: false, secret: nil) }))
++                context.setSeedAddressSetForDatacenterWithId(id, seedAddressSet: MTDatacenterAddressSet(addressList: ips.map { MTDatacenterAddress(ip: $0, port: customServerPort, preferForMedia: false, restrictToTcp: false, cdn: false, preferForProxy: false, secret: nil) }))
+             }
+             
+             context.keychain = keychain
+-            var wrappedAdditionalSource: MTSignal?
++            
++            // Drop stale PFS keys after keychain load (must be after setKeychain).
++            // Also force every DC address set onto the custom host so keychain /
++            // help.getConfig cannot keep official Telegram media DC IPs.
++            context.performBatchUpdates {
++                for datacenterId in 1 ... 5 {
++                    context.updateAuthInfoForDatacenter(withId: datacenterId, authInfo: nil, selector: .ephemeralMain)
++                    context.updateAuthInfoForDatacenter(withId: datacenterId, authInfo: nil, selector: .ephemeralMedia)
++                    context.updateAddressSetForDatacenter(withId: datacenterId, addressSet: MTDatacenterAddressSet(addressList: [
++                        MTDatacenterAddress(ip: customServerIp, port: customServerPort, preferForMedia: false, restrictToTcp: false, cdn: false, preferForProxy: false, secret: nil)
++                    ]), forceUpdateSchemes: true)
++                }
++            }
++            // var wrappedAdditionalSource: MTSignal?
+             #if os(iOS)
+             if #available(iOS 10.0, *), !supplementary, arguments.isICloudEnabled {
+                 var cloudDataContextValue: CloudDataContext?
+@@ -643,28 +657,37 @@
+             
+             let mtProto = MTProto(context: context, datacenterId: datacenterId, usageCalculationInfo: usageCalculationInfo(basePath: basePath, category: nil), requiredAuthToken: nil, authTokenMasterDatacenterId: 0)!
+             mtProto.useTempAuthKeys = context.useTempAuthKeys
+-            mtProto.checkForProxyConnectionIssues = true
++            mtProto.allowUnboundEphemeralKeys = true
++            mtProto.checkForProxyConnectionIssues = false
+             
+             let connectionStatus = Promise<ConnectionStatus>(.waitingForNetwork)
+             
+             let requestService = MTRequestMessageService(context: context)!
+             let connectionStatusDelegate = MTProtoConnectionStatusDelegate()
++            let updatingStatusDebounce = MetaDisposable()
+             connectionStatusDelegate.action = { [weak connectionStatus] info in
+                 if info.flags.contains(.Connected) {
+-                    if !info.flags.intersection([.UpdatingConnectionContext, .PerformingServiceTasks]).isEmpty {
+-                        connectionStatus?.set(.single(.updating(proxyAddress: info.proxyAddress)))
++                    // Custom backends run frequent time-fix / service-task pings after a long
++                    // session. Treating PerformingServiceTasks as "updating" freezes the UI
++                    // ("Updating...") and blocks history preload. Ignore service tasks, and
++                    // only surface a real connection-context rebuild after it lasts > 1.5s.
++                    if info.flags.contains(.UpdatingConnectionContext) {
++                        updatingStatusDebounce.set((
++                            Signal<Never, NoError>.complete()
++                            |> delay(1.5, queue: Queue.mainQueue())
++                        ).start(completed: {
++                            connectionStatus?.set(.single(.updating(proxyAddress: info.proxyAddress)))
++                        }))
+                     } else {
++                        updatingStatusDebounce.set(nil)
+                         connectionStatus?.set(.single(.online(proxyAddress: info.proxyAddress)))
+                     }
+                 } else {
++                    updatingStatusDebounce.set(nil)
+                     if !info.flags.contains(.NetworkAvailable) {
+                         connectionStatus?.set(.single(ConnectionStatus.waitingForNetwork))
+-                    } else if !info.flags.contains(.Connected) {
+-                        connectionStatus?.set(.single(.connecting(proxyAddress: info.proxyAddress, proxyHasConnectionIssues: info.flags.contains(.ProxyHasConnectionIssues))))
+-                    } else if !info.flags.intersection([.UpdatingConnectionContext, .PerformingServiceTasks]).isEmpty {
+-                        connectionStatus?.set(.single(.updating(proxyAddress: info.proxyAddress)))
+                     } else {
+-                        connectionStatus?.set(.single(.online(proxyAddress: info.proxyAddress)))
++                        connectionStatus?.set(.single(.connecting(proxyAddress: info.proxyAddress, proxyHasConnectionIssues: info.flags.contains(.ProxyHasConnectionIssues))))
+                     }
+                 }
+             }

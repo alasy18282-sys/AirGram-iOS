@@ -1,0 +1,24 @@
+--- submodules/MtProtoKit/Sources/MTContext.m
++++ submodules/MtProtoKit/Sources/MTContext.m
+@@ -1505,12 +1505,19 @@
+ {
+     [[MTContext contextQueue] dispatchOnQueue:^
+     {
+-        NSNumber *infoKey = authInfoMapIntegerKey((int32_t)datacenterId, selector);
++        MTDatacenterAuthInfoSelector effectiveSelector = selector;
++        bool effectiveAllowUnboundEphemeralKeys = allowUnboundEphemeralKeys;
++        if (!_useTempAuthKeys && (effectiveSelector == MTDatacenterAuthInfoSelectorEphemeralMain || effectiveSelector == MTDatacenterAuthInfoSelectorEphemeralMedia)) {
++            effectiveSelector = MTDatacenterAuthInfoSelectorPersistent;
++            effectiveAllowUnboundEphemeralKeys = true;
++        }
++        
++        NSNumber *infoKey = authInfoMapIntegerKey((int32_t)datacenterId, effectiveSelector);
+         
+         if (_datacenterAuthActions[infoKey] == nil)
+         {
+             __weak MTContext *weakSelf = self;
+-            MTDatacenterAuthAction *authAction = [[MTDatacenterAuthAction alloc] initWithAuthKeyInfoSelector:selector isCdn:isCdn skipBind:allowUnboundEphemeralKeys completion:^(MTDatacenterAuthAction *action, __unused bool success) {
++            MTDatacenterAuthAction *authAction = [[MTDatacenterAuthAction alloc] initWithAuthKeyInfoSelector:effectiveSelector isCdn:isCdn skipBind:effectiveAllowUnboundEphemeralKeys completion:^(MTDatacenterAuthAction *action, __unused bool success) {
+                 [[MTContext contextQueue] dispatchOnQueue:^{
+                     __strong MTContext *strongSelf = weakSelf;
+                     if (strongSelf == nil) {
