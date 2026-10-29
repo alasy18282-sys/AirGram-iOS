@@ -78,6 +78,7 @@ swift_library(
         "//submodules/Speak",
         "//submodules/TextSelectionNode",
         "//submodules/TranslateUI",
+        "//submodules/TextFormat",
     ],
     visibility = [
         "//visibility:public",

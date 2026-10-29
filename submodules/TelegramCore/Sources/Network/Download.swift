@@ -72,8 +72,6 @@ class Download: NSObject {
                     Logger.shared.log("Network", "Pause worker network connection")
                     session.setPaused(true)
                 }
-        self.mtProto.allowUnboundEphemeralKeys = true
-        self.mtProto.checkForProxyConnectionIssues = false
             }
         })
         self.isUserOnlineDisposable = (isUserOnline |> distinctUntilChanged |> deliverOn(queue)).start(next: { [weak session] value in

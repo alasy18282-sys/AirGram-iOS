@@ -139,7 +139,7 @@ public final class AuthorizationSequencePhoneEntryController: ViewController, MF
     @objc private func logsPressed() {
         self.view.endEditing(true)
         self.logsDisposable.set(exportAuthorizationLogsToTelegramWeb(openUrl: { [weak self] url in
-            self?.openUrl(url)
+            self?.sharedContext.applicationBindings.openUrl(url)
         }, completed: { [weak self] _ in
             guard let self else {
                 return
