@@ -2648,14 +2648,6 @@ private final class GiftViewSheetContent: CombinedComponent {
                             parseMarkdown: false
                         ), in: .window(.root))
                     }
-                }, error: { [weak self] _ in
-                    guard let self else {
-                        return
-                    }
-                    self.inProgress = false
-                    self.canSkip = false
-                    self.updated()
-                    self.showUpgradePreviewErrorAlert(error: .generic)
                 }, completed: { [weak self] in
                     guard let self, self.inProgress else {
                         return

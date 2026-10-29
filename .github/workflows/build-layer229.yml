@@ -109,7 +109,8 @@ jobs:
             --codesigningInformationPath=build-system/fake-codesigning \
             --configuration=release_arm64 \
             --target=Telegram/telegram_auth_build_test \
-            --buildNumber="$BUILD_NUMBER" 2>&1 | tee ci_logs/build.log
+            --buildNumber="$BUILD_NUMBER" \
+            --continueOnError 2>&1 | tee ci_logs/build.log
 
       - name: Save Bazel cache
         if: always() && steps.bazel-cache.outputs.cache-hit != 'true'
