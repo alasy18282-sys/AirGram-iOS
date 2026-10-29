@@ -106,17 +106,6 @@ public enum GiftTGSRenderer {
         return node
     }
     
-    public static func makeNode(
-        account: Account,
-        file: TelegramMediaFile,
-        size: CGSize,
-        playbackMode: PlaybackMode = .once
-    ) -> DefaultAnimatedStickerNodeImpl {
-        let node = DefaultAnimatedStickerNodeImpl()
-        node.isUserInteractionEnabled = false
-        return setup(node: node, account: account, file: file, size: size, playbackMode: playbackMode)
-    }
-    
     public static func setupInlineLayer(
         context: AccountContext,
         file: TelegramMediaFile,

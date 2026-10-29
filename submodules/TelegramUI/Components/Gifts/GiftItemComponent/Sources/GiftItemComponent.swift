@@ -468,7 +468,7 @@ public final class GiftItemComponent: Component {
                 if let currentNode = self.animationNode {
                     currentNode.view.removeFromSuperview()
                 }
-                node = DefaultAnimatedStickerNodeImpl()
+                node = DefaultAnimatedStickerNodeImpl(lottieSettings: component.context.lottieRenderingSettings)
                 node.isUserInteractionEnabled = false
                 self.animationNode = node
                 if let patternView = self.patternView.view {

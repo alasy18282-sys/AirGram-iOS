@@ -48,7 +48,6 @@ objc_library(
         # library without the app's other MediaPlayer clients still resolves it.
         "MediaPlayer",
         "CoreMotion",
-        "MediaPlayer",
     ],
     weak_sdk_frameworks = [
         "Vision",

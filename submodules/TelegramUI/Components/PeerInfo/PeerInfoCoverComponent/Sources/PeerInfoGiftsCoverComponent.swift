@@ -513,7 +513,7 @@ private final class GiftIconView: UIView {
             }
         }
         
-        let node = DefaultAnimatedStickerNodeImpl()
+        let node = DefaultAnimatedStickerNodeImpl(lottieSettings: context.lottieRenderingSettings)
         node.isUserInteractionEnabled = false
         self.animationNode = node
         
