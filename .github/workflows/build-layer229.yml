@@ -74,12 +74,13 @@ jobs:
           find submodules/ffmpeg third-party -type f \( -name configure -o -name pkg-config -o -name '*.pl' \) -print0 | xargs -0 chmod +x
 
       - name: Restore Bazel cache
-        uses: actions/cache@v4
+        id: bazel-cache
+        uses: actions/cache/restore@v4
         with:
           path: /private/var/tmp/_bazel_containerhost
-          key: ${{ runner.os }}-bazel-layer229-v1-${{ hashFiles('WORKSPACE', 'WORKSPACE.bzlmod', 'MODULE.bazel', '.bazelrc', 'build-system/Make/Make.py', 'Telegram/BUILD') }}
+          key: ${{ runner.os }}-bazel-layer229-v2-${{ hashFiles('WORKSPACE', 'WORKSPACE.bzlmod', 'MODULE.bazel', '.bazelrc', 'build-system/Make/Make.py', 'Telegram/BUILD') }}-${{ github.run_id }}
           restore-keys: |
-            ${{ runner.os }}-bazel-layer229-v1-
+            ${{ runner.os }}-bazel-layer229-v2-
 
       - name: Build AirGram device IPA
         run: |
@@ -109,6 +110,20 @@ jobs:
             --configuration=release_arm64 \
             --target=Telegram/telegram_auth_build_test \
             --buildNumber="$BUILD_NUMBER" 2>&1 | tee ci_logs/build.log
+
+      - name: Save Bazel cache
+        if: always() && steps.bazel-cache.outputs.cache-hit != 'true'
+        continue-on-error: true
+        timeout-minutes: 25
+        uses: actions/cache/save@v4
+        with:
+          path: /private/var/tmp/_bazel_containerhost
+          key: ${{ steps.bazel-cache.outputs.cache-primary-key }}
+
+      - name: Bazel cache size
+        if: always()
+        continue-on-error: true
+        run: du -sh "$BAZEL_USER_ROOT" || true
 
       - name: Collect artifacts
         run: |
@@ -203,8 +218,10 @@ jobs:
           mkdir -p ci_logs
           if [ -f ci_logs/build.log ]; then
             tail -c 4000000 ci_logs/build.log > ci_logs/build_tail.log
+            { grep -E "(error:|fatal error:|BUILD FAILED|ERROR: )" ci_logs/build.log | head -300; true; } > ci_logs/errors.txt
           else
             echo "build log was not produced" > ci_logs/build_tail.log
+            echo "build log was not produced" > ci_logs/errors.txt
           fi
           {
             echo "run: ${{ github.run_number }}"
@@ -212,11 +229,25 @@ jobs:
             echo "sha: ${{ github.sha }}"
             echo "date: $(date -u +%Y-%m-%dT%H:%M:%SZ)"
           } > ci_logs/status.txt
+          mkdir -p /tmp/ci_logs_out
+          cp ci_logs/build_tail.log ci_logs/errors.txt ci_logs/status.txt /tmp/ci_logs_out/
           git config user.name "airgram-ci"
           git config user.email "airgram-ci@users.noreply.github.com"
-          git add -f ci_logs/build_tail.log ci_logs/status.txt
+          git fetch origin "${BUILD_BRANCH}"
+          git checkout -q -B ci-log-push FETCH_HEAD
+          mkdir -p ci_logs
+          cp /tmp/ci_logs_out/* ci_logs/
+          git add -f ci_logs/build_tail.log ci_logs/errors.txt ci_logs/status.txt
           if git diff --cached --quiet; then
             exit 0
           fi
           git commit -m "ci(layer229): build log ${GITHUB_RUN_NUMBER} [skip ci]"
-          git push origin "HEAD:${BUILD_BRANCH}"
+          for attempt in 1 2 3; do
+            if git push origin "HEAD:${BUILD_BRANCH}"; then
+              exit 0
+            fi
+            sleep 5
+            git fetch origin "${BUILD_BRANCH}"
+            git rebase FETCH_HEAD
+          done
+          exit 1
