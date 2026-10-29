@@ -19,9 +19,17 @@ jobs:
           REPO: ${{ github.repository }}
           CURRENT_SHA: ${{ github.sha }}
         run: |
-          set -eu
-          gh run list --repo "$REPO" --workflow build-layer229.yml --status in_progress --limit 10 --json databaseId,headSha \
-            --jq '.[] | select(.headSha != env.CURRENT_SHA) | .databaseId' | while read -r run_id; do
-              echo "Cancelling stale run $run_id"
-              gh run cancel "$run_id" --repo "$REPO" || true
-            done
+          set -euxo pipefail
+          gh run list --repo "$REPO" --status in_progress --limit 50 \
+            --json databaseId,headSha,workflowName > /tmp/runs.json
+          cat /tmp/runs.json
+          gh run list --repo "$REPO" --status in_progress --limit 50 \
+            --json databaseId,headSha,workflowName \
+            --jq ".[] | select(.workflowName == \"Build AirGram iOS (layer 229)\" and .headSha != \"$CURRENT_SHA\") | .databaseId" \
+            | while read -r run_id; do
+                if [ -n "$run_id" ]; then
+                  echo "Cancelling stale run $run_id"
+                  gh api -X POST "repos/$REPO/actions/runs/$run_id/cancel"
+                fi
+              done
+          echo "done"
