@@ -831,10 +831,6 @@ static NSData *encryptRSAModernPadding(id<EncryptionProvider> encryptionProvider
                         g_b = candidateGB;
                     }
                 }
-                int64_t serverSalt = 0;
-                [serverSaltData getBytes:&serverSalt length:8];
-                _serverSalt = serverSalt;
-                
                 if (g_b == nil)
                 {
                     if (MTLogEnabled()) {
