@@ -451,29 +451,50 @@ private func resolveNetworkEngine(accountId: AccountRecordId, context: MTContext
 private final class NetworkMainSessionDelegate: NetworkEngineSessionDelegate {
     private weak var connectionStatus: Promise<ConnectionStatus>?
     weak var network: Network?
+    private var updatingStatusGeneration: Int = 0
     
     init(connectionStatus: Promise<ConnectionStatus>) {
         self.connectionStatus = connectionStatus
     }
     
     func networkSessionConnectionStateChanged(_ state: NetworkEngineConnectionState) {
-        let connectionStatus = self.connectionStatus
-        if state.isConnected {
-            if state.isUpdatingConnectionContext || state.isPerformingServiceTasks {
-                connectionStatus?.set(.single(.updating(proxyAddress: state.proxyAddress)))
-            } else {
-                connectionStatus?.set(.single(.online(proxyAddress: state.proxyAddress)))
+        let apply: () -> Void = { [weak self] in
+            guard let self = self else {
+                return
             }
+            let connectionStatus = self.connectionStatus
+            // A custom backend keeps running time-fix / service-task pings and
+            // per-connection actualization pings. Surfacing those as "Updating..."
+            // makes the chat title flicker between the update state and the peer
+            // presence, so ignore service tasks and only show a real connection
+            // context rebuild after it lasts longer than 1.5 seconds.
+            if state.isConnected {
+                if state.isUpdatingConnectionContext {
+                    self.updatingStatusGeneration += 1
+                    let generation = self.updatingStatusGeneration
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) { [weak self, weak connectionStatus] in
+                        guard let self = self, self.updatingStatusGeneration == generation else {
+                            return
+                        }
+                        connectionStatus?.set(.single(.updating(proxyAddress: state.proxyAddress)))
+                    }
+                } else {
+                    self.updatingStatusGeneration += 1
+                    connectionStatus?.set(.single(.online(proxyAddress: state.proxyAddress)))
+                }
+            } else {
+                self.updatingStatusGeneration += 1
+                if !state.isNetworkAvailable {
+                    connectionStatus?.set(.single(ConnectionStatus.waitingForNetwork))
+                } else {
+                    connectionStatus?.set(.single(.connecting(proxyAddress: state.proxyAddress, proxyHasConnectionIssues: state.proxyHasConnectionIssues)))
+                }
+            }
+        }
+        if Thread.isMainThread {
+            apply()
         } else {
-            if !state.isNetworkAvailable {
-                connectionStatus?.set(.single(ConnectionStatus.waitingForNetwork))
-            } else if !state.isConnected {
-                connectionStatus?.set(.single(.connecting(proxyAddress: state.proxyAddress, proxyHasConnectionIssues: state.proxyHasConnectionIssues)))
-            } else if state.isUpdatingConnectionContext || state.isPerformingServiceTasks {
-                connectionStatus?.set(.single(.updating(proxyAddress: state.proxyAddress)))
-            } else {
-                connectionStatus?.set(.single(.online(proxyAddress: state.proxyAddress)))
-            }
+            DispatchQueue.main.async(execute: apply)
         }
     }
     
