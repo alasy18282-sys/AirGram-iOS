@@ -205,16 +205,18 @@ func managedSynchronizeEmojiSearchCategories(postbox: Postbox, network: Network,
                     }
                     return _internal_resolveInlineStickers(postbox: postbox, network: network, fileIds: fileIds)
                     |> mapToSignal { files -> Signal<Never, NoError> in
-                        var fetchSignals: Signal<Never, NoError> = .complete()
+                        var signals: [Signal<Never, NoError>] = []
                         for (_, file) in files {
-                            let signal = fetchedMediaResource(mediaBox: postbox.mediaBox, userLocation: .other, userContentType: .other, reference: .standalone(resource: file.resource))
-                            |> ignoreValues
-                            |> `catch` { _ -> Signal<Never, NoError> in
-                                return .complete()
-                            }
-                            fetchSignals = fetchSignals |> then(signal)
+                            signals.append(
+                                fetchedMediaResource(mediaBox: postbox.mediaBox, userLocation: .other, userContentType: .other, reference: .standalone(resource: file.resource))
+                                |> ignoreValues
+                                |> `catch` { _ -> Signal<Never, NoError> in
+                                    return .complete()
+                                }
+                            )
                         }
-                        return fetchSignals
+                        return combineLatest(signals)
+                        |> ignoreValues
                     }
                 }
                 |> switchToLatest
