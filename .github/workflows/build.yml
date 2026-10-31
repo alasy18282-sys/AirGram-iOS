@@ -75,6 +75,9 @@ jobs:
           echo "BUILD_NUMBER=$BUILD_NUMBER" >> "$GITHUB_ENV"
           echo "APP_VERSION=$APP_VERSION" >> "$GITHUB_ENV"
 
+          # Upstream fake profiles expire; re-issue them with a far-future date.
+          python3 ci/rebrand_profiles.py ph.telegra.Telegraph org.airgram.ios
+
           python3 build-system/Make/ImportCertificates.py --path build-system/fake-codesigning/certs
           python3 build-system/Make/RewriteProfilesBundleId.py \
             --profiles build-system/fake-codesigning/profiles \
