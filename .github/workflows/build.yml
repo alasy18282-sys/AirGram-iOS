@@ -94,6 +94,26 @@ jobs:
             --buildNumber="$BUILD_NUMBER" \
             --enableParallelSwiftmoduleGeneration
 
+      - name: Dump build errors on failure
+        if: failure()
+        run: |
+          set -x
+          LOGFILE="build-error-${{ github.run_number }}.log"
+          bazel_log=""
+          for f in "$BAZEL_USER_ROOT"/command.log build/bazel*.log build/*.log; do
+            [ -f "$f" ] && bazel_log="$f" && break
+          done
+          if [ -n "$bazel_log" ]; then
+            tail -c 400000 "$bazel_log" | tail -n 4000 > "$LOGFILE"
+          else
+            echo "no bazel log found" > "$LOGFILE"
+          fi
+          git config user.email "ci@plumegram.local"
+          git config user.name "PlumeGram CI"
+          git add "$LOGFILE"
+          git commit -m "Build log for run ${{ github.run_number }}" || true
+          git push origin HEAD:${{ github.ref_name }} || true
+
       - name: Collect full artifacts
         run: |
           set -euxo pipefail
