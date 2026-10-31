@@ -1,0 +1,6 @@
+ERROR: no such package 'submodules/TelegramUI/Components/ShimmeringMask': BUILD file not found in any of the following directories. Add a BUILD file to a directory to mark it as a package.
+ERROR: /Users/runner/work/AirGram-iOS/AirGram-iOS/submodules/TelegramUI/Components/Wallet/WalletTransactionScreen/BUILD:3:14: no such package 'submodules/TelegramUI/Components/ShimmeringMask': BUILD file not found in any of the following directories. Add a BUILD file to a directory to mark it as a package.
+ERROR: Analysis of target '//Telegram:telegram_auth_build_test' failed; build aborted: Analysis failed
+ERROR: Build did NOT complete successfully
+FAILED: 
+Traceback (most recent call last):
