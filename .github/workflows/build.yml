@@ -82,6 +82,7 @@ jobs:
             --old-bundle ph.telegra.Telegraph \
             --new-bundle org.airgram.ios
 
+          set -o pipefail
           python3 -u build-system/Make/Make.py \
             --bazelUserRoot="$BAZEL_USER_ROOT" \
             --cacheDir="$BAZEL_USER_ROOT/disk_cache" \
@@ -92,7 +93,7 @@ jobs:
             --configuration=release_arm64 \
             --target=Telegram/telegram_auth_build_test \
             --buildNumber="$BUILD_NUMBER" \
-            --enableParallelSwiftmoduleGeneration
+            --enableParallelSwiftmoduleGeneration 2>&1 | tee /tmp/build_full.log
 
       - name: Dump build errors on failure
         if: failure()
@@ -103,10 +104,11 @@ jobs:
           for f in /private/var/tmp/_bazel_containerhost/command.log "$BAZEL_USER_ROOT"/command.log build/bazel*.log build/*.log; do
             [ -f "$f" ] && bazel_log="$f" && break
           done
-          if [ -n "$bazel_log" ]; then
-            tail -c 400000 "$bazel_log" | tail -n 4000 > "$LOGFILE"
+          if [ -f /tmp/build_full.log ]; then
+            grep -aE "ERROR|error:|FAILED|Traceback" /tmp/build_full.log | tail -n 800 > "$LOGFILE" || tail -n 400 /tmp/build_full.log > "$LOGFILE"
+            wc -l "$LOGFILE"
           else
-            echo "no bazel log found" > "$LOGFILE"
+            echo "no build log" > "$LOGFILE"
           fi
           git config user.email "ci@plumegram.local"
           git config user.name "PlumeGram CI"
