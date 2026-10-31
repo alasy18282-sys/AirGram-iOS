@@ -1,0 +1,4 @@
+ERROR: /Users/runner/work/AirGram-iOS/AirGram-iOS/Telegram/BUILD:1954:16: ProcessEntitlementsFiles Telegram/telegram_auth_build_test_entitlements.entitlements failed: (Exit 1): plisttool failed: error executing ProcessEntitlementsFiles command (from target //Telegram:telegram_auth_build_test) 
+ERROR: On target "@@//Telegram:telegram_auth_build_test", provisioning profile ExpirationDate ("2026-10-30T17:06:30") is in the past.
+ERROR: Build did NOT complete successfully
+Traceback (most recent call last):
