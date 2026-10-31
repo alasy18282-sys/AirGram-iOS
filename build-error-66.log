@@ -1,0 +1,7 @@
+ERROR: Traceback (most recent call last):
+ERROR: /Users/runner/work/AirGram-iOS/AirGram-iOS/third-party/wallet-engine/BUILD: no such target '//third-party/wallet-engine:WalletEngineFFI': target 'WalletEngineFFI' not declared in package 'third-party/wallet-engine' defined by /Users/runner/work/AirGram-iOS/AirGram-iOS/third-party/wallet-engine/BUILD
+ERROR: /Users/runner/work/AirGram-iOS/AirGram-iOS/submodules/WalletContext/BUILD:5:14: no such target '//third-party/wallet-engine:WalletEngineFFI': target 'WalletEngineFFI' not declared in package 'third-party/wallet-engine' defined by /Users/runner/work/AirGram-iOS/AirGram-iOS/third-party/wallet-engine/BUILD and referenced by '//submodules/WalletContext:WalletContext'
+ERROR: Analysis of target '//Telegram:telegram_auth_build_test' failed; build aborted: Analysis failed
+ERROR: Build did NOT complete successfully
+FAILED: 
+Traceback (most recent call last):
