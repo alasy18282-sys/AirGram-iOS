@@ -176,7 +176,7 @@ public final class ReactionIconView: PortalSourceView {
             let iconSize: CGSize
             switch reaction {
             case .builtin:
-                iconSize = CGSize(width: floor(size.width * 2.0), height: floor(size.height * 2.0))
+                iconSize = CGSize(width: floor(size.width * 1.0), height: floor(size.height * 1.0))
                 animationLayer.masksToBounds = false
                 animationLayer.cornerRadius = 0.0
             case .custom:
@@ -271,7 +271,7 @@ public final class ReactionIconView: PortalSourceView {
         let iconSize: CGSize
         switch reaction {
         case .builtin:
-            iconSize = CGSize(width: floor(size.width * 2.0), height: floor(size.height * 2.0))
+            iconSize = CGSize(width: floor(size.width * 1.0), height: floor(size.height * 1.0))
         case .custom:
             iconSize = CGSize(width: floor(size.width * 1.25), height: floor(size.height * 1.25))
         case .stars:
