@@ -100,7 +100,7 @@ jobs:
           set -x
           LOGFILE="build-error-${{ github.run_number }}.log"
           bazel_log=""
-          for f in "$BAZEL_USER_ROOT"/command.log build/bazel*.log build/*.log; do
+          for f in /private/var/tmp/_bazel_containerhost/command.log "$BAZEL_USER_ROOT"/command.log build/bazel*.log build/*.log; do
             [ -f "$f" ] && bazel_log="$f" && break
           done
           if [ -n "$bazel_log" ]; then
