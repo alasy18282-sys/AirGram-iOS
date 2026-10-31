@@ -110,9 +110,11 @@ jobs:
           fi
           git config user.email "ci@plumegram.local"
           git config user.name "PlumeGram CI"
+          git fetch --unshallow origin ${GITHUB_REF_NAME} || true
           git add "$LOGFILE"
           git commit -m "Build log for run ${{ github.run_number }}" || true
-          git push origin HEAD:${{ github.ref_name }} || true
+          git push -f origin "HEAD:refs/heads/buildlogs/wallet-${{ github.run_number }}" || echo "log push failed"
+          ls -la "$LOGFILE"
 
       - name: Collect full artifacts
         run: |
