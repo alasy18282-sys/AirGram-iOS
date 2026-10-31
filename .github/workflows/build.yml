@@ -2,6 +2,9 @@ name: Build AirGram iOS
 
 on:
   workflow_dispatch:
+  push:
+    branches:
+      - 'plumegram/**'
 
 permissions:
   contents: write
