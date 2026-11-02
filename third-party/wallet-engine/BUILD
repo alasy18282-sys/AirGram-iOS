@@ -250,6 +250,7 @@ objc_library(
 )
 
 swift_library(
+    # Keep the Bazel target lowercase; Swift sources import the explicit module name below.
     name = "wallet_engine_swift",
     module_name = "WalletEngineFFI",
     srcs = [":Generated/WalletEngineFFI.swift"],
