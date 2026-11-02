@@ -105,7 +105,10 @@ jobs:
             [ -f "$f" ] && bazel_log="$f" && break
           done
           if [ -f /tmp/build_full.log ]; then
-            grep -aE "ERROR|error:|FAILED|Traceback" /tmp/build_full.log | tail -n 800 > "$LOGFILE" || tail -n 400 /tmp/build_full.log > "$LOGFILE"
+            grep -aE "ERROR|error:|FAILED|Traceback|Could not find|Multiple matching|No .* found|Traceback" /tmp/build_full.log | tail -n 800 > "$LOGFILE" || true
+            if [ ! -s "$LOGFILE" ]; then
+              tail -n 400 /tmp/build_full.log > "$LOGFILE"
+            fi
             wc -l "$LOGFILE"
           else
             echo "no build log" > "$LOGFILE"
