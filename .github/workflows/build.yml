@@ -128,6 +128,7 @@ jobs:
           import os
           import shutil
           import sys
+          import subprocess
           import zipfile
 
           output_path = "build/artifacts"
@@ -145,12 +146,29 @@ jobs:
                           matches.append(os.path.abspath(path))
               return sorted(set(matches), key=os.path.getmtime, reverse=True)
 
+          def find_ipas():
+              # Bazel can place outputs under its output base without exposing
+              # the usual bazel-bin symlink. Follow symlinks while searching.
+              matches = []
+              for root in search_roots:
+                  if not os.path.exists(root):
+                      continue
+                  result = subprocess.run(
+                      ["find", "-L", root, "-type", "f", "-name", "*.ipa", "-print"],
+                      text=True, capture_output=True, check=False,
+                  )
+                  matches.extend(line for line in result.stdout.splitlines() if line)
+              return sorted(set(matches), key=os.path.getmtime, reverse=True)
+
           ipa_candidates = collect("telegram_auth_build_test.ipa", expect_dir=False)
           if not ipa_candidates:
               ipa_candidates = collect("Telegram.ipa", expect_dir=False)
           if not ipa_candidates:
+              ipa_candidates = find_ipas()
+          if not ipa_candidates:
               print("No Telegram.ipa found.", file=sys.stderr)
-              for item in collect("*.ipa", expect_dir=False)[:40]:
+              print("Workspace entries:", os.listdir("."), file=sys.stderr)
+              for item in find_ipas()[:40]:
                   print(f"debug-ipa: {item}", file=sys.stderr)
               sys.exit(1)
 
