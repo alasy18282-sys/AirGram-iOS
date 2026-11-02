@@ -89,6 +89,7 @@ jobs:
             build \
             --configurationPath="build-system/appstore-configuration.json" \
             --codesigningInformationPath=build-system/fake-codesigning \
+            --outputBuildArtifactsPath=build/bazel-artifacts \
             --configuration=release_arm64 \
             --target=Telegram/telegram_auth_build_test \
             --buildNumber="$BUILD_NUMBER" \
@@ -132,7 +133,7 @@ jobs:
           import zipfile
 
           output_path = "build/artifacts"
-          search_roots = ["bazel-bin", "bazel-out", "/private/var/tmp/_bazel_containerhost"]
+          search_roots = ["build/bazel-artifacts", "bazel-bin", "bazel-out", "/private/var/tmp/_bazel_containerhost"]
 
           def collect(pattern: str, expect_dir: bool):
               matches = []
