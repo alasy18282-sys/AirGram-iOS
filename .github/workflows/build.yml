@@ -58,11 +58,7 @@ jobs:
         uses: actions/cache@v4
         with:
           path: /private/var/tmp/_bazel_containerhost
-          key: ${{ runner.os }}-bazel-full-device-v1-${{ hashFiles('WORKSPACE', 'WORKSPACE.bzlmod', 'MODULE.bazel', '.bazelrc', 'build-system/Make/Make.py', 'Telegram/BUILD') }}
-          restore-keys: |
-            ${{ runner.os }}-bazel-full-device-v1-
-            ${{ runner.os }}-bazel-auth-device-v1-
-            ${{ runner.os }}-bazel-auth-only-v2-
+          key: ${{ runner.os }}-bazel-full-device-v2-${{ github.sha }}
 
       - name: Build AirGram auth-only IPA (faster)
         run: |
