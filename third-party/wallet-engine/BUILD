@@ -250,7 +250,7 @@ objc_library(
 )
 
 swift_library(
-    name = "WalletEngineFFI",
+    name = "wallet_engine_swift",
     module_name = "WalletEngineFFI",
     srcs = [":Generated/WalletEngineFFI.swift"],
     copts = [
