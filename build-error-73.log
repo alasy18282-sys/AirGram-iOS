@@ -1,0 +1,6 @@
+ERROR: no such package '@@[unknown repo 'wallet_engine_bindgen_crates' requested from @@]//': The repository '@@[unknown repo 'wallet_engine_bindgen_crates' requested from @@]' could not be resolved: No repository visible as '@wallet_engine_bindgen_crates' from main repository. Was the repository introduced in WORKSPACE? The WORKSPACE file is disabled by default in Bazel 8 (late 2024) and will be removed in Bazel 9 (late 2025), please migrate to Bzlmod. See https://bazel.build/external/migration
+ERROR: /Users/runner/work/AirGram-iOS/AirGram-iOS/third-party/wallet-engine/BUILD:172:12: no such package '@@[unknown repo 'wallet_engine_bindgen_crates' requested from @@]//': The repository '@@[unknown repo 'wallet_engine_bindgen_crates' requested from @@]' could not be resolved: No repository visible as '@wallet_engine_bindgen_crates' from main repository. Was the repository introduced in WORKSPACE? The WORKSPACE file is disabled by default in Bazel 8 (late 2024) and will be removed in Bazel 9 (late 2025), please migrate to Bzlmod. See https://bazel.build/external/migration and referenced by '//third-party/wallet-engine:wallet_engine_swift_postprocess'
+ERROR: Analysis of target '//Telegram:telegram_auth_build_test' failed; build aborted: Analysis failed
+ERROR: Build did NOT complete successfully
+FAILED: 
+Traceback (most recent call last):
