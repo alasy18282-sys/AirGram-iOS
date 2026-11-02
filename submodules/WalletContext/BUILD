@@ -13,7 +13,7 @@ swift_library(
         "-enable-testing",
     ],
     deps = [
-      "//third-party/wallet-engine:wallet_engine_swift",
+      "//third-party/wallet-engine:WalletEngineFFI",
       "//submodules/SSignalKit/SwiftSignalKit",
       "//submodules/TelegramCore",
       "//submodules/TelegramUIPreferences",
