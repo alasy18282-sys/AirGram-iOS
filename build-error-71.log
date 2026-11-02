@@ -1,0 +1,7 @@
+ERROR: Traceback (most recent call last):
+ERROR: /Users/runner/work/AirGram-iOS/AirGram-iOS/submodules/tlottie/BUILD: no such target '//submodules/tlottie:TLottieBinding': target 'TLottieBinding' not declared in package 'submodules/tlottie' defined by /Users/runner/work/AirGram-iOS/AirGram-iOS/submodules/tlottie/BUILD
+ERROR: /Users/runner/work/AirGram-iOS/AirGram-iOS/submodules/LottieBinding/BUILD:5:14: no such target '//submodules/tlottie:TLottieBinding': target 'TLottieBinding' not declared in package 'submodules/tlottie' defined by /Users/runner/work/AirGram-iOS/AirGram-iOS/submodules/tlottie/BUILD and referenced by '//submodules/LottieBinding:LottieBinding'
+ERROR: Analysis of target '//Telegram:telegram_auth_build_test' failed; build aborted: Analysis failed
+ERROR: Build did NOT complete successfully
+FAILED: 
+Traceback (most recent call last):
