@@ -467,7 +467,7 @@ final class GiftOptionsScreenComponent: Component {
                             }
                         }))
                     } else {
-                        if let availability = gift.availability, availability.remains == 0 || gift.perUserLimit?.remains == 0 || component.peerId.namespace == Namespaces.Peer.CloudChannel {
+                        if let availability = gift.availability, self.starsFilter == .resale || availability.remains == 0 || gift.perUserLimit?.remains == 0 || component.peerId.namespace == Namespaces.Peer.CloudChannel {
                             if availability.resale > 0 {
                                 let storeController = component.context.sharedContext.makeGiftStoreController(
                                     context: component.context,
@@ -696,7 +696,7 @@ final class GiftOptionsScreenComponent: Component {
                                     action = environment.strings.Gift_Options_Gift_ViewAuction
                                 }
                                 subject = .starGift(gift: gift, price: action)
-                            } else if let availability = gift.availability, availability.remains == 0, availability.resale > 0, let minResaleStars = availability.minResaleStars {
+                            } else if let availability = gift.availability, (self.starsFilter == .resale || availability.remains == 0), availability.resale > 0, let minResaleStars = availability.minResaleStars {
                                 let priceString = presentationStringsFormattedNumber(Int32(minResaleStars), environment.dateTimeFormat.groupingSeparator)
                                 if let resaleConfiguration = self.resaleConfiguration, minResaleStars == resaleConfiguration.starGiftResaleMaxStarsAmount || availability.resale == 1 {
                                     subject = .starGift(gift: gift, price: "# \(priceString)")
@@ -1632,10 +1632,8 @@ final class GiftOptionsScreenComponent: Component {
                     for gift in starGifts {
                         if case let .generic(gift) = gift {
                             starsAmountsSet.insert(gift.price)
-                            if let availability = gift.availability {
-                                if availability.remains == 0 && availability.resale > 0 {
-                                    hasResale = true
-                                }
+                            if let availability = gift.availability, availability.resale > 0 {
+                                hasResale = true
                             }
                         }
                     }

@@ -46,6 +46,7 @@ swift_library(
         "//submodules/LocalizedPeerData:LocalizedPeerData",
         "//submodules/SSignalKit/SwiftSignalKit",
         "//submodules/TelegramCore",
+        "//submodules/TelegramApi",
         "//submodules/TelegramPresentationData",
         "//submodules/PresentationDataUtils",
         "//submodules/TelegramStringFormatting",

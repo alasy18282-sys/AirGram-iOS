@@ -89,6 +89,8 @@ func infoItems(data: PeerInfoScreenData?, context: AccountContext, presentationD
         let ItemBalanceHeader = 7000
         let ItemBalanceTon = 7001
         let ItemBalanceStars = 7002
+        let ItemWalletBalanceHeader = 7003
+        let ItemWalletBalance = 7004
         let ItemBotPermissionsHeader = 8000
         let ItemBotPermissionsEmojiStatus = 8001
         let ItemBotPermissionsLocation = 8002
@@ -446,6 +448,20 @@ func infoItems(data: PeerInfoScreenData?, context: AccountContext, presentationD
                             interaction.editingOpenStars()
                         }))
                     }
+                }
+
+                if user.id == context.account.peerId, let revenueState = data.revenueStatsState {
+                    let balance = revenueState.balances.availableBalance.amount.value
+                    items[.balances]!.append(PeerInfoScreenHeaderItem(id: ItemWalletBalanceHeader, text: presentationData.strings.Wallet_Info_GramTitle))
+                    items[.balances]!.append(PeerInfoScreenDisclosureItem(
+                        id: ItemWalletBalance,
+                        label: .text(formatTonAmountText(balance, dateTimeFormat: presentationData.dateTimeFormat, maxDecimalPositions: 2)),
+                        text: presentationData.strings.Wallet_WaltBalance,
+                        icon: PresentationResourcesSettings.ton,
+                        action: {
+                            interaction.editingOpenRevenue()
+                        }
+                    ))
                 }
                 
                 if let _ = user.botInfo {

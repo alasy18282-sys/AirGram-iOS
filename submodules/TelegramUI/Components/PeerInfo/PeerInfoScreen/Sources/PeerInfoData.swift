@@ -1426,7 +1426,7 @@ func peerInfoScreenData(
                 #if DEBUG
                 canViewRevenue = peerId != context.account.peerId
                 #endif
-                guard canViewRevenue else {
+                guard canViewRevenue || peerId == context.account.peerId else {
                     return .single((nil, nil))
                 }
                 let revenueStatsContext = StarsRevenueStatsContext(account: context.account, peerId: peerId, ton: true)

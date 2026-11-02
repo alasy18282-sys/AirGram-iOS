@@ -21,6 +21,21 @@ public extension Api.functions.account {
         })
     }
 }
+
+public extension Api.functions.payments {
+    static func transferGramToPeer(userId: Int64, amount: Int64, randomId: Int64) -> (FunctionDescription, Buffer, DeserializeFunctionResponse<Api.Bool>) {
+        let buffer = Buffer()
+        buffer.appendInt32(0x5e275ea7)
+        serializeInt64(userId, buffer: buffer, boxed: false)
+        serializeInt64(amount, buffer: buffer, boxed: false)
+        serializeInt64(randomId, buffer: buffer, boxed: false)
+        return (FunctionDescription(name: "payments.transferGramToPeer", parameters: [("userId", ConstructorParameterDescription(userId)), ("amount", ConstructorParameterDescription(amount)), ("randomId", ConstructorParameterDescription(randomId))]), buffer, DeserializeFunctionResponse { (buffer: Buffer) -> Api.Bool? in
+            let reader = BufferReader(buffer)
+            guard let signature = reader.readInt32() else { return nil }
+            return Api.parse(reader, signature: signature) as? Api.Bool
+        })
+    }
+}
 public extension Api.functions.account {
     static func cancelPasswordEmail() -> (FunctionDescription, Buffer, DeserializeFunctionResponse<Api.Bool>) {
         let buffer = Buffer()

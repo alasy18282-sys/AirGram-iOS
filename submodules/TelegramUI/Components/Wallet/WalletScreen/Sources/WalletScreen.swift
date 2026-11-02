@@ -1584,10 +1584,20 @@ private final class WalletScreenComponent: Component {
         }
 
         private var displayBalance: Int64? {
+            if let balance = self.availableEarnings, balance.currency == .ton {
+                return balance.amount.value
+            }
             guard let balance = self.walletState?.balance.currentValue else {
                 return nil
             }
             return balance.magnitude < 1_000_000 ? 0 : balance
+        }
+
+        private var hasAvailableGramBalance: Bool {
+            guard let balance = self.availableEarnings, balance.currency == .ton else {
+                return false
+            }
+            return balance.amount.value > 0
         }
 
         private var walletAddress: String? {
@@ -2480,8 +2490,12 @@ private final class WalletScreenComponent: Component {
         private func openSend(address: String? = nil) {
             guard let component = self.component,
                   let controller = self.environment?.controller(),
-                  self.walletAddress != nil,
+                  self.walletAddress != nil || self.hasAvailableGramBalance,
                   !self.isResolvingSigningAccess else {
+                return
+            }
+            if self.walletAddress == nil, self.hasAvailableGramBalance {
+                self.routeToSend(address: nil)
                 return
             }
             guard let walletInfo = self.walletInfo else {
@@ -3458,7 +3472,7 @@ private final class WalletScreenComponent: Component {
                             color: environment.theme.list.itemCheckColors.foregroundColor
                         ))
                     ),
-                    isEnabled: walletAddress != nil && !self.isResolvingSigningAccess,
+                    isEnabled: (walletAddress != nil || self.hasAvailableGramBalance) && !self.isResolvingSigningAccess,
                     displaysProgress: self.isResolvingSigningAccess,
                     action: { [weak self] in
                         self?.openSend()

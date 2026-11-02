@@ -1189,6 +1189,7 @@ private final class WalletPeerSelectionScreenComponent: Component {
                     walletContext: component.walletContext,
                     resolvedAddress: resolvedAddress,
                     initialAddress: address ?? "",
+                    gramLedgerTransfer: address == nil,
                     refreshBalanceOnOpen: false,
                     transferAnimation: address == nil ? component.transferAnimation : nil,
                     completed: { [weak controller] in

@@ -4,6 +4,7 @@ import AppBundle
 import Display
 import AccountContext
 import TelegramCore
+import TelegramApi
 import LocalizedPeerData
 import SwiftSignalKit
 import TelegramPresentationData
@@ -526,6 +527,7 @@ private final class WalletSendScreenComponent: Component {
     let initialAddress: String
     let initialAmountNanograms: Int64?
     let walletContext: WalletContext
+    let gramLedgerTransfer: Bool
     let transferAnimation: WalletSendTransferAnimation?
     let completed: (() -> Void)?
 
@@ -538,6 +540,7 @@ private final class WalletSendScreenComponent: Component {
         initialAddress: String,
         initialAmountNanograms: Int64?,
         walletContext: WalletContext,
+        gramLedgerTransfer: Bool,
         transferAnimation: WalletSendTransferAnimation?,
         completed: (() -> Void)?
     ) {
@@ -549,6 +552,7 @@ private final class WalletSendScreenComponent: Component {
         self.initialAddress = initialAddress
         self.initialAmountNanograms = initialAmountNanograms
         self.walletContext = walletContext
+        self.gramLedgerTransfer = gramLedgerTransfer
         self.transferAnimation = transferAnimation
         self.completed = completed
     }
@@ -576,6 +580,9 @@ private final class WalletSendScreenComponent: Component {
             return false
         }
         if lhs.walletContext !== rhs.walletContext {
+            return false
+        }
+        if lhs.gramLedgerTransfer != rhs.gramLedgerTransfer {
             return false
         }
         return true
@@ -630,6 +637,9 @@ private final class WalletSendScreenComponent: Component {
 
         private var walletContext: WalletContext?
         private let walletDisposable = MetaDisposable()
+        private let gramRevenueDisposable = MetaDisposable()
+        private var gramRevenueContext: StarsRevenueStatsContext?
+        private var gramRevenueAccount: AccountContext?
         private let peerAddressDisposable = MetaDisposable()
         private var peerAddressResolution = WalletSendPeerAddressResolution()
         private var isVisible = false
@@ -970,6 +980,7 @@ private final class WalletSendScreenComponent: Component {
         }
 
         private var currentFeeRequest: WalletSendFeeRequest? {
+            guard self.component?.gramLedgerTransfer != true else { return nil }
             guard let walletInfo = self.walletInfo, !self.recipientAddress.isEmpty else { return nil }
             let comment: WalletContext.TransferFeeComment
             if self.commentEncrypted {
@@ -1004,6 +1015,9 @@ private final class WalletSendScreenComponent: Component {
         }
 
         private var feeDisplayState: WalletSendFeeDisplayState {
+            if self.component?.gramLedgerTransfer == true {
+                return .hidden
+            }
             guard self.amount > 0 else {
                 if case .value? = self.previousFeeDisplayState, let fee = self.lastKnownFee, fee > 0 {
                     return .value(fee)
@@ -1042,7 +1056,8 @@ private final class WalletSendScreenComponent: Component {
         }
 
         private func updateFeePreparation() {
-            guard self.isVisible, self.transferPreviewController == nil,
+            guard self.component?.gramLedgerTransfer != true,
+                  self.isVisible, self.transferPreviewController == nil,
                   self.commentSessionAvailable, !self.isSubmittingTransfer else { return }
             let request = self.currentFeeRequest
             if self.feeRequest != request {
@@ -1515,6 +1530,10 @@ private final class WalletSendScreenComponent: Component {
         }
 
         private func send() {
+            if let component = self.component, component.gramLedgerTransfer {
+                self.sendGramLedger(component: component)
+                return
+            }
             if let component = self.component, walletFakesTransfers(context: component.context) {
                 self.sendFake(component: component)
                 return
@@ -1564,6 +1583,53 @@ private final class WalletSendScreenComponent: Component {
             self.amountField.endEditing(true)
             self.requestUpdate(transition: .immediate)
             self.performSend(component: component)
+        }
+
+        private func sendGramLedger(component: WalletSendScreenComponent) {
+            guard let peer = component.peer,
+                  let controller = self.environment?.controller() as? WalletSendScreen,
+                  self.isVisible,
+                  self.amount > 0,
+                  !self.isSubmittingTransfer,
+                  !self.walletIsLoading,
+                  let balance = self.walletBalance,
+                  self.amount <= balance,
+                  self.validateTransferAmount() else {
+                return
+            }
+            self.isSubmittingTransfer = true
+            self.amountField.isUserInteractionEnabled = false
+            self.amountField.endEditing(true)
+            self.requestUpdate(transition: .immediate)
+
+            let request = Api.functions.payments.transferGramToPeer(
+                userId: peer.id.toInt64(),
+                amount: self.amount,
+                randomId: Int64.random(in: Int64.min ... Int64.max)
+            )
+            self.transferDisposable.set((component.context.account.network.request(request)
+            |> deliverOnMainQueue).start(next: { [weak self, weak controller] result in
+                guard let self, let controller,
+                      self.component?.gramLedgerTransfer == true,
+                      self.component?.peer?.id == peer.id else {
+                    return
+                }
+                if case .boolTrue = result {
+                    Haptics.hit(0.95)
+                    self.closeAfterTransferRegistration(nil, component: component, controller: controller)
+                } else {
+                    self.isSubmittingTransfer = false
+                    self.amountField.isUserInteractionEnabled = true
+                    self.presentTransferError(.network)
+                    self.requestUpdate(transition: .easeInOut(duration: 0.2))
+                }
+            }, error: { [weak self] _ in
+                guard let self else { return }
+                self.isSubmittingTransfer = false
+                self.amountField.isUserInteractionEnabled = true
+                self.presentTransferError(.network)
+                self.requestUpdate(transition: .easeInOut(duration: 0.2))
+            }))
         }
 
         /// A send while transfers are faked (`walletFakesTransfers`): the form shows its progress as a send does, then
@@ -2089,6 +2155,9 @@ private final class WalletSendScreenComponent: Component {
                 self.signingAccessDisposable.set(nil)
                 self.walletInfo = nil
                 self.walletBalance = nil
+                self.gramRevenueDisposable.set(nil)
+                self.gramRevenueContext = nil
+                self.gramRevenueAccount = nil
                 self.gaslessInfo = .idle
                 self.walletAddress = nil
                 self.walletIsLoading = true
@@ -2138,7 +2207,7 @@ private final class WalletSendScreenComponent: Component {
                     }
                     if let component = self.component, walletFakesTransfers(context: component.context) {
                         self.walletBalance = walletFakeTransferBalance
-                    } else {
+                    } else if self.component?.gramLedgerTransfer != true {
                         self.walletBalance = walletState.balance.currentValue
                     }
                     self.gaslessInfo = walletState.gaslessInfo
@@ -2153,9 +2222,11 @@ private final class WalletSendScreenComponent: Component {
                     self.walletAddress = walletState.walletAddress
                     let isOwnPreparation = (self.isEstimatingFee || self.isPreparingActualTransfer)
                         && walletState.activeOperation == .preparingTransfer
-                    self.walletIsLoading = self.walletInfo == nil
-                        || walletState.balance.currentValue == nil
-                        || (walletState.activeOperation != nil && !isOwnPreparation)
+                    if self.component?.gramLedgerTransfer != true {
+                        self.walletIsLoading = self.walletInfo == nil
+                            || walletState.balance.currentValue == nil
+                            || (walletState.activeOperation != nil && !isOwnPreparation)
+                    }
                     self.currentFiatCurrency = walletState.fiat.selectedCurrency
                     if let rate = walletState.fiat.selectedRate,
                        rate.unitsPerGram.isFinite,
@@ -2170,6 +2241,34 @@ private final class WalletSendScreenComponent: Component {
                         self.requestUpdate(transition: .easeInOut(duration: 0.2))
                     }
                 }))
+                if component.gramLedgerTransfer {
+                    let revenueContext = component.context.engine.payments.peerStarsRevenueContext(
+                        peerId: component.context.account.peerId,
+                        ton: true
+                    )
+                    self.gramRevenueContext = revenueContext
+                    self.gramRevenueAccount = component.context
+                    self.gramRevenueDisposable.set((revenueContext.state
+                    |> deliverOnMainQueue).start(next: { [weak self] revenueState in
+                        guard let self,
+                              self.gramRevenueContext === revenueContext,
+                              self.gramRevenueAccount === component.context,
+                              self.component?.gramLedgerTransfer == true else {
+                            return
+                        }
+                        let balance = revenueState.stats?.balances.availableBalance
+                        if let balance, balance.currency == .ton {
+                            self.walletBalance = balance.amount.value
+                            self.walletIsLoading = false
+                        } else {
+                            self.walletBalance = nil
+                            self.walletIsLoading = true
+                        }
+                        if !self.isUpdating {
+                            self.requestUpdate(transition: .easeInOut(duration: 0.2))
+                        }
+                    }))
+                }
             }
 
             if self.isVisible {
@@ -2952,6 +3051,7 @@ private final class WalletSendScreenComponent: Component {
                 }
             }
             let hasRecipient = !self.recipientAddress.isEmpty
+                || (component.gramLedgerTransfer && component.peer != nil)
             let canSend = hasAmount
                 && hasRecipient
                 && !self.isPreparingTransfer
@@ -2959,7 +3059,7 @@ private final class WalletSendScreenComponent: Component {
                 && !self.isResolvingSigningAccess
                 && !self.walletIsLoading
                 && !isInsufficient
-                && self.walletInfo != nil
+                && (component.gramLedgerTransfer || self.walletInfo != nil)
                 && self.walletBalance != nil
             // The full-width portrait button spans iPhone Duo's side strip; it keeps clear only of a corner block at the
             // bottom. The fixed-width landscape button stays centred with the texts above it.
@@ -3106,6 +3206,7 @@ public final class WalletSendScreen: ViewControllerComponentContainer, Attachmen
         resolvedAddress: WalletUserAddress? = nil,
         initialAddress: String = "",
         initialAmountNanograms: Int64? = nil,
+        gramLedgerTransfer: Bool = false,
         refreshBalanceOnOpen: Bool = true,
         allowOpenRecipientChat: Bool = true,
         transferAnimation: WalletSendTransferAnimation? = nil,
@@ -3131,6 +3232,7 @@ public final class WalletSendScreen: ViewControllerComponentContainer, Attachmen
                 initialAddress: initialAddress,
                 initialAmountNanograms: initialAmountNanograms,
                 walletContext: walletContext,
+                gramLedgerTransfer: gramLedgerTransfer,
                 transferAnimation: transferAnimation,
                 completed: completed
             ),
@@ -3174,6 +3276,7 @@ public final class WalletSendScreen: ViewControllerComponentContainer, Attachmen
                 initialAddress: address,
                 initialAmountNanograms: initialAmountNanograms,
                 walletContext: walletContext,
+                gramLedgerTransfer: false,
                 transferAnimation: transferAnimation,
                 completed: completed
             ),
@@ -3249,6 +3352,7 @@ public final class WalletSendScreen: ViewControllerComponentContainer, Attachmen
             completion()
             return
         }
+
         componentView.requestDismiss(completion: completion)
     }
 

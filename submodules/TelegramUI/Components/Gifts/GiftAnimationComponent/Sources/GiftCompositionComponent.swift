@@ -156,6 +156,9 @@ public final class GiftCompositionComponent: Component {
 
         private var spinPool: [StarGift.UniqueGift.Attribute] = []
         private var spinPoolIndex: Int = 0
+        private let upgradeModelsDisposable = MetaDisposable()
+        private var upgradeModelsGiftId: Int64?
+        private var upgradeModels: [StarGift.UniqueGift.Attribute]?
 
         private let baseAnimDuration: Double = 0.4
         private let maxAnimDuration:  Double = 1.3
@@ -172,6 +175,7 @@ public final class GiftCompositionComponent: Component {
         
         deinit {
             self.disposables.dispose()
+            self.upgradeModelsDisposable.dispose()
             self.previewTimer?.invalidate()
             self.stopSpinIfNeeded()
         }
@@ -934,6 +938,22 @@ public final class GiftCompositionComponent: Component {
             let iconSize = CGSize(width: 136.0, height: 136.0)
             
             if let (previewAttributes, mainGift) = uniqueSpinContext {
+                if self.upgradeModelsGiftId != mainGift.giftId {
+                    self.upgradeModelsGiftId = mainGift.giftId
+                    self.upgradeModels = nil
+                    self.upgradeModelsDisposable.set((component.context.engine.payments.getStarGiftUpgradeAttributes(giftId: mainGift.giftId)
+                    |> deliverOnMainQueue).start(next: { [weak self] attributes in
+                        guard let self, self.upgradeModelsGiftId == mainGift.giftId else {
+                            return
+                        }
+                        self.upgradeModels = attributes?.filter { attribute in
+                            if case .model = attribute { return true }
+                            return false
+                        }
+                        component.requestUpdate(.immediate)
+                    }))
+                }
+
                 var mainModelFile: TelegramMediaFile?
                 for attribute in mainGift.attributes {
                     if case let .model(_, file, _, _) = attribute { mainModelFile = file; break }
@@ -944,6 +964,13 @@ public final class GiftCompositionComponent: Component {
                     if case let .model(_, file, _, _) = attribute,
                        file.fileId.id != mainModelFile?.fileId.id {
                         models.append(attribute)
+                    }
+                }
+
+                if let upgradeModels = self.upgradeModels {
+                    models = upgradeModels.filter { attribute in
+                        guard case let .model(_, file, _, _) = attribute else { return false }
+                        return file.fileId.id != mainModelFile?.fileId.id
                     }
                 }
 
