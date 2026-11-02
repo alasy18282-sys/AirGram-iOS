@@ -6,6 +6,45 @@ bazel_dep(name = "platforms", version = "0.0.11")
 bazel_dep(name = "rules_cc", version = "0.2.20")
 bazel_dep(name = "rules_rust", version = "0.74.0")
 
+crate = use_extension("@rules_rust//crate_universe:extensions.bzl", "crate")
+crate.from_cargo(
+    name = "wallet_engine_crates",
+    cargo_lockfile = "//third-party/wallet-engine:Cargo.Bazel.lock",
+    manifests = ["//third-party/wallet-engine:wallet-engine/Cargo.toml"],
+)
+crate.spec(package = "base64", version = "=0.22.1", repositories = ["wallet_engine_ton_crates"])
+crate.spec(package = "ed25519-dalek", version = "=2.2.0", repositories = ["wallet_engine_ton_crates"])
+crate.spec(package = "fastnum", version = "=0.7.4", repositories = ["wallet_engine_ton_crates"])
+crate.spec(package = "hex", version = "=0.4.3", repositories = ["wallet_engine_ton_crates"])
+crate.spec(package = "hmac", version = "=0.12.1", repositories = ["wallet_engine_ton_crates"])
+crate.spec(package = "num-bigint", version = "=0.4.8", repositories = ["wallet_engine_ton_crates"])
+crate.spec(package = "num-traits", version = "=0.2.19", repositories = ["wallet_engine_ton_crates"])
+crate.spec(package = "parking_lot", version = "=0.12.5", repositories = ["wallet_engine_ton_crates"])
+crate.spec(package = "pbkdf2", version = "=0.12.2", repositories = ["wallet_engine_ton_crates"])
+crate.spec(package = "serde", version = "=1.0.229", repositories = ["wallet_engine_ton_crates"])
+crate.spec(package = "serde-aux", version = "=4.7.0", repositories = ["wallet_engine_ton_crates"])
+crate.spec(package = "serde_json", version = "=1.0.151", repositories = ["wallet_engine_ton_crates"])
+crate.spec(package = "sha2", version = "=0.10.9", repositories = ["wallet_engine_ton_crates"])
+crate.spec(package = "thiserror", version = "=2.0.17", repositories = ["wallet_engine_ton_crates"])
+crate.spec(package = "ton_core", version = "=0.1.4", repositories = ["wallet_engine_ton_crates"])
+crate.spec(package = "ton_macros", version = "=0.1.2", repositories = ["wallet_engine_ton_crates"])
+crate.spec(package = "zeroize", version = "=1.9.0", repositories = ["wallet_engine_ton_crates"])
+crate.from_specs(
+    name = "wallet_engine_ton_crates",
+    cargo_lockfile = "//third-party/wallet-engine:Cargo.Bazel.lock",
+)
+crate.from_cargo(
+    name = "wallet_engine_bindgen_crates",
+    cargo_lockfile = "//third-party/wallet-engine:Bindgen.Cargo.Bazel.lock",
+    manifests = ["//third-party/wallet-engine:wallet-engine/bindgen/apple/Cargo.toml"],
+)
+crate.spec(
+    package = "anyhow",
+    version = "=1.0.102",
+    repositories = ["wallet_engine_bindgen_crates"],
+)
+use_repo(crate, "wallet_engine_crates", "wallet_engine_ton_crates", "wallet_engine_bindgen_crates")
+
 rust = use_extension("@rules_rust//rust:extensions.bzl", "rust")
 rust.toolchain(
     edition = "2024",

@@ -173,14 +173,6 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "c8d4a3bb8b1e0c1050499d1815f5ab16d04f0959b233085fb31653fbfc9d98f9"
 
 [[package]]
-name = "direct-cargo-bazel-deps"
-version = "0.0.1"
-dependencies = [
- "anyhow",
- "uniffi",
-]
-
-[[package]]
 name = "equivalent"
 version = "1.0.2"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -704,6 +696,14 @@ dependencies = [
  "textwrap",
  "uniffi_meta",
  "weedle2",
+]
+
+[[package]]
+name = "wallet-engine-apple-bindgen"
+version = "0.1.0"
+dependencies = [
+ "anyhow",
+ "uniffi",
 ]
 
 [[package]]
