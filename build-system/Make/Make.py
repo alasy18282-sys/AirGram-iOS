@@ -657,6 +657,7 @@ def build(bazel, arguments):
         bazel_bin = run_executable_with_output(
             bazel,
             arguments=bazel_command_line.get_startup_bazel_arguments() + ['info', 'bazel-bin'],
+            stderr_to_stdout=False,
             check_result=True
         ).strip()
         built_ipa_path_prefix = os.path.join(bazel_bin, 'Telegram')
