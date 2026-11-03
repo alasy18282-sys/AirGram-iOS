@@ -201,11 +201,8 @@ class BazelCommandLine:
                 # Always build universal Watch binaries.
                 '--watchos_cpus=arm64_32',
 
-                # Generate DSYM files when building.
+                # Generate DSYM files when building; IPA remains the default output.
                 '--apple_generate_dsym',
-
-                # Require DSYM files as build output.
-                '--output_groups=+dsyms',
             ] + self.common_release_args
         else:
             raise Exception('Unknown configuration {}'.format(configuration))
