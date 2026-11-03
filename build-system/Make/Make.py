@@ -1,6 +1,7 @@
 #!/bin/python3
 
 import argparse
+import json
 import os
 import shlex
 import sys
@@ -318,9 +319,15 @@ class BazelCommandLine:
         if self.profile_swift:
             combined_arguments += ['--config=swift_profile']
 
+        build_event_path = os.path.join(tempfile.gettempdir(), 'airgram-build-events.json')
+        if os.path.exists(build_event_path):
+            os.remove(build_event_path)
+        combined_arguments += ['--build_event_json_file={}'.format(build_event_path)]
+
         print('TelegramBuild: running')
         print(subprocess.list2cmdline(combined_arguments))
         call_executable(combined_arguments)
+        self.build_event_path = build_event_path
 
     def invoke_test(self):
         combined_arguments = [
@@ -646,6 +653,14 @@ def build(bazel, arguments):
 
     bazel_command_line.invoke_build()
 
+    if os.path.isfile(getattr(bazel_command_line, 'build_event_path', '')):
+        with open(bazel_command_line.build_event_path) as event_file:
+            for event_line in event_file:
+                event = json.loads(event_line)
+                aborted = event.get('aborted', {})
+                if aborted.get('reason') == 'SKIPPED':
+                    print('Bazel skipped the requested target: {}'.format(aborted.get('description', 'no reason provided')))
+
     if arguments.outputBuildArtifactsPath is not None:
         artifacts_path = os.path.abspath(arguments.outputBuildArtifactsPath)
         if os.path.exists(artifacts_path + '/Telegram.ipa'):
@@ -656,24 +671,26 @@ def build(bazel, arguments):
         os.makedirs(artifacts_path + '/DSYMs', exist_ok=True)
 
         target = arguments.target or 'Telegram/Telegram'
-        bazel_info_arguments = bazel_command_line.get_startup_bazel_arguments() + [
-            'info',
-            '--apple_platform_type=ios',
-        ] + bazel_command_line.configuration_args + bazel_command_line.common_release_args + bazel_command_line.get_define_arguments() + ['bazel-bin']
-        bazel_bin = run_executable_with_output(
+        target = arguments.target or 'Telegram/Telegram'
+        cquery_arguments = bazel_command_line.get_startup_bazel_arguments() + [
+            'cquery', target, '--output=files', '--apple_platform_type=ios'
+        ] + bazel_command_line.get_define_arguments() + bazel_command_line.configuration_args
+        output_files = run_executable_with_output(
             bazel,
-            arguments=bazel_info_arguments,
+            arguments=cquery_arguments,
+            stderr_to_stdout=False,
+            check_result=True
+        ).splitlines()
+        execution_root = run_executable_with_output(
+            bazel,
+            arguments=bazel_command_line.get_startup_bazel_arguments() + ['info', 'execution_root'],
             stderr_to_stdout=False,
             check_result=True
         ).strip()
-        built_ipa_path_prefix = os.path.join(bazel_bin, 'Telegram')
-        ipa_paths = glob.glob(os.path.join(built_ipa_path_prefix, '*.ipa'))
-        ipa_paths = [
-            os.path.abspath(path)
-            for path in ipa_paths
-        ]
+        ipa_paths = [os.path.join(execution_root, path.strip()) for path in output_files if path.strip().lower().endswith('.ipa')]
+        built_ipa_path_prefix = execution_root
         if len(ipa_paths) == 0:
-            print(f'Could not find an IPA for target {target} under {built_ipa_path_prefix}')
+            print(f'Could not find an IPA in Bazel outputs for target {target}. cquery outputs: {output_files}')
             sys.exit(1)
         elif len(ipa_paths) > 1:
             print('Multiple matching IPA files found: {}'.format(ipa_paths))
