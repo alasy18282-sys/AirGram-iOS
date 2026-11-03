@@ -660,13 +660,16 @@ def build(bazel, arguments):
             stderr_to_stdout=False,
             check_result=True
         ).strip()
-        built_ipa_path_prefix = os.path.join(bazel_bin, 'Telegram')
-        ipa_paths = glob.glob(os.path.join(built_ipa_path_prefix, '**', '*.ipa'), recursive=True)
-        target_ipa = os.path.join(built_ipa_path_prefix, '{}.ipa'.format(os.path.basename(arguments.target or 'Telegram')))
-        if target_ipa in ipa_paths:
-            ipa_paths = [target_ipa]
-        elif os.path.join(built_ipa_path_prefix, 'Telegram.ipa') in ipa_paths:
-            ipa_paths = [os.path.join(built_ipa_path_prefix, 'Telegram.ipa')]
+        bazel_output_root = os.path.dirname(os.path.dirname(bazel_bin))
+        built_ipa_path_prefix = bazel_output_root
+        ipa_paths = glob.glob(os.path.join(bazel_output_root, '*', 'bin', 'Telegram', '*.ipa'))
+        target_ipa_name = '{}.ipa'.format(os.path.basename(arguments.target or 'Telegram'))
+        target_ipas = [path for path in ipa_paths if os.path.basename(path) == target_ipa_name]
+        telegram_ipas = [path for path in ipa_paths if os.path.basename(path) == 'Telegram.ipa']
+        if target_ipas:
+            ipa_paths = target_ipas
+        elif telegram_ipas:
+            ipa_paths = telegram_ipas
         if len(ipa_paths) == 0:
             print(f'Could not find an IPA for target {arguments.target} under {built_ipa_path_prefix}')
             sys.exit(1)
@@ -675,7 +678,7 @@ def build(bazel, arguments):
             sys.exit(1)
         shutil.copyfile(ipa_paths[0], artifacts_path + '/Telegram.ipa')
 
-        dsym_paths = glob.glob(os.path.join(built_ipa_path_prefix, '**', '*.dSYM'), recursive=True)
+        dsym_paths = glob.glob(os.path.join(bazel_output_root, '*', 'bin', 'Telegram', 'Telegram*.dSYM'))
         for dsym_path in dsym_paths:
             file_name = os.path.basename(dsym_path)
             shutil.copytree(dsym_path, artifacts_path + '/DSYMs/{}'.format(file_name))
