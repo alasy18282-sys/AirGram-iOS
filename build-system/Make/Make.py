@@ -654,31 +654,30 @@ def build(bazel, arguments):
         os.makedirs(artifacts_path, exist_ok=True)
         os.makedirs(artifacts_path + '/DSYMs', exist_ok=True)
 
-        bazel_bin = run_executable_with_output(
+        target = arguments.target or 'Telegram/Telegram'
+        cquery_arguments = bazel_command_line.get_startup_bazel_arguments() + [
+            'cquery', target, '--output=files'
+        ] + bazel_command_line.get_define_arguments() + bazel_command_line.configuration_args
+        output_files = run_executable_with_output(
             bazel,
-            arguments=bazel_command_line.get_startup_bazel_arguments() + ['info', 'bazel-bin'],
+            arguments=cquery_arguments,
             stderr_to_stdout=False,
             check_result=True
-        ).strip()
-        bazel_output_root = os.path.dirname(os.path.dirname(bazel_bin))
-        built_ipa_path_prefix = bazel_output_root
-        ipa_paths = glob.glob(os.path.join(bazel_output_root, '*', 'bin', 'Telegram', '*.ipa'))
-        target_ipa_name = '{}.ipa'.format(os.path.basename(arguments.target or 'Telegram'))
-        target_ipas = [path for path in ipa_paths if os.path.basename(path) == target_ipa_name]
-        telegram_ipas = [path for path in ipa_paths if os.path.basename(path) == 'Telegram.ipa']
-        if target_ipas:
-            ipa_paths = target_ipas
-        elif telegram_ipas:
-            ipa_paths = telegram_ipas
+        ).splitlines()
+        ipa_paths = [
+            os.path.abspath(path.strip())
+            for path in output_files
+            if path.strip().lower().endswith('.ipa')
+        ]
         if len(ipa_paths) == 0:
-            print(f'Could not find an IPA for target {arguments.target} under {built_ipa_path_prefix}')
+            print(f'Could not find an IPA in Bazel outputs for target {target}. cquery outputs: {output_files}')
             sys.exit(1)
         elif len(ipa_paths) > 1:
             print('Multiple matching IPA files found: {}'.format(ipa_paths))
             sys.exit(1)
         shutil.copyfile(ipa_paths[0], artifacts_path + '/Telegram.ipa')
 
-        dsym_paths = glob.glob(os.path.join(bazel_output_root, '*', 'bin', 'Telegram', 'Telegram*.dSYM'))
+        dsym_paths = glob.glob(os.path.join(os.path.dirname(ipa_paths[0]), 'Telegram*.dSYM'))
         for dsym_path in dsym_paths:
             file_name = os.path.basename(dsym_path)
             shutil.copytree(dsym_path, artifacts_path + '/DSYMs/{}'.format(file_name))
