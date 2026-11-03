@@ -655,29 +655,31 @@ def build(bazel, arguments):
         os.makedirs(artifacts_path + '/DSYMs', exist_ok=True)
 
         target = arguments.target or 'Telegram/Telegram'
-        cquery_arguments = bazel_command_line.get_startup_bazel_arguments() + [
-            'cquery', target, '--output=files'
-        ] + bazel_command_line.get_define_arguments() + bazel_command_line.configuration_args
-        output_files = run_executable_with_output(
+        bazel_info_arguments = bazel_command_line.get_startup_bazel_arguments() + [
+            'info',
+            '--apple_platform_type=ios',
+        ] + bazel_command_line.configuration_args + bazel_command_line.common_release_args + bazel_command_line.get_define_arguments() + ['bazel-bin']
+        bazel_bin = run_executable_with_output(
             bazel,
-            arguments=cquery_arguments,
+            arguments=bazel_info_arguments,
             stderr_to_stdout=False,
             check_result=True
-        ).splitlines()
+        ).strip()
+        built_ipa_path_prefix = os.path.join(bazel_bin, 'Telegram')
+        ipa_paths = glob.glob(os.path.join(built_ipa_path_prefix, '*.ipa'))
         ipa_paths = [
-            os.path.abspath(path.strip())
-            for path in output_files
-            if path.strip().lower().endswith('.ipa')
+            os.path.abspath(path)
+            for path in ipa_paths
         ]
         if len(ipa_paths) == 0:
-            print(f'Could not find an IPA in Bazel outputs for target {target}. cquery outputs: {output_files}')
+            print(f'Could not find an IPA for target {target} under {built_ipa_path_prefix}')
             sys.exit(1)
         elif len(ipa_paths) > 1:
             print('Multiple matching IPA files found: {}'.format(ipa_paths))
             sys.exit(1)
         shutil.copyfile(ipa_paths[0], artifacts_path + '/Telegram.ipa')
 
-        dsym_paths = glob.glob(os.path.join(os.path.dirname(ipa_paths[0]), 'Telegram*.dSYM'))
+        dsym_paths = glob.glob(os.path.join(built_ipa_path_prefix, 'Telegram*.dSYM'))
         for dsym_path in dsym_paths:
             file_name = os.path.basename(dsym_path)
             shutil.copytree(dsym_path, artifacts_path + '/DSYMs/{}'.format(file_name))
