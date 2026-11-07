@@ -5,11 +5,11 @@
 #import <CoreGraphics/CoreGraphics.h>
 
 typedef NS_ENUM(int32_t, RLottieFitzModifier) {
-    LottieFitzModifierNone,
-    LottieFitzModifierType12,
-    LottieFitzModifierType3,
-    LottieFitzModifierType4,
-    LottieFitzModifierType5,
+    RLottieFitzModifierNone,
+    RLottieFitzModifierType12,
+    RLottieFitzModifierType3,
+    RLottieFitzModifierType4,
+    RLottieFitzModifierType5,
     LottieFitzModifierType6
 };
 
