@@ -10,7 +10,7 @@ import SwiftSignalKit
 
 public final class ManagedAnimationState {
     public let item: ManagedAnimationItem
-    private let instance: LottieInstance
+    private let instance: RLottieInstance
 
     private let displaySize: CGSize
     
@@ -30,7 +30,7 @@ public final class ManagedAnimationState {
     public var executedCallbacks = Set<Int>()
     
     public init?(displaySize: CGSize, item: ManagedAnimationItem, current: ManagedAnimationState?) {
-        let resolvedInstance: LottieInstance
+        let resolvedInstance: RLottieInstance
         
         if let current = current {
             resolvedInstance = current.instance
@@ -46,7 +46,7 @@ public final class ManagedAnimationState {
             } else if let unpackedData = TGGUnzipData(data, 5 * 1024 * 1024) {
                 data = unpackedData
             }
-            guard let instance = LottieInstance(data: data, fitzModifier: .none, colorReplacements: item.replaceColors, cacheKey: "") else {
+            guard let instance = RLottieInstance(data: data, fitzModifier: .none, colorReplacements: item.replaceColors, cacheKey: "") else {
                 return nil
             }
             resolvedInstance = instance

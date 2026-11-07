@@ -110,7 +110,7 @@ final class CameraRoundVideoFilter {
     
     private var animationImageFilter: CIFilter?
     private var animationImage: CIImage?
-    private var animation: LottieInstance?
+    private var animation: RLottieInstance?
     private var animationFrameIndex: Int32 = 0
     
     private var outputColorSpace: CGColorSpace?
@@ -142,7 +142,7 @@ final class CameraRoundVideoFilter {
         if let path = getAppBundle().path(forResource: "PlaneLogoPlain", ofType: "tgs"), var data = try? Data(contentsOf: URL(fileURLWithPath: path)) {
             if let unpackedData = TGGUnzipData(data, 5 * 1024 * 1024) {
                 data = unpackedData
-                self.animation = LottieInstance(data: data, fitzModifier: .none, colorReplacements: [:], cacheKey: "")
+                self.animation = RLottieInstance(data: data, fitzModifier: .none, colorReplacements: [:], cacheKey: "")
             }
         }
         

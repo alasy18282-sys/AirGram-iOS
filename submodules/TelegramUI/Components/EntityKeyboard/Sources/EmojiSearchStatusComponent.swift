@@ -149,7 +149,7 @@ final class EmojiSearchStatusComponent: Component {
     private final class LottieAnimationState: EmojiSearchStatusAnimationState {
         let content: ContentState
         
-        private let animationInstance: LottieInstance
+        private let animationInstance: RLottieInstance
         
         private var currentFrameStartTime: Double?
         private var currentFrame: Int = 0
@@ -169,7 +169,7 @@ final class EmojiSearchStatusComponent: Component {
         }
         
         init?(content: ContentState, data: Data, displaySize: CGSize, frameRange: ClosedRange<Int>?, previousAnimationState: EmojiSearchStatusAnimationState?) {
-            guard let animationInstance = LottieInstance(data: data, fitzModifier: .none, colorReplacements: nil, cacheKey: "") else {
+            guard let animationInstance = RLottieInstance(data: data, fitzModifier: .none, colorReplacements: nil, cacheKey: "") else {
                 return nil
             }
             self.content = content

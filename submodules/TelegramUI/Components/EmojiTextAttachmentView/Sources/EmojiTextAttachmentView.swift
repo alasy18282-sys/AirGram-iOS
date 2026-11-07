@@ -742,7 +742,7 @@ public final class InlineStickerItemLayer: MultiAnimationRenderTarget {
             if let unpackedData = TGGUnzipData(data, 5 * 1024 * 1024) {
                 data = unpackedData
             }
-            guard let instance = LottieInstance(data: data, fitzModifier: .none, colorReplacements: nil, cacheKey: "") else {
+            guard let instance = RLottieInstance(data: data, fitzModifier: .none, colorReplacements: nil, cacheKey: "") else {
                 return nil
             }
             let size = CGSize(width: 128.0, height: 128.0)

@@ -11,7 +11,7 @@ import AnimationCompression
 private let sharedStoreQueue = Queue.concurrentDefaultQueue()
 
 public extension EmojiFitzModifier {
-    var lottieFitzModifier: LottieFitzModifier {
+    var lottieFitzModifier: RLottieFitzModifier {
         switch self {
         case .type12:
             return .type12
@@ -572,7 +572,7 @@ public final class AnimatedStickerDirectFrameSource: AnimatedStickerFrameSource 
     public let frameCount: Int
     public let frameRate: Int
     fileprivate var currentFrame: Int
-    private let animation: LottieInstance
+    private let animation: RLottieInstance
     
     public var frameIndex: Int {
         return self.currentFrame % self.frameCount
@@ -587,7 +587,7 @@ public final class AnimatedStickerDirectFrameSource: AnimatedStickerFrameSource 
         self.currentFrame = 0
         let decompressedData = TGGUnzipData(data, 8 * 1024 * 1024) ?? data
         
-        guard let animation = LottieInstance(data: decompressedData, fitzModifier: fitzModifier?.lottieFitzModifier ?? .none, colorReplacements: nil, cacheKey: "") else {
+        guard let animation = RLottieInstance(data: decompressedData, fitzModifier: fitzModifier?.lottieFitzModifier ?? .none, colorReplacements: nil, cacheKey: "") else {
             print("Could not load sticker data")
             return nil
         }

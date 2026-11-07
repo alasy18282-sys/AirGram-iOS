@@ -146,7 +146,7 @@ public final class LottieComponent: Component {
         private var isPlaying: Bool = false
         
         private var playOnceCompletion: (() -> Void)?
-        private var animationInstance: LottieInstance?
+        private var animationInstance: RLottieInstance?
         private var animationFrameRange: Range<Int>?
         private var currentDisplaySize: CGSize?
         private var currentContentDisposable: Disposable?
@@ -324,7 +324,7 @@ public final class LottieComponent: Component {
         }
         
         private func loadAnimation(data: Data, cacheKey: String?, startingPosition: StartingPosition, frameRange: Range<Double>) {
-            self.animationInstance = LottieInstance(data: data, fitzModifier: .none, colorReplacements: nil, cacheKey: cacheKey ?? "")
+            self.animationInstance = RLottieInstance(data: data, fitzModifier: .none, colorReplacements: nil, cacheKey: cacheKey ?? "")
             if let animationInstance = self.animationInstance {
                 self.animationFrameRange = Int(floor(frameRange.lowerBound * Double(animationInstance.frameCount))) ..< Int(floor(frameRange.upperBound * Double(animationInstance.frameCount)))
             } else {

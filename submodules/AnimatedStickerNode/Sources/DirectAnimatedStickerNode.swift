@@ -73,7 +73,7 @@ public final class DirectAnimatedStickerNode: ASDisplayNode, AnimatedStickerNode
     private var sourceDisposable: Disposable?
     private var playbackSize: CGSize?
     
-    private var lottieInstance: LottieInstance?
+    private var lottieInstance: RLottieInstance?
     private var videoSource: AnimatedStickerFrameSource?
     private var frameIndex: Int = 0
     private var playbackMode: AnimatedStickerPlaybackMode = .loop
@@ -122,7 +122,7 @@ public final class DirectAnimatedStickerNode: ASDisplayNode, AnimatedStickerNode
                 
                 let decompressedData = TGGUnzipData(data, 8 * 1024 * 1024) ?? data
                 
-                guard let lottieInstance = LottieInstance(data: decompressedData, fitzModifier: .none, colorReplacements: nil, cacheKey: "") else {
+                guard let lottieInstance = RLottieInstance(data: decompressedData, fitzModifier: .none, colorReplacements: nil, cacheKey: "") else {
                     print("Could not load sticker data")
                     return
                 }
@@ -338,7 +338,7 @@ public final class DirectAnimatedStickerNode: ASDisplayNode, AnimatedStickerNode
         }
     }
     
-    private func setupPlayback(lottieInstance: LottieInstance) {
+    private func setupPlayback(lottieInstance: RLottieInstance) {
         self.lottieInstance = lottieInstance
         
         self.updatePlayback()
