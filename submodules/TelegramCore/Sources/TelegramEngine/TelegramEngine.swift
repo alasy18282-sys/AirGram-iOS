@@ -91,6 +91,10 @@ public final class TelegramEngine {
     public lazy var preferences: Preferences = {
         return Preferences(account: self.account)
     }()
+
+    public lazy var wallet: Wallet = {
+        return Wallet(account: self.account)
+    }()
 }
 
 public final class TelegramEngineUnauthorized {

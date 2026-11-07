@@ -328,6 +328,14 @@ public final class AccountStateManager {
         let messagesRemovedContext: MessagesRemovedContext
         
         fileprivate let storyUpdatesPipe = ValuePipe<[InternalStoryUpdate]>()
+
+        fileprivate let walletTransferUpdatesPipe = ValuePipe<[WalletTransferUpdate]>()
+        fileprivate let walletTonConnectUpdatesPipe = ValuePipe<[WalletTonConnectEvent]>()
+
+        fileprivate let walletStateUpdatesPipe = ValuePipe<Api.WalletState>()
+        var walletStateUpdates: Signal<Api.WalletState, NoError> {
+            return self.walletStateUpdatesPipe.signal()
+        }
         public var storyUpdates: Signal<[InternalStoryUpdate], NoError> {
             return self.storyUpdatesPipe.signal()
         }
@@ -1193,6 +1201,15 @@ public final class AccountStateManager {
                             if !events.updatedTonBalance.isEmpty {
                                 strongSelf.notifyUpdatedTonBalance(events.updatedTonBalance)
                             }
+                            if !events.walletTransferUpdates.isEmpty {
+                                strongSelf.walletTransferUpdatesPipe.putNext(events.walletTransferUpdates)
+                            }
+                            if !events.walletTonConnectEvents.isEmpty {
+                                strongSelf.walletTonConnectUpdatesPipe.putNext(events.walletTonConnectEvents)
+                            }
+                            if let updatedWalletState = events.updatedWalletState {
+                                strongSelf.walletStateUpdatesPipe.putNext(updatedWalletState)
+                            }
                             if !events.updatedStarsRevenueStatus.isEmpty {
                                 strongSelf.notifyUpdatedStarsRevenueStatus(events.updatedStarsRevenueStatus)
                             }
@@ -1979,6 +1996,23 @@ public final class AccountStateManager {
         
         func addStarRefBotConnectionEvent(event: StarRefBotConnectionEvent) {
             self.starRefBotConnectionEventsPipe.putNext(event)
+        }
+    }
+    func walletTransferUpdates() -> Signal<[WalletTransferUpdate], NoError> {
+        return self.impl.signalWith { impl, subscriber in
+            return impl.walletTransferUpdatesPipe.signal().start(next: subscriber.putNext, error: subscriber.putError, completed: subscriber.putCompletion)
+        }
+    }
+
+    func walletTonConnectUpdates() -> Signal<[WalletTonConnectEvent], NoError> {
+        return self.impl.signalWith { impl, subscriber in
+            return impl.walletTonConnectUpdatesPipe.signal().start(next: subscriber.putNext, error: subscriber.putError, completed: subscriber.putCompletion)
+        }
+    }
+
+    func walletStateUpdates() -> Signal<Api.WalletState, NoError> {
+        return self.impl.signalWith { impl, subscriber in
+            return impl.walletStateUpdates.start(next: subscriber.putNext, error: subscriber.putError, completed: subscriber.putCompletion)
         }
     }
     

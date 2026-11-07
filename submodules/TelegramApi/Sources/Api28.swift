@@ -1883,6 +1883,67 @@ public extension Api {
                 return ("updateWebViewResultSent", [("queryId", ConstructorParameterDescription(self.queryId))])
             }
         }
+        public class Cons_updateSentWalletTransaction: TypeConstructorDescription {
+            public var flags: Int32
+            public var msgHash: String
+            public var transaction: Api.WalletTransaction?
+            public init(flags: Int32, msgHash: String, transaction: Api.WalletTransaction?) {
+                self.flags = flags
+                self.msgHash = msgHash
+                self.transaction = transaction
+            }
+            public func descriptionFields() -> (String, [(String, ConstructorParameterDescription)]) {
+                return ("updateSentWalletTransaction", [("flags", ConstructorParameterDescription(self.flags)), ("msgHash", ConstructorParameterDescription(self.msgHash)), ("transaction", ConstructorParameterDescription(self.transaction))])
+            }
+        }
+
+        public class Cons_updateWalletGaslessInfo: TypeConstructorDescription {
+            public var flags: Int32
+            public var left: Int32
+            public var resetAt: Int32
+            public var minAmount: Int64
+            public var relayerAddress: String
+            public init(flags: Int32, left: Int32, resetAt: Int32, minAmount: Int64, relayerAddress: String) {
+                self.flags = flags
+                self.left = left
+                self.resetAt = resetAt
+                self.minAmount = minAmount
+                self.relayerAddress = relayerAddress
+            }
+            public func descriptionFields() -> (String, [(String, ConstructorParameterDescription)]) {
+                return ("updateWalletGaslessInfo", [("flags", ConstructorParameterDescription(self.flags)), ("left", ConstructorParameterDescription(self.left)), ("resetAt", ConstructorParameterDescription(self.resetAt)), ("minAmount", ConstructorParameterDescription(self.minAmount)), ("relayerAddress", ConstructorParameterDescription(self.relayerAddress))])
+            }
+        }
+
+        public class Cons_updateWalletState: TypeConstructorDescription {
+            public var state: Api.WalletState
+            public init(state: Api.WalletState) {
+                self.state = state
+            }
+            public func descriptionFields() -> (String, [(String, ConstructorParameterDescription)]) {
+                return ("updateWalletState", [("state", ConstructorParameterDescription(self.state))])
+            }
+        }
+
+        public class Cons_updateWalletTonConnectSession: TypeConstructorDescription {
+            public var session: Api.TonConnectSession
+            public init(session: Api.TonConnectSession) {
+                self.session = session
+            }
+            public func descriptionFields() -> (String, [(String, ConstructorParameterDescription)]) {
+                return ("updateWalletTonConnectSession", [("session", ConstructorParameterDescription(self.session))])
+            }
+        }
+
+        public class Cons_updateWalletTonConnectPendingDisconnect: TypeConstructorDescription {
+            public var sessionIds: [Int64]
+            public init(sessionIds: [Int64]) {
+                self.sessionIds = sessionIds
+            }
+            public func descriptionFields() -> (String, [(String, ConstructorParameterDescription)]) {
+                return ("updateWalletTonConnectPendingDisconnect", [("sessionIds", ConstructorParameterDescription(self.sessionIds))])
+            }
+        }
         case updateAttachMenuBots
         case updateAutoSaveSettings
         case updateBotBusinessConnect(Cons_updateBotBusinessConnect)
@@ -2015,6 +2076,7 @@ public extension Api {
         case updateSavedRingtones
         case updateSentPhoneCode(Cons_updateSentPhoneCode)
         case updateSentStoryReaction(Cons_updateSentStoryReaction)
+        case updateSentWalletTransaction(Cons_updateSentWalletTransaction)
         case updateServiceNotification(Cons_updateServiceNotification)
         case updateSmsJob(Cons_updateSmsJob)
         case updateStarGiftAuctionState(Cons_updateStarGiftAuctionState)
@@ -2035,9 +2097,96 @@ public extension Api {
         case updateUserPhone(Cons_updateUserPhone)
         case updateUserStatus(Cons_updateUserStatus)
         case updateUserTyping(Cons_updateUserTyping)
+        case updateWalletGaslessInfo(Cons_updateWalletGaslessInfo)
+        case updateWalletState(Cons_updateWalletState)
+        case updateWalletTonConnectPendingDisconnect(Cons_updateWalletTonConnectPendingDisconnect)
+        case updateWalletTonConnectSession(Cons_updateWalletTonConnectSession)
         case updateWebPage(Cons_updateWebPage)
         case updateWebViewResultSent(Cons_updateWebViewResultSent)
 
+        public static func parse_updateSentWalletTransaction(_ reader: BufferReader) -> Update? {
+            var _1: Int32?
+            _1 = reader.readInt32()
+            var _2: String?
+            _2 = parseString(reader)
+            var _3: Api.WalletTransaction?
+            if Int(_1 ?? 0) & Int(1 << 1) != 0 {
+                if let signature = reader.readInt32() {
+                    _3 = Api.parse(reader, signature: signature) as? Api.WalletTransaction
+                }
+            }
+            let _c1 = _1 != nil
+            let _c2 = _2 != nil
+            let _c3 = (Int(_1 ?? 0) & Int(1 << 1) == 0) || _3 != nil
+            if _c1 && _c2 && _c3 {
+                return Api.Update.updateSentWalletTransaction(Cons_updateSentWalletTransaction(flags: _1!, msgHash: _2!, transaction: _3))
+            }
+            else {
+                return nil
+            }
+        }
+        public static func parse_updateWalletGaslessInfo(_ reader: BufferReader) -> Update? {
+            var _1: Int32?
+            _1 = reader.readInt32()
+            var _2: Int32?
+            _2 = reader.readInt32()
+            var _3: Int32?
+            _3 = reader.readInt32()
+            var _4: Int64?
+            _4 = reader.readInt64()
+            var _5: String?
+            _5 = parseString(reader)
+            let _c1 = _1 != nil
+            let _c2 = _2 != nil
+            let _c3 = _3 != nil
+            let _c4 = _4 != nil
+            let _c5 = _5 != nil
+            if _c1 && _c2 && _c3 && _c4 && _c5 {
+                return Api.Update.updateWalletGaslessInfo(Cons_updateWalletGaslessInfo(flags: _1!, left: _2!, resetAt: _3!, minAmount: _4!, relayerAddress: _5!))
+            }
+            else {
+                return nil
+            }
+        }
+        public static func parse_updateWalletState(_ reader: BufferReader) -> Update? {
+            var _1: Api.WalletState?
+            if let signature = reader.readInt32() {
+                _1 = Api.parse(reader, signature: signature) as? Api.WalletState
+            }
+            let _c1 = _1 != nil
+            if _c1 {
+                return Api.Update.updateWalletState(Cons_updateWalletState(state: _1!))
+            }
+            else {
+                return nil
+            }
+        }
+        public static func parse_updateWalletTonConnectSession(_ reader: BufferReader) -> Update? {
+            var _1: Api.TonConnectSession?
+            if let signature = reader.readInt32() {
+                _1 = Api.parse(reader, signature: signature) as? Api.TonConnectSession
+            }
+            let _c1 = _1 != nil
+            if _c1 {
+                return Api.Update.updateWalletTonConnectSession(Cons_updateWalletTonConnectSession(session: _1!))
+            }
+            else {
+                return nil
+            }
+        }
+        public static func parse_updateWalletTonConnectPendingDisconnect(_ reader: BufferReader) -> Update? {
+            var _1: [Int64]?
+            if let _ = reader.readInt32() {
+                _1 = Api.parseVector(reader, elementSignature: 570911930, elementType: Int64.self)
+            }
+            let _c1 = _1 != nil
+            if _c1 {
+                return Api.Update.updateWalletTonConnectPendingDisconnect(Cons_updateWalletTonConnectPendingDisconnect(sessionIds: _1!))
+            }
+            else {
+                return nil
+            }
+        }
         public func serialize(_ buffer: Buffer, _ boxed: Swift.Bool) {
             switch self {
             case .updateAttachMenuBots:
@@ -3307,6 +3456,16 @@ public extension Api {
                 serializeInt32(_data.storyId, buffer: buffer, boxed: false)
                 _data.reaction.serialize(buffer, true)
                 break
+            case .updateSentWalletTransaction(let _data):
+                if boxed {
+                    buffer.appendInt32(-1320989366)
+                }
+                serializeInt32(_data.flags, buffer: buffer, boxed: false)
+                serializeString(_data.msgHash, buffer: buffer, boxed: false)
+                if Int(_data.flags) & Int(1 << 1) != 0 {
+                    _data.transaction!.serialize(buffer, true)
+                }
+                break
             case .updateServiceNotification(let _data):
                 if boxed {
                     buffer.appendInt32(-337352679)
@@ -3465,6 +3624,38 @@ public extension Api {
                     serializeInt32(_data.topMsgId!, buffer: buffer, boxed: false)
                 }
                 _data.action.serialize(buffer, true)
+                break
+            case .updateWalletGaslessInfo(let _data):
+                if boxed {
+                    buffer.appendInt32(-1464984404)
+                }
+                serializeInt32(_data.flags, buffer: buffer, boxed: false)
+                serializeInt32(_data.left, buffer: buffer, boxed: false)
+                serializeInt32(_data.resetAt, buffer: buffer, boxed: false)
+                serializeInt64(_data.minAmount, buffer: buffer, boxed: false)
+                serializeString(_data.relayerAddress, buffer: buffer, boxed: false)
+                break
+            case .updateWalletState(let _data):
+                if boxed {
+                    buffer.appendInt32(1791226538)
+                }
+                _data.state.serialize(buffer, true)
+                break
+            case .updateWalletTonConnectPendingDisconnect(let _data):
+                if boxed {
+                    buffer.appendInt32(-772898407)
+                }
+                buffer.appendInt32(481674261)
+                buffer.appendInt32(Int32(_data.sessionIds.count))
+                for item in _data.sessionIds {
+                    serializeInt64(item, buffer: buffer, boxed: false)
+                }
+                break
+            case .updateWalletTonConnectSession(let _data):
+                if boxed {
+                    buffer.appendInt32(1352896014)
+                }
+                _data.session.serialize(buffer, true)
                 break
             case .updateWebPage(let _data):
                 if boxed {

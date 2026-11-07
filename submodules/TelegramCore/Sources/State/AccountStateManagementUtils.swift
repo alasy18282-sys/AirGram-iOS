@@ -2021,6 +2021,14 @@ private func finalStateWithUpdatesAndServerTime(accountPeerId: PeerId, postbox: 
             case let .updateStarsBalance(updateStarsBalanceData):
                 let amount = CurrencyAmount(apiAmount: updateStarsBalanceData.balance)
                 updatedState.updateStarsBalance(peerId: accountPeerId, currency: amount.currency, balance: amount.amount)
+            case .updateSentWalletTransaction, .updateWalletGaslessInfo:
+                updatedState.addWalletTransferUpdate(update)
+            case let .updateWalletTonConnectSession(data):
+                updatedState.addWalletTonConnectEvent(.session(WalletTonConnectSession(apiSession: data.session)))
+            case let .updateWalletTonConnectPendingDisconnect(data):
+                updatedState.addWalletTonConnectEvent(.pendingDisconnect(sessionIds: data.sessionIds))
+            case let .updateWalletState(updateWalletStateData):
+                updatedState.updateWalletState(updateWalletStateData.state)
             case let .updateStarsRevenueStatus(updateStarsRevenueStatusData):
                 updatedState.updateStarsRevenueStatus(peerId: updateStarsRevenueStatusData.peer.peerId, status: StarsRevenueStats.Balances(apiStarsRevenueStatus: updateStarsRevenueStatusData.status))
             case let .updatePaidReactionPrivacy(updatePaidReactionPrivacyData):
@@ -3975,6 +3983,9 @@ func replayFinalState(
     var updateConfig = false
     var updatedStarsBalance: [PeerId: StarsAmount] = [:]
     var updatedTonBalance: [PeerId: StarsAmount] = [:]
+    var walletTransferApiUpdates: [Api.Update] = []
+    var walletTonConnectEventBatch: [WalletTonConnectEvent] = []
+    var updatedWalletState: Api.WalletState?
     var updatedStarsRevenueStatus: [PeerId: StarsRevenueStats.Balances] = [:]
     var updatedStarsReactionsDefaultPrivacy: TelegramPaidReactionPrivacy?
     var reportMessageDelivery = Set<MessageId>()
@@ -5561,6 +5572,12 @@ func replayFinalState(
                 case .stars:
                     updatedStarsBalance[peerId] = balance
                 }
+            case let .UpdateWalletTransfer(update):
+                walletTransferApiUpdates.append(update)
+            case .UpdateWalletTonConnectEvent:
+                break
+            case let .UpdateWalletState(state):
+                updatedWalletState = state
             case let .UpdateStarsRevenueStatus(peerId, status):
                 updatedStarsRevenueStatus[peerId] = status
             case let .UpdateStarsReactionsDefaultPrivacy(value):
@@ -6133,6 +6150,21 @@ func replayFinalState(
         isPremiumUpdated: isPremiumUpdated,
         updatedStarsBalance: updatedStarsBalance,
         updatedTonBalance: updatedTonBalance,
+        walletTransferUpdates: walletTransferApiUpdates.compactMap { update in
+            switch update {
+            case let .updateSentWalletTransaction(data):
+                guard !data.msgHash.isEmpty else { return nil }
+                return .sentTransaction(WalletSentTransfer(apiTransfer: data), data.transaction.map {
+                    WalletTransaction(apiTransaction: $0, transaction: transaction)
+                })
+            case let .updateWalletGaslessInfo(data):
+                return .gaslessInfo(WalletGaslessInfo(apiInfo: data))
+            default:
+                return nil
+            }
+        },
+        walletTonConnectEvents: walletTonConnectEventBatch,
+        updatedWalletState: updatedWalletState,
         updatedStarsRevenueStatus: updatedStarsRevenueStatus,
         sentScheduledMessageIds: finalState.state.sentScheduledMessageIds,
         reportMessageDelivery: reportMessageDelivery,

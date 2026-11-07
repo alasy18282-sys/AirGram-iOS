@@ -21,6 +21,7 @@ public enum Api {
     public enum updates {}
     public enum upload {}
     public enum users {}
+    public enum wallet {}
     public enum functions {
         public enum account {}
         public enum auth {}
@@ -44,6 +45,7 @@ public enum Api {
         public enum updates {}
         public enum upload {}
         public enum users {}
+    public enum wallet {}
     }
 }
 
@@ -1610,6 +1612,37 @@ fileprivate let parsers: [Int32 : (BufferReader) -> Any?] = {
     dict[997004590] = { return Api.users.UserFull.parse_userFull($0) }
     dict[1658259128] = { return Api.users.Users.parse_users($0) }
     dict[828000628] = { return Api.users.Users.parse_usersSlice($0) }
+        dict[-1320989366] = { return Api.Update.parse_updateSentWalletTransaction($0) }
+    dict[-1464984404] = { return Api.Update.parse_updateWalletGaslessInfo($0) }
+    dict[1791226538] = { return Api.Update.parse_updateWalletState($0) }
+    dict[1352896014] = { return Api.Update.parse_updateWalletTonConnectSession($0) }
+    dict[-772898407] = { return Api.Update.parse_updateWalletTonConnectPendingDisconnect($0) }
+    dict[-1825969613] = { return Api.MessageAction.parse_messageActionGramTransfer($0) }
+    dict[1773716671] = { return Api.MessageAction.parse_messageActionWalletTonConnectRequest($0) }
+    dict[417867063] = { return Api.wallet.EncryptedSecretPhrasePart.parse_encryptedSecretPhrasePart($0) }
+    dict[-1108800883] = { return Api.wallet.ExistingBalance.parse_existingBalance($0) }
+    dict[1277096206] = { return Api.wallet.NftAttribute.parse_nftAttribute($0) }
+    dict[876739868] = { return Api.wallet.NftItem.parse_nftItem($0) }
+    dict[2035107951] = { return Api.wallet.NftItems.parse_nftItems($0) }
+    dict[-422514943] = { return Api.wallet.SecretPhraseParts.parse_secretPhraseParts($0) }
+    dict[-1713105145] = { return Api.wallet.ProofChallenge.parse_proofChallenge($0) }
+    dict[1271436947] = { return Api.wallet.TonConnectChallenge.parse_tonConnectChallenge($0) }
+    dict[-2050952924] = { return Api.wallet.TonConnectPending.parse_tonConnectPending($0) }
+    dict[236939414] = { return Api.wallet.TonConnectSessions.parse_tonConnectSessions($0) }
+    dict[1126356389] = { return Api.wallet.Transactions.parse_transactions($0) }
+    dict[-1836156075] = { return Api.wallet.UserAddresses.parse_userAddresses($0) }
+    dict[-103410961] = { return Api.wallet.HolderDc.parse_holderDc($0) }
+    dict[308631238] = { return Api.TonConnectSession.parse_tonConnectSession($0) }
+    dict[-1587575533] = { return Api.TonConnectRequest.parse_tonConnectRequest($0) }
+    dict[1478780131] = { return Api.TonConnectNextEventId.parse_tonConnectNextEventId($0) }
+    dict[-1782238101] = { return Api.WalletState.parse_walletState($0) }
+    dict[-1665551636] = { return Api.WalletState.parse_walletStateEmpty($0) }
+    dict[-1792163517] = { return Api.WalletTransaction.parse_walletTransaction($0) }
+    dict[-25628980] = { return Api.WalletUserAddress.parse_walletUserAddress($0) }
+    dict[103596476] = { return Api.WalletTransactionPeer.parse_walletTransactionPeerAddress($0) }
+    dict[-443213714] = { return Api.WalletTransactionPeer.parse_walletTransactionPeerOnramp($0) }
+    dict[-722833299] = { return Api.WalletTransactionPeer.parse_walletTransactionPeerUser($0) }
+    dict[1722182203] = { return Api.InputWalletReplacement.parse_inputWalletImported($0) }
     return dict
 }()
 
@@ -2835,6 +2868,48 @@ public extension Api {
         case let _1 as Api.users.UserFull:
             _1.serialize(buffer, boxed)
         case let _1 as Api.users.Users:
+            _1.serialize(buffer, boxed)
+        case let _1 as Api.wallet.EncryptedSecretPhrasePart:
+            _1.serialize(buffer, boxed)
+        case let _1 as Api.wallet.ExistingBalance:
+            _1.serialize(buffer, boxed)
+        case let _1 as Api.wallet.NftAttribute:
+            _1.serialize(buffer, boxed)
+        case let _1 as Api.wallet.NftItem:
+            _1.serialize(buffer, boxed)
+        case let _1 as Api.wallet.NftItems:
+            _1.serialize(buffer, boxed)
+        case let _1 as Api.wallet.SecretPhraseParts:
+            _1.serialize(buffer, boxed)
+        case let _1 as Api.wallet.ProofChallenge:
+            _1.serialize(buffer, boxed)
+        case let _1 as Api.wallet.TonConnectChallenge:
+            _1.serialize(buffer, boxed)
+        case let _1 as Api.wallet.TonConnectPending:
+            _1.serialize(buffer, boxed)
+        case let _1 as Api.wallet.TonConnectSessions:
+            _1.serialize(buffer, boxed)
+        case let _1 as Api.wallet.Transactions:
+            _1.serialize(buffer, boxed)
+        case let _1 as Api.wallet.UserAddresses:
+            _1.serialize(buffer, boxed)
+        case let _1 as Api.wallet.HolderDc:
+            _1.serialize(buffer, boxed)
+        case let _1 as Api.TonConnectSession:
+            _1.serialize(buffer, boxed)
+        case let _1 as Api.TonConnectRequest:
+            _1.serialize(buffer, boxed)
+        case let _1 as Api.TonConnectNextEventId:
+            _1.serialize(buffer, boxed)
+        case let _1 as Api.WalletState:
+            _1.serialize(buffer, boxed)
+        case let _1 as Api.WalletTransaction:
+            _1.serialize(buffer, boxed)
+        case let _1 as Api.WalletUserAddress:
+            _1.serialize(buffer, boxed)
+        case let _1 as Api.WalletTransactionPeer:
+            _1.serialize(buffer, boxed)
+        case let _1 as Api.InputWalletReplacement:
             _1.serialize(buffer, boxed)
         default:
             break
