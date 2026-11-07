@@ -1,0 +1,310 @@
+ERROR: /Users/runner/work/AirGram-iOS/AirGram-iOS/submodules/TelegramUI/Components/SideColumnLayout/BUILD:5:14: Generating derived files for Swift module //submodules/TelegramUI/Components/SideColumnLayout:SideColumnLayout failed: (Exit 1): worker failed: error executing SwiftDeriveFiles command (from target //submodules/TelegramUI/Components/SideColumnLayout:SideColumnLayout) 
+submodules/TelegramUI/Components/SideColumnLayout/Sources/SideColumnLayout.swift:211:25: error: value of type 'ContainerViewLayout' has no member 'sideInsets'
+    |                         `- error: value of type 'ContainerViewLayout' has no member 'sideInsets'
+submodules/TelegramUI/Components/SideColumnLayout/Sources/SideColumnLayout.swift:227:31: error: value of type 'ContainerViewLayout' has no member 'presentedInFormSheet'
+    |                               `- error: value of type 'ContainerViewLayout' has no member 'presentedInFormSheet'
+ERROR: /Users/runner/work/AirGram-iOS/AirGram-iOS/submodules/TelegramUI/Components/NavigationBarComponent/BUILD:5:14 Linking submodules/TelegramUI/Components/NavigationBarComponent/libNavigationBarComponent.a failed: (Exit 1): worker failed: error executing SwiftDeriveFiles command (from target //submodules/TelegramUI/Components/SideColumnLayout:SideColumnLayout) 
+ERROR: Build did NOT complete successfully
+FAILED: 
+Traceback (most recent call last):
+--- end of full build log ---
+[6,105 / 8,613] Compiling Swift module //submodules/TelegramApi:TelegramApi; 318s disk-cache, worker ... (3 actions running)
+[6,107 / 8,613] Compiling Swift module //submodules/TelegramApi:TelegramApi; 319s disk-cache, worker ... (3 actions running)
+[6,108 / 8,613] Compiling Swift module //submodules/TelegramApi:TelegramApi; 320s disk-cache, worker ... (3 actions running)
+[6,110 / 8,613] Compiling Swift module //submodules/TelegramApi:TelegramApi; 321s disk-cache, worker ... (3 actions running)
+[6,112 / 8,613] Compiling Swift module //submodules/TelegramApi:TelegramApi; 322s disk-cache, worker ... (3 actions running)
+[6,113 / 8,613] Compiling Swift module //submodules/TelegramApi:TelegramApi; 326s disk-cache, worker ... (3 actions, 2 running)
+[6,114 / 8,613] Compiling Swift module //submodules/TelegramApi:TelegramApi; 328s disk-cache, worker ... (3 actions running)
+[6,115 / 8,613] Compiling Swift module //submodules/TelegramApi:TelegramApi; 329s disk-cache, worker ... (3 actions, 2 running)
+[6,115 / 8,613] Compiling Swift module //submodules/TelegramApi:TelegramApi; 331s disk-cache, worker ... (3 actions running)
+[6,116 / 8,613] Compiling Swift module //submodules/TelegramApi:TelegramApi; 332s disk-cache, worker ... (3 actions running)
+[6,117 / 8,613] Compiling Swift module //submodules/TelegramApi:TelegramApi; 333s disk-cache, worker ... (3 actions running)
+[6,118 / 8,613] Compiling Swift module //submodules/TelegramApi:TelegramApi; 335s disk-cache, worker ... (3 actions, 2 running)
+[6,120 / 8,613] Compiling Swift module //submodules/TelegramApi:TelegramApi; 336s disk-cache, worker ... (3 actions running)
+[6,121 / 8,613] Compiling Swift module //submodules/TelegramApi:TelegramApi; 337s disk-cache, worker ... (3 actions, 2 running)
+[6,122 / 8,613] Compiling Swift module //submodules/TelegramApi:TelegramApi; 339s disk-cache, worker ... (3 actions, 2 running)
+[6,122 / 8,613] Compiling Swift module //submodules/TelegramApi:TelegramApi; 340s disk-cache, worker ... (3 actions running)
+[6,123 / 8,613] Compiling Swift module //submodules/TelegramApi:TelegramApi; 342s disk-cache, worker ... (3 actions, 2 running)
+[6,124 / 8,613] Compiling Swift module //submodules/TelegramApi:TelegramApi; 343s disk-cache, worker ... (3 actions, 2 running)
+[6,126 / 8,613] Compiling Swift module //submodules/TelegramApi:TelegramApi; 344s disk-cache, worker ... (3 actions, 2 running)
+[6,130 / 8,613] Compiling Swift module //submodules/TelegramApi:TelegramApi; 346s disk-cache, worker ... (3 actions, 2 running)
+[6,133 / 8,613] Compiling third-party/webrtc/webrtc/video/adaptation/quality_scaler_resource.cc; 0s local, disk-cache ... (3 actions running)
+[6,135 / 8,613] Compiling third-party/webrtc/webrtc/rtc_base/third_party/base64/base64.cc; 1s local, disk-cache ... (3 actions running)
+[6,139 / 8,613] Compiling Swift module //submodules/Utils/RangeSet:RangeSet; 0s disk-cache, worker ... (3 actions running)
+[6,143 / 8,613] Compiling third-party/webrtc/webrtc/video/adaptation/video_stream_encoder_resource_manager.cc; 1s local, disk-cache ... (3 actions running)
+[6,149 / 8,613] Compiling third-party/webrtc/webrtc/video/alignment_adjuster.cc; 0s local, disk-cache ... (3 actions running)
+[6,152 / 8,613] Compiling Swift module //submodules/Emoji:Emoji; 1s disk-cache, worker ... (3 actions, 2 running)
+[6,156 / 8,613] Generating derived files for Swift module //submodules/Markdown:Markdown; 0s disk-cache, worker ... (3 actions, 2 running)
+[6,159 / 8,613] Generating derived files for Swift module //submodules/SSignalKit/SwiftSignalKit:SwiftSignalKit; 0s disk-cache, worker ... (3 actions, 2 running)
+[6,162 / 8,613] Compiling third-party/webrtc/webrtc/rtc_base/socket_address_pair.cc; 0s local, disk-cache ... (3 actions, 2 running)
+[6,165 / 8,613] Compiling third-party/webrtc/webrtc/rtc_base/rtc_certificate_generator.cc; 0s local, disk-cache ... (3 actions, 2 running)
+[6,168 / 8,613] Compiling third-party/webrtc/webrtc/video/encoder_rtcp_feedback.cc; 1s local, disk-cache ... (3 actions running)
+[6,171 / 8,613] Compiling third-party/webrtc/webrtc/rtc_base/platform_thread.cc; 0s local, disk-cache ... (3 actions running)
+[6,173 / 8,613] Compiling Swift module //submodules/Media/LocalAudioTranscription:LocalAudioTranscription; 1s disk-cache, worker ... (3 actions running)
+[6,176 / 8,613] Compiling third-party/webrtc/webrtc/rtc_base/physical_socket_server.cc; 2s local, disk-cache ... (3 actions running)
+[6,178 / 8,613] Generating derived files for Swift module //submodules/Geocoding:Geocoding; 1s disk-cache, worker ... (3 actions running)
+[6,184 / 8,613] Compiling third-party/webrtc/webrtc/video/render/incoming_video_stream.cc; 0s local, disk-cache ... (3 actions, 2 running)
+[6,186 / 8,613] Compiling third-party/webrtc/webrtc/rtc_base/openssl_stream_adapter.cc; 1s local, disk-cache ... (3 actions running)
+[6,193 / 8,613] Compiling third-party/webrtc/webrtc/video/unique_timestamp_counter.cc; 0s local, disk-cache ... (3 actions running)
+[6,197 / 8,613] Compiling third-party/webrtc/webrtc/video/video_quality_observer2.cc; 0s local, disk-cache ... (3 actions running)
+[6,200 / 8,613] Compiling Swift module //submodules/TelegramAudio:TelegramAudio; 0s disk-cache, worker ... (3 actions running)
+[6,202 / 8,613] Compiling Swift module //submodules/TelegramAudio:TelegramAudio; 1s disk-cache, worker ... (3 actions running)
+[6,206 / 8,613] Compiling third-party/webrtc/webrtc/video/video_stream_encoder.cc; 1s local, disk-cache ... (3 actions running)
+[6,209 / 8,613] Compiling third-party/webrtc/webrtc/video/video_stream_encoder.cc; 2s local, disk-cache ... (3 actions running)
+[6,212 / 8,613] Compiling third-party/webrtc/webrtc/video/video_stream_encoder.cc; 3s local, disk-cache ... (3 actions running)
+[6,215 / 8,613] Compiling third-party/webrtc/webrtc/rtc_base/experiments/stable_target_rate_experiment.cc; 1s local, disk-cache ... (3 actions running)
+[6,218 / 8,613] Compiling third-party/webrtc/webrtc/rtc_base/experiments/rtt_mult_experiment.cc; 0s local, disk-cache ... (3 actions running)
+[6,222 / 8,613] Generating derived files for Swift module //submodules/Postbox:Postbox; 1s disk-cache, worker ... (3 actions, 2 running)
+[6,227 / 8,613] Generating derived files for Swift module //submodules/Postbox:Postbox; 2s disk-cache, worker ... (3 actions running)
+[6,229 / 8,613] Generating derived files for Swift module //submodules/Postbox:Postbox; 3s disk-cache, worker ... (3 actions running)
+[6,231 / 8,613] Generating derived files for Swift module //submodules/Postbox:Postbox; 4s disk-cache, worker ... (3 actions, 2 running)
+[6,233 / 8,613] Generating derived files for Swift module //submodules/Postbox:Postbox; 6s disk-cache, worker ... (3 actions running)
+[6,237 / 8,613] Generating derived files for Swift module //submodules/Postbox:Postbox; 7s disk-cache, worker ... (3 actions, 2 running)
+[6,238 / 8,613] Generating derived files for Swift module //submodules/Postbox:Postbox; 8s disk-cache, worker ... (3 actions running)
+[6,242 / 8,613] Generating derived files for Swift module //submodules/Postbox:Postbox; 9s disk-cache, worker ... (3 actions, 2 running)
+[6,244 / 8,613] Generating derived files for Swift module //submodules/Postbox:Postbox; 10s disk-cache, worker ... (3 actions running)
+[6,246 / 8,613] Generating derived files for Swift module //submodules/Postbox:Postbox; 11s disk-cache, worker ... (3 actions running)
+[6,248 / 8,613] Generating derived files for Swift module //submodules/Postbox:Postbox; 12s disk-cache, worker ... (3 actions running)
+[6,251 / 8,613] Generating derived files for Swift module //submodules/Postbox:Postbox; 13s disk-cache, worker ... (3 actions running)
+[6,256 / 8,613] Generating derived files for Swift module //submodules/Postbox:Postbox; 14s disk-cache, worker ... (3 actions, 2 running)
+[6,258 / 8,613] Generating derived files for Swift module //submodules/Postbox:Postbox; 15s disk-cache, worker ... (3 actions running)
+[6,262 / 8,613] Generating derived files for Swift module //submodules/Postbox:Postbox; 16s disk-cache, worker ... (3 actions running)
+[6,265 / 8,613] Generating derived files for Swift module //submodules/Postbox:Postbox; 17s disk-cache, worker ... (3 actions running)
+[6,268 / 8,613] Generating derived files for Swift module //submodules/Postbox:Postbox; 18s disk-cache, worker ... (3 actions running)
+[6,270 / 8,613] Generating derived files for Swift module //submodules/Postbox:Postbox; 20s disk-cache, worker ... (3 actions running)
+[6,272 / 8,613] Generating derived files for Swift module //submodules/Postbox:Postbox; 21s disk-cache, worker ... (3 actions running)
+[6,273 / 8,613] Generating derived files for Swift module //submodules/Postbox:Postbox; 22s disk-cache, worker ... (3 actions running)
+[6,274 / 8,613] Generating derived files for Swift module //submodules/Postbox:Postbox; 23s disk-cache, worker ... (3 actions running)
+[6,275 / 8,613] Generating derived files for Swift module //submodules/Postbox:Postbox; 24s disk-cache, worker ... (3 actions running)
+[6,277 / 8,613] Generating derived files for Swift module //submodules/Postbox:Postbox; 25s disk-cache, worker ... (3 actions running)
+[6,278 / 8,613] Generating derived files for Swift module //submodules/Postbox:Postbox; 26s disk-cache, worker ... (3 actions, 2 running)
+[6,279 / 8,613] Generating derived files for Swift module //submodules/Postbox:Postbox; 27s disk-cache, worker ... (3 actions running)
+[6,280 / 8,613] Generating derived files for Swift module //submodules/Postbox:Postbox; 28s disk-cache, worker ... (3 actions running)
+[6,282 / 8,613] Generating derived files for Swift module //submodules/Postbox:Postbox; 29s disk-cache, worker ... (3 actions running)
+[6,283 / 8,613] Generating derived files for Swift module //submodules/Postbox:Postbox; 30s disk-cache, worker ... (3 actions running)
+[6,285 / 8,613] Generating derived files for Swift module //submodules/Postbox:Postbox; 31s disk-cache, worker ... (3 actions running)
+[6,286 / 8,613] Generating derived files for Swift module //submodules/Postbox:Postbox; 32s disk-cache, worker ... (3 actions running)
+[6,288 / 8,613] Generating derived files for Swift module //submodules/Postbox:Postbox; 33s disk-cache, worker ... (3 actions running)
+[6,289 / 8,613] Generating derived files for Swift module //submodules/Postbox:Postbox; 34s disk-cache, worker ... (3 actions running)
+[6,290 / 8,613] Generating derived files for Swift module //submodules/Postbox:Postbox; 36s disk-cache, worker ... (3 actions, 2 running)
+[6,290 / 8,613] Generating derived files for Swift module //submodules/Postbox:Postbox; 38s disk-cache, worker ... (3 actions running)
+[6,293 / 8,613] Generating derived files for Swift module //submodules/Postbox:Postbox; 39s disk-cache, worker ... (3 actions running)
+[6,294 / 8,613] Generating derived files for Swift module //submodules/Postbox:Postbox; 40s disk-cache, worker ... (3 actions, 2 running)
+[6,296 / 8,613] Generating derived files for Swift module //submodules/Postbox:Postbox; 42s disk-cache, worker ... (3 actions running)
+[6,297 / 8,613] Generating derived files for Swift module //submodules/Postbox:Postbox; 43s disk-cache, worker ... (3 actions running)
+[6,299 / 8,613] Generating derived files for Swift module //submodules/Postbox:Postbox; 44s disk-cache, worker ... (3 actions running)
+[6,300 / 8,613] Generating derived files for Swift module //submodules/Postbox:Postbox; 45s disk-cache, worker ... (3 actions running)
+[6,301 / 8,613] Generating derived files for Swift module //submodules/Postbox:Postbox; 46s disk-cache, worker ... (3 actions, 2 running)
+[6,302 / 8,613] Generating derived files for Swift module //submodules/Postbox:Postbox; 48s disk-cache, worker ... (3 actions, 2 running)
+[6,309 / 8,613] Generating derived files for Swift module //submodules/Postbox:Postbox; 49s disk-cache, worker ... (3 actions, 2 running)
+[6,313 / 8,613] Compiling third-party/webrtc/webrtc/pc/jsep_transport_controller.cc; 1s local, disk-cache ... (3 actions, 2 running)
+[6,313 / 8,613] Compiling third-party/webrtc/webrtc/pc/jsep_transport_controller.cc; 2s local, disk-cache ... (3 actions running)
+[6,315 / 8,613] Compiling Swift module //submodules/Postbox:Postbox; 3s disk-cache, worker ... (3 actions running)
+[6,316 / 8,613] Compiling Swift module //submodules/Postbox:Postbox; 4s disk-cache, worker ... (3 actions, 2 running)
+[6,318 / 8,613] Compiling Swift module //submodules/Postbox:Postbox; 5s disk-cache, worker ... (3 actions running)
+[6,320 / 8,613] Compiling Swift module //submodules/Postbox:Postbox; 6s disk-cache, worker ... (3 actions running)
+[6,321 / 8,613] Compiling Swift module //submodules/Postbox:Postbox; 7s disk-cache, worker ... (3 actions, 2 running)
+[6,322 / 8,613] Compiling Swift module //submodules/Postbox:Postbox; 9s disk-cache, worker ... (3 actions running)
+[6,323 / 8,613] Compiling Swift module //submodules/Postbox:Postbox; 10s disk-cache, worker ... (3 actions, 2 running)
+[6,324 / 8,613] Compiling Swift module //submodules/Postbox:Postbox; 12s disk-cache, worker ... (3 actions, 2 running)
+[6,324 / 8,613] Compiling Swift module //submodules/Postbox:Postbox; 13s disk-cache, worker ... (3 actions running)
+[6,326 / 8,613] Compiling Swift module //submodules/Postbox:Postbox; 14s disk-cache, worker ... (3 actions running)
+[6,328 / 8,613] Compiling Swift module //submodules/Postbox:Postbox; 15s disk-cache, worker ... (3 actions running)
+[6,329 / 8,613] Compiling Swift module //submodules/Postbox:Postbox; 17s disk-cache, worker ... (3 actions running)
+[6,331 / 8,613] Compiling Swift module //submodules/Postbox:Postbox; 18s disk-cache, worker ... (3 actions running)
+[6,332 / 8,613] Compiling Swift module //submodules/Postbox:Postbox; 19s disk-cache, worker ... (3 actions, 2 running)
+[6,334 / 8,613] Compiling Swift module //submodules/Postbox:Postbox; 20s disk-cache, worker ... (2 actions running)
+[6,334 / 8,613] Compiling Swift module //submodules/Postbox:Postbox; 21s disk-cache, worker ... (3 actions running)
+[6,336 / 8,613] Compiling Swift module //submodules/Postbox:Postbox; 22s disk-cache, worker ... (3 actions running)
+[6,337 / 8,613] Compiling Swift module //submodules/Postbox:Postbox; 23s disk-cache, worker ... (3 actions running)
+[6,339 / 8,613] Compiling Swift module //submodules/Postbox:Postbox; 24s disk-cache, worker ... (3 actions running)
+[6,340 / 8,613] Compiling Swift module //submodules/Postbox:Postbox; 25s disk-cache, worker ... (3 actions running)
+[6,343 / 8,613] Compiling Swift module //submodules/Postbox:Postbox; 26s disk-cache, worker ... (3 actions running)
+[6,345 / 8,613] Compiling Swift module //submodules/Postbox:Postbox; 27s disk-cache, worker ... (3 actions running)
+[6,346 / 8,613] Compiling Swift module //submodules/Postbox:Postbox; 28s disk-cache, worker ... (3 actions running)
+[6,349 / 8,613] Compiling Swift module //submodules/Postbox:Postbox; 30s disk-cache, worker ... (3 actions running)
+[6,351 / 8,613] Compiling Swift module //submodules/Postbox:Postbox; 31s disk-cache, worker ... (3 actions running)
+[6,354 / 8,613] Compiling Swift module //submodules/Postbox:Postbox; 32s disk-cache, worker ... (3 actions running)
+[6,356 / 8,613] Compiling Swift module //submodules/Postbox:Postbox; 33s disk-cache, worker ... (3 actions running)
+[6,357 / 8,613] Compiling Swift module //submodules/Postbox:Postbox; 34s disk-cache, worker ... (3 actions running)
+[6,358 / 8,613] Compiling Swift module //submodules/Postbox:Postbox; 35s disk-cache, worker ... (3 actions running)
+[6,360 / 8,613] Compiling Swift module //submodules/Postbox:Postbox; 36s disk-cache, worker ... (3 actions, 2 running)
+[6,361 / 8,613] Compiling Swift module //submodules/Postbox:Postbox; 37s disk-cache, worker ... (3 actions running)
+[6,369 / 8,613] Compiling Swift module //submodules/Postbox:Postbox; 38s disk-cache, worker ... (3 actions, 2 running)
+[6,375 / 8,613] Compiling Swift module //submodules/Postbox:Postbox; 39s disk-cache, worker ... (3 actions, 2 running)
+[6,376 / 8,613] Compiling Swift module //submodules/Postbox:Postbox; 40s disk-cache, worker ... (3 actions running)
+[6,377 / 8,613] Compiling Swift module //submodules/Postbox:Postbox; 41s disk-cache, worker ... (3 actions running)
+[6,378 / 8,613] Compiling Swift module //submodules/Postbox:Postbox; 42s disk-cache, worker ... (3 actions running)
+[6,379 / 8,613] Compiling Swift module //submodules/Postbox:Postbox; 44s disk-cache, worker ... (3 actions, 2 running)
+[6,379 / 8,613] Compiling Swift module //submodules/Postbox:Postbox; 45s disk-cache, worker ... (3 actions running)
+[6,381 / 8,613] Compiling Swift module //submodules/Postbox:Postbox; 46s disk-cache, worker ... (3 actions running)
+[6,382 / 8,613] Compiling Swift module //submodules/Postbox:Postbox; 47s disk-cache, worker ... (3 actions, 2 running)
+[6,383 / 8,613] Compiling Swift module //submodules/Postbox:Postbox; 49s disk-cache, worker ... (3 actions running)
+[6,385 / 8,613] Compiling Swift module //submodules/Postbox:Postbox; 50s disk-cache, worker ... (3 actions running)
+[6,386 / 8,613] Compiling Swift module //submodules/Postbox:Postbox; 51s disk-cache, worker ... (3 actions running)
+[6,388 / 8,613] Compiling Swift module //submodules/Postbox:Postbox; 52s disk-cache, worker ... (3 actions, 2 running)
+[6,390 / 8,613] Compiling Swift module //submodules/Postbox:Postbox; 53s disk-cache, worker ... (3 actions running)
+[6,392 / 8,613] Compiling Swift module //submodules/Postbox:Postbox; 54s disk-cache, worker ... (3 actions, 2 running)
+[6,393 / 8,613] Compiling Swift module //submodules/Postbox:Postbox; 55s disk-cache, worker ... (3 actions running)
+[6,394 / 8,613] Compiling Swift module //submodules/Postbox:Postbox; 56s disk-cache, worker ... (3 actions running)
+[6,396 / 8,613] Compiling Swift module //submodules/Postbox:Postbox; 58s disk-cache, worker ... (3 actions running)
+[6,397 / 8,613] Compiling Swift module //submodules/Postbox:Postbox; 59s disk-cache, worker ... (3 actions running)
+[6,399 / 8,613] Compiling Swift module //submodules/Postbox:Postbox; 60s disk-cache, worker ... (3 actions running)
+[6,400 / 8,613] Compiling Swift module //submodules/Postbox:Postbox; 61s disk-cache, worker ... (3 actions, 2 running)
+[6,401 / 8,613] Compiling Swift module //submodules/Postbox:Postbox; 62s disk-cache, worker ... (3 actions running)
+[6,403 / 8,613] Compiling Swift module //submodules/Postbox:Postbox; 63s disk-cache, worker ... (3 actions, 2 running)
+[6,404 / 8,613] Compiling Swift module //submodules/Postbox:Postbox; 64s disk-cache, worker ... (3 actions running)
+[6,407 / 8,613] Compiling Swift module //submodules/Postbox:Postbox; 65s disk-cache, worker ... (3 actions running)
+[6,409 / 8,613] Compiling Swift module //submodules/Postbox:Postbox; 66s disk-cache, worker ... (3 actions running)
+[6,412 / 8,613] Compiling Swift module //submodules/Postbox:Postbox; 67s disk-cache, worker ... (3 actions running)
+[6,415 / 8,613] Compiling Swift module //submodules/Postbox:Postbox; 68s disk-cache, worker ... (3 actions running)
+[6,416 / 8,613] Compiling Swift module //submodules/Postbox:Postbox; 69s disk-cache, worker ... (3 actions running)
+[6,419 / 8,613] Compiling Swift module //submodules/Postbox:Postbox; 70s disk-cache, worker ... (3 actions running)
+[6,421 / 8,613] Compiling Swift module //submodules/Postbox:Postbox; 71s disk-cache, worker ... (3 actions running)
+[6,425 / 8,613] Compiling Swift module //submodules/Postbox:Postbox; 72s disk-cache, worker ... (3 actions running)
+[6,427 / 8,613] Compiling Swift module //submodules/Postbox:Postbox; 73s disk-cache, worker ... (3 actions running)
+[6,428 / 8,613] Compiling Swift module //submodules/Postbox:Postbox; 74s disk-cache, worker ... (3 actions running)
+[6,429 / 8,613] Compiling Swift module //submodules/Postbox:Postbox; 75s disk-cache, worker ... (3 actions running)
+[6,431 / 8,613] Compiling Swift module //submodules/Postbox:Postbox; 76s disk-cache, worker ... (3 actions running)
+[6,432 / 8,613] Compiling Swift module //submodules/Postbox:Postbox; 77s disk-cache, worker ... (3 actions running)
+[6,433 / 8,613] Compiling Swift module //submodules/Postbox:Postbox; 79s disk-cache, worker ... (3 actions, 2 running)
+[6,433 / 8,613] Compiling Swift module //submodules/Postbox:Postbox; 81s disk-cache, worker ... (3 actions running)
+[6,434 / 8,613] Compiling Swift module //submodules/Postbox:Postbox; 82s disk-cache, worker ... (3 actions running)
+[6,435 / 8,613] Compiling Swift module //submodules/Postbox:Postbox; 84s disk-cache, worker ... (3 actions, 2 running)
+[6,435 / 8,613] Compiling Swift module //submodules/Postbox:Postbox; 86s disk-cache, worker ... (3 actions running)
+[6,436 / 8,613] Compiling Swift module //submodules/Postbox:Postbox; 87s disk-cache, worker ... (3 actions running)
+[6,438 / 8,613] Compiling Swift module //submodules/Postbox:Postbox; 88s disk-cache, worker ... (3 actions running)
+[6,441 / 8,613] Compiling Swift module //submodules/Postbox:Postbox; 89s disk-cache, worker ... (3 actions running)
+[6,442 / 8,613] Compiling Swift module //submodules/Postbox:Postbox; 91s disk-cache, worker ... (3 actions, 2 running)
+[6,445 / 8,613] Compiling third-party/webrtc/webrtc/sdk/objc/api/peerconnection/RTCRtpReceiver.mm; 1s local, disk-cache ... (3 actions running)
+[6,449 / 8,613] Generating derived files for Swift module //submodules/Display:Display; 0s disk-cache, worker ... (3 actions running)
+[6,450 / 8,613] Generating derived files for Swift module //submodules/Display:Display; 1s disk-cache, worker ... (3 actions running)
+[6,451 / 8,613] Generating derived files for Swift module //submodules/Display:Display; 3s disk-cache, worker ... (3 actions running)
+[6,454 / 8,613] Generating derived files for Swift module //submodules/Display:Display; 4s disk-cache, worker ... (3 actions, 2 running)
+[6,456 / 8,613] Generating derived files for Swift module //submodules/Display:Display; 5s disk-cache, worker ... (3 actions running)
+[6,457 / 8,613] Generating derived files for Swift module //submodules/Display:Display; 6s disk-cache, worker ... (3 actions running)
+[6,458 / 8,613] Generating derived files for Swift module //submodules/Display:Display; 7s disk-cache, worker ... (3 actions, 2 running)
+[6,459 / 8,613] Generating derived files for Swift module //submodules/Display:Display; 8s disk-cache, worker ... (3 actions, 2 running)
+[6,462 / 8,613] Generating derived files for Swift module //submodules/Display:Display; 9s disk-cache, worker ... (3 actions, 2 running)
+[6,467 / 8,613] Generating derived files for Swift module //submodules/Display:Display; 11s disk-cache, worker ... (3 actions, 2 running)
+[6,470 / 8,613] Generating derived files for Swift module //submodules/Display:Display; 12s disk-cache, worker ... (3 actions, 2 running)
+[6,475 / 8,613] Generating derived files for Swift module //submodules/Display:Display; 13s disk-cache, worker ... (3 actions running)
+[6,476 / 8,613] Generating derived files for Swift module //submodules/Display:Display; 15s disk-cache, worker ... (3 actions running)
+[6,477 / 8,613] Generating derived files for Swift module //submodules/Display:Display; 16s disk-cache, worker ... (3 actions running)
+[6,478 / 8,613] Generating derived files for Swift module //submodules/Display:Display; 17s disk-cache, worker ... (3 actions running)
+[6,480 / 8,613] Generating derived files for Swift module //submodules/Display:Display; 18s disk-cache, worker ... (3 actions running)
+[6,484 / 8,613] Generating derived files for Swift module //submodules/Display:Display; 19s disk-cache, worker ... (3 actions, 2 running)
+[6,486 / 8,613] Generating derived files for Swift module //submodules/Display:Display; 20s disk-cache, worker ... (3 actions running)
+[6,489 / 8,613] Generating derived files for Swift module //submodules/Display:Display; 21s disk-cache, worker ... (3 actions, 2 running)
+[6,489 / 8,613] Generating derived files for Swift module //submodules/Display:Display; 22s disk-cache, worker ... (3 actions running)
+INFO: From Compiling third-party/ZipArchive/Sources/minizip/mz_strm_zlib.c:
+third-party/ZipArchive/Sources/minizip/mz_strm_zlib.c:145:14: warning: variable 'total_in' set but not used [-Wunused-but-set-variable]
+  145 |     uint32_t total_in = 0;
+      |              ^
+1 warning generated.
+[6,494 / 8,613] Generating derived files for Swift module //submodules/Display:Display; 23s disk-cache, worker ... (3 actions running)
+[6,500 / 8,613] Generating derived files for Swift module //submodules/Display:Display; 24s disk-cache, worker ... (3 actions running)
+INFO: From Compiling third-party/ZipArchive/Sources/SSZipArchive.m:
+third-party/ZipArchive/Sources/SSZipArchive.m:360:18: warning: variable 'isDirectory' set but not used [-Wunused-but-set-variable]
+  360 |             BOOL isDirectory = NO;
+      |                  ^
+third-party/ZipArchive/Sources/SSZipArchive.m:309:14: warning: variable 'unzippingError' set but not used [-Wunused-but-set-variable]
+  309 |     NSError *unzippingError;
+      |              ^
+third-party/ZipArchive/Sources/SSZipArchive.m:472:18: warning: variable 'isDirectory' set but not used [-Wunused-but-set-variable]
+  472 |             BOOL isDirectory = NO;
+      |                  ^
+third-party/ZipArchive/Sources/SSZipArchive.m:597:14: warning: variable 'retErr' set but not used [-Wunused-but-set-variable]
+  597 |     NSError *retErr = nil;
+      |              ^
+4 warnings generated.
+[6,501 / 8,613] Generating derived files for Swift module //submodules/Display:Display; 26s disk-cache, worker ... (3 actions, 2 running)
+[6,504 / 8,613] Generating derived files for Swift module //submodules/Display:Display; 27s disk-cache, worker ... (3 actions, 2 running)
+[6,508 / 8,613] Generating derived files for Swift module //submodules/Display:Display; 29s disk-cache, worker ... (3 actions, 2 running)
+[6,517 / 8,613] Generating derived files for Swift module //submodules/Display:Display; 30s disk-cache, worker ... (3 actions running)
+[6,523 / 8,613] Generating derived files for Swift module //submodules/Display:Display; 31s disk-cache, worker ... (3 actions running)
+[6,528 / 8,613] Compiling third-party/webrtc/webrtc/sdk/objc/native/src/objc_network_monitor.mm; 0s local, disk-cache ... (3 actions running)
+[6,531 / 8,613] Generating derived files for Swift module //submodules/TelegramUI/Components/MultiScaleTextNode:MultiScaleTextNode; 1s disk-cache, worker ... (3 actions running)
+[6,533 / 8,613] MetalCompile Telegram/WalletSendAmount.air; 1s local, disk-cache ... (3 actions running)
+[6,545 / 8,613] Generating derived files for Swift module //submodules/GraphCore:GraphCore; 0s disk-cache, worker ... (3 actions running)
+[6,561 / 8,613] Generating derived files for Swift module //submodules/GraphCore:GraphCore; 1s disk-cache, worker ... (3 actions, 2 running)
+[6,569 / 8,613] Generating derived files for Swift module //submodules/GraphCore:GraphCore; 2s disk-cache, worker ... (3 actions, 2 running)
+[6,574 / 8,613] Generating derived files for Swift module //submodules/GraphCore:GraphCore; 4s disk-cache, worker ... (3 actions running)
+[6,575 / 8,613] Generating derived files for Swift module //submodules/GraphCore:GraphCore; 5s disk-cache, worker ... (3 actions running)
+[6,577 / 8,613] Generating derived files for Swift module //submodules/GraphCore:GraphCore; 6s disk-cache, worker ... (3 actions, 2 running)
+[6,582 / 8,613] Compiling submodules/TgVoipWebrtc/Sources/MediaStreaming.mm; 1s local, disk-cache ... (3 actions running)
+[6,583 / 8,613] Compiling submodules/TgVoipWebrtc/tgcalls/tgcalls/v2/SignalingTranslator.cpp; 2s local, disk-cache ... (3 actions, 2 running)
+[6,584 / 8,613] Compiling Swift module //submodules/GraphCore:GraphCore; 3s disk-cache, worker ... (3 actions running)
+[6,585 / 8,613] Compiling Swift module //submodules/GraphCore:GraphCore; 4s disk-cache, worker ... (3 actions running)
+[6,586 / 8,613] Compiling Swift module //submodules/GraphCore:GraphCore; 6s disk-cache, worker ... (3 actions, 2 running)
+[6,587 / 8,613] Compiling Swift module //submodules/GraphCore:GraphCore; 7s disk-cache, worker ... (3 actions running)
+[6,588 / 8,613] Compiling Swift module //submodules/GraphCore:GraphCore; 8s disk-cache, worker ... (3 actions, 2 running)
+[6,589 / 8,613] Compiling Swift module //submodules/GraphCore:GraphCore; 9s disk-cache, worker ... (3 actions running)
+[6,590 / 8,613] Compiling Swift module //submodules/GraphCore:GraphCore; 10s disk-cache, worker ... (3 actions running)
+[6,591 / 8,613] Compiling Swift module //submodules/GraphCore:GraphCore; 11s disk-cache, worker ... (3 actions, 2 running)
+[6,592 / 8,613] Compiling submodules/TgVoipWebrtc/tgcalls/tgcalls/v2/Signaling.cpp; 4s local, disk-cache ... (3 actions, 2 running)
+[6,595 / 8,613] Generating derived files for Swift module //submodules/PasscodeInputFieldNode:PasscodeInputFieldNode; 1s disk-cache, worker ... (3 actions running)
+[6,597 / 8,613] Compiling submodules/TgVoipWebrtc/tgcalls/tgcalls/platform/darwin/DarwinInterface.mm; 1s local, disk-cache ... (3 actions running)
+[6,600 / 8,613] Compiling submodules/TgVoipWebrtc/tgcalls/tgcalls/v2/ReflectorPort.cpp; 1s local, disk-cache ... (3 actions running)
+[6,602 / 8,613] Compiling submodules/TgVoipWebrtc/tgcalls/tgcalls/platform/darwin/DarwinVideoSource.mm; 1s local, disk-cache ... (3 actions running)
+[6,606 / 8,613] Compiling submodules/TgVoipWebrtc/tgcalls/tgcalls/v2/NativeNetworkingImpl.cpp; 0s local, disk-cache ... (3 actions running)
+ERROR: /Users/runner/work/AirGram-iOS/AirGram-iOS/submodules/TelegramUI/Components/SideColumnLayout/BUILD:5:14: Generating derived files for Swift module //submodules/TelegramUI/Components/SideColumnLayout:SideColumnLayout failed: (Exit 1): worker failed: error executing SwiftDeriveFiles command (from target //submodules/TelegramUI/Components/SideColumnLayout:SideColumnLayout) 
+  (cd /private/var/tmp/_bazel_containerhost/c259e0c7803e089724afaeab1cf94801/execroot/_main && \
+  exec env - \
+    APPLE_SDK_PLATFORM=iPhoneOS \
+    APPLE_SDK_VERSION_OVERRIDE=26.4 \
+    PATH=/usr/bin:/bin:/usr/sbin:/sbin \
+    XCODE_VERSION_OVERRIDE=26.4.1.17E202 \
+    ZERO_AR_DATE=1 \
+  bazel-out/darwin_arm64-opt-exec-ST-d57f47055a04/bin/external/rules_swift+/tools/worker/worker swiftc @bazel-out/ios_arm64-opt-ios-arm64-min13.0-ST-2d46267cd7fb/bin/submodules/TelegramUI/Components/SideColumnLayout/SideColumnLayout.swiftmodule-0.params)
+# Configuration: 3ba5eaace649cb57515c4b86388f5bb8d32746399fd02c206a540caf053f5d28
+# Execution platform: @@platforms//host:host
+submodules/TelegramUI/Components/SideColumnLayout/Sources/SideColumnLayout.swift:211:25: error: value of type 'ContainerViewLayout' has no member 'sideInsets'
+209 | /// the layout's coordinates).
+210 | public func sideColumnBandInsets(layout: ContainerViewLayout, bandMinY: CGFloat, bandMaxY: CGFloat, column: (edge: ContainerViewLayoutSideEdge, maxY: CGFloat)?) -> (left: CGFloat, right: CGFloat) {
+211 |     var insets = layout.sideInsets(forBandFrom: bandMinY, to: bandMaxY)
+    |                         `- error: value of type 'ContainerViewLayout' has no member 'sideInsets'
+212 |     if let column, bandMinY < column.maxY + clearance {
+213 |         switch column.edge {
+
+submodules/TelegramUI/Components/SideColumnLayout/Sources/SideColumnLayout.swift:227:31: error: value of type 'ContainerViewLayout' has no member 'presentedInFormSheet'
+225 | /// the header keeps its buttons in the row.
+226 | public func pushedScreenSideColumnRegion(layout: ContainerViewLayout?) -> SideColumnRegion? {
+227 |     guard let layout, !layout.presentedInFormSheet else {
+    |                               `- error: value of type 'ContainerViewLayout' has no member 'presentedInFormSheet'
+228 |         return nil
+229 |     }
+Target //Telegram:telegram_auth_build_test failed to build
+ERROR: /Users/runner/work/AirGram-iOS/AirGram-iOS/submodules/TelegramUI/Components/NavigationBarComponent/BUILD:5:14 Linking submodules/TelegramUI/Components/NavigationBarComponent/libNavigationBarComponent.a failed: (Exit 1): worker failed: error executing SwiftDeriveFiles command (from target //submodules/TelegramUI/Components/SideColumnLayout:SideColumnLayout) 
+  (cd /private/var/tmp/_bazel_containerhost/c259e0c7803e089724afaeab1cf94801/execroot/_main && \
+  exec env - \
+    APPLE_SDK_PLATFORM=iPhoneOS \
+    APPLE_SDK_VERSION_OVERRIDE=26.4 \
+    PATH=/usr/bin:/bin:/usr/sbin:/sbin \
+    XCODE_VERSION_OVERRIDE=26.4.1.17E202 \
+    ZERO_AR_DATE=1 \
+  bazel-out/darwin_arm64-opt-exec-ST-d57f47055a04/bin/external/rules_swift+/tools/worker/worker swiftc @bazel-out/ios_arm64-opt-ios-arm64-min13.0-ST-2d46267cd7fb/bin/submodules/TelegramUI/Components/SideColumnLayout/SideColumnLayout.swiftmodule-0.params)
+# Configuration: 3ba5eaace649cb57515c4b86388f5bb8d32746399fd02c206a540caf053f5d28
+# Execution platform: @@platforms//host:host
+[6,609 / 8,613] checking cached actions
+INFO: Elapsed time: 2488.025s, Critical Path: 432.63s
+INFO: 6609 processes: 2120 internal, 4402 local, 87 worker.
+ERROR: Build did NOT complete successfully
+FAILED: 
+INFO: Build Event Protocol files produced successfully.
+Traceback (most recent call last):
+  File "/Users/runner/work/AirGram-iOS/AirGram-iOS/build-system/Make/Make.py", line 1294, in <module>
+    build(bazel=bazel_path, arguments=args)
+    ~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/runner/work/AirGram-iOS/AirGram-iOS/build-system/Make/Make.py", line 650, in build
+    bazel_command_line.invoke_build()
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "/Users/runner/work/AirGram-iOS/AirGram-iOS/build-system/Make/Make.py", line 325, in invoke_build
+    call_executable(combined_arguments)
+    ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^
+  File "/Users/runner/work/AirGram-iOS/AirGram-iOS/build-system/Make/BuildEnvironment.py", line 104, in call_executable
+    subprocess.check_call(resolved_arguments, env=resolved_env)
+    ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/homebrew/Cellar/python@3.15/3.15.2/Frameworks/Python.framework/Versions/3.15/lib/python3.15/subprocess.py", line 534, in check_call
+    raise CalledProcessError(retcode, cmd)
+subprocess.CalledProcessError: Command ['/Users/runner/work/AirGram-iOS/AirGram-iOS/build-input/bazel-8.4.2-darwin-arm64', '--output_user_root=/private/var/tmp/_bazel_containerhost', 'build', 'Telegram/telegram_auth_build_test', '--announce_rc', '--features=swift.use_global_module_cache', '--verbose_failures', '--remote_cache_async', '--jobs=3', '--local_cpu_resources=3', '--worker_max_instances=3', '--spawn_strategy=worker,local', '--strategy=SwiftCompile=worker,local', '--strategy=ObjcCompile=worker,local', '--strategy=Genrule=standalone', '--worker_quit_after_build=false', '--define=buildNumber=2829', '--features=swift.split_derived_files_generation', '--disk_cache=/private/var/tmp/_bazel_containerhost/disk_cache', '-c', 'opt', '--ios_multi_cpus=arm64', '--watchos_cpus=arm64_32', '--apple_generate_dsym', '--features=swift.opt_uses_wmo', '--features=swift.opt_uses_osize', '--features=dead_strip', '--objc_enable_binary_stripping', '--build_event_json_file=/var/folders/h5/t85nd63d71x27_8gl5gw3l_w0000gn/T/airgram-build-events.json'] returned non-zero exit status 1.
