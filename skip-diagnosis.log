@@ -1,0 +1,10 @@
++ echo '===== DIAGNOSE cquery ====='
+===== DIAGNOSE cquery =====
++ build-input/bazel-8.4.2-darwin-arm64 --output_user_root=/private/var/tmp/_bazel_containerhost cquery //Telegram:telegram_auth_build_test --output=build
++ tail -40
+/Users/runner/work/_temp/db5bdded-9cf1-4900-a6d6-fc9ed98bc500.sh: line 6: build-input/bazel-8.4.2-darwin-arm64: No such file or directory
++ echo '===== DIAGNOSE nobuild ====='
+===== DIAGNOSE nobuild =====
++ build-input/bazel-8.4.2-darwin-arm64 --output_user_root=/private/var/tmp/_bazel_containerhost build --nobuild //Telegram:telegram_auth_build_test '--toolchain_resolution_debug=.*'
++ tail -120
+/Users/runner/work/_temp/db5bdded-9cf1-4900-a6d6-fc9ed98bc500.sh: line 9: build-input/bazel-8.4.2-darwin-arm64: No such file or directory
