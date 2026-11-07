@@ -1,0 +1,312 @@
+ERROR: /Users/runner/work/AirGram-iOS/AirGram-iOS/submodules/LottieBinding/BUILD:5:14: Generating derived files for Swift module //submodules/LottieBinding:LottieBinding failed: (Exit 1): worker failed: error executing SwiftDeriveFiles command (from target //submodules/LottieBinding:LottieBinding) 
+submodules/LottieBinding/Sources/LottieInstance.swift:30:11: error: cannot find type 'RLottieInstance' in scope
+   |           `- error: cannot find type 'RLottieInstance' in scope
+submodules/LottieBinding/Sources/LottieInstance.swift:37:23: error: cannot find type 'RLottieFitzModifier' in scope
+   |                       `- error: cannot find type 'RLottieFitzModifier' in scope
+submodules/LottieBinding/Sources/MakeLottieInstance.swift:55:20: error: cannot find 'RLottieInstance' in scope
+   |                    `- error: cannot find 'RLottieInstance' in scope
+ERROR: /Users/runner/work/AirGram-iOS/AirGram-iOS/submodules/TelegramUI/Components/Wallet/WalletScreen/BUILD:5:14 Linking submodules/TelegramUI/Components/Wallet/WalletScreen/libWalletScreen.a failed: (Exit 1): worker failed: error executing SwiftDeriveFiles command (from target //submodules/LottieBinding:LottieBinding) 
+ERROR: Build did NOT complete successfully
+FAILED: 
+Traceback (most recent call last):
+--- end of full build log ---
+[2,825 / 8,613] Compiling absl/strings/internal/cord_rep_btree_reader.cc [for tool]; 1s local, disk-cache ... (3 actions, 2 running)
+[2,829 / 8,613] Compiling absl/strings/internal/cord_rep_btree_reader.cc [for tool]; 2s local, disk-cache ... (3 actions, 2 running)
+[2,832 / 8,613] Compiling absl/strings/internal/cord_rep_btree_reader.cc [for tool]; 3s local, disk-cache ... (3 actions, 2 running)
+[2,835 / 8,613] Compiling absl/strings/internal/cord_rep_btree_reader.cc [for tool]; 4s local, disk-cache ... (3 actions, 2 running)
+[2,840 / 8,613] Compiling absl/strings/internal/cord_rep_btree_reader.cc [for tool]; 5s local, disk-cache ... (3 actions, 2 running)
+[2,842 / 8,613] Compiling absl/strings/internal/cord_rep_btree_reader.cc [for tool]; 6s local, disk-cache ... (3 actions, 2 running)
+[2,844 / 8,613] Compiling absl/strings/internal/cord_rep_btree_reader.cc [for tool]; 8s local, disk-cache ... (3 actions running)
+[2,847 / 8,613] Compiling absl/strings/internal/cord_rep_btree_reader.cc [for tool]; 9s local, disk-cache ... (3 actions running)
+[2,849 / 8,613] Compiling absl/strings/internal/cord_rep_btree_reader.cc [for tool]; 10s local, disk-cache ... (3 actions running)
+[2,850 / 8,613] Compiling absl/strings/internal/cord_rep_btree_reader.cc [for tool]; 11s local, disk-cache ... (3 actions running)
+[2,852 / 8,613] Compiling absl/strings/internal/cord_rep_btree_reader.cc [for tool]; 12s local, disk-cache ... (3 actions running)
+[2,853 / 8,613] Compiling absl/strings/internal/cord_rep_btree_reader.cc [for tool]; 13s local, disk-cache ... (3 actions running)
+[2,855 / 8,613] Compiling absl/strings/internal/cord_rep_btree_reader.cc [for tool]; 14s local, disk-cache ... (3 actions running)
+[2,858 / 8,613] Compiling absl/strings/internal/cord_rep_btree_reader.cc [for tool]; 15s local, disk-cache ... (3 actions running)
+[2,860 / 8,613] Compiling absl/strings/internal/cord_rep_btree_reader.cc [for tool]; 16s local, disk-cache ... (3 actions running)
+[2,864 / 8,613] Compiling absl/strings/internal/cord_rep_btree_reader.cc [for tool]; 17s local, disk-cache ... (3 actions, 2 running)
+[2,867 / 8,613] Compiling submodules/LottieCpp/lottiecpp/Sources/Lottie/Private/MainThread/LayerContainers/CompLayers/TextCompositionLayer.cpp; 1s local, disk-cache ... (3 actions running)
+[2,868 / 8,613] Compiling submodules/LottieCpp/lottiecpp/Sources/Lottie/Private/MainThread/LayerContainers/CompLayers/TextCompositionLayer.cpp; 2s local, disk-cache ... (3 actions running)
+[2,870 / 8,613] Compiling submodules/LottieCpp/lottiecpp/Sources/Lottie/Private/MainThread/LayerContainers/CompLayers/TextCompositionLayer.cpp; 3s local, disk-cache ... (3 actions running)
+[2,872 / 8,613] Compiling absl/strings/internal/cord_rep_consume.cc [for tool]; 4s local, disk-cache ... (3 actions running)
+[2,874 / 8,613] Compiling absl/strings/internal/cord_rep_consume.cc [for tool]; 5s local, disk-cache ... (3 actions, 2 running)
+[2,875 / 8,613] Compiling absl/strings/internal/cord_rep_consume.cc [for tool]; 6s local, disk-cache ... (3 actions, 2 running)
+[2,875 / 8,613] Compiling absl/strings/internal/cord_rep_consume.cc [for tool]; 7s local, disk-cache ... (3 actions running)
+[2,876 / 8,613] Compiling absl/strings/internal/cord_rep_consume.cc [for tool]; 8s local, disk-cache ... (3 actions running)
+[2,879 / 8,613] Compiling absl/strings/internal/cord_rep_consume.cc [for tool]; 9s local, disk-cache ... (3 actions running)
+[2,881 / 8,613] Compiling absl/strings/internal/cord_rep_consume.cc [for tool]; 10s local, disk-cache ... (3 actions running)
+[2,882 / 8,613] Compiling absl/strings/internal/cord_rep_consume.cc [for tool]; 11s local, disk-cache ... (3 actions running)
+[2,883 / 8,613] Compiling absl/strings/internal/cord_rep_consume.cc [for tool]; 12s local, disk-cache ... (3 actions running)
+[2,885 / 8,613] Compiling absl/strings/internal/cord_rep_consume.cc [for tool]; 13s local, disk-cache ... (3 actions running)
+[2,888 / 8,613] Compiling absl/strings/internal/cord_rep_consume.cc [for tool]; 14s local, disk-cache ... (3 actions running)
+[2,889 / 8,613] Compiling absl/strings/internal/cord_rep_consume.cc [for tool]; 16s local, disk-cache ... (3 actions, 2 running)
+[2,892 / 8,613] Compiling absl/strings/internal/cord_rep_consume.cc [for tool]; 17s local, disk-cache ... (3 actions running)
+[2,893 / 8,613] Compiling absl/strings/internal/cord_rep_consume.cc [for tool]; 19s local, disk-cache ... (3 actions, 2 running)
+[2,895 / 8,613] Compiling submodules/LottieCpp/lottiecpp/Sources/Lottie/Private/MainThread/LayerContainers/Utility/LayerImageProvider.cpp; 1s local, disk-cache ... (3 actions running)
+[2,898 / 8,613] Compiling submodules/LottieCpp/lottiecpp/Sources/Lottie/Private/MainThread/LayerContainers/Utility/LayerImageProvider.cpp; 2s local, disk-cache ... (3 actions running)
+[2,900 / 8,613] Compiling absl/strings/internal/cord_rep_crc.cc [for tool]; 2s local, disk-cache ... (3 actions running)
+[2,901 / 8,613] Compiling absl/strings/internal/cord_rep_crc.cc [for tool]; 3s local, disk-cache ... (3 actions running)
+[2,903 / 8,613] Compiling absl/strings/internal/cord_rep_crc.cc [for tool]; 4s local, disk-cache ... (3 actions running)
+[2,905 / 8,613] Compiling absl/strings/internal/cord_rep_crc.cc [for tool]; 6s local, disk-cache ... (3 actions running)
+[2,908 / 8,613] Compiling absl/strings/internal/cord_rep_crc.cc [for tool]; 7s local, disk-cache ... (3 actions, 2 running)
+[2,909 / 8,613] Compiling absl/strings/internal/cord_rep_crc.cc [for tool]; 8s local, disk-cache ... (3 actions running)
+[2,911 / 8,613] Compiling absl/strings/internal/cord_rep_crc.cc [for tool]; 9s local, disk-cache ... (3 actions running)
+[2,913 / 8,613] Compiling absl/strings/internal/cord_rep_crc.cc [for tool]; 10s local, disk-cache ... (3 actions running)
+[2,916 / 8,613] Compiling absl/strings/internal/cord_rep_crc.cc [for tool]; 11s local, disk-cache ... (3 actions running)
+[2,919 / 8,613] Compiling absl/strings/internal/cord_rep_crc.cc [for tool]; 12s local, disk-cache ... (3 actions, 2 running)
+[2,920 / 8,613] Compiling absl/strings/internal/cord_rep_crc.cc [for tool]; 13s local, disk-cache ... (3 actions running)
+[2,922 / 8,613] Compiling absl/strings/internal/cord_rep_crc.cc [for tool]; 14s local, disk-cache ... (3 actions running)
+[2,926 / 8,613] Compiling submodules/LottieCpp/lottiecpp/Sources/Lottie/Private/MainThread/NodeRenderSystem/NodeProperties/Protocols/KeypathSearchable.cpp; 1s local, disk-cache ... (3 actions, 2 running)
+[2,927 / 8,613] Compiling submodules/LottieCpp/lottiecpp/Sources/Lottie/Private/MainThread/NodeRenderSystem/NodeProperties/Protocols/KeypathSearchable.cpp; 2s local, disk-cache ... (3 actions running)
+[2,930 / 8,613] Compiling absl/crc/internal/crc_cord_state.cc [for tool]; 2s local, disk-cache ... (3 actions running)
+[2,932 / 8,613] Compiling absl/crc/internal/crc_cord_state.cc [for tool]; 3s local, disk-cache ... (3 actions running)
+[2,934 / 8,613] Compiling absl/crc/internal/crc_cord_state.cc [for tool]; 4s local, disk-cache ... (3 actions running)
+[2,936 / 8,613] Compiling absl/crc/internal/crc_cord_state.cc [for tool]; 5s local, disk-cache ... (3 actions running)
+[2,938 / 8,613] Compiling absl/crc/internal/crc_cord_state.cc [for tool]; 6s local, disk-cache ... (3 actions running)
+[2,940 / 8,613] Compiling absl/crc/internal/crc_cord_state.cc [for tool]; 7s local, disk-cache ... (3 actions, 2 running)
+[2,942 / 8,613] Compiling absl/crc/internal/crc_cord_state.cc [for tool]; 8s local, disk-cache ... (3 actions, 2 running)
+[2,944 / 8,613] Compiling absl/crc/internal/crc_cord_state.cc [for tool]; 9s local, disk-cache ... (3 actions running)
+[2,946 / 8,613] Compiling absl/crc/internal/crc_cord_state.cc [for tool]; 10s local, disk-cache ... (3 actions, 2 running)
+[2,947 / 8,613] Compiling absl/crc/internal/crc_cord_state.cc [for tool]; 12s local, disk-cache ... (3 actions running)
+[2,949 / 8,613] Compiling absl/crc/internal/crc_cord_state.cc [for tool]; 13s local, disk-cache ... (3 actions running)
+[2,950 / 8,613] Compiling absl/crc/internal/crc_cord_state.cc [for tool]; 14s local, disk-cache ... (3 actions running)
+[2,952 / 8,613] Compiling absl/crc/internal/crc_cord_state.cc [for tool]; 15s local, disk-cache ... (3 actions, 2 running)
+[2,956 / 8,613] Compiling absl/crc/internal/crc_cord_state.cc [for tool]; 16s local, disk-cache ... (3 actions, 2 running)
+[2,962 / 8,613] Compiling submodules/LottieCpp/lottiecpp/Sources/Lottie/Private/Model/Animation.cpp; 1s local, disk-cache ... (3 actions, 2 running)
+[2,963 / 8,613] Compiling submodules/LottieCpp/lottiecpp/Sources/Lottie/Private/Model/Animation.cpp; 2s local, disk-cache ... (3 actions, 2 running)
+[2,969 / 8,613] Compiling absl/crc/crc32c.cc [for tool]; 2s local, disk-cache ... (3 actions, 2 running)
+[2,971 / 8,613] Compiling absl/crc/crc32c.cc [for tool]; 3s local, disk-cache ... (3 actions running)
+[2,976 / 8,613] Compiling absl/crc/crc32c.cc [for tool]; 5s local, disk-cache ... (3 actions running)
+[2,982 / 8,613] Compiling absl/crc/crc32c.cc [for tool]; 6s local, disk-cache ... (3 actions, 2 running)
+[2,989 / 8,613] Compiling absl/crc/crc32c.cc [for tool]; 7s local, disk-cache ... (3 actions running)
+[2,990 / 8,613] Compiling absl/crc/crc32c.cc [for tool]; 8s local, disk-cache ... (3 actions running)
+[2,991 / 8,613] Compiling absl/crc/crc32c.cc [for tool]; 9s local, disk-cache ... (3 actions, 2 running)
+[2,995 / 8,613] Compiling absl/crc/crc32c.cc [for tool]; 10s local, disk-cache ... (3 actions, 2 running)
+[2,998 / 8,613] Compiling absl/crc/crc32c.cc [for tool]; 11s local, disk-cache ... (3 actions, 2 running)
+[3,003 / 8,613] Compiling absl/crc/crc32c.cc [for tool]; 12s local, disk-cache ... (3 actions, 2 running)
+[3,010 / 8,613] Compiling absl/crc/crc32c.cc [for tool]; 13s local, disk-cache ... (3 actions, 2 running)
+INFO: From Executing genrule //third-party/boringssl:copy_ssl_headers:
++ cp third-party/boringssl/src/include/openssl/dtls1.h bazel-out/ios_arm64-opt-ios-arm64-min13.0-ST-2d46267cd7fb/bin/third-party/boringssl/ssl_headers/src/include/openssl/dtls1.h
++ cp third-party/boringssl/src/include/openssl/srtp.h bazel-out/ios_arm64-opt-ios-arm64-min13.0-ST-2d46267cd7fb/bin/third-party/boringssl/ssl_headers/src/include/openssl/srtp.h
++ cp third-party/boringssl/src/include/openssl/ssl.h bazel-out/ios_arm64-opt-ios-arm64-min13.0-ST-2d46267cd7fb/bin/third-party/boringssl/ssl_headers/src/include/openssl/ssl.h
++ cp third-party/boringssl/src/include/openssl/ssl3.h bazel-out/ios_arm64-opt-ios-arm64-min13.0-ST-2d46267cd7fb/bin/third-party/boringssl/ssl_headers/src/include/openssl/ssl3.h
++ cp third-party/boringssl/src/include/openssl/tls1.h bazel-out/ios_arm64-opt-ios-arm64-min13.0-ST-2d46267cd7fb/bin/third-party/boringssl/ssl_headers/src/include/openssl/tls1.h
+[3,019 / 8,613] Compiling absl/crc/crc32c.cc [for tool]; 14s local, disk-cache ... (3 actions, 2 running)
+[3,027 / 8,613] Compiling absl/crc/crc32c.cc [for tool]; 16s local, disk-cache ... (3 actions, 2 running)
+[3,035 / 8,613] Compiling absl/crc/crc32c.cc [for tool]; 17s local, disk-cache ... (3 actions, 2 running)
+[3,043 / 8,613] Compiling absl/crc/crc32c.cc [for tool]; 18s local, disk-cache ... (3 actions, 2 running)
+[3,051 / 8,613] Compiling submodules/LottieCpp/lottiecpp/Sources/Lottie/Private/Model/Layers/LayerModelSerialization.cpp; 2s local, disk-cache ... (3 actions, 2 running)
+[3,058 / 8,613] Compiling submodules/LottieCpp/lottiecpp/Sources/Lottie/Private/Model/Layers/LayerModelSerialization.cpp; 3s local, disk-cache ... (3 actions, 2 running)
+[3,063 / 8,613] Compiling submodules/LottieCpp/lottiecpp/Sources/Lottie/Private/Model/Layers/LayerModelSerialization.cpp; 4s local, disk-cache ... (3 actions, 2 running)
+[3,068 / 8,613] Compiling submodules/LottieCpp/lottiecpp/Sources/Lottie/Private/Model/Layers/LayerModelSerialization.cpp; 5s local, disk-cache ... (3 actions, 2 running)
+[3,074 / 8,613] Compiling absl/crc/internal/crc_memcpy_fallback.cc [for tool]; 5s local, disk-cache ... (3 actions, 2 running)
+[3,079 / 8,613] Compiling absl/crc/internal/crc_memcpy_fallback.cc [for tool]; 6s local, disk-cache ... (3 actions, 2 running)
+[3,083 / 8,613] Compiling absl/crc/internal/crc_memcpy_fallback.cc [for tool]; 7s local, disk-cache ... (3 actions, 2 running)
+[3,090 / 8,613] Compiling absl/crc/internal/crc_memcpy_fallback.cc [for tool]; 8s local, disk-cache ... (3 actions, 2 running)
+[3,093 / 8,613] Compiling absl/crc/internal/crc_memcpy_fallback.cc [for tool]; 9s local, disk-cache ... (3 actions running)
+[3,096 / 8,613] Compiling absl/crc/internal/crc_memcpy_fallback.cc [for tool]; 10s local, disk-cache ... (3 actions running)
+[3,101 / 8,613] Compiling absl/crc/internal/crc_memcpy_fallback.cc [for tool]; 11s local, disk-cache ... (3 actions running)
+[3,106 / 8,613] Compiling absl/crc/internal/crc_memcpy_fallback.cc [for tool]; 12s local, disk-cache ... (3 actions, 2 running)
+[3,113 / 8,613] Compiling absl/crc/internal/crc_memcpy_fallback.cc [for tool]; 14s local, disk-cache ... (3 actions, 2 running)
+[3,120 / 8,613] Compiling absl/crc/internal/crc_memcpy_fallback.cc [for tool]; 15s local, disk-cache ... (3 actions running)
+[3,128 / 8,613] Compiling absl/crc/internal/crc_memcpy_fallback.cc [for tool]; 16s local, disk-cache ... (3 actions, 2 running)
+[3,131 / 8,613] Compiling absl/crc/internal/crc_memcpy_fallback.cc [for tool]; 17s local, disk-cache ... (3 actions running)
+[3,132 / 8,613] Compiling absl/crc/internal/crc_memcpy_fallback.cc [for tool]; 18s local, disk-cache ... (3 actions, 2 running)
+[3,133 / 8,613] Compiling absl/crc/internal/crc_memcpy_fallback.cc [for tool]; 19s local, disk-cache ... (3 actions running)
+[3,134 / 8,613] Compiling absl/crc/internal/crc_memcpy_fallback.cc [for tool]; 20s local, disk-cache ... (3 actions running)
+[3,135 / 8,613] Compiling third-party/boringssl/src/crypto/fipsmodule/bcm.c; 5s local, disk-cache ... (3 actions running)
+[3,136 / 8,613] Compiling third-party/boringssl/src/crypto/fipsmodule/bcm.c; 6s local, disk-cache ... (3 actions running)
+[3,139 / 8,613] Compiling absl/crc/internal/crc_memcpy_x86_arm_combined.cc [for tool]; 2s local, disk-cache ... (3 actions running)
+[3,142 / 8,613] Compiling absl/crc/internal/crc_memcpy_x86_arm_combined.cc [for tool]; 3s local, disk-cache ... (3 actions running)
+[3,148 / 8,613] Compiling absl/crc/internal/crc_memcpy_x86_arm_combined.cc [for tool]; 4s local, disk-cache ... (3 actions running)
+[3,156 / 8,613] Compiling absl/crc/internal/crc_memcpy_x86_arm_combined.cc [for tool]; 5s local, disk-cache ... (3 actions, 2 running)
+[3,162 / 8,613] Compiling absl/crc/internal/crc_memcpy_x86_arm_combined.cc [for tool]; 6s local, disk-cache ... (3 actions, 2 running)
+[3,171 / 8,613] Compiling absl/crc/internal/crc_memcpy_x86_arm_combined.cc [for tool]; 7s local, disk-cache ... (3 actions, 2 running)
+[3,180 / 8,613] Compiling absl/crc/internal/crc_memcpy_x86_arm_combined.cc [for tool]; 8s local, disk-cache ... (3 actions, 2 running)
+[3,190 / 8,613] Compiling absl/crc/internal/crc_memcpy_x86_arm_combined.cc [for tool]; 9s local, disk-cache ... (3 actions, 2 running)
+[3,196 / 8,613] Compiling absl/crc/internal/crc_memcpy_x86_arm_combined.cc [for tool]; 10s local, disk-cache ... (3 actions, 2 running)
+[3,202 / 8,613] Compiling absl/crc/internal/crc_memcpy_x86_arm_combined.cc [for tool]; 11s local, disk-cache ... (3 actions, 2 running)
+[3,208 / 8,613] Compiling absl/crc/internal/crc_memcpy_x86_arm_combined.cc [for tool]; 12s local, disk-cache ... (3 actions, 2 running)
+[3,214 / 8,613] Compiling absl/crc/internal/crc_memcpy_x86_arm_combined.cc [for tool]; 14s local, disk-cache ... (3 actions, 2 running)
+[3,219 / 8,613] Compiling absl/crc/internal/crc_memcpy_x86_arm_combined.cc [for tool]; 15s local, disk-cache ... (3 actions, 2 running)
+[3,225 / 8,613] Compiling absl/crc/internal/crc_memcpy_x86_arm_combined.cc [for tool]; 16s local, disk-cache ... (3 actions, 2 running)
+[3,231 / 8,613] Compiling absl/crc/internal/crc_memcpy_x86_arm_combined.cc [for tool]; 17s local, disk-cache ... (3 actions, 2 running)
+[3,237 / 8,613] Compiling absl/crc/internal/crc_memcpy_x86_arm_combined.cc [for tool]; 18s local, disk-cache ... (3 actions, 2 running)
+[3,243 / 8,613] Compiling absl/crc/internal/crc_memcpy_x86_arm_combined.cc [for tool]; 19s local, disk-cache ... (3 actions, 2 running)
+[3,249 / 8,613] Compiling submodules/LottieCpp/lottiecpp/Sources/Lottie/Private/Model/ShapeItems/RoundedRectangle.cpp; 2s local, disk-cache ... (3 actions, 2 running)
+[3,256 / 8,613] Compiling absl/crc/internal/crc_non_temporal_memcpy.cc [for tool]; 1s local, disk-cache ... (3 actions, 2 running)
+[3,262 / 8,613] Compiling absl/crc/internal/crc_non_temporal_memcpy.cc [for tool]; 2s local, disk-cache ... (3 actions, 2 running)
+[3,270 / 8,613] Compiling absl/crc/internal/crc_non_temporal_memcpy.cc [for tool]; 4s local, disk-cache ... (3 actions, 2 running)
+[3,276 / 8,613] Compiling absl/crc/internal/crc_non_temporal_memcpy.cc [for tool]; 5s local, disk-cache ... (3 actions, 2 running)
+[3,287 / 8,613] Compiling absl/crc/internal/crc_non_temporal_memcpy.cc [for tool]; 6s local, disk-cache ... (3 actions, 2 running)
+[3,297 / 8,613] Compiling absl/crc/internal/crc_non_temporal_memcpy.cc [for tool]; 7s local, disk-cache ... (3 actions, 2 running)
+[3,308 / 8,613] Compiling absl/crc/internal/crc_non_temporal_memcpy.cc [for tool]; 8s local, disk-cache ... (3 actions, 2 running)
+[3,319 / 8,613] Compiling absl/crc/internal/crc_non_temporal_memcpy.cc [for tool]; 9s local, disk-cache ... (3 actions, 2 running)
+[3,331 / 8,613] Compiling absl/crc/internal/crc_non_temporal_memcpy.cc [for tool]; 10s local, disk-cache ... (3 actions, 2 running)
+[3,343 / 8,613] Compiling absl/crc/internal/crc_non_temporal_memcpy.cc [for tool]; 11s local, disk-cache ... (3 actions, 2 running)
+[3,354 / 8,613] Compiling absl/crc/internal/crc_non_temporal_memcpy.cc [for tool]; 12s local, disk-cache ... (3 actions, 2 running)
+[3,366 / 8,613] Compiling absl/crc/internal/crc_non_temporal_memcpy.cc [for tool]; 13s local, disk-cache ... (3 actions, 2 running)
+[3,377 / 8,613] Compiling absl/crc/internal/crc_non_temporal_memcpy.cc [for tool]; 14s local, disk-cache ... (3 actions, 2 running)
+[3,388 / 8,613] Compiling absl/crc/internal/crc_non_temporal_memcpy.cc [for tool]; 15s local, disk-cache ... (3 actions, 2 running)
+[3,398 / 8,613] Compiling absl/crc/internal/crc_non_temporal_memcpy.cc [for tool]; 16s local, disk-cache ... (3 actions, 2 running)
+[3,407 / 8,613] Compiling absl/crc/internal/crc_non_temporal_memcpy.cc [for tool]; 17s local, disk-cache ... (3 actions, 2 running)
+[3,410 / 8,613] Compiling absl/crc/internal/crc_non_temporal_memcpy.cc [for tool]; 18s local, disk-cache ... (3 actions, 2 running)
+[3,412 / 8,613] Compiling absl/crc/internal/crc_non_temporal_memcpy.cc [for tool]; 20s local, disk-cache ... (3 actions, 2 running)
+[3,414 / 8,613] Compiling absl/crc/internal/crc_non_temporal_memcpy.cc [for tool]; 21s local, disk-cache ... (3 actions, 2 running)
+[3,417 / 8,613] Compiling submodules/LottieCpp/lottiecpp/Sources/Lottie/Private/Model/Text/TextAnimator.cpp; 0s local, disk-cache ... (3 actions, 2 running)
+[3,421 / 8,613] Compiling absl/crc/internal/crc.cc [for tool]; 1s local, disk-cache ... (3 actions, 2 running)
+[3,422 / 8,613] Compiling absl/crc/internal/crc.cc [for tool]; 2s local, disk-cache ... (3 actions, 2 running)
+[3,423 / 8,613] Compiling absl/crc/internal/crc.cc [for tool]; 3s local, disk-cache ... (3 actions running)
+[3,425 / 8,613] Compiling absl/crc/internal/crc.cc [for tool]; 4s local, disk-cache ... (3 actions running)
+[3,426 / 8,613] Compiling absl/crc/internal/crc.cc [for tool]; 5s local, disk-cache ... (3 actions running)
+[3,427 / 8,613] Compiling absl/crc/internal/crc.cc [for tool]; 6s local, disk-cache ... (3 actions running)
+[3,429 / 8,613] Compiling absl/crc/internal/crc.cc [for tool]; 7s local, disk-cache ... (3 actions running)
+[3,430 / 8,613] Compiling absl/crc/internal/crc.cc [for tool]; 9s local, disk-cache ... (3 actions running)
+[3,433 / 8,613] Compiling absl/crc/internal/crc.cc [for tool]; 10s local, disk-cache ... (3 actions running)
+[3,434 / 8,613] Compiling absl/crc/internal/crc.cc [for tool]; 11s local, disk-cache ... (3 actions running)
+[3,436 / 8,613] Compiling absl/crc/internal/crc.cc [for tool]; 12s local, disk-cache ... (3 actions running)
+[3,437 / 8,613] Compiling absl/crc/internal/crc.cc [for tool]; 13s local, disk-cache ... (3 actions running)
+[3,439 / 8,613] Compiling absl/crc/internal/crc.cc [for tool]; 14s local, disk-cache ... (3 actions running)
+[3,441 / 8,613] Compiling absl/crc/internal/crc.cc [for tool]; 15s local, disk-cache ... (3 actions running)
+[3,442 / 8,613] Compiling absl/crc/internal/crc.cc [for tool]; 16s local, disk-cache ... (3 actions running)
+[3,443 / 8,613] Compiling absl/crc/internal/crc.cc [for tool]; 21s local, disk-cache ... (3 actions, 2 running)
+[3,446 / 8,613] Compiling absl/crc/internal/crc.cc [for tool]; 22s local, disk-cache ... (3 actions, 2 running)
+[3,448 / 8,613] Compiling absl/crc/internal/crc.cc [for tool]; 23s local, disk-cache ... (3 actions, 2 running)
+[3,449 / 8,613] Compiling submodules/LottieCpp/lottiecpp/Sources/Lottie/Public/Keyframes/Keyframe.cpp; 1s local, disk-cache ... (3 actions, 2 running)
+[3,451 / 8,613] Compiling absl/crc/internal/crc_x86_arm_combined.cc [for tool]; 1s local, disk-cache ... (3 actions running)
+[3,452 / 8,613] Compiling absl/crc/internal/crc_x86_arm_combined.cc [for tool]; 2s local, disk-cache ... (3 actions running)
+[3,453 / 8,613] Compiling absl/crc/internal/crc_x86_arm_combined.cc [for tool]; 3s local, disk-cache ... (3 actions, 2 running)
+[3,456 / 8,613] Compiling absl/crc/internal/crc_x86_arm_combined.cc [for tool]; 4s local, disk-cache ... (3 actions running)
+[3,457 / 8,613] Compiling absl/crc/internal/crc_x86_arm_combined.cc [for tool]; 5s local, disk-cache ... (3 actions running)
+[3,459 / 8,613] Compiling absl/crc/internal/crc_x86_arm_combined.cc [for tool]; 6s local, disk-cache ... (3 actions running)
+[3,460 / 8,613] Compiling absl/crc/internal/crc_x86_arm_combined.cc [for tool]; 8s local, disk-cache ... (3 actions running)
+[3,464 / 8,613] Compiling absl/crc/internal/crc_x86_arm_combined.cc [for tool]; 9s local, disk-cache ... (3 actions, 2 running)
+[3,465 / 8,613] Compiling absl/crc/internal/crc_x86_arm_combined.cc [for tool]; 10s local, disk-cache ... (3 actions running)
+[3,468 / 8,613] Compiling absl/crc/internal/crc_x86_arm_combined.cc [for tool]; 11s local, disk-cache ... (2 actions running)
+[3,470 / 8,613] Compiling absl/crc/internal/crc_x86_arm_combined.cc [for tool]; 12s local, disk-cache ... (3 actions, 2 running)
+[3,471 / 8,613] Compiling absl/crc/internal/crc_x86_arm_combined.cc [for tool]; 13s local, disk-cache ... (3 actions running)
+[3,475 / 8,613] Compiling absl/crc/internal/crc_x86_arm_combined.cc [for tool]; 14s local, disk-cache ... (3 actions, 2 running)
+[3,478 / 8,613] Compiling absl/crc/internal/crc_x86_arm_combined.cc [for tool]; 15s local, disk-cache ... (3 actions running)
+[3,485 / 8,613] Compiling absl/crc/internal/crc_x86_arm_combined.cc [for tool]; 16s local, disk-cache ... (3 actions, 2 running)
+[3,488 / 8,613] Compiling absl/crc/internal/crc_x86_arm_combined.cc [for tool]; 17s local, disk-cache ... (3 actions running)
+[3,489 / 8,613] Compiling absl/crc/internal/crc_x86_arm_combined.cc [for tool]; 18s local, disk-cache ... (3 actions running)
+[3,492 / 8,613] Compiling submodules/LottieCpp/lottiecpp/Sources/Renderer.cpp; 2s local, disk-cache ... (3 actions running)
+[3,494 / 8,613] Compiling submodules/LottieCpp/lottiecpp/Sources/Renderer.cpp; 3s local, disk-cache ... (3 actions running)
+[3,495 / 8,613] Compiling submodules/LottieCpp/lottiecpp/Sources/Renderer.cpp; 4s local, disk-cache ... (3 actions running)
+[3,496 / 8,613] Compiling submodules/LottieCpp/lottiecpp/Sources/Renderer.cpp; 5s local, disk-cache ... (3 actions running)
+[3,500 / 8,613] Generating derived files for Swift module //submodules/NotificationsPresentationData:NotificationsPresentationData; 1s disk-cache, worker ... (3 actions running)
+[3,502 / 8,613] Generating derived files for Swift module //submodules/NotificationsPresentationData:NotificationsPresentationData; 2s disk-cache, worker ... (2 actions running)
+[3,509 / 8,613] Generating derived files for Swift module //submodules/NotificationsPresentationData:NotificationsPresentationData; 3s disk-cache, worker ... (3 actions running)
+[3,521 / 8,613] Generating derived files for Swift module //submodules/NotificationsPresentationData:NotificationsPresentationData; 4s disk-cache, worker ... (3 actions, 2 running)
+[3,524 / 8,613] Generating derived files for Swift module //submodules/NotificationsPresentationData:NotificationsPresentationData; 5s disk-cache, worker ... (3 actions running)
+[3,528 / 8,613] Compiling third-party/openh264/third_party/openh264/src/codec/encoder/core/src/encoder_ext.cpp; 0s local, disk-cache ... (3 actions running)
+INFO: From Compiling third-party/openh264/third_party/openh264/src/codec/encoder/core/src/encoder_ext.cpp:
+third-party/openh264/third_party/openh264/src/codec/encoder/core/src/encoder_ext.cpp:2339:17: warning: first argument in call to 'memcpy' is a pointer to non-trivially copyable type 'SWelsSvcCodingParam' (aka 'WelsEnc::TagWelsSvcCodingParam') [-Wnontrivial-memcall]
+ 2339 |   memcpy (pCtx->pSvcParam, pCodingParam, sizeof (SWelsSvcCodingParam)); // confirmed_safe_unsafe_usage
+      |                 ^
+third-party/openh264/third_party/openh264/src/codec/encoder/core/src/encoder_ext.cpp:2339:17: note: explicitly cast the pointer to silence this warning
+ 2339 |   memcpy (pCtx->pSvcParam, pCodingParam, sizeof (SWelsSvcCodingParam)); // confirmed_safe_unsafe_usage
+      |                 ^
+      |           (void*)
+third-party/openh264/third_party/openh264/src/codec/encoder/core/src/encoder_ext.cpp:4466:11: warning: first argument in call to 'memcpy' is a pointer to non-trivially copyable type 'SWelsSvcCodingParam' (aka 'WelsEnc::TagWelsSvcCodingParam') [-Wnontrivial-memcall]
+ 4466 |   memcpy (&sConfig, (*ppCtx)->pSvcParam, sizeof (SWelsSvcCodingParam));
+      |           ^
+third-party/openh264/third_party/openh264/src/codec/encoder/core/src/encoder_ext.cpp:4466:11: note: explicitly cast the pointer to silence this warning
+ 4466 |   memcpy (&sConfig, (*ppCtx)->pSvcParam, sizeof (SWelsSvcCodingParam));
+      |           ^
+      |           (void*)
+2 warnings generated.
+[3,533 / 8,613] Generating derived files for Swift module //Telegram:GeneratedSources; 1s disk-cache, worker ... (3 actions, 2 running)
+[3,538 / 8,613] Generating derived files for Swift module //Telegram:GeneratedSources; 2s disk-cache, worker ... (3 actions, 2 running)
+[3,542 / 8,613] Generating derived files for Swift module //submodules/WidgetItems:WidgetItems; 0s disk-cache, worker ... (3 actions, 2 running)
+[3,547 / 8,613] Compiling third-party/webrtc/absl/absl/hash/internal/hash.cc; 1s local, disk-cache ... (3 actions, 2 running)
+[3,551 / 8,613] Compiling Swift module //submodules/WidgetItems:WidgetItems; 1s disk-cache, worker ... (3 actions running)
+[3,554 / 8,613] Compiling Swift module //submodules/WidgetItems:WidgetItems; 2s disk-cache, worker ... (3 actions running)
+[3,562 / 8,613] Compiling third-party/webrtc/absl/absl/random/internal/distribution_test_util.cc; 0s local, disk-cache ... (3 actions, 2 running)
+INFO: From Compiling third-party/openh264/third_party/openh264/src/codec/encoder/plus/src/welsEncoderExt.cpp:
+third-party/openh264/third_party/openh264/src/codec/encoder/plus/src/welsEncoderExt.cpp:1059:13: warning: first argument in call to 'memcpy' is a pointer to non-trivially copyable type 'SWelsSvcCodingParam' (aka 'WelsEnc::TagWelsSvcCodingParam') [-Wnontrivial-memcall]
+ 1059 |     memcpy (&sConfig, m_pEncContext->pSvcParam, sizeof (SWelsSvcCodingParam));
+      |             ^
+third-party/openh264/third_party/openh264/src/codec/encoder/plus/src/welsEncoderExt.cpp:1059:13: note: explicitly cast the pointer to silence this warning
+ 1059 |     memcpy (&sConfig, m_pEncContext->pSvcParam, sizeof (SWelsSvcCodingParam));
+      |             ^
+      |             (void*)
+1 warning generated.
+[3,566 / 8,613] Compiling third-party/webrtc/absl/absl/random/internal/distribution_test_util.cc; 1s local, disk-cache ... (3 actions, 2 running)
+[3,575 / 8,613] Compiling third-party/webrtc/absl/absl/random/internal/nanobenchmark.cc; 0s local, disk-cache ... (3 actions, 2 running)
+[3,581 / 8,613] Compiling third-party/webrtc/absl/absl/random/internal/nanobenchmark.cc; 1s local, disk-cache ... (3 actions, 2 running)
+[3,587 / 8,613] Generating derived files for Swift module //submodules/TelegramUI/Components/Chat/ChatNavigationButton:ChatNavigationButton; 1s disk-cache, worker ... (3 actions running)
+[3,592 / 8,613] Generating derived files for Swift module //submodules/TelegramUI/Components/Chat/ChatNavigationButton:ChatNavigationButton; 2s disk-cache, worker ... (3 actions, 2 running)
+[3,594 / 8,613] Generating derived files for Swift module //submodules/TelegramUI/Components/Chat/ChatNavigationButton:ChatNavigationButton; 3s disk-cache, worker ... (3 actions, 2 running)
+[3,597 / 8,613] Generating derived files for Swift module //submodules/TelegramUI/Components/Chat/ChatNavigationButton:ChatNavigationButton; 4s disk-cache, worker ... (3 actions running)
+[3,603 / 8,613] Compiling third-party/webrtc/absl/absl/random/internal/seed_material.cc; 0s local, disk-cache ... (3 actions running)
+[3,608 / 8,613] Compiling third-party/webrtc/absl/absl/random/seed_gen_exception.cc; 0s local, disk-cache ... (3 actions running)
+ERROR: /Users/runner/work/AirGram-iOS/AirGram-iOS/submodules/LottieBinding/BUILD:5:14: Generating derived files for Swift module //submodules/LottieBinding:LottieBinding failed: (Exit 1): worker failed: error executing SwiftDeriveFiles command (from target //submodules/LottieBinding:LottieBinding) 
+  (cd /private/var/tmp/_bazel_containerhost/c259e0c7803e089724afaeab1cf94801/execroot/_main && \
+  exec env - \
+    APPLE_SDK_PLATFORM=iPhoneOS \
+    APPLE_SDK_VERSION_OVERRIDE=26.4 \
+    PATH=/usr/bin:/bin:/usr/sbin:/sbin \
+    XCODE_VERSION_OVERRIDE=26.4.1.17E202 \
+    ZERO_AR_DATE=1 \
+  bazel-out/darwin_arm64-opt-exec-ST-d57f47055a04/bin/external/rules_swift+/tools/worker/worker swiftc @bazel-out/ios_arm64-opt-ios-arm64-min13.0-ST-2d46267cd7fb/bin/submodules/LottieBinding/LottieBinding.swiftmodule-0.params)
+# Configuration: 361da769c358b7cc2aa6a29fca0221c02af063fe13143dc17f2bd9bdc0da41a3
+# Execution platform: @@platforms//host:host
+submodules/LottieBinding/Sources/LottieInstance.swift:30:11: error: cannot find type 'RLottieInstance' in scope
+28 | }
+29 | 
+30 | extension RLottieInstance: LottieInstance {
+   |           `- error: cannot find type 'RLottieInstance' in scope
+31 | }
+32 | 
+
+submodules/LottieBinding/Sources/LottieInstance.swift:37:23: error: cannot find type 'RLottieFitzModifier' in scope
+35 | 
+36 | extension LottieFitzModifier {
+37 |     var rlottieValue: RLottieFitzModifier {
+   |                       `- error: cannot find type 'RLottieFitzModifier' in scope
+38 |         switch self {
+39 |         case .none: return .none
+
+submodules/LottieBinding/Sources/MakeLottieInstance.swift:55:20: error: cannot find 'RLottieInstance' in scope
+53 |     switch settings.backend {
+54 |     case .rlottie:
+55 |         instance = RLottieInstance(
+   |                    `- error: cannot find 'RLottieInstance' in scope
+56 |             data: data,
+57 |             fitzModifier: fitzModifier.rlottieValue,
+[3,613 / 8,613] Compiling third-party/openh264/third_party/openh264/src/codec/decoder/core/src/decoder.cpp; 0s local, disk-cache ... (2 actions running)
+Target //Telegram:telegram_auth_build_test failed to build
+ERROR: /Users/runner/work/AirGram-iOS/AirGram-iOS/submodules/TelegramUI/Components/Wallet/WalletScreen/BUILD:5:14 Linking submodules/TelegramUI/Components/Wallet/WalletScreen/libWalletScreen.a failed: (Exit 1): worker failed: error executing SwiftDeriveFiles command (from target //submodules/LottieBinding:LottieBinding) 
+  (cd /private/var/tmp/_bazel_containerhost/c259e0c7803e089724afaeab1cf94801/execroot/_main && \
+  exec env - \
+    APPLE_SDK_PLATFORM=iPhoneOS \
+    APPLE_SDK_VERSION_OVERRIDE=26.4 \
+    PATH=/usr/bin:/bin:/usr/sbin:/sbin \
+    XCODE_VERSION_OVERRIDE=26.4.1.17E202 \
+    ZERO_AR_DATE=1 \
+  bazel-out/darwin_arm64-opt-exec-ST-d57f47055a04/bin/external/rules_swift+/tools/worker/worker swiftc @bazel-out/ios_arm64-opt-ios-arm64-min13.0-ST-2d46267cd7fb/bin/submodules/LottieBinding/LottieBinding.swiftmodule-0.params)
+# Configuration: 361da769c358b7cc2aa6a29fca0221c02af063fe13143dc17f2bd9bdc0da41a3
+# Execution platform: @@platforms//host:host
+INFO: Elapsed time: 966.848s, Critical Path: 96.81s
+INFO: 3615 processes: 2057 internal, 1547 local, 11 worker.
+ERROR: Build did NOT complete successfully
+FAILED: 
+INFO: Build Event Protocol files produced successfully.
+Traceback (most recent call last):
+  File "/Users/runner/work/AirGram-iOS/AirGram-iOS/build-system/Make/Make.py", line 1294, in <module>
+    build(bazel=bazel_path, arguments=args)
+    ~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/runner/work/AirGram-iOS/AirGram-iOS/build-system/Make/Make.py", line 650, in build
+    bazel_command_line.invoke_build()
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "/Users/runner/work/AirGram-iOS/AirGram-iOS/build-system/Make/Make.py", line 325, in invoke_build
+    call_executable(combined_arguments)
+    ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^
+  File "/Users/runner/work/AirGram-iOS/AirGram-iOS/build-system/Make/BuildEnvironment.py", line 104, in call_executable
+    subprocess.check_call(resolved_arguments, env=resolved_env)
+    ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/homebrew/Cellar/python@3.15/3.15.2/Frameworks/Python.framework/Versions/3.15/lib/python3.15/subprocess.py", line 534, in check_call
+    raise CalledProcessError(retcode, cmd)
+subprocess.CalledProcessError: Command ['/Users/runner/work/AirGram-iOS/AirGram-iOS/build-input/bazel-8.4.2-darwin-arm64', '--output_user_root=/private/var/tmp/_bazel_containerhost', 'build', 'Telegram/telegram_auth_build_test', '--announce_rc', '--features=swift.use_global_module_cache', '--verbose_failures', '--remote_cache_async', '--jobs=3', '--local_cpu_resources=3', '--worker_max_instances=3', '--spawn_strategy=worker,local', '--strategy=SwiftCompile=worker,local', '--strategy=ObjcCompile=worker,local', '--strategy=Genrule=standalone', '--worker_quit_after_build=false', '--define=buildNumber=2824', '--features=swift.split_derived_files_generation', '--disk_cache=/private/var/tmp/_bazel_containerhost/disk_cache', '-c', 'opt', '--ios_multi_cpus=arm64', '--watchos_cpus=arm64_32', '--apple_generate_dsym', '--features=swift.opt_uses_wmo', '--features=swift.opt_uses_osize', '--features=dead_strip', '--objc_enable_binary_stripping', '--build_event_json_file=/var/folders/h5/t85nd63d71x27_8gl5gw3l_w0000gn/T/airgram-build-events.json'] returned non-zero exit status 1.
