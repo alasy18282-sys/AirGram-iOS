@@ -2,35 +2,35 @@
 
 #include "rlottie.h"
 
-@interface LottieInstance () {
+@interface RLottieInstance () {
     std::unique_ptr<rlottie::Animation> _animation;
 }
 
 @end
 
-@implementation LottieInstance
+@implementation RLottieInstance
 
-- (instancetype _Nullable)initWithData:(NSData * _Nonnull)data fitzModifier:(LottieFitzModifier)fitzModifier colorReplacements:(NSDictionary * _Nullable)colorReplacements cacheKey:(NSString * _Nonnull)cacheKey {
+- (instancetype _Nullable)initWithData:(NSData * _Nonnull)data fitzModifier:(RLottieFitzModifier)fitzModifier colorReplacements:(NSDictionary * _Nullable)colorReplacements cacheKey:(NSString * _Nonnull)cacheKey {
     self = [super init];
     if (self != nil) {
         rlottie::FitzModifier modifier;
         switch(fitzModifier) {
-            case LottieFitzModifierNone:
+            case RLottieFitzModifierNone:
                 modifier = rlottie::FitzModifier::None;
                 break;
-            case LottieFitzModifierType12:
+            case RLottieFitzModifierType12:
                 modifier = rlottie::FitzModifier::Type12;
                 break;
-            case LottieFitzModifierType3:
+            case RLottieFitzModifierType3:
                 modifier = rlottie::FitzModifier::Type3;
                 break;
-            case LottieFitzModifierType4:
+            case RLottieFitzModifierType4:
                 modifier = rlottie::FitzModifier::Type4;
                 break;
-            case LottieFitzModifierType5:
+            case RLottieFitzModifierType5:
                 modifier = rlottie::FitzModifier::Type5;
                 break;
-            case LottieFitzModifierType6:
+            case RLottieFitzModifierType6:
                 modifier = rlottie::FitzModifier::Type6;
                 break;
         }
