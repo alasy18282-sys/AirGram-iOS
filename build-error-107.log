@@ -1,0 +1,308 @@
+ERROR: /Users/runner/work/AirGram-iOS/AirGram-iOS/submodules/LottieBinding/BUILD:5:14: Generating derived files for Swift module //submodules/LottieBinding:LottieBinding failed: (Exit 1): worker failed: error executing SwiftDeriveFiles command (from target //submodules/LottieBinding:LottieBinding) 
+submodules/LottieBinding/Sources/LottieInstance.swift:30:1: error: type 'RLottieInstance' does not conform to protocol 'LottieInstance'
+   | |- error: type 'RLottieInstance' does not conform to protocol 'LottieInstance'
+ERROR: /Users/runner/work/AirGram-iOS/AirGram-iOS/submodules/TelegramUI/Components/Wallet/WalletScreen/BUILD:5:14 Linking submodules/TelegramUI/Components/Wallet/WalletScreen/libWalletScreen.a failed: (Exit 1): worker failed: error executing SwiftDeriveFiles command (from target //submodules/LottieBinding:LottieBinding) 
+ERROR: Build did NOT complete successfully
+FAILED: 
+Traceback (most recent call last):
+--- end of full build log ---
+
+
+warning:
+  /Users/runner/work/AirGram-iOS/AirGram-iOS/submodules/TelegramCore/FlatSerialization/Models/TelegramMediaImage.fbs:10: 11: warning: field names should be lowercase snake_case, got: imageId
+/Users/runner/work/AirGram-iOS/AirGram-iOS/submodules/TelegramCore/FlatSerialization/Models/TelegramMediaImage.fbs:11: 14: warning: field names should be lowercase snake_case, got: accessHash
+/Users/runner/work/AirGram-iOS/AirGram-iOS/submodules/TelegramCore/FlatSerialization/Models/TelegramMediaImage.fbs:12: 17: warning: field names should be lowercase snake_case, got: fileReference
+/Users/runner/work/AirGram-iOS/AirGram-iOS/submodules/TelegramCore/FlatSerialization/Models/TelegramMediaImage.fbs:19: 18: warning: field names should be lowercase snake_case, got: startTimestamp
+/Users/runner/work/AirGram-iOS/AirGram-iOS/submodules/TelegramCore/FlatSerialization/Models/TelegramMediaImage.fbs:23: 10: warning: field names should be lowercase snake_case, got: fileId
+/Users/runner/work/AirGram-iOS/AirGram-iOS/submodules/TelegramCore/FlatSerialization/Models/TelegramMediaImage.fbs:27: 17: warning: field names should be lowercase snake_case, got: packReference
+/Users/runner/work/AirGram-iOS/AirGram-iOS/submodules/TelegramCore/FlatSerialization/Models/TelegramMediaImage.fbs:28: 10: warning: field names should be lowercase snake_case, got: fileId
+/Users/runner/work/AirGram-iOS/AirGram-iOS/submodules/TelegramCore/FlatSerialization/Models/TelegramMediaImage.fbs:38: 20: warning: field names should be lowercase snake_case, got: backgroundColors
+/Users/runner/work/AirGram-iOS/AirGram-iOS/submodules/TelegramCore/FlatSerialization/Models/TelegramMediaImage.fbs:42: 11: warning: field names should be lowercase snake_case, got: imageId
+/Users/runner/work/AirGram-iOS/AirGram-iOS/submodules/TelegramCore/FlatSerialization/Models/TelegramMediaImage.fbs:44: 24: warning: field names should be lowercase snake_case, got: videoRepresentations
+/Users/runner/work/AirGram-iOS/AirGram-iOS/submodules/TelegramCore/FlatSerialization/Models/TelegramMediaImage.fbs:45: 26: warning: field names should be lowercase snake_case, got: immediateThumbnailData
+/Users/runner/work/AirGram-iOS/AirGram-iOS/submodules/TelegramCore/FlatSerialization/Models/TelegramMediaImage.fbs:46: 15: warning: field names should be lowercase snake_case, got: emojiMarkup
+/Users/runner/work/AirGram-iOS/AirGram-iOS/submodules/TelegramCore/FlatSerialization/Models/TelegramMediaImage.fbs:48: 20: warning: field names should be lowercase snake_case, got: partialReference
+
+
+warning:
+  /Users/runner/work/AirGram-iOS/AirGram-iOS/submodules/TelegramCore/FlatSerialization/Models/TelegramMediaImageRepresentation.fbs:15: 20: warning: field names should be lowercase snake_case, got: progressiveSizes
+/Users/runner/work/AirGram-iOS/AirGram-iOS/submodules/TelegramCore/FlatSerialization/Models/TelegramMediaImageRepresentation.fbs:16: 26: warning: field names should be lowercase snake_case, got: immediateThumbnailData
+/Users/runner/work/AirGram-iOS/AirGram-iOS/submodules/TelegramCore/FlatSerialization/Models/TelegramMediaImageRepresentation.fbs:17: 12: warning: field names should be lowercase snake_case, got: hasVideo
+/Users/runner/work/AirGram-iOS/AirGram-iOS/submodules/TelegramCore/FlatSerialization/Models/TelegramMediaImageRepresentation.fbs:18: 14: warning: field names should be lowercase snake_case, got: isPersonal
+/Users/runner/work/AirGram-iOS/AirGram-iOS/submodules/TelegramCore/FlatSerialization/Models/TelegramMediaImageRepresentation.fbs:19: 12: warning: field names should be lowercase snake_case, got: typeHint
+
+
+warning:
+  /Users/runner/work/AirGram-iOS/AirGram-iOS/submodules/TelegramCore/FlatSerialization/Models/TelegramMediaResource.fbs:4: 16: warning: field names should be lowercase snake_case, got: datacenterId
+/Users/runner/work/AirGram-iOS/AirGram-iOS/submodules/TelegramCore/FlatSerialization/Models/TelegramMediaResource.fbs:5: 12: warning: field names should be lowercase snake_case, got: volumeId
+/Users/runner/work/AirGram-iOS/AirGram-iOS/submodules/TelegramCore/FlatSerialization/Models/TelegramMediaResource.fbs:6: 11: warning: field names should be lowercase snake_case, got: localId
+/Users/runner/work/AirGram-iOS/AirGram-iOS/submodules/TelegramCore/FlatSerialization/Models/TelegramMediaResource.fbs:9: 17: warning: field names should be lowercase snake_case, got: fileReference
+/Users/runner/work/AirGram-iOS/AirGram-iOS/submodules/TelegramCore/FlatSerialization/Models/TelegramMediaResource.fbs:13: 16: warning: field names should be lowercase snake_case, got: datacenterId
+/Users/runner/work/AirGram-iOS/AirGram-iOS/submodules/TelegramCore/FlatSerialization/Models/TelegramMediaResource.fbs:14: 14: warning: field names should be lowercase snake_case, got: documentId
+/Users/runner/work/AirGram-iOS/AirGram-iOS/submodules/TelegramCore/FlatSerialization/Models/TelegramMediaResource.fbs:15: 14: warning: field names should be lowercase snake_case, got: accessHash
+/Users/runner/work/AirGram-iOS/AirGram-iOS/submodules/TelegramCore/FlatSerialization/Models/TelegramMediaResource.fbs:16: 12: warning: field names should be lowercase snake_case, got: sizeSpec
+/Users/runner/work/AirGram-iOS/AirGram-iOS/submodules/TelegramCore/FlatSerialization/Models/TelegramMediaResource.fbs:17: 17: warning: field names should be lowercase snake_case, got: fileReference
+/Users/runner/work/AirGram-iOS/AirGram-iOS/submodules/TelegramCore/FlatSerialization/Models/TelegramMediaResource.fbs:21: 16: warning: field names should be lowercase snake_case, got: datacenterId
+/Users/runner/work/AirGram-iOS/AirGram-iOS/submodules/TelegramCore/FlatSerialization/Models/TelegramMediaResource.fbs:22: 11: warning: field names should be lowercase snake_case, got: photoId
+/Users/runner/work/AirGram-iOS/AirGram-iOS/submodules/TelegramCore/FlatSerialization/Models/TelegramMediaResource.fbs:23: 14: warning: field names should be lowercase snake_case, got: accessHash
+/Users/runner/work/AirGram-iOS/AirGram-iOS/submodules/TelegramCore/FlatSerialization/Models/TelegramMediaResource.fbs:24: 12: warning: field names should be lowercase snake_case, got: sizeSpec
+/Users/runner/work/AirGram-iOS/AirGram-iOS/submodules/TelegramCore/FlatSerialization/Models/TelegramMediaResource.fbs:26: 17: warning: field names should be lowercase snake_case, got: fileReference
+/Users/runner/work/AirGram-iOS/AirGram-iOS/submodules/TelegramCore/FlatSerialization/Models/TelegramMediaResource.fbs:35: 16: warning: field names should be lowercase snake_case, got: datacenterId
+/Users/runner/work/AirGram-iOS/AirGram-iOS/submodules/TelegramCore/FlatSerialization/Models/TelegramMediaResource.fbs:36: 11: warning: field names should be lowercase snake_case, got: photoId
+/Users/runner/work/AirGram-iOS/AirGram-iOS/submodules/TelegramCore/FlatSerialization/Models/TelegramMediaResource.fbs:37: 12: warning: field names should be lowercase snake_case, got: sizeSpec
+/Users/runner/work/AirGram-iOS/AirGram-iOS/submodules/TelegramCore/FlatSerialization/Models/TelegramMediaResource.fbs:38: 12: warning: field names should be lowercase snake_case, got: volumeId
+/Users/runner/work/AirGram-iOS/AirGram-iOS/submodules/TelegramCore/FlatSerialization/Models/TelegramMediaResource.fbs:39: 11: warning: field names should be lowercase snake_case, got: localId
+/Users/runner/work/AirGram-iOS/AirGram-iOS/submodules/TelegramCore/FlatSerialization/Models/TelegramMediaResource.fbs:43: 16: warning: field names should be lowercase snake_case, got: datacenterId
+/Users/runner/work/AirGram-iOS/AirGram-iOS/submodules/TelegramCore/FlatSerialization/Models/TelegramMediaResource.fbs:44: 16: warning: field names should be lowercase snake_case, got: thumbVersion
+/Users/runner/work/AirGram-iOS/AirGram-iOS/submodules/TelegramCore/FlatSerialization/Models/TelegramMediaResource.fbs:45: 12: warning: field names should be lowercase snake_case, got: volumeId
+/Users/runner/work/AirGram-iOS/AirGram-iOS/submodules/TelegramCore/FlatSerialization/Models/TelegramMediaResource.fbs:46: 11: warning: field names should be lowercase snake_case, got: localId
+/Users/runner/work/AirGram-iOS/AirGram-iOS/submodules/TelegramCore/FlatSerialization/Models/TelegramMediaResource.fbs:50: 16: warning: field names should be lowercase snake_case, got: datacenterId
+/Users/runner/work/AirGram-iOS/AirGram-iOS/submodules/TelegramCore/FlatSerialization/Models/TelegramMediaResource.fbs:51: 10: warning: field names should be lowercase snake_case, got: fileId
+/Users/runner/work/AirGram-iOS/AirGram-iOS/submodules/TelegramCore/FlatSerialization/Models/TelegramMediaResource.fbs:52: 14: warning: field names should be lowercase snake_case, got: accessHash
+/Users/runner/work/AirGram-iOS/AirGram-iOS/submodules/TelegramCore/FlatSerialization/Models/TelegramMediaResource.fbs:54: 17: warning: field names should be lowercase snake_case, got: fileReference
+/Users/runner/work/AirGram-iOS/AirGram-iOS/submodules/TelegramCore/FlatSerialization/Models/TelegramMediaResource.fbs:55: 12: warning: field names should be lowercase snake_case, got: fileName
+/Users/runner/work/AirGram-iOS/AirGram-iOS/submodules/TelegramCore/FlatSerialization/Models/TelegramMediaResource.fbs:59: 10: warning: field names should be lowercase snake_case, got: fileId
+/Users/runner/work/AirGram-iOS/AirGram-iOS/submodules/TelegramCore/FlatSerialization/Models/TelegramMediaResource.fbs:61: 19: warning: field names should be lowercase snake_case, got: isSecretRelated
+
+
+warning:
+  /Users/runner/work/AirGram-iOS/AirGram-iOS/submodules/TelegramCore/FlatSerialization/Models/TelegramPeerAccessHash.fbs:4: 14: warning: field names should be lowercase snake_case, got: accessHash
+/Users/runner/work/AirGram-iOS/AirGram-iOS/submodules/TelegramCore/FlatSerialization/Models/TelegramPeerAccessHash.fbs:8: 14: warning: field names should be lowercase snake_case, got: accessHash
+
+
+warning:
+  /Users/runner/work/AirGram-iOS/AirGram-iOS/submodules/TelegramCore/FlatSerialization/Models/TelegramUser.fbs:16: 21: warning: field names should be lowercase snake_case, got: inlinePlaceholder
+/Users/runner/work/AirGram-iOS/AirGram-iOS/submodules/TelegramCore/FlatSerialization/Models/TelegramUser.fbs:21: 14: warning: field names should be lowercase snake_case, got: accessHash
+/Users/runner/work/AirGram-iOS/AirGram-iOS/submodules/TelegramCore/FlatSerialization/Models/TelegramUser.fbs:22: 13: warning: field names should be lowercase snake_case, got: firstName
+/Users/runner/work/AirGram-iOS/AirGram-iOS/submodules/TelegramCore/FlatSerialization/Models/TelegramUser.fbs:23: 12: warning: field names should be lowercase snake_case, got: lastName
+/Users/runner/work/AirGram-iOS/AirGram-iOS/submodules/TelegramCore/FlatSerialization/Models/TelegramUser.fbs:27: 11: warning: field names should be lowercase snake_case, got: botInfo
+/Users/runner/work/AirGram-iOS/AirGram-iOS/submodules/TelegramCore/FlatSerialization/Models/TelegramUser.fbs:28: 19: warning: field names should be lowercase snake_case, got: restrictionInfo
+/Users/runner/work/AirGram-iOS/AirGram-iOS/submodules/TelegramCore/FlatSerialization/Models/TelegramUser.fbs:30: 15: warning: field names should be lowercase snake_case, got: emojiStatus
+/Users/runner/work/AirGram-iOS/AirGram-iOS/submodules/TelegramCore/FlatSerialization/Models/TelegramUser.fbs:32: 17: warning: field names should be lowercase snake_case, got: storiesHidden
+/Users/runner/work/AirGram-iOS/AirGram-iOS/submodules/TelegramCore/FlatSerialization/Models/TelegramUser.fbs:33: 13: warning: field names should be lowercase snake_case, got: nameColor
+/Users/runner/work/AirGram-iOS/AirGram-iOS/submodules/TelegramCore/FlatSerialization/Models/TelegramUser.fbs:34: 21: warning: field names should be lowercase snake_case, got: backgroundEmojiId
+/Users/runner/work/AirGram-iOS/AirGram-iOS/submodules/TelegramCore/FlatSerialization/Models/TelegramUser.fbs:35: 16: warning: field names should be lowercase snake_case, got: profileColor
+/Users/runner/work/AirGram-iOS/AirGram-iOS/submodules/TelegramCore/FlatSerialization/Models/TelegramUser.fbs:36: 28: warning: field names should be lowercase snake_case, got: profileBackgroundEmojiId
+/Users/runner/work/AirGram-iOS/AirGram-iOS/submodules/TelegramCore/FlatSerialization/Models/TelegramUser.fbs:37: 19: warning: field names should be lowercase snake_case, got: subscriberCount
+/Users/runner/work/AirGram-iOS/AirGram-iOS/submodules/TelegramCore/FlatSerialization/Models/TelegramUser.fbs:38: 26: warning: field names should be lowercase snake_case, got: verificationIconFileId
+/Users/runner/work/AirGram-iOS/AirGram-iOS/submodules/TelegramCore/FlatSerialization/Models/TelegramUser.fbs:39: 20: warning: field names should be lowercase snake_case, got: collectibleColor
+
++ cp bazel-out/ios_arm64-opt-ios-arm64-min13.0-ST-2d46267cd7fb/bin/submodules/TelegramCore/FlatSerialization/build/InstantPage_generated.swift bazel-out/ios_arm64-opt-ios-arm64-min13.0-ST-2d46267cd7fb/bin/submodules/TelegramCore/FlatSerialization/InstantPage_generated.swift
++ cp bazel-out/ios_arm64-opt-ios-arm64-min13.0-ST-2d46267cd7fb/bin/submodules/TelegramCore/FlatSerialization/build/InstantPageBlock_generated.swift bazel-out/ios_arm64-opt-ios-arm64-min13.0-ST-2d46267cd7fb/bin/submodules/TelegramCore/FlatSerialization/InstantPageBlock_generated.swift
++ cp bazel-out/ios_arm64-opt-ios-arm64-min13.0-ST-2d46267cd7fb/bin/submodules/TelegramCore/FlatSerialization/build/ItemCollectionId_generated.swift bazel-out/ios_arm64-opt-ios-arm64-min13.0-ST-2d46267cd7fb/bin/submodules/TelegramCore/FlatSerialization/ItemCollectionId_generated.swift
++ cp bazel-out/ios_arm64-opt-ios-arm64-min13.0-ST-2d46267cd7fb/bin/submodules/TelegramCore/FlatSerialization/build/Media_generated.swift bazel-out/ios_arm64-opt-ios-arm64-min13.0-ST-2d46267cd7fb/bin/submodules/TelegramCore/FlatSerialization/Media_generated.swift
++ cp bazel-out/ios_arm64-opt-ios-arm64-min13.0-ST-2d46267cd7fb/bin/submodules/TelegramCore/FlatSerialization/build/MediaId_generated.swift bazel-out/ios_arm64-opt-ios-arm64-min13.0-ST-2d46267cd7fb/bin/submodules/TelegramCore/FlatSerialization/MediaId_generated.swift
++ cp bazel-out/ios_arm64-opt-ios-arm64-min13.0-ST-2d46267cd7fb/bin/submodules/TelegramCore/FlatSerialization/build/MessageId_generated.swift bazel-out/ios_arm64-opt-ios-arm64-min13.0-ST-2d46267cd7fb/bin/submodules/TelegramCore/FlatSerialization/MessageId_generated.swift
++ cp bazel-out/ios_arm64-opt-ios-arm64-min13.0-ST-2d46267cd7fb/bin/submodules/TelegramCore/FlatSerialization/build/Optional_generated.swift bazel-out/ios_arm64-opt-ios-arm64-min13.0-ST-2d46267cd7fb/bin/submodules/TelegramCore/FlatSerialization/Optional_generated.swift
++ cp bazel-out/ios_arm64-opt-ios-arm64-min13.0-ST-2d46267cd7fb/bin/submodules/TelegramCore/FlatSerialization/build/PartialMediaReference_generated.swift bazel-out/ios_arm64-opt-ios-arm64-min13.0-ST-2d46267cd7fb/bin/submodules/TelegramCore/FlatSerialization/PartialMediaReference_generated.swift
++ cp bazel-out/ios_arm64-opt-ios-arm64-min13.0-ST-2d46267cd7fb/bin/submodules/TelegramCore/FlatSerialization/build/PeerAccessRestrictionInfo_generated.swift bazel-out/ios_arm64-opt-ios-arm64-min13.0-ST-2d46267cd7fb/bin/submodules/TelegramCore/FlatSerialization/PeerAccessRestrictionInfo_generated.swift
++ cp bazel-out/ios_arm64-opt-ios-arm64-min13.0-ST-2d46267cd7fb/bin/submodules/TelegramCore/FlatSerialization/build/PeerCollectibleColor_generated.swift bazel-out/ios_arm64-opt-ios-arm64-min13.0-ST-2d46267cd7fb/bin/submodules/TelegramCore/FlatSerialization/PeerCollectibleColor_generated.swift
++ cp bazel-out/ios_arm64-opt-ios-arm64-min13.0-ST-2d46267cd7fb/bin/submodules/TelegramCore/FlatSerialization/build/PeerEmojiStatus_generated.swift bazel-out/ios_arm64-opt-ios-arm64-min13.0-ST-2d46267cd7fb/bin/submodules/TelegramCore/FlatSerialization/PeerEmojiStatus_generated.swift
++ cp bazel-out/ios_arm64-opt-ios-arm64-min13.0-ST-2d46267cd7fb/bin/submodules/TelegramCore/FlatSerialization/build/PeerId_generated.swift bazel-out/ios_arm64-opt-ios-arm64-min13.0-ST-2d46267cd7fb/bin/submodules/TelegramCore/FlatSerialization/PeerId_generated.swift
++ cp bazel-out/ios_arm64-opt-ios-arm64-min13.0-ST-2d46267cd7fb/bin/submodules/TelegramCore/FlatSerialization/build/PeerNameColor_generated.swift bazel-out/ios_arm64-opt-ios-arm64-min13.0-ST-2d46267cd7fb/bin/submodules/TelegramCore/FlatSerialization/PeerNameColor_generated.swift
++ cp bazel-out/ios_arm64-opt-ios-arm64-min13.0-ST-2d46267cd7fb/bin/submodules/TelegramCore/FlatSerialization/build/PeerReference_generated.swift bazel-out/ios_arm64-opt-ios-arm64-min13.0-ST-2d46267cd7fb/bin/submodules/TelegramCore/FlatSerialization/PeerReference_generated.swift
++ cp bazel-out/ios_arm64-opt-ios-arm64-min13.0-ST-2d46267cd7fb/bin/submodules/TelegramCore/FlatSerialization/build/PixelDimensions_generated.swift bazel-out/ios_arm64-opt-ios-arm64-min13.0-ST-2d46267cd7fb/bin/submodules/TelegramCore/FlatSerialization/PixelDimensions_generated.swift
++ cp bazel-out/ios_arm64-opt-ios-arm64-min13.0-ST-2d46267cd7fb/bin/submodules/TelegramCore/FlatSerialization/build/RichText_generated.swift bazel-out/ios_arm64-opt-ios-arm64-min13.0-ST-2d46267cd7fb/bin/submodules/TelegramCore/FlatSerialization/RichText_generated.swift
++ cp bazel-out/ios_arm64-opt-ios-arm64-min13.0-ST-2d46267cd7fb/bin/submodules/TelegramCore/FlatSerialization/build/StarsAmount_generated.swift bazel-out/ios_arm64-opt-ios-arm64-min13.0-ST-2d46267cd7fb/bin/submodules/TelegramCore/FlatSerialization/StarsAmount_generated.swift
++ cp bazel-out/ios_arm64-opt-ios-arm64-min13.0-ST-2d46267cd7fb/bin/submodules/TelegramCore/FlatSerialization/build/StickerPackCollectionInfo_generated.swift bazel-out/ios_arm64-opt-ios-arm64-min13.0-ST-2d46267cd7fb/bin/submodules/TelegramCore/FlatSerialization/StickerPackCollectionInfo_generated.swift
++ cp bazel-out/ios_arm64-opt-ios-arm64-min13.0-ST-2d46267cd7fb/bin/submodules/TelegramCore/FlatSerialization/build/StickerPackReference_generated.swift bazel-out/ios_arm64-opt-ios-arm64-min13.0-ST-2d46267cd7fb/bin/submodules/TelegramCore/FlatSerialization/StickerPackReference_generated.swift
++ cp bazel-out/ios_arm64-opt-ios-arm64-min13.0-ST-2d46267cd7fb/bin/submodules/TelegramCore/FlatSerialization/build/StoredDeviceContactData_generated.swift bazel-out/ios_arm64-opt-ios-arm64-min13.0-ST-2d46267cd7fb/bin/submodules/TelegramCore/FlatSerialization/StoredDeviceContactData_generated.swift
++ cp bazel-out/ios_arm64-opt-ios-arm64-min13.0-ST-2d46267cd7fb/bin/submodules/TelegramCore/FlatSerialization/build/TelegramChannel_generated.swift bazel-out/ios_arm64-opt-ios-arm64-min13.0-ST-2d46267cd7fb/bin/submodules/TelegramCore/FlatSerialization/TelegramChannel_generated.swift
++ cp bazel-out/ios_arm64-opt-ios-arm64-min13.0-ST-2d46267cd7fb/bin/submodules/TelegramCore/FlatSerialization/build/TelegramChatAdminRights_generated.swift bazel-out/ios_arm64-opt-ios-arm64-min13.0-ST-2d46267cd7fb/bin/submodules/TelegramCore/FlatSerialization/TelegramChatAdminRights_generated.swift
++ cp bazel-out/ios_arm64-opt-ios-arm64-min13.0-ST-2d46267cd7fb/bin/submodules/TelegramCore/FlatSerialization/build/TelegramChatBannedRights_generated.swift bazel-out/ios_arm64-opt-ios-arm64-min13.0-ST-2d46267cd7fb/bin/submodules/TelegramCore/FlatSerialization/TelegramChatBannedRights_generated.swift
++ cp bazel-out/ios_arm64-opt-ios-arm64-min13.0-ST-2d46267cd7fb/bin/submodules/TelegramCore/FlatSerialization/build/TelegramGroup_generated.swift bazel-out/ios_arm64-opt-ios-arm64-min13.0-ST-2d46267cd7fb/bin/submodules/TelegramCore/FlatSerialization/TelegramGroup_generated.swift
++ cp bazel-out/ios_arm64-opt-ios-arm64-min13.0-ST-2d46267cd7fb/bin/submodules/TelegramCore/FlatSerialization/build/TelegramMediaFile_generated.swift bazel-out/ios_arm64-opt-ios-arm64-min13.0-ST-2d46267cd7fb/bin/submodules/TelegramCore/FlatSerialization/TelegramMediaFile_generated.swift
++ cp bazel-out/ios_arm64-opt-ios-arm64-min13.0-ST-2d46267cd7fb/bin/submodules/TelegramCore/FlatSerialization/build/TelegramMediaFileAttribute_generated.swift bazel-out/ios_arm64-opt-ios-arm64-min13.0-ST-2d46267cd7fb/bin/submodules/TelegramCore/FlatSerialization/TelegramMediaFileAttribute_generated.swift
++ cp bazel-out/ios_arm64-opt-ios-arm64-min13.0-ST-2d46267cd7fb/bin/submodules/TelegramCore/FlatSerialization/build/TelegramMediaImage_generated.swift bazel-out/ios_arm64-opt-ios-arm64-min13.0-ST-2d46267cd7fb/bin/submodules/TelegramCore/FlatSerialization/TelegramMediaImage_generated.swift
++ cp bazel-out/ios_arm64-opt-ios-arm64-min13.0-ST-2d46267cd7fb/bin/submodules/TelegramCore/FlatSerialization/build/TelegramMediaImageRepresentation_generated.swift bazel-out/ios_arm64-opt-ios-arm64-min13.0-ST-2d46267cd7fb/bin/submodules/TelegramCore/FlatSerialization/TelegramMediaImageRepresentation_generated.swift
++ cp bazel-out/ios_arm64-opt-ios-arm64-min13.0-ST-2d46267cd7fb/bin/submodules/TelegramCore/FlatSerialization/build/TelegramMediaResource_generated.swift bazel-out/ios_arm64-opt-ios-arm64-min13.0-ST-2d46267cd7fb/bin/submodules/TelegramCore/FlatSerialization/TelegramMediaResource_generated.swift
++ cp bazel-out/ios_arm64-opt-ios-arm64-min13.0-ST-2d46267cd7fb/bin/submodules/TelegramCore/FlatSerialization/build/TelegramPeerAccessHash_generated.swift bazel-out/ios_arm64-opt-ios-arm64-min13.0-ST-2d46267cd7fb/bin/submodules/TelegramCore/FlatSerialization/TelegramPeerAccessHash_generated.swift
++ cp bazel-out/ios_arm64-opt-ios-arm64-min13.0-ST-2d46267cd7fb/bin/submodules/TelegramCore/FlatSerialization/build/TelegramPeerUsername_generated.swift bazel-out/ios_arm64-opt-ios-arm64-min13.0-ST-2d46267cd7fb/bin/submodules/TelegramCore/FlatSerialization/TelegramPeerUsername_generated.swift
++ cp bazel-out/ios_arm64-opt-ios-arm64-min13.0-ST-2d46267cd7fb/bin/submodules/TelegramCore/FlatSerialization/build/TelegramUser_generated.swift bazel-out/ios_arm64-opt-ios-arm64-min13.0-ST-2d46267cd7fb/bin/submodules/TelegramCore/FlatSerialization/TelegramUser_generated.swift
++ cp bazel-out/ios_arm64-opt-ios-arm64-min13.0-ST-2d46267cd7fb/bin/submodules/TelegramCore/FlatSerialization/build/VideoThumbnail_generated.swift bazel-out/ios_arm64-opt-ios-arm64-min13.0-ST-2d46267cd7fb/bin/submodules/TelegramCore/FlatSerialization/VideoThumbnail_generated.swift
+[2,692 / 8,613] Compiling absl/container/internal/raw_hash_set.cc [for tool]; 13s local, disk-cache ... (3 actions running)
+[2,693 / 8,613] Compiling Telegram/GeneratedPresentationStrings/Sources/PresentationStrings.m; 2s local, disk-cache ... (3 actions, 2 running)
+[2,695 / 8,613] Compiling Telegram/GeneratedPresentationStrings/Sources/PresentationStrings.m; 4s local, disk-cache ... (3 actions, 2 running)
+[2,695 / 8,613] Compiling Telegram/GeneratedPresentationStrings/Sources/PresentationStrings.m; 5s local, disk-cache ... (3 actions running)
+INFO: From Compiling Telegram/GeneratedPresentationStrings/Sources/PresentationStrings.m:
+bazel-out/ios_arm64-opt-ios-arm64-min13.0-ST-2d46267cd7fb/bin/Telegram/GeneratedPresentationStrings/Sources/PresentationStrings.m:249:36: warning: unused function 'getFormatted7' [-Wunused-function]
+  249 | static _FormattedString * _Nonnull getFormatted7(_PresentationStrings * _Nonnull strings,
+      |                                    ^~~~~~~~~~~~~
+1 warning generated.
+[2,697 / 8,613] Linking external/rules_swift+/tools/worker/worker [for tool]; 3s local, disk-cache ... (3 actions running)
+[2,700 / 8,613] Compiling submodules/AsyncDisplayKit/Source/ASDisplayNodeExtras.mm; 3s local, disk-cache ... (3 actions running)
+[2,701 / 8,613] Compiling submodules/AsyncDisplayKit/Source/ASDisplayNodeExtras.mm; 4s local, disk-cache ... (3 actions running)
+[2,704 / 8,613] Generating derived files for Swift module //submodules/NotificationsPresentationData:NotificationsPresentationData; 2s disk-cache, worker ... (3 actions running)
+[2,707 / 8,613] Generating derived files for Swift module //submodules/NotificationsPresentationData:NotificationsPresentationData; 3s disk-cache, worker ... (3 actions running)
+[2,713 / 8,613] Generating derived files for Swift module //submodules/NotificationsPresentationData:NotificationsPresentationData; 4s disk-cache, worker ... (3 actions running)
+[2,719 / 8,613] Generating derived files for Swift module //submodules/NotificationsPresentationData:NotificationsPresentationData; 5s disk-cache, worker ... (3 actions, 2 running)
+[2,723 / 8,613] Generating derived files for Swift module //submodules/NotificationsPresentationData:NotificationsPresentationData; 6s disk-cache, worker ... (3 actions, 2 running)
+[2,727 / 8,613] Generating derived files for Swift module //submodules/NotificationsPresentationData:NotificationsPresentationData; 7s disk-cache, worker ... (3 actions, 2 running)
+[2,729 / 8,613] Generating derived files for Swift module //submodules/TelegramApi:TelegramApi; 1s disk-cache, worker ... (3 actions running)
+[2,731 / 8,613] Generating derived files for Swift module //submodules/TelegramApi:TelegramApi; 2s disk-cache, worker ... (3 actions running)
+[2,732 / 8,613] Generating derived files for Swift module //submodules/TelegramApi:TelegramApi; 3s disk-cache, worker ... (3 actions, 2 running)
+[2,732 / 8,613] Generating derived files for Swift module //submodules/TelegramApi:TelegramApi; 5s disk-cache, worker ... (3 actions running)
+[2,733 / 8,613] Generating derived files for Swift module //submodules/TelegramApi:TelegramApi; 8s disk-cache, worker ... (3 actions, 2 running)
+[2,736 / 8,613] Generating derived files for Swift module //submodules/TelegramApi:TelegramApi; 9s disk-cache, worker ... (3 actions, 2 running)
+[2,739 / 8,613] Generating derived files for Swift module //submodules/TelegramApi:TelegramApi; 10s disk-cache, worker ... (2 actions running)
+[2,740 / 8,613] Generating derived files for Swift module //submodules/TelegramApi:TelegramApi; 12s disk-cache, worker ... (3 actions running)
+[2,741 / 8,613] Generating derived files for Swift module //submodules/TelegramApi:TelegramApi; 13s disk-cache, worker ... (3 actions running)
+[2,742 / 8,613] Generating derived files for Swift module //submodules/TelegramApi:TelegramApi; 15s disk-cache, worker ... (3 actions, 2 running)
+[2,743 / 8,613] Generating derived files for Swift module //submodules/TelegramApi:TelegramApi; 16s disk-cache, worker ... (3 actions, 2 running)
+[2,745 / 8,613] Generating derived files for Swift module //submodules/TelegramApi:TelegramApi; 17s disk-cache, worker ... (3 actions, 2 running)
+[2,748 / 8,613] Generating derived files for Swift module //submodules/TelegramApi:TelegramApi; 19s disk-cache, worker ... (3 actions, 2 running)
+[2,750 / 8,613] Generating derived files for Swift module //submodules/TelegramApi:TelegramApi; 20s disk-cache, worker ... (3 actions, 2 running)
+[2,752 / 8,613] Generating derived files for Swift module //submodules/TelegramApi:TelegramApi; 21s disk-cache, worker ... (3 actions, 2 running)
+[2,754 / 8,613] Generating derived files for Swift module //submodules/TelegramApi:TelegramApi; 22s disk-cache, worker ... (3 actions running)
+[2,756 / 8,613] Generating derived files for Swift module //submodules/TelegramApi:TelegramApi; 23s disk-cache, worker ... (3 actions running)
+[2,758 / 8,613] Generating derived files for Swift module //submodules/TelegramApi:TelegramApi; 24s disk-cache, worker ... (3 actions running)
+[2,761 / 8,613] Generating derived files for Swift module //submodules/TelegramApi:TelegramApi; 26s disk-cache, worker ... (3 actions running)
+[2,763 / 8,613] Generating derived files for Swift module //submodules/TelegramApi:TelegramApi; 27s disk-cache, worker ... (3 actions running)
+[2,765 / 8,613] Generating derived files for Swift module //submodules/TelegramApi:TelegramApi; 28s disk-cache, worker ... (3 actions running)
+[2,767 / 8,613] Generating derived files for Swift module //submodules/TelegramApi:TelegramApi; 29s disk-cache, worker ... (3 actions running)
+[2,769 / 8,613] Generating derived files for Swift module //submodules/TelegramApi:TelegramApi; 30s disk-cache, worker ... (3 actions running)
+[2,773 / 8,613] Generating derived files for Swift module //submodules/TelegramApi:TelegramApi; 31s disk-cache, worker ... (3 actions, 2 running)
+[2,773 / 8,613] Generating derived files for Swift module //submodules/TelegramApi:TelegramApi; 32s disk-cache, worker ... (3 actions running)
+[2,775 / 8,613] Generating derived files for Swift module //submodules/TelegramApi:TelegramApi; 34s disk-cache, worker ... (2 actions, 1 running)
+[2,775 / 8,613] Generating derived files for Swift module //submodules/TelegramApi:TelegramApi; 36s disk-cache, worker ... (3 actions running)
+[2,776 / 8,613] Generating derived files for Swift module //submodules/TelegramApi:TelegramApi; 37s disk-cache, worker ... (3 actions running)
+[2,779 / 8,613] Generating derived files for Swift module //submodules/TelegramApi:TelegramApi; 38s disk-cache, worker ... (3 actions running)
+[2,780 / 8,613] Generating derived files for Swift module //submodules/TelegramApi:TelegramApi; 39s disk-cache, worker ... (3 actions running)
+[2,781 / 8,613] Generating derived files for Swift module //submodules/TelegramApi:TelegramApi; 40s disk-cache, worker ... (3 actions running)
+[2,782 / 8,613] Generating derived files for Swift module //submodules/TelegramApi:TelegramApi; 41s disk-cache, worker ... (3 actions running)
+[2,783 / 8,613] Generating derived files for Swift module //submodules/TelegramApi:TelegramApi; 42s disk-cache, worker ... (3 actions running)
+[2,787 / 8,613] Generating derived files for Swift module //submodules/TelegramApi:TelegramApi; 43s disk-cache, worker ... (3 actions running)
+[2,789 / 8,613] Generating derived files for Swift module //submodules/TelegramApi:TelegramApi; 44s disk-cache, worker ... (3 actions, 2 running)
+[2,791 / 8,613] Generating derived files for Swift module //submodules/TelegramApi:TelegramApi; 45s disk-cache, worker ... (3 actions running)
+[2,792 / 8,613] Generating derived files for Swift module //submodules/TelegramApi:TelegramApi; 47s disk-cache, worker ... (3 actions running)
+[2,795 / 8,613] Generating derived files for Swift module //submodules/TelegramApi:TelegramApi; 48s disk-cache, worker ... (3 actions, 2 running)
+[2,796 / 8,613] Generating derived files for Swift module //submodules/TelegramApi:TelegramApi; 49s disk-cache, worker ... (3 actions running)
+[2,799 / 8,613] Generating derived files for Swift module //submodules/TelegramApi:TelegramApi; 50s disk-cache, worker ... (3 actions running)
+[2,801 / 8,613] Generating derived files for Swift module //submodules/TelegramApi:TelegramApi; 51s disk-cache, worker ... (3 actions, 2 running)
+[2,802 / 8,613] Generating derived files for Swift module //submodules/TelegramApi:TelegramApi; 52s disk-cache, worker ... (3 actions running)
+[2,803 / 8,613] Generating derived files for Swift module //submodules/TelegramApi:TelegramApi; 53s disk-cache, worker ... (3 actions running)
+[2,804 / 8,613] Generating derived files for Swift module //submodules/TelegramApi:TelegramApi; 54s disk-cache, worker ... (3 actions, 2 running)
+[2,806 / 8,613] Generating derived files for Swift module //submodules/TelegramApi:TelegramApi; 55s disk-cache, worker ... (3 actions running)
+[2,810 / 8,613] Generating derived files for Swift module //submodules/TelegramApi:TelegramApi; 56s disk-cache, worker ... (3 actions running)
+[2,811 / 8,613] Generating derived files for Swift module //submodules/TelegramApi:TelegramApi; 57s disk-cache, worker ... (3 actions running)
+[2,813 / 8,613] Generating derived files for Swift module //submodules/TelegramApi:TelegramApi; 58s disk-cache, worker ... (3 actions running)
+[2,814 / 8,613] Generating derived files for Swift module //submodules/TelegramApi:TelegramApi; 59s disk-cache, worker ... (3 actions, 2 running)
+[2,817 / 8,613] Generating derived files for Swift module //submodules/TelegramApi:TelegramApi; 60s disk-cache, worker ... (3 actions, 2 running)
+[2,818 / 8,613] Generating derived files for Swift module //submodules/TelegramApi:TelegramApi; 61s disk-cache, worker ... (3 actions running)
+[2,819 / 8,613] Generating derived files for Swift module //submodules/TelegramApi:TelegramApi; 63s disk-cache, worker ... (3 actions running)
+[2,820 / 8,613] Generating derived files for Swift module //submodules/TelegramApi:TelegramApi; 64s disk-cache, worker ... (3 actions running)
+[2,821 / 8,613] Generating derived files for Swift module //submodules/TelegramApi:TelegramApi; 65s disk-cache, worker ... (3 actions running)
+[2,826 / 8,613] Generating derived files for Swift module //submodules/TelegramApi:TelegramApi; 66s disk-cache, worker ... (3 actions running)
+[2,827 / 8,613] Generating derived files for Swift module //submodules/TelegramApi:TelegramApi; 68s disk-cache, worker ... (3 actions, 2 running)
+[2,827 / 8,613] Generating derived files for Swift module //submodules/TelegramApi:TelegramApi; 69s disk-cache, worker ... (3 actions running)
+[2,828 / 8,613] Generating derived files for Swift module //submodules/TelegramApi:TelegramApi; 72s disk-cache, worker ... (3 actions, 2 running)
+[2,830 / 8,613] Generating derived files for Swift module //submodules/TelegramApi:TelegramApi; 74s disk-cache, worker ... (3 actions, 2 running)
+[2,830 / 8,613] Generating derived files for Swift module //submodules/TelegramApi:TelegramApi; 75s disk-cache, worker ... (3 actions running)
+[2,831 / 8,613] Generating derived files for Swift module //submodules/TelegramApi:TelegramApi; 76s disk-cache, worker ... (3 actions, 2 running)
+[2,831 / 8,613] Generating derived files for Swift module //submodules/TelegramApi:TelegramApi; 78s disk-cache, worker ... (3 actions running)
+[2,832 / 8,613] Generating derived files for Swift module //submodules/TelegramApi:TelegramApi; 79s disk-cache, worker ... (3 actions, 2 running)
+[2,833 / 8,613] Generating derived files for Swift module //submodules/TelegramApi:TelegramApi; 80s disk-cache, worker ... (3 actions running)
+[2,835 / 8,613] Generating derived files for Swift module //submodules/TelegramApi:TelegramApi; 81s disk-cache, worker ... (3 actions running)
+[2,836 / 8,613] Generating derived files for Swift module //submodules/TelegramApi:TelegramApi; 82s disk-cache, worker ... (2 actions running)
+[2,838 / 8,613] Generating derived files for Swift module //submodules/TelegramApi:TelegramApi; 83s disk-cache, worker ... (3 actions running)
+[2,839 / 8,613] Generating derived files for Swift module //submodules/TelegramApi:TelegramApi; 85s disk-cache, worker ... (3 actions, 2 running)
+[2,839 / 8,613] Generating derived files for Swift module //submodules/TelegramApi:TelegramApi; 87s disk-cache, worker ... (3 actions running)
+[2,840 / 8,613] Generating derived files for Swift module //submodules/TelegramApi:TelegramApi; 88s disk-cache, worker ... (3 actions, 2 running)
+[2,841 / 8,613] Generating derived files for Swift module //submodules/TelegramApi:TelegramApi; 90s disk-cache, worker ... (3 actions running)
+[2,842 / 8,613] Generating derived files for Swift module //submodules/TelegramApi:TelegramApi; 91s disk-cache, worker ... (3 actions, 2 running)
+[2,842 / 8,613] Generating derived files for Swift module //submodules/TelegramApi:TelegramApi; 93s disk-cache, worker ... (3 actions running)
+[2,844 / 8,613] Generating derived files for Swift module //submodules/TelegramApi:TelegramApi; 94s disk-cache, worker ... (3 actions running)
+[2,845 / 8,613] Generating derived files for Swift module //submodules/TelegramApi:TelegramApi; 95s disk-cache, worker ... (3 actions, 2 running)
+[2,847 / 8,613] Generating derived files for Swift module //submodules/TelegramApi:TelegramApi; 97s disk-cache, worker ... (3 actions running)
+[2,851 / 8,613] Generating derived files for Swift module //submodules/TelegramApi:TelegramApi; 98s disk-cache, worker ... (3 actions running)
+[2,852 / 8,613] Generating derived files for Swift module //submodules/TelegramApi:TelegramApi; 100s disk-cache, worker ... (3 actions, 2 running)
+[2,852 / 8,613] Generating derived files for Swift module //submodules/TelegramApi:TelegramApi; 102s disk-cache, worker ... (3 actions running)
+[2,852 / 8,613] Generating derived files for Swift module //submodules/TelegramApi:TelegramApi; 112s disk-cache, worker ... (3 actions running)
+[2,853 / 8,613] Generating derived files for Swift module //submodules/TelegramApi:TelegramApi; 113s disk-cache, worker ... (3 actions running)
+[2,854 / 8,613] Generating derived files for Swift module //submodules/TelegramApi:TelegramApi; 116s disk-cache, worker ... (3 actions, 2 running)
+[2,854 / 8,613] Generating derived files for Swift module //submodules/TelegramApi:TelegramApi; 118s disk-cache, worker ... (3 actions running)
+[2,855 / 8,613] Generating derived files for Swift module //submodules/TelegramApi:TelegramApi; 121s disk-cache, worker ... (3 actions, 2 running)
+[2,856 / 8,613] Generating derived files for Swift module //submodules/TelegramApi:TelegramApi; 122s disk-cache, worker ... (3 actions running)
+[2,858 / 8,613] Generating derived files for Swift module //submodules/TelegramApi:TelegramApi; 123s disk-cache, worker ... (3 actions running)
+[2,859 / 8,613] Generating derived files for Swift module //submodules/TelegramApi:TelegramApi; 125s disk-cache, worker ... (3 actions, 2 running)
+[2,859 / 8,613] Generating derived files for Swift module //submodules/TelegramApi:TelegramApi; 126s disk-cache, worker ... (3 actions running)
+[2,860 / 8,613] Generating derived files for Swift module //submodules/TelegramApi:TelegramApi; 129s disk-cache, worker ... (3 actions, 2 running)
+[2,860 / 8,613] Generating derived files for Swift module //submodules/TelegramApi:TelegramApi; 131s disk-cache, worker ... (3 actions running)
+[2,861 / 8,613] Generating derived files for Swift module //submodules/TelegramApi:TelegramApi; 132s disk-cache, worker ... (3 actions running)
+[2,862 / 8,613] Generating derived files for Swift module //submodules/TelegramApi:TelegramApi; 133s disk-cache, worker ... (3 actions, 2 running)
+[2,862 / 8,613] Generating derived files for Swift module //submodules/TelegramApi:TelegramApi; 135s disk-cache, worker ... (3 actions running)
+[2,863 / 8,613] Generating derived files for Swift module //submodules/TelegramApi:TelegramApi; 137s disk-cache, worker ... (3 actions, 2 running)
+[2,863 / 8,613] Generating derived files for Swift module //submodules/TelegramApi:TelegramApi; 139s disk-cache, worker ... (3 actions running)
+[2,864 / 8,613] Generating derived files for Swift module //submodules/TelegramApi:TelegramApi; 140s disk-cache, worker ... (3 actions running)
+[2,865 / 8,613] Generating derived files for Swift module //submodules/TelegramApi:TelegramApi; 141s disk-cache, worker ... (3 actions running)
+[2,866 / 8,613] Generating derived files for Swift module //submodules/TelegramApi:TelegramApi; 143s disk-cache, worker ... (3 actions, 2 running)
+[2,866 / 8,613] Generating derived files for Swift module //submodules/TelegramApi:TelegramApi; 145s disk-cache, worker ... (3 actions running)
+[2,867 / 8,613] Generating derived files for Swift module //submodules/TelegramApi:TelegramApi; 146s disk-cache, worker ... (3 actions running)
+[2,868 / 8,613] Generating derived files for Swift module //submodules/TelegramApi:TelegramApi; 147s disk-cache, worker ... (3 actions, 2 running)
+[2,869 / 8,613] Generating derived files for Swift module //submodules/TelegramApi:TelegramApi; 149s disk-cache, worker ... (3 actions, 2 running)
+[2,871 / 8,613] Generating derived files for Swift module //submodules/TelegramApi:TelegramApi; 150s disk-cache, worker ... (3 actions, 2 running)
+[2,873 / 8,613] Generating derived files for Swift module //submodules/TelegramApi:TelegramApi; 151s disk-cache, worker ... (3 actions running)
+[2,874 / 8,613] Generating derived files for Swift module //submodules/TelegramApi:TelegramApi; 152s disk-cache, worker ... (3 actions running)
+[2,876 / 8,613] Generating derived files for Swift module //submodules/TelegramApi:TelegramApi; 153s disk-cache, worker ... (3 actions running)
+[2,878 / 8,613] Generating derived files for Swift module //submodules/TelegramApi:TelegramApi; 154s disk-cache, worker ... (3 actions running)
+[2,879 / 8,613] Generating derived files for Swift module //submodules/TelegramApi:TelegramApi; 155s disk-cache, worker ... (3 actions running)
+ERROR: /Users/runner/work/AirGram-iOS/AirGram-iOS/submodules/LottieBinding/BUILD:5:14: Generating derived files for Swift module //submodules/LottieBinding:LottieBinding failed: (Exit 1): worker failed: error executing SwiftDeriveFiles command (from target //submodules/LottieBinding:LottieBinding) 
+  (cd /private/var/tmp/_bazel_containerhost/c259e0c7803e089724afaeab1cf94801/execroot/_main && \
+  exec env - \
+    APPLE_SDK_PLATFORM=iPhoneOS \
+    APPLE_SDK_VERSION_OVERRIDE=26.4 \
+    PATH=/usr/bin:/bin:/usr/sbin:/sbin \
+    XCODE_VERSION_OVERRIDE=26.4.1.17E202 \
+    ZERO_AR_DATE=1 \
+  bazel-out/darwin_arm64-opt-exec-ST-d57f47055a04/bin/external/rules_swift+/tools/worker/worker swiftc @bazel-out/ios_arm64-opt-ios-arm64-min13.0-ST-2d46267cd7fb/bin/submodules/LottieBinding/LottieBinding.swiftmodule-0.params)
+# Configuration: 38f1bac0d64462d96d7e07952719cc959158b32ba246a7a0beec5cc0d4cd6f36
+# Execution platform: @@platforms//host:host
+submodules/LottieBinding/Sources/LottieInstance.swift:30:1: error: type 'RLottieInstance' does not conform to protocol 'LottieInstance'
+22 |     /// rate the two disagree near the 9-second boundary — so each backend
+23 |     /// reports its own, and the rlottie path stays bit-identical to its history.
+24 |     var duration: Double { get }
+   |         `- note: protocol requires property 'duration' with type 'Double'
+25 | 
+26 |     func renderFrame(with index: Int32, into buffer: UnsafeMutablePointer<UInt8>,
+   :
+28 | }
+29 | 
+30 | extension RLottieInstance: LottieInstance {
+   | |- error: type 'RLottieInstance' does not conform to protocol 'LottieInstance'
+   | `- note: add stubs for conformance
+31 | }
+32 | 
+[2,882 / 8,613] checking cached actions
+Target //Telegram:telegram_auth_build_test failed to build
+ERROR: /Users/runner/work/AirGram-iOS/AirGram-iOS/submodules/TelegramUI/Components/Wallet/WalletScreen/BUILD:5:14 Linking submodules/TelegramUI/Components/Wallet/WalletScreen/libWalletScreen.a failed: (Exit 1): worker failed: error executing SwiftDeriveFiles command (from target //submodules/LottieBinding:LottieBinding) 
+  (cd /private/var/tmp/_bazel_containerhost/c259e0c7803e089724afaeab1cf94801/execroot/_main && \
+  exec env - \
+    APPLE_SDK_PLATFORM=iPhoneOS \
+    APPLE_SDK_VERSION_OVERRIDE=26.4 \
+    PATH=/usr/bin:/bin:/usr/sbin:/sbin \
+    XCODE_VERSION_OVERRIDE=26.4.1.17E202 \
+    ZERO_AR_DATE=1 \
+  bazel-out/darwin_arm64-opt-exec-ST-d57f47055a04/bin/external/rules_swift+/tools/worker/worker swiftc @bazel-out/ios_arm64-opt-ios-arm64-min13.0-ST-2d46267cd7fb/bin/submodules/LottieBinding/LottieBinding.swiftmodule-0.params)
+# Configuration: 38f1bac0d64462d96d7e07952719cc959158b32ba246a7a0beec5cc0d4cd6f36
+# Execution platform: @@platforms//host:host
+INFO: Elapsed time: 910.631s, Critical Path: 222.91s
+INFO: 2882 processes: 2097 internal, 720 local, 65 worker.
+ERROR: Build did NOT complete successfully
+FAILED: 
+INFO: Build Event Protocol files produced successfully.
+Traceback (most recent call last):
+  File "/Users/runner/work/AirGram-iOS/AirGram-iOS/build-system/Make/Make.py", line 1294, in <module>
+    build(bazel=bazel_path, arguments=args)
+    ~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/runner/work/AirGram-iOS/AirGram-iOS/build-system/Make/Make.py", line 650, in build
+    bazel_command_line.invoke_build()
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "/Users/runner/work/AirGram-iOS/AirGram-iOS/build-system/Make/Make.py", line 325, in invoke_build
+    call_executable(combined_arguments)
+    ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^
+  File "/Users/runner/work/AirGram-iOS/AirGram-iOS/build-system/Make/BuildEnvironment.py", line 104, in call_executable
+    subprocess.check_call(resolved_arguments, env=resolved_env)
+    ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/homebrew/Cellar/python@3.15/3.15.2/Frameworks/Python.framework/Versions/3.15/lib/python3.15/subprocess.py", line 534, in check_call
+    raise CalledProcessError(retcode, cmd)
+subprocess.CalledProcessError: Command ['/Users/runner/work/AirGram-iOS/AirGram-iOS/build-input/bazel-8.4.2-darwin-arm64', '--output_user_root=/private/var/tmp/_bazel_containerhost', 'build', 'Telegram/telegram_auth_build_test', '--announce_rc', '--features=swift.use_global_module_cache', '--verbose_failures', '--remote_cache_async', '--jobs=3', '--local_cpu_resources=3', '--worker_max_instances=3', '--spawn_strategy=worker,local', '--strategy=SwiftCompile=worker,local', '--strategy=ObjcCompile=worker,local', '--strategy=Genrule=standalone', '--worker_quit_after_build=false', '--define=buildNumber=2827', '--features=swift.split_derived_files_generation', '--disk_cache=/private/var/tmp/_bazel_containerhost/disk_cache', '-c', 'opt', '--ios_multi_cpus=arm64', '--watchos_cpus=arm64_32', '--apple_generate_dsym', '--features=swift.opt_uses_wmo', '--features=swift.opt_uses_osize', '--features=dead_strip', '--objc_enable_binary_stripping', '--build_event_json_file=/var/folders/h5/t85nd63d71x27_8gl5gw3l_w0000gn/T/airgram-build-events.json'] returned non-zero exit status 1.
