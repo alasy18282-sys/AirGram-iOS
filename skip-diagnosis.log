@@ -1,0 +1,80 @@
+      ToolchainResolution:   Toolchain @@apple_support++apple_cc_configure_extension+local_config_apple_cc//:cc-compiler-ios_sim_arm64 is compatible with target platform, searching for execution platforms:
+      ToolchainResolution:     Compatible execution platform @@platforms//host:host
+      ToolchainResolution:   All execution platforms have been assigned a @@bazel_tools//tools/cpp:toolchain_type toolchain, stopping
+      ToolchainResolution: Recap of selected @@bazel_tools//tools/cpp:toolchain_type toolchains for target platform @@apple_support+//platforms:ios_sim_arm64:
+      ToolchainResolution:   Selected @@apple_support++apple_cc_configure_extension+local_config_apple_cc//:cc-compiler-ios_sim_arm64 to run on execution platform @@platforms//host:host
+INFO: ToolchainResolution: Target platform @@apple_support+//platforms:ios_sim_arm64: Selected execution platform @@platforms//host:host, type @@bazel_tools//tools/cpp:toolchain_type -> toolchain @@apple_support++apple_cc_configure_extension+local_config_apple_cc//:cc-compiler-ios_sim_arm64
+INFO: ToolchainResolution: Target platform @@apple_support+//platforms:ios_sim_arm64: Selected execution platform @@platforms//host:host, 
+INFO: ToolchainResolution: Target platform @@platforms//host:host: Selected execution platform @@platforms//host:host, type @@rules_shell+//shell:toolchain_type -> toolchain @@rules_shell++sh_configure+local_config_shell//:osx_sh
+INFO: ToolchainResolution: Target platform @@apple_support+//platforms:ios_sim_arm64: Selected execution platform @@platforms//host:host, type @@bazel_tools//tools/cpp:toolchain_type -> toolchain @@apple_support++apple_cc_configure_extension+local_config_apple_cc//:cc-compiler-ios_sim_arm64
+INFO: ToolchainResolution: Target platform @@platforms//host:host: Selected execution platform @@platforms//host:host, type @@bazel_tools//tools/cpp:toolchain_type -> toolchain @@rules_cc++cc_configure_extension+local_config_cc//:cc-compiler-darwin_arm64
+INFO: ToolchainResolution:   Rejected toolchain @@protobuf+//toolchain:osx-x86_64-cc_toolchain; mismatching config settings: is_cross_compiling
+      ToolchainResolution:   Rejected toolchain @@protobuf+//toolchain:osx-aarch_64-cc_toolchain; mismatching config settings: is_cross_compiling
+      ToolchainResolution:   Rejected toolchain @@protobuf+//toolchain:linux-aarch_64-cc_toolchain; mismatching config settings: is_cross_compiling
+      ToolchainResolution:   Rejected toolchain @@protobuf+//toolchain:linux-ppcle_64-cc_toolchain; mismatching config settings: is_cross_compiling
+      ToolchainResolution:   Rejected toolchain @@protobuf+//toolchain:linux-s390_64-cc_toolchain; mismatching config settings: is_cross_compiling
+      ToolchainResolution:   Rejected toolchain @@protobuf+//toolchain:linux-x86_32-cc_toolchain; mismatching config settings: is_cross_compiling
+      ToolchainResolution:   Rejected toolchain @@protobuf+//toolchain:linux-x86_64-cc_toolchain; mismatching config settings: is_cross_compiling
+      ToolchainResolution:   Rejected toolchain @@protobuf+//toolchain:win32-cc_toolchain; mismatching config settings: is_cross_compiling
+      ToolchainResolution:   Rejected toolchain @@protobuf+//toolchain:win64-cc_toolchain; mismatching config settings: is_cross_compiling
+      ToolchainResolution:   Rejected toolchain @@protobuf+//toolchain:k8-cc_toolchain; mismatching config settings: is_cross_compiling
+      ToolchainResolution: Performing resolution of @@bazel_tools//tools/cpp:toolchain_type for target platform @@platforms//host:host
+      ToolchainResolution:   Rejected toolchain @@rules_cc++cc_configure_extension+local_config_cc//:cc-compiler-armeabi-v7a; mismatching values: armv7, android
+      ToolchainResolution:   Toolchain @@rules_cc++cc_configure_extension+local_config_cc//:cc-compiler-darwin_arm64 is compatible with target platform, searching for execution platforms:
+      ToolchainResolution:     Compatible execution platform @@platforms//host:host
+      ToolchainResolution:   All execution platforms have been assigned a @@bazel_tools//tools/cpp:toolchain_type toolchain, stopping
+      ToolchainResolution: Recap of selected @@bazel_tools//tools/cpp:toolchain_type toolchains for target platform @@platforms//host:host:
+      ToolchainResolution:   Selected @@rules_cc++cc_configure_extension+local_config_cc//:cc-compiler-darwin_arm64 to run on execution platform @@platforms//host:host
+INFO: ToolchainResolution: Target platform @@platforms//host:host: Selected execution platform @@platforms//host:host, type @@bazel_tools//tools/cpp:toolchain_type -> toolchain @@rules_cc++cc_configure_extension+local_config_cc//:cc-compiler-darwin_arm64
+INFO: ToolchainResolution: Target platform @@platforms//host:host: Selected execution platform @@platforms//host:host, type @@rules_rust+//rust:toolchain_type -> toolchain @@rules_rust++rust+rust_macos_aarch64__aarch64-apple-darwin__stable_tools//:rust_toolchain
+Analyzing: target //Telegram:telegram_auth_build_test (1232 packages loaded, 43848 targets configured)
+INFO: ToolchainResolution:   Rejected toolchain @@protobuf+//toolchain:osx-x86_64-cc_toolchain; mismatching config settings: is_cross_compiling
+      ToolchainResolution:   Rejected toolchain @@protobuf+//toolchain:osx-aarch_64-cc_toolchain; mismatching config settings: is_cross_compiling
+      ToolchainResolution:   Rejected toolchain @@protobuf+//toolchain:linux-aarch_64-cc_toolchain; mismatching config settings: is_cross_compiling
+      ToolchainResolution:   Rejected toolchain @@protobuf+//toolchain:linux-ppcle_64-cc_toolchain; mismatching config settings: is_cross_compiling
+      ToolchainResolution:   Rejected toolchain @@protobuf+//toolchain:linux-s390_64-cc_toolchain; mismatching config settings: is_cross_compiling
+      ToolchainResolution:   Rejected toolchain @@protobuf+//toolchain:linux-x86_32-cc_toolchain; mismatching config settings: is_cross_compiling
+      ToolchainResolution:   Rejected toolchain @@protobuf+//toolchain:linux-x86_64-cc_toolchain; mismatching config settings: is_cross_compiling
+      ToolchainResolution:   Rejected toolchain @@protobuf+//toolchain:win32-cc_toolchain; mismatching config settings: is_cross_compiling
+      ToolchainResolution:   Rejected toolchain @@protobuf+//toolchain:win64-cc_toolchain; mismatching config settings: is_cross_compiling
+      ToolchainResolution:   Rejected toolchain @@protobuf+//toolchain:k8-cc_toolchain; mismatching config settings: is_cross_compiling
+      ToolchainResolution: Performing resolution of @@bazel_tools//tools/cpp:toolchain_type for target platform @@platforms//host:host
+      ToolchainResolution:   Rejected toolchain @@rules_cc++cc_configure_extension+local_config_cc//:cc-compiler-armeabi-v7a; mismatching values: armv7, android
+      ToolchainResolution:   Toolchain @@rules_cc++cc_configure_extension+local_config_cc//:cc-compiler-darwin_arm64 is compatible with target platform, searching for execution platforms:
+      ToolchainResolution:     Compatible execution platform @@platforms//host:host
+      ToolchainResolution:   All execution platforms have been assigned a @@bazel_tools//tools/cpp:toolchain_type toolchain, stopping
+      ToolchainResolution: Recap of selected @@bazel_tools//tools/cpp:toolchain_type toolchains for target platform @@platforms//host:host:
+      ToolchainResolution:   Selected @@rules_cc++cc_configure_extension+local_config_cc//:cc-compiler-darwin_arm64 to run on execution platform @@platforms//host:host
+INFO: ToolchainResolution: Performing resolution of @@rules_swift+//toolchains:toolchain_type for target platform @@platforms//host:host
+      ToolchainResolution:   Rejected toolchain @@rules_swift++_repo_rules+rules_swift_local_config//:linux-toolchain; mismatching values: linux
+      ToolchainResolution:   Rejected toolchain @@rules_swift++_repo_rules+rules_swift_local_config//:linux-toolchain; mismatching values: linux, x86_64
+      ToolchainResolution:   Rejected toolchain @@rules_swift++_repo_rules+rules_swift_local_config//:windows-toolchain; mismatching values: windows
+      ToolchainResolution:   Rejected toolchain @@rules_swift++_repo_rules+rules_swift_local_config//:windows-toolchain; mismatching values: windows, x86_64
+      ToolchainResolution:   Toolchain @@rules_swift+//swift/toolchains:xcode-toolchain is compatible with target platform, searching for execution platforms:
+      ToolchainResolution:     Compatible execution platform @@platforms//host:host
+      ToolchainResolution:   All execution platforms have been assigned a @@rules_swift+//toolchains:toolchain_type toolchain, stopping
+      ToolchainResolution: Recap of selected @@rules_swift+//toolchains:toolchain_type toolchains for target platform @@platforms//host:host:
+      ToolchainResolution:   Selected @@rules_swift+//swift/toolchains:xcode-toolchain to run on execution platform @@platforms//host:host
+INFO: ToolchainResolution: Target platform @@platforms//host:host: Selected execution platform @@platforms//host:host, type @@rules_swift+//toolchains:toolchain_type -> toolchain @@rules_swift+//swift/toolchains:xcode-toolchain, type @@bazel_tools//tools/cpp:toolchain_type -> toolchain @@rules_cc++cc_configure_extension+local_config_cc//:cc-compiler-darwin_arm64
+INFO: ToolchainResolution: Target platform @@platforms//host:host: Selected execution platform @@platforms//host:host, type @@bazel_tools//tools/cpp:toolchain_type -> toolchain @@rules_cc++cc_configure_extension+local_config_cc//:cc-compiler-darwin_arm64
+INFO: ToolchainResolution: Target platform @@platforms//host:host: Selected execution platform @@platforms//host:host, 
+INFO: ToolchainResolution: Performing resolution of @@rules_swift+//toolchains:sdk_toolchain_type for target platform @@platforms//host:host
+      ToolchainResolution:   Toolchain @@rules_swift+//swift/toolchains:xcode-sdk-toolchain is compatible with target platform, searching for execution platforms:
+      ToolchainResolution:     Compatible execution platform @@platforms//host:host
+      ToolchainResolution:   All execution platforms have been assigned a @@rules_swift+//toolchains:sdk_toolchain_type toolchain, stopping
+      ToolchainResolution: Recap of selected @@rules_swift+//toolchains:sdk_toolchain_type toolchains for target platform @@platforms//host:host:
+      ToolchainResolution:   Selected @@rules_swift+//swift/toolchains:xcode-sdk-toolchain to run on execution platform @@platforms//host:host
+INFO: ToolchainResolution: Target platform @@platforms//host:host: Selected execution platform @@platforms//host:host, type @@rules_swift+//toolchains:sdk_toolchain_type -> toolchain @@rules_swift+//swift/toolchains:xcode-sdk-toolchain
+ERROR: /private/var/tmp/_bazel_containerhost/c259e0c7803e089724afaeab1cf94801/external/rules_swift+/swift/toolchains/BUILD:71:22: in xcode_swift_toolchain rule @@rules_swift+//swift/toolchains:xcode-sdk-toolchain: 
+Traceback (most recent call last):
+	File "/private/var/tmp/_bazel_containerhost/c259e0c7803e089724afaeab1cf94801/external/rules_swift+/swift/toolchains/xcode_swift_toolchain.bzl", line 797, column 29, in _xcode_swift_toolchain_impl
+		target_triples.parse(ctx.var.get("CC_TARGET_TRIPLE") or cc_toolchain.target_gnu_system_name),
+	File "/private/var/tmp/_bazel_containerhost/c259e0c7803e089724afaeab1cf94801/external/rules_swift+/swift/internal/target_triples.bzl", line 159, column 13, in _parse
+		fail("Invalid target triple: {}, this likely means you're using the wrong CC toolchain, make sure you include apple_support in your project".format(triple_string))
+Error in fail: Invalid target triple: local, this likely means you're using the wrong CC toolchain, make sure you include apple_support in your project
+ERROR: /private/var/tmp/_bazel_containerhost/c259e0c7803e089724afaeab1cf94801/external/rules_swift+/swift/toolchains/BUILD:71:22: Analysis of target '@@rules_swift+//swift/toolchains:xcode-sdk-toolchain' (config: 7315a94) failed
+ERROR: Loading failed
+ERROR: Analysis of target '//Telegram:telegram_auth_build_test' failed; build aborted: Analysis failed
+INFO: Elapsed time: 3.824s
+INFO: 0 processes.
+ERROR: Build did NOT complete successfully
