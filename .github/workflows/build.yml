@@ -110,6 +110,9 @@ jobs:
             echo "===== DIAGNOSE cquery ====="
             "$BAZEL" --output_user_root=/private/var/tmp/_bazel_containerhost \
               cquery //Telegram:telegram_auth_build_test --output=build 2>&1 | tail -40
+            echo "===== DIAGNOSE ton_crates targets ====="
+            "$BAZEL" --output_user_root=/private/var/tmp/_bazel_containerhost \
+              query '@wallet_engine_ton_crates//:all' --output=label 2>&1 | head -60
             echo "===== DIAGNOSE nobuild ====="
             "$BAZEL" --output_user_root=/private/var/tmp/_bazel_containerhost \
               build --nobuild //Telegram:telegram_auth_build_test \
