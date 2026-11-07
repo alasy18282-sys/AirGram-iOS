@@ -1294,7 +1294,22 @@ public final class GlassContextExtractableContainer: UIView, ContextExtractableC
         self.state = state
         self.applyState(previousState: previousState, transition: transition, completion: completion)
     }
-    
+
+    /// The tint the normal-state glass was last updated with.
+    public var glassTintColor: GlassBackgroundView.TintColor? {
+        return self.normalParams?.tintColor
+    }
+
+    /// Re-renders the normal-state glass in place (e.g. after the tint changed under it).
+    public func renewGlass() {
+        guard let params = self.normalParams else {
+            return
+        }
+        self.update(size: params.size, cornerRadius: params.cornerRadius, isDark: params.isDark,
+                    tintColor: params.tintColor, isInteractive: params.isInteractive,
+                    isVisible: params.isVisible, transition: .immediate)
+    }
+
     private func applyState(previousState: State?, transition: Transition, completion: ((Bool) -> Void)?) {
         guard let normalParams = self.normalParams else {
             completion?(true)

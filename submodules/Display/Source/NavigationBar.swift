@@ -29,11 +29,13 @@ public final class NavigationBarTheme {
     public let badgeTextColor: UIColor
     public let edgeEffectColor: UIColor?
     public let accentButtonColor: UIColor
+    public let accentDisabledButtonColor: UIColor
     public let accentForegroundColor: UIColor
     public let style: NavigationBar.Style
     public let glassStyle: NavigationBar.GlassStyle
-    
-    public init(overallDarkAppearance: Bool, buttonColor: UIColor, disabledButtonColor: UIColor, primaryTextColor: UIColor, backgroundColor: UIColor, opaqueBackgroundColor: UIColor? = nil, enableBackgroundBlur: Bool, separatorColor: UIColor, badgeBackgroundColor: UIColor, badgeStrokeColor: UIColor, badgeTextColor: UIColor, edgeEffectColor: UIColor? = nil, accentButtonColor: UIColor, accentForegroundColor: UIColor, style: NavigationBar.Style = .legacy, glassStyle: NavigationBar.GlassStyle = .default) {
+    public let glassTintColor: UIColor?
+
+    public init(overallDarkAppearance: Bool, buttonColor: UIColor, disabledButtonColor: UIColor, primaryTextColor: UIColor, backgroundColor: UIColor, opaqueBackgroundColor: UIColor? = nil, enableBackgroundBlur: Bool, separatorColor: UIColor, badgeBackgroundColor: UIColor, badgeStrokeColor: UIColor, badgeTextColor: UIColor, edgeEffectColor: UIColor? = nil, accentButtonColor: UIColor, accentDisabledButtonColor: UIColor? = nil, accentForegroundColor: UIColor, style: NavigationBar.Style = .legacy, glassStyle: NavigationBar.GlassStyle = .default, glassTintColor: UIColor? = nil) {
         self.overallDarkAppearance = overallDarkAppearance
         self.buttonColor = buttonColor
         self.disabledButtonColor = disabledButtonColor
@@ -47,9 +49,11 @@ public final class NavigationBarTheme {
         self.badgeTextColor = badgeTextColor
         self.edgeEffectColor = edgeEffectColor
         self.accentButtonColor = accentButtonColor
+        self.accentDisabledButtonColor = accentDisabledButtonColor ?? disabledButtonColor
         self.accentForegroundColor = accentForegroundColor
         self.style = style
         self.glassStyle = glassStyle
+        self.glassTintColor = glassTintColor
     }
     
     public func withUpdatedBackgroundColor(_ color: UIColor) -> NavigationBarTheme {
