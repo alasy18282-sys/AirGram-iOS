@@ -43,3 +43,7 @@ common:index_build --noannounce_rc
 common:index_build --noshow_timestamps
 common:index_build --curses=no
 common:index_build --color=no
+
+# Re-splice the Rust crate repositories on the build machine so the
+# generated targets carry proper Apple platform compatibility.
+common --repo_env=CARGO_BAZEL_REPIN=1
