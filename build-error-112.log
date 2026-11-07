@@ -1,0 +1,328 @@
+ERROR: /Users/runner/work/AirGram-iOS/AirGram-iOS/submodules/PasscodeCore/BUILD:3:14: Generating derived files for Swift module //submodules/PasscodeCore:PasscodeCore failed: (Exit 1): worker failed: error executing SwiftDeriveFiles command (from target //submodules/PasscodeCore:PasscodeCore) 
+submodules/PasscodeCore/Sources/AccountManagerIntegration.swift:6:64: error: 'Kind' is not a member type of enum 'TelegramCore.PostboxAccessChallengeData'
+   |                                                                `- error: 'Kind' is not a member type of enum 'TelegramCore.PostboxAccessChallengeData'
+submodules/PasscodeCore/Sources/AccountManagerIntegration.swift:18:21: error: type 'PostboxAccessChallengeData' has no member 'secured'
+   |                     `- error: type 'PostboxAccessChallengeData' has no member 'secured'
+submodules/PasscodeCore/Sources/AccountManagerIntegration.swift:25:42: error: 'Kind' is not a member type of enum 'TelegramCore.PostboxAccessChallengeData'
+   |                                          `- error: 'Kind' is not a member type of enum 'TelegramCore.PostboxAccessChallengeData'
+submodules/PasscodeCore/Sources/AccountManagerIntegration.swift:34:13: error: type 'PostboxAccessChallengeData' has no member 'secured'
+   |             `- error: type 'PostboxAccessChallengeData' has no member 'secured'
+submodules/PasscodeCore/Sources/AccountManagerIntegration.swift:42:27: error: type 'PostboxAccessChallengeData' has no member 'secured'
+   |                           `- error: type 'PostboxAccessChallengeData' has no member 'secured'
+submodules/PasscodeCore/Sources/AccountManagerIntegration.swift:59:18: error: type 'PostboxAccessChallengeData' has no member 'secured'
+   |                  `- error: type 'PostboxAccessChallengeData' has no member 'secured'
+submodules/PasscodeCore/Sources/AccountManagerIntegration.swift:76:26: error: cannot find 'AccountManagerAccessChallenge' in scope
+   |                          `- error: cannot find 'AccountManagerAccessChallenge' in scope
+submodules/PasscodeCore/Sources/AccountManagerIntegration.swift:76:26: error: extra argument 'accessChallenge' in call
+   |                          `- error: extra argument 'accessChallenge' in call
+submodules/PasscodeCore/Sources/AccountManagerIntegration.swift:80:32: error: cannot convert value of type '_' to expected argument type 'Bool'
+   |                                `- error: cannot convert value of type '_' to expected argument type 'Bool'
+submodules/PasscodeCore/Sources/PasscodeCrypto.swift:197:23: error: 'HKDF' is only available in iOS 14.0 or newer
+    |                       |- error: 'HKDF' is only available in iOS 14.0 or newer
+submodules/PasscodeCore/Sources/PasscodeCrypto.swift:197:36: error: 'deriveKey(inputKeyMaterial:salt:info:outputByteCount:)' is only available in iOS 14.0 or newer
+    |                                    |- error: 'deriveKey(inputKeyMaterial:salt:info:outputByteCount:)' is only available in iOS 14.0 or newer
+ERROR: /Users/runner/work/AirGram-iOS/AirGram-iOS/submodules/WalletContext/BUILD:5:14 Linking submodules/WalletContext/libWalletContext.a failed: (Exit 1): worker failed: error executing SwiftDeriveFiles command (from target //submodules/PasscodeCore:PasscodeCore) 
+ERROR: Build did NOT complete successfully
+FAILED: 
+Traceback (most recent call last):
+--- end of full build log ---
+[6,586 / 8,613] Generating derived files for Swift module //submodules/TelegramCore:TelegramCore; 81s disk-cache, worker ... (3 actions running)
+[6,587 / 8,613] Generating derived files for Swift module //submodules/TelegramCore:TelegramCore; 82s disk-cache, worker ... (3 actions running)
+[6,588 / 8,613] Generating derived files for Swift module //submodules/TelegramCore:TelegramCore; 83s disk-cache, worker ... (3 actions running)
+[6,590 / 8,613] Generating derived files for Swift module //submodules/TelegramCore:TelegramCore; 84s disk-cache, worker ... (3 actions running)
+[6,591 / 8,613] Generating derived files for Swift module //submodules/TelegramCore:TelegramCore; 85s disk-cache, worker ... (3 actions, 2 running)
+[6,594 / 8,613] Generating derived files for Swift module //submodules/TelegramCore:TelegramCore; 87s disk-cache, worker ... (3 actions running)
+[6,595 / 8,613] Generating derived files for Swift module //submodules/TelegramCore:TelegramCore; 88s disk-cache, worker ... (3 actions running)
+[6,596 / 8,613] Generating derived files for Swift module //submodules/TelegramCore:TelegramCore; 92s disk-cache, worker ... (3 actions, 2 running)
+[6,598 / 8,613] Generating derived files for Swift module //submodules/TelegramCore:TelegramCore; 94s disk-cache, worker ... (3 actions running)
+[6,600 / 8,613] Generating derived files for Swift module //submodules/TelegramCore:TelegramCore; 95s disk-cache, worker ... (3 actions running)
+[6,601 / 8,613] Generating derived files for Swift module //submodules/TelegramCore:TelegramCore; 97s disk-cache, worker ... (3 actions, 2 running)
+[6,601 / 8,613] Generating derived files for Swift module //submodules/TelegramCore:TelegramCore; 98s disk-cache, worker ... (3 actions running)
+[6,602 / 8,613] Generating derived files for Swift module //submodules/TelegramCore:TelegramCore; 101s disk-cache, worker ... (3 actions, 2 running)
+[6,604 / 8,613] Generating derived files for Swift module //submodules/TelegramCore:TelegramCore; 103s disk-cache, worker ... (3 actions running)
+[6,605 / 8,613] Generating derived files for Swift module //submodules/TelegramCore:TelegramCore; 104s disk-cache, worker ... (3 actions running)
+[6,606 / 8,613] Generating derived files for Swift module //submodules/TelegramCore:TelegramCore; 106s disk-cache, worker ... (3 actions, 2 running)
+[6,607 / 8,613] Generating derived files for Swift module //submodules/TelegramCore:TelegramCore; 108s disk-cache, worker ... (3 actions, 2 running)
+[6,609 / 8,613] Generating derived files for Swift module //submodules/TelegramCore:TelegramCore; 109s disk-cache, worker ... (3 actions running)
+[6,611 / 8,613] Generating derived files for Swift module //submodules/TelegramCore:TelegramCore; 110s disk-cache, worker ... (3 actions running)
+[6,612 / 8,613] Generating derived files for Swift module //submodules/TelegramCore:TelegramCore; 111s disk-cache, worker ... (3 actions running)
+[6,613 / 8,613] Generating derived files for Swift module //submodules/TelegramCore:TelegramCore; 112s disk-cache, worker ... (3 actions running)
+[6,616 / 8,613] Generating derived files for Swift module //submodules/TelegramCore:TelegramCore; 113s disk-cache, worker ... (3 actions running)
+[6,617 / 8,613] Generating derived files for Swift module //submodules/TelegramCore:TelegramCore; 114s disk-cache, worker ... (3 actions running)
+[6,619 / 8,613] Generating derived files for Swift module //submodules/TelegramCore:TelegramCore; 115s disk-cache, worker ... (3 actions running)
+[6,621 / 8,613] Generating derived files for Swift module //submodules/TelegramCore:TelegramCore; 116s disk-cache, worker ... (3 actions, 2 running)
+[6,623 / 8,613] Generating derived files for Swift module //submodules/TelegramCore:TelegramCore; 118s disk-cache, worker ... (3 actions running)
+[6,625 / 8,613] Generating derived files for Swift module //submodules/TelegramCore:TelegramCore; 119s disk-cache, worker ... (3 actions, 2 running)
+[6,628 / 8,613] Generating derived files for Swift module //submodules/TelegramCore:TelegramCore; 120s disk-cache, worker ... (3 actions running)
+[6,630 / 8,613] Generating derived files for Swift module //submodules/TelegramCore:TelegramCore; 121s disk-cache, worker ... (3 actions running)
+[6,632 / 8,613] Generating derived files for Swift module //submodules/TelegramCore:TelegramCore; 122s disk-cache, worker ... (3 actions running)
+[6,633 / 8,613] Generating derived files for Swift module //submodules/TelegramCore:TelegramCore; 123s disk-cache, worker ... (3 actions, 2 running)
+[6,635 / 8,613] Generating derived files for Swift module //submodules/TelegramCore:TelegramCore; 124s disk-cache, worker ... (3 actions running)
+[6,636 / 8,613] Generating derived files for Swift module //submodules/TelegramCore:TelegramCore; 125s disk-cache, worker ... (3 actions, 2 running)
+[6,639 / 8,613] Generating derived files for Swift module //submodules/TelegramCore:TelegramCore; 127s disk-cache, worker ... (3 actions, 2 running)
+[6,640 / 8,613] Generating derived files for Swift module //submodules/TelegramCore:TelegramCore; 128s disk-cache, worker ... (3 actions running)
+[6,641 / 8,613] Generating derived files for Swift module //submodules/TelegramCore:TelegramCore; 129s disk-cache, worker ... (3 actions running)
+[6,643 / 8,613] Generating derived files for Swift module //submodules/TelegramCore:TelegramCore; 130s disk-cache, worker ... (3 actions running)
+[6,644 / 8,613] Generating derived files for Swift module //submodules/TelegramCore:TelegramCore; 132s disk-cache, worker ... (3 actions, 2 running)
+[6,647 / 8,613] Generating derived files for Swift module //submodules/TelegramCore:TelegramCore; 133s disk-cache, worker ... (3 actions, 2 running)
+[6,648 / 8,613] Generating derived files for Swift module //submodules/TelegramCore:TelegramCore; 135s disk-cache, worker ... (3 actions running)
+[6,649 / 8,613] Generating derived files for Swift module //submodules/TelegramCore:TelegramCore; 136s disk-cache, worker ... (3 actions running)
+[6,650 / 8,613] Generating derived files for Swift module //submodules/TelegramCore:TelegramCore; 137s disk-cache, worker ... (3 actions running)
+[6,651 / 8,613] Generating derived files for Swift module //submodules/TelegramCore:TelegramCore; 138s disk-cache, worker ... (3 actions, 2 running)
+[6,652 / 8,613] Generating derived files for Swift module //submodules/TelegramCore:TelegramCore; 140s disk-cache, worker ... (3 actions running)
+[6,654 / 8,613] Generating derived files for Swift module //submodules/TelegramCore:TelegramCore; 142s disk-cache, worker ... (3 actions running)
+[6,655 / 8,613] Generating derived files for Swift module //submodules/TelegramCore:TelegramCore; 143s disk-cache, worker ... (3 actions running)
+[6,657 / 8,613] Generating derived files for Swift module //submodules/TelegramCore:TelegramCore; 144s disk-cache, worker ... (3 actions running)
+[6,658 / 8,613] Generating derived files for Swift module //submodules/TelegramCore:TelegramCore; 145s disk-cache, worker ... (3 actions, 2 running)
+[6,659 / 8,613] Generating derived files for Swift module //submodules/TelegramCore:TelegramCore; 146s disk-cache, worker ... (3 actions, 2 running)
+[6,660 / 8,613] Generating derived files for Swift module //submodules/TelegramCore:TelegramCore; 148s disk-cache, worker ... (3 actions running)
+[6,662 / 8,613] Generating derived files for Swift module //submodules/TelegramCore:TelegramCore; 149s disk-cache, worker ... (3 actions running)
+[6,663 / 8,613] Generating derived files for Swift module //submodules/TelegramCore:TelegramCore; 150s disk-cache, worker ... (3 actions running)
+[6,664 / 8,613] Generating derived files for Swift module //submodules/TelegramCore:TelegramCore; 152s disk-cache, worker ... (3 actions, 2 running)
+[6,666 / 8,613] Generating derived files for Swift module //submodules/TelegramCore:TelegramCore; 154s disk-cache, worker ... (3 actions running)
+[6,667 / 8,613] Generating derived files for Swift module //submodules/TelegramCore:TelegramCore; 156s disk-cache, worker ... (3 actions, 2 running)
+[6,669 / 8,613] Generating derived files for Swift module //submodules/TelegramCore:TelegramCore; 158s disk-cache, worker ... (3 actions running)
+[6,670 / 8,613] Generating derived files for Swift module //submodules/TelegramCore:TelegramCore; 159s disk-cache, worker ... (3 actions running)
+[6,672 / 8,613] Generating derived files for Swift module //submodules/TelegramCore:TelegramCore; 160s disk-cache, worker ... (3 actions running)
+[6,673 / 8,613] Generating derived files for Swift module //submodules/TelegramCore:TelegramCore; 161s disk-cache, worker ... (3 actions running)
+[6,674 / 8,613] Generating derived files for Swift module //submodules/TelegramCore:TelegramCore; 162s disk-cache, worker ... (3 actions running)
+[6,676 / 8,613] Generating derived files for Swift module //submodules/TelegramCore:TelegramCore; 163s disk-cache, worker ... (3 actions running)
+[6,679 / 8,613] Generating derived files for Swift module //submodules/TelegramCore:TelegramCore; 164s disk-cache, worker ... (3 actions running)
+[6,681 / 8,613] Generating derived files for Swift module //submodules/TelegramCore:TelegramCore; 165s disk-cache, worker ... (3 actions, 2 running)
+[6,681 / 8,613] Generating derived files for Swift module //submodules/TelegramCore:TelegramCore; 167s disk-cache, worker ... (3 actions running)
+[6,683 / 8,613] Generating derived files for Swift module //submodules/TelegramCore:TelegramCore; 168s disk-cache, worker ... (3 actions running)
+[6,685 / 8,613] Generating derived files for Swift module //submodules/TelegramCore:TelegramCore; 169s disk-cache, worker ... (3 actions running)
+[6,686 / 8,613] Generating derived files for Swift module //submodules/TelegramCore:TelegramCore; 173s disk-cache, worker ... (3 actions, 2 running)
+[6,686 / 8,613] Generating derived files for Swift module //submodules/TelegramCore:TelegramCore; 174s disk-cache, worker ... (3 actions running)
+[6,687 / 8,613] Generating derived files for Swift module //submodules/TelegramCore:TelegramCore; 176s disk-cache, worker ... (3 actions, 2 running)
+[6,687 / 8,613] Generating derived files for Swift module //submodules/TelegramCore:TelegramCore; 178s disk-cache, worker ... (3 actions running)
+[6,688 / 8,613] Generating derived files for Swift module //submodules/TelegramCore:TelegramCore; 180s disk-cache, worker ... (3 actions, 2 running)
+[6,688 / 8,613] Generating derived files for Swift module //submodules/TelegramCore:TelegramCore; 181s disk-cache, worker ... (3 actions running)
+[6,689 / 8,613] Generating derived files for Swift module //submodules/TelegramCore:TelegramCore; 182s disk-cache, worker ... (3 actions running)
+[6,690 / 8,613] Generating derived files for Swift module //submodules/TelegramCore:TelegramCore; 184s disk-cache, worker ... (3 actions, 2 running)
+[6,690 / 8,613] Generating derived files for Swift module //submodules/TelegramCore:TelegramCore; 185s disk-cache, worker ... (3 actions running)
+[6,691 / 8,613] Generating derived files for Swift module //submodules/TelegramCore:TelegramCore; 186s disk-cache, worker ... (3 actions running)
+[6,692 / 8,613] Generating derived files for Swift module //submodules/TelegramCore:TelegramCore; 187s disk-cache, worker ... (3 actions running)
+[6,693 / 8,613] Generating derived files for Swift module //submodules/TelegramCore:TelegramCore; 189s disk-cache, worker ... (3 actions, 2 running)
+[6,695 / 8,613] Generating derived files for Swift module //submodules/TelegramCore:TelegramCore; 191s disk-cache, worker ... (3 actions running)
+[6,696 / 8,613] Generating derived files for Swift module //submodules/TelegramCore:TelegramCore; 192s disk-cache, worker ... (3 actions running)
+[6,697 / 8,613] Generating derived files for Swift module //submodules/TelegramCore:TelegramCore; 194s disk-cache, worker ... (3 actions, 2 running)
+[6,697 / 8,613] Generating derived files for Swift module //submodules/TelegramCore:TelegramCore; 195s disk-cache, worker ... (3 actions running)
+[6,698 / 8,613] Generating derived files for Swift module //submodules/TelegramCore:TelegramCore; 197s disk-cache, worker ... (3 actions, 2 running)
+[6,698 / 8,613] Generating derived files for Swift module //submodules/TelegramCore:TelegramCore; 199s disk-cache, worker ... (3 actions running)
+[6,699 / 8,613] Generating derived files for Swift module //submodules/TelegramCore:TelegramCore; 201s disk-cache, worker ... (3 actions, 2 running)
+[6,699 / 8,613] Generating derived files for Swift module //submodules/TelegramCore:TelegramCore; 202s disk-cache, worker ... (3 actions running)
+[6,701 / 8,613] Generating derived files for Swift module //submodules/TelegramCore:TelegramCore; 203s disk-cache, worker ... (3 actions, 2 running)
+[6,701 / 8,613] Generating derived files for Swift module //submodules/TelegramCore:TelegramCore; 204s disk-cache, worker ... (3 actions running)
+[6,702 / 8,613] Generating derived files for Swift module //submodules/TelegramCore:TelegramCore; 208s disk-cache, worker ... (3 actions, 2 running)
+[6,702 / 8,613] Generating derived files for Swift module //submodules/TelegramCore:TelegramCore; 211s disk-cache, worker ... (3 actions running)
+[6,703 / 8,613] Generating derived files for Swift module //submodules/TelegramCore:TelegramCore; 215s disk-cache, worker ... (3 actions, 2 running)
+[6,703 / 8,613] Generating derived files for Swift module //submodules/TelegramCore:TelegramCore; 216s disk-cache, worker ... (3 actions running)
+[6,704 / 8,613] Generating derived files for Swift module //submodules/TelegramCore:TelegramCore; 218s disk-cache, worker ... (3 actions, 2 running)
+[6,706 / 8,613] Generating derived files for Swift module //submodules/TelegramCore:TelegramCore; 219s disk-cache, worker ... (3 actions running)
+[6,708 / 8,613] Generating derived files for Swift module //submodules/TelegramCore:TelegramCore; 221s disk-cache, worker ... (2 actions, 1 running)
+[6,709 / 8,613] Generating derived files for Swift module //submodules/TelegramCore:TelegramCore; 222s disk-cache, worker ... (3 actions, 2 running)
+[6,711 / 8,613] Generating derived files for Swift module //submodules/TelegramCore:TelegramCore; 223s disk-cache, worker ... (3 actions, 2 running)
+[6,713 / 8,613] Generating derived files for Swift module //submodules/TelegramCore:TelegramCore; 224s disk-cache, worker ... (3 actions running)
+[6,715 / 8,613] Generating derived files for Swift module //submodules/TelegramCore:TelegramCore; 226s disk-cache, worker ... (3 actions running)
+[6,716 / 8,613] Generating derived files for Swift module //submodules/TelegramCore:TelegramCore; 227s disk-cache, worker ... (3 actions running)
+[6,717 / 8,613] Generating derived files for Swift module //submodules/TelegramCore:TelegramCore; 228s disk-cache, worker ... (3 actions running)
+[6,718 / 8,613] Generating derived files for Swift module //submodules/TelegramCore:TelegramCore; 229s disk-cache, worker ... (3 actions running)
+[6,722 / 8,613] Generating derived files for Swift module //submodules/TelegramCore:TelegramCore; 230s disk-cache, worker ... (3 actions, 2 running)
+[6,724 / 8,613] Generating derived files for Swift module //submodules/TelegramCore:TelegramCore; 231s disk-cache, worker ... (3 actions running)
+[6,725 / 8,613] Generating derived files for Swift module //submodules/TelegramCore:TelegramCore; 232s disk-cache, worker ... (3 actions, 2 running)
+[6,728 / 8,613] Generating derived files for Swift module //submodules/TelegramCore:TelegramCore; 234s disk-cache, worker ... (3 actions, 2 running)
+[6,730 / 8,613] Generating derived files for Swift module //submodules/TelegramCore:TelegramCore; 235s disk-cache, worker ... (3 actions, 2 running)
+[6,731 / 8,613] Generating derived files for Swift module //submodules/TelegramCore:TelegramCore; 236s disk-cache, worker ... (3 actions, 2 running)
+[6,732 / 8,613] Generating derived files for Swift module //submodules/TelegramCore:TelegramCore; 237s disk-cache, worker ... (3 actions, 2 running)
+[6,734 / 8,613] Generating derived files for Swift module //submodules/TelegramCore:TelegramCore; 238s disk-cache, worker ... (3 actions running)
+[6,735 / 8,613] Generating derived files for Swift module //submodules/TelegramCore:TelegramCore; 242s disk-cache, worker ... (3 actions, 2 running)
+[6,737 / 8,613] Generating derived files for Swift module //submodules/TelegramCore:TelegramCore; 244s disk-cache, worker ... (3 actions running)
+[6,738 / 8,613] Generating derived files for Swift module //submodules/TelegramCore:TelegramCore; 245s disk-cache, worker ... (3 actions, 2 running)
+[6,740 / 8,613] Generating derived files for Swift module //submodules/TelegramCore:TelegramCore; 246s disk-cache, worker ... (3 actions running)
+[6,741 / 8,613] Generating derived files for Swift module //submodules/TelegramCore:TelegramCore; 248s disk-cache, worker ... (3 actions, 2 running)
+[6,744 / 8,613] Generating derived files for Swift module //submodules/TelegramCore:TelegramCore; 249s disk-cache, worker ... (3 actions, 2 running)
+[6,745 / 8,613] Generating derived files for Swift module //submodules/TelegramCore:TelegramCore; 251s disk-cache, worker ... (2 actions running)
+[6,746 / 8,613] Generating derived files for Swift module //submodules/TelegramCore:TelegramCore; 252s disk-cache, worker ... (3 actions running)
+[6,747 / 8,613] Generating derived files for Swift module //submodules/TelegramCore:TelegramCore; 253s disk-cache, worker ... (3 actions running)
+[6,748 / 8,613] Generating derived files for Swift module //submodules/TelegramCore:TelegramCore; 254s disk-cache, worker ... (3 actions, 2 running)
+[6,748 / 8,613] Generating derived files for Swift module //submodules/TelegramCore:TelegramCore; 255s disk-cache, worker ... (3 actions running)
+[6,751 / 8,613] Generating derived files for Swift module //submodules/TelegramCore:TelegramCore; 256s disk-cache, worker ... (3 actions running)
+[6,752 / 8,613] Generating derived files for Swift module //submodules/TelegramCore:TelegramCore; 257s disk-cache, worker ... (3 actions, 2 running)
+[6,754 / 8,613] Generating derived files for Swift module //submodules/TelegramCore:TelegramCore; 259s disk-cache, worker ... (3 actions running)
+[6,757 / 8,613] Generating derived files for Swift module //submodules/WidgetItemsUtils:WidgetItemsUtils; 0s disk-cache, worker ... (3 actions running)
+[6,762 / 8,613] Compiling submodules/TgVoipWebrtc/tgcalls/tgcalls/group/GroupInstanceCustomImpl.cpp; 0s local, disk-cache ... (3 actions, 2 running)
+ERROR: /Users/runner/work/AirGram-iOS/AirGram-iOS/submodules/PasscodeCore/BUILD:3:14: Generating derived files for Swift module //submodules/PasscodeCore:PasscodeCore failed: (Exit 1): worker failed: error executing SwiftDeriveFiles command (from target //submodules/PasscodeCore:PasscodeCore) 
+  (cd /private/var/tmp/_bazel_containerhost/c259e0c7803e089724afaeab1cf94801/execroot/_main && \
+  exec env - \
+    APPLE_SDK_PLATFORM=iPhoneOS \
+    APPLE_SDK_VERSION_OVERRIDE=26.4 \
+    PATH=/usr/bin:/bin:/usr/sbin:/sbin \
+    XCODE_VERSION_OVERRIDE=26.4.1.17E202 \
+    ZERO_AR_DATE=1 \
+  bazel-out/darwin_arm64-opt-exec-ST-d57f47055a04/bin/external/rules_swift+/tools/worker/worker swiftc @bazel-out/ios_arm64-opt-ios-arm64-min13.0-ST-2d46267cd7fb/bin/submodules/PasscodeCore/PasscodeCore.swiftmodule-0.params)
+# Configuration: 4d4840e835956dd2f1962f39f834e34a3d3e00958a02d75e7dfb5b43ae393a4e
+# Execution platform: @@platforms//host:host
+submodules/PasscodeCore/Sources/AccountManagerIntegration.swift:6:64: error: 'Kind' is not a member type of enum 'TelegramCore.PostboxAccessChallengeData'
+ 4 | #endif
+ 5 | 
+ 6 | public func passcodeKind(from kind: PostboxAccessChallengeData.Kind) -> PasscodeKind {
+   |                                                                `- error: 'Kind' is not a member type of enum 'TelegramCore.PostboxAccessChallengeData'
+ 7 |     switch kind {
+ 8 |     case .digits4:
+
+TelegramCore.PostboxAccessChallengeData:1:13: note: 'PostboxAccessChallengeData' declared here
+ 1 | public enum PostboxAccessChallengeData : Postbox.PostboxCoding, Equatable, Codable {
+   |             `- note: 'PostboxAccessChallengeData' declared here
+ 2 |     case none
+ 3 |     case numericalPassword(value: String)
+
+submodules/PasscodeCore/Sources/AccountManagerIntegration.swift:18:21: error: type 'PostboxAccessChallengeData' has no member 'secured'
+16 | 
+17 | public func passcodeCredentialReference(from challenge: PostboxAccessChallengeData) -> PasscodeCredentialReference? {
+18 |     guard case let .secured(id, kind) = challenge else {
+   |                     `- error: type 'PostboxAccessChallengeData' has no member 'secured'
+19 |         return nil
+20 |     }
+
+submodules/PasscodeCore/Sources/AccountManagerIntegration.swift:25:42: error: 'Kind' is not a member type of enum 'TelegramCore.PostboxAccessChallengeData'
+23 | 
+24 | public func accessChallengeData(reference: PasscodeCredentialReference) -> PostboxAccessChallengeData {
+25 |     let kind: PostboxAccessChallengeData.Kind
+   |                                          `- error: 'Kind' is not a member type of enum 'TelegramCore.PostboxAccessChallengeData'
+26 |     switch reference.kind {
+27 |     case .digits4:
+
+TelegramCore.PostboxAccessChallengeData:1:13: note: 'PostboxAccessChallengeData' declared here
+ 1 | public enum PostboxAccessChallengeData : Postbox.PostboxCoding, Equatable, Codable {
+   |             `- note: 'PostboxAccessChallengeData' declared here
+ 2 |     case none
+ 3 |     case numericalPassword(value: String)
+
+submodules/PasscodeCore/Sources/AccountManagerIntegration.swift:34:13: error: type 'PostboxAccessChallengeData' has no member 'secured'
+32 |         kind = .alphanumeric
+33 |     }
+34 |     return .secured(id: reference.id, kind: kind)
+   |             `- error: type 'PostboxAccessChallengeData' has no member 'secured'
+35 | }
+36 | 
+
+submodules/PasscodeCore/Sources/AccountManagerIntegration.swift:42:27: error: type 'PostboxAccessChallengeData' has no member 'secured'
+40 | private func resolveAccessChallenge(_ current: PostboxAccessChallengeData?, allowMigration: Bool) throws -> PostboxAccessChallengeData? {
+41 |     let credentials = PasscodeCredentialStore.shared
+42 |     if let current, case .secured = current {
+   |                           `- error: type 'PostboxAccessChallengeData' has no member 'secured'
+43 |         credentials.requireExistingCredential()
+44 |     }
+
+submodules/PasscodeCore/Sources/AccountManagerIntegration.swift:59:18: error: type 'PostboxAccessChallengeData' has no member 'secured'
+57 |         let reference = try credentials.migrateLegacy(code: code, kind: .alphanumeric)
+58 |         return .some(reference.map { accessChallengeData(reference: $0) } ?? .none)
+59 |     case .none, .secured:
+   |                  `- error: type 'PostboxAccessChallengeData' has no member 'secured'
+60 |         return nil
+61 |     }
+
+submodules/PasscodeCore/Sources/AccountManagerIntegration.swift:76:26: error: cannot find 'AccountManagerAccessChallenge' in scope
+74 |         useCaches: useCaches,
+75 |         removeDatabaseOnError: removeDatabaseOnError,
+76 |         accessChallenge: AccountManagerAccessChallenge(
+   |                          `- error: cannot find 'AccountManagerAccessChallenge' in scope
+77 |             prepare: { isFreshInstallation in
+78 |                 let _ = try PasscodeEnvironment.shared.sharedAccessGroup()
+
+submodules/PasscodeCore/Sources/AccountManagerIntegration.swift:76:26: error: extra argument 'accessChallenge' in call
+74 |         useCaches: useCaches,
+75 |         removeDatabaseOnError: removeDatabaseOnError,
+76 |         accessChallenge: AccountManagerAccessChallenge(
+   |                          `- error: extra argument 'accessChallenge' in call
+77 |             prepare: { isFreshInstallation in
+78 |                 let _ = try PasscodeEnvironment.shared.sharedAccessGroup()
+
+submodules/PasscodeCore/Sources/AccountManagerIntegration.swift:80:32: error: cannot convert value of type '_' to expected argument type 'Bool'
+78 |                 let _ = try PasscodeEnvironment.shared.sharedAccessGroup()
+79 |                 PasscodeCredentialStore.shared.configureLock(directory: basePath)
+80 |                 if canReset && isFreshInstallation {
+   |                                `- error: cannot convert value of type '_' to expected argument type 'Bool'
+81 |                     try resetLocalSecrets?()
+82 |                 }
+
+submodules/PasscodeCore/Sources/PasscodeCrypto.swift:197:23: error: 'HKDF' is only available in iOS 14.0 or newer
+ 73 | 
+ 74 | @available(macOS 10.15, *)
+ 75 | public final class PasscodeSession: @unchecked Sendable {
+    |                    `- note: add '@available' attribute to enclosing class
+ 76 |     public enum Lifetime: Equatable, Sendable {
+ 77 |         case standard
+    :
+189 |     /// Namespace binding, availability, and revocation share the key-use lock.
+190 |     @available(macOS 11.0, *)
+191 |     public func withDerivedKey<T>(namespace: String, domain: String, _ body: (Data) throws -> T) throws -> T {
+    |                 `- note: add '@available' attribute to enclosing instance method
+192 |         guard !namespace.isEmpty, !domain.isEmpty else {
+193 |             throw PasscodeError.authenticationRequired
+    :
+195 |         try self.require(scope: .resource(namespace: namespace))
+196 |         return try self.withKey { accessKey in
+197 |             let key = HKDF<SHA256>.deriveKey(inputKeyMaterial: SymmetricKey(data: accessKey),
+    |                       |- error: 'HKDF' is only available in iOS 14.0 or newer
+    |                       `- note: add 'if #available' version check
+198 |                 salt: Data(namespace.utf8), info: Data(domain.utf8), outputByteCount: 32)
+199 |             var derivedKey = key.withUnsafeBytes { Data($0) }
+
+submodules/PasscodeCore/Sources/PasscodeCrypto.swift:197:36: error: 'deriveKey(inputKeyMaterial:salt:info:outputByteCount:)' is only available in iOS 14.0 or newer
+ 73 | 
+ 74 | @available(macOS 10.15, *)
+ 75 | public final class PasscodeSession: @unchecked Sendable {
+    |                    `- note: add '@available' attribute to enclosing class
+ 76 |     public enum Lifetime: Equatable, Sendable {
+ 77 |         case standard
+    :
+189 |     /// Namespace binding, availability, and revocation share the key-use lock.
+190 |     @available(macOS 11.0, *)
+191 |     public func withDerivedKey<T>(namespace: String, domain: String, _ body: (Data) throws -> T) throws -> T {
+    |                 `- note: add '@available' attribute to enclosing instance method
+192 |         guard !namespace.isEmpty, !domain.isEmpty else {
+193 |             throw PasscodeError.authenticationRequired
+    :
+195 |         try self.require(scope: .resource(namespace: namespace))
+196 |         return try self.withKey { accessKey in
+197 |             let key = HKDF<SHA256>.deriveKey(inputKeyMaterial: SymmetricKey(data: accessKey),
+    |                                    |- error: 'deriveKey(inputKeyMaterial:salt:info:outputByteCount:)' is only available in iOS 14.0 or newer
+    |                                    `- note: add 'if #available' version check
+198 |                 salt: Data(namespace.utf8), info: Data(domain.utf8), outputByteCount: 32)
+199 |             var derivedKey = key.withUnsafeBytes { Data($0) }
+[6,768 / 8,613] checking cached actions
+Target //Telegram:telegram_auth_build_test failed to build
+ERROR: /Users/runner/work/AirGram-iOS/AirGram-iOS/submodules/WalletContext/BUILD:5:14 Linking submodules/WalletContext/libWalletContext.a failed: (Exit 1): worker failed: error executing SwiftDeriveFiles command (from target //submodules/PasscodeCore:PasscodeCore) 
+  (cd /private/var/tmp/_bazel_containerhost/c259e0c7803e089724afaeab1cf94801/execroot/_main && \
+  exec env - \
+    APPLE_SDK_PLATFORM=iPhoneOS \
+    APPLE_SDK_VERSION_OVERRIDE=26.4 \
+    PATH=/usr/bin:/bin:/usr/sbin:/sbin \
+    XCODE_VERSION_OVERRIDE=26.4.1.17E202 \
+    ZERO_AR_DATE=1 \
+  bazel-out/darwin_arm64-opt-exec-ST-d57f47055a04/bin/external/rules_swift+/tools/worker/worker swiftc @bazel-out/ios_arm64-opt-ios-arm64-min13.0-ST-2d46267cd7fb/bin/submodules/PasscodeCore/PasscodeCore.swiftmodule-0.params)
+# Configuration: 4d4840e835956dd2f1962f39f834e34a3d3e00958a02d75e7dfb5b43ae393a4e
+# Execution platform: @@platforms//host:host
+INFO: Elapsed time: 2863.259s, Critical Path: 707.44s
+INFO: 6768 processes: 2120 internal, 4471 local, 177 worker.
+ERROR: Build did NOT complete successfully
+FAILED: 
+INFO: Build Event Protocol files produced successfully.
+Traceback (most recent call last):
+  File "/Users/runner/work/AirGram-iOS/AirGram-iOS/build-system/Make/Make.py", line 1294, in <module>
+    build(bazel=bazel_path, arguments=args)
+    ~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/runner/work/AirGram-iOS/AirGram-iOS/build-system/Make/Make.py", line 650, in build
+    bazel_command_line.invoke_build()
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "/Users/runner/work/AirGram-iOS/AirGram-iOS/build-system/Make/Make.py", line 325, in invoke_build
+    call_executable(combined_arguments)
+    ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^
+  File "/Users/runner/work/AirGram-iOS/AirGram-iOS/build-system/Make/BuildEnvironment.py", line 104, in call_executable
+    subprocess.check_call(resolved_arguments, env=resolved_env)
+    ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/homebrew/Cellar/python@3.15/3.15.2/Frameworks/Python.framework/Versions/3.15/lib/python3.15/subprocess.py", line 534, in check_call
+    raise CalledProcessError(retcode, cmd)
+subprocess.CalledProcessError: Command ['/Users/runner/work/AirGram-iOS/AirGram-iOS/build-input/bazel-8.4.2-darwin-arm64', '--output_user_root=/private/var/tmp/_bazel_containerhost', 'build', 'Telegram/telegram_auth_build_test', '--announce_rc', '--features=swift.use_global_module_cache', '--verbose_failures', '--remote_cache_async', '--jobs=3', '--local_cpu_resources=3', '--worker_max_instances=3', '--spawn_strategy=worker,local', '--strategy=SwiftCompile=worker,local', '--strategy=ObjcCompile=worker,local', '--strategy=Genrule=standalone', '--worker_quit_after_build=false', '--define=buildNumber=2832', '--features=swift.split_derived_files_generation', '--disk_cache=/private/var/tmp/_bazel_containerhost/disk_cache', '-c', 'opt', '--ios_multi_cpus=arm64', '--watchos_cpus=arm64_32', '--apple_generate_dsym', '--features=swift.opt_uses_wmo', '--features=swift.opt_uses_osize', '--features=dead_strip', '--objc_enable_binary_stripping', '--build_event_json_file=/var/folders/h5/t85nd63d71x27_8gl5gw3l_w0000gn/T/airgram-build-events.json'] returned non-zero exit status 1.
