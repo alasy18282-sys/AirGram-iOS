@@ -1,0 +1,306 @@
+ERROR: /Users/runner/work/AirGram-iOS/AirGram-iOS/submodules/rlottie/BUILD:2:13: Compiling submodules/rlottie/LottieInstance.mm failed: (Exit 1): wrapped_clang_pp failed: error executing ObjcCompile command (from target //submodules/rlottie:RLottieBinding) 
+submodules/rlottie/LottieInstance.mm:33:18: error: use of undeclared identifier 'RLottieFitzModifierType6'
+ERROR: Build did NOT complete successfully
+FAILED: 
+Traceback (most recent call last):
+--- end of full build log ---
+CC	libavcodec/faanidct.o
+CC	libavcodec/fdctdsp.o
+CC	libavcodec/flac.o
+CC	libavcodec/flac_parser.o
+CC	libavcodec/flacdata.o
+CC	libavcodec/flacdec.o
+CC	libavcodec/flacdsp.o
+CC	libavcodec/frame_thread_encoder.o
+CC	libavcodec/get_buffer.o
+CC	libavcodec/golomb.o
+CC	libavcodec/h2645_parse.o
+CC	libavcodec/h2645_sei.o
+CC	libavcodec/h2645_vui.o
+CC	libavcodec/h2645data.o
+CC	libavcodec/h264_cabac.o
+CC	libavcodec/h264_cavlc.o
+CC	libavcodec/h264_direct.o
+CC	libavcodec/h264_loopfilter.o
+CC	libavcodec/h264_mb.o
+CC	libavcodec/h264_parse.o
+CC	libavcodec/h264_parser.o
+CC	libavcodec/h264_picture.o
+CC	libavcodec/h264_refs.o
+CC	libavcodec/h264_ps.o
+CC	libavcodec/h264_sei.o
+CC	libavcodec/h264_slice.o
+CC	libavcodec/h264chroma.o
+CC	libavcodec/h264data.o
+CC	libavcodec/h264dec.o
+CC	libavcodec/h264dsp.o
+CC	libavcodec/h264idct.o
+CC	libavcodec/h264pred.o
+CC	libavcodec/h264qpel.o
+CC	libavcodec/h274.o
+CC	libavcodec/hevc/cabac.o
+CC	libavcodec/hevc/data.o
+CC	libavcodec/hevc/dsp.o
+CC	libavcodec/hevc/filter.o
+CC	libavcodec/hevc/hevcdec.o
+CC	libavcodec/hevc/mvs.o
+CC	libavcodec/hevc/parse.o
+CC	libavcodec/hevc/pred.o
+CC	libavcodec/hevc/ps.o
+CC	libavcodec/hevc/refs.o
+CC	libavcodec/hevc/sei.o
+CC	libavcodec/idctdsp.o
+CC	libavcodec/imgconvert.o
+CC	libavcodec/jfdctfst.o
+CC	libavcodec/jfdctint.o
+CC	libavcodec/jni.o
+CC	libavcodec/jrevdct.o
+CC	libavcodec/lcevcdec.o
+CC	libavcodec/libdav1d.o
+CC	libavcodec/libopus.o
+CC	libavcodec/libopusdec.o
+CC	libavcodec/libvpxdec.o
+CC	libavcodec/libvpxenc.o
+CC	libavcodec/mathtables.o
+CC	libavcodec/me_cmp.o
+CC	libavcodec/mediacodec.o
+CC	libavcodec/mpeg12framerate.o
+CC	libavcodec/mpeg4audio.o
+CC	libavcodec/mpeg4audio_sample_rates.o
+CC	libavcodec/mpegaudio.o
+CC	libavcodec/mpegaudio_parser.o
+CC	libavcodec/mpegaudiodata.o
+CC	libavcodec/mpegaudiodec_common.o
+CC	libavcodec/mpegaudiodec_fixed.o
+CC	libavcodec/mpegaudiodecheader.o
+CC	libavcodec/mpegaudiodsp.o
+CC	libavcodec/mpegaudiodsp_data.o
+CC	libavcodec/mpegaudiodsp_fixed.o
+CC	libavcodec/mpegaudiodsp_float.o
+CC	libavcodec/options.o
+CC	libavcodec/mpegaudiotabs.o
+CC	libavcodec/packet.o
+CC	libavcodec/parser.o
+CC	libavcodec/parsers.o
+CC	libavcodec/pcm.o
+CC	libavcodec/profiles.o
+CC	libavcodec/pthread.o
+CC	libavcodec/pthread_frame.o
+CC	libavcodec/pthread_slice.o
+CC	libavcodec/qsv_api.o
+CC	libavcodec/raw.o
+CC	libavcodec/refstruct.o
+CC	libavcodec/simple_idct.o
+CC	libavcodec/startcode.o
+CC	libavcodec/threadprogress.o
+CC	libavcodec/utils.o
+CC	libavcodec/version.o
+CC	libavcodec/videodsp.o
+CC	libavcodec/videotoolbox.o
+CC	libavcodec/vlc.o
+CC	libavcodec/vorbis_data.o
+CC	libavcodec/vorbis_parser.o
+CC	libavcodec/xiph.o
+CC	libswresample/aarch64/audio_convert_init.o
+AS	libswresample/aarch64/audio_convert_neon.o
+AS	libswresample/aarch64/resample.o
+CC	libswresample/aarch64/resample_init.o
+CC	libswresample/audioconvert.o
+CC	libswresample/dither.o
+CC	libswresample/options.o
+CC	libswresample/rematrix.o
+CC	libswresample/resample.o
+CC	libswresample/resample_dsp.o
+CC	libswresample/swresample.o
+CC	libswresample/swresample_frame.o
+CC	libswresample/version.o
+CC	libavutil/aarch64/cpu.o
+CC	libavutil/aarch64/float_dsp_init.o
+AS	libavutil/aarch64/float_dsp_neon.o
+CC	libavutil/aarch64/tx_float_init.o
+AS	libavutil/aarch64/tx_float_neon.o
+CC	libavutil/adler32.o
+CC	libavutil/aes.o
+CC	libavutil/aes_ctr.o
+CC	libavutil/ambient_viewing_environment.o
+CC	libavutil/audio_fifo.o
+CC	libavutil/avsscanf.o
+CC	libavutil/avstring.o
+CC	libavutil/base64.o
+CC	libavutil/blowfish.o
+CC	libavutil/bprint.o
+CC	libavutil/buffer.o
+CC	libavutil/camellia.o
+CC	libavutil/cast5.o
+CC	libavutil/channel_layout.o
+CC	libavutil/cpu.o
+CC	libavutil/crc.o
+CC	libavutil/csp.o
+CC	libavutil/des.o
+CC	libavutil/detection_bbox.o
+CC	libavutil/dict.o
+CC	libavutil/display.o
+CC	libavutil/dovi_meta.o
+CC	libavutil/downmix_info.o
+CC	libavutil/encryption_info.o
+CC	libavutil/error.o
+CC	libavutil/eval.o
+CC	libavutil/executor.o
+CC	libavutil/fifo.o
+CC	libavutil/file.o
+CC	libavutil/file_open.o
+CC	libavutil/film_grain_params.o
+CC	libavutil/fixed_dsp.o
+CC	libavutil/float_dsp.o
+CC	libavutil/frame.o
+CC	libavutil/hash.o
+CC	libavutil/hdr_dynamic_metadata.o
+CC	libavutil/hdr_dynamic_vivid_metadata.o
+CC	libavutil/hmac.o
+CC	libavutil/hwcontext.o
+CC	libavutil/hwcontext_stub.o
+CC	libavutil/hwcontext_videotoolbox.o
+CC	libavutil/iamf.o
+CC	libavutil/imgutils.o
+CC	libavutil/integer.o
+CC	libavutil/intmath.o
+CC	libavutil/lfg.o
+CC	libavutil/lls.o
+CC	libavutil/log.o
+CC	libavutil/log2_tab.o
+CC	libavutil/lzo.o
+CC	libavutil/mastering_display_metadata.o
+CC	libavutil/mathematics.o
+CC	libavutil/md5.o
+CC	libavutil/mem.o
+CC	libavutil/murmur3.o
+CC	libavutil/opt.o
+CC	libavutil/parseutils.o
+CC	libavutil/pixdesc.o
+CC	libavutil/pixelutils.o
+CC	libavutil/random_seed.o
+CC	libavutil/rational.o
+CC	libavutil/rc4.o
+CC	libavutil/reverse.o
+CC	libavutil/ripemd.o
+CC	libavutil/samplefmt.o
+CC	libavutil/sha.o
+CC	libavutil/sha512.o
+CC	libavutil/slicethread.o
+CC	libavutil/spherical.o
+CC	libavutil/stereo3d.o
+CC	libavutil/tea.o
+CC	libavutil/threadmessage.o
+CC	libavutil/time.o
+CC	libavutil/timecode.o
+CC	libavutil/timestamp.o
+CC	libavutil/tree.o
+CC	libavutil/twofish.o
+CC	libavutil/tx.o
+CC	libavutil/tx_double.o
+CC	libavutil/tx_float.o
+CC	libavutil/tx_int32.o
+CC	libavutil/utils.o
+CC	libavutil/uuid.o
+CC	libavutil/version.o
+CC	libavutil/video_enc_params.o
+CC	libavutil/video_hint.o
+CC	libavutil/xga_font_data.o
+CC	libavutil/xtea.o
+INSTALL	libavformat/libavformat.pc
+INSTALL	libavcodec/libavcodec.pc
+INSTALL	libswresample/libswresample.pc
+INSTALL	libavutil/libavutil.pc
+INSTALL	libavformat/libavformat.a
+AR	libavcodec/libavcodec.a
+AR	libswresample/libswresample.a
+AR	libavutil/libavutil.a
+INSTALL	libswresample/libswresample.a
+INSTALL	libavutil/libavutil.a
+INSTALL	libavcodec/libavcodec.a
+/private/var/tmp/_bazel_containerhost/c259e0c7803e089724afaeab1cf94801/execroot/_main
+UPDATED_LIBS_HASH= arm64//private/var/tmp/_bazel_containerhost/c259e0c7803e089724afaeab1cf94801/execroot/_main/bazel-out/ios_arm64-opt-ios-arm64-min13.0-ST-2d46267cd7fb/bin/submodules/ffmpeg/build/thin/arm64/lib/libavcodec.a:103be6fe arm64//private/var/tmp/_bazel_containerhost/c259e0c7803e089724afaeab1cf94801/execroot/_main/bazel-out/ios_arm64-opt-ios-arm64-min13.0-ST-2d46267cd7fb/bin/submodules/ffmpeg/build/thin/arm64/lib/libavformat.a:185d6615 arm64//private/var/tmp/_bazel_containerhost/c259e0c7803e089724afaeab1cf94801/execroot/_main/bazel-out/ios_arm64-opt-ios-arm64-min13.0-ST-2d46267cd7fb/bin/submodules/ffmpeg/build/thin/arm64/lib/libavutil.a:94496742 arm64//private/var/tmp/_bazel_containerhost/c259e0c7803e089724afaeab1cf94801/execroot/_main/bazel-out/ios_arm64-opt-ios-arm64-min13.0-ST-2d46267cd7fb/bin/submodules/ffmpeg/build/thin/arm64/lib/libswresample.a:dd52ceb9
+LIBS_HASH=
+building fat binaries in /private/var/tmp/_bazel_containerhost/c259e0c7803e089724afaeab1cf94801/execroot/_main/bazel-out/ios_arm64-opt-ios-arm64-min13.0-ST-2d46267cd7fb/bin/submodules/ffmpeg/build/FFmpeg-iOS
+LIPO_INPUT command find "/private/var/tmp/_bazel_containerhost/c259e0c7803e089724afaeab1cf94801/execroot/_main/bazel-out/ios_arm64-opt-ios-arm64-min13.0-ST-2d46267cd7fb/bin/submodules/ffmpeg/build/thin" -name "libavcodec.a"
+LIPO_INPUT command find "/private/var/tmp/_bazel_containerhost/c259e0c7803e089724afaeab1cf94801/execroot/_main/bazel-out/ios_arm64-opt-ios-arm64-min13.0-ST-2d46267cd7fb/bin/submodules/ffmpeg/build/thin" -name "libavformat.a"
+LIPO_INPUT command find "/private/var/tmp/_bazel_containerhost/c259e0c7803e089724afaeab1cf94801/execroot/_main/bazel-out/ios_arm64-opt-ios-arm64-min13.0-ST-2d46267cd7fb/bin/submodules/ffmpeg/build/thin" -name "libavutil.a"
+LIPO_INPUT command find "/private/var/tmp/_bazel_containerhost/c259e0c7803e089724afaeab1cf94801/execroot/_main/bazel-out/ios_arm64-opt-ios-arm64-min13.0-ST-2d46267cd7fb/bin/submodules/ffmpeg/build/thin" -name "libswresample.a"
+Done
+[3,706 / 8,613] Compiling absl/synchronization/internal/futex_waiter.cc [for tool]; 9s local, disk-cache ... (3 actions, 2 running)
+[3,710 / 8,613] Compiling absl/synchronization/internal/futex_waiter.cc [for tool]; 10s local, disk-cache ... (3 actions, 2 running)
+[3,715 / 8,613] Compiling absl/synchronization/internal/futex_waiter.cc [for tool]; 12s local, disk-cache ... (3 actions, 2 running)
+[3,719 / 8,613] Compiling absl/synchronization/internal/futex_waiter.cc [for tool]; 13s local, disk-cache ... (3 actions, 2 running)
+[3,724 / 8,613] Compiling absl/synchronization/internal/futex_waiter.cc [for tool]; 14s local, disk-cache ... (3 actions, 2 running)
+[3,726 / 8,613] Compiling absl/synchronization/internal/futex_waiter.cc [for tool]; 15s local, disk-cache ... (3 actions running)
+[3,730 / 8,613] Compiling submodules/rlottie/rlottie/src/lottie/lottieanimation.cpp; 0s local, disk-cache ... (3 actions, 1 running)
+[3,732 / 8,613] Compiling absl/synchronization/internal/per_thread_sem.cc [for tool]; 1s local, disk-cache ... (3 actions, 2 running)
+[3,733 / 8,613] Compiling absl/synchronization/internal/per_thread_sem.cc [for tool]; 2s local, disk-cache ... (3 actions, 2 running)
+[3,734 / 8,613] Compiling absl/synchronization/internal/per_thread_sem.cc [for tool]; 3s local, disk-cache ... (3 actions, 2 running)
+[3,735 / 8,613] Compiling absl/synchronization/internal/per_thread_sem.cc [for tool]; 4s local, disk-cache ... (3 actions, 2 running)
+[3,736 / 8,613] Compiling absl/synchronization/internal/per_thread_sem.cc [for tool]; 5s local, disk-cache ... (3 actions running)
+[3,738 / 8,613] Compiling absl/synchronization/internal/per_thread_sem.cc [for tool]; 6s local, disk-cache ... (3 actions, 2 running)
+[3,739 / 8,613] Compiling absl/synchronization/internal/per_thread_sem.cc [for tool]; 7s local, disk-cache ... (3 actions running)
+[3,740 / 8,613] Compiling absl/synchronization/internal/per_thread_sem.cc [for tool]; 8s local, disk-cache ... (3 actions running)
+[3,741 / 8,613] Compiling absl/synchronization/internal/per_thread_sem.cc [for tool]; 9s local, disk-cache ... (3 actions running)
+[3,742 / 8,613] Compiling absl/synchronization/internal/per_thread_sem.cc [for tool]; 10s local, disk-cache ... (3 actions running)
+[3,743 / 8,613] Compiling absl/synchronization/internal/per_thread_sem.cc [for tool]; 12s local, disk-cache ... (3 actions, 2 running)
+[3,748 / 8,613] Compiling absl/synchronization/internal/per_thread_sem.cc [for tool]; 13s local, disk-cache ... (3 actions, 2 running)
+[3,749 / 8,613] Compiling absl/synchronization/internal/per_thread_sem.cc [for tool]; 15s local, disk-cache ... (3 actions running)
+[3,751 / 8,613] Compiling absl/synchronization/internal/per_thread_sem.cc [for tool]; 16s local, disk-cache ... (3 actions running)
+[3,752 / 8,613] Compiling absl/synchronization/internal/per_thread_sem.cc [for tool]; 17s local, disk-cache ... (3 actions running)
+[3,755 / 8,613] Compiling third-party/webrtc/webrtc/api/audio_codecs/L16/audio_decoder_L16.cc; 0s local, disk-cache ... (3 actions, 2 running)
+[3,757 / 8,613] Compiling absl/synchronization/internal/pthread_waiter.cc [for tool]; 1s local, disk-cache ... (3 actions running)
+[3,759 / 8,613] Compiling absl/synchronization/internal/pthread_waiter.cc [for tool]; 2s local, disk-cache ... (3 actions running)
+[3,762 / 8,613] Compiling absl/synchronization/internal/pthread_waiter.cc [for tool]; 3s local, disk-cache ... (3 actions running)
+[3,764 / 8,613] Compiling absl/synchronization/internal/pthread_waiter.cc [for tool]; 4s local, disk-cache ... (3 actions running)
+[3,767 / 8,613] Compiling absl/synchronization/internal/pthread_waiter.cc [for tool]; 5s local, disk-cache ... (3 actions running)
+[3,769 / 8,613] Compiling absl/synchronization/internal/pthread_waiter.cc [for tool]; 6s local, disk-cache ... (3 actions running)
+[3,771 / 8,613] Compiling absl/synchronization/internal/pthread_waiter.cc [for tool]; 7s local, disk-cache ... (3 actions running)
+[3,773 / 8,613] Compiling absl/synchronization/internal/pthread_waiter.cc [for tool]; 8s local, disk-cache ... (3 actions running)
+[3,775 / 8,613] Compiling absl/synchronization/internal/pthread_waiter.cc [for tool]; 9s local, disk-cache ... (3 actions running)
+[3,777 / 8,613] Compiling absl/synchronization/internal/pthread_waiter.cc [for tool]; 10s local, disk-cache ... (3 actions running)
+[3,779 / 8,613] Compiling absl/synchronization/internal/pthread_waiter.cc [for tool]; 11s local, disk-cache ... (3 actions running)
+[3,781 / 8,613] Compiling absl/synchronization/internal/pthread_waiter.cc [for tool]; 12s local, disk-cache ... (3 actions running)
+[3,783 / 8,613] Compiling absl/synchronization/internal/pthread_waiter.cc [for tool]; 13s local, disk-cache ... (3 actions running)
+[3,785 / 8,613] Compiling third-party/webrtc/webrtc/api/create_peerconnection_factory.cc; 1s local, disk-cache ... (3 actions, 2 running)
+[3,787 / 8,613] Compiling absl/synchronization/internal/sem_waiter.cc [for tool]; 1s local, disk-cache ... (3 actions running)
+ERROR: /Users/runner/work/AirGram-iOS/AirGram-iOS/submodules/rlottie/BUILD:2:13: Compiling submodules/rlottie/LottieInstance.mm failed: (Exit 1): wrapped_clang_pp failed: error executing ObjcCompile command (from target //submodules/rlottie:RLottieBinding) 
+  (cd /private/var/tmp/_bazel_containerhost/c259e0c7803e089724afaeab1cf94801/execroot/_main && \
+  exec env - \
+    APPLE_SDK_PLATFORM=iPhoneOS \
+    APPLE_SDK_VERSION_OVERRIDE=26.4 \
+    PATH=/usr/bin:/bin:/usr/sbin:/sbin \
+    XCODE_VERSION_OVERRIDE=26.4.1.17E202 \
+    ZERO_AR_DATE=1 \
+  bazel-out/darwin_arm64-opt-exec-ST-d57f47055a04/bin/external/apple_support+/crosstool/wrapped_clang_pp '-stdlib=libc++' '-std=gnu++17' '-D_FORTIFY_SOURCE=1' -fstack-protector -fcolor-diagnostics -Wall -Wthread-safety -Wself-assign -fno-omit-frame-pointer -g0 -O2 -DNDEBUG '-DNS_BLOCK_ASSERTIONS=1' '-fdebug-prefix-map=__BAZEL_EXECUTION_ROOT__=.' '-fdebug-prefix-map=__BAZEL_XCODE_DEVELOPER_DIR__=/PLACEHOLDER_DEVELOPER_DIR' -g '-Werror=incompatible-sysroot' -Wshorten-64-to-32 -Wbool-conversion -Wconstant-conversion -Wduplicate-method-match -Wempty-body -Wenum-conversion -Wint-conversion -Wunreachable-code -Wmismatched-return-types -Wundeclared-selector -Wuninitialized -Wunused-function -Wunused-variable -iquote . -iquote bazel-out/ios_arm64-opt-ios-arm64-min13.0-ST-2d46267cd7fb/bin -Isubmodules/rlottie/PublicHeaders -Ibazel-out/ios_arm64-opt-ios-arm64-min13.0-ST-2d46267cd7fb/bin/submodules/rlottie/PublicHeaders -MD -MF bazel-out/ios_arm64-opt-ios-arm64-min13.0-ST-2d46267cd7fb/bin/submodules/rlottie/_objs/RLottieBinding/arc/LottieInstance.d -DOS_IOS -fno-autolink -isysroot __BAZEL_XCODE_SDKROOT__ -F__BAZEL_XCODE_SDKROOT__/System/Library/Frameworks -F__BAZEL_XCODE_DEVELOPER_DIR__/Platforms/iPhoneOS.platform/Developer/Library/Frameworks -fobjc-arc -no-canonical-prefixes -target arm64-apple-ios13.0 '-Dpixman_region_selfcheck(x)=1' '-DLOTTIE_DISABLE_ARM_NEON=1' '-DLOTTIE_THREAD_SAFE=1' '-DLOTTIE_IMAGE_MODULE_DISABLED=1' -Isubmodules/rlottie -Isubmodules/rlottie/rlottie/inc -Isubmodules/rlottie/rlottie/src/vector -Isubmodules/rlottie/rlottie/src/vector/pixman -Isubmodules/rlottie/rlottie/src/vector/freetype -fmodules '-fmodules-cache-path=bazel-out/ios_arm64-opt-ios-arm64-min13.0-ST-2d46267cd7fb/bin/_objc_module_cache' -Os '-DNDEBUG=1' -Wno-unused-variable -Winit-self -Wno-extra -Wno-builtin-macro-redefined '-D__DATE__="redacted"' '-D__TIMESTAMP__="redacted"' '-D__TIME__="redacted"' -c submodules/rlottie/LottieInstance.mm -o bazel-out/ios_arm64-opt-ios-arm64-min13.0-ST-2d46267cd7fb/bin/submodules/rlottie/_objs/RLottieBinding/arc/LottieInstance.o)
+# Configuration: 5195b23d537eb92926dd1712bff7653c217b93f2d3e86035b35bed71a819c195
+# Execution platform: @@platforms//host:host
+submodules/rlottie/LottieInstance.mm:33:18: error: use of undeclared identifier 'RLottieFitzModifierType6'
+   33 |             case RLottieFitzModifierType6:
+      |                  ^~~~~~~~~~~~~~~~~~~~~~~~
+1 error generated.
+Error in child process '/usr/bin/xcrun'. 1
+[3,790 / 8,613] checking cached actions
+Target //Telegram:telegram_auth_build_test failed to build
+INFO: Elapsed time: 910.838s, Critical Path: 255.98s
+INFO: 3790 processes: 2120 internal, 1670 local.
+ERROR: Build did NOT complete successfully
+FAILED: 
+INFO: Build Event Protocol files produced successfully.
+Traceback (most recent call last):
+  File "/Users/runner/work/AirGram-iOS/AirGram-iOS/build-system/Make/Make.py", line 1294, in <module>
+    build(bazel=bazel_path, arguments=args)
+    ~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/runner/work/AirGram-iOS/AirGram-iOS/build-system/Make/Make.py", line 650, in build
+    bazel_command_line.invoke_build()
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "/Users/runner/work/AirGram-iOS/AirGram-iOS/build-system/Make/Make.py", line 325, in invoke_build
+    call_executable(combined_arguments)
+    ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^
+  File "/Users/runner/work/AirGram-iOS/AirGram-iOS/build-system/Make/BuildEnvironment.py", line 104, in call_executable
+    subprocess.check_call(resolved_arguments, env=resolved_env)
+    ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/homebrew/Cellar/python@3.15/3.15.2/Frameworks/Python.framework/Versions/3.15/lib/python3.15/subprocess.py", line 534, in check_call
+    raise CalledProcessError(retcode, cmd)
+subprocess.CalledProcessError: Command ['/Users/runner/work/AirGram-iOS/AirGram-iOS/build-input/bazel-8.4.2-darwin-arm64', '--output_user_root=/private/var/tmp/_bazel_containerhost', 'build', 'Telegram/telegram_auth_build_test', '--announce_rc', '--features=swift.use_global_module_cache', '--verbose_failures', '--remote_cache_async', '--jobs=3', '--local_cpu_resources=3', '--worker_max_instances=3', '--spawn_strategy=worker,local', '--strategy=SwiftCompile=worker,local', '--strategy=ObjcCompile=worker,local', '--strategy=Genrule=standalone', '--worker_quit_after_build=false', '--define=buildNumber=2826', '--features=swift.split_derived_files_generation', '--disk_cache=/private/var/tmp/_bazel_containerhost/disk_cache', '-c', 'opt', '--ios_multi_cpus=arm64', '--watchos_cpus=arm64_32', '--apple_generate_dsym', '--features=swift.opt_uses_wmo', '--features=swift.opt_uses_osize', '--features=dead_strip', '--objc_enable_binary_stripping', '--build_event_json_file=/var/folders/h5/t85nd63d71x27_8gl5gw3l_w0000gn/T/airgram-build-events.json'] returned non-zero exit status 1.
