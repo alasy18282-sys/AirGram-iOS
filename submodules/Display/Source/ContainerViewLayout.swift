@@ -20,6 +20,21 @@ public enum ContainerViewLayoutSizeClass {
     case regular
 }
 
+/// The screen edge a side strip (vertical accessory column) is anchored to.
+///
+/// This fork's layouts never reserve a side strip, so `ContainerViewLayout.sideStrip`
+/// always returns nil; the type exists so newer upstream components compile.
+public enum ContainerViewLayoutSideEdge {
+    case left
+    case right
+}
+
+extension ContainerViewLayout {
+    public func sideStrip(edge: ContainerViewLayoutSideEdge) -> CGRect? {
+        return nil
+    }
+}
+
 public struct LayoutMetrics: Equatable {
     public let widthClass: ContainerViewLayoutSizeClass
     public let heightClass: ContainerViewLayoutSizeClass
