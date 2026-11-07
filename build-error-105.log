@@ -1,0 +1,311 @@
+ERROR: /Users/runner/work/AirGram-iOS/AirGram-iOS/submodules/rlottie/BUILD:2:13: Compiling submodules/rlottie/LottieInstance.mm failed: (Exit 1): wrapped_clang_pp failed: error executing ObjcCompile command (from target //submodules/rlottie:RLottieBinding) 
+submodules/rlottie/LottieInstance.mm:18:18: error: use of undeclared identifier 'RLottieFitzModifierNone'; did you mean 'LottieFitzModifierNone'?
+submodules/rlottie/LottieInstance.mm:21:18: error: use of undeclared identifier 'RLottieFitzModifierType12'; did you mean 'LottieFitzModifierType12'?
+submodules/rlottie/LottieInstance.mm:24:18: error: use of undeclared identifier 'RLottieFitzModifierType3'; did you mean 'LottieFitzModifierType3'?
+submodules/rlottie/LottieInstance.mm:27:18: error: use of undeclared identifier 'RLottieFitzModifierType4'; did you mean 'LottieFitzModifierType4'?
+submodules/rlottie/LottieInstance.mm:30:18: error: use of undeclared identifier 'RLottieFitzModifierType5'; did you mean 'LottieFitzModifierType5'?
+submodules/rlottie/LottieInstance.mm:33:18: error: use of undeclared identifier 'RLottieFitzModifierType6'; did you mean 'LottieFitzModifierType6'?
+ERROR: Build did NOT complete successfully
+FAILED: 
+Traceback (most recent call last):
+--- end of full build log ---
+[2,731 / 8,613] Compiling absl/crc/internal/crc_cord_state.cc [for tool]; 16s local, disk-cache ... (3 actions, 2 running)
+[2,732 / 8,613] Compiling absl/crc/internal/crc_cord_state.cc [for tool]; 17s local, disk-cache ... (3 actions running)
+[2,734 / 8,613] Compiling absl/crc/internal/crc_cord_state.cc [for tool]; 18s local, disk-cache ... (3 actions running)
+[2,736 / 8,613] Compiling absl/crc/internal/crc_cord_state.cc [for tool]; 19s local, disk-cache ... (3 actions running)
+[2,738 / 8,613] Compiling absl/crc/internal/crc_cord_state.cc [for tool]; 21s local, disk-cache ... (3 actions running)
+[2,740 / 8,613] Compiling absl/crc/internal/crc_cord_state.cc [for tool]; 22s local, disk-cache ... (3 actions running)
+[2,741 / 8,613] Compiling absl/crc/internal/crc_cord_state.cc [for tool]; 23s local, disk-cache ... (3 actions, 2 running)
+[2,743 / 8,613] Compiling absl/crc/internal/crc_cord_state.cc [for tool]; 24s local, disk-cache ... (3 actions, 2 running)
+[2,749 / 8,613] Compiling absl/crc/crc32c.cc [for tool]; 1s local, disk-cache ... (3 actions, 2 running)
+[2,751 / 8,613] Compiling absl/crc/crc32c.cc [for tool]; 2s local, disk-cache ... (3 actions, 2 running)
+[2,754 / 8,613] Compiling absl/crc/crc32c.cc [for tool]; 3s local, disk-cache ... (3 actions, 2 running)
+[2,756 / 8,613] Compiling absl/crc/crc32c.cc [for tool]; 4s local, disk-cache ... (3 actions running)
+[2,757 / 8,613] Compiling absl/crc/crc32c.cc [for tool]; 5s local, disk-cache ... (3 actions running)
+[2,759 / 8,613] Compiling absl/crc/crc32c.cc [for tool]; 6s local, disk-cache ... (3 actions running)
+[2,761 / 8,613] Compiling absl/crc/crc32c.cc [for tool]; 7s local, disk-cache ... (3 actions running)
+[2,763 / 8,613] Compiling absl/crc/crc32c.cc [for tool]; 8s local, disk-cache ... (3 actions running)
+[2,765 / 8,613] Compiling absl/crc/crc32c.cc [for tool]; 9s local, disk-cache ... (3 actions running)
+[2,766 / 8,613] Compiling absl/crc/crc32c.cc [for tool]; 10s local, disk-cache ... (3 actions running)
+[2,768 / 8,613] Compiling absl/crc/crc32c.cc [for tool]; 11s local, disk-cache ... (3 actions running)
+[2,769 / 8,613] Compiling absl/crc/crc32c.cc [for tool]; 13s local, disk-cache ... (3 actions running)
+[2,772 / 8,613] Compiling absl/crc/crc32c.cc [for tool]; 14s local, disk-cache ... (3 actions running)
+[2,774 / 8,613] Compiling absl/crc/crc32c.cc [for tool]; 15s local, disk-cache ... (3 actions running)
+[2,775 / 8,613] Compiling absl/crc/crc32c.cc [for tool]; 16s local, disk-cache ... (3 actions running)
+[2,777 / 8,613] Compiling absl/crc/crc32c.cc [for tool]; 17s local, disk-cache ... (3 actions running)
+[2,779 / 8,613] Compiling absl/crc/crc32c.cc [for tool]; 18s local, disk-cache ... (3 actions running)
+[2,780 / 8,613] Compiling absl/crc/crc32c.cc [for tool]; 19s local, disk-cache ... (3 actions running)
+[2,782 / 8,613] Compiling submodules/LottieCpp/lottiecpp/Sources/Lottie/Private/Utility/Primitives/CompoundBezierPath.cpp; 2s local, disk-cache ... (3 actions running)
+[2,785 / 8,613] Compiling absl/crc/internal/crc_memcpy_fallback.cc [for tool]; 1s local, disk-cache ... (3 actions running)
+[2,787 / 8,613] Compiling absl/crc/internal/crc_memcpy_fallback.cc [for tool]; 2s local, disk-cache ... (3 actions running)
+[2,788 / 8,613] Compiling absl/crc/internal/crc_memcpy_fallback.cc [for tool]; 3s local, disk-cache ... (3 actions running)
+[2,789 / 8,613] Compiling absl/crc/internal/crc_memcpy_fallback.cc [for tool]; 5s local, disk-cache ... (3 actions, 2 running)
+[2,792 / 8,613] Compiling absl/crc/internal/crc_memcpy_fallback.cc [for tool]; 6s local, disk-cache ... (3 actions, 2 running)
+[2,794 / 8,613] Compiling absl/crc/internal/crc_memcpy_fallback.cc [for tool]; 8s local, disk-cache ... (3 actions running)
+[2,795 / 8,613] Compiling absl/crc/internal/crc_memcpy_fallback.cc [for tool]; 9s local, disk-cache ... (3 actions running)
+[2,797 / 8,613] Compiling absl/crc/internal/crc_memcpy_fallback.cc [for tool]; 10s local, disk-cache ... (3 actions running)
+[2,800 / 8,613] Compiling absl/crc/internal/crc_memcpy_fallback.cc [for tool]; 11s local, disk-cache ... (3 actions running)
+[2,802 / 8,613] Compiling absl/crc/internal/crc_memcpy_fallback.cc [for tool]; 12s local, disk-cache ... (3 actions running)
+[2,805 / 8,613] Compiling absl/crc/internal/crc_memcpy_fallback.cc [for tool]; 13s local, disk-cache ... (3 actions running)
+[2,806 / 8,613] Compiling absl/crc/internal/crc_memcpy_fallback.cc [for tool]; 14s local, disk-cache ... (3 actions running)
+[2,807 / 8,613] Compiling absl/crc/internal/crc_memcpy_fallback.cc [for tool]; 15s local, disk-cache ... (3 actions running)
+[2,810 / 8,613] Compiling absl/crc/internal/crc_memcpy_fallback.cc [for tool]; 16s local, disk-cache ... (3 actions, 2 running)
+[2,812 / 8,613] Compiling absl/crc/internal/crc_memcpy_fallback.cc [for tool]; 17s local, disk-cache ... (3 actions, 2 running)
+[2,814 / 8,613] Compiling submodules/LottieCpp/lottiecpp/Sources/Lottie/Public/Primitives/AnyValue.cpp; 2s local, disk-cache ... (3 actions, 2 running)
+[2,817 / 8,613] Compiling absl/crc/internal/crc_memcpy_x86_arm_combined.cc [for tool]; 1s local, disk-cache ... (3 actions, 2 running)
+[2,818 / 8,613] Compiling absl/crc/internal/crc_memcpy_x86_arm_combined.cc [for tool]; 2s local, disk-cache ... (3 actions running)
+[2,819 / 8,613] Compiling absl/crc/internal/crc_memcpy_x86_arm_combined.cc [for tool]; 3s local, disk-cache ... (3 actions running)
+[2,821 / 8,613] Compiling absl/crc/internal/crc_memcpy_x86_arm_combined.cc [for tool]; 4s local, disk-cache ... (3 actions running)
+[2,822 / 8,613] Compiling absl/crc/internal/crc_memcpy_x86_arm_combined.cc [for tool]; 5s local, disk-cache ... (3 actions running)
+[2,823 / 8,613] Compiling absl/crc/internal/crc_memcpy_x86_arm_combined.cc [for tool]; 6s local, disk-cache ... (3 actions running)
+[2,825 / 8,613] Compiling absl/crc/internal/crc_memcpy_x86_arm_combined.cc [for tool]; 7s local, disk-cache ... (3 actions running)
+[2,827 / 8,613] Compiling absl/crc/internal/crc_memcpy_x86_arm_combined.cc [for tool]; 8s local, disk-cache ... (3 actions running)
+[2,828 / 8,613] Compiling absl/crc/internal/crc_memcpy_x86_arm_combined.cc [for tool]; 9s local, disk-cache ... (3 actions running)
+[2,830 / 8,613] Compiling absl/crc/internal/crc_memcpy_x86_arm_combined.cc [for tool]; 10s local, disk-cache ... (3 actions running)
+[2,831 / 8,613] Compiling absl/crc/internal/crc_memcpy_x86_arm_combined.cc [for tool]; 11s local, disk-cache ... (3 actions running)
+[2,832 / 8,613] Compiling absl/crc/internal/crc_memcpy_x86_arm_combined.cc [for tool]; 13s local, disk-cache ... (3 actions running)
+[2,834 / 8,613] Compiling absl/crc/internal/crc_memcpy_x86_arm_combined.cc [for tool]; 14s local, disk-cache ... (3 actions running)
+[2,835 / 8,613] Compiling absl/crc/internal/crc_memcpy_x86_arm_combined.cc [for tool]; 15s local, disk-cache ... (3 actions running)
+[2,837 / 8,613] Compiling absl/crc/internal/crc_memcpy_x86_arm_combined.cc [for tool]; 16s local, disk-cache ... (3 actions running)
+[2,838 / 8,613] Compiling absl/crc/internal/crc_memcpy_x86_arm_combined.cc [for tool]; 17s local, disk-cache ... (3 actions, 2 running)
+[2,840 / 8,613] Compiling absl/crc/internal/crc_memcpy_x86_arm_combined.cc [for tool]; 18s local, disk-cache ... (3 actions, 2 running)
+[2,841 / 8,613] Compiling absl/crc/internal/crc_memcpy_x86_arm_combined.cc [for tool]; 19s local, disk-cache ... (3 actions running)
+[2,843 / 8,613] Compiling absl/crc/internal/crc_memcpy_x86_arm_combined.cc [for tool]; 20s local, disk-cache ... (3 actions running)
+[2,844 / 8,613] Compiling absl/crc/internal/crc_memcpy_x86_arm_combined.cc [for tool]; 21s local, disk-cache ... (3 actions running)
+[2,847 / 8,613] Compiling submodules/LottieCpp/lottiecpp/Sources/Renderer.cpp; 4s local, disk-cache ... (3 actions, 2 running)
+[2,848 / 8,613] Compiling submodules/LottieCpp/lottiecpp/Sources/Renderer.cpp; 5s local, disk-cache ... (3 actions running)
+[2,850 / 8,613] Compiling absl/crc/internal/crc_non_temporal_memcpy.cc [for tool]; 2s local, disk-cache ... (3 actions running)
+[2,851 / 8,613] Compiling absl/crc/internal/crc_non_temporal_memcpy.cc [for tool]; 3s local, disk-cache ... (3 actions running)
+[2,853 / 8,613] Compiling absl/crc/internal/crc_non_temporal_memcpy.cc [for tool]; 4s local, disk-cache ... (3 actions, 2 running)
+INFO: From Executing genrule //third-party/boringssl:copy_ssl_headers:
++ cp third-party/boringssl/src/include/openssl/dtls1.h bazel-out/ios_arm64-opt-ios-arm64-min13.0-ST-2d46267cd7fb/bin/third-party/boringssl/ssl_headers/src/include/openssl/dtls1.h
++ cp third-party/boringssl/src/include/openssl/srtp.h bazel-out/ios_arm64-opt-ios-arm64-min13.0-ST-2d46267cd7fb/bin/third-party/boringssl/ssl_headers/src/include/openssl/srtp.h
++ cp third-party/boringssl/src/include/openssl/ssl.h bazel-out/ios_arm64-opt-ios-arm64-min13.0-ST-2d46267cd7fb/bin/third-party/boringssl/ssl_headers/src/include/openssl/ssl.h
++ cp third-party/boringssl/src/include/openssl/ssl3.h bazel-out/ios_arm64-opt-ios-arm64-min13.0-ST-2d46267cd7fb/bin/third-party/boringssl/ssl_headers/src/include/openssl/ssl3.h
++ cp third-party/boringssl/src/include/openssl/tls1.h bazel-out/ios_arm64-opt-ios-arm64-min13.0-ST-2d46267cd7fb/bin/third-party/boringssl/ssl_headers/src/include/openssl/tls1.h
+[2,857 / 8,613] Compiling absl/crc/internal/crc_non_temporal_memcpy.cc [for tool]; 5s local, disk-cache ... (3 actions running)
+[2,859 / 8,613] Compiling absl/crc/internal/crc_non_temporal_memcpy.cc [for tool]; 6s local, disk-cache ... (3 actions running)
+[2,865 / 8,613] Compiling absl/crc/internal/crc_non_temporal_memcpy.cc [for tool]; 7s local, disk-cache ... (2 actions running)
+[2,866 / 8,613] Compiling absl/crc/internal/crc_non_temporal_memcpy.cc [for tool]; 9s local, disk-cache ... (3 actions running)
+[2,869 / 8,613] Compiling absl/crc/internal/crc_non_temporal_memcpy.cc [for tool]; 10s local, disk-cache ... (3 actions running)
+[2,872 / 8,613] Compiling absl/crc/internal/crc_non_temporal_memcpy.cc [for tool]; 11s local, disk-cache ... (3 actions running)
+INFO: From Executing genrule //third-party/webrtc:generate_field_trials_header:
++ python3 third-party/webrtc/webrtc/experiments/field_trials.py header --output bazel-out/ios_arm64-opt-ios-arm64-min13.0-ST-2d46267cd7fb/bin/third-party/webrtc/field_trials_header/experiments/registered_field_trials.h
+[2,879 / 8,613] Compiling absl/crc/internal/crc_non_temporal_memcpy.cc [for tool]; 12s local, disk-cache ... (3 actions, 2 running)
+[2,889 / 8,613] Compiling absl/crc/internal/crc_non_temporal_memcpy.cc [for tool]; 13s local, disk-cache ... (3 actions, 2 running)
+[2,895 / 8,613] Compiling absl/crc/internal/crc_non_temporal_memcpy.cc [for tool]; 14s local, disk-cache ... (3 actions, 2 running)
+[2,898 / 8,613] Compiling absl/crc/internal/crc_non_temporal_memcpy.cc [for tool]; 15s local, disk-cache ... (3 actions running)
+INFO: From Compiling third-party/openh264/third_party/openh264/src/codec/encoder/core/src/encoder_ext.cpp:
+third-party/openh264/third_party/openh264/src/codec/encoder/core/src/encoder_ext.cpp:2339:17: warning: first argument in call to 'memcpy' is a pointer to non-trivially copyable type 'SWelsSvcCodingParam' (aka 'WelsEnc::TagWelsSvcCodingParam') [-Wnontrivial-memcall]
+ 2339 |   memcpy (pCtx->pSvcParam, pCodingParam, sizeof (SWelsSvcCodingParam)); // confirmed_safe_unsafe_usage
+      |                 ^
+third-party/openh264/third_party/openh264/src/codec/encoder/core/src/encoder_ext.cpp:2339:17: note: explicitly cast the pointer to silence this warning
+ 2339 |   memcpy (pCtx->pSvcParam, pCodingParam, sizeof (SWelsSvcCodingParam)); // confirmed_safe_unsafe_usage
+      |                 ^
+      |           (void*)
+third-party/openh264/third_party/openh264/src/codec/encoder/core/src/encoder_ext.cpp:4466:11: warning: first argument in call to 'memcpy' is a pointer to non-trivially copyable type 'SWelsSvcCodingParam' (aka 'WelsEnc::TagWelsSvcCodingParam') [-Wnontrivial-memcall]
+ 4466 |   memcpy (&sConfig, (*ppCtx)->pSvcParam, sizeof (SWelsSvcCodingParam));
+      |           ^
+third-party/openh264/third_party/openh264/src/codec/encoder/core/src/encoder_ext.cpp:4466:11: note: explicitly cast the pointer to silence this warning
+ 4466 |   memcpy (&sConfig, (*ppCtx)->pSvcParam, sizeof (SWelsSvcCodingParam));
+      |           ^
+      |           (void*)
+2 warnings generated.
+[2,903 / 8,613] Compiling absl/crc/internal/crc_non_temporal_memcpy.cc [for tool]; 16s local, disk-cache ... (3 actions, 2 running)
+[2,908 / 8,613] Compiling absl/crc/internal/crc_non_temporal_memcpy.cc [for tool]; 17s local, disk-cache ... (3 actions, 2 running)
+[2,913 / 8,613] Compiling absl/crc/internal/crc_non_temporal_memcpy.cc [for tool]; 18s local, disk-cache ... (3 actions, 2 running)
+[2,920 / 8,613] Compiling third-party/openh264/third_party/openh264/src/codec/encoder/core/src/sample.cpp; 0s local, disk-cache ... (3 actions, 2 running)
+[2,924 / 8,613] Compiling absl/crc/internal/crc.cc [for tool]; 1s local, disk-cache ... (3 actions, 2 running)
+[2,927 / 8,613] Compiling absl/crc/internal/crc.cc [for tool]; 2s local, disk-cache ... (3 actions, 2 running)
+[2,931 / 8,613] Compiling absl/crc/internal/crc.cc [for tool]; 3s local, disk-cache ... (3 actions, 2 running)
+[2,935 / 8,613] Compiling absl/crc/internal/crc.cc [for tool]; 4s local, disk-cache ... (3 actions, 2 running)
+[2,938 / 8,613] Compiling absl/crc/internal/crc.cc [for tool]; 5s local, disk-cache ... (3 actions running)
+[2,942 / 8,613] Compiling absl/crc/internal/crc.cc [for tool]; 6s local, disk-cache ... (3 actions running)
+INFO: From Compiling third-party/openh264/third_party/openh264/src/codec/encoder/plus/src/welsEncoderExt.cpp:
+third-party/openh264/third_party/openh264/src/codec/encoder/plus/src/welsEncoderExt.cpp:1059:13: warning: first argument in call to 'memcpy' is a pointer to non-trivially copyable type 'SWelsSvcCodingParam' (aka 'WelsEnc::TagWelsSvcCodingParam') [-Wnontrivial-memcall]
+ 1059 |     memcpy (&sConfig, m_pEncContext->pSvcParam, sizeof (SWelsSvcCodingParam));
+      |             ^
+third-party/openh264/third_party/openh264/src/codec/encoder/plus/src/welsEncoderExt.cpp:1059:13: note: explicitly cast the pointer to silence this warning
+ 1059 |     memcpy (&sConfig, m_pEncContext->pSvcParam, sizeof (SWelsSvcCodingParam));
+      |             ^
+      |             (void*)
+1 warning generated.
+[2,945 / 8,613] Compiling absl/crc/internal/crc.cc [for tool]; 7s local, disk-cache ... (3 actions running)
+[2,950 / 8,613] Compiling absl/crc/internal/crc.cc [for tool]; 9s local, disk-cache ... (3 actions running)
+[2,954 / 8,613] Compiling absl/crc/internal/crc.cc [for tool]; 10s local, disk-cache ... (3 actions running)
+[2,959 / 8,613] Compiling absl/crc/internal/crc.cc [for tool]; 11s local, disk-cache ... (3 actions, 2 running)
+[2,965 / 8,613] Compiling absl/crc/internal/crc.cc [for tool]; 12s local, disk-cache ... (3 actions, 2 running)
+[2,970 / 8,613] Compiling absl/crc/internal/crc.cc [for tool]; 13s local, disk-cache ... (3 actions running)
+[2,976 / 8,613] Compiling absl/crc/internal/crc.cc [for tool]; 14s local, disk-cache ... (3 actions, 2 running)
+[2,983 / 8,613] Compiling absl/crc/internal/crc.cc [for tool]; 15s local, disk-cache ... (3 actions, 2 running)
+[2,991 / 8,613] Compiling absl/crc/internal/crc.cc [for tool]; 16s local, disk-cache ... (3 actions, 2 running)
+[2,999 / 8,613] Compiling absl/crc/internal/crc.cc [for tool]; 17s local, disk-cache ... (3 actions, 2 running)
+INFO: From Compiling third-party/webrtc/libsrtp/third_party/libsrtp/srtp/ekt.c:
+third-party/webrtc/libsrtp/third_party/libsrtp/srtp/ekt.c:201:37: warning: variable 'srtp_policy' is uninitialized when passed as a const pointer argument here [-Wuninitialized-const-pointer]
+  201 |     err = srtp_stream_init(stream, &srtp_policy);
+      |                                     ^~~~~~~~~~~
+1 warning generated.
+[3,007 / 8,613] Compiling absl/crc/internal/crc.cc [for tool]; 18s local, disk-cache ... (3 actions, 2 running)
+[3,011 / 8,613] Compiling absl/crc/internal/crc.cc [for tool]; 19s local, disk-cache ... (2 actions running)
+[3,015 / 8,613] Compiling submodules/LegacyComponents/Sources/UIImage+TGMediaEditableItem.m; 0s local, disk-cache ... (2 actions running)
+[3,029 / 8,613] Compiling absl/crc/internal/crc_x86_arm_combined.cc [for tool]; 1s local, disk-cache ... (2 actions running)
+[3,030 / 8,613] Compiling absl/crc/internal/crc_x86_arm_combined.cc [for tool]; 2s local, disk-cache ... (2 actions running)
+[3,033 / 8,613] Compiling absl/crc/internal/crc_x86_arm_combined.cc [for tool]; 3s local, disk-cache ... (2 actions running)
+[3,034 / 8,613] Compiling absl/crc/internal/crc_x86_arm_combined.cc [for tool]; 5s local, disk-cache ... (2 actions, 1 running)
+[3,034 / 8,613] Compiling absl/crc/internal/crc_x86_arm_combined.cc [for tool]; 7s local, disk-cache ... (3 actions, 2 running)
+[3,035 / 8,613] Compiling absl/crc/internal/crc_x86_arm_combined.cc [for tool]; 8s local, disk-cache ... (2 actions running)
+[3,036 / 8,613] Compiling absl/crc/internal/crc_x86_arm_combined.cc [for tool]; 9s local, disk-cache ... (3 actions running)
+[3,040 / 8,613] Compiling absl/crc/internal/crc_x86_arm_combined.cc [for tool]; 10s local, disk-cache ... (3 actions running)
+[3,045 / 8,613] Compiling absl/crc/internal/crc_x86_arm_combined.cc [for tool]; 11s local, disk-cache ... (3 actions running)
+[3,049 / 8,613] Compiling absl/crc/internal/crc_x86_arm_combined.cc [for tool]; 12s local, disk-cache ... (3 actions running)
+INFO: From Compiling submodules/OpusBinding/Sources/opusfile/opusfile.c:
+submodules/OpusBinding/Sources/opusfile/opusfile.c:3068:18: warning: implicit conversion from 'unsigned int' to 'float' changes value from 4294967295 to 4294967296 [-Wimplicit-const-int-float-conversion]
+ 3068 |           r=seed*OP_PRNG_GAIN;
+      |                  ^~~~~~~~~~~~
+submodules/OpusBinding/Sources/opusfile/opusfile.c:3005:29: note: expanded from macro 'OP_PRNG_GAIN'
+ 3005 | # define OP_PRNG_GAIN (1.0F/0xFFFFFFFF)
+      |                            ~^~~~~~~~~~
+submodules/OpusBinding/Sources/opusfile/opusfile.c:3070:19: warning: implicit conversion from 'unsigned int' to 'float' changes value from 4294967295 to 4294967296 [-Wimplicit-const-int-float-conversion]
+ 3070 |           r-=seed*OP_PRNG_GAIN;
+      |                   ^~~~~~~~~~~~
+submodules/OpusBinding/Sources/opusfile/opusfile.c:3005:29: note: expanded from macro 'OP_PRNG_GAIN'
+ 3005 | # define OP_PRNG_GAIN (1.0F/0xFFFFFFFF)
+      |                            ~^~~~~~~~~~
+2 warnings generated.
+[3,061 / 8,613] Compiling absl/crc/internal/crc_x86_arm_combined.cc [for tool]; 13s local, disk-cache ... (3 actions, 2 running)
+[3,069 / 8,613] Compiling absl/crc/internal/crc_x86_arm_combined.cc [for tool]; 14s local, disk-cache ... (3 actions running)
+[3,078 / 8,613] Compiling absl/crc/internal/crc_x86_arm_combined.cc [for tool]; 15s local, disk-cache ... (3 actions running)
+[3,086 / 8,613] Compiling absl/crc/internal/crc_x86_arm_combined.cc [for tool]; 16s local, disk-cache ... (3 actions, 2 running)
+[3,097 / 8,613] Compiling absl/crc/internal/crc_x86_arm_combined.cc [for tool]; 17s local, disk-cache ... (3 actions running)
+[3,108 / 8,613] Compiling absl/crc/internal/crc_x86_arm_combined.cc [for tool]; 18s local, disk-cache ... (3 actions, 2 running)
+[3,121 / 8,613] Compiling absl/crc/internal/crc_x86_arm_combined.cc [for tool]; 19s local, disk-cache ... (3 actions, 2 running)
+[3,128 / 8,613] Compiling absl/crc/internal/crc_x86_arm_combined.cc [for tool]; 20s local, disk-cache ... (3 actions, 2 running)
+[3,135 / 8,613] Compiling absl/crc/internal/crc_x86_arm_combined.cc [for tool]; 21s local, disk-cache ... (3 actions, 2 running)
+[3,143 / 8,613] Compiling absl/crc/internal/crc_x86_arm_combined.cc [for tool]; 22s local, disk-cache ... (3 actions, 2 running)
+[3,147 / 8,613] Compiling absl/crc/internal/crc_x86_arm_combined.cc [for tool]; 23s local, disk-cache ... (3 actions, 2 running)
+[3,150 / 8,613] Compiling absl/crc/internal/crc_x86_arm_combined.cc [for tool]; 25s local, disk-cache ... (3 actions running)
+[3,152 / 8,613] Compiling absl/crc/internal/crc_x86_arm_combined.cc [for tool]; 26s local, disk-cache ... (3 actions running)
+[3,156 / 8,613] Compiling absl/crc/internal/crc_x86_arm_combined.cc [for tool]; 27s local, disk-cache ... (3 actions, 2 running)
+[3,160 / 8,613] Compiling absl/crc/internal/crc_x86_arm_combined.cc [for tool]; 28s local, disk-cache ... (3 actions, 2 running)
+[3,167 / 8,613] Compiling absl/crc/internal/crc_x86_arm_combined.cc [for tool]; 29s local, disk-cache ... (2 actions running)
+[3,172 / 8,613] Compiling submodules/rlottie/rlottie/src/lottie/lottieitem.cpp; 2s local, disk-cache ... (3 actions running)
+[3,180 / 8,613] Compiling absl/crc/internal/cpu_detect.cc [for tool]; 1s local, disk-cache ... (3 actions, 2 running)
+[3,185 / 8,613] Compiling absl/crc/internal/cpu_detect.cc [for tool]; 3s local, disk-cache ... (3 actions running)
+[3,193 / 8,613] Compiling absl/crc/internal/cpu_detect.cc [for tool]; 4s local, disk-cache ... (3 actions running)
+[3,198 / 8,613] Compiling absl/crc/internal/cpu_detect.cc [for tool]; 5s local, disk-cache ... (3 actions running)
+[3,203 / 8,613] Compiling absl/crc/internal/cpu_detect.cc [for tool]; 6s local, disk-cache ... (3 actions running)
+[3,208 / 8,613] Compiling absl/crc/internal/cpu_detect.cc [for tool]; 7s local, disk-cache ... (3 actions, 2 running)
+[3,211 / 8,613] Compiling absl/crc/internal/cpu_detect.cc [for tool]; 8s local, disk-cache ... (3 actions running)
+[3,217 / 8,613] Compiling absl/crc/internal/cpu_detect.cc [for tool]; 9s local, disk-cache ... (3 actions running)
+[3,222 / 8,613] Compiling absl/crc/internal/cpu_detect.cc [for tool]; 10s local, disk-cache ... (3 actions running)
+[3,227 / 8,613] Compiling absl/crc/internal/cpu_detect.cc [for tool]; 11s local, disk-cache ... (3 actions running)
+[3,232 / 8,613] Compiling absl/crc/internal/cpu_detect.cc [for tool]; 12s local, disk-cache ... (3 actions running)
+[3,237 / 8,613] Compiling absl/crc/internal/cpu_detect.cc [for tool]; 13s local, disk-cache ... (3 actions running)
+[3,246 / 8,613] Compiling absl/crc/internal/cpu_detect.cc [for tool]; 14s local, disk-cache ... (3 actions, 2 running)
+[3,252 / 8,613] Compiling absl/crc/internal/cpu_detect.cc [for tool]; 15s local, disk-cache ... (3 actions running)
+[3,257 / 8,613] Compiling absl/crc/internal/cpu_detect.cc [for tool]; 16s local, disk-cache ... (3 actions running)
+[3,264 / 8,613] Compiling absl/crc/internal/cpu_detect.cc [for tool]; 17s local, disk-cache ... (3 actions, 2 running)
+[3,269 / 8,613] Compiling absl/crc/internal/cpu_detect.cc [for tool]; 19s local, disk-cache ... (3 actions running)
+[3,274 / 8,613] Compiling absl/crc/internal/cpu_detect.cc [for tool]; 20s local, disk-cache ... (3 actions running)
+[3,280 / 8,613] Compiling absl/crc/internal/cpu_detect.cc [for tool]; 21s local, disk-cache ... (3 actions running)
+[3,285 / 8,613] Compiling absl/crc/internal/cpu_detect.cc [for tool]; 22s local, disk-cache ... (3 actions running)
+[3,291 / 8,613] Compiling submodules/rlottie/rlottie/src/vector/vcompositionfunctions.cpp; 0s local, disk-cache ... (3 actions running)
+[3,293 / 8,613] Compiling absl/strings/internal/str_format/arg.cc [for tool]; 1s local, disk-cache ... (3 actions, 2 running)
+[3,293 / 8,613] Compiling absl/strings/internal/str_format/arg.cc [for tool]; 2s local, disk-cache ... (3 actions running)
+[3,295 / 8,613] Compiling absl/strings/internal/str_format/arg.cc [for tool]; 3s local, disk-cache ... (3 actions running)
+[3,297 / 8,613] Compiling absl/strings/internal/str_format/arg.cc [for tool]; 4s local, disk-cache ... (3 actions running)
+[3,298 / 8,613] Compiling absl/strings/internal/str_format/arg.cc [for tool]; 6s local, disk-cache ... (3 actions, 2 running)
+[3,300 / 8,613] Compiling absl/strings/internal/str_format/arg.cc [for tool]; 8s local, disk-cache ... (3 actions running)
+[3,301 / 8,613] Compiling absl/strings/internal/str_format/arg.cc [for tool]; 9s local, disk-cache ... (3 actions running)
+[3,303 / 8,613] Compiling absl/strings/internal/str_format/arg.cc [for tool]; 10s local, disk-cache ... (3 actions running)
+[3,304 / 8,613] Compiling absl/strings/internal/str_format/arg.cc [for tool]; 11s local, disk-cache ... (3 actions running)
+[3,305 / 8,613] Compiling absl/strings/internal/str_format/arg.cc [for tool]; 12s local, disk-cache ... (3 actions running)
+[3,307 / 8,613] Compiling absl/strings/internal/str_format/arg.cc [for tool]; 13s local, disk-cache ... (3 actions running)
+[3,308 / 8,613] Compiling absl/strings/internal/str_format/arg.cc [for tool]; 14s local, disk-cache ... (3 actions, 2 running)
+[3,309 / 8,613] Compiling absl/strings/internal/str_format/arg.cc [for tool]; 15s local, disk-cache ... (3 actions running)
+[3,311 / 8,613] Compiling absl/strings/internal/str_format/arg.cc [for tool]; 16s local, disk-cache ... (3 actions running)
+[3,312 / 8,613] Compiling absl/strings/internal/str_format/arg.cc [for tool]; 17s local, disk-cache ... (3 actions running)
+[3,313 / 8,613] Compiling absl/strings/internal/str_format/arg.cc [for tool]; 18s local, disk-cache ... (3 actions running)
+[3,314 / 8,613] Compiling absl/strings/internal/str_format/arg.cc [for tool]; 19s local, disk-cache ... (3 actions running)
+[3,316 / 8,613] Compiling submodules/AsyncDisplayKit/Source/ASTextKitComponents.mm; 2s local, disk-cache ... (3 actions running)
+[3,317 / 8,613] Compiling absl/strings/internal/str_format/bind.cc [for tool]; 2s local, disk-cache ... (3 actions running)
+[3,318 / 8,613] Compiling absl/strings/internal/str_format/bind.cc [for tool]; 3s local, disk-cache ... (3 actions running)
+[3,319 / 8,613] Compiling absl/strings/internal/str_format/bind.cc [for tool]; 4s local, disk-cache ... (3 actions running)
+ERROR: /Users/runner/work/AirGram-iOS/AirGram-iOS/submodules/rlottie/BUILD:2:13: Compiling submodules/rlottie/LottieInstance.mm failed: (Exit 1): wrapped_clang_pp failed: error executing ObjcCompile command (from target //submodules/rlottie:RLottieBinding) 
+  (cd /private/var/tmp/_bazel_containerhost/c259e0c7803e089724afaeab1cf94801/execroot/_main && \
+  exec env - \
+    APPLE_SDK_PLATFORM=iPhoneOS \
+    APPLE_SDK_VERSION_OVERRIDE=26.4 \
+    PATH=/usr/bin:/bin:/usr/sbin:/sbin \
+    XCODE_VERSION_OVERRIDE=26.4.1.17E202 \
+    ZERO_AR_DATE=1 \
+  bazel-out/darwin_arm64-opt-exec-ST-d57f47055a04/bin/external/apple_support+/crosstool/wrapped_clang_pp '-stdlib=libc++' '-std=gnu++17' '-D_FORTIFY_SOURCE=1' -fstack-protector -fcolor-diagnostics -Wall -Wthread-safety -Wself-assign -fno-omit-frame-pointer -g0 -O2 -DNDEBUG '-DNS_BLOCK_ASSERTIONS=1' '-fdebug-prefix-map=__BAZEL_EXECUTION_ROOT__=.' '-fdebug-prefix-map=__BAZEL_XCODE_DEVELOPER_DIR__=/PLACEHOLDER_DEVELOPER_DIR' -g '-Werror=incompatible-sysroot' -Wshorten-64-to-32 -Wbool-conversion -Wconstant-conversion -Wduplicate-method-match -Wempty-body -Wenum-conversion -Wint-conversion -Wunreachable-code -Wmismatched-return-types -Wundeclared-selector -Wuninitialized -Wunused-function -Wunused-variable -iquote . -iquote bazel-out/ios_arm64-opt-ios-arm64-min13.0-ST-2d46267cd7fb/bin -Isubmodules/rlottie/PublicHeaders -Ibazel-out/ios_arm64-opt-ios-arm64-min13.0-ST-2d46267cd7fb/bin/submodules/rlottie/PublicHeaders -MD -MF bazel-out/ios_arm64-opt-ios-arm64-min13.0-ST-2d46267cd7fb/bin/submodules/rlottie/_objs/RLottieBinding/arc/LottieInstance.d -DOS_IOS -fno-autolink -isysroot __BAZEL_XCODE_SDKROOT__ -F__BAZEL_XCODE_SDKROOT__/System/Library/Frameworks -F__BAZEL_XCODE_DEVELOPER_DIR__/Platforms/iPhoneOS.platform/Developer/Library/Frameworks -fobjc-arc -no-canonical-prefixes -target arm64-apple-ios13.0 '-Dpixman_region_selfcheck(x)=1' '-DLOTTIE_DISABLE_ARM_NEON=1' '-DLOTTIE_THREAD_SAFE=1' '-DLOTTIE_IMAGE_MODULE_DISABLED=1' -Isubmodules/rlottie -Isubmodules/rlottie/rlottie/inc -Isubmodules/rlottie/rlottie/src/vector -Isubmodules/rlottie/rlottie/src/vector/pixman -Isubmodules/rlottie/rlottie/src/vector/freetype -fmodules '-fmodules-cache-path=bazel-out/ios_arm64-opt-ios-arm64-min13.0-ST-2d46267cd7fb/bin/_objc_module_cache' -Os '-DNDEBUG=1' -Wno-unused-variable -Winit-self -Wno-extra -Wno-builtin-macro-redefined '-D__DATE__="redacted"' '-D__TIMESTAMP__="redacted"' '-D__TIME__="redacted"' -c submodules/rlottie/LottieInstance.mm -o bazel-out/ios_arm64-opt-ios-arm64-min13.0-ST-2d46267cd7fb/bin/submodules/rlottie/_objs/RLottieBinding/arc/LottieInstance.o)
+# Configuration: 336a8f4e515329bb9e561977265215f8865963241996ed1a074330d201b2d550
+# Execution platform: @@platforms//host:host
+submodules/rlottie/LottieInstance.mm:18:18: error: use of undeclared identifier 'RLottieFitzModifierNone'; did you mean 'LottieFitzModifierNone'?
+   18 |             case RLottieFitzModifierNone:
+      |                  ^~~~~~~~~~~~~~~~~~~~~~~
+      |                  LottieFitzModifierNone
+submodules/rlottie/PublicHeaders/RLottieBinding/LottieInstance.h:8:5: note: 'LottieFitzModifierNone' declared here
+    8 |     LottieFitzModifierNone,
+      |     ^
+submodules/rlottie/LottieInstance.mm:21:18: error: use of undeclared identifier 'RLottieFitzModifierType12'; did you mean 'LottieFitzModifierType12'?
+   21 |             case RLottieFitzModifierType12:
+      |                  ^~~~~~~~~~~~~~~~~~~~~~~~~
+      |                  LottieFitzModifierType12
+submodules/rlottie/PublicHeaders/RLottieBinding/LottieInstance.h:9:5: note: 'LottieFitzModifierType12' declared here
+    9 |     LottieFitzModifierType12,
+      |     ^
+submodules/rlottie/LottieInstance.mm:24:18: error: use of undeclared identifier 'RLottieFitzModifierType3'; did you mean 'LottieFitzModifierType3'?
+   24 |             case RLottieFitzModifierType3:
+      |                  ^~~~~~~~~~~~~~~~~~~~~~~~
+      |                  LottieFitzModifierType3
+submodules/rlottie/PublicHeaders/RLottieBinding/LottieInstance.h:10:5: note: 'LottieFitzModifierType3' declared here
+   10 |     LottieFitzModifierType3,
+      |     ^
+submodules/rlottie/LottieInstance.mm:27:18: error: use of undeclared identifier 'RLottieFitzModifierType4'; did you mean 'LottieFitzModifierType4'?
+   27 |             case RLottieFitzModifierType4:
+      |                  ^~~~~~~~~~~~~~~~~~~~~~~~
+      |                  LottieFitzModifierType4
+submodules/rlottie/PublicHeaders/RLottieBinding/LottieInstance.h:11:5: note: 'LottieFitzModifierType4' declared here
+   11 |     LottieFitzModifierType4,
+      |     ^
+submodules/rlottie/LottieInstance.mm:30:18: error: use of undeclared identifier 'RLottieFitzModifierType5'; did you mean 'LottieFitzModifierType5'?
+   30 |             case RLottieFitzModifierType5:
+      |                  ^~~~~~~~~~~~~~~~~~~~~~~~
+      |                  LottieFitzModifierType5
+submodules/rlottie/PublicHeaders/RLottieBinding/LottieInstance.h:12:5: note: 'LottieFitzModifierType5' declared here
+   12 |     LottieFitzModifierType5,
+      |     ^
+submodules/rlottie/LottieInstance.mm:33:18: error: use of undeclared identifier 'RLottieFitzModifierType6'; did you mean 'LottieFitzModifierType6'?
+   33 |             case RLottieFitzModifierType6:
+      |                  ^~~~~~~~~~~~~~~~~~~~~~~~
+      |                  LottieFitzModifierType6
+submodules/rlottie/PublicHeaders/RLottieBinding/LottieInstance.h:13:5: note: 'LottieFitzModifierType6' declared here
+   13 |     LottieFitzModifierType6
+      |     ^
+6 errors generated.
+Error in child process '/usr/bin/xcrun'. 1
+Target //Telegram:telegram_auth_build_test failed to build
+[3,322 / 8,613] checking cached actions
+INFO: Elapsed time: 794.172s, Critical Path: 137.44s
+INFO: 3322 processes: 2043 internal, 1279 local.
+ERROR: Build did NOT complete successfully
+FAILED: 
+INFO: Build Event Protocol files produced successfully.
+Traceback (most recent call last):
+  File "/Users/runner/work/AirGram-iOS/AirGram-iOS/build-system/Make/Make.py", line 1294, in <module>
+    build(bazel=bazel_path, arguments=args)
+    ~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/runner/work/AirGram-iOS/AirGram-iOS/build-system/Make/Make.py", line 650, in build
+    bazel_command_line.invoke_build()
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "/Users/runner/work/AirGram-iOS/AirGram-iOS/build-system/Make/Make.py", line 325, in invoke_build
+    call_executable(combined_arguments)
+    ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^
+  File "/Users/runner/work/AirGram-iOS/AirGram-iOS/build-system/Make/BuildEnvironment.py", line 104, in call_executable
+    subprocess.check_call(resolved_arguments, env=resolved_env)
+    ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/homebrew/Cellar/python@3.15/3.15.2/Frameworks/Python.framework/Versions/3.15/lib/python3.15/subprocess.py", line 534, in check_call
+    raise CalledProcessError(retcode, cmd)
+subprocess.CalledProcessError: Command ['/Users/runner/work/AirGram-iOS/AirGram-iOS/build-input/bazel-8.4.2-darwin-arm64', '--output_user_root=/private/var/tmp/_bazel_containerhost', 'build', 'Telegram/telegram_auth_build_test', '--announce_rc', '--features=swift.use_global_module_cache', '--verbose_failures', '--remote_cache_async', '--jobs=3', '--local_cpu_resources=3', '--worker_max_instances=3', '--spawn_strategy=worker,local', '--strategy=SwiftCompile=worker,local', '--strategy=ObjcCompile=worker,local', '--strategy=Genrule=standalone', '--worker_quit_after_build=false', '--define=buildNumber=2825', '--features=swift.split_derived_files_generation', '--disk_cache=/private/var/tmp/_bazel_containerhost/disk_cache', '-c', 'opt', '--ios_multi_cpus=arm64', '--watchos_cpus=arm64_32', '--apple_generate_dsym', '--features=swift.opt_uses_wmo', '--features=swift.opt_uses_osize', '--features=dead_strip', '--objc_enable_binary_stripping', '--build_event_json_file=/var/folders/h5/t85nd63d71x27_8gl5gw3l_w0000gn/T/airgram-build-events.json'] returned non-zero exit status 1.
