@@ -1,0 +1,80 @@
+      ToolchainResolution:   Toolchain @@rules_shell++sh_configure+local_config_shell//:osx_sh is compatible with target platform, searching for execution platforms:
+      ToolchainResolution:     Compatible execution platform @@platforms//host:host
+      ToolchainResolution:   All execution platforms have been assigned a @@rules_shell+//shell:toolchain_type toolchain, stopping
+      ToolchainResolution: Recap of selected @@rules_shell+//shell:toolchain_type toolchains for target platform @@platforms//host:host:
+      ToolchainResolution:   Selected @@rules_shell++sh_configure+local_config_shell//:osx_sh to run on execution platform @@platforms//host:host
+INFO: ToolchainResolution: Target platform @@platforms//host:host: Selected execution platform @@platforms//host:host, type @@rules_shell+//shell:toolchain_type -> toolchain @@rules_shell++sh_configure+local_config_shell//:osx_sh
+INFO: ToolchainResolution: Performing resolution of @@rules_rust+//rust:toolchain_type for target platform @@platforms//host:host
+      ToolchainResolution:   Rejected toolchain @@rules_rust++rust+rust_freebsd_x86_64__aarch64-apple-ios-sim__stable_tools//:rust_toolchain; mismatching values: ios, simulator
+      ToolchainResolution:   Rejected toolchain @@rules_rust++rust+rust_freebsd_x86_64__aarch64-apple-ios__stable_tools//:rust_toolchain; mismatching values: ios
+      ToolchainResolution:   Rejected toolchain @@rules_rust++rust+rust_freebsd_x86_64__x86_64-apple-ios__stable_tools//:rust_toolchain; mismatching values: x86_64, ios, simulator
+      ToolchainResolution:   Rejected toolchain @@rules_rust++rust+rust_freebsd_x86_64__x86_64-unknown-freebsd__stable_tools//:rust_toolchain; mismatching values: x86_64, freebsd
+      ToolchainResolution:   Rejected toolchain @@rules_rust++rust+rust_linux_aarch64__aarch64-apple-ios-sim__stable_tools//:rust_toolchain; mismatching values: ios, simulator
+      ToolchainResolution:   Rejected toolchain @@rules_rust++rust+rust_linux_aarch64__aarch64-apple-ios__stable_tools//:rust_toolchain; mismatching values: ios
+      ToolchainResolution:   Rejected toolchain @@rules_rust++rust+rust_linux_aarch64__aarch64-unknown-linux-gnu__stable_tools//:rust_toolchain; mismatching values: linux
+      ToolchainResolution:   Rejected toolchain @@rules_rust++rust+rust_linux_aarch64__x86_64-apple-ios__stable_tools//:rust_toolchain; mismatching values: x86_64, ios, simulator
+      ToolchainResolution:   Rejected toolchain @@rules_rust++rust+rust_linux_powerpc64le__aarch64-apple-ios-sim__stable_tools//:rust_toolchain; mismatching values: ios, simulator
+      ToolchainResolution:   Rejected toolchain @@rules_rust++rust+rust_linux_powerpc64le__aarch64-apple-ios__stable_tools//:rust_toolchain; mismatching values: ios
+      ToolchainResolution:   Rejected toolchain @@rules_rust++rust+rust_linux_powerpc64le__powerpc64le-unknown-linux-gnu__stable_tools//:rust_toolchain; mismatching values: ppc64le, linux
+      ToolchainResolution:   Rejected toolchain @@rules_rust++rust+rust_linux_powerpc64le__x86_64-apple-ios__stable_tools//:rust_toolchain; mismatching values: x86_64, ios, simulator
+      ToolchainResolution:   Rejected toolchain @@rules_rust++rust+rust_linux_riscv64__aarch64-apple-ios-sim__stable_tools//:rust_toolchain; mismatching values: ios, simulator
+      ToolchainResolution:   Rejected toolchain @@rules_rust++rust+rust_linux_riscv64__aarch64-apple-ios__stable_tools//:rust_toolchain; mismatching values: ios
+      ToolchainResolution:   Rejected toolchain @@rules_rust++rust+rust_linux_riscv64__riscv64gc-unknown-linux-gnu__stable_tools//:rust_toolchain; mismatching values: riscv64, linux
+      ToolchainResolution:   Rejected toolchain @@rules_rust++rust+rust_linux_riscv64__x86_64-apple-ios__stable_tools//:rust_toolchain; mismatching values: x86_64, ios, simulator
+      ToolchainResolution:   Rejected toolchain @@rules_rust++rust+rust_linux_s390x__aarch64-apple-ios-sim__stable_tools//:rust_toolchain; mismatching values: ios, simulator
+      ToolchainResolution:   Rejected toolchain @@rules_rust++rust+rust_linux_s390x__aarch64-apple-ios__stable_tools//:rust_toolchain; mismatching values: ios
+      ToolchainResolution:   Rejected toolchain @@rules_rust++rust+rust_linux_s390x__s390x-unknown-linux-gnu__stable_tools//:rust_toolchain; mismatching values: s390x, linux
+      ToolchainResolution:   Rejected toolchain @@rules_rust++rust+rust_linux_s390x__x86_64-apple-ios__stable_tools//:rust_toolchain; mismatching values: x86_64, ios, simulator
+      ToolchainResolution:   Rejected toolchain @@rules_rust++rust+rust_linux_x86_64__aarch64-apple-ios-sim__stable_tools//:rust_toolchain; mismatching values: ios, simulator
+      ToolchainResolution:   Rejected toolchain @@rules_rust++rust+rust_linux_x86_64__aarch64-apple-ios__stable_tools//:rust_toolchain; mismatching values: ios
+      ToolchainResolution:   Rejected toolchain @@rules_rust++rust+rust_linux_x86_64__x86_64-apple-ios__stable_tools//:rust_toolchain; mismatching values: x86_64, ios, simulator
+      ToolchainResolution:   Rejected toolchain @@rules_rust++rust+rust_linux_x86_64__x86_64-unknown-linux-gnu__stable_tools//:rust_toolchain; mismatching values: x86_64, linux
+      ToolchainResolution:   Toolchain @@rules_rust++rust+rust_macos_aarch64__aarch64-apple-darwin__stable_tools//:rust_toolchain is compatible with target platform, searching for execution platforms:
+      ToolchainResolution:     Compatible execution platform @@platforms//host:host
+      ToolchainResolution:   All execution platforms have been assigned a @@rules_rust+//rust:toolchain_type toolchain, stopping
+      ToolchainResolution: Recap of selected @@rules_rust+//rust:toolchain_type toolchains for target platform @@platforms//host:host:
+      ToolchainResolution:   Selected @@rules_rust++rust+rust_macos_aarch64__aarch64-apple-darwin__stable_tools//:rust_toolchain to run on execution platform @@platforms//host:host
+INFO: ToolchainResolution: Target platform @@platforms//host:host: Selected execution platform @@platforms//host:host, type @@rules_rust+//rust:toolchain_type -> toolchain @@rules_rust++rust+rust_macos_aarch64__aarch64-apple-darwin__stable_tools//:rust_toolchain
+INFO: ToolchainResolution:   Rejected toolchain @@rules_python++python+python_3_11_x86_64-unknown-linux-musl//:py_exec_tools_toolchain; mismatching config settings: _is_py_linux_libc_musl
+      ToolchainResolution: Performing resolution of @@rules_python+//python:exec_tools_toolchain_type for target platform @@platforms//host:host
+      ToolchainResolution:   Toolchain @@rules_python++python+python_3_11_aarch64-apple-darwin//:py_exec_tools_toolchain is compatible with target platform, searching for execution platforms:
+      ToolchainResolution:     Compatible execution platform @@platforms//host:host
+      ToolchainResolution:   All execution platforms have been assigned a @@rules_python+//python:exec_tools_toolchain_type toolchain, stopping
+      ToolchainResolution: Recap of selected @@rules_python+//python:exec_tools_toolchain_type toolchains for target platform @@platforms//host:host:
+      ToolchainResolution:   Selected @@rules_python++python+python_3_11_aarch64-apple-darwin//:py_exec_tools_toolchain to run on execution platform @@platforms//host:host
+INFO: ToolchainResolution:   Rejected toolchain @@rules_python++python+python_3_11_x86_64-unknown-linux-musl//:python_runtimes; mismatching config settings: _is_py_linux_libc_musl
+      ToolchainResolution: Performing resolution of @@bazel_tools//tools/python:toolchain_type for target platform @@platforms//host:host
+      ToolchainResolution:   Toolchain @@rules_python++python+python_3_11_aarch64-apple-darwin//:python_runtimes is compatible with target platform, searching for execution platforms:
+      ToolchainResolution:     Compatible execution platform @@platforms//host:host
+      ToolchainResolution:   All execution platforms have been assigned a @@bazel_tools//tools/python:toolchain_type toolchain, stopping
+      ToolchainResolution: Recap of selected @@bazel_tools//tools/python:toolchain_type toolchains for target platform @@platforms//host:host:
+      ToolchainResolution:   Selected @@rules_python++python+python_3_11_aarch64-apple-darwin//:python_runtimes to run on execution platform @@platforms//host:host
+INFO: ToolchainResolution: Target platform @@platforms//host:host: Selected execution platform @@platforms//host:host, type @@bazel_tools//tools/python:toolchain_type -> toolchain @@rules_python++python+python_3_11_aarch64-apple-darwin//:python_runtimes
+INFO: ToolchainResolution:   Rejected toolchain @@protobuf+//toolchain:osx-x86_64-cc_toolchain; mismatching config settings: is_cross_compiling
+      ToolchainResolution:   Rejected toolchain @@protobuf+//toolchain:osx-aarch_64-cc_toolchain; mismatching config settings: is_cross_compiling
+      ToolchainResolution:   Rejected toolchain @@protobuf+//toolchain:linux-aarch_64-cc_toolchain; mismatching config settings: is_cross_compiling
+      ToolchainResolution:   Rejected toolchain @@protobuf+//toolchain:linux-ppcle_64-cc_toolchain; mismatching config settings: is_cross_compiling
+      ToolchainResolution:   Rejected toolchain @@protobuf+//toolchain:linux-s390_64-cc_toolchain; mismatching config settings: is_cross_compiling
+      ToolchainResolution:   Rejected toolchain @@protobuf+//toolchain:linux-x86_32-cc_toolchain; mismatching config settings: is_cross_compiling
+      ToolchainResolution:   Rejected toolchain @@protobuf+//toolchain:linux-x86_64-cc_toolchain; mismatching config settings: is_cross_compiling
+      ToolchainResolution:   Rejected toolchain @@protobuf+//toolchain:win32-cc_toolchain; mismatching config settings: is_cross_compiling
+      ToolchainResolution:   Rejected toolchain @@protobuf+//toolchain:win64-cc_toolchain; mismatching config settings: is_cross_compiling
+      ToolchainResolution:   Rejected toolchain @@protobuf+//toolchain:k8-cc_toolchain; mismatching config settings: is_cross_compiling
+      ToolchainResolution: Performing resolution of @@bazel_tools//tools/cpp:toolchain_type for target platform @@platforms//host:host
+      ToolchainResolution:   Rejected toolchain @@rules_cc++cc_configure_extension+local_config_cc//:cc-compiler-armeabi-v7a; mismatching values: armv7, android
+      ToolchainResolution:   Toolchain @@rules_cc++cc_configure_extension+local_config_cc//:cc-compiler-darwin_arm64 is compatible with target platform, searching for execution platforms:
+      ToolchainResolution:     Compatible execution platform @@platforms//host:host
+      ToolchainResolution:   All execution platforms have been assigned a @@bazel_tools//tools/cpp:toolchain_type toolchain, stopping
+      ToolchainResolution: Recap of selected @@bazel_tools//tools/cpp:toolchain_type toolchains for target platform @@platforms//host:host:
+      ToolchainResolution:   Selected @@rules_cc++cc_configure_extension+local_config_cc//:cc-compiler-darwin_arm64 to run on execution platform @@platforms//host:host
+INFO: ToolchainResolution: Target platform @@platforms//host:host: Selected execution platform @@platforms//host:host, type @@rules_rust+//rust:toolchain_type -> toolchain @@rules_rust++rust+rust_macos_aarch64__aarch64-apple-darwin__stable_tools//:rust_toolchain, type @@bazel_tools//tools/cpp:toolchain_type -> toolchain @@rules_cc++cc_configure_extension+local_config_cc//:cc-compiler-darwin_arm64
+INFO: ToolchainResolution: Target platform @@platforms//host:host: Selected execution platform @@platforms//host:host, type @@bazel_tools//tools/cpp:toolchain_type -> toolchain @@rules_cc++cc_configure_extension+local_config_cc//:cc-compiler-darwin_arm64
+INFO: ToolchainResolution: Target platform @@platforms//host:host: Selected execution platform @@platforms//host:host, type @@rules_python+//python:exec_tools_toolchain_type -> toolchain @@rules_python++python+python_3_11_aarch64-apple-darwin//:py_exec_tools_toolchain
+ERROR: /private/var/tmp/_bazel_containerhost/c259e0c7803e089724afaeab1cf94801/external/rules_rust++crate+wallet_engine_ton_crates/BUILD.bazel: no such target '@@rules_rust++crate+wallet_engine_ton_crates//:ton_macros': target 'ton_macros' not declared in package '' defined by /private/var/tmp/_bazel_containerhost/c259e0c7803e089724afaeab1cf94801/external/rules_rust++crate+wallet_engine_ton_crates/BUILD.bazel
+Analyzing: target //Telegram:telegram_auth_build_test (0 packages loaded, 11832 targets configured)
+ERROR: /Users/runner/work/AirGram-iOS/AirGram-iOS/third-party/wallet-engine/BUILD:18:13: no such target '@@rules_rust++crate+wallet_engine_ton_crates//:ton_macros': target 'ton_macros' not declared in package '' defined by /private/var/tmp/_bazel_containerhost/c259e0c7803e089724afaeab1cf94801/external/rules_rust++crate+wallet_engine_ton_crates/BUILD.bazel and referenced by '//third-party/wallet-engine:ton'
+ERROR: Analysis of target '//Telegram:telegram_auth_build_test' failed; build aborted: Analysis failed
+INFO: Elapsed time: 4.468s
+INFO: 0 processes.
+ERROR: Build did NOT complete successfully
+Loading: 0 packages loaded
