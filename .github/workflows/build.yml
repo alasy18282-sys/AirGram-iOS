@@ -63,26 +63,7 @@ jobs:
             ${{ runner.os }}-bazel-full-device-v3-
             ${{ runner.os }}-bazel-full-device-v2-
 
-      - name: Diagnose target skip
-        run: |
-          set -x
-          BAZEL="build-input/bazel-$(python3 -c 'import json; print(json.load(open("versions.json"))["bazel"].split(":")[0])')-darwin-arm64"
-          ls -la "$BAZEL" || true
-          {
-            echo "===== DIAGNOSE cquery ====="
-            "$BAZEL" --output_user_root=/private/var/tmp/_bazel_containerhost \
-              cquery //Telegram:telegram_auth_build_test --output=build 2>&1 | tail -40
-            echo "===== DIAGNOSE nobuild ====="
-            "$BAZEL" --output_user_root=/private/var/tmp/_bazel_containerhost \
-              build --nobuild //Telegram:telegram_auth_build_test \
-              --toolchain_resolution_debug='.*' 2>&1 | tail -120
-          } > /tmp/diagnose.log 2>&1 || true
-          tail -80 /tmp/diagnose.log > skip-diagnosis.log || true
-          git config user.email "ci@plumegram.local"
-          git config user.name "PlumeGram CI"
-          git add skip-diagnosis.log || true
-          git commit -m "Skip diagnosis for run ${{ github.run_number }}" || true
-          git push -f origin "HEAD:refs/heads/buildlogs/skip-${{ github.run_number }}" || true
+
 
       - name: Build AirGram auth-only IPA (faster)
         run: |
@@ -118,6 +99,27 @@ jobs:
             --target=Telegram/telegram_auth_build_test \
             --buildNumber="$BUILD_NUMBER" \
             --enableParallelSwiftmoduleGeneration 2>&1 | tee /tmp/build_full.log
+
+      - name: Diagnose target skip
+        run: |
+          set -x
+          BAZEL="build-input/bazel-$(python3 -c 'import json; print(json.load(open("versions.json"))["bazel"].split(":")[0])')-darwin-arm64"
+          ls -la "$BAZEL" || true
+          {
+            echo "===== DIAGNOSE cquery ====="
+            "$BAZEL" --output_user_root=/private/var/tmp/_bazel_containerhost \
+              cquery //Telegram:telegram_auth_build_test --output=build 2>&1 | tail -40
+            echo "===== DIAGNOSE nobuild ====="
+            "$BAZEL" --output_user_root=/private/var/tmp/_bazel_containerhost \
+              build --nobuild //Telegram:telegram_auth_build_test \
+              --toolchain_resolution_debug='.*' 2>&1 | tail -120
+          } > /tmp/diagnose.log 2>&1 || true
+          tail -80 /tmp/diagnose.log > skip-diagnosis.log || true
+          git config user.email "ci@plumegram.local"
+          git config user.name "PlumeGram CI"
+          git add skip-diagnosis.log || true
+          git commit -m "Skip diagnosis for run ${{ github.run_number }}" || true
+          git push -f origin "HEAD:refs/heads/buildlogs/skip-${{ github.run_number }}" || true
 
       - name: Dump build errors on failure
         if: failure()
