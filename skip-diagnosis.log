@@ -1,0 +1,28 @@
++ echo '===== DIAGNOSE cquery ====='
+===== DIAGNOSE cquery =====
++ build-input/bazel-8.4.2-darwin-arm64 --output_user_root=/private/var/tmp/_bazel_containerhost cquery //Telegram:telegram_auth_build_test --output=build
++ tail -40
+INFO: Reading rc options for 'cquery' from /Users/runner/work/AirGram-iOS/AirGram-iOS/.bazelrc:
+  Inherited 'build' options: --action_env=ZERO_AR_DATE=1 --enable_platform_specific_config --experimental_remote_downloader_local_fallback --noincompatible_target_cpu_from_platform --strategy=Genrule=standalone --spawn_strategy=standalone
+ERROR: --noincompatible_target_cpu_from_platform :: Unrecognized option: --noincompatible_target_cpu_from_platform
++ echo '===== DIAGNOSE ton_crates targets ====='
+===== DIAGNOSE ton_crates targets =====
++ build-input/bazel-8.4.2-darwin-arm64 --output_user_root=/private/var/tmp/_bazel_containerhost query @wallet_engine_ton_crates//:all --output=label
++ head -60
+ no actions running
+ no actions running
+ no actions running
+ no actions running
+ no actions running
+WARNING: For repository 'bazel_features', the root module requires module version bazel_features@1.33.0, but got bazel_features@1.51.0 in the resolved dependency graph. Please update the version in your MODULE.bazel or set --check_direct_dependencies=off
+WARNING: For repository 'bazel_skylib', the root module requires module version bazel_skylib@1.8.1, but got bazel_skylib@1.9.0 in the resolved dependency graph. Please update the version in your MODULE.bazel or set --check_direct_dependencies=off
+ no actions running
+Loading: 0 packages loaded
+ERROR: no such package '@@[unknown repo 'wallet_engine_ton_crates' requested from @@ (did you mean 'wallet_engine_crates'?)]//': The repository '@@[unknown repo 'wallet_engine_ton_crates' requested from @@ (did you mean 'wallet_engine_crates'?)]' could not be resolved: No repository visible as '@wallet_engine_ton_crates' from main repository. Was the repository introduced in WORKSPACE? The WORKSPACE file is disabled by default in Bazel 8 (late 2024) and will be removed in Bazel 9 (late 2025), please migrate to Bzlmod. See https://bazel.build/external/migration
++ echo '===== DIAGNOSE nobuild ====='
+===== DIAGNOSE nobuild =====
++ build-input/bazel-8.4.2-darwin-arm64 --output_user_root=/private/var/tmp/_bazel_containerhost build --nobuild //Telegram:telegram_auth_build_test '--toolchain_resolution_debug=.*'
++ tail -120
+INFO: Reading rc options for 'build' from /Users/runner/work/AirGram-iOS/AirGram-iOS/.bazelrc:
+  'build' options: --action_env=ZERO_AR_DATE=1 --enable_platform_specific_config --experimental_remote_downloader_local_fallback --noincompatible_target_cpu_from_platform --strategy=Genrule=standalone --spawn_strategy=standalone
+ERROR: --noincompatible_target_cpu_from_platform :: Unrecognized option: --noincompatible_target_cpu_from_platform
