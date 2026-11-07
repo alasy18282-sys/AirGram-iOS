@@ -63,6 +63,17 @@ jobs:
             ${{ runner.os }}-bazel-full-device-v3-
             ${{ runner.os }}-bazel-full-device-v2-
 
+      - name: Diagnose target skip
+        run: |
+          set -x
+          BAZEL="build-input/bazel-$(python3 -c 'import json; print(json.load(open("versions.json"))["bazel"].split(":")[0])')-darwin-arm64"
+          ls -la "$BAZEL" || true
+          "$BAZEL" --output_user_root=/private/var/tmp/_bazel_containerhost \
+            cquery //Telegram:telegram_auth_build_test --output=build 2>&1 | tail -40 || true
+          "$BAZEL" --output_user_root=/private/var/tmp/_bazel_containerhost \
+            build --nobuild //Telegram:telegram_auth_build_test \
+            --toolchain_resolution_debug='.*' 2>&1 | grep -a -i -B2 -A6 'incompat\|skip' | tail -60 || true
+
       - name: Build AirGram auth-only IPA (faster)
         run: |
           set -euxo pipefail
