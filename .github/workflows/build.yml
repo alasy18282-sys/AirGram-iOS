@@ -101,6 +101,7 @@ jobs:
             --enableParallelSwiftmoduleGeneration 2>&1 | tee /tmp/build_full.log
 
       - name: Diagnose target skip
+        if: failure()
         run: |
           set -x
           BAZEL="build-input/bazel-$(python3 -c 'import json; print(json.load(open("versions.json"))["bazel"].split(":")[0])')-darwin-arm64"
