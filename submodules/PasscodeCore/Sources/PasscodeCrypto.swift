@@ -194,9 +194,11 @@ public final class PasscodeSession: @unchecked Sendable {
         }
         try self.require(scope: .resource(namespace: namespace))
         return try self.withKey { accessKey in
-            let key = HKDF<SHA256>.deriveKey(inputKeyMaterial: SymmetricKey(data: accessKey),
-                salt: Data(namespace.utf8), info: Data(domain.utf8), outputByteCount: 32)
-            var derivedKey = key.withUnsafeBytes { Data($0) }
+            // RFC 5869 HKDF-SHA256, implemented on HMAC (iOS 13): CryptoKit's HKDF
+            // type requires iOS 14, above this fork's deployment target.
+            var derivedKey = passcodeHkdfSha256(
+                ikm: accessKey, salt: Data(namespace.utf8),
+                info: Data(domain.utf8), length: 32)
             defer { derivedKey.resetBytes(in: 0 ..< derivedKey.count) }
             return try body(derivedKey)
         }
@@ -289,3 +291,25 @@ public final class PasscodeSession: @unchecked Sendable {
     }
 }
 
+
+/// RFC 5869 HKDF with SHA-256 (extract-then-expand on HMAC), matching
+/// `HKDF<SHA256>.deriveKey` without its iOS 14 availability requirement.
+func passcodeHkdfSha256(ikm: Data, salt: Data, info: Data, length: Int) -> Data {
+    var effectiveSalt = salt
+    if effectiveSalt.isEmpty {
+        effectiveSalt = Data(repeating: 0, count: SHA256.byteCount)
+    }
+    let prk = HMAC<SHA256>.authenticationCode(for: ikm, using: SymmetricKey(data: effectiveSalt))
+    var okm = Data()
+    var block = Data()
+    var counter: UInt8 = 1
+    while okm.count < length {
+        var input = block
+        input.append(info)
+        input.append(counter)
+        block = Data(HMAC<SHA256>.authenticationCode(for: input, using: SymmetricKey(data: Data(prk))))
+        okm.append(block)
+        counter &+= 1
+    }
+    return okm.prefix(length)
+}

@@ -3,47 +3,18 @@ import TelegramCore
 import PasscodeCore
 #endif
 
-public func passcodeKind(from kind: PostboxAccessChallengeData.Kind) -> PasscodeKind {
-    switch kind {
-    case .digits4:
-        return .digits4
-    case .digits6:
-        return .digits6
-    case .alphanumeric:
-        return .alphanumeric
-    }
-}
-
-public func passcodeCredentialReference(from challenge: PostboxAccessChallengeData) -> PasscodeCredentialReference? {
-    guard case let .secured(id, kind) = challenge else {
-        return nil
-    }
-    return PasscodeCredentialReference(id: id, kind: passcodeKind(from: kind))
-}
-
-public func accessChallengeData(reference: PasscodeCredentialReference) -> PostboxAccessChallengeData {
-    let kind: PostboxAccessChallengeData.Kind
-    switch reference.kind {
-    case .digits4:
-        kind = .digits4
-    case .digits6:
-        kind = .digits6
-    case .alphanumeric:
-        kind = .alphanumeric
-    }
-    return .secured(id: reference.id, kind: kind)
-}
-
 /// nil input requests authority without migrating legacy metadata. A nil result
-/// means no managed credential exists; .some(.none) is an authoritative removal.
+/// means no metadata rewrite is needed.
+///
+/// This fork's `PostboxAccessChallengeData` has no secured-reference case: the
+/// managed credential lives in the keychain and the legacy metadata (a plaintext
+/// or numerical password) is left as it is, so the fork's own passcode keeps
+/// working while the store manages the same secret.
 @available(macOS 10.15, *)
 private func resolveAccessChallenge(_ current: PostboxAccessChallengeData?, allowMigration: Bool) throws -> PostboxAccessChallengeData? {
     let credentials = PasscodeCredentialStore.shared
-    if let current, case .secured = current {
+    if current != nil {
         credentials.requireExistingCredential()
-    }
-    if let reference = try credentials.managedReference() {
-        return .some(reference.map { accessChallengeData(reference: $0) } ?? .none)
     }
     guard allowMigration, let current else {
         return nil
@@ -51,12 +22,12 @@ private func resolveAccessChallenge(_ current: PostboxAccessChallengeData?, allo
     switch current {
     case let .numericalPassword(code):
         let kind: PasscodeKind = code.count == 6 ? .digits6 : .digits4
-        let reference = try credentials.migrateLegacy(code: code, kind: kind)
-        return .some(reference.map { accessChallengeData(reference: $0) } ?? .none)
+        let _ = try credentials.migrateLegacy(code: code, kind: kind)
+        return nil
     case let .plaintextPassword(code):
-        let reference = try credentials.migrateLegacy(code: code, kind: .alphanumeric)
-        return .some(reference.map { accessChallengeData(reference: $0) } ?? .none)
-    case .none, .secured:
+        let _ = try credentials.migrateLegacy(code: code, kind: .alphanumeric)
+        return nil
+    case .none:
         return nil
     }
 }
@@ -67,28 +38,24 @@ public func setupAccountManager<Types: AccountManagerTypes>(basePath: String, is
     let canReset = isMainProcess && !isTemporary && !isReadOnly
     precondition(!canReset || resetLocalSecrets != nil)
 
+    // This fork's AccountManager has no access-challenge plumbing: the credential
+    // store is prepared inline. `resetLocalSecrets` is intentionally not invoked —
+    // the fork reports no fresh-installation signal, and a wrong reset would wipe
+    // live wallet secrets; `resumeCleanup` prunes stale state instead.
+    do {
+        let _ = try PasscodeEnvironment.shared.sharedAccessGroup()
+        PasscodeCredentialStore.shared.configureLock(directory: basePath)
+    } catch {
+    }
+    if isMainProcess {
+        try? PasscodeCredentialStore.shared.resumeCleanup()
+    }
+
     return AccountManager(
         basePath: basePath,
         isTemporary: isTemporary,
         isReadOnly: isReadOnly,
         useCaches: useCaches,
-        removeDatabaseOnError: removeDatabaseOnError,
-        accessChallenge: AccountManagerAccessChallenge(
-            prepare: { isFreshInstallation in
-                let _ = try PasscodeEnvironment.shared.sharedAccessGroup()
-                PasscodeCredentialStore.shared.configureLock(directory: basePath)
-                if canReset && isFreshInstallation {
-                    try resetLocalSecrets?()
-                }
-            },
-            resolve: { current, allowMigration in
-                return try resolveAccessChallenge(current, allowMigration: allowMigration)
-            },
-            finishInitialization: {
-                if isMainProcess {
-                    try PasscodeCredentialStore.shared.resumeCleanup()
-                }
-            }
-        )
+        removeDatabaseOnError: removeDatabaseOnError
     )
 }
