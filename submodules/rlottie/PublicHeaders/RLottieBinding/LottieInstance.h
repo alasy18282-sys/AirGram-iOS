@@ -10,7 +10,7 @@ typedef NS_ENUM(int32_t, RLottieFitzModifier) {
     RLottieFitzModifierType3,
     RLottieFitzModifierType4,
     RLottieFitzModifierType5,
-    LottieFitzModifierType6
+    RLottieFitzModifierType6
 };
 
 @interface RLottieInstance : NSObject
