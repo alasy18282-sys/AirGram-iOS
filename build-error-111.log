@@ -1,0 +1,501 @@
+submodules/TelegramUI/Components/NavigationBarComponent/Sources/NavigationBarGlassAnimation.swift:477:9: error: cannot find 'addNavigationKeyframes' in scope
+    |         `- error: cannot find 'addNavigationKeyframes' in scope
+submodules/TelegramUI/Components/NavigationBarComponent/Sources/NavigationBarGlassAnimation.swift:478:9: error: cannot find 'addNavigationKeyframes' in scope
+    |         `- error: cannot find 'addNavigationKeyframes' in scope
+submodules/TelegramUI/Components/NavigationBarComponent/Sources/NavigationBarGlassAnimation.swift:479:9: error: cannot find 'addNavigationKeyframes' in scope
+    |         `- error: cannot find 'addNavigationKeyframes' in scope
+submodules/TelegramUI/Components/NavigationBarComponent/Sources/NavigationBarGlassAnimation.swift:483:9: error: cannot find 'addNavigationKeyframes' in scope
+    |         `- error: cannot find 'addNavigationKeyframes' in scope
+submodules/TelegramUI/Components/NavigationBarComponent/Sources/NavigationBarInPlaceAnimation.swift:59:16: error: cannot find type 'NavigationSpringCurve' in scope
+    |                `- error: cannot find type 'NavigationSpringCurve' in scope
+submodules/TelegramUI/Components/NavigationBarComponent/Sources/NavigationBarInPlaceAnimation.swift:60:16: error: cannot find type 'NavigationSpringCurve' in scope
+    |                `- error: cannot find type 'NavigationSpringCurve' in scope
+submodules/TelegramUI/Components/NavigationBarComponent/Sources/NavigationBarInPlaceAnimation.swift:61:20: error: cannot find type 'NavigationSpringCurve' in scope
+    |                    `- error: cannot find type 'NavigationSpringCurve' in scope
+submodules/TelegramUI/Components/NavigationBarComponent/Sources/NavigationBarInPlaceAnimation.swift:62:21: error: cannot find type 'NavigationSpringCurve' in scope
+    |                     `- error: cannot find type 'NavigationSpringCurve' in scope
+submodules/TelegramUI/Components/NavigationBarComponent/Sources/NavigationBarInPlaceAnimation.swift:63:32: error: cannot find type 'NavigationSpringCurve' in scope
+    |                                `- error: cannot find type 'NavigationSpringCurve' in scope
+submodules/TelegramUI/Components/NavigationBarComponent/Sources/NavigationBarInPlaceAnimation.swift:73:69: error: cannot find type 'NavigationTransitionSpring' in scope
+    |                                                                     `- error: cannot find type 'NavigationTransitionSpring' in scope
+submodules/TelegramUI/Components/NavigationBarComponent/Sources/NavigationBarInPlaceAnimation.swift:96:66: error: cannot find type 'NavigationTransitionSpring' in scope
+    |                                                                  `- error: cannot find type 'NavigationTransitionSpring' in scope
+submodules/TelegramUI/Components/NavigationBarComponent/Sources/NavigationBarInPlaceAnimation.swift:129:67: error: cannot find type 'NavigationSpringCurve' in scope
+    |                                                                   `- error: cannot find type 'NavigationSpringCurve' in scope
+submodules/TelegramUI/Components/NavigationBarComponent/Sources/NavigationBarInPlaceAnimation.swift:161:49: error: cannot find type 'NavigationTransitionSpring' in scope
+    |                                                 `- error: cannot find type 'NavigationTransitionSpring' in scope
+submodules/TelegramUI/Components/NavigationBarComponent/Sources/NavigationBarInPlaceAnimation.swift:224:30: error: cannot find 'NavigationTransitionSpring' in scope
+    |                              `- error: cannot find 'NavigationTransitionSpring' in scope
+submodules/TelegramUI/Components/NavigationBarComponent/Sources/NavigationBarInPlaceAnimation.swift:229:45: error: cannot find type 'NavigationTransitionSpring' in scope
+    |                                             `- error: cannot find type 'NavigationTransitionSpring' in scope
+submodules/TelegramUI/Components/NavigationBarComponent/Sources/NavigationBarInPlaceAnimation.swift:74:89: error: cannot find type 'NavigationSpringCurve' in scope
+    |                                                                                         `- error: cannot find type 'NavigationSpringCurve' in scope
+submodules/TelegramUI/Components/NavigationBarComponent/Sources/NavigationBarInPlaceAnimation.swift:74:64: error: cannot find type 'NavigationSpringRest' in scope
+    |                                                                `- error: cannot find type 'NavigationSpringRest' in scope
+submodules/TelegramUI/Components/NavigationBarComponent/Sources/NavigationBarInPlaceAnimation.swift:75:24: error: cannot find 'NavigationSpringCurve' in scope
+    |                        `- error: cannot find 'NavigationSpringCurve' in scope
+submodules/TelegramUI/Components/NavigationBarComponent/Sources/NavigationBarInPlaceAnimation.swift:77:55: error: cannot infer contextual base in reference to member 'glass'
+    |                                                       `- error: cannot infer contextual base in reference to member 'glass'
+submodules/TelegramUI/Components/NavigationBarComponent/Sources/NavigationBarInPlaceAnimation.swift:78:55: error: cannot infer contextual base in reference to member 'glass'
+    |                                                       `- error: cannot infer contextual base in reference to member 'glass'
+submodules/TelegramUI/Components/NavigationBarComponent/Sources/NavigationBarInPlaceAnimation.swift:79:61: error: cannot infer contextual base in reference to member 'glass'
+    |                                                             `- error: cannot infer contextual base in reference to member 'glass'
+submodules/TelegramUI/Components/NavigationBarComponent/Sources/NavigationBarInPlaceAnimation.swift:80:64: error: cannot infer contextual base in reference to member 'glass'
+    |                                                                `- error: cannot infer contextual base in reference to member 'glass'
+submodules/TelegramUI/Components/NavigationBarComponent/Sources/NavigationBarInPlaceAnimation.swift:81:91: error: cannot infer contextual base in reference to member 'glass'
+    |                                                                                           `- error: cannot infer contextual base in reference to member 'glass'
+submodules/TelegramUI/Components/NavigationBarComponent/Sources/NavigationBarInPlaceAnimation.swift:332:98: error: value of type 'GlassContextExtractableContainer' has no member 'glassTintColor'
+    |                                                                                                  `- error: value of type 'GlassContextExtractableContainer' has no member 'glassTintColor'
+submodules/TelegramUI/Components/NavigationBarComponent/Sources/NavigationBarInPlaceAnimation.swift:340:27: error: value of type 'GlassContextExtractableContainer' has no member 'renewGlass'
+    |                           `- error: value of type 'GlassContextExtractableContainer' has no member 'renewGlass'
+submodules/TelegramUI/Components/NavigationBarComponent/Sources/NavigationBarInPlaceAnimation.swift:343:29: error: cannot find 'NavigationSpringCurve' in scope
+    |                             `- error: cannot find 'NavigationSpringCurve' in scope
+submodules/TelegramUI/Components/NavigationBarComponent/Sources/NavigationBarInPlaceAnimation.swift:343:178: error: cannot infer contextual base in reference to member 'glass'
+    |                                                                                                                                                                                  `- error: cannot infer contextual base in reference to member 'glass'
+submodules/TelegramUI/Components/NavigationBarComponent/Sources/NavigationBarInPlaceAnimation.swift:354:38: error: value of type 'GlassContextExtractableContainer' has no member 'glassTintColor'
+    |                                      `- error: value of type 'GlassContextExtractableContainer' has no member 'glassTintColor'
+submodules/TelegramUI/Components/NavigationBarComponent/Sources/NavigationBarInPlaceAnimation.swift:357:39: error: cannot find 'NavigationSpringCurve' in scope
+    |                                       `- error: cannot find 'NavigationSpringCurve' in scope
+submodules/TelegramUI/Components/NavigationBarComponent/Sources/NavigationBarInPlaceAnimation.swift:357:160: error: cannot infer contextual base in reference to member 'glass'
+    |                                                                                                                                                                `- error: cannot infer contextual base in reference to member 'glass'
+submodules/TelegramUI/Components/NavigationBarComponent/Sources/NavigationBarInPlaceAnimation.swift:424:45: error: cannot infer contextual base in reference to member 'immediate'
+    |                                             `- error: cannot infer contextual base in reference to member 'immediate'
+submodules/TelegramUI/Components/NavigationBarComponent/Sources/NavigationBarInPlaceAnimation.swift:629:29: error: cannot find 'NavigationSpringCurve' in scope
+    |                             `- error: cannot find 'NavigationSpringCurve' in scope
+submodules/TelegramUI/Components/NavigationBarComponent/Sources/NavigationBarInPlaceAnimation.swift:629:178: error: cannot infer contextual base in reference to member 'glass'
+    |                                                                                                                                                                                  `- error: cannot infer contextual base in reference to member 'glass'
+submodules/TelegramUI/Components/NavigationBarComponent/Sources/NavigationBarInPlaceAnimation.swift:647:39: error: value of type 'GlassContextExtractableContainer' has no member 'lendGlass'
+    |                                       `- error: value of type 'GlassContextExtractableContainer' has no member 'lendGlass'
+submodules/TelegramUI/Components/NavigationBarComponent/Sources/NavigationBarInPlaceAnimation.swift:672:31: error: value of type 'GlassContextExtractableContainer' has no member 'reclaimGlass'
+    |                               `- error: value of type 'GlassContextExtractableContainer' has no member 'reclaimGlass'
+submodules/TelegramUI/Components/NavigationBarComponent/Sources/NavigationBarInPlaceAnimation.swift:734:59: error: value of type 'GlassContextExtractableContainer' has no member 'isGlassLent'
+    |                                                           `- error: value of type 'GlassContextExtractableContainer' has no member 'isGlassLent'
+submodules/TelegramUI/Components/NavigationBarComponent/Sources/NavigationBarInPlaceAnimation.swift:748:22: error: the compiler is unable to type-check this expression in reasonable time; try breaking up the expression into distinct sub-expressions
+    |                      `- error: the compiler is unable to type-check this expression in reasonable time; try breaking up the expression into distinct sub-expressions
+submodules/TelegramUI/Components/NavigationBarComponent/Sources/NavigationBarPlatterTransitionView.swift:322:29: error: cannot find type 'NavigationAnimationClock' in scope
+     |                             `- error: cannot find type 'NavigationAnimationClock' in scope
+submodules/TelegramUI/Components/NavigationBarComponent/Sources/NavigationBarPlatterTransitionView.swift:119:25: error: cannot find type 'NavigationSpringCurve' in scope
+     |                         `- error: cannot find type 'NavigationSpringCurve' in scope
+submodules/TelegramUI/Components/NavigationBarComponent/Sources/NavigationBarPlatterTransitionView.swift:144:24: error: cannot find 'NavigationSpringCurve' in scope
+     |                        `- error: cannot find 'NavigationSpringCurve' in scope
+submodules/TelegramUI/Components/NavigationBarComponent/Sources/NavigationBarPlatterTransitionView.swift:144:67: error: cannot infer contextual base in reference to member 'glass'
+     |                                                                   `- error: cannot infer contextual base in reference to member 'glass'
+submodules/TelegramUI/Components/NavigationBarComponent/Sources/NavigationBarPlatterTransitionView.swift:149:21: error: cannot find 'NavigationSpringCurve' in scope
+     |                     `- error: cannot find 'NavigationSpringCurve' in scope
+submodules/TelegramUI/Components/NavigationBarComponent/Sources/NavigationBarPlatterTransitionView.swift:149:64: error: cannot infer contextual base in reference to member 'glass'
+     |                                                                `- error: cannot infer contextual base in reference to member 'glass'
+submodules/TelegramUI/Components/NavigationBarComponent/Sources/NavigationBarPlatterTransitionView.swift:151:20: error: cannot find 'NavigationSpringCurve' in scope
+     |                    `- error: cannot find 'NavigationSpringCurve' in scope
+submodules/TelegramUI/Components/NavigationBarComponent/Sources/NavigationBarPlatterTransitionView.swift:151:63: error: cannot infer contextual base in reference to member 'glass'
+     |                                                               `- error: cannot infer contextual base in reference to member 'glass'
+submodules/TelegramUI/Components/NavigationBarComponent/Sources/NavigationBarPlatterTransitionView.swift:153:16: error: cannot find type 'NavigationSpringCurve' in scope
+     |                `- error: cannot find type 'NavigationSpringCurve' in scope
+submodules/TelegramUI/Components/NavigationBarComponent/Sources/NavigationBarPlatterTransitionView.swift:154:16: error: cannot find type 'NavigationSpringCurve' in scope
+     |                `- error: cannot find type 'NavigationSpringCurve' in scope
+submodules/TelegramUI/Components/NavigationBarComponent/Sources/NavigationBarPlatterTransitionView.swift:155:20: error: cannot find type 'NavigationSpringCurve' in scope
+     |                    `- error: cannot find type 'NavigationSpringCurve' in scope
+submodules/TelegramUI/Components/NavigationBarComponent/Sources/NavigationBarPlatterTransitionView.swift:156:21: error: cannot find type 'NavigationSpringCurve' in scope
+     |                     `- error: cannot find type 'NavigationSpringCurve' in scope
+submodules/TelegramUI/Components/NavigationBarComponent/Sources/NavigationBarPlatterTransitionView.swift:158:32: error: cannot find type 'NavigationSpringCurve' in scope
+     |                                `- error: cannot find type 'NavigationSpringCurve' in scope
+submodules/TelegramUI/Components/NavigationBarComponent/Sources/NavigationBarPlatterTransitionView.swift:218:53: error: cannot find type 'NavigationTransitionSpring' in scope
+     |                                                     `- error: cannot find type 'NavigationTransitionSpring' in scope
+submodules/TelegramUI/Components/NavigationBarComponent/Sources/NavigationBarPlatterTransitionView.swift:323:21: error: cannot find 'NavigationAnimationClock' in scope
+     |                     `- error: cannot find 'NavigationAnimationClock' in scope
+submodules/TelegramUI/Components/NavigationBarComponent/Sources/NavigationBarPlatterTransitionView.swift:329:26: error: cannot find type 'NavigationAnimationClock' in scope
+     |                          `- error: cannot find type 'NavigationAnimationClock' in scope
+submodules/TelegramUI/Components/NavigationBarComponent/Sources/NavigationBarPlatterTransitionView.swift:342:45: error: type 'GlassBackgroundContainerView' has no member 'mergesShapes'
+     |                                             `- error: type 'GlassBackgroundContainerView' has no member 'mergesShapes'
+submodules/TelegramUI/Components/NavigationBarComponent/Sources/NavigationBarPlatterTransitionView.swift:899:51: error: cannot find type 'NavigationKeyframeTiming' in scope
+     |                                                   `- error: cannot find type 'NavigationKeyframeTiming' in scope
+submodules/TelegramUI/Components/NavigationBarComponent/Sources/NavigationBarPlatterTransitionView.swift:967:80: error: cannot find type 'NavigationKeyframeTiming' in scope
+     |                                                                                `- error: cannot find type 'NavigationKeyframeTiming' in scope
+submodules/TelegramUI/Components/NavigationBarComponent/Sources/NavigationBarPlatterTransitionView.swift:129:32: error: cannot infer contextual base in reference to member 'constant'
+     |                                `- error: cannot infer contextual base in reference to member 'constant'
+submodules/TelegramUI/Components/NavigationBarComponent/Sources/NavigationBarPlatterTransitionView.swift:129:60: error: cannot infer contextual base in reference to member 'glass'
+     |                                                            `- error: cannot infer contextual base in reference to member 'glass'
+submodules/TelegramUI/Components/NavigationBarComponent/Sources/NavigationBarPlatterTransitionView.swift:183:23: error: cannot infer contextual base in reference to member 'constant'
+     |                       `- error: cannot infer contextual base in reference to member 'constant'
+submodules/TelegramUI/Components/NavigationBarComponent/Sources/NavigationBarPlatterTransitionView.swift:183:51: error: cannot infer contextual base in reference to member 'glass'
+     |                                                   `- error: cannot infer contextual base in reference to member 'glass'
+submodules/TelegramUI/Components/NavigationBarComponent/Sources/NavigationBarPlatterTransitionView.swift:184:23: error: cannot infer contextual base in reference to member 'constant'
+     |                       `- error: cannot infer contextual base in reference to member 'constant'
+submodules/TelegramUI/Components/NavigationBarComponent/Sources/NavigationBarPlatterTransitionView.swift:184:51: error: cannot infer contextual base in reference to member 'glass'
+     |                                                   `- error: cannot infer contextual base in reference to member 'glass'
+submodules/TelegramUI/Components/NavigationBarComponent/Sources/NavigationBarPlatterTransitionView.swift:185:27: error: cannot infer contextual base in reference to member 'constant'
+     |                           `- error: cannot infer contextual base in reference to member 'constant'
+submodules/TelegramUI/Components/NavigationBarComponent/Sources/NavigationBarPlatterTransitionView.swift:185:56: error: cannot infer contextual base in reference to member 'glass'
+     |                                                        `- error: cannot infer contextual base in reference to member 'glass'
+submodules/TelegramUI/Components/NavigationBarComponent/Sources/NavigationBarPlatterTransitionView.swift:186:28: error: cannot infer contextual base in reference to member 'constant'
+     |                            `- error: cannot infer contextual base in reference to member 'constant'
+submodules/TelegramUI/Components/NavigationBarComponent/Sources/NavigationBarPlatterTransitionView.swift:186:58: error: cannot infer contextual base in reference to member 'glass'
+     |                                                          `- error: cannot infer contextual base in reference to member 'glass'
+submodules/TelegramUI/Components/NavigationBarComponent/Sources/NavigationBarPlatterTransitionView.swift:187:39: error: cannot infer contextual base in reference to member 'constant'
+     |                                       `- error: cannot infer contextual base in reference to member 'constant'
+submodules/TelegramUI/Components/NavigationBarComponent/Sources/NavigationBarPlatterTransitionView.swift:187:60: error: cannot infer contextual base in reference to member 'glass'
+     |                                                            `- error: cannot infer contextual base in reference to member 'glass'
+submodules/TelegramUI/Components/NavigationBarComponent/Sources/NavigationBarPlatterTransitionView.swift:259:61: error: cannot find type 'NavigationSpringCurve' in scope
+     |                                                             `- error: cannot find type 'NavigationSpringCurve' in scope
+submodules/TelegramUI/Components/NavigationBarComponent/Sources/NavigationBarPlatterTransitionView.swift:259:35: error: cannot find type 'NavigationSpringCurve' in scope
+     |                                   `- error: cannot find type 'NavigationSpringCurve' in scope
+submodules/TelegramUI/Components/NavigationBarComponent/Sources/NavigationBarPlatterTransitionView.swift:591:33: error: cannot find 'NavigationSpringCurve' in scope
+     |                                 `- error: cannot find 'NavigationSpringCurve' in scope
+submodules/TelegramUI/Components/NavigationBarComponent/Sources/NavigationBarPlatterTransitionView.swift:591:164: error: cannot infer contextual base in reference to member 'glass'
+     |                                                                                                                                                                    `- error: cannot infer contextual base in reference to member 'glass'
+submodules/TelegramUI/Components/NavigationBarComponent/Sources/NavigationBarPlatterTransitionView.swift:596:32: error: cannot find 'NavigationSpringCurve' in scope
+     |                                `- error: cannot find 'NavigationSpringCurve' in scope
+submodules/TelegramUI/Components/NavigationBarComponent/Sources/NavigationBarPlatterTransitionView.swift:596:176: error: cannot infer contextual base in reference to member 'glass'
+     |                                                                                                                                                                                `- error: cannot infer contextual base in reference to member 'glass'
+submodules/TelegramUI/Components/NavigationBarComponent/Sources/NavigationBarPlatterTransitionView.swift:712:53: error: cannot find 'NavigationSpringCurve' in scope
+     |                                                     `- error: cannot find 'NavigationSpringCurve' in scope
+submodules/TelegramUI/Components/NavigationBarComponent/Sources/NavigationBarPlatterTransitionView.swift:712:155: error: cannot infer contextual base in reference to member 'glass'
+     |                                                                                                                                                           `- error: cannot infer contextual base in reference to member 'glass'
+submodules/TelegramUI/Components/NavigationBarComponent/Sources/NavigationBarPlatterTransitionView.swift:759:79: error: cannot find type 'NavigationSpringCurve' in scope
+     |                                                                               `- error: cannot find type 'NavigationSpringCurve' in scope
+submodules/TelegramUI/Components/NavigationBarComponent/Sources/NavigationBarPlatterTransitionView.swift:759:54: error: cannot find type 'NavigationSpringRest' in scope
+     |                                                      `- error: cannot find type 'NavigationSpringRest' in scope
+submodules/TelegramUI/Components/NavigationBarComponent/Sources/NavigationBarPlatterTransitionView.swift:760:20: error: cannot find 'NavigationSpringCurve' in scope
+     |                    `- error: cannot find 'NavigationSpringCurve' in scope
+submodules/TelegramUI/Components/NavigationBarComponent/Sources/NavigationBarPlatterTransitionView.swift:762:70: error: cannot infer contextual base in reference to member 'glass'
+     |                                                                      `- error: cannot infer contextual base in reference to member 'glass'
+submodules/TelegramUI/Components/NavigationBarComponent/Sources/NavigationBarPlatterTransitionView.swift:763:70: error: cannot infer contextual base in reference to member 'glass'
+     |                                                                      `- error: cannot infer contextual base in reference to member 'glass'
+submodules/TelegramUI/Components/NavigationBarComponent/Sources/NavigationBarPlatterTransitionView.swift:764:76: error: cannot infer contextual base in reference to member 'glass'
+     |                                                                            `- error: cannot infer contextual base in reference to member 'glass'
+submodules/TelegramUI/Components/NavigationBarComponent/Sources/NavigationBarPlatterTransitionView.swift:765:79: error: cannot infer contextual base in reference to member 'glass'
+     |                                                                               `- error: cannot infer contextual base in reference to member 'glass'
+submodules/TelegramUI/Components/NavigationBarComponent/Sources/NavigationBarPlatterTransitionView.swift:769:110: error: cannot infer contextual base in reference to member 'glass'
+     |                                                                                                              `- error: cannot infer contextual base in reference to member 'glass'
+submodules/TelegramUI/Components/NavigationBarComponent/Sources/NavigationBarPlatterTransitionView.swift:854:28: error: cannot find 'NavigationSpringCurve' in scope
+     |                            `- error: cannot find 'NavigationSpringCurve' in scope
+submodules/TelegramUI/Components/NavigationBarComponent/Sources/NavigationBarPlatterTransitionView.swift:854:153: error: cannot infer contextual base in reference to member 'glass'
+     |                                                                                                                                                         `- error: cannot infer contextual base in reference to member 'glass'
+submodules/TelegramUI/Components/NavigationBarComponent/Sources/NavigationBarPlatterTransitionView.swift:911:13: error: cannot find 'addNavigationKeyframes' in scope
+     |             `- error: cannot find 'addNavigationKeyframes' in scope
+submodules/TelegramUI/Components/NavigationBarComponent/Sources/NavigationBarPlatterTransitionView.swift:931:27: error: value of type 'GlassBackgroundContainerView' has no member 'animateSize'
+     |                           `- error: value of type 'GlassBackgroundContainerView' has no member 'animateSize'
+submodules/TelegramUI/Components/NavigationBarComponent/Sources/NavigationBarPlatterTransitionView.swift:943:23: error: value of type 'GlassBackgroundView' has no member 'animateShape'
+     |                       `- error: value of type 'GlassBackgroundView' has no member 'animateShape'
+submodules/TelegramUI/Components/NavigationBarComponent/Sources/NavigationBarPlatterTransitionView.swift:946:29: error: value of type 'GlassBackgroundContainerView' has no member 'animateSize'
+     |                             `- error: value of type 'GlassBackgroundContainerView' has no member 'animateSize'
+submodules/TelegramUI/Components/NavigationBarComponent/Sources/NavigationBarPlatterTransitionView.swift:949:25: error: value of type 'GlassBackgroundView' has no member 'animateShape'
+     |                         `- error: value of type 'GlassBackgroundView' has no member 'animateShape'
+submodules/TelegramUI/Components/NavigationBarComponent/Sources/NavigationBarPlatterTransitionView.swift:952:29: error: extra arguments at positions #1, #2, #3, #4 in call
+     |                             `- error: extra arguments at positions #1, #2, #3, #4 in call
+submodules/TelegramUI/Components/NavigationBarComponent/Sources/NavigationBarPlatterTransitionView.swift:952:153: error: missing argument for parameter 'animations' in call
+     |                                                                                                                                                         `- error: missing argument for parameter 'animations' in call
+submodules/TelegramUI/Components/NavigationBarComponent/Sources/NavigationBarPlatterTransitionView.swift:952:13: error: static member 'animate' cannot be used on instance of type 'NavigationBarPressGlowView'
+     |             `- error: static member 'animate' cannot be used on instance of type 'NavigationBarPressGlowView'
+submodules/TelegramUI/Components/NavigationBarComponent/Sources/NavigationBarPlatterTransitionView.swift:959:13: error: the compiler is unable to type-check this expression in reasonable time; try breaking up the expression into distinct sub-expressions
+     |             `- error: the compiler is unable to type-check this expression in reasonable time; try breaking up the expression into distinct sub-expressions
+submodules/TelegramUI/Components/NavigationBarComponent/Sources/NavigationBarPlatterTransitionView.swift:980:9: error: cannot find 'addNavigationKeyframes' in scope
+     |         `- error: cannot find 'addNavigationKeyframes' in scope
+submodules/TelegramUI/Components/NavigationBarComponent/Sources/NavigationBarRowLayout.swift:180:39: error: value of type 'NavigationBarTheme' has no member 'glassTintColor'
+    |                                       `- error: value of type 'NavigationBarTheme' has no member 'glassTintColor'
+submodules/TelegramUI/Components/NavigationBarComponent/Sources/NavigationBarRowLayout.swift:187:104: error: value of type 'NavigationBarTheme' has no member 'accentDisabledButtonColor'
+    |                                                                                                        `- error: value of type 'NavigationBarTheme' has no member 'accentDisabledButtonColor'
+ERROR: /Users/runner/work/AirGram-iOS/AirGram-iOS/submodules/TelegramUI/Components/Wallet/WalletPeerSelectionScreen/BUILD:3:14 Linking submodules/TelegramUI/Components/Wallet/WalletPeerSelectionScreen/libWalletPeerSelectionScreen.a failed: (Exit 1): worker failed: error executing SwiftDeriveFiles command (from target //submodules/TelegramUI/Components/NavigationBarComponent:NavigationBarComponent) 
+ERROR: Build did NOT complete successfully
+FAILED: 
+Traceback (most recent call last):
+--- end of full build log ---
+     |                                       `- error: cannot infer contextual base in reference to member 'constant'
+ 188 |             self.tint = tint
+ 189 |             self.isDark = isDark
+
+submodules/TelegramUI/Components/NavigationBarComponent/Sources/NavigationBarPlatterTransitionView.swift:187:60: error: cannot infer contextual base in reference to member 'glass'
+ 185 |             self.width = .constant(frame.width, rest: .glass(0.01))
+ 186 |             self.height = .constant(frame.height, rest: .glass(0.01))
+ 187 |             self.dematerialization = .constant(0.0, rest: .glass(0.001))
+     |                                                            `- error: cannot infer contextual base in reference to member 'glass'
+ 188 |             self.tint = tint
+ 189 |             self.isDark = isDark
+
+submodules/TelegramUI/Components/NavigationBarComponent/Sources/NavigationBarPlatterTransitionView.swift:259:61: error: cannot find type 'NavigationSpringCurve' in scope
+ 257 |         /// Every curve at its target (the group has come to rest).
+ 258 |         func settle() {
+ 259 |             func settled(_ curve: NavigationSpringCurve) -> NavigationSpringCurve {
+     |                                                             `- error: cannot find type 'NavigationSpringCurve' in scope
+ 260 |                 return .constant(curve.target, rest: curve.rest)
+ 261 |             }
+
+submodules/TelegramUI/Components/NavigationBarComponent/Sources/NavigationBarPlatterTransitionView.swift:259:35: error: cannot find type 'NavigationSpringCurve' in scope
+ 257 |         /// Every curve at its target (the group has come to rest).
+ 258 |         func settle() {
+ 259 |             func settled(_ curve: NavigationSpringCurve) -> NavigationSpringCurve {
+     |                                   `- error: cannot find type 'NavigationSpringCurve' in scope
+ 260 |                 return .constant(curve.target, rest: curve.rest)
+ 261 |             }
+
+submodules/TelegramUI/Components/NavigationBarComponent/Sources/NavigationBarPlatterTransitionView.swift:591:33: error: cannot find 'NavigationSpringCurve' in scope
+ 589 |             }
+ 590 |             if abs(pressScale - 1.0) > 0.0005 {
+ 591 |                 platter.press = NavigationSpringCurve(startTime: self.time, from: pressScale, target: 1.0, spring: NavigationBarGlassSettings.pressRelease, rest: .glass(0.0005))
+     |                                 `- error: cannot find 'NavigationSpringCurve' in scope
+ 592 |             }
+ 593 |             if pressGlow > 0.001, NavigationBarPressGlowView.isAvailable {
+
+submodules/TelegramUI/Components/NavigationBarComponent/Sources/NavigationBarPlatterTransitionView.swift:591:164: error: cannot infer contextual base in reference to member 'glass'
+ 589 |             }
+ 590 |             if abs(pressScale - 1.0) > 0.0005 {
+ 591 |                 platter.press = NavigationSpringCurve(startTime: self.time, from: pressScale, target: 1.0, spring: NavigationBarGlassSettings.pressRelease, rest: .glass(0.0005))
+     |                                                                                                                                                                    `- error: cannot infer contextual base in reference to member 'glass'
+ 592 |             }
+ 593 |             if pressGlow > 0.001, NavigationBarPressGlowView.isAvailable {
+
+submodules/TelegramUI/Components/NavigationBarComponent/Sources/NavigationBarPlatterTransitionView.swift:596:32: error: cannot find 'NavigationSpringCurve' in scope
+ 594 |                 // Inside the glass, as UIKit's glow container is inside the capsule's glass. Without the filter the glow
+ 595 |                 // would be a plain white capsule, so then there is none.
+ 596 |                 platter.glow = NavigationSpringCurve(startTime: self.time, from: min(1.0, pressGlow), target: 0.0, spring: NavigationBarGlassSettings.pressGlowRelease, rest: .glass(0.001))
+     |                                `- error: cannot find 'NavigationSpringCurve' in scope
+ 597 |                 let glowView = NavigationBarPressGlowView(frame: CGRect())
+ 598 |                 platter.glass.contentView.addSubview(glowView)
+
+submodules/TelegramUI/Components/NavigationBarComponent/Sources/NavigationBarPlatterTransitionView.swift:596:176: error: cannot infer contextual base in reference to member 'glass'
+ 594 |                 // Inside the glass, as UIKit's glow container is inside the capsule's glass. Without the filter the glow
+ 595 |                 // would be a plain white capsule, so then there is none.
+ 596 |                 platter.glow = NavigationSpringCurve(startTime: self.time, from: min(1.0, pressGlow), target: 0.0, spring: NavigationBarGlassSettings.pressGlowRelease, rest: .glass(0.001))
+     |                                                                                                                                                                                `- error: cannot infer contextual base in reference to member 'glass'
+ 597 |                 let glowView = NavigationBarPressGlowView(frame: CGRect())
+ 598 |                 platter.glass.contentView.addSubview(glowView)
+
+submodules/TelegramUI/Components/NavigationBarComponent/Sources/NavigationBarPlatterTransitionView.swift:712:53: error: cannot find 'NavigationSpringCurve' in scope
+ 710 |                         platter.maxScale = motion.materializeScale(size: frame.size)
+ 711 |                         platter.blurRadius = motion.blurRadius
+ 712 |                         platter.dematerialization = NavigationSpringCurve(startTime: self.time, from: 1.0, target: 0.0, spring: motion.transition, rest: .glass(0.001))
+     |                                                     `- error: cannot find 'NavigationSpringCurve' in scope
+ 713 |                     }
+ 714 |                     platter.items = [Items(side: side, view: itemView, frame: frame, appearance: 0.0, motion: motion)]
+
+submodules/TelegramUI/Components/NavigationBarComponent/Sources/NavigationBarPlatterTransitionView.swift:712:155: error: cannot infer contextual base in reference to member 'glass'
+ 710 |                         platter.maxScale = motion.materializeScale(size: frame.size)
+ 711 |                         platter.blurRadius = motion.blurRadius
+ 712 |                         platter.dematerialization = NavigationSpringCurve(startTime: self.time, from: 1.0, target: 0.0, spring: motion.transition, rest: .glass(0.001))
+     |                                                                                                                                                           `- error: cannot infer contextual base in reference to member 'glass'
+ 713 |                     }
+ 714 |                     platter.items = [Items(side: side, view: itemView, frame: frame, appearance: 0.0, motion: motion)]
+
+submodules/TelegramUI/Components/NavigationBarComponent/Sources/NavigationBarPlatterTransitionView.swift:759:79: error: cannot find type 'NavigationSpringCurve' in scope
+ 757 |         let resolvedOffset = NavigationBarGlassSettings.resolvedMatchedOffset(disjoint ? delta : nil, isRemoval: !appearing)
+ 758 |         let start = self.time + (resolvedOffset.map { NavigationBarGlassSettings.matchedDelay(offset: $0, containerWidth: containerWidth) } ?? 0.0)
+ 759 |         func curve(from: CGFloat, to: CGFloat, rest: NavigationSpringRest) -> NavigationSpringCurve {
+     |                                                                               `- error: cannot find type 'NavigationSpringCurve' in scope
+ 760 |             return NavigationSpringCurve(startTime: start, from: from, target: to, spring: motion.transition, rest: rest)
+ 761 |         }
+
+submodules/TelegramUI/Components/NavigationBarComponent/Sources/NavigationBarPlatterTransitionView.swift:759:54: error: cannot find type 'NavigationSpringRest' in scope
+ 757 |         let resolvedOffset = NavigationBarGlassSettings.resolvedMatchedOffset(disjoint ? delta : nil, isRemoval: !appearing)
+ 758 |         let start = self.time + (resolvedOffset.map { NavigationBarGlassSettings.matchedDelay(offset: $0, containerWidth: containerWidth) } ?? 0.0)
+ 759 |         func curve(from: CGFloat, to: CGFloat, rest: NavigationSpringRest) -> NavigationSpringCurve {
+     |                                                      `- error: cannot find type 'NavigationSpringRest' in scope
+ 760 |             return NavigationSpringCurve(startTime: start, from: from, target: to, spring: motion.transition, rest: rest)
+ 761 |         }
+
+submodules/TelegramUI/Components/NavigationBarComponent/Sources/NavigationBarPlatterTransitionView.swift:760:20: error: cannot find 'NavigationSpringCurve' in scope
+ 758 |         let start = self.time + (resolvedOffset.map { NavigationBarGlassSettings.matchedDelay(offset: $0, containerWidth: containerWidth) } ?? 0.0)
+ 759 |         func curve(from: CGFloat, to: CGFloat, rest: NavigationSpringRest) -> NavigationSpringCurve {
+ 760 |             return NavigationSpringCurve(startTime: start, from: from, target: to, spring: motion.transition, rest: rest)
+     |                    `- error: cannot find 'NavigationSpringCurve' in scope
+ 761 |         }
+ 762 |         platter.x = curve(from: source.minX, to: target.minX, rest: .glass(0.01))
+
+submodules/TelegramUI/Components/NavigationBarComponent/Sources/NavigationBarPlatterTransitionView.swift:762:70: error: cannot infer contextual base in reference to member 'glass'
+ 760 |             return NavigationSpringCurve(startTime: start, from: from, target: to, spring: motion.transition, rest: rest)
+ 761 |         }
+ 762 |         platter.x = curve(from: source.minX, to: target.minX, rest: .glass(0.01))
+     |                                                                      `- error: cannot infer contextual base in reference to member 'glass'
+ 763 |         platter.y = curve(from: source.minY, to: target.minY, rest: .glass(0.01))
+ 764 |         platter.width = curve(from: source.width, to: target.width, rest: .glass(0.01))
+
+submodules/TelegramUI/Components/NavigationBarComponent/Sources/NavigationBarPlatterTransitionView.swift:763:70: error: cannot infer contextual base in reference to member 'glass'
+ 761 |         }
+ 762 |         platter.x = curve(from: source.minX, to: target.minX, rest: .glass(0.01))
+ 763 |         platter.y = curve(from: source.minY, to: target.minY, rest: .glass(0.01))
+     |                                                                      `- error: cannot infer contextual base in reference to member 'glass'
+ 764 |         platter.width = curve(from: source.width, to: target.width, rest: .glass(0.01))
+ 765 |         platter.height = curve(from: source.height, to: target.height, rest: .glass(0.01))
+
+submodules/TelegramUI/Components/NavigationBarComponent/Sources/NavigationBarPlatterTransitionView.swift:764:76: error: cannot infer contextual base in reference to member 'glass'
+ 762 |         platter.x = curve(from: source.minX, to: target.minX, rest: .glass(0.01))
+ 763 |         platter.y = curve(from: source.minY, to: target.minY, rest: .glass(0.01))
+ 764 |         platter.width = curve(from: source.width, to: target.width, rest: .glass(0.01))
+     |                                                                            `- error: cannot infer contextual base in reference to member 'glass'
+ 765 |         platter.height = curve(from: source.height, to: target.height, rest: .glass(0.01))
+ 766 |         platter.maxScale = motion.matchScale
+
+submodules/TelegramUI/Components/NavigationBarComponent/Sources/NavigationBarPlatterTransitionView.swift:765:79: error: cannot infer contextual base in reference to member 'glass'
+ 763 |         platter.y = curve(from: source.minY, to: target.minY, rest: .glass(0.01))
+ 764 |         platter.width = curve(from: source.width, to: target.width, rest: .glass(0.01))
+ 765 |         platter.height = curve(from: source.height, to: target.height, rest: .glass(0.01))
+     |                                                                               `- error: cannot infer contextual base in reference to member 'glass'
+ 766 |         platter.maxScale = motion.matchScale
+ 767 |         platter.blurRadius = motion.blurRadius
+
+submodules/TelegramUI/Components/NavigationBarComponent/Sources/NavigationBarPlatterTransitionView.swift:769:110: error: cannot infer contextual base in reference to member 'glass'
+ 767 |         platter.blurRadius = motion.blurRadius
+ 768 |         let current = platter.dematerialization.value(at: self.time)
+ 769 |         platter.dematerialization = curve(from: appearing ? 1.0 : current, to: appearing ? 0.0 : 1.0, rest: .glass(0.001))
+     |                                                                                                              `- error: cannot infer contextual base in reference to member 'glass'
+ 770 |         platter.isLeaving = !appearing
+ 771 |         platter.isMatched = true
+
+submodules/TelegramUI/Components/NavigationBarComponent/Sources/NavigationBarPlatterTransitionView.swift:854:28: error: cannot find 'NavigationSpringCurve' in scope
+ 852 |         }
+ 853 |         platter.fadingTint = tint
+ 854 |         platter.tintFade = NavigationSpringCurve(startTime: self.time, from: 1.0, target: 0.0, spring: NavigationBarGlassSettings.tintCrossFade, rest: .glass(0.001))
+     |                            `- error: cannot find 'NavigationSpringCurve' in scope
+ 855 |     }
+ 856 | 
+
+submodules/TelegramUI/Components/NavigationBarComponent/Sources/NavigationBarPlatterTransitionView.swift:854:153: error: cannot infer contextual base in reference to member 'glass'
+ 852 |         }
+ 853 |         platter.fadingTint = tint
+ 854 |         platter.tintFade = NavigationSpringCurve(startTime: self.time, from: 1.0, target: 0.0, spring: NavigationBarGlassSettings.tintCrossFade, rest: .glass(0.001))
+     |                                                                                                                                                         `- error: cannot infer contextual base in reference to member 'glass'
+ 855 |     }
+ 856 | 
+
+submodules/TelegramUI/Components/NavigationBarComponent/Sources/NavigationBarPlatterTransitionView.swift:911:13: error: cannot find 'addNavigationKeyframes' in scope
+ 909 | 
+ 910 |         func add(_ layer: CALayer, _ keyPath: String, _ values: [Any]) {
+ 911 |             addNavigationKeyframes(to: layer, key: NavigationBarPlatterTransitionView.keyPrefix + keyPath, keyPath: keyPath, values: values, timing: timing)
+     |             `- error: cannot find 'addNavigationKeyframes' in scope
+ 912 |         }
+ 913 |         let frames = times.map { platter.frame(at: $0) }
+
+submodules/TelegramUI/Components/NavigationBarComponent/Sources/NavigationBarPlatterTransitionView.swift:931:27: error: value of type 'GlassBackgroundContainerView' has no member 'animateSize'
+ 929 |         self.addBlurKeyframes(to: platter.itemsHost.layer, radii: dematerializations.map { platter.blurRadius * $0 }, timing: timing)
+ 930 | 
+ 931 |         platter.container.animateSize(width: platter.width, height: platter.height, timing: timing, isDark: platter.isDark)
+     |                           `- error: value of type 'GlassBackgroundContainerView' has no member 'animateSize'
+ 932 |         // Merged glass draws its scaled frame as its own geometry in this view's space (a transform would scale the
+ 933 |         // other platter's shape with it); its own container's transform scales the rest.
+
+submodules/TelegramUI/Components/NavigationBarComponent/Sources/NavigationBarPlatterTransitionView.swift:943:23: error: value of type 'GlassBackgroundView' has no member 'animateShape'
+ 941 |             add(platter.glass.layer, "bounds", bounds)
+ 942 |         }
+ 943 |         platter.glass.animateShape(sizes: glassFrames.map { CGSize(width: max(0.0, $0.width), height: max(0.0, $0.height)) }, timing: timing, isDark: platter.isDark, tintColor: platter.tint)
+     |                       `- error: value of type 'GlassBackgroundView' has no member 'animateShape'
+ 944 |         if let fadingContainer = platter.fadingContainer, let fadingGlass = platter.fadingGlass, let fadingTint = platter.fadingTint {
+ 945 |             add(fadingContainer.layer, "opacity", zip(times, dematerializations).map { NSNumber(value: Float(max(0.0, min(1.0, platter.tintFade.value(at: $0.0))) * (1.0 - $0.1))) })
+
+submodules/TelegramUI/Components/NavigationBarComponent/Sources/NavigationBarPlatterTransitionView.swift:946:29: error: value of type 'GlassBackgroundContainerView' has no member 'animateSize'
+ 944 |         if let fadingContainer = platter.fadingContainer, let fadingGlass = platter.fadingGlass, let fadingTint = platter.fadingTint {
+ 945 |             add(fadingContainer.layer, "opacity", zip(times, dematerializations).map { NSNumber(value: Float(max(0.0, min(1.0, platter.tintFade.value(at: $0.0))) * (1.0 - $0.1))) })
+ 946 |             fadingContainer.animateSize(width: platter.width, height: platter.height, timing: timing, isDark: platter.isDark)
+     |                             `- error: value of type 'GlassBackgroundContainerView' has no member 'animateSize'
+ 947 |             add(fadingGlass.layer, "position", glassCenters)
+ 948 |             add(fadingGlass.layer, "bounds", bounds)
+
+submodules/TelegramUI/Components/NavigationBarComponent/Sources/NavigationBarPlatterTransitionView.swift:949:25: error: value of type 'GlassBackgroundView' has no member 'animateShape'
+ 947 |             add(fadingGlass.layer, "position", glassCenters)
+ 948 |             add(fadingGlass.layer, "bounds", bounds)
+ 949 |             fadingGlass.animateShape(width: platter.width, height: platter.height, timing: timing, isDark: platter.isDark, tintColor: fadingTint)
+     |                         `- error: value of type 'GlassBackgroundView' has no member 'animateShape'
+ 950 |         }
+ 951 |         if let glowView = platter.glowView {
+
+submodules/TelegramUI/Components/NavigationBarComponent/Sources/NavigationBarPlatterTransitionView.swift:952:29: error: extra arguments at positions #1, #2, #3, #4 in call
+ 950 |         }
+ 951 |         if let glowView = platter.glowView {
+ 952 |             glowView.animate(sizes: glassFrames.map { $0.size }, glows: times.map { platter.glow.value(at: $0) }, timing: timing, isDark: platter.isDark)
+     |                             `- error: extra arguments at positions #1, #2, #3, #4 in call
+ 953 |         }
+ 954 |         for items in platter.items {
+
+UIKit.UIView.animate:4:48: note: 'animate(springDuration:bounce:initialSpringVelocity:delay:options:animations:completion:)' declared here
+2 | @available(iOS 17.0, macOS 14.0, tvOS 17.0, visionOS 1.0, *)
+3 |   @available(watchOS, unavailable)
+4 |   @MainActor @preconcurrency public class func animate(springDuration duration: TimeInterval = 0.5, bounce: CGFloat = 0.0, initialSpringVelocity: CGFloat = 0.0, delay: TimeInterval = 0.0, options: UIView.AnimationOptions = [], animations: () -> Void, completion: ((Bool) -> Void)? = nil)}
+  |                                                `- note: 'animate(springDuration:bounce:initialSpringVelocity:delay:options:animations:completion:)' declared here
+5 | 
+
+submodules/TelegramUI/Components/NavigationBarComponent/Sources/NavigationBarPlatterTransitionView.swift:952:153: error: missing argument for parameter 'animations' in call
+ 950 |         }
+ 951 |         if let glowView = platter.glowView {
+ 952 |             glowView.animate(sizes: glassFrames.map { $0.size }, glows: times.map { platter.glow.value(at: $0) }, timing: timing, isDark: platter.isDark)
+     |                                                                                                                                                         `- error: missing argument for parameter 'animations' in call
+ 953 |         }
+ 954 |         for items in platter.items {
+
+UIKit.UIView.animate:4:48: note: 'animate(springDuration:bounce:initialSpringVelocity:delay:options:animations:completion:)' declared here
+2 | @available(iOS 17.0, macOS 14.0, tvOS 17.0, visionOS 1.0, *)
+3 |   @available(watchOS, unavailable)
+4 |   @MainActor @preconcurrency public class func animate(springDuration duration: TimeInterval = 0.5, bounce: CGFloat = 0.0, initialSpringVelocity: CGFloat = 0.0, delay: TimeInterval = 0.0, options: UIView.AnimationOptions = [], animations: () -> Void, completion: ((Bool) -> Void)? = nil)}
+  |                                                `- note: 'animate(springDuration:bounce:initialSpringVelocity:delay:options:animations:completion:)' declared here
+5 | 
+
+submodules/TelegramUI/Components/NavigationBarComponent/Sources/NavigationBarPlatterTransitionView.swift:952:13: error: static member 'animate' cannot be used on instance of type 'NavigationBarPressGlowView'
+ 950 |         }
+ 951 |         if let glowView = platter.glowView {
+ 952 |             glowView.animate(sizes: glassFrames.map { $0.size }, glows: times.map { platter.glow.value(at: $0) }, timing: timing, isDark: platter.isDark)
+     |             `- error: static member 'animate' cannot be used on instance of type 'NavigationBarPressGlowView'
+ 953 |         }
+ 954 |         for items in platter.items {
+
+submodules/TelegramUI/Components/NavigationBarComponent/Sources/NavigationBarPlatterTransitionView.swift:959:13: error: the compiler is unable to type-check this expression in reasonable time; try breaking up the expression into distinct sub-expressions
+ 957 |             let scales = times.map { items.appearance.value(at: $0) }
+ 958 |             add(items.view.layer, "position", frames.map { NSValue(cgPoint: CGPoint(x: items.frame.midX - $0.minX, y: items.frame.midY - $0.minY)) })
+ 959 |             add(items.view.layer, "transform", scales.map { a in NSValue(caTransform3D: CATransform3DMakeScale(1.0 + a * (items.maxScale.width - 1.0), 1.0 + a * (items.maxScale.height - 1.0), 1.0)) })
+     |             `- error: the compiler is unable to type-check this expression in reasonable time; try breaking up the expression into distinct sub-expressions
+ 960 |             add(items.view.layer, "opacity", appearances.map { NSNumber(value: Float(1.0 - $0)) })
+ 961 |             self.addBlurKeyframes(to: items.view.layer, radii: appearances.map { items.blurRadius * $0 }, timing: timing)
+
+submodules/TelegramUI/Components/NavigationBarComponent/Sources/NavigationBarPlatterTransitionView.swift:980:9: error: cannot find 'addNavigationKeyframes' in scope
+ 978 |             layer.filters = [filter]
+ 979 |         }
+ 980 |         addNavigationKeyframes(to: layer, key: key, keyPath: "filters.gaussianBlur.inputRadius", values: radii.map { NSNumber(value: Double($0)) }, timing: timing)
+     |         `- error: cannot find 'addNavigationKeyframes' in scope
+ 981 |     }
+ 982 | 
+
+submodules/TelegramUI/Components/NavigationBarComponent/Sources/NavigationBarRowLayout.swift:180:39: error: value of type 'NavigationBarTheme' has no member 'glassTintColor'
+178 |     switch tint {
+179 |     case .generic:
+180 |         if let glassTintColor = theme.glassTintColor {
+    |                                       `- error: value of type 'NavigationBarTheme' has no member 'glassTintColor'
+181 |             return .init(kind: .custom(style: theme.glassStyle == .clear ? .clear : .default, color: glassTintColor))
+182 |         }
+
+submodules/TelegramUI/Components/NavigationBarComponent/Sources/NavigationBarRowLayout.swift:187:104: error: value of type 'NavigationBarTheme' has no member 'accentDisabledButtonColor'
+185 |         return .init(kind: .custom(style: theme.glassStyle == .clear ? .clear : .default, color: theme.accentButtonColor))
+186 |     case .accentDisabled:
+187 |         return .init(kind: .custom(style: theme.glassStyle == .clear ? .clear : .default, color: theme.accentDisabledButtonColor))
+    |                                                                                                        `- error: value of type 'NavigationBarTheme' has no member 'accentDisabledButtonColor'
+188 |     }
+189 | }
+[4,795 / 8,613] Compiling Rust rlib uniffi_bindgen v0.32.0 (108 files) [for tool]; 23s local, disk-cache
+Target //Telegram:telegram_auth_build_test failed to build
+ERROR: /Users/runner/work/AirGram-iOS/AirGram-iOS/submodules/TelegramUI/Components/Wallet/WalletPeerSelectionScreen/BUILD:3:14 Linking submodules/TelegramUI/Components/Wallet/WalletPeerSelectionScreen/libWalletPeerSelectionScreen.a failed: (Exit 1): worker failed: error executing SwiftDeriveFiles command (from target //submodules/TelegramUI/Components/NavigationBarComponent:NavigationBarComponent) 
+  (cd /private/var/tmp/_bazel_containerhost/c259e0c7803e089724afaeab1cf94801/execroot/_main && \
+  exec env - \
+    APPLE_SDK_PLATFORM=iPhoneOS \
+    APPLE_SDK_VERSION_OVERRIDE=26.4 \
+    PATH=/usr/bin:/bin:/usr/sbin:/sbin \
+    XCODE_VERSION_OVERRIDE=26.4.1.17E202 \
+    ZERO_AR_DATE=1 \
+  bazel-out/darwin_arm64-opt-exec-ST-d57f47055a04/bin/external/rules_swift+/tools/worker/worker swiftc @bazel-out/ios_arm64-opt-ios-arm64-min13.0-ST-2d46267cd7fb/bin/submodules/TelegramUI/Components/NavigationBarComponent/NavigationBarComponent.swiftmodule-0.params)
+# Configuration: d1c91be0bb6d8321ec9bffab4c73531df69cabaa58b370f6a302928720f060ca
+# Execution platform: @@platforms//host:host
+[4,796 / 8,613] checking cached actions
+INFO: Elapsed time: 2278.133s, Critical Path: 587.42s
+INFO: 4796 processes: 2120 internal, 2419 local, 257 worker.
+ERROR: Build did NOT complete successfully
+FAILED: 
+INFO: Build Event Protocol files produced successfully.
+Traceback (most recent call last):
+  File "/Users/runner/work/AirGram-iOS/AirGram-iOS/build-system/Make/Make.py", line 1294, in <module>
+    build(bazel=bazel_path, arguments=args)
+    ~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/runner/work/AirGram-iOS/AirGram-iOS/build-system/Make/Make.py", line 650, in build
+    bazel_command_line.invoke_build()
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "/Users/runner/work/AirGram-iOS/AirGram-iOS/build-system/Make/Make.py", line 325, in invoke_build
+    call_executable(combined_arguments)
+    ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^
+  File "/Users/runner/work/AirGram-iOS/AirGram-iOS/build-system/Make/BuildEnvironment.py", line 104, in call_executable
+    subprocess.check_call(resolved_arguments, env=resolved_env)
+    ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/homebrew/Cellar/python@3.15/3.15.2/Frameworks/Python.framework/Versions/3.15/lib/python3.15/subprocess.py", line 534, in check_call
+    raise CalledProcessError(retcode, cmd)
+subprocess.CalledProcessError: Command ['/Users/runner/work/AirGram-iOS/AirGram-iOS/build-input/bazel-8.4.2-darwin-arm64', '--output_user_root=/private/var/tmp/_bazel_containerhost', 'build', 'Telegram/telegram_auth_build_test', '--announce_rc', '--features=swift.use_global_module_cache', '--verbose_failures', '--remote_cache_async', '--jobs=3', '--local_cpu_resources=3', '--worker_max_instances=3', '--spawn_strategy=worker,local', '--strategy=SwiftCompile=worker,local', '--strategy=ObjcCompile=worker,local', '--strategy=Genrule=standalone', '--worker_quit_after_build=false', '--define=buildNumber=2831', '--features=swift.split_derived_files_generation', '--disk_cache=/private/var/tmp/_bazel_containerhost/disk_cache', '-c', 'opt', '--ios_multi_cpus=arm64', '--watchos_cpus=arm64_32', '--apple_generate_dsym', '--features=swift.opt_uses_wmo', '--features=swift.opt_uses_osize', '--features=dead_strip', '--objc_enable_binary_stripping', '--build_event_json_file=/var/folders/h5/t85nd63d71x27_8gl5gw3l_w0000gn/T/airgram-build-events.json'] returned non-zero exit status 1.
