@@ -1,0 +1,392 @@
+ERROR: /Users/runner/work/AirGram-iOS/AirGram-iOS/submodules/TelegramApi/BUILD:3:14: Generating derived files for Swift module //submodules/TelegramApi:TelegramApi failed: (Exit 1): worker failed: error executing SwiftDeriveFiles command (from target //submodules/TelegramApi:TelegramApi) 
+submodules/TelegramApi/Sources/Api0.swift:48:21: error: invalid redeclaration of 'wallet'
+     |                     `- error: invalid redeclaration of 'wallet'
+submodules/TelegramApi/Sources/Api15.swift:2816:24: error: unexpected non-void return value in void function
+     |                        |- error: unexpected non-void return value in void function
+submodules/TelegramApi/Sources/Api15.swift:2818:24: error: unexpected non-void return value in void function
+     |                        |- error: unexpected non-void return value in void function
+submodules/TelegramApi/Sources/Api15.swift:2815:18: error: case is already handled by previous patterns; consider removing it
+     |                  `- error: case is already handled by previous patterns; consider removing it
+submodules/TelegramApi/Sources/Api15.swift:3237:18: error: case is already handled by previous patterns; consider removing it
+     |                  `- error: case is already handled by previous patterns; consider removing it
+submodules/TelegramApi/Sources/Api15.swift:3271:13: error: switch must be exhaustive
+     |             |- error: switch must be exhaustive
+submodules/TelegramApi/Sources/Api28.swift:3470:24: error: unexpected non-void return value in void function
+     |                        |- error: unexpected non-void return value in void function
+submodules/TelegramApi/Sources/Api28.swift:3472:24: error: unexpected non-void return value in void function
+     |                        |- error: unexpected non-void return value in void function
+submodules/TelegramApi/Sources/Api28.swift:3474:24: error: unexpected non-void return value in void function
+     |                        |- error: unexpected non-void return value in void function
+submodules/TelegramApi/Sources/Api28.swift:3476:24: error: unexpected non-void return value in void function
+     |                        |- error: unexpected non-void return value in void function
+submodules/TelegramApi/Sources/Api28.swift:3478:24: error: unexpected non-void return value in void function
+     |                        |- error: unexpected non-void return value in void function
+submodules/TelegramApi/Sources/Api28.swift:3469:18: error: case is already handled by previous patterns; consider removing it
+     |                  `- error: case is already handled by previous patterns; consider removing it
+submodules/TelegramApi/Sources/Api28.swift:3638:18: error: case is already handled by previous patterns; consider removing it
+     |                  `- error: case is already handled by previous patterns; consider removing it
+submodules/TelegramApi/Sources/Api28.swift:3648:18: error: case is already handled by previous patterns; consider removing it
+     |                  `- error: case is already handled by previous patterns; consider removing it
+submodules/TelegramApi/Sources/Api28.swift:3654:18: error: case is already handled by previous patterns; consider removing it
+     |                  `- error: case is already handled by previous patterns; consider removing it
+submodules/TelegramApi/Sources/Api28.swift:3664:18: error: case is already handled by previous patterns; consider removing it
+     |                  `- error: case is already handled by previous patterns; consider removing it
+submodules/TelegramApi/Sources/Api28.swift:3688:13: error: switch must be exhaustive
+     |             |- error: switch must be exhaustive
+submodules/TelegramApi/Sources/ApiWallet.swift:1630:5: error: 'public' modifier is redundant for enum declared in a public extension
+     |     `- error: 'public' modifier is redundant for enum declared in a public extension
+submodules/TelegramApi/Sources/ApiWallet.swift:1633:32: error: ambiguous type name 'wallet' in 'Api.functions'
+     |                                `- error: ambiguous type name 'wallet' in 'Api.functions'
+submodules/TelegramApi/Sources/ApiWallet.swift:1657:32: error: ambiguous type name 'wallet' in 'Api.functions'
+     |                                `- error: ambiguous type name 'wallet' in 'Api.functions'
+submodules/TelegramApi/Sources/ApiWallet.swift:1683:32: error: ambiguous type name 'wallet' in 'Api.functions'
+     |                                `- error: ambiguous type name 'wallet' in 'Api.functions'
+submodules/TelegramApi/Sources/ApiWallet.swift:1701:32: error: ambiguous type name 'wallet' in 'Api.functions'
+     |                                `- error: ambiguous type name 'wallet' in 'Api.functions'
+submodules/TelegramApi/Sources/ApiWallet.swift:1717:32: error: ambiguous type name 'wallet' in 'Api.functions'
+     |                                `- error: ambiguous type name 'wallet' in 'Api.functions'
+submodules/TelegramApi/Sources/ApiWallet.swift:1731:32: error: ambiguous type name 'wallet' in 'Api.functions'
+     |                                `- error: ambiguous type name 'wallet' in 'Api.functions'
+submodules/TelegramApi/Sources/ApiWallet.swift:1745:32: error: ambiguous type name 'wallet' in 'Api.functions'
+     |                                `- error: ambiguous type name 'wallet' in 'Api.functions'
+submodules/TelegramApi/Sources/ApiWallet.swift:1759:32: error: ambiguous type name 'wallet' in 'Api.functions'
+     |                                `- error: ambiguous type name 'wallet' in 'Api.functions'
+submodules/TelegramApi/Sources/ApiWallet.swift:1775:32: error: ambiguous type name 'wallet' in 'Api.functions'
+     |                                `- error: ambiguous type name 'wallet' in 'Api.functions'
+submodules/TelegramApi/Sources/ApiWallet.swift:1789:32: error: ambiguous type name 'wallet' in 'Api.functions'
+     |                                `- error: ambiguous type name 'wallet' in 'Api.functions'
+submodules/TelegramApi/Sources/ApiWallet.swift:1803:32: error: ambiguous type name 'wallet' in 'Api.functions'
+     |                                `- error: ambiguous type name 'wallet' in 'Api.functions'
+submodules/TelegramApi/Sources/ApiWallet.swift:1820:32: error: ambiguous type name 'wallet' in 'Api.functions'
+     |                                `- error: ambiguous type name 'wallet' in 'Api.functions'
+submodules/TelegramApi/Sources/ApiWallet.swift:1839:32: error: ambiguous type name 'wallet' in 'Api.functions'
+     |                                `- error: ambiguous type name 'wallet' in 'Api.functions'
+submodules/TelegramApi/Sources/ApiWallet.swift:1858:32: error: ambiguous type name 'wallet' in 'Api.functions'
+     |                                `- error: ambiguous type name 'wallet' in 'Api.functions'
+submodules/TelegramApi/Sources/ApiWallet.swift:1883:32: error: ambiguous type name 'wallet' in 'Api.functions'
+     |                                `- error: ambiguous type name 'wallet' in 'Api.functions'
+submodules/TelegramApi/Sources/ApiWallet.swift:1902:32: error: ambiguous type name 'wallet' in 'Api.functions'
+     |                                `- error: ambiguous type name 'wallet' in 'Api.functions'
+submodules/TelegramApi/Sources/ApiWallet.swift:1923:32: error: ambiguous type name 'wallet' in 'Api.functions'
+     |                                `- error: ambiguous type name 'wallet' in 'Api.functions'
+submodules/TelegramApi/Sources/ApiWallet.swift:1944:32: error: ambiguous type name 'wallet' in 'Api.functions'
+     |                                `- error: ambiguous type name 'wallet' in 'Api.functions'
+submodules/TelegramApi/Sources/ApiWallet.swift:1963:32: error: ambiguous type name 'wallet' in 'Api.functions'
+     |                                `- error: ambiguous type name 'wallet' in 'Api.functions'
+submodules/TelegramApi/Sources/ApiWallet.swift:1979:32: error: ambiguous type name 'wallet' in 'Api.functions'
+     |                                `- error: ambiguous type name 'wallet' in 'Api.functions'
+submodules/TelegramApi/Sources/ApiWallet.swift:2000:32: error: ambiguous type name 'wallet' in 'Api.functions'
+     |                                `- error: ambiguous type name 'wallet' in 'Api.functions'
+submodules/TelegramApi/Sources/ApiWallet.swift:2014:32: error: ambiguous type name 'wallet' in 'Api.functions'
+     |                                `- error: ambiguous type name 'wallet' in 'Api.functions'
+submodules/TelegramApi/Sources/ApiWallet.swift:2029:32: error: ambiguous type name 'wallet' in 'Api.functions'
+     |                                `- error: ambiguous type name 'wallet' in 'Api.functions'
+submodules/TelegramApi/Sources/ApiWallet.swift:2045:32: error: ambiguous type name 'wallet' in 'Api.functions'
+     |                                `- error: ambiguous type name 'wallet' in 'Api.functions'
+submodules/TelegramApi/Sources/ApiWallet.swift:2066:32: error: ambiguous type name 'wallet' in 'Api.functions'
+     |                                `- error: ambiguous type name 'wallet' in 'Api.functions'
+ERROR: /Users/runner/work/AirGram-iOS/AirGram-iOS/submodules/TelegramCore/BUILD:3:14 Linking submodules/TelegramCore/libTelegramCore.a failed: (Exit 1): worker failed: error executing SwiftDeriveFiles command (from target //submodules/TelegramApi:TelegramApi) 
+ERROR: Build did NOT complete successfully
+FAILED: 
+Traceback (most recent call last):
+--- end of full build log ---
+1857 | }
+1858 | public extension Api.functions.wallet {
+     |                                `- error: ambiguous type name 'wallet' in 'Api.functions'
+1859 |     static func getUserAddresses(flags: Int32, id: [Api.InputUser], addresses: [String]) -> (FunctionDescription, Buffer, DeserializeFunctionResponse<Api.wallet.UserAddresses>) {
+1860 |         let buffer = Buffer()
+
+submodules/TelegramApi/Sources/Api0.swift:48:21: note: found candidate with type 'Api.functions.wallet'
+  46 |         public enum upload {}
+  47 |         public enum users {}
+  48 |         public enum wallet {}
+     |                     `- note: found candidate with type 'Api.functions.wallet'
+  49 |     }
+  50 | }
+
+submodules/TelegramApi/Sources/ApiWallet.swift:1883:32: error: ambiguous type name 'wallet' in 'Api.functions'
+1628 | 
+1629 | public extension Api.functions {
+1630 |     public enum wallet {}
+     |                 `- note: found candidate with type 'Api.functions.wallet'
+1631 | }
+1632 | 
+     :
+1881 |     }
+1882 | }
+1883 | public extension Api.functions.wallet {
+     |                                `- error: ambiguous type name 'wallet' in 'Api.functions'
+1884 |     static func replaceWallet(flags: Int32, wallet: Api.InputWalletReplacement, password: Api.InputCheckPasswordSRP?) -> (FunctionDescription, Buffer, DeserializeFunctionResponse<Api.WalletState>) {
+1885 |         let buffer = Buffer()
+
+submodules/TelegramApi/Sources/Api0.swift:48:21: note: found candidate with type 'Api.functions.wallet'
+  46 |         public enum upload {}
+  47 |         public enum users {}
+  48 |         public enum wallet {}
+     |                     `- note: found candidate with type 'Api.functions.wallet'
+  49 |     }
+  50 | }
+
+submodules/TelegramApi/Sources/ApiWallet.swift:1902:32: error: ambiguous type name 'wallet' in 'Api.functions'
+1628 | 
+1629 | public extension Api.functions {
+1630 |     public enum wallet {}
+     |                 `- note: found candidate with type 'Api.functions.wallet'
+1631 | }
+1632 | 
+     :
+1900 |     }
+1901 | }
+1902 | public extension Api.functions.wallet {
+     |                                `- error: ambiguous type name 'wallet' in 'Api.functions'
+1903 |     static func sendTransfer(flags: Int32, dataNormal: Buffer, dataGasless: Buffer?, userId: Api.InputUser, randomId: Int64) -> (FunctionDescription, Buffer, DeserializeFunctionResponse<Api.Updates>) {
+1904 |         let buffer = Buffer()
+
+submodules/TelegramApi/Sources/Api0.swift:48:21: note: found candidate with type 'Api.functions.wallet'
+  46 |         public enum upload {}
+  47 |         public enum users {}
+  48 |         public enum wallet {}
+     |                     `- note: found candidate with type 'Api.functions.wallet'
+  49 |     }
+  50 | }
+
+submodules/TelegramApi/Sources/ApiWallet.swift:1923:32: error: ambiguous type name 'wallet' in 'Api.functions'
+1628 | 
+1629 | public extension Api.functions {
+1630 |     public enum wallet {}
+     |                 `- note: found candidate with type 'Api.functions.wallet'
+1631 | }
+1632 | 
+     :
+1921 |     }
+1922 | }
+1923 | public extension Api.functions.wallet {
+     |                                `- error: ambiguous type name 'wallet' in 'Api.functions'
+1924 |     static func tonConnectClaimRequest(flags: Int32, sessionId: Int64, msgId: Int32, appRequestId: String, challengeAnswer: Buffer?) -> (FunctionDescription, Buffer, DeserializeFunctionResponse<Api.Bool>) {
+1925 |         let buffer = Buffer()
+
+submodules/TelegramApi/Sources/Api0.swift:48:21: note: found candidate with type 'Api.functions.wallet'
+  46 |         public enum upload {}
+  47 |         public enum users {}
+  48 |         public enum wallet {}
+     |                     `- note: found candidate with type 'Api.functions.wallet'
+  49 |     }
+  50 | }
+
+submodules/TelegramApi/Sources/ApiWallet.swift:1944:32: error: ambiguous type name 'wallet' in 'Api.functions'
+1628 | 
+1629 | public extension Api.functions {
+1630 |     public enum wallet {}
+     |                 `- note: found candidate with type 'Api.functions.wallet'
+1631 | }
+1632 | 
+     :
+1942 |     }
+1943 | }
+1944 | public extension Api.functions.wallet {
+     |                                `- error: ambiguous type name 'wallet' in 'Api.functions'
+1945 |     static func tonConnectCloseSession(flags: Int32, sessionId: Int64, body: Buffer?) -> (FunctionDescription, Buffer, DeserializeFunctionResponse<Api.Bool>) {
+1946 |         let buffer = Buffer()
+
+submodules/TelegramApi/Sources/Api0.swift:48:21: note: found candidate with type 'Api.functions.wallet'
+  46 |         public enum upload {}
+  47 |         public enum users {}
+  48 |         public enum wallet {}
+     |                     `- note: found candidate with type 'Api.functions.wallet'
+  49 |     }
+  50 | }
+
+submodules/TelegramApi/Sources/ApiWallet.swift:1963:32: error: ambiguous type name 'wallet' in 'Api.functions'
+1628 | 
+1629 | public extension Api.functions {
+1630 |     public enum wallet {}
+     |                 `- note: found candidate with type 'Api.functions.wallet'
+1631 | }
+1632 | 
+     :
+1961 |     }
+1962 | }
+1963 | public extension Api.functions.wallet {
+     |                                `- error: ambiguous type name 'wallet' in 'Api.functions'
+1964 |     static func tonConnectCreateSession(dappClientId: String, manifestUrl: String) -> (FunctionDescription, Buffer, DeserializeFunctionResponse<Api.TonConnectSession>) {
+1965 |         let buffer = Buffer()
+
+submodules/TelegramApi/Sources/Api0.swift:48:21: note: found candidate with type 'Api.functions.wallet'
+  46 |         public enum upload {}
+  47 |         public enum users {}
+  48 |         public enum wallet {}
+     |                     `- note: found candidate with type 'Api.functions.wallet'
+  49 |     }
+  50 | }
+
+submodules/TelegramApi/Sources/ApiWallet.swift:1979:32: error: ambiguous type name 'wallet' in 'Api.functions'
+1628 | 
+1629 | public extension Api.functions {
+1630 |     public enum wallet {}
+     |                 `- note: found candidate with type 'Api.functions.wallet'
+1631 | }
+1632 | 
+     :
+1977 |     }
+1978 | }
+1979 | public extension Api.functions.wallet {
+     |                                `- error: ambiguous type name 'wallet' in 'Api.functions'
+1980 |     static func tonConnectGetPending(flags: Int32, dappClientId: String?, sessionId: Int64?) -> (FunctionDescription, Buffer, DeserializeFunctionResponse<Api.wallet.TonConnectPending>) {
+1981 |         let buffer = Buffer()
+
+submodules/TelegramApi/Sources/Api0.swift:48:21: note: found candidate with type 'Api.functions.wallet'
+  46 |         public enum upload {}
+  47 |         public enum users {}
+  48 |         public enum wallet {}
+     |                     `- note: found candidate with type 'Api.functions.wallet'
+  49 |     }
+  50 | }
+
+submodules/TelegramApi/Sources/ApiWallet.swift:2000:32: error: ambiguous type name 'wallet' in 'Api.functions'
+1628 | 
+1629 | public extension Api.functions {
+1630 |     public enum wallet {}
+     |                 `- note: found candidate with type 'Api.functions.wallet'
+1631 | }
+1632 | 
+     :
+1998 |     }
+1999 | }
+2000 | public extension Api.functions.wallet {
+     |                                `- error: ambiguous type name 'wallet' in 'Api.functions'
+2001 |     static func tonConnectGetSessions() -> (FunctionDescription, Buffer, DeserializeFunctionResponse<Api.wallet.TonConnectSessions>) {
+2002 |         let buffer = Buffer()
+
+submodules/TelegramApi/Sources/Api0.swift:48:21: note: found candidate with type 'Api.functions.wallet'
+  46 |         public enum upload {}
+  47 |         public enum users {}
+  48 |         public enum wallet {}
+     |                     `- note: found candidate with type 'Api.functions.wallet'
+  49 |     }
+  50 | }
+
+submodules/TelegramApi/Sources/ApiWallet.swift:2014:32: error: ambiguous type name 'wallet' in 'Api.functions'
+1628 | 
+1629 | public extension Api.functions {
+1630 |     public enum wallet {}
+     |                 `- note: found candidate with type 'Api.functions.wallet'
+1631 | }
+1632 | 
+     :
+2012 |     }
+2013 | }
+2014 | public extension Api.functions.wallet {
+     |                                `- error: ambiguous type name 'wallet' in 'Api.functions'
+2015 |     static func tonConnectNextEventId(sessionId: Int64) -> (FunctionDescription, Buffer, DeserializeFunctionResponse<Api.TonConnectNextEventId>) {
+2016 |         let buffer = Buffer()
+
+submodules/TelegramApi/Sources/Api0.swift:48:21: note: found candidate with type 'Api.functions.wallet'
+  46 |         public enum upload {}
+  47 |         public enum users {}
+  48 |         public enum wallet {}
+     |                     `- note: found candidate with type 'Api.functions.wallet'
+  49 |     }
+  50 | }
+
+submodules/TelegramApi/Sources/ApiWallet.swift:2029:32: error: ambiguous type name 'wallet' in 'Api.functions'
+1628 | 
+1629 | public extension Api.functions {
+1630 |     public enum wallet {}
+     |                 `- note: found candidate with type 'Api.functions.wallet'
+1631 | }
+1632 | 
+     :
+2027 |     }
+2028 | }
+2029 | public extension Api.functions.wallet {
+     |                                `- error: ambiguous type name 'wallet' in 'Api.functions'
+2030 |     static func tonConnectRegisterKey(sessionId: Int64, clientId: String) -> (FunctionDescription, Buffer, DeserializeFunctionResponse<Api.wallet.TonConnectChallenge>) {
+2031 |         let buffer = Buffer()
+
+submodules/TelegramApi/Sources/Api0.swift:48:21: note: found candidate with type 'Api.functions.wallet'
+  46 |         public enum upload {}
+  47 |         public enum users {}
+  48 |         public enum wallet {}
+     |                     `- note: found candidate with type 'Api.functions.wallet'
+  49 |     }
+  50 | }
+
+submodules/TelegramApi/Sources/ApiWallet.swift:2045:32: error: ambiguous type name 'wallet' in 'Api.functions'
+1628 | 
+1629 | public extension Api.functions {
+1630 |     public enum wallet {}
+     |                 `- note: found candidate with type 'Api.functions.wallet'
+1631 | }
+1632 | 
+     :
+2043 |     }
+2044 | }
+2045 | public extension Api.functions.wallet {
+     |                                `- error: ambiguous type name 'wallet' in 'Api.functions'
+2046 |     static func tonConnectSubmitConnectResult(flags: Int32, sessionId: Int64, challengeAnswer: Buffer, body: Buffer, traceId: String?) -> (FunctionDescription, Buffer, DeserializeFunctionResponse<Api.Bool>) {
+2047 |         let buffer = Buffer()
+
+submodules/TelegramApi/Sources/Api0.swift:48:21: note: found candidate with type 'Api.functions.wallet'
+  46 |         public enum upload {}
+  47 |         public enum users {}
+  48 |         public enum wallet {}
+     |                     `- note: found candidate with type 'Api.functions.wallet'
+  49 |     }
+  50 | }
+
+submodules/TelegramApi/Sources/ApiWallet.swift:2066:32: error: ambiguous type name 'wallet' in 'Api.functions'
+1628 | 
+1629 | public extension Api.functions {
+1630 |     public enum wallet {}
+     |                 `- note: found candidate with type 'Api.functions.wallet'
+1631 | }
+1632 | 
+     :
+2064 |     }
+2065 | }
+2066 | public extension Api.functions.wallet {
+     |                                `- error: ambiguous type name 'wallet' in 'Api.functions'
+2067 |     static func tonConnectSubmitResponse(flags: Int32, sessionId: Int64, msgId: Int32, body: Buffer, traceId: String?) -> (FunctionDescription, Buffer, DeserializeFunctionResponse<Api.Bool>) {
+2068 |         let buffer = Buffer()
+
+submodules/TelegramApi/Sources/Api0.swift:48:21: note: found candidate with type 'Api.functions.wallet'
+  46 |         public enum upload {}
+  47 |         public enum users {}
+  48 |         public enum wallet {}
+     |                     `- note: found candidate with type 'Api.functions.wallet'
+  49 |     }
+  50 | }
+Target //Telegram:telegram_auth_build_test failed to build
+ERROR: /Users/runner/work/AirGram-iOS/AirGram-iOS/submodules/TelegramCore/BUILD:3:14 Linking submodules/TelegramCore/libTelegramCore.a failed: (Exit 1): worker failed: error executing SwiftDeriveFiles command (from target //submodules/TelegramApi:TelegramApi) 
+  (cd /private/var/tmp/_bazel_containerhost/c259e0c7803e089724afaeab1cf94801/execroot/_main && \
+  exec env - \
+    APPLE_SDK_PLATFORM=iPhoneOS \
+    APPLE_SDK_VERSION_OVERRIDE=26.4 \
+    PATH=/usr/bin:/bin:/usr/sbin:/sbin \
+    XCODE_VERSION_OVERRIDE=26.4.1.17E202 \
+    ZERO_AR_DATE=1 \
+  bazel-out/darwin_arm64-opt-exec-ST-d57f47055a04/bin/external/rules_swift+/tools/worker/worker swiftc @bazel-out/ios_arm64-opt-ios-arm64-min13.0-ST-2d46267cd7fb/bin/submodules/TelegramApi/TelegramApi.swiftmodule-0.params)
+# Configuration: c34dcb9a5813e4e60649ba74a92649165520e47a66fa8abcc34a1ead0314e019
+# Execution platform: @@platforms//host:host
+[5,520 / 8,613] checking cached actions
+INFO: Elapsed time: 1591.446s, Critical Path: 314.34s
+INFO: 5520 processes: 2120 internal, 3352 local, 48 worker.
+ERROR: Build did NOT complete successfully
+FAILED: 
+INFO: Build Event Protocol files produced successfully.
+Traceback (most recent call last):
+  File "/Users/runner/work/AirGram-iOS/AirGram-iOS/build-system/Make/Make.py", line 1294, in <module>
+    build(bazel=bazel_path, arguments=args)
+    ~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/runner/work/AirGram-iOS/AirGram-iOS/build-system/Make/Make.py", line 650, in build
+    bazel_command_line.invoke_build()
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "/Users/runner/work/AirGram-iOS/AirGram-iOS/build-system/Make/Make.py", line 325, in invoke_build
+    call_executable(combined_arguments)
+    ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^
+  File "/Users/runner/work/AirGram-iOS/AirGram-iOS/build-system/Make/BuildEnvironment.py", line 104, in call_executable
+    subprocess.check_call(resolved_arguments, env=resolved_env)
+    ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/homebrew/Cellar/python@3.15/3.15.2/Frameworks/Python.framework/Versions/3.15/lib/python3.15/subprocess.py", line 534, in check_call
+    raise CalledProcessError(retcode, cmd)
+subprocess.CalledProcessError: Command ['/Users/runner/work/AirGram-iOS/AirGram-iOS/build-input/bazel-8.4.2-darwin-arm64', '--output_user_root=/private/var/tmp/_bazel_containerhost', 'build', 'Telegram/telegram_auth_build_test', '--announce_rc', '--features=swift.use_global_module_cache', '--verbose_failures', '--remote_cache_async', '--jobs=3', '--local_cpu_resources=3', '--worker_max_instances=3', '--spawn_strategy=worker,local', '--strategy=SwiftCompile=worker,local', '--strategy=ObjcCompile=worker,local', '--strategy=Genrule=standalone', '--worker_quit_after_build=false', '--define=buildNumber=2835', '--features=swift.split_derived_files_generation', '--disk_cache=/private/var/tmp/_bazel_containerhost/disk_cache', '-c', 'opt', '--ios_multi_cpus=arm64', '--watchos_cpus=arm64_32', '--apple_generate_dsym', '--features=swift.opt_uses_wmo', '--features=swift.opt_uses_osize', '--features=dead_strip', '--objc_enable_binary_stripping', '--build_event_json_file=/var/folders/h5/t85nd63d71x27_8gl5gw3l_w0000gn/T/airgram-build-events.json'] returned non-zero exit status 1.
