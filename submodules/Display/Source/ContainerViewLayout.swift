@@ -33,6 +33,14 @@ extension ContainerViewLayout {
     public func sideStrip(edge: ContainerViewLayoutSideEdge) -> CGRect? {
         return nil
     }
+
+    public func sideInsets(forBandFrom bandMinY: CGFloat, to bandMaxY: CGFloat) -> (left: CGFloat, right: CGFloat) {
+        return (0.0, 0.0)
+    }
+
+    public var presentedInFormSheet: Bool {
+        return false
+    }
 }
 
 public struct LayoutMetrics: Equatable {

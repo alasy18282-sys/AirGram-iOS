@@ -1399,3 +1399,33 @@ public final class GlassContextExtractableContainer: UIView, ContextExtractableC
         }
     }
 }
+
+extension GlassBackgroundView.TintColor {
+    /// Interpolates between two tints for glass fade animations. Kinds that do not
+    /// carry a blendable color swap at the midpoint, which reads as a cross-fade.
+    public static func blended(from: GlassBackgroundView.TintColor, to: GlassBackgroundView.TintColor,
+                               fraction: CGFloat, isDark: Bool) -> GlassBackgroundView.TintColor {
+        if fraction <= 0.0 {
+            return from
+        }
+        if fraction >= 1.0 {
+            return to
+        }
+        if from.kind == to.kind, let fromColor = from.innerColor, let toColor = to.innerColor {
+            var fromRed: CGFloat = 0.0, fromGreen: CGFloat = 0.0, fromBlue: CGFloat = 0.0, fromAlpha: CGFloat = 0.0
+            var toRed: CGFloat = 0.0, toGreen: CGFloat = 0.0, toBlue: CGFloat = 0.0, toAlpha: CGFloat = 0.0
+            if fromColor.getRed(&fromRed, green: &fromGreen, blue: &fromBlue, alpha: &fromAlpha),
+               toColor.getRed(&toRed, green: &toGreen, blue: &toBlue, alpha: &toAlpha) {
+                let blendedColor = UIColor(
+                    red: fromRed + (toRed - fromRed) * fraction,
+                    green: fromGreen + (toGreen - fromGreen) * fraction,
+                    blue: fromBlue + (toBlue - fromBlue) * fraction,
+                    alpha: fromAlpha + (toAlpha - fromAlpha) * fraction
+                )
+                let blendedInset = from.innerInset + (to.innerInset - from.innerInset) * fraction
+                return GlassBackgroundView.TintColor(kind: from.kind, innerColor: blendedColor, innerInset: blendedInset)
+            }
+        }
+        return fraction < 0.5 ? from : to
+    }
+}
