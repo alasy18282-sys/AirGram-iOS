@@ -1,0 +1,148 @@
+Could not find an IPA in Bazel outputs for target Telegram/telegram_auth_build_test. cquery outputs: []
+--- end of full build log ---
+  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0
+ 54 55.8M   54 30.6M    0     0  41.0M      0  0:00:01 --:--:--  0:00:01 41.0M100 55.8M  100 55.8M    0     0  53.3M      0  0:00:01  0:00:01 --:--:-- 84.1M
+Overriding the required Xcode version 26.4 with 26.4.1 as reported by 'xcode-select -p'
+TelegramBuild: running
+/Users/runner/work/AirGram-iOS/AirGram-iOS/build-input/bazel-8.4.2-darwin-arm64 --output_user_root=/private/var/tmp/_bazel_containerhost build Telegram/telegram_auth_build_test --announce_rc --features=swift.use_global_module_cache --verbose_failures --remote_cache_async --jobs=3 --local_cpu_resources=3 --worker_max_instances=3 --spawn_strategy=worker,local --strategy=SwiftCompile=worker,local --strategy=ObjcCompile=worker,local --strategy=Genrule=standalone --worker_quit_after_build=false --define=buildNumber=2814 --features=swift.split_derived_files_generation --disk_cache=/private/var/tmp/_bazel_containerhost/disk_cache -c opt --ios_multi_cpus=arm64 --watchos_cpus=arm64_32 --apple_generate_dsym --features=swift.opt_uses_wmo --features=swift.opt_uses_osize --features=dead_strip --objc_enable_binary_stripping --build_event_json_file=/var/folders/h5/t85nd63d71x27_8gl5gw3l_w0000gn/T/airgram-build-events.json
+Extracting Bazel installation...
+Starting local Bazel server (8.4.2) and connecting to it...
+WARNING: Option 'local_cpu_resources' is deprecated: --local_cpu_resources is deprecated, please use --local_resources=cpu= instead.
+INFO: Invocation ID: 51a68ac3-5a41-4691-80e2-97446298dafe
+INFO: Options provided by the client:
+  Inherited 'common' options: --isatty=0 --terminal_columns=80
+INFO: Reading rc options for 'build' from /Users/runner/work/AirGram-iOS/AirGram-iOS/.bazelrc:
+  Inherited 'common' options: --features=swift.index_while_building --features=swift.use_global_index_store --features=swift.use_global_module_cache --features=oso_prefix_is_pwd
+INFO: Reading rc options for 'build' from /Users/runner/work/AirGram-iOS/AirGram-iOS/.bazelrc:
+  'build' options: --action_env=ZERO_AR_DATE=1 --apple_platform_type=ios --enable_platform_specific_config --apple_crosstool_top=@local_config_apple_cc//:toolchain --crosstool_top=@local_config_apple_cc//:toolchain --host_crosstool_top=@local_config_apple_cc//:toolchain --per_file_copt=.*.m$,@-fno-objc-msgsend-selector-stubs --per_file_copt=.*.mm$,@-fno-objc-msgsend-selector-stubs --features=debug_prefix_map_pwd_is_dot --features=swift.cacheable_swiftmodules --features=swift.debug_prefix_map --features=swift.enable_vfsoverlays --jobs=HOST_CPUS --local_cpu_resources=HOST_CPUS --worker_max_instances=HOST_CPUS --spawn_strategy=worker,local --strategy=SwiftCompile=worker,local --strategy=ObjcCompile=worker,local --strategy=Genrule=standalone --worker_quit_after_build=false --disk_cache=~/.cache/airgram-bazel-disk --remote_cache_async
+Computing main repo mapping: 
+Computing main repo mapping: 
+Computing main repo mapping: 
+WARNING: For repository 'bazel_features', the root module requires module version bazel_features@1.33.0, but got bazel_features@1.50.0 in the resolved dependency graph. Please update the version in your MODULE.bazel or set --check_direct_dependencies=off
+WARNING: For repository 'bazel_skylib', the root module requires module version bazel_skylib@1.8.1, but got bazel_skylib@1.9.0 in the resolved dependency graph. Please update the version in your MODULE.bazel or set --check_direct_dependencies=off
+WARNING: For repository 'platforms', the root module requires module version platforms@0.0.11, but got platforms@1.1.0 in the resolved dependency graph. Please update the version in your MODULE.bazel or set --check_direct_dependencies=off
+WARNING: Option 'local_cpu_resources' is deprecated: --local_cpu_resources is deprecated, please use --local_resources=cpu= instead.
+Loading: 
+Loading: 0 packages loaded
+Loading: 0 packages loaded
+Loading: 0 packages loaded
+Analyzing: target //Telegram:telegram_auth_build_test (1 packages loaded, 0 targets configured)
+Analyzing: target //Telegram:telegram_auth_build_test (1 packages loaded, 0 targets configured)
+
+Analyzing: target //Telegram:telegram_auth_build_test (23 packages loaded, 19 targets configured)
+
+Analyzing: target //Telegram:telegram_auth_build_test (56 packages loaded, 19 targets configured)
+
+Analyzing: target //Telegram:telegram_auth_build_test (56 packages loaded, 19 targets configured)
+
+Analyzing: target //Telegram:telegram_auth_build_test (85 packages loaded, 4333 targets configured)
+
+Analyzing: target //Telegram:telegram_auth_build_test (94 packages loaded, 4594 targets configured)
+
+Analyzing: target //Telegram:telegram_auth_build_test (94 packages loaded, 4594 targets configured)
+
+Analyzing: target //Telegram:telegram_auth_build_test (235 packages loaded, 6989 targets configured)
+
+Analyzing: target //Telegram:telegram_auth_build_test (420 packages loaded, 7967 targets configured)
+
+Analyzing: target //Telegram:telegram_auth_build_test (420 packages loaded, 7967 targets configured)
+
+Analyzing: target //Telegram:telegram_auth_build_test (447 packages loaded, 8764 targets configured)
+
+Analyzing: target //Telegram:telegram_auth_build_test (801 packages loaded, 23354 targets configured)
+
+Analyzing: target //Telegram:telegram_auth_build_test (801 packages loaded, 23354 targets configured)
+
+Analyzing: target //Telegram:telegram_auth_build_test (801 packages loaded, 23354 targets configured)
+
+Analyzing: target //Telegram:telegram_auth_build_test (874 packages loaded, 26624 targets configured)
+
+Analyzing: target //Telegram:telegram_auth_build_test (902 packages loaded, 31948 targets configured)
+
+Analyzing: target //Telegram:telegram_auth_build_test (902 packages loaded, 31948 targets configured)
+
+Analyzing: target //Telegram:telegram_auth_build_test (902 packages loaded, 31948 targets configured)
+
+Analyzing: target //Telegram:telegram_auth_build_test (902 packages loaded, 31948 targets configured)
+
+Analyzing: target //Telegram:telegram_auth_build_test (902 packages loaded, 31948 targets configured)
+
+Analyzing: target //Telegram:telegram_auth_build_test (904 packages loaded, 31961 targets configured)
+
+Analyzing: target //Telegram:telegram_auth_build_test (904 packages loaded, 31961 targets configured)
+
+Analyzing: target //Telegram:telegram_auth_build_test (904 packages loaded, 31961 targets configured)
+
+Analyzing: target //Telegram:telegram_auth_build_test (904 packages loaded, 31961 targets configured)
+
+Analyzing: target //Telegram:telegram_auth_build_test (904 packages loaded, 31961 targets configured)
+
+Analyzing: target //Telegram:telegram_auth_build_test (904 packages loaded, 31961 targets configured)
+
+Analyzing: target //Telegram:telegram_auth_build_test (904 packages loaded, 31961 targets configured)
+
+Analyzing: target //Telegram:telegram_auth_build_test (904 packages loaded, 31961 targets configured)
+
+Analyzing: target //Telegram:telegram_auth_build_test (904 packages loaded, 31961 targets configured)
+
+Analyzing: target //Telegram:telegram_auth_build_test (904 packages loaded, 31961 targets configured)
+
+Analyzing: target //Telegram:telegram_auth_build_test (904 packages loaded, 31961 targets configured)
+
+Analyzing: target //Telegram:telegram_auth_build_test (904 packages loaded, 31961 targets configured)
+
+Analyzing: target //Telegram:telegram_auth_build_test (904 packages loaded, 31961 targets configured)
+
+Analyzing: target //Telegram:telegram_auth_build_test (904 packages loaded, 31961 targets configured)
+
+Analyzing: target //Telegram:telegram_auth_build_test (905 packages loaded, 32122 targets configured)
+
+Analyzing: target //Telegram:telegram_auth_build_test (905 packages loaded, 32128 targets configured)
+
+Analyzing: target //Telegram:telegram_auth_build_test (911 packages loaded, 32286 targets configured)
+
+Analyzing: target //Telegram:telegram_auth_build_test (914 packages loaded, 32486 targets configured)
+
+Analyzing: target //Telegram:telegram_auth_build_test (914 packages loaded, 33017 targets configured)
+
+DEBUG: /private/var/tmp/_bazel_containerhost/c259e0c7803e089724afaeab1cf94801/external/rules_rust+/crate_universe/extensions.bzl:708:14: WARN: Build is not hermetic - path dependency pulling in crate at /Users/runner/work/AirGram-iOS/AirGram-iOS/third-party/wallet-engine/vendor/ton/Cargo.toml is being used.
+Analyzing: target //Telegram:telegram_auth_build_test (914 packages loaded, 33017 targets configured)
+
+Analyzing: target //Telegram:telegram_auth_build_test (914 packages loaded, 33017 targets configured)
+
+Analyzing: target //Telegram:telegram_auth_build_test (914 packages loaded, 33017 targets configured)
+
+Analyzing: target //Telegram:telegram_auth_build_test (914 packages loaded, 33017 targets configured)
+
+Analyzing: target //Telegram:telegram_auth_build_test (914 packages loaded, 33017 targets configured)
+
+Analyzing: target //Telegram:telegram_auth_build_test (914 packages loaded, 33017 targets configured)
+
+Analyzing: target //Telegram:telegram_auth_build_test (949 packages loaded, 33017 targets configured)
+
+Analyzing: target //Telegram:telegram_auth_build_test (1009 packages loaded, 36973 targets configured)
+
+Analyzing: target //Telegram:telegram_auth_build_test (1069 packages loaded, 38916 targets configured)
+
+Analyzing: target //Telegram:telegram_auth_build_test (1109 packages loaded, 40961 targets configured)
+
+Analyzing: target //Telegram:telegram_auth_build_test (1162 packages loaded, 43696 targets configured)
+
+Analyzing: target //Telegram:telegram_auth_build_test (1236 packages loaded, 46483 targets configured)
+
+Analyzing: target //Telegram:telegram_auth_build_test (1282 packages loaded, 48648 targets configured)
+
+Analyzing: target //Telegram:telegram_auth_build_test (1303 packages loaded, 50285 targets configured)
+
+INFO: Analyzed target //Telegram:telegram_auth_build_test (1305 packages loaded, 50445 targets configured).
+INFO: Found 1 target...
+Target //Telegram:telegram_auth_build_test was skipped
+INFO: Elapsed time: 89.664s, Critical Path: 0.03s
+INFO: 1 process: 1 internal.
+INFO: Build completed successfully, 1 total action
+INFO: 
+INFO: Build Event Protocol files produced successfully.
+Bazel skipped the requested target: Target //Telegram:telegram_auth_build_test build was skipped.
+Could not find an IPA in Bazel outputs for target Telegram/telegram_auth_build_test. cquery outputs: []
