@@ -2084,3 +2084,123 @@ public extension Api.functions.wallet {
         })
     }
 }
+public extension Api {
+    enum WalletOwnershipProof: TypeConstructorDescription {
+        public class Cons_walletOwnershipProof: TypeConstructorDescription {
+            public var timestamp: Int32
+            public var signature: Buffer
+            public init(timestamp: Int32, signature: Buffer) {
+                self.timestamp = timestamp
+                self.signature = signature
+            }
+            public func descriptionFields() -> (String, [(String, ConstructorParameterDescription)]) {
+                return ("walletOwnershipProof", [("timestamp", ConstructorParameterDescription(self.timestamp)), ("signature", ConstructorParameterDescription(self.signature))])
+            }
+        }
+        case walletOwnershipProof(Cons_walletOwnershipProof)
+
+        public func serialize(_ buffer: Buffer, _ boxed: Swift.Bool) {
+            switch self {
+            case .walletOwnershipProof(let _data):
+                if boxed {
+                    buffer.appendInt32(1622985485)
+                }
+                serializeInt32(_data.timestamp, buffer: buffer, boxed: false)
+                serializeBytes(_data.signature, buffer: buffer, boxed: false)
+                break
+            }
+        }
+
+        public func descriptionFields() -> (String, [(String, ConstructorParameterDescription)]) {
+            switch self {
+            case .walletOwnershipProof(let _data):
+                return ("walletOwnershipProof", [("timestamp", ConstructorParameterDescription(_data.timestamp)), ("signature", ConstructorParameterDescription(_data.signature))])
+            }
+        }
+
+        public static func parse_walletOwnershipProof(_ reader: BufferReader) -> WalletOwnershipProof? {
+            var _1: Int32?
+            _1 = reader.readInt32()
+            var _2: Buffer?
+            _2 = parseBytes(reader)
+            let _c1 = _1 != nil
+            let _c2 = _2 != nil
+            if _c1 && _c2 {
+                return Api.WalletOwnershipProof.walletOwnershipProof(Cons_walletOwnershipProof(timestamp: _1!, signature: _2!))
+            }
+            else {
+                return nil
+            }
+        }
+    }
+}
+
+public extension Api {
+    enum TonConnectManifest: TypeConstructorDescription {
+        public class Cons_tonConnectManifest: TypeConstructorDescription {
+            public var flags: Int32
+            public var url: String
+            public var name: String
+            public var icon: Api.WebDocument?
+            public init(flags: Int32, url: String, name: String, icon: Api.WebDocument?) {
+                self.flags = flags
+                self.url = url
+                self.name = name
+                self.icon = icon
+            }
+            public func descriptionFields() -> (String, [(String, ConstructorParameterDescription)]) {
+                return ("tonConnectManifest", [("flags", ConstructorParameterDescription(self.flags)), ("url", ConstructorParameterDescription(self.url)), ("name", ConstructorParameterDescription(self.name)), ("icon", ConstructorParameterDescription(self.icon))])
+            }
+        }
+        case tonConnectManifest(Cons_tonConnectManifest)
+
+        public func serialize(_ buffer: Buffer, _ boxed: Swift.Bool) {
+            switch self {
+            case .tonConnectManifest(let _data):
+                if boxed {
+                    buffer.appendInt32(304255588)
+                }
+                serializeInt32(_data.flags, buffer: buffer, boxed: false)
+                serializeString(_data.url, buffer: buffer, boxed: false)
+                serializeString(_data.name, buffer: buffer, boxed: false)
+                if Int(_data.flags) & Int(1 << 0) != 0 {
+                    _data.icon!.serialize(buffer, true)
+                }
+                break
+            }
+        }
+
+        public func descriptionFields() -> (String, [(String, ConstructorParameterDescription)]) {
+            switch self {
+            case .tonConnectManifest(let _data):
+                return ("tonConnectManifest", [("flags", ConstructorParameterDescription(_data.flags)), ("url", ConstructorParameterDescription(_data.url)), ("name", ConstructorParameterDescription(_data.name)), ("icon", ConstructorParameterDescription(_data.icon))])
+            }
+        }
+
+        public static func parse_tonConnectManifest(_ reader: BufferReader) -> TonConnectManifest? {
+            var _1: Int32?
+            _1 = reader.readInt32()
+            var _2: String?
+            _2 = parseString(reader)
+            var _3: String?
+            _3 = parseString(reader)
+            var _4: Api.WebDocument?
+            if Int(_1 ?? 0) & Int(1 << 0) != 0 {
+                if let signature = reader.readInt32() {
+                    _4 = Api.parse(reader, signature: signature) as? Api.WebDocument
+                }
+            }
+            let _c1 = _1 != nil
+            let _c2 = _2 != nil
+            let _c3 = _3 != nil
+            let _c4 = (Int(_1 ?? 0) & Int(1 << 0) == 0) || _4 != nil
+            if _c1 && _c2 && _c3 && _c4 {
+                return Api.TonConnectManifest.tonConnectManifest(Cons_tonConnectManifest(flags: _1!, url: _2!, name: _3!, icon: _4))
+            }
+            else {
+                return nil
+            }
+        }
+    }
+}
+

@@ -45,7 +45,7 @@ public enum Api {
         public enum updates {}
         public enum upload {}
         public enum users {}
-    public enum wallet {}
+        public enum wallet {}
     }
 }
 
