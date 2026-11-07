@@ -277,7 +277,7 @@ class BazelCommandLine:
         combined_arguments += ['build']
 
         if self.lock:
-            combined_arguments += ['--lockfile_mode=update']
+            combined_arguments += ['--lockfile_mode=error']
 
         if self.custom_target is not None:
             combined_arguments += [self.custom_target]
