@@ -1,0 +1,328 @@
+ERROR: /Users/runner/work/AirGram-iOS/AirGram-iOS/submodules/TelegramUI/Components/SideColumnLayout/BUILD:5:14: Generating derived files for Swift module //submodules/TelegramUI/Components/SideColumnLayout:SideColumnLayout failed: (Exit 1): worker failed: error executing SwiftDeriveFiles command (from target //submodules/TelegramUI/Components/SideColumnLayout:SideColumnLayout) 
+submodules/TelegramUI/Components/SideColumnLayout/Sources/SideColumnLayout.swift:21:22: error: cannot find type 'ContainerViewLayoutSideEdge' in scope
+    |                      `- error: cannot find type 'ContainerViewLayoutSideEdge' in scope
+submodules/TelegramUI/Components/SideColumnLayout/Sources/SideColumnLayout.swift:26:23: error: cannot find type 'ContainerViewLayoutSideEdge' in scope
+    |                       `- error: cannot find type 'ContainerViewLayoutSideEdge' in scope
+submodules/TelegramUI/Components/SideColumnLayout/Sources/SideColumnLayout.swift:20:15: error: type 'SideColumnRegion' does not conform to protocol 'Equatable'
+    |               |- error: type 'SideColumnRegion' does not conform to protocol 'Equatable'
+submodules/TelegramUI/Components/SideColumnLayout/Sources/SideColumnLayout.swift:210:116: error: cannot find type 'ContainerViewLayoutSideEdge' in scope
+    |                                                                                                                    `- error: cannot find type 'ContainerViewLayoutSideEdge' in scope
+submodules/TelegramUI/Components/SideColumnLayout/Sources/SideColumnLayout.swift:37:15: error: cannot find type 'ContainerViewLayoutSideEdge' in scope
+    |               `- error: cannot find type 'ContainerViewLayoutSideEdge' in scope
+submodules/TelegramUI/Components/SideColumnLayout/Sources/SideColumnLayout.swift:39:32: error: value of type 'ContainerViewLayout' has no member 'sideStrip'
+    |                                `- error: value of type 'ContainerViewLayout' has no member 'sideStrip'
+submodules/TelegramUI/Components/SideColumnLayout/Sources/SideColumnLayout.swift:39:49: error: cannot infer contextual base in reference to member 'right'
+    |                                                 `- error: cannot infer contextual base in reference to member 'right'
+submodules/TelegramUI/Components/SideColumnLayout/Sources/SideColumnLayout.swift:42:38: error: value of type 'ContainerViewLayout' has no member 'sideStrip'
+    |                                      `- error: value of type 'ContainerViewLayout' has no member 'sideStrip'
+submodules/TelegramUI/Components/SideColumnLayout/Sources/SideColumnLayout.swift:42:55: error: cannot infer contextual base in reference to member 'left'
+    |                                                       `- error: cannot infer contextual base in reference to member 'left'
+submodules/TelegramUI/Components/SideColumnLayout/Sources/SideColumnLayout.swift:211:25: error: value of type 'ContainerViewLayout' has no member 'sideInsets'
+    |                         `- error: value of type 'ContainerViewLayout' has no member 'sideInsets'
+submodules/TelegramUI/Components/SideColumnLayout/Sources/SideColumnLayout.swift:227:31: error: value of type 'ContainerViewLayout' has no member 'presentedInFormSheet'
+    |                               `- error: value of type 'ContainerViewLayout' has no member 'presentedInFormSheet'
+ERROR: /Users/runner/work/AirGram-iOS/AirGram-iOS/submodules/TelegramUI/Components/NavigationBarComponent/BUILD:5:14 Linking submodules/TelegramUI/Components/NavigationBarComponent/libNavigationBarComponent.a failed: (Exit 1): worker failed: error executing SwiftDeriveFiles command (from target //submodules/TelegramUI/Components/SideColumnLayout:SideColumnLayout) 
+ERROR: Build did NOT complete successfully
+FAILED: 
+Traceback (most recent call last):
+--- end of full build log ---
+  249 | static _FormattedString * _Nonnull getFormatted7(_PresentationStrings * _Nonnull strings,
+      |                                    ^~~~~~~~~~~~~
+1 warning generated.
+[3,136 / 8,613] Compiling absl/strings/internal/cord_rep_crc.cc [for tool]; 14s local, disk-cache ... (3 actions, 2 running)
+[3,137 / 8,613] Compiling absl/strings/internal/cord_rep_crc.cc [for tool]; 15s local, disk-cache ... (3 actions running)
+[3,140 / 8,613] Compiling absl/strings/internal/cord_rep_crc.cc [for tool]; 16s local, disk-cache ... (3 actions running)
+[3,141 / 8,613] Compiling absl/strings/internal/cord_rep_crc.cc [for tool]; 17s local, disk-cache ... (3 actions running)
+[3,142 / 8,613] Compiling absl/strings/internal/cord_rep_crc.cc [for tool]; 18s local, disk-cache ... (3 actions running)
+[3,146 / 8,613] Compiling absl/crc/internal/crc_cord_state.cc [for tool]; 0s local, disk-cache ... (3 actions running)
+[3,147 / 8,613] Compiling absl/crc/internal/crc_cord_state.cc [for tool]; 1s local, disk-cache ... (3 actions running)
+[3,148 / 8,613] Compiling absl/crc/internal/crc_cord_state.cc [for tool]; 3s local, disk-cache ... (3 actions, 2 running)
+[3,150 / 8,613] Compiling absl/crc/internal/crc_cord_state.cc [for tool]; 4s local, disk-cache ... (3 actions, 2 running)
+[3,155 / 8,613] Compiling absl/crc/internal/crc_cord_state.cc [for tool]; 6s local, disk-cache ... (3 actions running)
+[3,156 / 8,613] Compiling absl/crc/internal/crc_cord_state.cc [for tool]; 7s local, disk-cache ... (3 actions running)
+[3,157 / 8,613] Compiling absl/crc/internal/crc_cord_state.cc [for tool]; 8s local, disk-cache ... (3 actions running)
+[3,158 / 8,613] Compiling absl/crc/internal/crc_cord_state.cc [for tool]; 9s local, disk-cache ... (3 actions running)
+[3,159 / 8,613] Compiling absl/crc/internal/crc_cord_state.cc [for tool]; 11s local, disk-cache ... (3 actions, 2 running)
+[3,159 / 8,613] Compiling absl/crc/internal/crc_cord_state.cc [for tool]; 12s local, disk-cache ... (3 actions running)
+[3,160 / 8,613] Compiling absl/crc/internal/crc_cord_state.cc [for tool]; 13s local, disk-cache ... (3 actions running)
+[3,163 / 8,613] Compiling submodules/sqlcipher/Sources/sqlite3.c; 8s local, disk-cache ... (3 actions running)
+[3,164 / 8,613] Compiling submodules/sqlcipher/Sources/sqlite3.c; 10s local, disk-cache ... (3 actions, 2 running)
+[3,165 / 8,613] Compiling submodules/sqlcipher/Sources/sqlite3.c; 12s local, disk-cache ... (3 actions running)
+[3,166 / 8,613] Compiling submodules/sqlcipher/Sources/sqlite3.c; 13s local, disk-cache ... (3 actions, 2 running)
+[3,166 / 8,613] Compiling submodules/sqlcipher/Sources/sqlite3.c; 14s local, disk-cache ... (3 actions running)
+[3,167 / 8,613] Generating derived files for Swift module //submodules/RaiseToListen:RaiseToListen; 5s disk-cache, worker ... (3 actions, 2 running)
+[3,169 / 8,613] Generating derived files for Swift module //submodules/RaiseToListen:RaiseToListen; 6s disk-cache, worker ... (3 actions running)
+[3,170 / 8,613] Generating derived files for Swift module //submodules/RaiseToListen:RaiseToListen; 7s disk-cache, worker ... (3 actions running)
+[3,176 / 8,613] Compiling submodules/AsyncDisplayKit/Source/ASDisplayNodeExtras.mm; 0s local, disk-cache ... (3 actions, 2 running)
+[3,180 / 8,613] Compiling submodules/AsyncDisplayKit/Source/ASDisplayNodeExtras.mm; 1s local, disk-cache ... (3 actions, 2 running)
+[3,184 / 8,613] CompileInfoPlist submodules/PremiumUI/PremiumUIBundle-intermediates/PremiumUIBundle.bundle/Info.plist; 0s local, disk-cache ... (3 actions, 2 running)
+[3,188 / 8,613] Compiling Swift module //submodules/WidgetItems:WidgetItems; 1s disk-cache, worker ... (3 actions, 2 running)
+[3,191 / 8,613] Compiling Swift module //submodules/WidgetItems:WidgetItems; 2s disk-cache, worker ... (3 actions, 2 running)
+[3,199 / 8,613] Compiling submodules/AsyncDisplayKit/Source/ASExperimentalFeatures.mm; 0s local, disk-cache ... (3 actions, 2 running)
+[3,204 / 8,613] Compiling submodules/AsyncDisplayKit/Source/ASGraphicsContext.mm; 0s local, disk-cache ... (3 actions, 2 running)
+[3,213 / 8,613] Compiling submodules/MtProtoKit/Sources/GCDAsyncSocket.m; 0s local, disk-cache ... (3 actions, 2 running)
+[3,219 / 8,613] Compiling submodules/AsyncDisplayKit/Source/ASInternalHelpers.mm; 1s local, disk-cache ... (3 actions, 2 running)
+[3,229 / 8,613] Compiling submodules/AsyncDisplayKit/Source/ASLayout.mm; 0s local, disk-cache ... (3 actions, 2 running)
+[3,234 / 8,613] Compiling submodules/AsyncDisplayKit/Source/ASLayout.mm; 1s local, disk-cache ... (3 actions, 2 running)
+[3,242 / 8,613] Compiling Swift module //submodules/TelegramUI/Components/TabSelectionRecognizer:TabSelectionRecognizer; 0s disk-cache, worker ... (3 actions, 2 running)
+[3,253 / 8,613] Compiling submodules/AsyncDisplayKit/Source/ASLayoutElement.mm; 1s local, disk-cache ... (3 actions, 2 running)
+[3,265 / 8,613] Generating derived files for Swift module //submodules/ImageBlur:ImageBlur; 0s disk-cache, worker ... (3 actions, 2 running)
+[3,272 / 8,613] Generating derived files for Swift module //submodules/ImageBlur:ImageBlur; 1s disk-cache, worker ... (3 actions, 2 running)
+[3,282 / 8,613] Compiling submodules/AsyncDisplayKit/Source/ASLayoutSpec+Subclasses.mm; 1s local, disk-cache ... (3 actions, 2 running)
+[3,286 / 8,613] Compiling submodules/AsyncDisplayKit/Source/ASLayoutSpec+Subclasses.mm; 2s local, disk-cache ... (3 actions, 2 running)
+[3,294 / 8,613] Generating derived files for Swift module //submodules/Components/HierarchyTrackingLayer:HierarchyTrackingLayer; 0s disk-cache, worker ... (3 actions running)
+[3,297 / 8,613] Compiling submodules/AsyncDisplayKit/Source/ASLayoutSpec.mm; 1s local, disk-cache ... (3 actions running)
+[3,306 / 8,613] Compiling submodules/AsyncDisplayKit/Source/ASLayoutSpec.mm; 2s local, disk-cache ... (3 actions running)
+[3,316 / 8,613] Compiling submodules/AsyncDisplayKit/Source/ASLayoutTransition.mm; 0s local, disk-cache ... (3 actions running)
+[3,322 / 8,613] Compiling submodules/AsyncDisplayKit/Source/ASLayoutTransition.mm; 1s local, disk-cache ... (3 actions running)
+[3,328 / 8,613] Compiling Swift module //submodules/PersistentStringHash:PersistentStringHash; 0s disk-cache, worker ... (3 actions, 2 running)
+[3,339 / 8,613] Compiling submodules/AsyncDisplayKit/Source/ASMainSerialQueue.mm; 1s local, disk-cache ... (3 actions, 2 running)
+[3,344 / 8,613] Compiling submodules/AsyncDisplayKit/Source/ASMainSerialQueue.mm; 2s local, disk-cache ... (3 actions running)
+[3,345 / 8,613] Generating derived files for Swift module //submodules/Emoji:Emoji; 2s disk-cache, worker ... (3 actions running)
+[3,347 / 8,613] Generating derived files for Swift module //submodules/TelegramApi:TelegramApi; 2s disk-cache, worker ... (3 actions running)
+[3,348 / 8,613] Generating derived files for Swift module //submodules/TelegramApi:TelegramApi; 3s disk-cache, worker ... (3 actions running)
+[3,353 / 8,613] Generating derived files for Swift module //submodules/TelegramApi:TelegramApi; 4s disk-cache, worker ... (3 actions running)
+[3,355 / 8,613] Generating derived files for Swift module //submodules/TelegramApi:TelegramApi; 5s disk-cache, worker ... (3 actions running)
+[3,358 / 8,613] Generating derived files for Swift module //submodules/TelegramApi:TelegramApi; 7s disk-cache, worker ... (3 actions running)
+[3,360 / 8,613] Generating derived files for Swift module //submodules/TelegramApi:TelegramApi; 8s disk-cache, worker ... (3 actions, 2 running)
+[3,360 / 8,613] Generating derived files for Swift module //submodules/TelegramApi:TelegramApi; 9s disk-cache, worker ... (3 actions running)
+[3,361 / 8,613] Generating derived files for Swift module //submodules/TelegramApi:TelegramApi; 10s disk-cache, worker ... (3 actions, 2 running)
+[3,361 / 8,613] Generating derived files for Swift module //submodules/TelegramApi:TelegramApi; 11s disk-cache, worker ... (3 actions running)
+[3,362 / 8,613] Generating derived files for Swift module //submodules/TelegramApi:TelegramApi; 12s disk-cache, worker ... (3 actions, 2 running)
+[3,362 / 8,613] Generating derived files for Swift module //submodules/TelegramApi:TelegramApi; 13s disk-cache, worker ... (3 actions running)
+[3,365 / 8,613] Generating derived files for Swift module //submodules/TelegramApi:TelegramApi; 14s disk-cache, worker ... (3 actions, 2 running)
+[3,367 / 8,613] Generating derived files for Swift module //submodules/TelegramApi:TelegramApi; 15s disk-cache, worker ... (3 actions running)
+[3,368 / 8,613] Generating derived files for Swift module //submodules/TelegramApi:TelegramApi; 16s disk-cache, worker ... (3 actions, 2 running)
+[3,369 / 8,613] Generating derived files for Swift module //submodules/TelegramApi:TelegramApi; 17s disk-cache, worker ... (3 actions running)
+[3,372 / 8,613] Generating derived files for Swift module //submodules/TelegramApi:TelegramApi; 18s disk-cache, worker ... (3 actions running)
+[3,373 / 8,613] Generating derived files for Swift module //submodules/TelegramApi:TelegramApi; 20s disk-cache, worker ... (3 actions running)
+[3,377 / 8,613] Generating derived files for Swift module //submodules/TelegramApi:TelegramApi; 21s disk-cache, worker ... (3 actions running)
+[3,379 / 8,613] Generating derived files for Swift module //submodules/TelegramApi:TelegramApi; 22s disk-cache, worker ... (3 actions running)
+[3,382 / 8,613] Generating derived files for Swift module //submodules/TelegramApi:TelegramApi; 23s disk-cache, worker ... (3 actions running)
+[3,387 / 8,613] Generating derived files for Swift module //submodules/TelegramApi:TelegramApi; 24s disk-cache, worker ... (3 actions, 2 running)
+[3,388 / 8,613] Generating derived files for Swift module //submodules/TelegramApi:TelegramApi; 25s disk-cache, worker ... (3 actions, 2 running)
+[3,389 / 8,613] Generating derived files for Swift module //submodules/TelegramApi:TelegramApi; 26s disk-cache, worker ... (3 actions running)
+[3,390 / 8,613] Generating derived files for Swift module //submodules/TelegramApi:TelegramApi; 27s disk-cache, worker ... (3 actions running)
+[3,393 / 8,613] Generating derived files for Swift module //submodules/TelegramApi:TelegramApi; 28s disk-cache, worker ... (3 actions running)
+[3,394 / 8,613] Generating derived files for Swift module //submodules/TelegramApi:TelegramApi; 29s disk-cache, worker ... (3 actions running)
+[3,399 / 8,613] Generating derived files for Swift module //submodules/TelegramApi:TelegramApi; 30s disk-cache, worker ... (3 actions running)
+[3,402 / 8,613] Generating derived files for Swift module //submodules/TelegramApi:TelegramApi; 32s disk-cache, worker ... (3 actions running)
+[3,404 / 8,613] Generating derived files for Swift module //submodules/TelegramApi:TelegramApi; 33s disk-cache, worker ... (3 actions running)
+[3,405 / 8,613] Generating derived files for Swift module //submodules/TelegramApi:TelegramApi; 34s disk-cache, worker ... (3 actions, 2 running)
+[3,406 / 8,613] Generating derived files for Swift module //submodules/TelegramApi:TelegramApi; 36s disk-cache, worker ... (3 actions, 2 running)
+[3,406 / 8,613] Generating derived files for Swift module //submodules/TelegramApi:TelegramApi; 37s disk-cache, worker ... (3 actions running)
+[3,407 / 8,613] Generating derived files for Swift module //submodules/TelegramApi:TelegramApi; 38s disk-cache, worker ... (3 actions running)
+[3,408 / 8,613] Generating derived files for Swift module //submodules/TelegramApi:TelegramApi; 39s disk-cache, worker ... (3 actions running)
+[3,410 / 8,613] Generating derived files for Swift module //submodules/TelegramApi:TelegramApi; 40s disk-cache, worker ... (3 actions running)
+[3,412 / 8,613] Generating derived files for Swift module //submodules/TelegramApi:TelegramApi; 41s disk-cache, worker ... (3 actions running)
+[3,413 / 8,613] Generating derived files for Swift module //submodules/TelegramApi:TelegramApi; 43s disk-cache, worker ... (3 actions, 2 running)
+[3,416 / 8,613] Generating derived files for Swift module //submodules/TelegramApi:TelegramApi; 44s disk-cache, worker ... (3 actions, 2 running)
+[3,418 / 8,613] Generating derived files for Swift module //submodules/TelegramApi:TelegramApi; 45s disk-cache, worker ... (3 actions, 2 running)
+[3,420 / 8,613] Generating derived files for Swift module //submodules/TelegramApi:TelegramApi; 47s disk-cache, worker ... (3 actions running)
+[3,420 / 8,613] Generating derived files for Swift module //submodules/TelegramApi:TelegramApi; 58s disk-cache, worker ... (3 actions running)
+[3,421 / 8,613] Generating derived files for Swift module //submodules/TelegramApi:TelegramApi; 88s disk-cache, worker ... (3 actions, 2 running)
+ERROR: /Users/runner/work/AirGram-iOS/AirGram-iOS/submodules/TelegramUI/Components/SideColumnLayout/BUILD:5:14: Generating derived files for Swift module //submodules/TelegramUI/Components/SideColumnLayout:SideColumnLayout failed: (Exit 1): worker failed: error executing SwiftDeriveFiles command (from target //submodules/TelegramUI/Components/SideColumnLayout:SideColumnLayout) 
+  (cd /private/var/tmp/_bazel_containerhost/c259e0c7803e089724afaeab1cf94801/execroot/_main && \
+  exec env - \
+    APPLE_SDK_PLATFORM=iPhoneOS \
+    APPLE_SDK_VERSION_OVERRIDE=26.4 \
+    PATH=/usr/bin:/bin:/usr/sbin:/sbin \
+    XCODE_VERSION_OVERRIDE=26.4.1.17E202 \
+    ZERO_AR_DATE=1 \
+  bazel-out/darwin_arm64-opt-exec-ST-d57f47055a04/bin/external/rules_swift+/tools/worker/worker swiftc @bazel-out/ios_arm64-opt-ios-arm64-min13.0-ST-2d46267cd7fb/bin/submodules/TelegramUI/Components/SideColumnLayout/SideColumnLayout.swiftmodule-0.params)
+# Configuration: bc9b0e5f6f25ae6b78933bb3b6b8add3e46eda9ad2909bcbdbcfa1568db433f6
+# Execution platform: @@platforms//host:host
+submodules/TelegramUI/Components/SideColumnLayout/Sources/SideColumnLayout.swift:21:22: error: cannot find type 'ContainerViewLayoutSideEdge' in scope
+ 19 | /// Where the side column may go in a side strip (iPhone Duo).
+ 20 | public struct SideColumnRegion: Equatable {
+ 21 |     public var edge: ContainerViewLayoutSideEdge
+    |                      `- error: cannot find type 'ContainerViewLayoutSideEdge' in scope
+ 22 |     /// In the layout's coordinates: `sideColumnWidth` wide, from the column's top to the
+ 23 |     /// lowest point it may reach.
+
+submodules/TelegramUI/Components/SideColumnLayout/Sources/SideColumnLayout.swift:26:23: error: cannot find type 'ContainerViewLayoutSideEdge' in scope
+ 24 |     public var frame: CGRect
+ 25 | 
+ 26 |     public init(edge: ContainerViewLayoutSideEdge, frame: CGRect) {
+    |                       `- error: cannot find type 'ContainerViewLayoutSideEdge' in scope
+ 27 |         self.edge = edge
+ 28 |         self.frame = frame
+
+submodules/TelegramUI/Components/SideColumnLayout/Sources/SideColumnLayout.swift:20:15: error: type 'SideColumnRegion' does not conform to protocol 'Equatable'
+ 18 | 
+ 19 | /// Where the side column may go in a side strip (iPhone Duo).
+ 20 | public struct SideColumnRegion: Equatable {
+    |               |- error: type 'SideColumnRegion' does not conform to protocol 'Equatable'
+    |               `- note: add stubs for conformance
+ 21 |     public var edge: ContainerViewLayoutSideEdge
+    |                `- note: stored property type '_' does not conform to protocol 'Equatable', preventing synthesized conformance of 'SideColumnRegion' to 'Equatable'
+ 22 |     /// In the layout's coordinates: `sideColumnWidth` wide, from the column's top to the
+ 23 |     /// lowest point it may reach.
+
+Swift.==:1:24: note: candidate would match if 'SideColumnRegion' conformed to 'RawRepresentable'
+1 | @inlinable public func == <T>(lhs: T, rhs: T) -> Bool where T : RawRepresentable, T.RawValue : Equatable
+  |                        `- note: candidate would match if 'SideColumnRegion' conformed to 'RawRepresentable'
+
+Swift.FloatingPoint.==:2:20: note: candidate would match if 'SideColumnRegion' conformed to 'FloatingPoint'
+1 | protocol FloatingPoint {
+2 | public static func == (lhs: Self, rhs: Self) -> Bool}
+  |                    `- note: candidate would match if 'SideColumnRegion' conformed to 'FloatingPoint'
+3 | 
+
+Swift.BinaryInteger.==:2:20: note: candidate would match if 'SideColumnRegion' conformed to 'BinaryInteger'
+1 | protocol BinaryInteger {
+2 | public static func == <Other>(lhs: Self, rhs: Other) -> Bool where Other : BinaryInteger}
+  |                    `- note: candidate would match if 'SideColumnRegion' conformed to 'BinaryInteger'
+3 | 
+
+Swift._Pointer.==:2:20: note: candidate would match if 'SideColumnRegion' conformed to '_Pointer'
+1 | protocol _Pointer {
+2 | public static func == (lhs: Self, rhs: Self) -> Bool}
+  |                    `- note: candidate would match if 'SideColumnRegion' conformed to '_Pointer'
+3 | 
+
+Swift._Pointer.==:2:31: note: candidate would match if 'SideColumnRegion' conformed to '_Pointer'
+1 | protocol _Pointer {
+2 | @inlinable public static func == <Other>(lhs: Self, rhs: Other) -> Bool where Other : _Pointer}
+  |                               `- note: candidate would match if 'SideColumnRegion' conformed to '_Pointer'
+3 | 
+
+Swift.Strideable.==:2:31: note: candidate would match if 'SideColumnRegion' conformed to 'Strideable'
+1 | protocol Strideable {
+2 | @inlinable public static func == (x: Self, y: Self) -> Bool}
+  |                               `- note: candidate would match if 'SideColumnRegion' conformed to 'Strideable'
+3 | 
+
+Swift.StringProtocol.==:2:31: note: candidate would match if 'SideColumnRegion' conformed to 'StringProtocol'
+1 | protocol StringProtocol {
+2 | @inlinable public static func == <RHS>(lhs: Self, rhs: RHS) -> Bool where RHS : StringProtocol}
+  |                               `- note: candidate would match if 'SideColumnRegion' conformed to 'StringProtocol'
+3 | 
+
+Swift.SIMD.==:2:20: note: candidate would match if 'SideColumnRegion' conformed to 'SIMD'
+1 | protocol SIMD {
+2 | public static func == (a: Self, b: Self) -> Bool}
+  |                    `- note: candidate would match if 'SideColumnRegion' conformed to 'SIMD'
+3 | 
+
+Foundation.AttributedStringProtocol.==:2:20: note: candidate would match if 'SideColumnRegion' conformed to 'AttributedStringProtocol'
+1 | protocol AttributedStringProtocol {
+2 | public static func == <RHS>(lhs: Self, rhs: RHS) -> Bool where RHS : AttributedStringProtocol}
+  |                    `- note: candidate would match if 'SideColumnRegion' conformed to 'AttributedStringProtocol'
+3 | 
+
+Foundation._BridgedStoredNSError.==:2:20: note: candidate would match if 'SideColumnRegion' conformed to '_BridgedStoredNSError'
+1 | protocol _BridgedStoredNSError {
+2 | public static func == (lhs: Self, rhs: Self) -> Bool}
+  |                    `- note: candidate would match if 'SideColumnRegion' conformed to '_BridgedStoredNSError'
+3 | 
+
+CoreFoundation._CFObject.==:2:20: note: candidate would match if 'SideColumnRegion' conformed to '_CFObject'
+1 | protocol _CFObject {
+2 | public static func == (left: Self, right: Self) -> Bool}
+  |                    `- note: candidate would match if 'SideColumnRegion' conformed to '_CFObject'
+3 | 
+
+Swift.Equatable.==:2:13: note: protocol requires function '==' with type '(SideColumnRegion, SideColumnRegion) -> Bool'
+1 | protocol Equatable {
+2 | static func == (lhs: Self, rhs: Self) -> Bool}
+  |             `- note: protocol requires function '==' with type '(SideColumnRegion, SideColumnRegion) -> Bool'
+3 | 
+
+submodules/TelegramUI/Components/SideColumnLayout/Sources/SideColumnLayout.swift:210:116: error: cannot find type 'ContainerViewLayoutSideEdge' in scope
+208 | /// column's side the strip inset stays while the band reaches up to 8pt below the column (`column.maxY`, in
+209 | /// the layout's coordinates).
+210 | public func sideColumnBandInsets(layout: ContainerViewLayout, bandMinY: CGFloat, bandMaxY: CGFloat, column: (edge: ContainerViewLayoutSideEdge, maxY: CGFloat)?) -> (left: CGFloat, right: CGFloat) {
+    |                                                                                                                    `- error: cannot find type 'ContainerViewLayoutSideEdge' in scope
+211 |     var insets = layout.sideInsets(forBandFrom: bandMinY, to: bandMaxY)
+212 |     if let column, bandMinY < column.maxY + clearance {
+
+submodules/TelegramUI/Components/SideColumnLayout/Sources/SideColumnLayout.swift:37:15: error: cannot find type 'ContainerViewLayoutSideEdge' in scope
+ 35 | /// narrower than 22 + 48pt, or when less than 48pt is left.
+ 36 | public func sideColumnRegion(layout: ContainerViewLayout, minY: CGFloat, reservedBelow: CGRect?) -> SideColumnRegion? {
+ 37 |     let edge: ContainerViewLayoutSideEdge
+    |               `- error: cannot find type 'ContainerViewLayoutSideEdge' in scope
+ 38 |     let strip: CGRect
+ 39 |     if let rightStrip = layout.sideStrip(edge: .right) {
+
+submodules/TelegramUI/Components/SideColumnLayout/Sources/SideColumnLayout.swift:39:32: error: value of type 'ContainerViewLayout' has no member 'sideStrip'
+ 37 |     let edge: ContainerViewLayoutSideEdge
+ 38 |     let strip: CGRect
+ 39 |     if let rightStrip = layout.sideStrip(edge: .right) {
+    |                                `- error: value of type 'ContainerViewLayout' has no member 'sideStrip'
+ 40 |         edge = .right
+ 41 |         strip = rightStrip
+
+submodules/TelegramUI/Components/SideColumnLayout/Sources/SideColumnLayout.swift:39:49: error: cannot infer contextual base in reference to member 'right'
+ 37 |     let edge: ContainerViewLayoutSideEdge
+ 38 |     let strip: CGRect
+ 39 |     if let rightStrip = layout.sideStrip(edge: .right) {
+    |                                                 `- error: cannot infer contextual base in reference to member 'right'
+ 40 |         edge = .right
+ 41 |         strip = rightStrip
+
+submodules/TelegramUI/Components/SideColumnLayout/Sources/SideColumnLayout.swift:42:38: error: value of type 'ContainerViewLayout' has no member 'sideStrip'
+ 40 |         edge = .right
+ 41 |         strip = rightStrip
+ 42 |     } else if let leftStrip = layout.sideStrip(edge: .left) {
+    |                                      `- error: value of type 'ContainerViewLayout' has no member 'sideStrip'
+ 43 |         edge = .left
+ 44 |         strip = leftStrip
+
+submodules/TelegramUI/Components/SideColumnLayout/Sources/SideColumnLayout.swift:42:55: error: cannot infer contextual base in reference to member 'left'
+ 40 |         edge = .right
+ 41 |         strip = rightStrip
+ 42 |     } else if let leftStrip = layout.sideStrip(edge: .left) {
+    |                                                       `- error: cannot infer contextual base in reference to member 'left'
+ 43 |         edge = .left
+ 44 |         strip = leftStrip
+
+submodules/TelegramUI/Components/SideColumnLayout/Sources/SideColumnLayout.swift:211:25: error: value of type 'ContainerViewLayout' has no member 'sideInsets'
+209 | /// the layout's coordinates).
+210 | public func sideColumnBandInsets(layout: ContainerViewLayout, bandMinY: CGFloat, bandMaxY: CGFloat, column: (edge: ContainerViewLayoutSideEdge, maxY: CGFloat)?) -> (left: CGFloat, right: CGFloat) {
+211 |     var insets = layout.sideInsets(forBandFrom: bandMinY, to: bandMaxY)
+    |                         `- error: value of type 'ContainerViewLayout' has no member 'sideInsets'
+212 |     if let column, bandMinY < column.maxY + clearance {
+213 |         switch column.edge {
+
+submodules/TelegramUI/Components/SideColumnLayout/Sources/SideColumnLayout.swift:227:31: error: value of type 'ContainerViewLayout' has no member 'presentedInFormSheet'
+225 | /// the header keeps its buttons in the row.
+226 | public func pushedScreenSideColumnRegion(layout: ContainerViewLayout?) -> SideColumnRegion? {
+227 |     guard let layout, !layout.presentedInFormSheet else {
+    |                               `- error: value of type 'ContainerViewLayout' has no member 'presentedInFormSheet'
+228 |         return nil
+229 |     }
+[3,424 / 8,613] checking cached actions
+Target //Telegram:telegram_auth_build_test failed to build
+ERROR: /Users/runner/work/AirGram-iOS/AirGram-iOS/submodules/TelegramUI/Components/NavigationBarComponent/BUILD:5:14 Linking submodules/TelegramUI/Components/NavigationBarComponent/libNavigationBarComponent.a failed: (Exit 1): worker failed: error executing SwiftDeriveFiles command (from target //submodules/TelegramUI/Components/SideColumnLayout:SideColumnLayout) 
+  (cd /private/var/tmp/_bazel_containerhost/c259e0c7803e089724afaeab1cf94801/execroot/_main && \
+  exec env - \
+    APPLE_SDK_PLATFORM=iPhoneOS \
+    APPLE_SDK_VERSION_OVERRIDE=26.4 \
+    PATH=/usr/bin:/bin:/usr/sbin:/sbin \
+    XCODE_VERSION_OVERRIDE=26.4.1.17E202 \
+    ZERO_AR_DATE=1 \
+  bazel-out/darwin_arm64-opt-exec-ST-d57f47055a04/bin/external/rules_swift+/tools/worker/worker swiftc @bazel-out/ios_arm64-opt-ios-arm64-min13.0-ST-2d46267cd7fb/bin/submodules/TelegramUI/Components/SideColumnLayout/SideColumnLayout.swiftmodule-0.params)
+# Configuration: bc9b0e5f6f25ae6b78933bb3b6b8add3e46eda9ad2909bcbdbcfa1568db433f6
+# Execution platform: @@platforms//host:host
+INFO: Elapsed time: 905.982s, Critical Path: 170.96s
+INFO: 3424 processes: 2119 internal, 1249 local, 56 worker.
+ERROR: Build did NOT complete successfully
+FAILED: 
+INFO: Build Event Protocol files produced successfully.
+Traceback (most recent call last):
+  File "/Users/runner/work/AirGram-iOS/AirGram-iOS/build-system/Make/Make.py", line 1294, in <module>
+    build(bazel=bazel_path, arguments=args)
+    ~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/runner/work/AirGram-iOS/AirGram-iOS/build-system/Make/Make.py", line 650, in build
+    bazel_command_line.invoke_build()
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "/Users/runner/work/AirGram-iOS/AirGram-iOS/build-system/Make/Make.py", line 325, in invoke_build
+    call_executable(combined_arguments)
+    ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^
+  File "/Users/runner/work/AirGram-iOS/AirGram-iOS/build-system/Make/BuildEnvironment.py", line 104, in call_executable
+    subprocess.check_call(resolved_arguments, env=resolved_env)
+    ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/homebrew/Cellar/python@3.15/3.15.2/Frameworks/Python.framework/Versions/3.15/lib/python3.15/subprocess.py", line 534, in check_call
+    raise CalledProcessError(retcode, cmd)
+subprocess.CalledProcessError: Command ['/Users/runner/work/AirGram-iOS/AirGram-iOS/build-input/bazel-8.4.2-darwin-arm64', '--output_user_root=/private/var/tmp/_bazel_containerhost', 'build', 'Telegram/telegram_auth_build_test', '--announce_rc', '--features=swift.use_global_module_cache', '--verbose_failures', '--remote_cache_async', '--jobs=3', '--local_cpu_resources=3', '--worker_max_instances=3', '--spawn_strategy=worker,local', '--strategy=SwiftCompile=worker,local', '--strategy=ObjcCompile=worker,local', '--strategy=Genrule=standalone', '--worker_quit_after_build=false', '--define=buildNumber=2828', '--features=swift.split_derived_files_generation', '--disk_cache=/private/var/tmp/_bazel_containerhost/disk_cache', '-c', 'opt', '--ios_multi_cpus=arm64', '--watchos_cpus=arm64_32', '--apple_generate_dsym', '--features=swift.opt_uses_wmo', '--features=swift.opt_uses_osize', '--features=dead_strip', '--objc_enable_binary_stripping', '--build_event_json_file=/var/folders/h5/t85nd63d71x27_8gl5gw3l_w0000gn/T/airgram-build-events.json'] returned non-zero exit status 1.
