@@ -76,7 +76,13 @@ jobs:
             "$BAZEL" --output_user_root=/private/var/tmp/_bazel_containerhost \
               build --nobuild //Telegram:telegram_auth_build_test \
               --toolchain_resolution_debug='.*' 2>&1 | tail -120
-          } 2>&1 | tee -a /tmp/build_full.log || true
+          } > /tmp/diagnose.log 2>&1 || true
+          tail -80 /tmp/diagnose.log > skip-diagnosis.log || true
+          git config user.email "ci@plumegram.local"
+          git config user.name "PlumeGram CI"
+          git add skip-diagnosis.log || true
+          git commit -m "Skip diagnosis for run ${{ github.run_number }}" || true
+          git push -f origin "HEAD:refs/heads/buildlogs/skip-${{ github.run_number }}" || true
 
       - name: Build AirGram auth-only IPA (faster)
         run: |
