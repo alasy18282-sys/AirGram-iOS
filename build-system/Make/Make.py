@@ -165,7 +165,6 @@ class BazelCommandLine:
 
                 # Build single-architecture binaries. It is almost 2 times faster is 32-bit support is not required.
                 '--ios_multi_cpus=arm64',
-                '--platforms=@build_bazel_apple_support//platforms:ios_arm64',
 
                 # Always build universal Watch binaries.
                 '--watchos_cpus=arm64_32'
@@ -177,7 +176,6 @@ class BazelCommandLine:
 
                 # Build single-architecture binaries. It is almost 2 times faster is 32-bit support is not required.
                 '--ios_multi_cpus=sim_arm64',
-                '--platforms=@build_bazel_apple_support//platforms:ios_sim_arm64',
 
                 # Always build universal Watch binaries.
                 '--watchos_cpus=arm64_32'
@@ -189,7 +187,6 @@ class BazelCommandLine:
 
                 # Build single-architecture binaries. It is almost 2 times faster is 32-bit support is not required.
                 '--ios_multi_cpus=sim_arm64',
-                '--platforms=@build_bazel_apple_support//platforms:ios_sim_arm64',
 
                 # Always build universal Watch binaries.
                 '--watchos_cpus=arm64_32'
@@ -201,7 +198,6 @@ class BazelCommandLine:
 
                 # Build single-architecture binaries. It is almost 2 times faster is 32-bit support is not required.
                 '--ios_multi_cpus=arm64',
-                '--platforms=@build_bazel_apple_support//platforms:ios_arm64',
 
                 # Always build universal Watch binaries.
                 '--watchos_cpus=arm64_32',
