@@ -48,8 +48,9 @@ public struct WalletNftItem: Codable, Equatable, Sendable {
     public let lottie: WalletNftFile?
     public let attributes: [WalletNftAttribute]?
     public let extra: String?
+    public let gift: StarGift?
 
-    public init(collectionAddress: String?, address: String, ownerAddress: String, index: String, name: String?, description: String?, image: WalletNftFile?, imageSmall: WalletNftFile?, contentUrl: WalletNftFile?, lottie: WalletNftFile?, attributes: [WalletNftAttribute]?, extra: String?) {
+    public init(collectionAddress: String?, address: String, ownerAddress: String, index: String, name: String?, description: String?, image: WalletNftFile?, imageSmall: WalletNftFile?, contentUrl: WalletNftFile?, lottie: WalletNftFile?, attributes: [WalletNftAttribute]?, extra: String?, gift: StarGift? = nil) {
         self.collectionAddress = collectionAddress
         self.address = address
         self.ownerAddress = ownerAddress
@@ -62,6 +63,7 @@ public struct WalletNftItem: Codable, Equatable, Sendable {
         self.lottie = lottie
         self.attributes = attributes
         self.extra = extra
+        self.gift = gift
     }
 
     init(apiItem: Api.wallet.NftItem) {
@@ -89,7 +91,8 @@ public struct WalletNftItem: Codable, Equatable, Sendable {
                         }
                     }
                 },
-                extra: extra
+                extra: extra,
+                gift: data.gift.flatMap(StarGift.init(apiStarGift:))
             )
         }
     }

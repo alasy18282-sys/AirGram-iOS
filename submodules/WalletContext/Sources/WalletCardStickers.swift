@@ -182,7 +182,7 @@ extension WalletContextImpl {
             }
         }
         do {
-            let card = try await WalletSignalRequestContext<WalletCard>().run(self.engine.wallet.setCardStickers(submitted, backgroundNftAddress: submittedBackground))
+            let card = try await WalletSignalRequestContext<WalletCard>().run(self.engine.wallet.setCardStickers(submitted, backgroundNftAddress: submittedBackground) |> castError(WalletError.self))
             self.cardStickerSavingAddress = nil
             guard !self.isShutdown, case let .wallet(current) = self.currentState.phase,
                   walletEngineAddressesEqual(current.address, walletAddress), walletEngineAddressesEqual(card.address, walletAddress) else { return }
