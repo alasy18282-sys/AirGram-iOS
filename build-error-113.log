@@ -1,0 +1,501 @@
+submodules/WalletContext/Sources/WalletTonConnect.swift:68:67: error: '_' can only appear in a pattern or on the left side of an assignment
+     |                                                                   `- error: '_' can only appear in a pattern or on the left side of an assignment
+submodules/WalletContext/Sources/WalletTonConnect.swift:335:66: error: cannot find type 'WalletTonConnectSession' in scope
+     |                                                                  `- error: cannot find type 'WalletTonConnectSession' in scope
+submodules/WalletContext/Sources/WalletTonConnect.swift:335:110: error: value of type 'TelegramEngine' has no member 'wallet'
+     |                                                                                                              `- error: value of type 'TelegramEngine' has no member 'wallet'
+submodules/WalletContext/Sources/WalletTonConnect.swift:337:40: error: cannot infer key path type from context; consider explicitly specifying a root type
+     |                                        `- error: cannot infer key path type from context; consider explicitly specifying a root type
+submodules/WalletContext/Sources/WalletTonConnect.swift:364:68: error: cannot find type 'WalletTonConnectPending' in scope
+     |                                                                    `- error: cannot find type 'WalletTonConnectPending' in scope
+submodules/WalletContext/Sources/WalletTonConnect.swift:364:111: error: value of type 'TelegramEngine' has no member 'wallet'
+     |                                                                                                               `- error: value of type 'TelegramEngine' has no member 'wallet'
+submodules/WalletContext/Sources/WalletTonConnect.swift:364:148: error: cannot infer contextual base in reference to member 'sessionId'
+     |                                                                                                                                                    `- error: cannot infer contextual base in reference to member 'sessionId'
+submodules/WalletContext/Sources/WalletTonConnect.swift:373:48: error: cannot infer contextual base in reference to member 'executing'
+     |                                                `- error: cannot infer contextual base in reference to member 'executing'
+submodules/WalletContext/Sources/WalletTonConnect.swift:468:69: error: cannot call value of non-function type 'WalletStoredTonConnectRequest?'
+     |                                                                     `- error: cannot call value of non-function type 'WalletStoredTonConnectRequest?'
+submodules/WalletContext/Sources/WalletTonConnect.swift:473:88: error: cannot infer contextual base in reference to member 'dappClientId'
+     |                                                                                        `- error: cannot infer contextual base in reference to member 'dappClientId'
+submodules/WalletContext/Sources/WalletTonConnect.swift:473:122: error: 'nil' requires a contextual type
+     |                                                                                                                          `- error: 'nil' requires a contextual type
+submodules/WalletContext/Sources/WalletTonConnect.swift:492:66: error: cannot infer contextual base in reference to member 'sessionId'
+     |                                                                  `- error: cannot infer contextual base in reference to member 'sessionId'
+submodules/WalletContext/Sources/WalletTonConnect.swift:505:45: error: '_' can only appear in a pattern or on the left side of an assignment
+     |                                             `- error: '_' can only appear in a pattern or on the left side of an assignment
+submodules/WalletContext/Sources/WalletTonConnect.swift:562:46: error: '_' can only appear in a pattern or on the left side of an assignment
+     |                                              `- error: '_' can only appear in a pattern or on the left side of an assignment
+submodules/WalletContext/Sources/WalletTonConnect.swift:538:68: error: cannot find type 'WalletTonConnectSession' in scope
+     |                                                                    `- error: cannot find type 'WalletTonConnectSession' in scope
+submodules/WalletContext/Sources/WalletTonConnect.swift:539:33: error: value of type 'TelegramEngine' has no member 'wallet'
+     |                                 `- error: value of type 'TelegramEngine' has no member 'wallet'
+submodules/WalletContext/Sources/WalletTonConnect.swift:563:30: error: cannot find type 'WalletTonConnectSession' in scope
+     |                              `- error: cannot find type 'WalletTonConnectSession' in scope
+submodules/WalletContext/Sources/WalletTonConnect.swift:564:31: error: cannot find type 'WalletTonConnectRequest' in scope
+     |                               `- error: cannot find type 'WalletTonConnectRequest' in scope
+submodules/WalletContext/Sources/WalletTonConnect.swift:592:72: error: cannot find type 'WalletTonConnectPending' in scope
+     |                                                                        `- error: cannot find type 'WalletTonConnectPending' in scope
+submodules/WalletContext/Sources/WalletTonConnect.swift:592:115: error: value of type 'TelegramEngine' has no member 'wallet'
+     |                                                                                                                   `- error: value of type 'TelegramEngine' has no member 'wallet'
+submodules/WalletContext/Sources/WalletStoredState.swift:215:8: error: type 'WalletStoredTonConnectRequest' does not conform to protocol 'Decodable'
+    |        `- error: type 'WalletStoredTonConnectRequest' does not conform to protocol 'Decodable'
+submodules/WalletContext/Sources/WalletTonConnect.swift:630:110: error: 'nil' requires a contextual type
+     |                                                                                                              `- error: 'nil' requires a contextual type
+submodules/WalletContext/Sources/WalletTonConnect.swift:630:123: error: cannot infer contextual base in reference to member 'received'
+     |                                                                                                                           `- error: cannot infer contextual base in reference to member 'received'
+submodules/WalletContext/Sources/WalletTonConnect.swift:630:143: error: 'nil' requires a contextual type
+     |                                                                                                                                               `- error: 'nil' requires a contextual type
+submodules/WalletContext/Sources/WalletTonConnect.swift:690:64: error: cannot find type 'WalletTonConnectPending' in scope
+     |                                                                `- error: cannot find type 'WalletTonConnectPending' in scope
+submodules/WalletContext/Sources/WalletTonConnect.swift:690:107: error: value of type 'TelegramEngine' has no member 'wallet'
+     |                                                                                                           `- error: value of type 'TelegramEngine' has no member 'wallet'
+submodules/WalletContext/Sources/WalletTonConnect.swift:690:144: error: cannot infer contextual base in reference to member 'sessionId'
+     |                                                                                                                                                `- error: cannot infer contextual base in reference to member 'sessionId'
+submodules/WalletContext/Sources/WalletTonConnect.swift:873:38: error: cannot find 'WalletTonConnectSession' in scope
+     |                                      `- error: cannot find 'WalletTonConnectSession' in scope
+submodules/WalletContext/Sources/WalletTonConnect.swift:987:70: error: cannot find type 'WalletTonConnectChallenge' in scope
+     |                                                                      `- error: cannot find type 'WalletTonConnectChallenge' in scope
+submodules/WalletContext/Sources/WalletTonConnect.swift:988:33: error: value of type 'TelegramEngine' has no member 'wallet'
+     |                                 `- error: value of type 'TelegramEngine' has no member 'wallet'
+submodules/WalletContext/Sources/WalletTonConnect.swift:995:76: error: generic parameter 'SignalError' could not be inferred
+     |                                                                            `- error: generic parameter 'SignalError' could not be inferred
+submodules/WalletContext/Sources/WalletTonConnect.swift:995:92: error: value of type 'TelegramEngine' has no member 'wallet'
+     |                                                                                            `- error: value of type 'TelegramEngine' has no member 'wallet'
+submodules/WalletContext/Sources/WalletTonConnect.swift:1001:29: error: cannot find 'WalletTonConnectError' in scope
+     |                             `- error: cannot find 'WalletTonConnectError' in scope
+submodules/WalletContext/Sources/WalletTonConnect.swift:1001:55: error: '_' can only appear in a pattern or on the left side of an assignment
+     |                                                       `- error: '_' can only appear in a pattern or on the left side of an assignment
+submodules/WalletContext/Sources/WalletTonConnect.swift:1001:55: error: '_' can only appear in a pattern or on the left side of an assignment
+     |                                                       `- error: '_' can only appear in a pattern or on the left side of an assignment
+submodules/WalletContext/Sources/WalletTonConnect.swift:1001:73: error: failed to produce diagnostic for expression; please submit a bug report (https://swift.org/contributing/#reporting-bugs)
+     |                                                                         `- error: failed to produce diagnostic for expression; please submit a bug report (https://swift.org/contributing/#reporting-bugs)
+submodules/WalletContext/Sources/WalletTonConnect.swift:1032:34: error: cannot find type 'WalletTonConnectError' in scope
+     |                                  `- error: cannot find type 'WalletTonConnectError' in scope
+submodules/WalletContext/Sources/WalletTonConnect.swift:1037:34: error: value of type 'TelegramEngine' has no member 'wallet'
+     |                                  `- error: value of type 'TelegramEngine' has no member 'wallet'
+submodules/WalletContext/Sources/WalletTonConnect.swift:1041:34: error: value of type 'TelegramEngine' has no member 'wallet'
+     |                                  `- error: value of type 'TelegramEngine' has no member 'wallet'
+submodules/WalletContext/Sources/WalletTonConnect.swift:1046:69: error: generic parameter 'SignalError' could not be inferred
+     |                                                                     `- error: generic parameter 'SignalError' could not be inferred
+1048 |             self.logTonConnect("publish_failed", active, body: packet, error: error)
+submodules/WalletContext/Sources/WalletTonConnect.swift:1049:50: error: cannot find 'WalletTonConnectError' in scope
+1048 |             self.logTonConnect("publish_failed", active, body: packet, error: error)
+     |                                                  `- error: cannot find 'WalletTonConnectError' in scope
+submodules/WalletContext/Sources/WalletTonConnect.swift:1049:76: error: '_' can only appear in a pattern or on the left side of an assignment
+1048 |             self.logTonConnect("publish_failed", active, body: packet, error: error)
+     |                                                                            `- error: '_' can only appear in a pattern or on the left side of an assignment
+submodules/WalletContext/Sources/WalletTonConnect.swift:1049:76: error: '_' can only appear in a pattern or on the left side of an assignment
+1048 |             self.logTonConnect("publish_failed", active, body: packet, error: error)
+     |                                                                            `- error: '_' can only appear in a pattern or on the left side of an assignment
+submodules/WalletContext/Sources/WalletTonConnect.swift:1049:113: error: failed to produce diagnostic for expression; please submit a bug report (https://swift.org/contributing/#reporting-bugs)
+1048 |             self.logTonConnect("publish_failed", active, body: packet, error: error)
+     |                                                                                                                 `- error: failed to produce diagnostic for expression; please submit a bug report (https://swift.org/contributing/#reporting-bugs)
+submodules/WalletContext/Sources/WalletTonConnect.swift:1053:55: error: cannot find 'WalletTonConnectError' in scope
+     |                                                       `- error: cannot find 'WalletTonConnectError' in scope
+submodules/WalletContext/Sources/WalletTonConnect.swift:1053:81: error: '_' can only appear in a pattern or on the left side of an assignment
+     |                                                                                 `- error: '_' can only appear in a pattern or on the left side of an assignment
+submodules/WalletContext/Sources/WalletTonConnect.swift:1053:81: error: '_' can only appear in a pattern or on the left side of an assignment
+     |                                                                                 `- error: '_' can only appear in a pattern or on the left side of an assignment
+submodules/WalletContext/Sources/WalletTonConnect.swift:1053:99: error: failed to produce diagnostic for expression; please submit a bug report (https://swift.org/contributing/#reporting-bugs)
+     |                                                                                                   `- error: failed to produce diagnostic for expression; please submit a bug report (https://swift.org/contributing/#reporting-bugs)
+submodules/WalletContext/Sources/WalletTonConnect.swift:1084:49: error: cannot find 'WalletTonConnectSession' in scope
+     |                                                 `- error: cannot find 'WalletTonConnectSession' in scope
+submodules/WalletContext/Sources/WalletTonConnect.swift:1086:90: error: 'nil' requires a contextual type
+     |                                                                                          `- error: 'nil' requires a contextual type
+submodules/WalletContext/Sources/WalletTonConnect.swift:1105:77: error: generic parameter 'SignalError' could not be inferred
+     |                                                                             `- error: generic parameter 'SignalError' could not be inferred
+submodules/WalletContext/Sources/WalletTonConnect.swift:1105:93: error: value of type 'TelegramEngine' has no member 'wallet'
+     |                                                                                             `- error: value of type 'TelegramEngine' has no member 'wallet'
+submodules/WalletContext/Sources/WalletTonConnect.swift:1105:159: error: 'nil' requires a contextual type
+     |                                                                                                                                                               `- error: 'nil' requires a contextual type
+submodules/WalletContext/Sources/WalletTonConnect.swift:1107:21: error: cannot find 'WalletTonConnectError' in scope
+     |                     `- error: cannot find 'WalletTonConnectError' in scope
+submodules/WalletContext/Sources/WalletTonConnect.swift:1107:47: error: '_' can only appear in a pattern or on the left side of an assignment
+     |                                               `- error: '_' can only appear in a pattern or on the left side of an assignment
+submodules/WalletContext/Sources/WalletTonConnect.swift:1130:85: error: cannot infer key path type from context; consider explicitly specifying a root type
+     |                                                                                     `- error: cannot infer key path type from context; consider explicitly specifying a root type
+submodules/WalletContext/Sources/WalletTonConnect.swift:1243:22: error: cannot infer contextual base in reference to member 'sendTransaction'
+     |                      `- error: cannot infer contextual base in reference to member 'sendTransaction'
+submodules/WalletContext/Sources/WalletToncenter.swift:162:30: error: cannot find type 'TonApiRequestError' in scope
+    |                              `- error: cannot find type 'TonApiRequestError' in scope
+submodules/WalletContext/Sources/WalletToncenter.swift:219:64: error: generic parameter 'SignalError' could not be inferred
+    |                                                                `- error: generic parameter 'SignalError' could not be inferred
+submodules/WalletContext/Sources/WalletToncenter.swift:220:28: error: value of type 'TelegramEngine' has no member 'wallet'
+    |                            `- error: value of type 'TelegramEngine' has no member 'wallet'
+submodules/WalletContext/Sources/WalletToncenter.swift:271:64: error: generic parameter 'SignalError' could not be inferred
+    |                                                                `- error: generic parameter 'SignalError' could not be inferred
+submodules/WalletContext/Sources/WalletToncenter.swift:272:28: error: value of type 'TelegramEngine' has no member 'wallet'
+    |                            `- error: value of type 'TelegramEngine' has no member 'wallet'
+submodules/WalletContext/Sources/WalletToncenter.swift:357:75: error: generic parameter 'SignalError' could not be inferred
+    |                                                                           `- error: generic parameter 'SignalError' could not be inferred
+submodules/WalletContext/Sources/WalletToncenter.swift:358:32: error: value of type 'TelegramEngine' has no member 'wallet'
+    |                                `- error: value of type 'TelegramEngine' has no member 'wallet'
+submodules/WalletContext/Sources/WalletTransfers.swift:678:47: error: cannot find type 'WalletSendTransferResult' in scope
+     |                                               `- error: cannot find type 'WalletSendTransferResult' in scope
+submodules/WalletContext/Sources/WalletTransfers.swift:1034:51: error: cannot find type 'WalletTransferUpdate' in scope
+     |                                                   `- error: cannot find type 'WalletTransferUpdate' in scope
+submodules/WalletContext/Sources/WalletTransfers.swift:333:19: error: cannot find 'WalletSendTransferError' in scope
+     |                   `- error: cannot find 'WalletSendTransferError' in scope
+submodules/WalletContext/Sources/WalletTransfers.swift:356:40: error: 'nil' requires a contextual type
+     |                                        `- error: 'nil' requires a contextual type
+submodules/WalletContext/Sources/WalletTransfers.swift:356:53: error: cannot infer contextual base in reference to member 'submissionUnknown'
+     |                                                     `- error: cannot infer contextual base in reference to member 'submissionUnknown'
+submodules/WalletContext/Sources/WalletTransfers.swift:404:34: error: extra arguments at positions #1, #2, #3, #4, #5, #6, #7, #8, #9, #10, #11, #12, #13, #14, #15, #16, #17 in call
+     |                                  `- error: extra arguments at positions #1, #2, #3, #4, #5, #6, #7, #8, #9, #10, #11, #12, #13, #14, #15, #16, #17 in call
+submodules/WalletContext/Sources/WalletTransfers.swift:405:9: error: missing argument for parameter 'from' in call
+     |         `- error: missing argument for parameter 'from' in call
+submodules/WalletContext/Sources/WalletTransfers.swift:412:82: error: cannot infer contextual base in reference to member 'confirmed'
+     |                                                                                  `- error: cannot infer contextual base in reference to member 'confirmed'
+submodules/WalletContext/Sources/WalletTransfers.swift:422:74: error: generic parameter 'SignalError' could not be inferred
+     |                                                                          `- error: generic parameter 'SignalError' could not be inferred
+submodules/WalletContext/Sources/WalletTransfers.swift:423:24: error: value of type 'TelegramEngine' has no member 'wallet'
+     |                        `- error: value of type 'TelegramEngine' has no member 'wallet'
+submodules/WalletContext/Sources/WalletTransfers.swift:624:54: error: cannot find type 'WalletSendTransferResult' in scope
+     |                                                      `- error: cannot find type 'WalletSendTransferResult' in scope
+submodules/WalletContext/Sources/WalletTransfers.swift:629:43: error: value of type 'TelegramEngine' has no member 'wallet'
+     |                                           `- error: value of type 'TelegramEngine' has no member 'wallet'
+submodules/WalletContext/Sources/WalletTransfers.swift:662:37: error: value of type 'TelegramEngine' has no member 'wallet'
+     |                                     `- error: value of type 'TelegramEngine' has no member 'wallet'
+submodules/WalletContext/Sources/WalletTransfers.swift:691:23: error: cannot find type 'WalletSendTransferResult' in scope
+     |                       `- error: cannot find type 'WalletSendTransferResult' in scope
+submodules/WalletContext/Sources/WalletTransfers.swift:693:60: error: cannot find 'WalletSendTransferResult' in scope
+     |                                                            `- error: cannot find 'WalletSendTransferResult' in scope
+submodules/WalletContext/Sources/WalletTransfers.swift:701:27: error: cannot find 'WalletSendTransferError' in scope
+     |                           `- error: cannot find 'WalletSendTransferError' in scope
+submodules/WalletContext/Sources/WalletTransfers.swift:705:27: error: cannot find 'WalletSendTransferError' in scope
+     |                           `- error: cannot find 'WalletSendTransferError' in scope
+submodules/WalletContext/Sources/WalletTransfers.swift:709:30: error: cannot find type 'WalletSendTransferError' in scope
+     |                              `- error: cannot find type 'WalletSendTransferError' in scope
+submodules/WalletContext/Sources/WalletTransfers.swift:732:65: error: value of type 'TelegramEngine' has no member 'wallet'
+     |                                                                 `- error: value of type 'TelegramEngine' has no member 'wallet'
+submodules/WalletContext/Sources/WalletTransfers.swift:748:26: error: 'nil' requires a contextual type
+     |                          `- error: 'nil' requires a contextual type
+submodules/WalletContext/Sources/WalletTransfers.swift:749:87: error: cannot infer contextual base in reference to member 'confirmed'
+     |                                                                                       `- error: cannot infer contextual base in reference to member 'confirmed'
+submodules/WalletContext/Sources/WalletTransfers.swift:757:77: error: missing argument for parameter 'engine' in call
+     |                                                                             `- error: missing argument for parameter 'engine' in call
+submodules/WalletContext/Sources/WalletTransfers.swift:759:52: error: cannot infer contextual base in reference to member 'confirmed'
+     |                                                    `- error: cannot infer contextual base in reference to member 'confirmed'
+submodules/WalletContext/Sources/WalletTransfers.swift:768:44: error: cannot infer contextual base in reference to member 'failed'
+     |                                            `- error: cannot infer contextual base in reference to member 'failed'
+submodules/WalletContext/Sources/WalletTransfers.swift:768:59: error: cannot find 'WalletSendTransferError' in scope
+     |                                                           `- error: cannot find 'WalletSendTransferError' in scope
+submodules/WalletContext/Sources/WalletTransfers.swift:905:29: error: value of type 'TelegramEngine' has no member 'wallet'
+     |                             `- error: value of type 'TelegramEngine' has no member 'wallet'
+submodules/WalletContext/Sources/WalletTransfers.swift:906:182: error: type 'Error' has no member 'generic'
+     |                                                                                                                                                                                      `- error: type 'Error' has no member 'generic'
+submodules/WalletContext/Sources/WalletTransfers.swift:907:24: error: cannot infer type of closure parameter '$0' without a type annotation
+     |                        `- error: cannot infer type of closure parameter '$0' without a type annotation
+submodules/WalletContext/Sources/WalletTransfers.swift:907:59: error: missing argument for parameter 'engine' in call
+     |                                                           `- error: missing argument for parameter 'engine' in call
+submodules/WalletContext/Sources/WalletTransfers.swift:1010:33: error: value of type 'TelegramEngine' has no member 'wallet'
+     |                                 `- error: value of type 'TelegramEngine' has no member 'wallet'
+submodules/WalletContext/Sources/WalletTransfers.swift:1048:99: error: missing argument for parameter 'engine' in call
+     |                                                                                                   `- error: missing argument for parameter 'engine' in call
+submodules/WalletContext/Sources/WalletTransfers.swift:1051:106: error: missing argument for parameter 'engine' in call
+     |                                                                                                          `- error: missing argument for parameter 'engine' in call
+ERROR: Build did NOT complete successfully
+FAILED: 
+Traceback (most recent call last):
+--- end of full build log ---
+ 355 |     return acceptedWalletTransferSubmission(
+ 356 |         pending: pending, messageHash: nil, phase: .submissionUnknown, acceptedAt: pending.createdAt
+     |                                                     `- error: cannot infer contextual base in reference to member 'submissionUnknown'
+ 357 |     ) ?? pending
+ 358 | }
+
+submodules/WalletContext/Sources/WalletTransfers.swift:404:34: error: extra arguments at positions #1, #2, #3, #4, #5, #6, #7, #8, #9, #10, #11, #12, #13, #14, #15, #16, #17 in call
+ 402 | @available(macOS 10.15, *)
+ 403 | private func walletTransferConfirmed(_ pending: WalletContext.PendingTransfer, transaction: WalletContext.Transaction) -> WalletContext.PendingTransfer {
+ 404 |     WalletContext.PendingTransfer(
+     |                                  `- error: extra arguments at positions #1, #2, #3, #4, #5, #6, #7, #8, #9, #10, #11, #12, #13, #14, #15, #16, #17 in call
+ 405 |         id: pending.id, recipient: pending.recipient, amount: pending.amount,
+ 406 |         comment: pending.comment, commentEncrypted: pending.commentEncrypted,
+
+submodules/WalletContext/Sources/WalletModels.swift:811:16: note: 'init(from:)' declared here
+ 809 |         }
+ 810 | 
+ 811 |         public init(from decoder: Decoder) throws {
+     |                `- note: 'init(from:)' declared here
+ 812 |             let container = try decoder.container(keyedBy: CodingKeys.self)
+ 813 |             self.init(
+
+submodules/WalletContext/Sources/WalletTransfers.swift:405:9: error: missing argument for parameter 'from' in call
+ 403 | private func walletTransferConfirmed(_ pending: WalletContext.PendingTransfer, transaction: WalletContext.Transaction) -> WalletContext.PendingTransfer {
+ 404 |     WalletContext.PendingTransfer(
+ 405 |         id: pending.id, recipient: pending.recipient, amount: pending.amount,
+     |         `- error: missing argument for parameter 'from' in call
+ 406 |         comment: pending.comment, commentEncrypted: pending.commentEncrypted,
+ 407 |         collectibleAddress: pending.collectibleAddress, normalizedHash: pending.normalizedHash,
+
+submodules/WalletContext/Sources/WalletModels.swift:811:16: note: 'init(from:)' declared here
+ 809 |         }
+ 810 | 
+ 811 |         public init(from decoder: Decoder) throws {
+     |                `- note: 'init(from:)' declared here
+ 812 |             let container = try decoder.container(keyedBy: CodingKeys.self)
+ 813 |             self.init(
+
+submodules/WalletContext/Sources/WalletTransfers.swift:412:82: error: cannot infer contextual base in reference to member 'confirmed'
+ 410 |         streamingData: pending.streamingData, fee: transaction.fee,
+ 411 |         transactionHash: transaction.transactionHash, transactionLt: transaction.logicalTime,
+ 412 |         uiExpiresAt: pending.uiExpiresAt, createdAt: pending.createdAt, status: .confirmed
+     |                                                                                  `- error: cannot infer contextual base in reference to member 'confirmed'
+ 413 |     )
+ 414 | }
+
+submodules/WalletContext/Sources/WalletTransfers.swift:422:74: error: generic parameter 'SignalError' could not be inferred
+ 420 |             var query = URLComponents()
+ 421 |             query.queryItems = [URLQueryItem(name: "address", value: address)]
+ 422 |             let account = try await WalletSignalRequestContext<String>().run(
+     |                                                                          `- error: generic parameter 'SignalError' could not be inferred
+ 423 |                 engine.wallet.performGetRequest(endpoint: "/api/v2/getAddressInformation", query: query.percentEncodedQuery)
+ 424 |             )
+
+submodules/WalletContext/Sources/WalletToncenter.swift:45:10: note: in call to function 'run'
+ 43 |     }
+ 44 | 
+ 45 |     func run<SignalError: Error>(_ signal: Signal<Value, SignalError>) async throws -> Value {
+    |          `- note: in call to function 'run'
+ 46 |         try Task.checkCancellation()
+ 47 |         self.start(signal)
+
+submodules/WalletContext/Sources/WalletTransfers.swift:423:24: error: value of type 'TelegramEngine' has no member 'wallet'
+ 421 |             query.queryItems = [URLQueryItem(name: "address", value: address)]
+ 422 |             let account = try await WalletSignalRequestContext<String>().run(
+ 423 |                 engine.wallet.performGetRequest(endpoint: "/api/v2/getAddressInformation", query: query.percentEncodedQuery)
+     |                        `- error: value of type 'TelegramEngine' has no member 'wallet'
+ 424 |             )
+ 425 |             let accountData = Data(account.utf8)
+
+submodules/WalletContext/Sources/WalletTransfers.swift:624:54: error: cannot find type 'WalletSendTransferResult' in scope
+ 622 |             self.preparedTransfers[prepared.id] = nil
+ 623 |             let submittedPending = persistedPending
+ 624 |             let request = WalletSignalRequestContext<WalletSendTransferResult>()
+     |                                                      `- error: cannot find type 'WalletSendTransferResult' in scope
+ 625 |             let requestStartedAt = ProcessInfo.processInfo.systemUptime
+ 626 |             self.transferSubmissions.startedRPC(pending.id)
+
+submodules/WalletContext/Sources/WalletTransfers.swift:629:43: error: value of type 'TelegramEngine' has no member 'wallet'
+ 627 |             let task = WalletAuthorizationScope.$session.withValue(nil) {
+ 628 |                 let backgroundTask = self.output.transferBackgroundTasks.acquire()
+ 629 |                 request.start(self.engine.wallet.sendTransfer(dataNormal: data.normal, dataGasless: data.gasless,
+     |                                           `- error: value of type 'TelegramEngine' has no member 'wallet'
+ 630 |                     recipientPeerId: recipientPeerId, randomId: randomId, pendingMessage: submittedPending.pendingMessage))
+ 631 |                 return Task {
+
+submodules/WalletContext/Sources/WalletTransfers.swift:662:37: error: value of type 'TelegramEngine' has no member 'wallet'
+ 660 |             }
+ 661 |             if let pendingMessage = pending.pendingMessage {
+ 662 |                 let _ = self.engine.wallet.removePendingTransferMessage(pendingMessage).start()
+     |                                     `- error: value of type 'TelegramEngine' has no member 'wallet'
+ 663 |             }
+ 664 |             throw error
+
+submodules/WalletContext/Sources/WalletTransfers.swift:691:23: error: cannot find type 'WalletSendTransferResult' in scope
+ 689 |         let pendingMessage = pending.pendingMessage
+ 690 |         let clock = self.transferSubmissionClock
+ 691 |         let response: WalletSendTransferResult?
+     |                       `- error: cannot find type 'WalletSendTransferResult' in scope
+ 692 |         do {
+ 693 |             response = try await withThrowingTaskGroup(of: WalletSendTransferResult.self) { group in
+
+submodules/WalletContext/Sources/WalletTransfers.swift:693:60: error: cannot find 'WalletSendTransferResult' in scope
+ 691 |         let response: WalletSendTransferResult?
+ 692 |         do {
+ 693 |             response = try await withThrowingTaskGroup(of: WalletSendTransferResult.self) { group in
+     |                                                            `- error: cannot find 'WalletSendTransferResult' in scope
+ 694 |                 group.addTask {
+ 695 |                     try await request.value()
+
+submodules/WalletContext/Sources/WalletTransfers.swift:701:27: error: cannot find 'WalletSendTransferError' in scope
+ 699 |                     let remaining = max(0, Double(walletTransferSubmissionTimeout) - elapsed * 1_000_000_000)
+ 700 |                     try await clock.sleep(UInt64(remaining))
+ 701 |                     throw WalletSendTransferError.network
+     |                           `- error: cannot find 'WalletSendTransferError' in scope
+ 702 |                 }
+ 703 |                 defer { group.cancelAll() }
+
+submodules/WalletContext/Sources/WalletTransfers.swift:705:27: error: cannot find 'WalletSendTransferError' in scope
+ 703 |                 defer { group.cancelAll() }
+ 704 |                 guard let result = try await group.next() else {
+ 705 |                     throw WalletSendTransferError.network
+     |                           `- error: cannot find 'WalletSendTransferError' in scope
+ 706 |                 }
+ 707 |                 return result
+
+submodules/WalletContext/Sources/WalletTransfers.swift:709:30: error: cannot find type 'WalletSendTransferError' in scope
+ 707 |                 return result
+ 708 |             }
+ 709 |         } catch let error as WalletSendTransferError where error == .invalidData || error == .sendFailed || error == .keyMismatch {
+     |                              `- error: cannot find type 'WalletSendTransferError' in scope
+ 710 |             if self.transferSubmissions.entries[pending.id]?.confirmed != true && self.latestPendingTransfer(pending).status != .confirmed {
+ 711 |                 if error == .keyMismatch, self.activationGeneration == generation {
+
+submodules/WalletContext/Sources/WalletTransfers.swift:732:65: error: value of type 'TelegramEngine' has no member 'wallet'
+ 730 |                             activeOperation: self.currentState.activeOperation)
+ 731 |                     }
+ 732 |                     if let pendingMessage { let _ = self.engine.wallet.removePendingTransferMessage(pendingMessage).start() }
+     |                                                                 `- error: value of type 'TelegramEngine' has no member 'wallet'
+ 733 |                     throw error
+ 734 |                 }
+
+submodules/WalletContext/Sources/WalletTransfers.swift:748:26: error: 'nil' requires a contextual type
+ 746 |         guard let accepted = acceptedWalletTransferSubmission(
+ 747 |             pending: self.latestPendingTransfer(pending),
+ 748 |             messageHash: nil,
+     |                          `- error: 'nil' requires a contextual type
+ 749 |             phase: self.transferSubmissions.entries[pending.id]?.confirmed == true ? .confirmed : (transfer == nil ? .submissionUnknown : .submitted),
+ 750 |             acceptedAt: receivedAt,
+
+submodules/WalletContext/Sources/WalletTransfers.swift:749:87: error: cannot infer contextual base in reference to member 'confirmed'
+ 747 |             pending: self.latestPendingTransfer(pending),
+ 748 |             messageHash: nil,
+ 749 |             phase: self.transferSubmissions.entries[pending.id]?.confirmed == true ? .confirmed : (transfer == nil ? .submissionUnknown : .submitted),
+     |                                                                                       `- error: cannot infer contextual base in reference to member 'confirmed'
+ 750 |             acceptedAt: receivedAt,
+ 751 |             sentTransfer: transfer
+
+submodules/WalletContext/Sources/WalletTransfers.swift:757:77: error: missing argument for parameter 'engine' in call
+ 755 |         self.preparedTransfers[pending.id] = nil
+ 756 |         let candidate = walletHistoryTransactionForPending(accepted, transactions: self.currentState.transactions.items)
+ 757 |             ?? response?.transaction.flatMap { walletTransactions(from: [$0]).first }
+     |                                                                             `- error: missing argument for parameter 'engine' in call
+ 758 |             ?? accepted.sentTransfer.flatMap { self.cachedWalletTransferTransaction(accepted, msgHash: $0.msgHash) }
+ 759 |         let finalTransaction = accepted.status == .confirmed && candidate?.status == .failed ? nil : candidate
+
+submodules/WalletContext/Sources/WalletTransactions.swift:187:6: note: 'walletTransactions(from:engine:)' declared here
+185 | 
+186 | @available(macOS 10.15, *)
+187 | func walletTransactions(
+    |      `- note: 'walletTransactions(from:engine:)' declared here
+188 |     from transactions: [WalletStoredTransaction],
+189 |     engine: TelegramEngine
+
+submodules/WalletContext/Sources/WalletTransfers.swift:759:52: error: cannot infer contextual base in reference to member 'confirmed'
+ 757 |             ?? response?.transaction.flatMap { walletTransactions(from: [$0]).first }
+ 758 |             ?? accepted.sentTransfer.flatMap { self.cachedWalletTransferTransaction(accepted, msgHash: $0.msgHash) }
+ 759 |         let finalTransaction = accepted.status == .confirmed && candidate?.status == .failed ? nil : candidate
+     |                                                    `- error: cannot infer contextual base in reference to member 'confirmed'
+ 760 |         if let finalTransaction {
+ 761 |             await self.applyWalletFinalTransaction(finalTransaction, pending: accepted, generation: generation, source: "send_response")
+
+submodules/WalletContext/Sources/WalletTransfers.swift:768:44: error: cannot infer contextual base in reference to member 'failed'
+ 766 |             self.requestSynchronization(scope: [.account], force: true)
+ 767 |             try await self.persistWalletTransferState(generation: generation)
+ 768 |             if finalTransaction.status == .failed { throw WalletSendTransferError.sendFailed }
+     |                                            `- error: cannot infer contextual base in reference to member 'failed'
+ 769 |             return walletTransferConfirmed(accepted, transaction: finalTransaction)
+ 770 |         }
+
+submodules/WalletContext/Sources/WalletTransfers.swift:768:59: error: cannot find 'WalletSendTransferError' in scope
+ 766 |             self.requestSynchronization(scope: [.account], force: true)
+ 767 |             try await self.persistWalletTransferState(generation: generation)
+ 768 |             if finalTransaction.status == .failed { throw WalletSendTransferError.sendFailed }
+     |                                                           `- error: cannot find 'WalletSendTransferError' in scope
+ 769 |             return walletTransferConfirmed(accepted, transaction: finalTransaction)
+ 770 |         }
+
+submodules/WalletContext/Sources/WalletTransfers.swift:905:29: error: value of type 'TelegramEngine' has no member 'wallet'
+ 903 |             self.logger.log("event=wallet_transfer_fallback_requested operation_count=\(unresolvedIds.count)")
+ 904 |             let transactions = try await WalletSignalRequestContext<[Transaction]>().run(
+ 905 |                 self.engine.wallet.getTransactionsByMsgHash(msgHash: [hash])
+     |                             `- error: value of type 'TelegramEngine' has no member 'wallet'
+ 906 |                 |> timeout(min(Double(walletTransferResolutionInterval), Double(expiresAt) - Date().timeIntervalSince1970), queue: Queue.concurrentDefaultQueue(), alternate: .fail(.generic))
+ 907 |                 |> map { walletTransactions(from: $0.items) }
+
+submodules/WalletContext/Sources/WalletTransfers.swift:906:182: error: type 'Error' has no member 'generic'
+ 904 |             let transactions = try await WalletSignalRequestContext<[Transaction]>().run(
+ 905 |                 self.engine.wallet.getTransactionsByMsgHash(msgHash: [hash])
+ 906 |                 |> timeout(min(Double(walletTransferResolutionInterval), Double(expiresAt) - Date().timeIntervalSince1970), queue: Queue.concurrentDefaultQueue(), alternate: .fail(.generic))
+     |                                                                                                                                                                                      `- error: type 'Error' has no member 'generic'
+ 907 |                 |> map { walletTransactions(from: $0.items) }
+ 908 |             )
+
+submodules/WalletContext/Sources/WalletTransfers.swift:907:24: error: cannot infer type of closure parameter '$0' without a type annotation
+ 905 |                 self.engine.wallet.getTransactionsByMsgHash(msgHash: [hash])
+ 906 |                 |> timeout(min(Double(walletTransferResolutionInterval), Double(expiresAt) - Date().timeIntervalSince1970), queue: Queue.concurrentDefaultQueue(), alternate: .fail(.generic))
+ 907 |                 |> map { walletTransactions(from: $0.items) }
+     |                        `- error: cannot infer type of closure parameter '$0' without a type annotation
+ 908 |             )
+ 909 |             guard self.isCurrentWalletTransferResolution(generation) else { return }
+
+submodules/WalletContext/Sources/WalletTransfers.swift:907:59: error: missing argument for parameter 'engine' in call
+ 905 |                 self.engine.wallet.getTransactionsByMsgHash(msgHash: [hash])
+ 906 |                 |> timeout(min(Double(walletTransferResolutionInterval), Double(expiresAt) - Date().timeIntervalSince1970), queue: Queue.concurrentDefaultQueue(), alternate: .fail(.generic))
+ 907 |                 |> map { walletTransactions(from: $0.items) }
+     |                                                           `- error: missing argument for parameter 'engine' in call
+ 908 |             )
+ 909 |             guard self.isCurrentWalletTransferResolution(generation) else { return }
+
+submodules/WalletContext/Sources/WalletTransactions.swift:187:6: note: 'walletTransactions(from:engine:)' declared here
+185 | 
+186 | @available(macOS 10.15, *)
+187 | func walletTransactions(
+    |      `- note: 'walletTransactions(from:engine:)' declared here
+188 |     from transactions: [WalletStoredTransaction],
+189 |     engine: TelegramEngine
+
+submodules/WalletContext/Sources/WalletTransfers.swift:1010:33: error: value of type 'TelegramEngine' has no member 'wallet'
+1008 |             do {
+1009 |                 try await WalletSignalRequestContext<Void>().run(
+1010 |                     self.engine.wallet.resolvePendingTransferMessage(reference, transactionId: transaction.id, failed: transaction.status == .failed)
+     |                                 `- error: value of type 'TelegramEngine' has no member 'wallet'
+1011 |                     |> castError(WalletError.self)
+1012 |                 )
+
+submodules/WalletContext/Sources/WalletTransfers.swift:1048:99: error: missing argument for parameter 'engine' in call
+1046 |                     self.walletTransferHashStates[transfer.msgHash] = nil
+1047 |                 }
+1048 |                 if let apiTransaction, let transaction = walletTransactions(from: [apiTransaction]).first, !walletTransactionApplicableToMessageHash(transaction, transfer.msgHash, isCollectibleTransfer: false) {
+     |                                                                                                   `- error: missing argument for parameter 'engine' in call
+1049 |                     self.logger.log("event=wallet_transfer_update_skipped msg_hash=\(transfer.msgHash) transaction_id=\(transaction.id)")
+1050 |                     self.requestSynchronization(scope: [.account, .transactions], force: true)
+
+submodules/WalletContext/Sources/WalletTransactions.swift:187:6: note: 'walletTransactions(from:engine:)' declared here
+185 | 
+186 | @available(macOS 10.15, *)
+187 | func walletTransactions(
+    |      `- note: 'walletTransactions(from:engine:)' declared here
+188 |     from transactions: [WalletStoredTransaction],
+189 |     engine: TelegramEngine
+
+submodules/WalletContext/Sources/WalletTransfers.swift:1051:106: error: missing argument for parameter 'engine' in call
+1049 |                     self.logger.log("event=wallet_transfer_update_skipped msg_hash=\(transfer.msgHash) transaction_id=\(transaction.id)")
+1050 |                     self.requestSynchronization(scope: [.account, .transactions], force: true)
+1051 |                 } else if let apiTransaction, let transaction = walletTransactions(from: [apiTransaction]).first {
+     |                                                                                                          `- error: missing argument for parameter 'engine' in call
+1052 |                     self.rememberWalletFinalTransaction(transaction, msgHash: transfer.msgHash)
+1053 |                     let candidates = self.currentState.pendingTransfers.filter {
+
+submodules/WalletContext/Sources/WalletTransactions.swift:187:6: note: 'walletTransactions(from:engine:)' declared here
+185 | 
+186 | @available(macOS 10.15, *)
+187 | func walletTransactions(
+    |      `- note: 'walletTransactions(from:engine:)' declared here
+188 |     from transactions: [WalletStoredTransaction],
+189 |     engine: TelegramEngine
+[5,850 / 8,613] checking cached actions
+Target //Telegram:telegram_auth_build_test failed to build
+INFO: Elapsed time: 2122.350s, Critical Path: 597.07s
+INFO: 5850 processes: 2120 internal, 3448 local, 282 worker.
+ERROR: Build did NOT complete successfully
+FAILED: 
+INFO: Build Event Protocol files produced successfully.
+Traceback (most recent call last):
+  File "/Users/runner/work/AirGram-iOS/AirGram-iOS/build-system/Make/Make.py", line 1294, in <module>
+    build(bazel=bazel_path, arguments=args)
+    ~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/runner/work/AirGram-iOS/AirGram-iOS/build-system/Make/Make.py", line 650, in build
+    bazel_command_line.invoke_build()
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "/Users/runner/work/AirGram-iOS/AirGram-iOS/build-system/Make/Make.py", line 325, in invoke_build
+    call_executable(combined_arguments)
+    ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^
+  File "/Users/runner/work/AirGram-iOS/AirGram-iOS/build-system/Make/BuildEnvironment.py", line 104, in call_executable
+    subprocess.check_call(resolved_arguments, env=resolved_env)
+    ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/homebrew/Cellar/python@3.15/3.15.2/Frameworks/Python.framework/Versions/3.15/lib/python3.15/subprocess.py", line 534, in check_call
+    raise CalledProcessError(retcode, cmd)
+subprocess.CalledProcessError: Command ['/Users/runner/work/AirGram-iOS/AirGram-iOS/build-input/bazel-8.4.2-darwin-arm64', '--output_user_root=/private/var/tmp/_bazel_containerhost', 'build', 'Telegram/telegram_auth_build_test', '--announce_rc', '--features=swift.use_global_module_cache', '--verbose_failures', '--remote_cache_async', '--jobs=3', '--local_cpu_resources=3', '--worker_max_instances=3', '--spawn_strategy=worker,local', '--strategy=SwiftCompile=worker,local', '--strategy=ObjcCompile=worker,local', '--strategy=Genrule=standalone', '--worker_quit_after_build=false', '--define=buildNumber=2833', '--features=swift.split_derived_files_generation', '--disk_cache=/private/var/tmp/_bazel_containerhost/disk_cache', '-c', 'opt', '--ios_multi_cpus=arm64', '--watchos_cpus=arm64_32', '--apple_generate_dsym', '--features=swift.opt_uses_wmo', '--features=swift.opt_uses_osize', '--features=dead_strip', '--objc_enable_binary_stripping', '--build_event_json_file=/var/folders/h5/t85nd63d71x27_8gl5gw3l_w0000gn/T/airgram-build-events.json'] returned non-zero exit status 1.
