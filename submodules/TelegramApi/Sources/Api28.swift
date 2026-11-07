@@ -3466,16 +3466,6 @@ public extension Api {
                     _data.transaction!.serialize(buffer, true)
                 }
                 break
-            case .updateSentWalletTransaction(let _data):
-                return ("updateSentWalletTransaction", [("flags", ConstructorParameterDescription(_data.flags)), ("msgHash", ConstructorParameterDescription(_data.msgHash)), ("transaction", ConstructorParameterDescription(_data.transaction))])
-            case .updateWalletGaslessInfo(let _data):
-                return ("updateWalletGaslessInfo", [("flags", ConstructorParameterDescription(_data.flags)), ("left", ConstructorParameterDescription(_data.left)), ("resetAt", ConstructorParameterDescription(_data.resetAt)), ("minAmount", ConstructorParameterDescription(_data.minAmount)), ("relayerAddress", ConstructorParameterDescription(_data.relayerAddress))])
-            case .updateWalletState(let _data):
-                return ("updateWalletState", [("state", ConstructorParameterDescription(_data.state))])
-            case .updateWalletTonConnectSession(let _data):
-                return ("updateWalletTonConnectSession", [("session", ConstructorParameterDescription(_data.session))])
-            case .updateWalletTonConnectPendingDisconnect(let _data):
-                return ("updateWalletTonConnectPendingDisconnect", [("sessionIds", ConstructorParameterDescription(_data.sessionIds))])
             case .updateServiceNotification(let _data):
                 if boxed {
                     buffer.appendInt32(-337352679)
@@ -3950,6 +3940,16 @@ public extension Api {
                 return ("updateSentPhoneCode", [("sentCode", ConstructorParameterDescription(_data.sentCode))])
             case .updateSentStoryReaction(let _data):
                 return ("updateSentStoryReaction", [("peer", ConstructorParameterDescription(_data.peer)), ("storyId", ConstructorParameterDescription(_data.storyId)), ("reaction", ConstructorParameterDescription(_data.reaction))])
+            case .updateSentWalletTransaction(let _data):
+                return ("updateSentWalletTransaction", [("flags", ConstructorParameterDescription(_data.flags)), ("msgHash", ConstructorParameterDescription(_data.msgHash)), ("transaction", ConstructorParameterDescription(_data.transaction))])
+            case .updateWalletGaslessInfo(let _data):
+                return ("updateWalletGaslessInfo", [("flags", ConstructorParameterDescription(_data.flags)), ("left", ConstructorParameterDescription(_data.left)), ("resetAt", ConstructorParameterDescription(_data.resetAt)), ("minAmount", ConstructorParameterDescription(_data.minAmount)), ("relayerAddress", ConstructorParameterDescription(_data.relayerAddress))])
+            case .updateWalletState(let _data):
+                return ("updateWalletState", [("state", ConstructorParameterDescription(_data.state))])
+            case .updateWalletTonConnectSession(let _data):
+                return ("updateWalletTonConnectSession", [("session", ConstructorParameterDescription(_data.session))])
+            case .updateWalletTonConnectPendingDisconnect(let _data):
+                return ("updateWalletTonConnectPendingDisconnect", [("sessionIds", ConstructorParameterDescription(_data.sessionIds))])
             case .updateServiceNotification(let _data):
                 return ("updateServiceNotification", [("flags", ConstructorParameterDescription(_data.flags)), ("inboxDate", ConstructorParameterDescription(_data.inboxDate)), ("type", ConstructorParameterDescription(_data.type)), ("message", ConstructorParameterDescription(_data.message)), ("media", ConstructorParameterDescription(_data.media)), ("entities", ConstructorParameterDescription(_data.entities))])
             case .updateSmsJob(let _data):

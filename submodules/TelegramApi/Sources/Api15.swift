@@ -2812,10 +2812,6 @@ public extension Api {
                     serializeString(_data.comment!, buffer: buffer, boxed: false)
                 }
                 break
-            case .messageActionGramTransfer(let _data):
-                return ("messageActionGramTransfer", [("flags", ConstructorParameterDescription(_data.flags)), ("amount", ConstructorParameterDescription(_data.amount)), ("peerAddress", ConstructorParameterDescription(_data.peerAddress)), ("transactionId", ConstructorParameterDescription(_data.transactionId)), ("comment", ConstructorParameterDescription(_data.comment))])
-            case .messageActionWalletTonConnectRequest(let _data):
-                return ("messageActionWalletTonConnectRequest", [("flags", ConstructorParameterDescription(_data.flags)), ("sessionId", ConstructorParameterDescription(_data.sessionId)), ("expires", ConstructorParameterDescription(_data.expires)), ("topic", ConstructorParameterDescription(_data.topic)), ("traceId", ConstructorParameterDescription(_data.traceId)), ("dappName", ConstructorParameterDescription(_data.dappName))])
             case .messageActionGroupCall(let _data):
                 if boxed {
                     buffer.appendInt32(2047704898)
@@ -3321,6 +3317,10 @@ public extension Api {
                 return ("messageActionGiveawayLaunch", [("flags", ConstructorParameterDescription(_data.flags)), ("stars", ConstructorParameterDescription(_data.stars))])
             case .messageActionGiveawayResults(let _data):
                 return ("messageActionGiveawayResults", [("flags", ConstructorParameterDescription(_data.flags)), ("winnersCount", ConstructorParameterDescription(_data.winnersCount)), ("unclaimedCount", ConstructorParameterDescription(_data.unclaimedCount))])
+            case .messageActionGramTransfer(let _data):
+                return ("messageActionGramTransfer", [("flags", ConstructorParameterDescription(_data.flags)), ("amount", ConstructorParameterDescription(_data.amount)), ("peerAddress", ConstructorParameterDescription(_data.peerAddress)), ("transactionId", ConstructorParameterDescription(_data.transactionId)), ("comment", ConstructorParameterDescription(_data.comment))])
+            case .messageActionWalletTonConnectRequest(let _data):
+                return ("messageActionWalletTonConnectRequest", [("flags", ConstructorParameterDescription(_data.flags)), ("sessionId", ConstructorParameterDescription(_data.sessionId)), ("expires", ConstructorParameterDescription(_data.expires)), ("topic", ConstructorParameterDescription(_data.topic)), ("traceId", ConstructorParameterDescription(_data.traceId)), ("dappName", ConstructorParameterDescription(_data.dappName))])
             case .messageActionGroupCall(let _data):
                 return ("messageActionGroupCall", [("flags", ConstructorParameterDescription(_data.flags)), ("call", ConstructorParameterDescription(_data.call)), ("duration", ConstructorParameterDescription(_data.duration))])
             case .messageActionGroupCallScheduled(let _data):

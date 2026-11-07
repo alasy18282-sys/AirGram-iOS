@@ -1626,9 +1626,6 @@ public extension Api {
     }
 }
 
-public extension Api.functions {
-    public enum wallet {}
-}
 
 public extension Api.functions.wallet {
     static func disableBackup(flags: Int32, password: Api.InputCheckPasswordSRP?, newPublicKey: Buffer?, proof: Api.WalletOwnershipProof?) -> (FunctionDescription, Buffer, DeserializeFunctionResponse<Api.WalletState>) {
