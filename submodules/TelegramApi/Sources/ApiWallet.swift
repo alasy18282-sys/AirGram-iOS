@@ -1493,23 +1493,6 @@ public extension Api {
                 }
                 serializeInt32(_data.flags, buffer: buffer, boxed: false)
                 break
-            case .walletTransactionPeerChannel(let _data):
-                if boxed {
-                    buffer.appendInt32(1416649777)
-                }
-                serializeInt32(_data.flags, buffer: buffer, boxed: false)
-                serializeInt64(_data.channelId, buffer: buffer, boxed: false)
-                serializeString(_data.address, buffer: buffer, boxed: false)
-                if Int(_data.flags) & Int(1 << 0) != 0 {
-                    serializeString(_data.domain!, buffer: buffer, boxed: false)
-                }
-                break
-            case .walletTransactionPeerTelegramGift(let _data):
-                if boxed {
-                    buffer.appendInt32(-193817447)
-                }
-                serializeInt32(_data.flags, buffer: buffer, boxed: false)
-                break
             case .walletTransactionPeerOnramp(let _data):
                 if boxed {
                     buffer.appendInt32(-443213714)
@@ -1544,6 +1527,10 @@ public extension Api {
             switch self {
             case .walletTransactionPeerAddress(let _data):
                 return ("walletTransactionPeerAddress", [("flags", ConstructorParameterDescription(_data.flags)), ("address", ConstructorParameterDescription(_data.address)), ("domain", ConstructorParameterDescription(_data.domain))])
+            case .walletTransactionPeerChannel(let _data):
+                return ("walletTransactionPeerChannel", [("flags", ConstructorParameterDescription(_data.flags)), ("channelId", ConstructorParameterDescription(_data.channelId)), ("address", ConstructorParameterDescription(_data.address)), ("domain", ConstructorParameterDescription(_data.domain))])
+            case .walletTransactionPeerTelegramGift(let _data):
+                return ("walletTransactionPeerTelegramGift", [("flags", ConstructorParameterDescription(_data.flags))])
             case .walletTransactionPeerOnramp(let _data):
                 return ("walletTransactionPeerOnramp", [("flags", ConstructorParameterDescription(_data.flags)), ("address", ConstructorParameterDescription(_data.address)), ("domain", ConstructorParameterDescription(_data.domain)), ("providerName", ConstructorParameterDescription(_data.providerName))])
             case .walletTransactionPeerUnsupported:
