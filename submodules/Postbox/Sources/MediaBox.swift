@@ -423,7 +423,7 @@ public final class MediaBox {
                         
                         if let statusUpdateDisposable = statusUpdateDisposable {
                             let statusQueue = self.statusQueue
-                            self.dataQueue.async {
+                            self.dataQueue.async { [self, statusContext] in
                                 if let (fileContext, releaseContext) = self.fileContext(for: resourceId) {
                                     let statusDisposable = fileContext.status(next: { [weak statusContext] value in
                                         statusQueue.async {
@@ -901,7 +901,7 @@ public final class MediaBox {
     }
     
     public func keepResource(id: MediaResourceId) -> Signal<Never, NoError> {
-        return Signal { subscriber in
+        return Signal { [self] subscriber in
             let disposable = MetaDisposable()
             
             let dataQueue = self.dataQueue
@@ -989,7 +989,7 @@ public final class MediaBox {
     }
     
     public func cachedResourceRepresentation(_ resource: MediaResource, representation: CachedMediaResourceRepresentation, pathExtension: String? = nil, complete: Bool, fetch: Bool = true, attemptSynchronously: Bool = false) -> Signal<MediaResourceData, NoError> {
-        return Signal { subscriber in
+        return Signal { [self] subscriber in
             let disposable = MetaDisposable()
             
             let begin: () -> Void = {
@@ -1172,7 +1172,7 @@ public final class MediaBox {
     }
 
     public func customResourceData(id: String, baseResourceId: String?, pathExtension: String?, complete: Bool, fetch: (() -> Signal<CachedMediaResourceRepresentationResult, NoError>)?, keepDuration: CachedMediaRepresentationKeepDuration, attemptSynchronously: Bool) -> Signal<MediaResourceData, NoError> {
-        return Signal { subscriber in
+        return Signal { [self] subscriber in
             let disposable = MetaDisposable()
 
             let begin: () -> Void = {
