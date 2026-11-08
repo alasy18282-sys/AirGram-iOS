@@ -1,0 +1,424 @@
+ERROR: /Users/runner/work/AirGram-iOS/AirGram-iOS/submodules/TelegramCore/BUILD:3:14: Generating derived files for Swift module //submodules/TelegramCore:TelegramCore failed: (Exit 1): worker failed: error executing SwiftDeriveFiles command (from target //submodules/TelegramCore:TelegramCore) 
+submodules/TelegramCore/Sources/Account/AccountIntermediateState.swift:763:9: error: switch must be exhaustive
+     |         |- error: switch must be exhaustive
+submodules/TelegramCore/Sources/Account/AccountIntermediateState.swift:989:14: error: value of type 'AccountFinalStateEvents' has no member 'walletTransferUpdates'
+     |              `- error: value of type 'AccountFinalStateEvents' has no member 'walletTransferUpdates'
+submodules/TelegramCore/Sources/Account/AccountIntermediateState.swift:990:14: error: value of type 'AccountFinalStateEvents' has no member 'walletTonConnectEvents'
+     |              `- error: value of type 'AccountFinalStateEvents' has no member 'walletTonConnectEvents'
+submodules/TelegramCore/Sources/Account/AccountIntermediateState.swift:991:14: error: value of type 'AccountFinalStateEvents' has no member 'updatedWalletState'
+     |              `- error: value of type 'AccountFinalStateEvents' has no member 'updatedWalletState'
+submodules/TelegramCore/Sources/ApiUtils/StoreMessage_Telegram.swift:253:13: error: switch must be exhaustive
+     |             |- error: switch must be exhaustive
+submodules/TelegramCore/Sources/ApiUtils/TelegramMediaAction.swift:7:5: error: switch must be exhaustive
+    |     |- error: switch must be exhaustive
+submodules/TelegramCore/Sources/State/AccountStateManagementUtils.swift:3847:9: error: switch must be exhaustive
+     |         |- error: switch must be exhaustive
+submodules/TelegramCore/Sources/State/AccountStateManagementUtils.swift:3987:9: error: variable 'walletTonConnectEventBatch' was never mutated; consider changing to 'let' constant
+     |         `- error: variable 'walletTonConnectEventBatch' was never mutated; consider changing to 'let' constant
+submodules/TelegramCore/Sources/State/AccountStateManager.swift:1204:40: error: value of type 'AccountFinalStateEvents' has no member 'walletTransferUpdates'
+     |                                        `- error: value of type 'AccountFinalStateEvents' has no member 'walletTransferUpdates'
+submodules/TelegramCore/Sources/TelegramEngine/Wallet/Wallet.swift:373:82: error: type 'Namespaces.CachedItemCollection' has no member 'cachedExistingWaltBalance'
+    |                                                                                  `- error: type 'Namespaces.CachedItemCollection' has no member 'cachedExistingWaltBalance'
+submodules/TelegramCore/Sources/TelegramEngine/Wallet/Wallet.swift:455:97: error: type 'Namespaces.CachedItemCollection' has no member 'cachedWalletUserAddresses'
+    |                                                                                                 `- error: type 'Namespaces.CachedItemCollection' has no member 'cachedWalletUserAddresses'
+submodules/TelegramCore/Sources/TelegramEngine/Wallet/Wallet.swift:677:33: error: type 'Api.functions' has no member 'toncenter'
+    |                                 `- error: type 'Api.functions' has no member 'toncenter'
+submodules/TelegramCore/Sources/TelegramEngine/Wallet/Wallet.swift:684:49: error: 'toncenter' is not a member type of enum 'TelegramApi.Api'
+    |                                                 `- error: 'toncenter' is not a member type of enum 'TelegramApi.Api'
+submodules/TelegramCore/Sources/TelegramEngine/Wallet/Wallet.swift:686:32: error: 'toncenter' is not a member type of enum 'TelegramApi.Api'
+    |                                `- error: 'toncenter' is not a member type of enum 'TelegramApi.Api'
+submodules/TelegramCore/Sources/TelegramEngine/Wallet/Wallet.swift:702:14: error: cannot infer type of closure parameter 'result' without a type annotation
+    |              `- error: cannot infer type of closure parameter 'result' without a type annotation
+submodules/TelegramCore/Sources/TelegramEngine/Wallet/Wallet.swift:717:33: error: type 'Api.functions' has no member 'toncenter'
+    |                                 `- error: type 'Api.functions' has no member 'toncenter'
+submodules/TelegramCore/Sources/TelegramEngine/Wallet/Wallet.swift:729:49: error: 'toncenter' is not a member type of enum 'TelegramApi.Api'
+    |                                                 `- error: 'toncenter' is not a member type of enum 'TelegramApi.Api'
+submodules/TelegramCore/Sources/TelegramEngine/Wallet/Wallet.swift:731:32: error: 'toncenter' is not a member type of enum 'TelegramApi.Api'
+    |                                `- error: 'toncenter' is not a member type of enum 'TelegramApi.Api'
+submodules/TelegramCore/Sources/TelegramEngine/Wallet/Wallet.swift:747:14: error: cannot infer type of closure parameter 'result' without a type annotation
+    |              `- error: cannot infer type of closure parameter 'result' without a type annotation
+submodules/TelegramCore/Sources/TelegramEngine/Wallet/WalletBackup.swift:86:103: error: extra argument 'keychain' in call
+    |                                                                                                       `- error: extra argument 'keychain' in call
+submodules/TelegramCore/Sources/TelegramEngine/Wallet/WalletCard.swift:80:99: error: cannot find type 'WalletError' in scope
+   |                                                                                                   `- error: cannot find type 'WalletError' in scope
+submodules/TelegramCore/Sources/TelegramEngine/Wallet/WalletNfts.swift:51:16: error: stored property 'gift' of 'Sendable'-conforming struct 'WalletNftItem' contains non-Sendable type 'StarGift'; this is an error in the Swift 6 language mode
+    |                `- error: stored property 'gift' of 'Sendable'-conforming struct 'WalletNftItem' contains non-Sendable type 'StarGift'; this is an error in the Swift 6 language mode
+submodules/TelegramCore/Sources/TelegramEngine/Wallet/WalletNfts.swift:95:28: error: value of type 'Api.wallet.NftItem.Cons_nftItem' has no member 'gift'
+    |                            `- error: value of type 'Api.wallet.NftItem.Cons_nftItem' has no member 'gift'
+submodules/TelegramCore/Sources/TelegramEngine/Wallet/WalletPendingTransferMessages.swift:44:93: error: cannot find type 'PendingWalletTransferMessageAttribute' in scope
+    |                                                                                             `- error: cannot find type 'PendingWalletTransferMessageAttribute' in scope
+submodules/TelegramCore/Sources/TelegramEngine/Wallet/WalletPendingTransferMessages.swift:106:85: error: cannot find type 'PendingWalletTransferMessageAttribute' in scope
+    |                                                                                     `- error: cannot find type 'PendingWalletTransferMessageAttribute' in scope
+submodules/TelegramCore/Sources/TelegramEngine/Wallet/WalletPendingTransferMessages.swift:157:93: error: cannot find type 'PendingWalletTransferMessageAttribute' in scope
+    |                                                                                             `- error: cannot find type 'PendingWalletTransferMessageAttribute' in scope
+submodules/TelegramCore/Sources/TelegramEngine/Wallet/WalletPendingTransferMessages.swift:33:36: error: value of type 'Transaction' has no member 'getMessages'
+    |                                    `- error: value of type 'Transaction' has no member 'getMessages'
+submodules/TelegramCore/Sources/TelegramEngine/Wallet/WalletPendingTransferMessages.swift:46:56: error: cannot find type 'PendingWalletTransferMessageAttribute' in scope
+    |                                                        `- error: cannot find type 'PendingWalletTransferMessageAttribute' in scope
+submodules/TelegramCore/Sources/TelegramEngine/Wallet/WalletPendingTransferMessages.swift:49:58: error: cannot find type 'PendingWalletTransferMessageAttribute' in scope
+    |                                                          `- error: cannot find type 'PendingWalletTransferMessageAttribute' in scope
+submodules/TelegramCore/Sources/TelegramEngine/Wallet/WalletPendingTransferMessages.swift:53:48: error: type 'PendingMessageActionType' has no member 'walletTransfer'
+    |                                                `- error: type 'PendingMessageActionType' has no member 'walletTransfer'
+submodules/TelegramCore/Sources/TelegramEngine/Wallet/WalletPendingTransferMessages.swift:57:48: error: type 'PendingMessageActionType' has no member 'walletTransfer'
+    |                                                `- error: type 'PendingMessageActionType' has no member 'walletTransfer'
+submodules/TelegramCore/Sources/TelegramEngine/Wallet/WalletPendingTransferMessages.swift:60:54: error: cannot find type 'PendingWalletTransferMessageAttribute' in scope
+    |                                                      `- error: cannot find type 'PendingWalletTransferMessageAttribute' in scope
+submodules/TelegramCore/Sources/TelegramEngine/Wallet/WalletPendingTransferMessages.swift:92:38: error: '_' can only appear in a pattern or on the left side of an assignment
+    |                                      `- error: '_' can only appear in a pattern or on the left side of an assignment
+submodules/TelegramCore/Sources/TelegramEngine/Wallet/WalletPendingTransferMessages.swift:92:63: error: type 'TelegramMediaActionType' has no member 'gramTransfer'
+    |                                                               `- error: type 'TelegramMediaActionType' has no member 'gramTransfer'
+submodules/TelegramCore/Sources/TelegramEngine/Wallet/WalletPendingTransferMessages.swift:112:69: error: type 'TelegramMediaActionType' has no member 'gramTransfer'
+    |                                                                     `- error: type 'TelegramMediaActionType' has no member 'gramTransfer'
+submodules/TelegramCore/Sources/TelegramEngine/Wallet/WalletPendingTransferMessages.swift:123:30: error: value of type 'Transaction' has no member 'getPendingMessageActions'
+    |                              `- error: value of type 'Transaction' has no member 'getPendingMessageActions'
+submodules/TelegramCore/Sources/TelegramEngine/Wallet/WalletPendingTransferMessages.swift:123:62: error: cannot infer contextual base in reference to member 'walletTransfer'
+    |                                                              `- error: cannot infer contextual base in reference to member 'walletTransfer'
+submodules/TelegramCore/Sources/TelegramEngine/Wallet/WalletPendingTransferMessages.swift:125:46: error: cannot find type 'PendingWalletTransferMessageAttribute' in scope
+    |                                              `- error: cannot find type 'PendingWalletTransferMessageAttribute' in scope
+submodules/TelegramCore/Sources/TelegramEngine/Wallet/WalletPendingTransferMessages.swift:139:101: error: cannot find type 'PendingWalletTransferMessageAttribute' in scope
+    |                                                                                                     `- error: cannot find type 'PendingWalletTransferMessageAttribute' in scope
+submodules/TelegramCore/Sources/TelegramEngine/Wallet/WalletPendingTransferMessages.swift:139:68: error: type 'PendingMessageActionType' has no member 'walletTransfer'
+    |                                                                    `- error: type 'PendingMessageActionType' has no member 'walletTransfer'
+submodules/TelegramCore/Sources/TelegramEngine/Wallet/WalletPendingTransferMessages.swift:140:39: error: incorrect argument label in call (have '_:peerId:pending:', expected '_:peerId:transactionId:')
+    |                                       `- error: incorrect argument label in call (have '_:peerId:pending:', expected '_:peerId:transactionId:')
+submodules/TelegramCore/Sources/TelegramEngine/Wallet/WalletPendingTransferMessages.swift:142:61: error: cannot find type 'PendingWalletTransferMessageAttribute' in scope
+    |                                                             `- error: cannot find type 'PendingWalletTransferMessageAttribute' in scope
+submodules/TelegramCore/Sources/TelegramEngine/Wallet/WalletPendingTransferMessages.swift:150:48: error: type 'PendingMessageActionType' has no member 'walletTransfer'
+    |                                                `- error: type 'PendingMessageActionType' has no member 'walletTransfer'
+submodules/TelegramCore/Sources/TelegramEngine/Wallet/WalletPendingTransferMessages.swift:185:21: error: cannot find 'PendingWalletTransferMessageAttribute' in scope
+    |                     `- error: cannot find 'PendingWalletTransferMessageAttribute' in scope
+submodules/TelegramCore/Sources/TelegramEngine/Wallet/WalletPendingTransferMessages.swift:191:38: error: type 'TelegramMediaActionType' has no member 'gramTransfer'
+    |                                      `- error: type 'TelegramMediaActionType' has no member 'gramTransfer'
+submodules/TelegramCore/Sources/TelegramEngine/Wallet/WalletPendingTransferMessages.swift:196:48: error: type 'PendingMessageActionType' has no member 'walletTransfer'
+    |                                                `- error: type 'PendingMessageActionType' has no member 'walletTransfer'
+submodules/TelegramCore/Sources/TelegramEngine/Wallet/WalletPendingTransferMessages.swift:210:117: error: cannot find type 'PendingWalletTransferMessageAttribute' in scope
+    |                                                                                                                     `- error: cannot find type 'PendingWalletTransferMessageAttribute' in scope
+submodules/TelegramCore/Sources/TelegramEngine/Wallet/WalletPendingTransferMessages.swift:210:72: error: type 'PendingMessageActionType' has no member 'walletTransfer'
+    |                                                                        `- error: type 'PendingMessageActionType' has no member 'walletTransfer'
+submodules/TelegramCore/Sources/TelegramEngine/Wallet/WalletPendingTransferMessages.swift:226:113: error: cannot find type 'PendingWalletTransferMessageAttribute' in scope
+    |                                                                                                                 `- error: cannot find type 'PendingWalletTransferMessageAttribute' in scope
+submodules/TelegramCore/Sources/TelegramEngine/Wallet/WalletPendingTransferMessages.swift:226:68: error: type 'PendingMessageActionType' has no member 'walletTransfer'
+    |                                                                    `- error: type 'PendingMessageActionType' has no member 'walletTransfer'
+submodules/TelegramCore/Sources/TelegramEngine/Wallet/WalletPendingTransferMessages.swift:239:117: error: cannot find type 'PendingWalletTransferMessageAttribute' in scope
+    |                                                                                                                     `- error: cannot find type 'PendingWalletTransferMessageAttribute' in scope
+submodules/TelegramCore/Sources/TelegramEngine/Wallet/WalletPendingTransferMessages.swift:239:72: error: type 'PendingMessageActionType' has no member 'walletTransfer'
+    |                                                                        `- error: type 'PendingMessageActionType' has no member 'walletTransfer'
+submodules/TelegramCore/Sources/TelegramEngine/Wallet/WalletPendingTransferMessages.swift:250:117: error: cannot find type 'PendingWalletTransferMessageAttribute' in scope
+    |                                                                                                                     `- error: cannot find type 'PendingWalletTransferMessageAttribute' in scope
+submodules/TelegramCore/Sources/TelegramEngine/Wallet/WalletPendingTransferMessages.swift:250:72: error: type 'PendingMessageActionType' has no member 'walletTransfer'
+    |                                                                        `- error: type 'PendingMessageActionType' has no member 'walletTransfer'
+submodules/TelegramCore/Sources/TelegramEngine/Wallet/WalletPendingTransferMessages.swift:264:113: error: cannot find type 'PendingWalletTransferMessageAttribute' in scope
+    |                                                                                                                 `- error: cannot find type 'PendingWalletTransferMessageAttribute' in scope
+submodules/TelegramCore/Sources/TelegramEngine/Wallet/WalletPendingTransferMessages.swift:264:68: error: type 'PendingMessageActionType' has no member 'walletTransfer'
+    |                                                                    `- error: type 'PendingMessageActionType' has no member 'walletTransfer'
+submodules/TelegramCore/Sources/TelegramEngine/Wallet/WalletPendingTransferMessages.swift:292:117: error: cannot find type 'PendingWalletTransferMessageAttribute' in scope
+    |                                                                                                                     `- error: cannot find type 'PendingWalletTransferMessageAttribute' in scope
+submodules/TelegramCore/Sources/TelegramEngine/Wallet/WalletPendingTransferMessages.swift:292:72: error: type 'PendingMessageActionType' has no member 'walletTransfer'
+    |                                                                        `- error: type 'PendingMessageActionType' has no member 'walletTransfer'
+submodules/TelegramCore/Sources/TelegramEngine/Wallet/WalletTonConnect.swift:409:26: error: type 'TelegramMediaActionType' has no member 'walletTonConnectRequest'
+    |                          `- error: type 'TelegramMediaActionType' has no member 'walletTonConnectRequest'
+ERROR: /Users/runner/work/AirGram-iOS/AirGram-iOS/submodules/TelegramUIPreferences/BUILD:3:14 Linking submodules/TelegramUIPreferences/libTelegramUIPreferences.a failed: (Exit 1): worker failed: error executing SwiftDeriveFiles command (from target //submodules/TelegramCore:TelegramCore) 
+ERROR: Build did NOT complete successfully
+FAILED: 
+Traceback (most recent call last):
+--- end of full build log ---
+158 |     if let serverMessageId = pending.serverMessageId {
+159 |         if let message = transaction.getMessage(MessageId(peerId: id.peerId, namespace: Namespaces.Message.Cloud, id: serverMessageId)) {
+
+submodules/TelegramCore/Sources/TelegramEngine/Wallet/WalletPendingTransferMessages.swift:33:36: error: value of type 'Transaction' has no member 'getMessages'
+ 31 |     let to = MessageIndex.lowerBound(peerId: peerId, namespace: namespace)
+ 32 |     while true {
+ 33 |         let messages = transaction.getMessages(peerId: peerId, namespace: namespace, from: from, includeFrom: false, to: to, limit: 100)
+    |                                    `- error: value of type 'Transaction' has no member 'getMessages'
+ 34 |         for message in messages where message.id.id > afterId && matches(message) {
+ 35 |             return message
+
+submodules/TelegramCore/Sources/TelegramEngine/Wallet/WalletPendingTransferMessages.swift:46:56: error: cannot find type 'PendingWalletTransferMessageAttribute' in scope
+ 44 | func updatePendingWalletTransferMessage(transaction: Transaction, id: MessageId, attribute: PendingWalletTransferMessageAttribute) {
+ 45 |     guard let message = transaction.getMessage(id),
+ 46 |           message.attributes.contains(where: { ($0 as? PendingWalletTransferMessageAttribute)?.operationId == attribute.operationId }) else {
+    |                                                        `- error: cannot find type 'PendingWalletTransferMessageAttribute' in scope
+ 47 |         return
+ 48 |     }
+
+submodules/TelegramCore/Sources/TelegramEngine/Wallet/WalletPendingTransferMessages.swift:49:58: error: cannot find type 'PendingWalletTransferMessageAttribute' in scope
+ 47 |         return
+ 48 |     }
+ 49 |     let attributes = message.attributes.filter { !($0 is PendingWalletTransferMessageAttribute) } + [attribute]
+    |                                                          `- error: cannot find type 'PendingWalletTransferMessageAttribute' in scope
+ 50 |     transaction.updateMessage(id, update: { _ in
+ 51 |         return .update(walletStoreMessage(message).withUpdatedAttributes(attributes))
+
+submodules/TelegramCore/Sources/TelegramEngine/Wallet/WalletPendingTransferMessages.swift:53:48: error: type 'PendingMessageActionType' has no member 'walletTransfer'
+ 51 |         return .update(walletStoreMessage(message).withUpdatedAttributes(attributes))
+ 52 |     })
+ 53 |     transaction.setPendingMessageAction(type: .walletTransfer, id: id, action: attribute)
+    |                                                `- error: type 'PendingMessageActionType' has no member 'walletTransfer'
+ 54 | }
+ 55 | 
+
+submodules/TelegramCore/Sources/TelegramEngine/Wallet/WalletPendingTransferMessages.swift:57:48: error: type 'PendingMessageActionType' has no member 'walletTransfer'
+ 55 | 
+ 56 | func removePendingWalletTransferMessage(transaction: Transaction, id: MessageId) {
+ 57 |     transaction.setPendingMessageAction(type: .walletTransfer, id: id, action: nil)
+    |                                                `- error: type 'PendingMessageActionType' has no member 'walletTransfer'
+ 58 |     guard id.namespace == Namespaces.Message.Local,
+ 59 |           let message = transaction.getMessage(id),
+
+submodules/TelegramCore/Sources/TelegramEngine/Wallet/WalletPendingTransferMessages.swift:60:54: error: cannot find type 'PendingWalletTransferMessageAttribute' in scope
+ 58 |     guard id.namespace == Namespaces.Message.Local,
+ 59 |           let message = transaction.getMessage(id),
+ 60 |           message.attributes.contains(where: { $0 is PendingWalletTransferMessageAttribute }) else {
+    |                                                      `- error: cannot find type 'PendingWalletTransferMessageAttribute' in scope
+ 61 |         return
+ 62 |     }
+
+submodules/TelegramCore/Sources/TelegramEngine/Wallet/WalletPendingTransferMessages.swift:92:38: error: '_' can only appear in a pattern or on the left side of an assignment
+ 90 |     return message.media.contains(where: { media in
+ 91 |         guard let action = media as? TelegramMediaAction,
+ 92 |               case let .gramTransfer(_, _, id, _, _) = action.action else {
+    |                                      `- error: '_' can only appear in a pattern or on the left side of an assignment
+ 93 |             return false
+ 94 |         }
+
+submodules/TelegramCore/Sources/TelegramEngine/Wallet/WalletPendingTransferMessages.swift:92:63: error: type 'TelegramMediaActionType' has no member 'gramTransfer'
+ 90 |     return message.media.contains(where: { media in
+ 91 |         guard let action = media as? TelegramMediaAction,
+ 92 |               case let .gramTransfer(_, _, id, _, _) = action.action else {
+    |                                                               `- error: type 'TelegramMediaActionType' has no member 'gramTransfer'
+ 93 |             return false
+ 94 |         }
+
+submodules/TelegramCore/Sources/TelegramEngine/Wallet/WalletPendingTransferMessages.swift:112:69: error: type 'TelegramMediaActionType' has no member 'gramTransfer'
+110 |               !message.flags.contains(.Incoming), message.forwardInfo == nil else { return false }
+111 |         return message.media.contains { media in
+112 |             guard let action = media as? TelegramMediaAction, case .gramTransfer = action.action else { return false }
+    |                                                                     `- error: type 'TelegramMediaActionType' has no member 'gramTransfer'
+113 |             return true
+114 |         }
+
+submodules/TelegramCore/Sources/TelegramEngine/Wallet/WalletPendingTransferMessages.swift:123:30: error: value of type 'Transaction' has no member 'getPendingMessageActions'
+121 |     guard !mappings.isEmpty else { return [] }
+122 |     var ids: [MessageId] = []
+123 |     for entry in transaction.getPendingMessageActions(type: .walletTransfer) {
+    |                              `- error: value of type 'Transaction' has no member 'getPendingMessageActions'
+124 |         guard entry.id.namespace == Namespaces.Message.Local,
+125 |               let pending = entry.action as? PendingWalletTransferMessageAttribute,
+
+submodules/TelegramCore/Sources/TelegramEngine/Wallet/WalletPendingTransferMessages.swift:123:62: error: cannot infer contextual base in reference to member 'walletTransfer'
+121 |     guard !mappings.isEmpty else { return [] }
+122 |     var ids: [MessageId] = []
+123 |     for entry in transaction.getPendingMessageActions(type: .walletTransfer) {
+    |                                                              `- error: cannot infer contextual base in reference to member 'walletTransfer'
+124 |         guard entry.id.namespace == Namespaces.Message.Local,
+125 |               let pending = entry.action as? PendingWalletTransferMessageAttribute,
+
+submodules/TelegramCore/Sources/TelegramEngine/Wallet/WalletPendingTransferMessages.swift:125:46: error: cannot find type 'PendingWalletTransferMessageAttribute' in scope
+123 |     for entry in transaction.getPendingMessageActions(type: .walletTransfer) {
+124 |         guard entry.id.namespace == Namespaces.Message.Local,
+125 |               let pending = entry.action as? PendingWalletTransferMessageAttribute,
+    |                                              `- error: cannot find type 'PendingWalletTransferMessageAttribute' in scope
+126 |               let message = transaction.getMessage(entry.id),
+127 |               let randomId = message.globallyUniqueId,
+
+submodules/TelegramCore/Sources/TelegramEngine/Wallet/WalletPendingTransferMessages.swift:139:101: error: cannot find type 'PendingWalletTransferMessageAttribute' in scope
+137 | 
+138 | func replacePendingWalletTransferMessage(transaction: Transaction, localId: MessageId, serverMessage: StoreMessage) {
+139 |     guard let pending = transaction.getPendingMessageAction(type: .walletTransfer, id: localId) as? PendingWalletTransferMessageAttribute,
+    |                                                                                                     `- error: cannot find type 'PendingWalletTransferMessageAttribute' in scope
+140 |           walletTransferMessageMatches(serverMessage, peerId: localId.peerId, pending: pending),
+141 |           let localMessage = transaction.getMessage(localId),
+
+submodules/TelegramCore/Sources/TelegramEngine/Wallet/WalletPendingTransferMessages.swift:139:68: error: type 'PendingMessageActionType' has no member 'walletTransfer'
+137 | 
+138 | func replacePendingWalletTransferMessage(transaction: Transaction, localId: MessageId, serverMessage: StoreMessage) {
+139 |     guard let pending = transaction.getPendingMessageAction(type: .walletTransfer, id: localId) as? PendingWalletTransferMessageAttribute,
+    |                                                                    `- error: type 'PendingMessageActionType' has no member 'walletTransfer'
+140 |           walletTransferMessageMatches(serverMessage, peerId: localId.peerId, pending: pending),
+141 |           let localMessage = transaction.getMessage(localId),
+
+submodules/TelegramCore/Sources/TelegramEngine/Wallet/WalletPendingTransferMessages.swift:140:39: error: incorrect argument label in call (have '_:peerId:pending:', expected '_:peerId:transactionId:')
+138 | func replacePendingWalletTransferMessage(transaction: Transaction, localId: MessageId, serverMessage: StoreMessage) {
+139 |     guard let pending = transaction.getPendingMessageAction(type: .walletTransfer, id: localId) as? PendingWalletTransferMessageAttribute,
+140 |           walletTransferMessageMatches(serverMessage, peerId: localId.peerId, pending: pending),
+    |                                       `- error: incorrect argument label in call (have '_:peerId:pending:', expected '_:peerId:transactionId:')
+141 |           let localMessage = transaction.getMessage(localId),
+142 |           localMessage.attributes.contains(where: { ($0 as? PendingWalletTransferMessageAttribute)?.operationId == pending.operationId }),
+
+submodules/TelegramCore/Sources/TelegramEngine/Wallet/WalletPendingTransferMessages.swift:142:61: error: cannot find type 'PendingWalletTransferMessageAttribute' in scope
+140 |           walletTransferMessageMatches(serverMessage, peerId: localId.peerId, pending: pending),
+141 |           let localMessage = transaction.getMessage(localId),
+142 |           localMessage.attributes.contains(where: { ($0 as? PendingWalletTransferMessageAttribute)?.operationId == pending.operationId }),
+    |                                                             `- error: cannot find type 'PendingWalletTransferMessageAttribute' in scope
+143 |           case let .Id(serverId) = serverMessage.id else {
+144 |         return
+
+submodules/TelegramCore/Sources/TelegramEngine/Wallet/WalletPendingTransferMessages.swift:150:48: error: type 'PendingMessageActionType' has no member 'walletTransfer'
+148 |         return
+149 |     }
+150 |     transaction.setPendingMessageAction(type: .walletTransfer, id: localId, action: nil)
+    |                                                `- error: type 'PendingMessageActionType' has no member 'walletTransfer'
+151 |     transaction.deleteMessages([serverId], forEachMedia: nil)
+152 |     transaction.updateMessage(localId, update: { _ in
+
+submodules/TelegramCore/Sources/TelegramEngine/Wallet/WalletPendingTransferMessages.swift:185:21: error: cannot find 'PendingWalletTransferMessageAttribute' in scope
+183 |         return nil
+184 |     }
+185 |     let attribute = PendingWalletTransferMessageAttribute(
+    |                     `- error: cannot find 'PendingWalletTransferMessageAttribute' in scope
+186 |         operationId: operationId,
+187 |         expiresAt: Int32(clamping: Int64(timestamp) + 90),
+
+submodules/TelegramCore/Sources/TelegramEngine/Wallet/WalletPendingTransferMessages.swift:191:38: error: type 'TelegramMediaActionType' has no member 'gramTransfer'
+189 |     )
+190 |     let message = StoreMessage(peerId: peerId, namespace: Namespaces.Message.Local, customStableId: nil, globallyUniqueId: randomId, groupingKey: nil, threadId: nil, timestamp: timestamp, flags: [], tags: [], globalTags: [], localTags: [], forwardInfo: nil, authorId: accountPeerId, text: "", attributes: [attribute], media: [
+191 |         TelegramMediaAction(action: .gramTransfer(amount: amount, peerAddress: address, transactionId: "", comment: comment, commentEncrypted: commentEncrypted))
+    |                                      `- error: type 'TelegramMediaActionType' has no member 'gramTransfer'
+192 |     ])
+193 |     guard let id = transaction.addMessages([message], location: .Random)[randomId] else {
+
+submodules/TelegramCore/Sources/TelegramEngine/Wallet/WalletPendingTransferMessages.swift:196:48: error: type 'PendingMessageActionType' has no member 'walletTransfer'
+194 |         return nil
+195 |     }
+196 |     transaction.setPendingMessageAction(type: .walletTransfer, id: id, action: attribute)
+    |                                                `- error: type 'PendingMessageActionType' has no member 'walletTransfer'
+197 |     updatePeerChatInclusionWithMinTimestamp(transaction: transaction, id: peerId, minTimestamp: timestamp, forceRootGroupIfNotExists: true)
+198 |     return WalletPendingTransferMessageReference(id: id, operationId: operationId)
+
+submodules/TelegramCore/Sources/TelegramEngine/Wallet/WalletPendingTransferMessages.swift:210:117: error: cannot find type 'PendingWalletTransferMessageAttribute' in scope
+208 |     return postbox.transaction { transaction in
+209 |         guard amount > 0,
+210 |               let pending = transaction.getPendingMessageAction(type: .walletTransfer, id: reference.messageId) as? PendingWalletTransferMessageAttribute,
+    |                                                                                                                     `- error: cannot find type 'PendingWalletTransferMessageAttribute' in scope
+211 |               pending.operationId == reference.operationId,
+212 |               pending.msgHash == nil, pending.resolvedMessageId == nil, pending.serverMessageId == nil,
+
+submodules/TelegramCore/Sources/TelegramEngine/Wallet/WalletPendingTransferMessages.swift:210:72: error: type 'PendingMessageActionType' has no member 'walletTransfer'
+208 |     return postbox.transaction { transaction in
+209 |         guard amount > 0,
+210 |               let pending = transaction.getPendingMessageAction(type: .walletTransfer, id: reference.messageId) as? PendingWalletTransferMessageAttribute,
+    |                                                                        `- error: type 'PendingMessageActionType' has no member 'walletTransfer'
+211 |               pending.operationId == reference.operationId,
+212 |               pending.msgHash == nil, pending.resolvedMessageId == nil, pending.serverMessageId == nil,
+
+submodules/TelegramCore/Sources/TelegramEngine/Wallet/WalletPendingTransferMessages.swift:226:113: error: cannot find type 'PendingWalletTransferMessageAttribute' in scope
+224 | 
+225 | func acceptPendingWalletTransferMessage(transaction: Transaction, reference: WalletPendingTransferMessageReference, transfer: WalletSentTransfer, receivedAt: Int32) {
+226 |     guard let pending = transaction.getPendingMessageAction(type: .walletTransfer, id: reference.messageId) as? PendingWalletTransferMessageAttribute,
+    |                                                                                                                 `- error: cannot find type 'PendingWalletTransferMessageAttribute' in scope
+227 |           pending.operationId == reference.operationId else {
+228 |         return
+
+submodules/TelegramCore/Sources/TelegramEngine/Wallet/WalletPendingTransferMessages.swift:226:68: error: type 'PendingMessageActionType' has no member 'walletTransfer'
+224 | 
+225 | func acceptPendingWalletTransferMessage(transaction: Transaction, reference: WalletPendingTransferMessageReference, transfer: WalletSentTransfer, receivedAt: Int32) {
+226 |     guard let pending = transaction.getPendingMessageAction(type: .walletTransfer, id: reference.messageId) as? PendingWalletTransferMessageAttribute,
+    |                                                                    `- error: type 'PendingMessageActionType' has no member 'walletTransfer'
+227 |           pending.operationId == reference.operationId else {
+228 |         return
+
+submodules/TelegramCore/Sources/TelegramEngine/Wallet/WalletPendingTransferMessages.swift:239:117: error: cannot find type 'PendingWalletTransferMessageAttribute' in scope
+237 | func _internal_removePendingWalletTransferMessage(postbox: Postbox, reference: WalletPendingTransferMessageReference) -> Signal<Void, NoError> {
+238 |     return postbox.transaction { transaction in
+239 |         guard let pending = transaction.getPendingMessageAction(type: .walletTransfer, id: reference.messageId) as? PendingWalletTransferMessageAttribute,
+    |                                                                                                                     `- error: cannot find type 'PendingWalletTransferMessageAttribute' in scope
+240 |               pending.operationId == reference.operationId,
+241 |               pending.transactionId == nil, pending.chainTraceId == nil else {
+
+submodules/TelegramCore/Sources/TelegramEngine/Wallet/WalletPendingTransferMessages.swift:239:72: error: type 'PendingMessageActionType' has no member 'walletTransfer'
+237 | func _internal_removePendingWalletTransferMessage(postbox: Postbox, reference: WalletPendingTransferMessageReference) -> Signal<Void, NoError> {
+238 |     return postbox.transaction { transaction in
+239 |         guard let pending = transaction.getPendingMessageAction(type: .walletTransfer, id: reference.messageId) as? PendingWalletTransferMessageAttribute,
+    |                                                                        `- error: type 'PendingMessageActionType' has no member 'walletTransfer'
+240 |               pending.operationId == reference.operationId,
+241 |               pending.transactionId == nil, pending.chainTraceId == nil else {
+
+submodules/TelegramCore/Sources/TelegramEngine/Wallet/WalletPendingTransferMessages.swift:250:117: error: cannot find type 'PendingWalletTransferMessageAttribute' in scope
+248 | func _internal_hasUnresolvedPendingWalletTransferMessage(postbox: Postbox, reference: WalletPendingTransferMessageReference) -> Signal<Bool, NoError> {
+249 |     return postbox.transaction { transaction in
+250 |         guard let pending = transaction.getPendingMessageAction(type: .walletTransfer, id: reference.messageId) as? PendingWalletTransferMessageAttribute,
+    |                                                                                                                     `- error: cannot find type 'PendingWalletTransferMessageAttribute' in scope
+251 |               pending.operationId == reference.operationId else { return false }
+252 |         return pending.expiresAt > Int32(clamping: Int64(Date().timeIntervalSince1970)) && pending.resolvedMessageId == nil && pending.serverMessageId == nil
+
+submodules/TelegramCore/Sources/TelegramEngine/Wallet/WalletPendingTransferMessages.swift:250:72: error: type 'PendingMessageActionType' has no member 'walletTransfer'
+248 | func _internal_hasUnresolvedPendingWalletTransferMessage(postbox: Postbox, reference: WalletPendingTransferMessageReference) -> Signal<Bool, NoError> {
+249 |     return postbox.transaction { transaction in
+250 |         guard let pending = transaction.getPendingMessageAction(type: .walletTransfer, id: reference.messageId) as? PendingWalletTransferMessageAttribute,
+    |                                                                        `- error: type 'PendingMessageActionType' has no member 'walletTransfer'
+251 |               pending.operationId == reference.operationId else { return false }
+252 |         return pending.expiresAt > Int32(clamping: Int64(Date().timeIntervalSince1970)) && pending.resolvedMessageId == nil && pending.serverMessageId == nil
+
+submodules/TelegramCore/Sources/TelegramEngine/Wallet/WalletPendingTransferMessages.swift:264:113: error: cannot find type 'PendingWalletTransferMessageAttribute' in scope
+262 | func resolvePendingWalletTransferMessage(transaction: Transaction, reference: WalletPendingTransferMessageReference, transactionId: String, failed: Bool) {
+263 |     guard !transactionId.isEmpty,
+264 |           let pending = transaction.getPendingMessageAction(type: .walletTransfer, id: reference.messageId) as? PendingWalletTransferMessageAttribute,
+    |                                                                                                                 `- error: cannot find type 'PendingWalletTransferMessageAttribute' in scope
+265 |           pending.operationId == reference.operationId else {
+266 |         return
+
+submodules/TelegramCore/Sources/TelegramEngine/Wallet/WalletPendingTransferMessages.swift:264:68: error: type 'PendingMessageActionType' has no member 'walletTransfer'
+262 | func resolvePendingWalletTransferMessage(transaction: Transaction, reference: WalletPendingTransferMessageReference, transactionId: String, failed: Bool) {
+263 |     guard !transactionId.isEmpty,
+264 |           let pending = transaction.getPendingMessageAction(type: .walletTransfer, id: reference.messageId) as? PendingWalletTransferMessageAttribute,
+    |                                                                    `- error: type 'PendingMessageActionType' has no member 'walletTransfer'
+265 |           pending.operationId == reference.operationId else {
+266 |         return
+
+submodules/TelegramCore/Sources/TelegramEngine/Wallet/WalletPendingTransferMessages.swift:292:117: error: cannot find type 'PendingWalletTransferMessageAttribute' in scope
+290 |     return postbox.transaction { transaction in
+291 |         guard chainTraceId.utf8.count == 44, let hash = Data(base64Encoded: chainTraceId), hash.count == 32,
+292 |               let pending = transaction.getPendingMessageAction(type: .walletTransfer, id: reference.messageId) as? PendingWalletTransferMessageAttribute,
+    |                                                                                                                     `- error: cannot find type 'PendingWalletTransferMessageAttribute' in scope
+293 |               pending.operationId == reference.operationId,
+294 |               pending.chainTraceId == nil || pending.chainTraceId == chainTraceId else {
+
+submodules/TelegramCore/Sources/TelegramEngine/Wallet/WalletPendingTransferMessages.swift:292:72: error: type 'PendingMessageActionType' has no member 'walletTransfer'
+290 |     return postbox.transaction { transaction in
+291 |         guard chainTraceId.utf8.count == 44, let hash = Data(base64Encoded: chainTraceId), hash.count == 32,
+292 |               let pending = transaction.getPendingMessageAction(type: .walletTransfer, id: reference.messageId) as? PendingWalletTransferMessageAttribute,
+    |                                                                        `- error: type 'PendingMessageActionType' has no member 'walletTransfer'
+293 |               pending.operationId == reference.operationId,
+294 |               pending.chainTraceId == nil || pending.chainTraceId == chainTraceId else {
+
+submodules/TelegramCore/Sources/TelegramEngine/Wallet/WalletTonConnect.swift:409:26: error: type 'TelegramMediaActionType' has no member 'walletTonConnectRequest'
+407 |         for media in message.media {
+408 |             if let action = media as? TelegramMediaAction,
+409 |                case let .walletTonConnectRequest(flags, sessionId, expires, topic, traceId, dappName) = action.action {
+    |                          `- error: type 'TelegramMediaActionType' has no member 'walletTonConnectRequest'
+410 |                 events.append(.request(WalletTonConnectRequestMessage(messageId: id, flags: flags, sessionId: sessionId, expires: expires, topic: topic, traceId: traceId, dappName: dappName)))
+411 |                 break
+[6,229 / 8,613] Compiling third-party/webrtc/webrtc/p2p/base/basic_ice_controller.cc; 1s local, disk-cache
+Target //Telegram:telegram_auth_build_test failed to build
+ERROR: /Users/runner/work/AirGram-iOS/AirGram-iOS/submodules/TelegramUIPreferences/BUILD:3:14 Linking submodules/TelegramUIPreferences/libTelegramUIPreferences.a failed: (Exit 1): worker failed: error executing SwiftDeriveFiles command (from target //submodules/TelegramCore:TelegramCore) 
+  (cd /private/var/tmp/_bazel_containerhost/c259e0c7803e089724afaeab1cf94801/execroot/_main && \
+  exec env - \
+    APPLE_SDK_PLATFORM=iPhoneOS \
+    APPLE_SDK_VERSION_OVERRIDE=26.4 \
+    PATH=/usr/bin:/bin:/usr/sbin:/sbin \
+    XCODE_VERSION_OVERRIDE=26.4.1.17E202 \
+    ZERO_AR_DATE=1 \
+  bazel-out/darwin_arm64-opt-exec-ST-d57f47055a04/bin/external/rules_swift+/tools/worker/worker swiftc @bazel-out/ios_arm64-opt-ios-arm64-min13.0-ST-2d46267cd7fb/bin/submodules/TelegramCore/TelegramCore.swiftmodule-0.params)
+# Configuration: 01b589007f137926300f010f0b494336ee0393909a345ee088212c33d46dd701
+# Execution platform: @@platforms//host:host
+INFO: Elapsed time: 2119.717s, Critical Path: 524.10s
+INFO: 6230 processes: 2120 internal, 3831 local, 279 worker.
+ERROR: Build did NOT complete successfully
+FAILED: 
+INFO: Build Event Protocol files produced successfully.
+Traceback (most recent call last):
+  File "/Users/runner/work/AirGram-iOS/AirGram-iOS/build-system/Make/Make.py", line 1294, in <module>
+    build(bazel=bazel_path, arguments=args)
+    ~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/runner/work/AirGram-iOS/AirGram-iOS/build-system/Make/Make.py", line 650, in build
+    bazel_command_line.invoke_build()
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "/Users/runner/work/AirGram-iOS/AirGram-iOS/build-system/Make/Make.py", line 325, in invoke_build
+    call_executable(combined_arguments)
+    ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^
+  File "/Users/runner/work/AirGram-iOS/AirGram-iOS/build-system/Make/BuildEnvironment.py", line 104, in call_executable
+    subprocess.check_call(resolved_arguments, env=resolved_env)
+    ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/homebrew/Cellar/python@3.15/3.15.2/Frameworks/Python.framework/Versions/3.15/lib/python3.15/subprocess.py", line 534, in check_call
+    raise CalledProcessError(retcode, cmd)
+subprocess.CalledProcessError: Command ['/Users/runner/work/AirGram-iOS/AirGram-iOS/build-input/bazel-8.4.2-darwin-arm64', '--output_user_root=/private/var/tmp/_bazel_containerhost', 'build', 'Telegram/telegram_auth_build_test', '--announce_rc', '--features=swift.use_global_module_cache', '--verbose_failures', '--remote_cache_async', '--jobs=3', '--local_cpu_resources=3', '--worker_max_instances=3', '--spawn_strategy=worker,local', '--strategy=SwiftCompile=worker,local', '--strategy=ObjcCompile=worker,local', '--strategy=Genrule=standalone', '--worker_quit_after_build=false', '--define=buildNumber=2839', '--features=swift.split_derived_files_generation', '--disk_cache=/private/var/tmp/_bazel_containerhost/disk_cache', '-c', 'opt', '--ios_multi_cpus=arm64', '--watchos_cpus=arm64_32', '--apple_generate_dsym', '--features=swift.opt_uses_wmo', '--features=swift.opt_uses_osize', '--features=dead_strip', '--objc_enable_binary_stripping', '--build_event_json_file=/var/folders/h5/t85nd63d71x27_8gl5gw3l_w0000gn/T/airgram-build-events.json'] returned non-zero exit status 1.
