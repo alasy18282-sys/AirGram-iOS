@@ -35,6 +35,8 @@ objc_library(
     ]),
     copts = [
         "-Werror",
+        # Preserve legacy UIKit image-state behavior while keeping deprecation warnings non-fatal on iOS 15+.
+        "-Wno-error=deprecated-declarations",
     ],
     includes = [
         "PublicHeaders",
