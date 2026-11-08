@@ -75,7 +75,10 @@ public extension WalletContext.CardSticker {
         let gift = WalletContext.Collectible(nft: serverSticker.nft)
         guard gift.kind == .gift else { return nil }
         var model: Data?, pattern: Data?
-        let unique = serverSticker.nft.gift
+        var unique: StarGift.UniqueGift?
+        if case let .unique(uniqueGift) = serverSticker.nft.gift {
+            unique = uniqueGift
+        }
         for attribute in unique?.attributes ?? [] {
             switch attribute {
             case let .model(_, file, _, _):

@@ -952,6 +952,20 @@ public extension WalletContext {
         case failed(FatalStorageError)
     }
 
+    public enum WalletCardUpdateError: Equatable, Error {
+        case limitExceeded
+        case savedInProfile
+        case backgroundNotAllowed
+        case invalidSticker
+        case notOwned
+        case duplicate
+        case invalidAddress
+        case invalidNft
+        case unavailable
+        case generic
+        case floodWait
+    }
+
     struct CardGiftStyle: Codable, Equatable, Sendable {
         public let innerColor: Int32
         public let outerColor: Int32

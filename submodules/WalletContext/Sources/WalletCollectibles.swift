@@ -104,7 +104,7 @@ func walletCollectible(from nft: WalletNftItem) -> WalletContext.Collectible {
         collectionName: collectionName,
         collectionUrl: collectionUrl,
         attributes: attributes,
-        giftSlug: nft.gift?.slug ?? (kind == .gift ? walletCollectibleGiftSlug(name: name, urls: urls) : nil),
+        giftSlug: { if case let .unique(uniqueGift) = nft.gift { return uniqueGift.slug }; return (kind == .gift ? walletCollectibleGiftSlug(name: name, urls: urls) : nil) }(),
         nft: nft
     )
 }
