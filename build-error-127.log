@@ -1,0 +1,312 @@
+ERROR: /Users/runner/work/AirGram-iOS/AirGram-iOS/submodules/TelegramApi/BUILD:3:14: Generating derived files for Swift module //submodules/TelegramApi:TelegramApi failed: (Exit 1): worker failed: error executing SwiftDeriveFiles command (from target //submodules/TelegramApi:TelegramApi) 
+submodules/TelegramApi/Sources/ApiWallet.swift:1496:18: error: case is already handled by previous patterns; consider removing it
+     |                  `- error: case is already handled by previous patterns; consider removing it
+submodules/TelegramApi/Sources/ApiWallet.swift:1507:18: error: case is already handled by previous patterns; consider removing it
+     |                  `- error: case is already handled by previous patterns; consider removing it
+submodules/TelegramApi/Sources/ApiWallet.swift:1544:13: error: switch must be exhaustive
+     |             |- error: switch must be exhaustive
+ERROR: /Users/runner/work/AirGram-iOS/AirGram-iOS/submodules/TelegramCore/BUILD:3:14 Linking submodules/TelegramCore/libTelegramCore.a failed: (Exit 1): worker failed: error executing SwiftDeriveFiles command (from target //submodules/TelegramApi:TelegramApi) 
+ERROR: Build did NOT complete successfully
+FAILED: 
+Traceback (most recent call last):
+--- end of full build log ---
+[5,242 / 8,613] Compiling absl/strings/internal/escaping.cc [for tool]; 8s local, disk-cache ... (3 actions, 2 running)
+[5,243 / 8,613] Compiling absl/strings/internal/escaping.cc [for tool]; 10s local, disk-cache ... (3 actions running)
+[5,244 / 8,613] Compiling absl/strings/internal/escaping.cc [for tool]; 11s local, disk-cache ... (3 actions running)
+[5,245 / 8,613] Compiling absl/strings/internal/escaping.cc [for tool]; 12s local, disk-cache ... (3 actions, 2 running)
+[5,247 / 8,613] Compiling absl/strings/internal/escaping.cc [for tool]; 13s local, disk-cache ... (3 actions, 2 running)
+[5,249 / 8,613] Compiling Rust rlib deluxe_core v0.5.0 (8 files) [for tool]; 1s local, disk-cache ... (3 actions, 2 running)
+[5,251 / 8,613] Compiling absl/strings/internal/ostringstream.cc [for tool]; 2s local, disk-cache ... (3 actions, 2 running)
+[5,252 / 8,613] Compiling absl/strings/internal/ostringstream.cc [for tool]; 3s local, disk-cache ... (3 actions, 2 running)
+[5,252 / 8,613] Compiling absl/strings/internal/ostringstream.cc [for tool]; 4s local, disk-cache ... (3 actions running)
+[5,253 / 8,613] Compiling absl/strings/internal/ostringstream.cc [for tool]; 6s local, disk-cache ... (3 actions, 2 running)
+[5,253 / 8,613] Compiling absl/strings/internal/ostringstream.cc [for tool]; 8s local, disk-cache ... (3 actions running)
+[5,254 / 8,613] Compiling absl/strings/internal/ostringstream.cc [for tool]; 10s local, disk-cache ... (3 actions, 2 running)
+[5,257 / 8,613] Compiling absl/strings/internal/utf8.cc [for tool]; 0s local, disk-cache ... (3 actions, 2 running)
+[5,258 / 8,613] Compiling absl/strings/internal/utf8.cc [for tool]; 1s local, disk-cache ... (3 actions, 2 running)
+[5,258 / 8,613] Compiling absl/strings/internal/utf8.cc [for tool]; 2s local, disk-cache ... (3 actions running)
+[5,259 / 8,613] Compiling absl/strings/internal/utf8.cc [for tool]; 3s local, disk-cache ... (3 actions running)
+[5,260 / 8,613] Compiling absl/strings/internal/utf8.cc [for tool]; 5s local, disk-cache ... (3 actions, 2 running)
+[5,262 / 8,613] Compiling absl/strings/internal/utf8.cc [for tool]; 6s local, disk-cache ... (3 actions running)
+[5,263 / 8,613] Compiling absl/strings/internal/utf8.cc [for tool]; 9s local, disk-cache ... (3 actions, 2 running)
+[5,266 / 8,613] Compiling third-party/webrtc/webrtc/modules/audio_processing/aec3/echo_remover_metrics.cc; 1s local, disk-cache ... (3 actions running)
+[5,267 / 8,613] Compiling absl/strings/string_view.cc [for tool]; 2s local, disk-cache ... (3 actions running)
+[5,268 / 8,613] Compiling absl/strings/string_view.cc [for tool]; 3s local, disk-cache ... (3 actions, 2 running)
+[5,268 / 8,613] Compiling absl/strings/string_view.cc [for tool]; 5s local, disk-cache ... (3 actions running)
+[5,269 / 8,613] Compiling absl/strings/string_view.cc [for tool]; 7s local, disk-cache ... (3 actions, 2 running)
+[5,271 / 8,613] Compiling absl/strings/string_view.cc [for tool]; 8s local, disk-cache ... (3 actions, 2 running)
+[5,271 / 8,613] Compiling absl/strings/string_view.cc [for tool]; 9s local, disk-cache ... (3 actions running)
+[5,273 / 8,613] Compiling Rust proc-macro zerofrom_derive v0.1.7 (3 files) [for tool]; 2s local, disk-cache ... (3 actions running)
+[5,274 / 8,613] Compiling Rust proc-macro zerofrom_derive v0.1.7 (3 files) [for tool]; 4s local, disk-cache ... (3 actions running)
+[5,275 / 8,613] Compiling Rust proc-macro zerofrom_derive v0.1.7 (3 files) [for tool]; 6s local, disk-cache ... (3 actions, 2 running)
+[5,277 / 8,613] Compiling absl/base/internal/throw_delegate.cc [for tool]; 6s local, disk-cache ... (3 actions running)
+[5,278 / 8,613] Compiling absl/base/internal/throw_delegate.cc [for tool]; 8s local, disk-cache ... (3 actions, 2 running)
+[5,278 / 8,613] Compiling absl/base/internal/throw_delegate.cc [for tool]; 9s local, disk-cache ... (3 actions running)
+[5,279 / 8,613] Compiling absl/base/internal/throw_delegate.cc [for tool]; 10s local, disk-cache ... (3 actions, 2 running)
+[5,280 / 8,613] Compiling absl/base/internal/throw_delegate.cc [for tool]; 12s local, disk-cache ... (3 actions running)
+[5,281 / 8,613] Compiling absl/base/internal/throw_delegate.cc [for tool]; 14s local, disk-cache ... (3 actions, 2 running)
+[5,283 / 8,613] Compiling Rust proc-macro async_trait v0.1.89 (27 files) [for tool]; 5s local, disk-cache ... (3 actions running)
+[5,284 / 8,613] Compiling Rust proc-macro async_trait v0.1.89 (27 files) [for tool]; 6s local, disk-cache ... (3 actions, 2 running)
+[5,284 / 8,613] Compiling Rust proc-macro async_trait v0.1.89 (27 files) [for tool]; 7s local, disk-cache ... (3 actions running)
+[5,285 / 8,613] Compiling Rust proc-macro async_trait v0.1.89 (27 files) [for tool]; 8s local, disk-cache ... (3 actions running)
+[5,286 / 8,613] Compiling Rust proc-macro async_trait v0.1.89 (27 files) [for tool]; 9s local, disk-cache ... (3 actions running)
+[5,287 / 8,613] Compiling Rust proc-macro async_trait v0.1.89 (27 files) [for tool]; 10s local, disk-cache ... (3 actions running)
+[5,288 / 8,613] Compiling Rust proc-macro async_trait v0.1.89 (27 files) [for tool]; 11s local, disk-cache ... (3 actions running)
+[5,289 / 8,613] Compiling Rust proc-macro async_trait v0.1.89 (27 files) [for tool]; 12s local, disk-cache ... (3 actions running)
+[5,290 / 8,613] Compiling Rust proc-macro async_trait v0.1.89 (27 files) [for tool]; 13s local, disk-cache ... (3 actions running)
+[5,292 / 8,613] Compiling absl/numeric/int128.cc [for tool]; 10s local, disk-cache ... (3 actions, 2 running)
+[5,295 / 8,613] Compiling Rust rlib futures_util v0.3.34 (186 files) [for tool]; 1s local, disk-cache ... (3 actions running)
+[5,297 / 8,613] Compiling absl/base/internal/cycleclock.cc [for tool]; 1s local, disk-cache ... (3 actions running)
+[5,300 / 8,613] Compiling absl/base/internal/cycleclock.cc [for tool]; 2s local, disk-cache ... (3 actions running)
+[5,301 / 8,613] Compiling absl/base/internal/cycleclock.cc [for tool]; 3s local, disk-cache ... (3 actions running)
+[5,303 / 8,613] Compiling absl/base/internal/cycleclock.cc [for tool]; 4s local, disk-cache ... (3 actions running)
+[5,307 / 8,613] Compiling absl/base/internal/cycleclock.cc [for tool]; 5s local, disk-cache ... (3 actions running)
+[5,310 / 8,613] Compiling absl/base/internal/cycleclock.cc [for tool]; 6s local, disk-cache ... (3 actions running)
+[5,312 / 8,613] Compiling absl/base/internal/cycleclock.cc [for tool]; 7s local, disk-cache ... (3 actions, 2 running)
+[5,315 / 8,613] Compiling absl/base/internal/cycleclock.cc [for tool]; 8s local, disk-cache ... (3 actions, 2 running)
+[5,317 / 8,613] Compiling absl/base/internal/cycleclock.cc [for tool]; 9s local, disk-cache ... (3 actions running)
+[5,318 / 8,613] Compiling absl/base/internal/cycleclock.cc [for tool]; 11s local, disk-cache ... (3 actions running)
+[5,319 / 8,613] Compiling Rust proc-macro ton_macros v0.1.2 (7 files) [for tool]; 3s local, disk-cache ... (3 actions running)
+[5,320 / 8,613] Compiling Rust proc-macro ton_macros v0.1.2 (7 files) [for tool]; 4s local, disk-cache ... (3 actions, 2 running)
+[5,321 / 8,613] Compiling Rust proc-macro ton_macros v0.1.2 (7 files) [for tool]; 5s local, disk-cache ... (3 actions, 2 running)
+[5,327 / 8,613] Compiling absl/base/internal/spinlock.cc [for tool]; 4s local, disk-cache ... (3 actions, 2 running)
+[5,332 / 8,613] Compiling absl/base/internal/spinlock.cc [for tool]; 5s local, disk-cache ... (3 actions, 2 running)
+[5,336 / 8,613] Compiling absl/base/internal/spinlock.cc [for tool]; 6s local, disk-cache ... (3 actions, 2 running)
+[5,339 / 8,613] Compiling absl/base/internal/spinlock.cc [for tool]; 8s local, disk-cache ... (3 actions, 2 running)
+[5,343 / 8,613] Compiling absl/base/internal/spinlock.cc [for tool]; 9s local, disk-cache ... (3 actions running)
+[5,345 / 8,613] Compiling absl/base/internal/spinlock.cc [for tool]; 10s local, disk-cache ... (3 actions running)
+[5,348 / 8,613] Compiling absl/base/internal/spinlock.cc [for tool]; 11s local, disk-cache ... (3 actions running)
+[5,359 / 8,613] Compiling absl/base/internal/sysinfo.cc [for tool]; 0s local, disk-cache ... (3 actions, 2 running)
+[5,362 / 8,613] Compiling absl/base/internal/sysinfo.cc [for tool]; 1s local, disk-cache ... (3 actions running)
+[5,365 / 8,613] Compiling absl/base/internal/sysinfo.cc [for tool]; 2s local, disk-cache ... (3 actions running)
+[5,367 / 8,613] Compiling absl/base/internal/sysinfo.cc [for tool]; 3s local, disk-cache ... (3 actions running)
+[5,370 / 8,613] Compiling absl/base/internal/sysinfo.cc [for tool]; 4s local, disk-cache ... (3 actions, 2 running)
+[5,375 / 8,613] Compiling absl/base/internal/sysinfo.cc [for tool]; 5s local, disk-cache ... (3 actions, 2 running)
+[5,376 / 8,613] Compiling absl/base/internal/sysinfo.cc [for tool]; 6s local, disk-cache ... (3 actions running)
+[5,377 / 8,613] Compiling absl/base/internal/sysinfo.cc [for tool]; 7s local, disk-cache ... (3 actions running)
+[5,379 / 8,613] Compiling Rust rlib cargo_metadata v0.23.1 (8 files) [for tool]; 3s local, disk-cache ... (3 actions running)
+[5,382 / 8,613] Compiling absl/base/internal/thread_identity.cc [for tool]; 1s local, disk-cache ... (3 actions running)
+[5,383 / 8,613] Compiling absl/base/internal/thread_identity.cc [for tool]; 2s local, disk-cache ... (3 actions running)
+[5,384 / 8,613] Compiling absl/base/internal/thread_identity.cc [for tool]; 3s local, disk-cache ... (3 actions running)
+[5,386 / 8,613] Compiling absl/base/internal/thread_identity.cc [for tool]; 4s local, disk-cache ... (3 actions, 2 running)
+[5,388 / 8,613] Compiling absl/base/internal/thread_identity.cc [for tool]; 5s local, disk-cache ... (3 actions running)
+[5,389 / 8,613] Compiling absl/base/internal/thread_identity.cc [for tool]; 6s local, disk-cache ... (3 actions, 2 running)
+[5,392 / 8,613] Compiling Rust proc-macro uniffi_macros v0.32.0 (21 files) [for tool]; 0s local, disk-cache ... (3 actions, 2 running)
+[5,392 / 8,613] Compiling Rust proc-macro uniffi_macros v0.32.0 (21 files) [for tool]; 1s local, disk-cache ... (3 actions running)
+[5,393 / 8,613] Compiling Rust proc-macro uniffi_macros v0.32.0 (21 files) [for tool]; 2s local, disk-cache ... (3 actions running)
+[5,394 / 8,613] Compiling Rust proc-macro uniffi_macros v0.32.0 (21 files) [for tool]; 4s local, disk-cache ... (3 actions, 2 running)
+[5,394 / 8,613] Compiling Rust proc-macro uniffi_macros v0.32.0 (21 files) [for tool]; 5s local, disk-cache ... (3 actions running)
+[5,395 / 8,613] Compiling Rust proc-macro uniffi_macros v0.32.0 (21 files) [for tool]; 6s local, disk-cache ... (3 actions running)
+[5,396 / 8,613] Compiling Rust proc-macro uniffi_macros v0.32.0 (21 files) [for tool]; 13s local, disk-cache ... (3 actions, 2 running)
+[5,397 / 8,613] Compiling Rust proc-macro uniffi_macros v0.32.0 (21 files) [for tool]; 15s local, disk-cache ... (3 actions running)
+[5,398 / 8,613] Compiling Rust proc-macro uniffi_macros v0.32.0 (21 files) [for tool]; 16s local, disk-cache ... (3 actions running)
+[5,399 / 8,613] Compiling Rust proc-macro uniffi_macros v0.32.0 (21 files) [for tool]; 19s local, disk-cache ... (3 actions, 2 running)
+[5,402 / 8,613] Compiling absl/base/internal/raw_logging.cc [for tool]; 6s local, disk-cache ... (3 actions, 2 running)
+[5,405 / 8,613] Compiling absl/base/internal/raw_logging.cc [for tool]; 8s local, disk-cache ... (3 actions, 2 running)
+[5,407 / 8,613] Compiling absl/base/internal/raw_logging.cc [for tool]; 9s local, disk-cache ... (3 actions running)
+[5,408 / 8,613] Compiling absl/base/internal/raw_logging.cc [for tool]; 10s local, disk-cache ... (3 actions running)
+[5,409 / 8,613] Compiling absl/base/internal/raw_logging.cc [for tool]; 11s local, disk-cache ... (3 actions running)
+[5,411 / 8,613] Compiling absl/base/internal/raw_logging.cc [for tool]; 12s local, disk-cache ... (3 actions, 2 running)
+[5,413 / 8,613] Compiling absl/base/internal/raw_logging.cc [for tool]; 13s local, disk-cache ... (3 actions, 2 running)
+[5,415 / 8,613] Compiling absl/base/internal/raw_logging.cc [for tool]; 14s local, disk-cache ... (3 actions running)
+[5,416 / 8,613] Compiling absl/base/internal/raw_logging.cc [for tool]; 17s local, disk-cache ... (3 actions, 2 running)
+[5,418 / 8,613] Compiling absl/base/internal/raw_logging.cc [for tool]; 19s local, disk-cache ... (3 actions running)
+[5,419 / 8,613] Compiling absl/base/internal/raw_logging.cc [for tool]; 20s local, disk-cache ... (3 actions, 2 running)
+[5,420 / 8,613] Compiling absl/base/internal/raw_logging.cc [for tool]; 21s local, disk-cache ... (3 actions running)
+[5,421 / 8,613] Compiling absl/base/internal/raw_logging.cc [for tool]; 22s local, disk-cache ... (3 actions, 2 running)
+[5,424 / 8,613] Compiling absl/base/internal/raw_logging.cc [for tool]; 24s local, disk-cache ... (3 actions running)
+[5,425 / 8,613] Compiling absl/base/internal/raw_logging.cc [for tool]; 25s local, disk-cache ... (3 actions, 2 running)
+[5,426 / 8,613] Compiling absl/base/internal/raw_logging.cc [for tool]; 26s local, disk-cache ... (3 actions running)
+[5,427 / 8,613] Compiling absl/base/internal/raw_logging.cc [for tool]; 27s local, disk-cache ... (3 actions running)
+[5,429 / 8,613] Compiling absl/base/internal/raw_logging.cc [for tool]; 28s local, disk-cache ... (3 actions running)
+[5,433 / 8,613] Compiling third-party/webrtc/webrtc/modules/audio_processing/splitting_filter.cc; 1s local, disk-cache ... (3 actions running)
+[5,436 / 8,613] Compiling absl/base/log_severity.cc [for tool]; 1s local, disk-cache ... (3 actions running)
+[5,437 / 8,613] Compiling absl/base/log_severity.cc [for tool]; 2s local, disk-cache ... (3 actions, 2 running)
+[5,439 / 8,613] Compiling absl/base/log_severity.cc [for tool]; 4s local, disk-cache ... (3 actions, 2 running)
+[5,441 / 8,613] Compiling absl/base/log_severity.cc [for tool]; 5s local, disk-cache ... (3 actions, 2 running)
+[5,442 / 8,613] Compiling absl/base/log_severity.cc [for tool]; 6s local, disk-cache ... (3 actions, 2 running)
+[5,443 / 8,613] Compiling absl/base/log_severity.cc [for tool]; 8s local, disk-cache ... (3 actions, 2 running)
+[5,445 / 8,613] Compiling absl/base/log_severity.cc [for tool]; 9s local, disk-cache ... (3 actions running)
+[5,447 / 8,613] Compiling absl/base/log_severity.cc [for tool]; 10s local, disk-cache ... (3 actions running)
+[5,448 / 8,613] Compiling absl/base/log_severity.cc [for tool]; 11s local, disk-cache ... (3 actions, 2 running)
+[5,449 / 8,613] Compiling absl/base/log_severity.cc [for tool]; 12s local, disk-cache ... (3 actions running)
+[5,450 / 8,613] Compiling absl/base/log_severity.cc [for tool]; 13s local, disk-cache ... (3 actions running)
+[5,451 / 8,613] Compiling absl/base/log_severity.cc [for tool]; 14s local, disk-cache ... (3 actions running)
+[5,452 / 8,613] Compiling absl/base/log_severity.cc [for tool]; 15s local, disk-cache ... (3 actions running)
+[5,453 / 8,613] Compiling absl/base/log_severity.cc [for tool]; 16s local, disk-cache ... (3 actions running)
+[5,456 / 8,613] Compiling third-party/webrtc/webrtc/modules/audio_processing/vad/vad_audio_proc.cc; 1s local, disk-cache ... (3 actions running)
+[5,458 / 8,613] Compiling absl/base/internal/spinlock_wait.cc [for tool]; 1s local, disk-cache ... (3 actions running)
+[5,459 / 8,613] Compiling absl/base/internal/spinlock_wait.cc [for tool]; 2s local, disk-cache ... (3 actions, 2 running)
+[5,459 / 8,613] Compiling absl/base/internal/spinlock_wait.cc [for tool]; 3s local, disk-cache ... (3 actions running)
+[5,460 / 8,613] Compiling absl/base/internal/spinlock_wait.cc [for tool]; 4s local, disk-cache ... (3 actions running)
+[5,461 / 8,613] Compiling absl/base/internal/spinlock_wait.cc [for tool]; 5s local, disk-cache ... (3 actions running)
+[5,462 / 8,613] Compiling absl/base/internal/spinlock_wait.cc [for tool]; 6s local, disk-cache ... (3 actions running)
+[5,463 / 8,613] Compiling absl/base/internal/spinlock_wait.cc [for tool]; 7s local, disk-cache ... (3 actions running)
+[5,464 / 8,613] Compiling absl/base/internal/spinlock_wait.cc [for tool]; 9s local, disk-cache ... (3 actions, 2 running)
+[5,465 / 8,613] Compiling absl/base/internal/spinlock_wait.cc [for tool]; 10s local, disk-cache ... (3 actions, 2 running)
+[5,466 / 8,613] Compiling absl/base/internal/spinlock_wait.cc [for tool]; 12s local, disk-cache ... (3 actions running)
+[5,467 / 8,613] Compiling absl/base/internal/spinlock_wait.cc [for tool]; 13s local, disk-cache ... (3 actions running)
+[5,469 / 8,613] Compiling Rust rlib ton_connect_core v0.0.6 (22 files) [for tool]; 2s local, disk-cache ... (3 actions running)
+[5,471 / 8,613] Compiling Rust rlib ton_connect_core v0.0.6 (22 files) [for tool]; 3s local, disk-cache ... (3 actions, 2 running)
+[5,474 / 8,613] Compiling Rust rlib ton_connect_core v0.0.6 (22 files) [for tool]; 4s local, disk-cache ... (3 actions, 2 running)
+[5,474 / 8,613] Compiling Rust rlib ton_connect_core v0.0.6 (22 files) [for tool]; 6s local, disk-cache ... (3 actions running)
+[5,476 / 8,613] Compiling Rust rlib ton_connect_core v0.0.6 (22 files) [for tool]; 7s local, disk-cache ... (3 actions running)
+[5,477 / 8,613] Compiling Rust rlib ton_connect_core v0.0.6 (22 files) [for tool]; 8s local, disk-cache ... (3 actions running)
+[5,478 / 8,613] Generating derived files for Swift module //submodules/RaiseToListen:RaiseToListen; 2s disk-cache, worker ... (3 actions running)
+[5,480 / 8,613] Generating derived files for Swift module //submodules/RaiseToListen:RaiseToListen; 3s disk-cache, worker ... (3 actions running)
+[5,481 / 8,613] Generating derived files for Swift module //submodules/RaiseToListen:RaiseToListen; 4s disk-cache, worker ... (3 actions, 2 running)
+[5,481 / 8,613] Generating derived files for Swift module //submodules/RaiseToListen:RaiseToListen; 6s disk-cache, worker ... (3 actions running)
+[5,482 / 8,613] Generating derived files for Swift module //submodules/RaiseToListen:RaiseToListen; 7s disk-cache, worker ... (3 actions running)
+[5,483 / 8,613] Generating derived files for Swift module //submodules/RaiseToListen:RaiseToListen; 10s disk-cache, worker ... (3 actions, 2 running)
+[5,484 / 8,613] Compiling Rust cdylib wallet_engine_bindings_cdylib v0.0.6 (65 files) [for tool]; 9s local, disk-cache ... (3 actions, 2 running)
+[5,486 / 8,613] Compiling Rust cdylib wallet_engine_bindings_cdylib v0.0.6 (65 files) [for tool]; 10s local, disk-cache ... (3 actions running)
+[5,487 / 8,613] Compiling Rust cdylib wallet_engine_bindings_cdylib v0.0.6 (65 files) [for tool]; 11s local, disk-cache ... (3 actions, 2 running)
+[5,490 / 8,613] Compiling Rust cdylib wallet_engine_bindings_cdylib v0.0.6 (65 files) [for tool]; 12s local, disk-cache ... (3 actions running)
+[5,492 / 8,613] Compiling Rust cdylib wallet_engine_bindings_cdylib v0.0.6 (65 files) [for tool]; 13s local, disk-cache ... (3 actions running)
+[5,493 / 8,613] Compiling Rust cdylib wallet_engine_bindings_cdylib v0.0.6 (65 files) [for tool]; 15s local, disk-cache ... (3 actions, 2 running)
+[5,496 / 8,613] Compiling Rust cdylib wallet_engine_bindings_cdylib v0.0.6 (65 files) [for tool]; 16s local, disk-cache ... (3 actions running)
+[5,497 / 8,613] Compiling Rust cdylib wallet_engine_bindings_cdylib v0.0.6 (65 files) [for tool]; 17s local, disk-cache ... (3 actions running)
+[5,502 / 8,613] Compiling Rust cdylib wallet_engine_bindings_cdylib v0.0.6 (65 files) [for tool]; 18s local, disk-cache ... (3 actions, 2 running)
+[5,505 / 8,613] Compiling Rust cdylib wallet_engine_bindings_cdylib v0.0.6 (65 files) [for tool]; 20s local, disk-cache ... (3 actions running)
+[5,506 / 8,613] Compiling Rust cdylib wallet_engine_bindings_cdylib v0.0.6 (65 files) [for tool]; 21s local, disk-cache ... (3 actions running)
+[5,510 / 8,613] Compiling Rust cdylib wallet_engine_bindings_cdylib v0.0.6 (65 files) [for tool]; 22s local, disk-cache ... (3 actions running)
+[5,515 / 8,613] Compiling Rust cdylib wallet_engine_bindings_cdylib v0.0.6 (65 files) [for tool]; 23s local, disk-cache ... (3 actions running)
+[5,519 / 8,613] Compiling Rust cdylib wallet_engine_bindings_cdylib v0.0.6 (65 files) [for tool]; 24s local, disk-cache ... (3 actions running)
+[5,522 / 8,613] Compiling Rust cdylib wallet_engine_bindings_cdylib v0.0.6 (65 files) [for tool]; 25s local, disk-cache ... (3 actions running)
+[5,525 / 8,613] Compiling Rust cdylib wallet_engine_bindings_cdylib v0.0.6 (65 files) [for tool]; 26s local, disk-cache ... (3 actions running)
+[5,528 / 8,613] Compiling Rust cdylib wallet_engine_bindings_cdylib v0.0.6 (65 files) [for tool]; 27s local, disk-cache ... (3 actions running)
+[5,531 / 8,613] Compiling Rust cdylib wallet_engine_bindings_cdylib v0.0.6 (65 files) [for tool]; 28s local, disk-cache ... (3 actions running)
+[5,533 / 8,613] Compiling Rust cdylib wallet_engine_bindings_cdylib v0.0.6 (65 files) [for tool]; 29s local, disk-cache ... (3 actions running)
+[5,538 / 8,613] Compiling Rust cdylib wallet_engine_bindings_cdylib v0.0.6 (65 files) [for tool]; 30s local, disk-cache ... (3 actions running)
+[5,542 / 8,613] Compiling Rust cdylib wallet_engine_bindings_cdylib v0.0.6 (65 files) [for tool]; 31s local, disk-cache ... (3 actions, 2 running)
+[5,543 / 8,613] Compiling Rust cdylib wallet_engine_bindings_cdylib v0.0.6 (65 files) [for tool]; 33s local, disk-cache ... (3 actions running)
+INFO: From Compiling Rust cdylib wallet_engine_bindings_cdylib v0.0.6 (65 files) [for tool]:
+warning: linker stderr: clang: overriding '-mmacosx-version-min=11.0.0' option with '-target arm64-apple-macosx26.4' [-Woverriding-option]
+  |
+  = note: `#[warn(linker_messages)]` on by default
+
+warning: 1 warning emitted
+
+[5,548 / 8,613] Compiling third-party/webrtc/webrtc/modules/rtp_rtcp/source/frame_object.cc; 0s local, disk-cache ... (3 actions running)
+[5,551 / 8,613] Generating derived files for Swift module //third-party/wallet-engine:WalletEngineFFI; 1s disk-cache, worker ... (3 actions running)
+[5,552 / 8,613] Generating derived files for Swift module //third-party/wallet-engine:WalletEngineFFI; 2s disk-cache, worker ... (3 actions, 2 running)
+[5,553 / 8,613] Generating derived files for Swift module //third-party/wallet-engine:WalletEngineFFI; 3s disk-cache, worker ... (3 actions running)
+[5,554 / 8,613] Generating derived files for Swift module //third-party/wallet-engine:WalletEngineFFI; 4s disk-cache, worker ... (3 actions running)
+[5,555 / 8,613] Generating derived files for Swift module //third-party/wallet-engine:WalletEngineFFI; 6s disk-cache, worker ... (3 actions, 2 running)
+[5,558 / 8,613] Compiling third-party/webrtc/webrtc/modules/rtp_rtcp/source/rtcp_nack_stats.cc; 1s local, disk-cache ... (3 actions running)
+[5,559 / 8,613] Generating derived files for Swift module //submodules/ImageBlur:ImageBlur; 2s disk-cache, worker ... (3 actions running)
+[5,562 / 8,613] Compiling Swift module //third-party/wallet-engine:WalletEngineFFI; 2s disk-cache, worker ... (3 actions running)
+[5,565 / 8,613] Compiling Swift module //third-party/wallet-engine:WalletEngineFFI; 3s disk-cache, worker ... (3 actions running)
+[5,566 / 8,613] Compiling Swift module //third-party/wallet-engine:WalletEngineFFI; 4s disk-cache, worker ... (3 actions running)
+[5,568 / 8,613] Compiling Swift module //third-party/wallet-engine:WalletEngineFFI; 6s disk-cache, worker ... (3 actions running)
+[5,573 / 8,613] Compiling Swift module //third-party/wallet-engine:WalletEngineFFI; 7s disk-cache, worker ... (3 actions running)
+[5,575 / 8,613] Compiling Swift module //third-party/wallet-engine:WalletEngineFFI; 8s disk-cache, worker ... (3 actions running)
+[5,578 / 8,613] Compiling Swift module //third-party/wallet-engine:WalletEngineFFI; 9s disk-cache, worker ... (3 actions running)
+[5,580 / 8,613] Compiling Swift module //third-party/wallet-engine:WalletEngineFFI; 10s disk-cache, worker ... (3 actions, 2 running)
+[5,581 / 8,613] Compiling Swift module //third-party/wallet-engine:WalletEngineFFI; 11s disk-cache, worker ... (3 actions running)
+[5,584 / 8,613] Compiling Swift module //third-party/wallet-engine:WalletEngineFFI; 12s disk-cache, worker ... (3 actions running)
+[5,588 / 8,613] Compiling Swift module //third-party/wallet-engine:WalletEngineFFI; 13s disk-cache, worker ... (3 actions running)
+[5,591 / 8,613] Compiling Swift module //third-party/wallet-engine:WalletEngineFFI; 14s disk-cache, worker ... (3 actions running)
+[5,593 / 8,613] Compiling Swift module //third-party/wallet-engine:WalletEngineFFI; 15s disk-cache, worker ... (3 actions, 2 running)
+[5,596 / 8,613] Generating derived files for Swift module //submodules/TelegramApi:TelegramApi; 2s disk-cache, worker ... (3 actions, 2 running)
+[5,597 / 8,613] Generating derived files for Swift module //submodules/TelegramApi:TelegramApi; 3s disk-cache, worker ... (3 actions, 2 running)
+[5,597 / 8,613] Generating derived files for Swift module //submodules/TelegramApi:TelegramApi; 5s disk-cache, worker ... (3 actions running)
+[5,598 / 8,613] Generating derived files for Swift module //submodules/TelegramApi:TelegramApi; 6s disk-cache, worker ... (3 actions running)
+[5,599 / 8,613] Generating derived files for Swift module //submodules/TelegramApi:TelegramApi; 10s disk-cache, worker ... (3 actions, 2 running)
+[5,600 / 8,613] Generating derived files for Swift module //submodules/TelegramApi:TelegramApi; 11s disk-cache, worker ... (3 actions running)
+[5,601 / 8,613] Generating derived files for Swift module //submodules/TelegramApi:TelegramApi; 13s disk-cache, worker ... (3 actions, 2 running)
+[5,601 / 8,613] Generating derived files for Swift module //submodules/TelegramApi:TelegramApi; 14s disk-cache, worker ... (3 actions running)
+[5,602 / 8,613] Generating derived files for Swift module //submodules/TelegramApi:TelegramApi; 17s disk-cache, worker ... (3 actions, 2 running)
+[5,603 / 8,613] Generating derived files for Swift module //submodules/TelegramApi:TelegramApi; 18s disk-cache, worker ... (3 actions, 2 running)
+[5,603 / 8,613] Generating derived files for Swift module //submodules/TelegramApi:TelegramApi; 20s disk-cache, worker ... (3 actions running)
+[5,604 / 8,613] Generating derived files for Swift module //submodules/TelegramApi:TelegramApi; 21s disk-cache, worker ... (3 actions running)
+[5,605 / 8,613] Generating derived files for Swift module //submodules/TelegramApi:TelegramApi; 23s disk-cache, worker ... (3 actions, 2 running)
+[5,605 / 8,613] Generating derived files for Swift module //submodules/TelegramApi:TelegramApi; 25s disk-cache, worker ... (3 actions running)
+[5,606 / 8,613] Generating derived files for Swift module //submodules/TelegramApi:TelegramApi; 26s disk-cache, worker ... (3 actions running)
+[5,608 / 8,613] Generating derived files for Swift module //submodules/TelegramApi:TelegramApi; 27s disk-cache, worker ... (3 actions running)
+[5,609 / 8,613] Generating derived files for Swift module //submodules/TelegramApi:TelegramApi; 29s disk-cache, worker ... (3 actions, 2 running)
+[5,610 / 8,613] Generating derived files for Swift module //submodules/TelegramApi:TelegramApi; 30s disk-cache, worker ... (3 actions, 2 running)
+[5,610 / 8,613] Generating derived files for Swift module //submodules/TelegramApi:TelegramApi; 31s disk-cache, worker ... (3 actions running)
+[5,611 / 8,613] Generating derived files for Swift module //submodules/TelegramApi:TelegramApi; 32s disk-cache, worker ... (3 actions running)
+[5,612 / 8,613] Generating derived files for Swift module //submodules/TelegramApi:TelegramApi; 34s disk-cache, worker ... (3 actions running)
+[5,613 / 8,613] Generating derived files for Swift module //submodules/TelegramApi:TelegramApi; 35s disk-cache, worker ... (3 actions running)
+[5,614 / 8,613] Generating derived files for Swift module //submodules/TelegramApi:TelegramApi; 36s disk-cache, worker ... (3 actions, 2 running)
+[5,614 / 8,613] Generating derived files for Swift module //submodules/TelegramApi:TelegramApi; 38s disk-cache, worker ... (3 actions running)
+[5,616 / 8,613] Generating derived files for Swift module //submodules/TelegramApi:TelegramApi; 39s disk-cache, worker ... (3 actions running)
+[5,617 / 8,613] Generating derived files for Swift module //submodules/TelegramApi:TelegramApi; 40s disk-cache, worker ... (3 actions running)
+[5,618 / 8,613] Generating derived files for Swift module //submodules/TelegramApi:TelegramApi; 41s disk-cache, worker ... (3 actions running)
+[5,619 / 8,613] Generating derived files for Swift module //submodules/TelegramApi:TelegramApi; 42s disk-cache, worker ... (3 actions, 2 running)
+[5,619 / 8,613] Generating derived files for Swift module //submodules/TelegramApi:TelegramApi; 43s disk-cache, worker ... (3 actions running)
+[5,620 / 8,613] Generating derived files for Swift module //submodules/TelegramApi:TelegramApi; 45s disk-cache, worker ... (3 actions, 2 running)
+[5,620 / 8,613] Generating derived files for Swift module //submodules/TelegramApi:TelegramApi; 47s disk-cache, worker ... (3 actions running)
+ERROR: /Users/runner/work/AirGram-iOS/AirGram-iOS/submodules/TelegramApi/BUILD:3:14: Generating derived files for Swift module //submodules/TelegramApi:TelegramApi failed: (Exit 1): worker failed: error executing SwiftDeriveFiles command (from target //submodules/TelegramApi:TelegramApi) 
+  (cd /private/var/tmp/_bazel_containerhost/c259e0c7803e089724afaeab1cf94801/execroot/_main && \
+  exec env - \
+    APPLE_SDK_PLATFORM=iPhoneOS \
+    APPLE_SDK_VERSION_OVERRIDE=26.4 \
+    PATH=/usr/bin:/bin:/usr/sbin:/sbin \
+    XCODE_VERSION_OVERRIDE=26.4.1.17E202 \
+    ZERO_AR_DATE=1 \
+  bazel-out/darwin_arm64-opt-exec-ST-d57f47055a04/bin/external/rules_swift+/tools/worker/worker swiftc @bazel-out/ios_arm64-opt-ios-arm64-min13.0-ST-2d46267cd7fb/bin/submodules/TelegramApi/TelegramApi.swiftmodule-0.params)
+# Configuration: d3ccd752ffa87e57ba0b8e9353f38a05c54ed7c20a78722a85d284f5dd12efa6
+# Execution platform: @@platforms//host:host
+submodules/TelegramApi/Sources/ApiWallet.swift:1496:18: error: case is already handled by previous patterns; consider removing it
+1494 |                 serializeInt32(_data.flags, buffer: buffer, boxed: false)
+1495 |                 break
+1496 |             case .walletTransactionPeerChannel(let _data):
+     |                  `- error: case is already handled by previous patterns; consider removing it
+1497 |                 if boxed {
+1498 |                     buffer.appendInt32(1416649777)
+
+submodules/TelegramApi/Sources/ApiWallet.swift:1507:18: error: case is already handled by previous patterns; consider removing it
+1505 |                 }
+1506 |                 break
+1507 |             case .walletTransactionPeerTelegramGift(let _data):
+     |                  `- error: case is already handled by previous patterns; consider removing it
+1508 |                 if boxed {
+1509 |                     buffer.appendInt32(-193817447)
+
+submodules/TelegramApi/Sources/ApiWallet.swift:1544:13: error: switch must be exhaustive
+1542 | 
+1543 |         public func descriptionFields() -> (String, [(String, ConstructorParameterDescription)]) {
+1544 |             switch self {
+     |             |- error: switch must be exhaustive
+     |             |- note: add missing case: '.walletTransactionPeerChannel(_)'
+     |             |- note: add missing case: '.walletTransactionPeerTelegramGift(_)'
+     |             `- note: add missing cases
+1545 |             case .walletTransactionPeerAddress(let _data):
+1546 |                 return ("walletTransactionPeerAddress", [("flags", ConstructorParameterDescription(_data.flags)), ("address", ConstructorParameterDescription(_data.address)), ("domain", ConstructorParameterDescription(_data.domain))])
+[5,624 / 8,613] checking cached actions
+Target //Telegram:telegram_auth_build_test failed to build
+ERROR: /Users/runner/work/AirGram-iOS/AirGram-iOS/submodules/TelegramCore/BUILD:3:14 Linking submodules/TelegramCore/libTelegramCore.a failed: (Exit 1): worker failed: error executing SwiftDeriveFiles command (from target //submodules/TelegramApi:TelegramApi) 
+  (cd /private/var/tmp/_bazel_containerhost/c259e0c7803e089724afaeab1cf94801/execroot/_main && \
+  exec env - \
+    APPLE_SDK_PLATFORM=iPhoneOS \
+    APPLE_SDK_VERSION_OVERRIDE=26.4 \
+    PATH=/usr/bin:/bin:/usr/sbin:/sbin \
+    XCODE_VERSION_OVERRIDE=26.4.1.17E202 \
+    ZERO_AR_DATE=1 \
+  bazel-out/darwin_arm64-opt-exec-ST-d57f47055a04/bin/external/rules_swift+/tools/worker/worker swiftc @bazel-out/ios_arm64-opt-ios-arm64-min13.0-ST-2d46267cd7fb/bin/submodules/TelegramApi/TelegramApi.swiftmodule-0.params)
+# Configuration: d3ccd752ffa87e57ba0b8e9353f38a05c54ed7c20a78722a85d284f5dd12efa6
+# Execution platform: @@platforms//host:host
+INFO: Elapsed time: 1804.679s, Critical Path: 306.50s
+INFO: 5624 processes: 2120 internal, 3456 local, 48 worker.
+ERROR: Build did NOT complete successfully
+FAILED: 
+INFO: Build Event Protocol files produced successfully.
+Traceback (most recent call last):
+  File "/Users/runner/work/AirGram-iOS/AirGram-iOS/build-system/Make/Make.py", line 1294, in <module>
+    build(bazel=bazel_path, arguments=args)
+    ~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/runner/work/AirGram-iOS/AirGram-iOS/build-system/Make/Make.py", line 650, in build
+    bazel_command_line.invoke_build()
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "/Users/runner/work/AirGram-iOS/AirGram-iOS/build-system/Make/Make.py", line 325, in invoke_build
+    call_executable(combined_arguments)
+    ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^
+  File "/Users/runner/work/AirGram-iOS/AirGram-iOS/build-system/Make/BuildEnvironment.py", line 104, in call_executable
+    subprocess.check_call(resolved_arguments, env=resolved_env)
+    ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/homebrew/Cellar/python@3.15/3.15.2/Frameworks/Python.framework/Versions/3.15/lib/python3.15/subprocess.py", line 534, in check_call
+    raise CalledProcessError(retcode, cmd)
+subprocess.CalledProcessError: Command ['/Users/runner/work/AirGram-iOS/AirGram-iOS/build-input/bazel-8.4.2-darwin-arm64', '--output_user_root=/private/var/tmp/_bazel_containerhost', 'build', 'Telegram/telegram_auth_build_test', '--announce_rc', '--features=swift.use_global_module_cache', '--verbose_failures', '--remote_cache_async', '--jobs=3', '--local_cpu_resources=3', '--worker_max_instances=3', '--spawn_strategy=worker,local', '--strategy=SwiftCompile=worker,local', '--strategy=ObjcCompile=worker,local', '--strategy=Genrule=standalone', '--worker_quit_after_build=false', '--define=buildNumber=2847', '--features=swift.split_derived_files_generation', '--disk_cache=/private/var/tmp/_bazel_containerhost/disk_cache', '-c', 'opt', '--ios_multi_cpus=arm64', '--watchos_cpus=arm64_32', '--apple_generate_dsym', '--features=swift.opt_uses_wmo', '--features=swift.opt_uses_osize', '--features=dead_strip', '--objc_enable_binary_stripping', '--build_event_json_file=/var/folders/h5/t85nd63d71x27_8gl5gw3l_w0000gn/T/airgram-build-events.json'] returned non-zero exit status 1.
