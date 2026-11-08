@@ -1,0 +1,76 @@
+ERROR: /private/var/tmp/_bazel_containerhost/c259e0c7803e089724afaeab1cf94801/external/bazel_tools/tools/build_defs/repo/http.bzl:155:45: An error occurred during the fetch of repository 'rules_shell+':
+   Traceback (most recent call last):
+ERROR: Skipping 'Telegram/telegram_auth_build_test': no such package '@@rules_shell+//shell': java.io.IOException: Error downloading [https://github.com/bazelbuild/rules_shell/releases/download/v0.6.1/rules_shell-v0.6.1.tar.gz] to /private/var/tmp/_bazel_containerhost/c259e0c7803e089724afaeab1cf94801/external/rules_shell+/temp17898562182231709998/rules_shell-v0.6.1.tar.gz: GET returned 504 Gateway Time-out
+ERROR: no such package '@@rules_shell+//shell': java.io.IOException: Error downloading [https://github.com/bazelbuild/rules_shell/releases/download/v0.6.1/rules_shell-v0.6.1.tar.gz] to /private/var/tmp/_bazel_containerhost/c259e0c7803e089724afaeab1cf94801/external/rules_shell+/temp17898562182231709998/rules_shell-v0.6.1.tar.gz: GET returned 504 Gateway Time-out
+ERROR: Build did NOT complete successfully
+FAILED: 
+Traceback (most recent call last):
+--- end of full build log ---
+  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0  0     0    0     0    0     0      0      0 --:--:--  0:00:01 --:--:--     0  0     0    0     0    0     0      0      0 --:--:--  0:00:02 --:--:--     0  0     0    0     0    0     0      0      0 --:--:--  0:00:03 --:--:--     0  0     0    0     0    0     0      0      0 --:--:--  0:00:04 --:--:--     0  0     0    0     0    0     0      0      0 --:--:--  0:00:05 --:--:--     0  0     0    0     0    0     0      0      0 --:--:--  0:00:06 --:--:--     0  0     0    0     0    0     0      0      0 --:--:--  0:00:07 --:--:--     0  0     0    0     0    0     0      0      0 --:--:--  0:00:08 --:--:--     0  0     0    0     0    0     0      0      0 --:--:--  0:00:09 --:--:--     0  0     0    0     0    0     0      0      0 --:--:--  0:00:10 --:--:--     0  0     0    0     0    0     0      0      0 --:--:--  0:00:10 --:--:--     0
+100 55.8M  100 55.8M    0     0  5080k      0  0:00:11  0:00:11 --:--:-- 5080k
+Overriding the required Xcode version 26.4 with 26.4.1 as reported by 'xcode-select -p'
+TelegramBuild: running
+/Users/runner/work/AirGram-iOS/AirGram-iOS/build-input/bazel-8.4.2-darwin-arm64 --output_user_root=/private/var/tmp/_bazel_containerhost build Telegram/telegram_auth_build_test --announce_rc --features=swift.use_global_module_cache --verbose_failures --remote_cache_async --jobs=3 --local_cpu_resources=3 --worker_max_instances=3 --spawn_strategy=worker,local --strategy=SwiftCompile=worker,local --strategy=ObjcCompile=worker,local --strategy=Genrule=standalone --worker_quit_after_build=false --define=buildNumber=2858 --features=swift.split_derived_files_generation --disk_cache=/private/var/tmp/_bazel_containerhost/disk_cache -c opt --ios_multi_cpus=arm64 --watchos_cpus=arm64_32 --apple_generate_dsym --features=swift.opt_uses_wmo --features=swift.opt_uses_osize --features=dead_strip --objc_enable_binary_stripping --build_event_json_file=/var/folders/h5/t85nd63d71x27_8gl5gw3l_w0000gn/T/airgram-build-events.json
+Extracting Bazel installation...
+Starting local Bazel server (8.4.2) and connecting to it...
+WARNING: Option 'local_cpu_resources' is deprecated: --local_cpu_resources is deprecated, please use --local_resources=cpu= instead.
+INFO: Invocation ID: 1fb02b90-b15b-4bcd-b390-70a0fa63e182
+INFO: Options provided by the client:
+  Inherited 'common' options: --isatty=0 --terminal_columns=80
+INFO: Reading rc options for 'build' from /Users/runner/work/AirGram-iOS/AirGram-iOS/.bazelrc:
+  'build' options: --action_env=ZERO_AR_DATE=1 --enable_platform_specific_config --experimental_remote_downloader_local_fallback --strategy=Genrule=standalone --spawn_strategy=standalone
+INFO: Found applicable config definition common:macos in file /Users/runner/work/AirGram-iOS/AirGram-iOS/.bazelrc: --features=swift.use_global_module_cache --features=oso_prefix_is_pwd
+INFO: Found applicable config definition build:macos in file /Users/runner/work/AirGram-iOS/AirGram-iOS/.bazelrc: --features=debug_prefix_map_pwd_is_dot --features=swift.cacheable_swiftmodules --features=swift.debug_prefix_map --features=swift.enable_vfsoverlays --strategy=SwiftCompile=worker
+Computing main repo mapping: 
+Computing main repo mapping: 
+Computing main repo mapping: 
+WARNING: For repository 'bazel_features', the root module requires module version bazel_features@1.33.0, but got bazel_features@1.51.0 in the resolved dependency graph. Please update the version in your MODULE.bazel or set --check_direct_dependencies=off
+WARNING: For repository 'bazel_skylib', the root module requires module version bazel_skylib@1.8.1, but got bazel_skylib@1.9.0 in the resolved dependency graph. Please update the version in your MODULE.bazel or set --check_direct_dependencies=off
+WARNING: Option 'local_cpu_resources' is deprecated: --local_cpu_resources is deprecated, please use --local_resources=cpu= instead.
+Loading: 
+Loading: 0 packages loaded
+Loading: 0 packages loaded
+Loading: 0 packages loaded
+Loading: 0 packages loaded
+Loading: 0 packages loaded
+Loading: 0 packages loaded
+Loading: 0 packages loaded
+Loading: 0 packages loaded
+Loading: 0 packages loaded
+Loading: 0 packages loaded
+WARNING: Download from https://github.com/bazelbuild/rules_shell/releases/download/v0.6.1/rules_shell-v0.6.1.tar.gz failed: class java.io.IOException GET returned 504 Gateway Time-out
+INFO: Repository rules_shell+ instantiated at:
+  <builtin>: in <toplevel>
+Repository rule http_archive defined at:
+  /private/var/tmp/_bazel_containerhost/c259e0c7803e089724afaeab1cf94801/external/bazel_tools/tools/build_defs/repo/http.bzl:431:31: in <toplevel>
+ERROR: /private/var/tmp/_bazel_containerhost/c259e0c7803e089724afaeab1cf94801/external/bazel_tools/tools/build_defs/repo/http.bzl:155:45: An error occurred during the fetch of repository 'rules_shell+':
+   Traceback (most recent call last):
+	File "/private/var/tmp/_bazel_containerhost/c259e0c7803e089724afaeab1cf94801/external/bazel_tools/tools/build_defs/repo/http.bzl", line 155, column 45, in _http_archive_impl
+		download_info = ctx.download_and_extract(
+Error in download_and_extract: java.io.IOException: Error downloading [https://github.com/bazelbuild/rules_shell/releases/download/v0.6.1/rules_shell-v0.6.1.tar.gz] to /private/var/tmp/_bazel_containerhost/c259e0c7803e089724afaeab1cf94801/external/rules_shell+/temp17898562182231709998/rules_shell-v0.6.1.tar.gz: GET returned 504 Gateway Time-out
+WARNING: Target pattern parsing failed.
+ERROR: Skipping 'Telegram/telegram_auth_build_test': no such package '@@rules_shell+//shell': java.io.IOException: Error downloading [https://github.com/bazelbuild/rules_shell/releases/download/v0.6.1/rules_shell-v0.6.1.tar.gz] to /private/var/tmp/_bazel_containerhost/c259e0c7803e089724afaeab1cf94801/external/rules_shell+/temp17898562182231709998/rules_shell-v0.6.1.tar.gz: GET returned 504 Gateway Time-out
+ERROR: no such package '@@rules_shell+//shell': java.io.IOException: Error downloading [https://github.com/bazelbuild/rules_shell/releases/download/v0.6.1/rules_shell-v0.6.1.tar.gz] to /private/var/tmp/_bazel_containerhost/c259e0c7803e089724afaeab1cf94801/external/rules_shell+/temp17898562182231709998/rules_shell-v0.6.1.tar.gz: GET returned 504 Gateway Time-out
+INFO: Elapsed time: 29.975s
+INFO: 0 processes.
+ERROR: Build did NOT complete successfully
+FAILED: 
+INFO: Build Event Protocol files produced successfully.
+Traceback (most recent call last):
+  File "/Users/runner/work/AirGram-iOS/AirGram-iOS/build-system/Make/Make.py", line 1298, in <module>
+    build(bazel=bazel_path, arguments=args)
+    ~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/runner/work/AirGram-iOS/AirGram-iOS/build-system/Make/Make.py", line 654, in build
+    bazel_command_line.invoke_build()
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "/Users/runner/work/AirGram-iOS/AirGram-iOS/build-system/Make/Make.py", line 329, in invoke_build
+    call_executable(combined_arguments)
+    ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^
+  File "/Users/runner/work/AirGram-iOS/AirGram-iOS/build-system/Make/BuildEnvironment.py", line 104, in call_executable
+    subprocess.check_call(resolved_arguments, env=resolved_env)
+    ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/homebrew/Cellar/python@3.15/3.15.2/Frameworks/Python.framework/Versions/3.15/lib/python3.15/subprocess.py", line 534, in check_call
+    raise CalledProcessError(retcode, cmd)
+subprocess.CalledProcessError: Command ['/Users/runner/work/AirGram-iOS/AirGram-iOS/build-input/bazel-8.4.2-darwin-arm64', '--output_user_root=/private/var/tmp/_bazel_containerhost', 'build', 'Telegram/telegram_auth_build_test', '--announce_rc', '--features=swift.use_global_module_cache', '--verbose_failures', '--remote_cache_async', '--jobs=3', '--local_cpu_resources=3', '--worker_max_instances=3', '--spawn_strategy=worker,local', '--strategy=SwiftCompile=worker,local', '--strategy=ObjcCompile=worker,local', '--strategy=Genrule=standalone', '--worker_quit_after_build=false', '--define=buildNumber=2858', '--features=swift.split_derived_files_generation', '--disk_cache=/private/var/tmp/_bazel_containerhost/disk_cache', '-c', 'opt', '--ios_multi_cpus=arm64', '--watchos_cpus=arm64_32', '--apple_generate_dsym', '--features=swift.opt_uses_wmo', '--features=swift.opt_uses_osize', '--features=dead_strip', '--objc_enable_binary_stripping', '--build_event_json_file=/var/folders/h5/t85nd63d71x27_8gl5gw3l_w0000gn/T/airgram-build-events.json'] returned non-zero exit status 1.
