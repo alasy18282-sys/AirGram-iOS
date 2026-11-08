@@ -35,7 +35,7 @@ public struct WalletNftAttribute: Codable, Equatable, Sendable {
     }
 }
 
-public struct WalletNftItem: Codable, Equatable, Sendable {
+public struct WalletNftItem: Codable, Equatable {
     public let collectionAddress: String?
     public let address: String
     public let ownerAddress: String

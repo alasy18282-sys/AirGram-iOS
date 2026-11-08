@@ -77,7 +77,7 @@ extension TelegramEngine.Wallet {
     }
 
     /// Cached address-to-peer resolutions; the caller falls back to its own resolution.
-    public func getCachedUserAddressPeers(addresses: [String]) -> Signal<[WalletTransactionPeer], WalletError> {
+    public func getCachedUserAddressPeers(addresses: [String]) -> Signal<[WalletTransactionPeer], WalletCardError> {
         return .single([])
     }
 }

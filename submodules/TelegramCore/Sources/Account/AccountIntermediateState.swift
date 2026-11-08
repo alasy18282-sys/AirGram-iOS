@@ -1025,6 +1025,9 @@ struct AccountFinalStateEvents {
         self.isPremiumUpdated = state.isPremiumUpdated
         self.updatedStarsBalance = state.updatedStarsBalance
         self.updatedTonBalance = state.updatedTonBalance
+        self.walletTransferUpdates = state.walletTransferUpdates
+        self.walletTonConnectEvents = state.walletTonConnectEvents
+        self.updatedWalletState = state.updatedWalletState
         self.updatedStarsRevenueStatus = state.updatedStarsRevenueStatus
         self.sentScheduledMessageIds = state.sentScheduledMessageIds
         self.reportMessageDelivery = state.reportMessageDelivery
@@ -1095,6 +1098,9 @@ struct AccountFinalStateEvents {
             isPremiumUpdated: isPremiumUpdated,
             updatedStarsBalance: self.updatedStarsBalance.merging(other.updatedStarsBalance, uniquingKeysWith: { lhs, _ in lhs }),
             updatedTonBalance: self.updatedTonBalance.merging(other.updatedTonBalance, uniquingKeysWith: { lhs, _ in lhs }),
+            walletTransferUpdates: self.walletTransferUpdates + other.walletTransferUpdates,
+            walletTonConnectEvents: self.walletTonConnectEvents + other.walletTonConnectEvents,
+            updatedWalletState: other.updatedWalletState ?? self.updatedWalletState,
             updatedStarsRevenueStatus: self.updatedStarsRevenueStatus.merging(other.updatedStarsRevenueStatus, uniquingKeysWith: { lhs, _ in lhs }),
             sentScheduledMessageIds: sentScheduledMessageIds,
             reportMessageDelivery: reportMessageDelivery,

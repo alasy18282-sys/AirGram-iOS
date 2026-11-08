@@ -83,7 +83,7 @@ private func walletPasswordProof(account: Account, password: String?) -> Signal<
             return .fail(.twoStepAuthMissing)
         }
         guard let result = passwordKDF(
-            encryptionProvider: account.network.encryptionProvider, keychain: account.network.context.keychain,
+            encryptionProvider: account.network.encryptionProvider,
             password: password,
             derivation: derivation,
             srpSessionData: sessionData

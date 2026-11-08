@@ -100,6 +100,8 @@ public struct Namespaces {
     }
     
     public struct CachedItemCollection {
+        public static let cachedWalletUserAddresses: Int8 = 59
+        public static let cachedExistingWaltBalance: Int8 = 57
         public static let resolvedByNamePeers: Int8 = 0
         public static let cachedTwoStepToken: Int8 = 1
         public static let cachedStickerPacks: Int8 = 2
