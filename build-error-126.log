@@ -1,0 +1,312 @@
+ERROR: /Users/runner/work/AirGram-iOS/AirGram-iOS/submodules/TelegramApi/BUILD:3:14: Generating derived files for Swift module //submodules/TelegramApi:TelegramApi failed: (Exit 1): worker failed: error executing SwiftDeriveFiles command (from target //submodules/TelegramApi:TelegramApi) 
+submodules/TelegramApi/Sources/Api0.swift:1624:59: error: type 'Api.WalletTransactionPeer' has no member 'parse_walletTransactionPeerChannel'
+     |                                                           `- error: type 'Api.WalletTransactionPeer' has no member 'parse_walletTransactionPeerChannel'
+submodules/TelegramApi/Sources/ApiWallet.swift:1477:19: error: type 'Api.WalletTransactionPeer' has no member 'walletTransactionPeerChannel'
+     |                   `- error: type 'Api.WalletTransactionPeer' has no member 'walletTransactionPeerChannel'
+submodules/TelegramApi/Sources/ApiWallet.swift:1488:19: error: type 'Api.WalletTransactionPeer' has no member 'walletTransactionPeerTelegramGift'
+     |                   `- error: type 'Api.WalletTransactionPeer' has no member 'walletTransactionPeerTelegramGift'
+ERROR: /Users/runner/work/AirGram-iOS/AirGram-iOS/submodules/TelegramCore/BUILD:3:14 Linking submodules/TelegramCore/libTelegramCore.a failed: (Exit 1): worker failed: error executing SwiftDeriveFiles command (from target //submodules/TelegramApi:TelegramApi) 
+ERROR: Build did NOT complete successfully
+FAILED: 
+Traceback (most recent call last):
+--- end of full build log ---
+    [CC] vp9/encoder/vp9_ratectrl.c.o
+    [CC] vp9/encoder/vp9_rd.c.o
+    [CC] vp9/encoder/vp9_rdopt.c.o
+    [CC] vp9/encoder/vp9_pickmode.c.o
+    [CC] vp9/encoder/vp9_segmentation.c.o
+    [CC] vp9/encoder/vp9_speed_features.c.o
+    [CC] vp9/encoder/vp9_subexp.c.o
+    [CC] vp9/encoder/vp9_svc_layercontext.c.o
+    [CC] vp9/encoder/vp9_resize.c.o
+    [CC] vp9/encoder/vp9_tokenize.c.o
+    [CC] vp9/encoder/vp9_treewriter.c.o
+    [CC] vp9/encoder/vp9_aq_cyclicrefresh.c.o
+    [CC] vp9/encoder/vp9_skin_detection.c.o
+    [CC] vp9/encoder/vp9_noise_estimate.c.o
+    [CC] vp9/encoder/vp9_ext_ratectrl.c.o
+    [CC] vp9/encoder/vp9_tpl_model.c.o
+    [CC] vp9/encoder/arm/neon/vp9_diamond_search_sad_neon.c.o
+    [CC] vp9/encoder/arm/neon/vp9_dct_neon.c.o
+    [CC] vp9/encoder/arm/neon/vp9_error_neon.c.o
+    [CC] vp9/encoder/arm/neon/vp9_frame_scale_neon.c.o
+    [CC] vp9/encoder/arm/neon/vp9_quantize_neon.c.o
+    [CC] vp9/vp9_dx_iface.c.o
+    [CC] vp9/decoder/vp9_decodemv.c.o
+    [CC] vp9/decoder/vp9_decodeframe.c.o
+    [CC] vp9/decoder/vp9_detokenize.c.o
+    [CC] vp9/decoder/vp9_decoder.c.o
+    [CC] vp9/decoder/vp9_dsubexp.c.o
+    [CC] vp9/decoder/vp9_job_queue.c.o
+    [CC] vpx_config.c.o
+    [AR] libvpx_g.a
+    [CP] libvpx.a < libvpx_g.a
+    [CREATE] vpx.pc
+    [CXX] vp9/ratectrl_rtc.cc.o
+    [CXX] vp8/vp8_ratectrl_rtc.cc.o
+    [AR] libvpxrc_g.a
+    [CP] libvpxrc.a < libvpxrc_g.a
+    [INSTALL] _dist/include/vpx/vp8.h
+    [INSTALL] _dist/include/vpx/vp8cx.h
+    [INSTALL] _dist/include/vpx/vpx_ext_ratectrl.h
+    [INSTALL] _dist/include/vpx/vp8dx.h
+    [INSTALL] _dist/include/vpx/vpx_codec.h
+    [INSTALL] _dist/include/vpx/vpx_frame_buffer.h
+    [INSTALL] _dist/include/vpx/vpx_image.h
+    [INSTALL] _dist/include/vpx/vpx_integer.h
+    [INSTALL] _dist/include/vpx/vpx_decoder.h
+    [INSTALL] _dist/include/vpx/vpx_encoder.h
+    [INSTALL] _dist/include/vpx/vpx_tpl.h
+    [INSTALL] _dist/lib/libvpx.a
+    [INSTALL] _dist/lib/pkgconfig/vpx.pc
+    [DEP] tools/tiny_ssim.c.d
+    [DEP] y4minput.c.d
+    [CC] y4minput.c.o
+    [CC] tools/tiny_ssim.c.o
+    [LD] tools/tiny_ssim
+    [INSTALL] _dist/bin/tools/tiny_ssim
+    [MD5SUM] _dist
+/private/var/tmp/_bazel_containerhost/c259e0c7803e089724afaeab1cf94801/execroot/_main
+[4,646 / 8,613] Compiling absl/base/internal/raw_logging.cc [for tool]; 7s local, disk-cache ... (3 actions, 2 running)
+[4,655 / 8,613] Compiling cc/runfiles/runfiles.cc [for tool]; 0s local, disk-cache ... (3 actions, 2 running)
+[4,663 / 8,613] Compiling Rust rlib uniffi_core v0.32.0 (19 files) [for tool]; 0s local, disk-cache ... (3 actions, 2 running)
+[4,670 / 8,613] Linking external/rules_swift+/tools/worker/worker [for tool]; 1s local, disk-cache ... (3 actions, 2 running)
+[4,673 / 8,613] Compiling Rust rlib proc_macro2 v1.0.107 (22 files) [for tool]; 0s local, disk-cache ... (3 actions, 2 running)
+[4,680 / 8,613] Generating derived files for Swift module //submodules/RaiseToListen:RaiseToListen; 1s disk-cache, worker ... (3 actions, 2 running)
+[4,683 / 8,613] Generating derived files for Swift module //submodules/RaiseToListen:RaiseToListen; 3s disk-cache, worker ... (3 actions, 2 running)
+[4,685 / 8,613] Generating derived files for Swift module //submodules/RaiseToListen:RaiseToListen; 4s disk-cache, worker ... (3 actions, 2 running)
+[4,692 / 8,613] Generating derived files for Swift module //submodules/RaiseToListen:RaiseToListen; 5s disk-cache, worker ... (3 actions, 2 running)
+[4,696 / 8,613] Generating derived files for Swift module //submodules/RaiseToListen:RaiseToListen; 7s disk-cache, worker ... (3 actions running)
+INFO: From Compiling third-party/ZipArchive/Sources/SSZipArchive.m:
+third-party/ZipArchive/Sources/SSZipArchive.m:360:18: warning: variable 'isDirectory' set but not used [-Wunused-but-set-variable]
+  360 |             BOOL isDirectory = NO;
+      |                  ^
+third-party/ZipArchive/Sources/SSZipArchive.m:309:14: warning: variable 'unzippingError' set but not used [-Wunused-but-set-variable]
+  309 |     NSError *unzippingError;
+      |              ^
+third-party/ZipArchive/Sources/SSZipArchive.m:472:18: warning: variable 'isDirectory' set but not used [-Wunused-but-set-variable]
+  472 |             BOOL isDirectory = NO;
+      |                  ^
+third-party/ZipArchive/Sources/SSZipArchive.m:597:14: warning: variable 'retErr' set but not used [-Wunused-but-set-variable]
+  597 |     NSError *retErr = nil;
+      |              ^
+4 warnings generated.
+[4,697 / 8,613] Generating derived files for Swift module //submodules/RaiseToListen:RaiseToListen; 9s disk-cache, worker ... (3 actions, 2 running)
+[4,699 / 8,613] Generating derived files for Swift module //submodules/RaiseToListen:RaiseToListen; 10s disk-cache, worker ... (3 actions running)
+[4,700 / 8,613] Compiling Rust rlib syn v3.0.3 (96 files) [for tool]; 9s local, disk-cache ... (3 actions running)
+[4,701 / 8,613] Compiling Rust rlib syn v3.0.3 (96 files) [for tool]; 10s local, disk-cache ... (3 actions, 2 running)
+[4,705 / 8,613] Compiling Rust rlib syn v3.0.3 (96 files) [for tool]; 11s local, disk-cache ... (3 actions, 2 running)
+[4,708 / 8,613] Compiling submodules/TelegramUI/Components/AnimationCache/ImageDCT/Sources/DCT.cpp; 1s local, disk-cache ... (3 actions running)
+[4,712 / 8,613] Compiling Rust proc-macro futures_macro v0.3.34 (5 files) [for tool]; 1s local, disk-cache ... (3 actions running)
+[4,713 / 8,613] Compiling Rust proc-macro futures_macro v0.3.34 (5 files) [for tool]; 2s local, disk-cache ... (3 actions running)
+[4,717 / 8,613] Compiling Swift module //submodules/WidgetItems:WidgetItems; 1s disk-cache, worker ... (3 actions, 2 running)
+[4,722 / 8,613] Compiling Swift module //submodules/WidgetItems:WidgetItems; 2s disk-cache, worker ... (3 actions, 2 running)
+[4,726 / 8,613] Compiling Rust proc-macro displaydoc v0.2.7 (17 files) [for tool]; 2s local, disk-cache ... (3 actions, 2 running)
+[4,736 / 8,613] Compiling Swift module //submodules/NotificationsPresentationData:NotificationsPresentationData; 0s disk-cache, worker ... (3 actions, 2 running)
+[4,745 / 8,613] Compiling Rust proc-macro serde_derive v1.0.229 (28 files) [for tool]; 1s local, disk-cache ... (3 actions, 2 running)
+[4,753 / 8,613] Compiling Rust proc-macro serde_derive v1.0.229 (28 files) [for tool]; 2s local, disk-cache ... (3 actions running)
+[4,755 / 8,613] Compiling Rust proc-macro serde_derive v1.0.229 (28 files) [for tool]; 3s local, disk-cache ... (3 actions running)
+[4,757 / 8,613] Compiling Rust proc-macro serde_derive v1.0.229 (28 files) [for tool]; 4s local, disk-cache ... (3 actions running)
+[4,759 / 8,613] Compiling Rust proc-macro serde_derive v1.0.229 (28 files) [for tool]; 5s local, disk-cache ... (3 actions running)
+[4,761 / 8,613] Compiling Rust proc-macro serde_derive v1.0.229 (28 files) [for tool]; 6s local, disk-cache ... (3 actions running)
+[4,763 / 8,613] Compiling Rust proc-macro serde_derive v1.0.229 (28 files) [for tool]; 8s local, disk-cache ... (3 actions, 2 running)
+[4,767 / 8,613] Compiling Rust staticlib tlottie_archive (65 files); 7s local, disk-cache ... (3 actions running)
+[4,771 / 8,613] Compiling Rust staticlib tlottie_archive (65 files); 8s local, disk-cache ... (3 actions, 2 running)
+[4,773 / 8,613] Compiling Rust staticlib tlottie_archive (65 files); 9s local, disk-cache ... (3 actions running)
+[4,775 / 8,613] Compiling Rust staticlib tlottie_archive (65 files); 10s local, disk-cache ... (3 actions, 2 running)
+[4,777 / 8,613] Compiling Rust staticlib tlottie_archive (65 files); 11s local, disk-cache ... (3 actions running)
+[4,778 / 8,613] Compiling Rust staticlib tlottie_archive (65 files); 13s local, disk-cache ... (3 actions, 2 running)
+[4,778 / 8,613] Compiling Rust staticlib tlottie_archive (65 files); 14s local, disk-cache ... (3 actions running)
+[4,779 / 8,613] Compiling Rust staticlib tlottie_archive (65 files); 16s local, disk-cache ... (3 actions, 2 running)
+[4,779 / 8,613] Compiling Rust staticlib tlottie_archive (65 files); 18s local, disk-cache ... (3 actions running)
+[4,784 / 8,613] Compiling Rust staticlib tlottie_archive (65 files); 19s local, disk-cache ... (3 actions running)
+[4,785 / 8,613] Compiling Rust staticlib tlottie_archive (65 files); 22s local, disk-cache ... (3 actions, 2 running)
+[4,786 / 8,613] Compiling Rust staticlib tlottie_archive (65 files); 24s local, disk-cache ... (3 actions running)
+[4,787 / 8,613] Compiling Rust staticlib tlottie_archive (65 files); 26s local, disk-cache ... (3 actions, 2 running)
+[4,789 / 8,613] Compiling Rust staticlib tlottie_archive (65 files); 27s local, disk-cache ... (3 actions running)
+[4,792 / 8,613] Compiling Rust staticlib tlottie_archive (65 files); 28s local, disk-cache ... (3 actions running)
+[4,796 / 8,613] Compiling Rust staticlib tlottie_archive (65 files); 30s local, disk-cache ... (3 actions running)
+[4,799 / 8,613] Compiling Rust staticlib tlottie_archive (65 files); 31s local, disk-cache ... (3 actions, 2 running)
+[4,799 / 8,613] Compiling Rust staticlib tlottie_archive (65 files); 32s local, disk-cache ... (3 actions running)
+[4,800 / 8,613] Compiling Rust staticlib tlottie_archive (65 files); 35s local, disk-cache ... (3 actions, 2 running)
+INFO: From Compiling Rust staticlib tlottie_archive (65 files):
+warning: field `matte_src` is never read
+   --> submodules/tlottie/tlottie/src/composition/model.rs:149:7
+    |
+116 | pub(crate) struct Layer {
+    |                   ----- field in this struct
+...
+149 |   pub matte_src: bool,
+    |       ^^^^^^^^^
+    |
+    = note: `Layer` has derived impls for the traits `Clone` and `Debug`, but these are intentionally ignored during dead code analysis
+    = note: `#[warn(dead_code)]` (part of `#[warn(unused)]`) on by default
+
+warning: function `premultiplied_rgba_to_straight` is never used
+  --> submodules/tlottie/tlottie/src/pixel.rs:14:15
+   |
+14 | pub(crate) fn premultiplied_rgba_to_straight(pixel: u32) -> [u8; 4] {
+   |               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+warning: function `premultiplied_rgba_to_straight_slice` is never used
+  --> submodules/tlottie/tlottie/src/pixel.rs:33:15
+   |
+33 | pub(crate) fn premultiplied_rgba_to_straight_slice(src: &[u32], dst: &mut [u8]) {
+   |               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+warning: function `premultiplied_rgba_to_straight_slice_scalar` is never used
+  --> submodules/tlottie/tlottie/src/pixel.rs:40:15
+   |
+40 | pub(crate) fn premultiplied_rgba_to_straight_slice_scalar(src: &[u32], dst: &mut [u8]) {
+   |               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+warning: function `alpha8_to_rgba_slice` is never used
+  --> submodules/tlottie/tlottie/src/pixel.rs:48:15
+   |
+48 | pub(crate) fn alpha8_to_rgba_slice(src: &[u8], dst: &mut [u8], color: u32) {
+   |               ^^^^^^^^^^^^^^^^^^^^
+
+warning: function `alpha8_to_rgba_slice_scalar` is never used
+  --> submodules/tlottie/tlottie/src/pixel.rs:55:15
+   |
+55 | pub(crate) fn alpha8_to_rgba_slice_scalar(src: &[u8], dst: &mut [u8], color: u32) {
+   |               ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+warning: 6 warnings emitted
+
+[4,802 / 8,613] Compiling Rust proc-macro deluxe_macros v0.5.0 (9 files) [for tool]; 8s local, disk-cache ... (3 actions, 2 running)
+[4,809 / 8,613] Compiling Rust proc-macro deluxe_macros v0.5.0 (9 files) [for tool]; 9s local, disk-cache ... (3 actions, 2 running)
+[4,814 / 8,613] Compiling Rust rlib funty v2.0.0 (1 file); 1s local, disk-cache ... (3 actions, 2 running)
+[4,818 / 8,613] Compiling Rust proc-macro uniffi_internal_macros v0.32.0 (4 files) [for tool]; 2s local, disk-cache ... (3 actions running)
+[4,823 / 8,613] Compiling Rust proc-macro uniffi_internal_macros v0.32.0 (4 files) [for tool]; 3s local, disk-cache ... (3 actions running)
+[4,824 / 8,613] Compiling Rust rlib bitvec v1.1.1 (66 files); 1s local, disk-cache ... (3 actions running)
+[4,825 / 8,613] Generating derived files for Swift module //submodules/TelegramApi:TelegramApi; 3s disk-cache, worker ... (3 actions, 2 running)
+[4,833 / 8,613] Generating derived files for Swift module //submodules/TelegramApi:TelegramApi; 4s disk-cache, worker ... (3 actions, 2 running)
+[4,840 / 8,613] Generating derived files for Swift module //submodules/TelegramApi:TelegramApi; 5s disk-cache, worker ... (3 actions running)
+[4,841 / 8,613] Generating derived files for Swift module //submodules/TelegramApi:TelegramApi; 8s disk-cache, worker ... (3 actions, 2 running)
+[4,844 / 8,613] Generating derived files for Swift module //submodules/TelegramApi:TelegramApi; 9s disk-cache, worker ... (3 actions running)
+[4,845 / 8,613] Generating derived files for Swift module //submodules/TelegramApi:TelegramApi; 13s disk-cache, worker ... (3 actions, 2 running)
+[4,847 / 8,613] Generating derived files for Swift module //submodules/TelegramApi:TelegramApi; 14s disk-cache, worker ... (3 actions running)
+[4,848 / 8,613] Generating derived files for Swift module //submodules/TelegramApi:TelegramApi; 15s disk-cache, worker ... (3 actions running)
+[4,849 / 8,613] Generating derived files for Swift module //submodules/TelegramApi:TelegramApi; 17s disk-cache, worker ... (3 actions, 2 running)
+[4,850 / 8,613] Generating derived files for Swift module //submodules/TelegramApi:TelegramApi; 18s disk-cache, worker ... (3 actions running)
+[4,851 / 8,613] Generating derived files for Swift module //submodules/TelegramApi:TelegramApi; 20s disk-cache, worker ... (3 actions, 2 running)
+[4,851 / 8,613] Generating derived files for Swift module //submodules/TelegramApi:TelegramApi; 21s disk-cache, worker ... (3 actions running)
+[4,852 / 8,613] Generating derived files for Swift module //submodules/TelegramApi:TelegramApi; 23s disk-cache, worker ... (3 actions, 2 running)
+[4,857 / 8,613] Generating derived files for Swift module //submodules/TelegramApi:TelegramApi; 24s disk-cache, worker ... (3 actions, 2 running)
+[4,860 / 8,613] Generating derived files for Swift module //submodules/TelegramApi:TelegramApi; 25s disk-cache, worker ... (3 actions, 2 running)
+[4,863 / 8,613] Generating derived files for Swift module //submodules/TelegramApi:TelegramApi; 27s disk-cache, worker ... (3 actions, 2 running)
+[4,866 / 8,613] Generating derived files for Swift module //submodules/TelegramApi:TelegramApi; 28s disk-cache, worker ... (3 actions running)
+[4,869 / 8,613] Generating derived files for Swift module //submodules/TelegramApi:TelegramApi; 29s disk-cache, worker ... (3 actions running)
+[4,871 / 8,613] Generating derived files for Swift module //submodules/TelegramApi:TelegramApi; 30s disk-cache, worker ... (3 actions running)
+[4,874 / 8,613] Generating derived files for Swift module //submodules/TelegramApi:TelegramApi; 31s disk-cache, worker ... (3 actions, 2 running)
+[4,878 / 8,613] Generating derived files for Swift module //submodules/TelegramApi:TelegramApi; 32s disk-cache, worker ... (3 actions running)
+[4,881 / 8,613] Generating derived files for Swift module //submodules/TelegramApi:TelegramApi; 33s disk-cache, worker ... (3 actions running)
+[4,883 / 8,613] Generating derived files for Swift module //submodules/TelegramApi:TelegramApi; 34s disk-cache, worker ... (3 actions running)
+[4,888 / 8,613] Generating derived files for Swift module //submodules/TelegramApi:TelegramApi; 35s disk-cache, worker ... (3 actions running)
+[4,891 / 8,613] Generating derived files for Swift module //submodules/TelegramApi:TelegramApi; 36s disk-cache, worker ... (3 actions running)
+[4,892 / 8,613] Generating derived files for Swift module //submodules/TelegramApi:TelegramApi; 38s disk-cache, worker ... (3 actions, 2 running)
+[4,896 / 8,613] Generating derived files for Swift module //submodules/TelegramApi:TelegramApi; 39s disk-cache, worker ... (3 actions, 2 running)
+[4,902 / 8,613] Generating derived files for Swift module //submodules/TelegramApi:TelegramApi; 41s disk-cache, worker ... (3 actions, 2 running)
+[4,903 / 8,613] Generating derived files for Swift module //submodules/TelegramApi:TelegramApi; 42s disk-cache, worker ... (3 actions running)
+[4,907 / 8,613] Generating derived files for Swift module //submodules/TelegramApi:TelegramApi; 43s disk-cache, worker ... (3 actions running)
+[4,911 / 8,613] Generating derived files for Swift module //submodules/TelegramApi:TelegramApi; 44s disk-cache, worker ... (3 actions running)
+[4,913 / 8,613] Generating derived files for Swift module //submodules/TelegramApi:TelegramApi; 45s disk-cache, worker ... (3 actions running)
+[4,914 / 8,613] Generating derived files for Swift module //submodules/TelegramApi:TelegramApi; 49s disk-cache, worker ... (3 actions, 2 running)
+[4,919 / 8,613] Generating derived files for Swift module //submodules/TelegramApi:TelegramApi; 50s disk-cache, worker ... (3 actions, 2 running)
+[4,927 / 8,613] Generating derived files for Swift module //submodules/TelegramApi:TelegramApi; 52s disk-cache, worker ... (3 actions, 2 running)
+[4,933 / 8,613] Generating derived files for Swift module //submodules/TelegramApi:TelegramApi; 53s disk-cache, worker ... (3 actions, 2 running)
+[4,938 / 8,613] Generating derived files for Swift module //submodules/TelegramApi:TelegramApi; 54s disk-cache, worker ... (3 actions, 2 running)
+[4,943 / 8,613] Generating derived files for Swift module //submodules/TelegramApi:TelegramApi; 55s disk-cache, worker ... (3 actions, 2 running)
+[4,947 / 8,613] Generating derived files for Swift module //submodules/TelegramApi:TelegramApi; 57s disk-cache, worker ... (3 actions, 2 running)
+[4,955 / 8,613] Generating derived files for Swift module //submodules/TelegramApi:TelegramApi; 58s disk-cache, worker ... (3 actions, 2 running)
+[4,958 / 8,613] Generating derived files for Swift module //submodules/TelegramApi:TelegramApi; 59s disk-cache, worker ... (3 actions, 2 running)
+[4,958 / 8,613] Generating derived files for Swift module //submodules/TelegramApi:TelegramApi; 60s disk-cache, worker ... (3 actions running)
+[4,961 / 8,613] Generating derived files for Swift module //submodules/TelegramApi:TelegramApi; 61s disk-cache, worker ... (3 actions running)
+[4,962 / 8,613] Generating derived files for Swift module //submodules/TelegramApi:TelegramApi; 62s disk-cache, worker ... (3 actions, 2 running)
+[4,964 / 8,613] Generating derived files for Swift module //submodules/TelegramApi:TelegramApi; 64s disk-cache, worker ... (3 actions, 2 running)
+[4,965 / 8,613] Generating derived files for Swift module //submodules/TelegramApi:TelegramApi; 66s disk-cache, worker ... (3 actions running)
+[4,966 / 8,613] Generating derived files for Swift module //submodules/TelegramApi:TelegramApi; 69s disk-cache, worker ... (3 actions, 2 running)
+[4,967 / 8,613] Generating derived files for Swift module //submodules/TelegramApi:TelegramApi; 71s disk-cache, worker ... (3 actions running)
+[4,968 / 8,613] Generating derived files for Swift module //submodules/TelegramApi:TelegramApi; 73s disk-cache, worker ... (3 actions, 2 running)
+[4,970 / 8,613] Generating derived files for Swift module //submodules/TelegramApi:TelegramApi; 74s disk-cache, worker ... (3 actions running)
+[4,971 / 8,613] Generating derived files for Swift module //submodules/TelegramApi:TelegramApi; 76s disk-cache, worker ... (3 actions, 2 running)
+[4,971 / 8,613] Generating derived files for Swift module //submodules/TelegramApi:TelegramApi; 78s disk-cache, worker ... (3 actions running)
+[4,972 / 8,613] Generating derived files for Swift module //submodules/TelegramApi:TelegramApi; 88s disk-cache, worker ... (3 actions, 2 running)
+[4,976 / 8,613] Generating derived files for Swift module //submodules/TelegramApi:TelegramApi; 89s disk-cache, worker ... (3 actions, 2 running)
+[4,980 / 8,613] Generating derived files for Swift module //submodules/TelegramApi:TelegramApi; 90s disk-cache, worker ... (3 actions, 2 running)
+[4,983 / 8,613] Generating derived files for Swift module //submodules/TelegramApi:TelegramApi; 91s disk-cache, worker ... (3 actions, 2 running)
+[4,985 / 8,613] Generating derived files for Swift module //submodules/TelegramApi:TelegramApi; 92s disk-cache, worker ... (3 actions, 2 running)
+[4,986 / 8,613] Generating derived files for Swift module //submodules/TelegramApi:TelegramApi; 94s disk-cache, worker ... (3 actions running)
+[4,987 / 8,613] Generating derived files for Swift module //submodules/TelegramApi:TelegramApi; 95s disk-cache, worker ... (3 actions running)
+[4,989 / 8,613] Generating derived files for Swift module //submodules/TelegramApi:TelegramApi; 96s disk-cache, worker ... (3 actions running)
+[4,990 / 8,613] Generating derived files for Swift module //submodules/TelegramApi:TelegramApi; 97s disk-cache, worker ... (3 actions running)
+[4,991 / 8,613] Generating derived files for Swift module //submodules/TelegramApi:TelegramApi; 98s disk-cache, worker ... (3 actions, 2 running)
+[4,993 / 8,613] Generating derived files for Swift module //submodules/TelegramApi:TelegramApi; 99s disk-cache, worker ... (3 actions running)
+ERROR: /Users/runner/work/AirGram-iOS/AirGram-iOS/submodules/TelegramApi/BUILD:3:14: Generating derived files for Swift module //submodules/TelegramApi:TelegramApi failed: (Exit 1): worker failed: error executing SwiftDeriveFiles command (from target //submodules/TelegramApi:TelegramApi) 
+  (cd /private/var/tmp/_bazel_containerhost/c259e0c7803e089724afaeab1cf94801/execroot/_main && \
+  exec env - \
+    APPLE_SDK_PLATFORM=iPhoneOS \
+    APPLE_SDK_VERSION_OVERRIDE=26.4 \
+    PATH=/usr/bin:/bin:/usr/sbin:/sbin \
+    XCODE_VERSION_OVERRIDE=26.4.1.17E202 \
+    ZERO_AR_DATE=1 \
+  bazel-out/darwin_arm64-opt-exec-ST-d57f47055a04/bin/external/rules_swift+/tools/worker/worker swiftc @bazel-out/ios_arm64-opt-ios-arm64-min13.0-ST-2d46267cd7fb/bin/submodules/TelegramApi/TelegramApi.swiftmodule-0.params)
+# Configuration: db3305ab08c20c06ba988b9d6d51c6f5c39080626484f69c26fb5e29ca4dc602
+# Execution platform: @@platforms//host:host
+submodules/TelegramApi/Sources/Api0.swift:1624:59: error: type 'Api.WalletTransactionPeer' has no member 'parse_walletTransactionPeerChannel'
+1622 |     dict[-1825969613] = { return Api.MessageAction.parse_messageActionGramTransfer($0) }
+1623 |     dict[1773716671] = { return Api.MessageAction.parse_messageActionWalletTonConnectRequest($0) }
+1624 |     dict[1416649777] = { return Api.WalletTransactionPeer.parse_walletTransactionPeerChannel($0) }
+     |                                                           `- error: type 'Api.WalletTransactionPeer' has no member 'parse_walletTransactionPeerChannel'
+1625 |     dict[-193817447] = { return Api.WalletTransactionPeer.parse_walletTransactionPeerTelegramGift($0) }
+1626 |     dict[417867063] = { return Api.wallet.EncryptedSecretPhrasePart.parse_encryptedSecretPhrasePart($0) }
+
+submodules/TelegramApi/Sources/ApiWallet.swift:1477:19: error: type 'Api.WalletTransactionPeer' has no member 'walletTransactionPeerChannel'
+1475 |                 }
+1476 |                 break
+1477 |             case .walletTransactionPeerChannel(let _data):
+     |                   `- error: type 'Api.WalletTransactionPeer' has no member 'walletTransactionPeerChannel'
+1478 |                 if boxed {
+1479 |                     buffer.appendInt32(1416649777)
+
+submodules/TelegramApi/Sources/ApiWallet.swift:1488:19: error: type 'Api.WalletTransactionPeer' has no member 'walletTransactionPeerTelegramGift'
+1486 |                 }
+1487 |                 break
+1488 |             case .walletTransactionPeerTelegramGift(let _data):
+     |                   `- error: type 'Api.WalletTransactionPeer' has no member 'walletTransactionPeerTelegramGift'
+1489 |                 if boxed {
+1490 |                     buffer.appendInt32(-193817447)
+Target //Telegram:telegram_auth_build_test failed to build
+ERROR: /Users/runner/work/AirGram-iOS/AirGram-iOS/submodules/TelegramCore/BUILD:3:14 Linking submodules/TelegramCore/libTelegramCore.a failed: (Exit 1): worker failed: error executing SwiftDeriveFiles command (from target //submodules/TelegramApi:TelegramApi) 
+  (cd /private/var/tmp/_bazel_containerhost/c259e0c7803e089724afaeab1cf94801/execroot/_main && \
+  exec env - \
+    APPLE_SDK_PLATFORM=iPhoneOS \
+    APPLE_SDK_VERSION_OVERRIDE=26.4 \
+    PATH=/usr/bin:/bin:/usr/sbin:/sbin \
+    XCODE_VERSION_OVERRIDE=26.4.1.17E202 \
+    ZERO_AR_DATE=1 \
+  bazel-out/darwin_arm64-opt-exec-ST-d57f47055a04/bin/external/rules_swift+/tools/worker/worker swiftc @bazel-out/ios_arm64-opt-ios-arm64-min13.0-ST-2d46267cd7fb/bin/submodules/TelegramApi/TelegramApi.swiftmodule-0.params)
+# Configuration: db3305ab08c20c06ba988b9d6d51c6f5c39080626484f69c26fb5e29ca4dc602
+# Execution platform: @@platforms//host:host
+INFO: Elapsed time: 1718.779s, Critical Path: 235.39s
+INFO: 4997 processes: 2120 internal, 2833 local, 44 worker.
+ERROR: Build did NOT complete successfully
+FAILED: 
+INFO: Build Event Protocol files produced successfully.
+Traceback (most recent call last):
+  File "/Users/runner/work/AirGram-iOS/AirGram-iOS/build-system/Make/Make.py", line 1294, in <module>
+    build(bazel=bazel_path, arguments=args)
+    ~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/runner/work/AirGram-iOS/AirGram-iOS/build-system/Make/Make.py", line 650, in build
+    bazel_command_line.invoke_build()
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "/Users/runner/work/AirGram-iOS/AirGram-iOS/build-system/Make/Make.py", line 325, in invoke_build
+    call_executable(combined_arguments)
+    ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^
+  File "/Users/runner/work/AirGram-iOS/AirGram-iOS/build-system/Make/BuildEnvironment.py", line 104, in call_executable
+    subprocess.check_call(resolved_arguments, env=resolved_env)
+    ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/homebrew/Cellar/python@3.15/3.15.2/Frameworks/Python.framework/Versions/3.15/lib/python3.15/subprocess.py", line 534, in check_call
+    raise CalledProcessError(retcode, cmd)
+subprocess.CalledProcessError: Command ['/Users/runner/work/AirGram-iOS/AirGram-iOS/build-input/bazel-8.4.2-darwin-arm64', '--output_user_root=/private/var/tmp/_bazel_containerhost', 'build', 'Telegram/telegram_auth_build_test', '--announce_rc', '--features=swift.use_global_module_cache', '--verbose_failures', '--remote_cache_async', '--jobs=3', '--local_cpu_resources=3', '--worker_max_instances=3', '--spawn_strategy=worker,local', '--strategy=SwiftCompile=worker,local', '--strategy=ObjcCompile=worker,local', '--strategy=Genrule=standalone', '--worker_quit_after_build=false', '--define=buildNumber=2846', '--features=swift.split_derived_files_generation', '--disk_cache=/private/var/tmp/_bazel_containerhost/disk_cache', '-c', 'opt', '--ios_multi_cpus=arm64', '--watchos_cpus=arm64_32', '--apple_generate_dsym', '--features=swift.opt_uses_wmo', '--features=swift.opt_uses_osize', '--features=dead_strip', '--objc_enable_binary_stripping', '--build_event_json_file=/var/folders/h5/t85nd63d71x27_8gl5gw3l_w0000gn/T/airgram-build-events.json'] returned non-zero exit status 1.
