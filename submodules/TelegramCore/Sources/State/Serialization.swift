@@ -260,6 +260,9 @@ public class BoxedMessage: NSObject {
 
 public class Serialization: NSObject, MTSerialization {
     public func currentLayer() -> UInt {
+        // The AirGram server currently implements API layer 232. Keep this pinned
+        // independently of the app marketing version so newer app releases don't
+        // negotiate methods the server does not support.
         return 232
     }
     
