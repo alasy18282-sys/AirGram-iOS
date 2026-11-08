@@ -132,6 +132,9 @@ jobs:
           for url in re.findall(r'https://[^"\\ ]+\.(?:tar\.gz|zip|bz2)', data):
               if 'releases/download' in url or 'codeload' in url:
                   urls.add(url)
+          # repo rules declared directly in MODULE.bazel (http_file etc.)
+          for url in re.findall(r'urls = \["(https://[^"\\ ]+)"\]', open('MODULE.bazel').read()):
+              urls.add(url)
           with open('/tmp/urls.txt', 'w') as f:
               f.write('\n'.join(sorted(urls)))
           print(f'{len(urls)} archive URLs')
