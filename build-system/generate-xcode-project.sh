@@ -58,7 +58,7 @@ CORE_COUNT_MINUS_ONE=$(expr ${CORE_COUNT} \- 1)
 BAZEL_OPTIONS=(\
 	--features=swift.use_global_module_cache \
 	--jobs=${CORE_COUNT} \
-	--local_cpu_resources=${CORE_COUNT} \
+	--local_resources=cpu=${CORE_COUNT} \
 	--worker_max_instances=${CORE_COUNT} \
 	--spawn_strategy=worker,local \
 	--strategy=SwiftCompile=worker,local \

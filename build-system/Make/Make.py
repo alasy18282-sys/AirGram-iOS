@@ -75,7 +75,7 @@ class BazelCommandLine:
 
             # Start persistent workers immediately and keep the local action cache warm.
             '--jobs={}'.format(cpu_count),
-            '--local_cpu_resources={}'.format(cpu_count),
+            '--local_resources=cpu={}'.format(cpu_count),
             '--worker_max_instances={}'.format(cpu_count),
             '--spawn_strategy=worker,local',
             '--strategy=SwiftCompile=worker,local',
