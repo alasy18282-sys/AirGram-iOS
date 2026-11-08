@@ -150,6 +150,36 @@ jobs:
           done < /tmp/urls.txt
           ls -la "$DISTDIR" | head -30
 
+      - name: Collect failed download URLs into distdir
+        if: failure()
+        run: |
+          set -x
+          DISTDIR="${BAZEL_DISTDIR:-/private/var/tmp/_bazel_containerhost/distdir}"
+          mkdir -p "$DISTDIR"
+          python3 - <<'PY'
+          import re
+          urls = set()
+          try:
+              log = open('/tmp/build_full.log', errors='ignore').read()
+              urls |= set(re.findall(r'Error downloading \[([^\]\\ ]+)\]', log))
+              urls |= set(re.findall(r'Download from (https://[^ ]+\.\w+(?:\.gz|\.zip|\.bz2)) failed', log))
+          except FileNotFoundError:
+              pass
+          with open('/tmp/failed_urls.txt', 'w') as f:
+              f.write('\n'.join(sorted(urls)))
+          print(f'{len(urls)} failed URLs')
+          PY
+          while read -r url; do
+            [ -z "$url" ] && continue
+            name="$(basename "$url")"
+            if [ -s "$DISTDIR/$name" ]; then continue; fi
+            echo "Re-fetching $name"
+            mirror="https://mirror.bazel.build/${url#https://}"
+            curl -L --retry 8 --retry-delay 5 --retry-all-errors --fail --silent --show-error "$mirror" -o "$DISTDIR/$name" \
+              || curl -L --retry 8 --retry-delay 5 --retry-all-errors --fail --silent --show-error "$url" -o "$DISTDIR/$name" \
+              || echo "still failing $name"
+          done < /tmp/failed_urls.txt
+
       - name: Diagnose target skip
         if: failure()
         run: |
