@@ -2,6 +2,9 @@ build --action_env=ZERO_AR_DATE=1
 
 build --enable_platform_specific_config
 
+# Third-party build rules use TARGET_CPU to distinguish iOS device and simulator.
+build --noincompatible_target_cpu_from_platform
+
 # Download dependencies directly if the remote downloader configured by --cacheHost fails.
 build --experimental_remote_downloader_local_fallback
 
