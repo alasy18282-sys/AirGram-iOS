@@ -1,0 +1,79 @@
+curl: (56) The requested URL returned error: 504
+curl: (56) The requested URL returned error: 504
+curl: (56) The requested URL returned error: 504
+curl: (56) The requested URL returned error: 504
+curl: (56) The requested URL returned error: 504
+curl: (56) The requested URL returned error: 504
+curl: (56) The requested URL returned error: 504
+curl: (56) The requested URL returned error: 504
+curl: (56) The requested URL returned error: 504
+curl: (56) The requested URL returned error: 504
+curl: (56) The requested URL returned error: 504
+Traceback (most recent call last):
+--- end of full build log ---
+  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0 33 55.8M   33 18.9M    0     0  85.5M      0 --:--:-- --:--:-- --:--:-- 85.5M100 55.8M  100 55.8M    0     0   100M      0 --:--:-- --:--:-- --:--:-- 99.9M
+  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0  0     0    0     0    0     0      0      0 --:--:--  0:00:01 --:--:--     0  0     0    0     0    0     0      0      0 --:--:--  0:00:02 --:--:--     0  0     0    0     0    0     0      0      0 --:--:--  0:00:03 --:--:--     0  0     0    0     0    0     0      0      0 --:--:--  0:00:04 --:--:--     0  0     0    0     0    0     0      0      0 --:--:--  0:00:05 --:--:--     0  0     0    0     0    0     0      0      0 --:--:--  0:00:06 --:--:--     0  0     0    0     0    0     0      0      0 --:--:--  0:00:07 --:--:--     0  0     0    0     0    0     0      0      0 --:--:--  0:00:08 --:--:--     0  0     0    0     0    0     0      0      0 --:--:--  0:00:09 --:--:--     0  0     0    0     0    0     0      0      0 --:--:--  0:00:10 --:--:--     0  0    92    0     0    0     0      0      0 --:--:--  0:00:11 --:--:--     0
+curl: (56) The requested URL returned error: 504
+Warning: Problem (retrying all errors). Will retry in 10 seconds. 10 retries 
+Warning: left.
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0  0    92    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0
+curl: (56) The requested URL returned error: 504
+Warning: Problem (retrying all errors). Will retry in 10 seconds. 9 retries 
+Warning: left.
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0  0    92    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0
+curl: (56) The requested URL returned error: 504
+Warning: Problem (retrying all errors). Will retry in 10 seconds. 8 retries 
+Warning: left.
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0  0    92    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0
+curl: (56) The requested URL returned error: 504
+Warning: Problem (retrying all errors). Will retry in 10 seconds. 7 retries 
+Warning: left.
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0  0    92    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0
+curl: (56) The requested URL returned error: 504
+Warning: Problem (retrying all errors). Will retry in 10 seconds. 6 retries 
+Warning: left.
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0  0    92    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0
+curl: (56) The requested URL returned error: 504
+Warning: Problem (retrying all errors). Will retry in 10 seconds. 5 retries 
+Warning: left.
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0  0    92    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0
+curl: (56) The requested URL returned error: 504
+Warning: Problem (retrying all errors). Will retry in 10 seconds. 4 retries 
+Warning: left.
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0  0    92    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0
+curl: (56) The requested URL returned error: 504
+Warning: Problem (retrying all errors). Will retry in 10 seconds. 3 retries 
+Warning: left.
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0  0    92    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0
+curl: (56) The requested URL returned error: 504
+Warning: Problem (retrying all errors). Will retry in 10 seconds. 2 retries 
+Warning: left.
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0  0    92    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0
+curl: (56) The requested URL returned error: 504
+Warning: Problem (retrying all errors). Will retry in 10 seconds. 1 retries 
+Warning: left.
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0  0    92    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0
+curl: (56) The requested URL returned error: 504
+Traceback (most recent call last):
+  File "/Users/runner/work/AirGram-iOS/AirGram-iOS/build-system/Make/Make.py", line 1288, in <module>
+    bazel_path = locate_bazel(base_path=os.getcwd(), cache_host_or_path=args.cacheHost, cache_dir=args.cacheDir)
+  File "/Users/runner/work/AirGram-iOS/AirGram-iOS/build-system/Make/BazelLocation.py", line 108, in locate_bazel
+    call_executable([
+    ~~~~~~~~~~~~~~~^^
+        'curl',
+        ^^^^^^^
+    ...<15 lines>...
+        bazel_path
+        ^^^^^^^^^^
+    ])
+    ^^
+  File "/Users/runner/work/AirGram-iOS/AirGram-iOS/build-system/Make/BuildEnvironment.py", line 104, in call_executable
+    subprocess.check_call(resolved_arguments, env=resolved_env)
+    ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/homebrew/Cellar/python@3.15/3.15.2/Frameworks/Python.framework/Versions/3.15/lib/python3.15/subprocess.py", line 534, in check_call
+    raise CalledProcessError(retcode, cmd)
+subprocess.CalledProcessError: Command ['/usr/bin/curl', '-L', '--fail', '--retry', '10', '--retry-delay', '10', '--retry-max-time', '300', '--retry-all-errors', 'https://releases.bazel.build/8.4.2/release/bazel-8.4.2-darwin-arm64', 'https://github.com/bazelbuild/bazel/releases/download/8.4.2/bazel-8.4.2-darwin-arm64', '--output', '/Users/runner/work/AirGram-iOS/AirGram-iOS/build-input/bazel-8.4.2-darwin-arm64'] returned non-zero exit status 56.
