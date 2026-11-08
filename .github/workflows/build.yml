@@ -69,6 +69,7 @@ jobs:
         run: |
           set -euxo pipefail
           BAZEL_USER_ROOT="/private/var/tmp/_bazel_containerhost"
+          BAZEL_DISTDIR="/private/var/tmp/_bazel_containerhost/distdir"
           BUILD_NUMBER_OFFSET="$(cat build_number_offset)"
           COMMIT_COUNT="${GITHUB_RUN_NUMBER:-1}"
           BUILD_NUMBER="$((COMMIT_COUNT + BUILD_NUMBER_OFFSET))"
@@ -119,7 +120,7 @@ jobs:
       - name: Prefetch BCR archives (flaky github downloads)
         run: |
           set -x
-          DISTDIR="$BAZEL_USER_ROOT/distdir"
+          DISTDIR="${BAZEL_DISTDIR:-/private/var/tmp/_bazel_containerhost/distdir}"
           mkdir -p "$DISTDIR"
           python3 - <<'PY'
           import json, re, os
