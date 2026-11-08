@@ -686,6 +686,12 @@ public class GlassBackgroundView: UIView {
 }
 
 public final class GlassBackgroundContainerView: UIView {
+    /// Whether the container merges the glass shapes in it (native glass). This fork
+    /// renders each shape separately, so platters keep their own glass.
+    public static var mergesShapes: Bool {
+        return false
+    }
+
     private final class ContentView: UIView {
     }
     
@@ -1241,7 +1247,31 @@ public final class GlassContextExtractableContainer: UIView, ContextExtractableC
     
     private var state: State = .normal
     private var normalParams: NormalParams?
-    
+    private var glassLent = false
+    /// Whether the capsule's glass morphs into a context menu presentation.
+    public var morphsIntoContextMenu: Bool = false
+
+    public var isGlassLent: Bool {
+        return self.glassLent
+    }
+
+    /// Lends the glass out to a merging host (a navigation transition): the view is
+    /// re-parented by the borrower and returned with `reclaimGlass()`.
+    public func lendGlass() -> UIView {
+        self.glassLent = true
+        return self.extractableContentView
+    }
+
+    public func reclaimGlass() {
+        self.glassLent = false
+        if self.extractableContentView.superview !== self {
+            self.addSubview(self.extractableContentView)
+            if let params = self.normalParams {
+                self.extractableContentView.frame = CGRect(origin: CGPoint(), size: params.size)
+            }
+        }
+    }
+
     override public init(frame: CGRect) {
         self.extractableContentView = UIView()
         self.glassView = GlassBackgroundView()

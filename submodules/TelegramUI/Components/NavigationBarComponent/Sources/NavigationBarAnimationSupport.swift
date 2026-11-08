@@ -1,5 +1,6 @@
 import Foundation
 import UIKit
+import GlassBackgroundComponent
 
 /// When a spring rests: `.glass` carries the distance-to-target threshold.
 public enum NavigationSpringRest: Equatable {
@@ -62,7 +63,10 @@ public struct NavigationTransitionSpring: Equatable {
 /// The clock's zero is the bake's origin: `value(at:)` evaluates the closed-form
 /// spring from `startTime`, `rebased(by:)` shifts the origin, `retargeted(at:to:spring:)`
 /// redirects from the current value and velocity.
-public final class NavigationSpringCurve {
+public final class NavigationSpringCurve: Equatable {
+    public static func == (lhs: NavigationSpringCurve, rhs: NavigationSpringCurve) -> Bool {
+        return lhs === rhs
+    }
     public let startTime: Double
     public let from: CGFloat
     public let target: CGFloat
@@ -304,16 +308,11 @@ public func addNavigationKeyframes(to layer: CALayer, key: String, keyPath: Stri
 
 /// Keeps a glass container's inner geometry on the bake's final sample: the layer's
 /// position and bounds are keyframed separately, the glass follows the model.
-extension GlassContextExtractableContainer {
+extension GlassBackgroundContainerView {
     public func animateSize(width: CGFloat, height: CGFloat, timing: NavigationKeyframeTiming, isDark: Bool) {
-        let state = self.normalState
         self.update(
             size: CGSize(width: max(0.0, width), height: max(0.0, height)),
-            cornerRadius: state.cornerRadius,
             isDark: isDark,
-            tintColor: self.glassTintColor ?? GlassBackgroundView.TintColor(kind: .panel),
-            isInteractive: true,
-            isVisible: true,
             transition: .immediate
         )
     }

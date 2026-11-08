@@ -82,6 +82,10 @@ public protocol CustomViewControllerNavigationData: AnyObject {
 public protocol CustomViewControllerNavigationDataSummary: AnyObject {
 }
 
+/// A controller that can act as a source (or partner) of a navigation transition.
+public protocol NavigationBarTransitionSource: AnyObject {
+}
+
 @objc open class ViewController: UIViewController, ContainableController {
     public struct NavigationLayout {
         public var navigationFrame: CGRect
@@ -214,6 +218,10 @@ public protocol CustomViewControllerNavigationDataSummary: AnyObject {
     public private(set) var toolbar: Toolbar?
     
     public var displayNavigationBar = true
+    open var navigationBarTransitionSource: NavigationBarTransitionSource? {
+        return nil
+    }
+
     open var navigationBarRequiresEntireLayoutUpdate: Bool {
         return true
     }

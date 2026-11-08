@@ -68,10 +68,12 @@ public final class NavigationBarTheme {
 public final class NavigationBarStrings {
     public let back: String
     public let close: String
-    
-    public init(back: String, close: String) {
+    public let more: String
+
+    public init(back: String, close: String, more: String = "More") {
         self.back = back
         self.close = close
+        self.more = more
     }
 }
 
