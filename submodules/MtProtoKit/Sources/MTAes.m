@@ -79,6 +79,7 @@ void MyAesIgeEncrypt(const void *inBytes, int length, void *outBytes, const void
     free(tmpInBytes);
     
     assert(result == kCCSuccess);
+    (void)result; // assert is compiled out in release builds.
     
     len = length / AES_BLOCK_SIZE;
     
@@ -140,6 +141,7 @@ void MyAesIgeDecrypt(const void *inBytes, int length, void *outBytes, const void
             size_t dataOutMoved = 0;
             CCCryptorStatus result = CCCryptorUpdate(decryptor, &tmp, AES_BLOCK_SIZE, outBytes, AES_BLOCK_SIZE, &dataOutMoved);
             assert(result == kCCSuccess);
+            (void)result; // assert is compiled out in release builds.
             assert(dataOutMoved == AES_BLOCK_SIZE);
             
             for (n = 0; n < N_WORDS; ++n)
@@ -165,6 +167,7 @@ void MyAesCbcDecrypt(const void *inBytes, int length, void *outBytes, const void
     size_t outLength = 0;
     CCCryptorStatus status = CCCrypt(kCCDecrypt, kCCAlgorithmAES128, 0, key, keyLength, iv, inBytes, length, outBytes, length, &outLength);
     assert(status == kCCSuccess);
+    (void)status; // assert is compiled out in release builds.
     assert(outLength == length);
 }
 
