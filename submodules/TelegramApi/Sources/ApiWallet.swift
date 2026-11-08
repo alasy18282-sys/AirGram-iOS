@@ -1118,34 +1118,6 @@ public extension Api {
 
 public extension Api {
     enum WalletState: TypeConstructorDescription {
-        public class Cons_walletTransactionPeerChannel: TypeConstructorDescription {
-            public var flags: Int32
-            public var channelId: Int64
-            public var address: String
-            public var domain: String?
-
-            public init(flags: Int32, channelId: Int64, address: String, domain: String?) {
-                self.flags = flags
-                self.channelId = channelId
-                self.address = address
-                self.domain = domain
-            }
-
-            public func descriptionFields() -> (String, [(String, ConstructorParameterDescription)]) {
-                return ("walletTransactionPeerChannel", [("flags", ConstructorParameterDescription(self.flags)), ("channelId", ConstructorParameterDescription(self.channelId)), ("address", ConstructorParameterDescription(self.address)), ("domain", ConstructorParameterDescription(self.domain))])
-            }
-        }
-        public class Cons_walletTransactionPeerTelegramGift: TypeConstructorDescription {
-            public var flags: Int32
-
-            public init(flags: Int32) {
-                self.flags = flags
-            }
-
-            public func descriptionFields() -> (String, [(String, ConstructorParameterDescription)]) {
-                return ("walletTransactionPeerTelegramGift", [("flags", ConstructorParameterDescription(self.flags))])
-            }
-        }
         public class Cons_walletState: TypeConstructorDescription {
             public var flags: Int32
             public var address: String
@@ -1414,6 +1386,34 @@ public extension Api {
 
 public extension Api {
     enum WalletTransactionPeer: TypeConstructorDescription {
+        public class Cons_walletTransactionPeerChannel: TypeConstructorDescription {
+            public var flags: Int32
+            public var channelId: Int64
+            public var address: String
+            public var domain: String?
+
+            public init(flags: Int32, channelId: Int64, address: String, domain: String?) {
+                self.flags = flags
+                self.channelId = channelId
+                self.address = address
+                self.domain = domain
+            }
+
+            public func descriptionFields() -> (String, [(String, ConstructorParameterDescription)]) {
+                return ("walletTransactionPeerChannel", [("flags", ConstructorParameterDescription(self.flags)), ("channelId", ConstructorParameterDescription(self.channelId)), ("address", ConstructorParameterDescription(self.address)), ("domain", ConstructorParameterDescription(self.domain))])
+            }
+        }
+        public class Cons_walletTransactionPeerTelegramGift: TypeConstructorDescription {
+            public var flags: Int32
+
+            public init(flags: Int32) {
+                self.flags = flags
+            }
+
+            public func descriptionFields() -> (String, [(String, ConstructorParameterDescription)]) {
+                return ("walletTransactionPeerTelegramGift", [("flags", ConstructorParameterDescription(self.flags))])
+            }
+        }
         public class Cons_walletTransactionPeerAddress: TypeConstructorDescription {
             public var flags: Int32
             public var address: String
@@ -1458,7 +1458,9 @@ public extension Api {
             }
         }
         case walletTransactionPeerAddress(Cons_walletTransactionPeerAddress)
+        case walletTransactionPeerChannel(Cons_walletTransactionPeerChannel)
         case walletTransactionPeerOnramp(Cons_walletTransactionPeerOnramp)
+        case walletTransactionPeerTelegramGift(Cons_walletTransactionPeerTelegramGift)
         case walletTransactionPeerUnsupported
         case walletTransactionPeerUser(Cons_walletTransactionPeerUser)
 
@@ -1473,6 +1475,23 @@ public extension Api {
                 if Int(_data.flags) & Int(1 << 0) != 0 {
                     serializeString(_data.domain!, buffer: buffer, boxed: false)
                 }
+                break
+            case .walletTransactionPeerChannel(let _data):
+                if boxed {
+                    buffer.appendInt32(1416649777)
+                }
+                serializeInt32(_data.flags, buffer: buffer, boxed: false)
+                serializeInt64(_data.channelId, buffer: buffer, boxed: false)
+                serializeString(_data.address, buffer: buffer, boxed: false)
+                if Int(_data.flags) & Int(1 << 0) != 0 {
+                    serializeString(_data.domain!, buffer: buffer, boxed: false)
+                }
+                break
+            case .walletTransactionPeerTelegramGift(let _data):
+                if boxed {
+                    buffer.appendInt32(-193817447)
+                }
+                serializeInt32(_data.flags, buffer: buffer, boxed: false)
                 break
             case .walletTransactionPeerChannel(let _data):
                 if boxed {
@@ -1570,6 +1589,39 @@ public extension Api {
             let _c4 = _4 != nil
             if _c1 && _c2 && _c3 && _c4 {
                 return Api.WalletTransactionPeer.walletTransactionPeerOnramp(Cons_walletTransactionPeerOnramp(flags: _1!, address: _2!, domain: _3, providerName: _4!))
+            }
+            else {
+                return nil
+            }
+        }
+        public static func parse_walletTransactionPeerChannel(_ reader: BufferReader) -> WalletTransactionPeer? {
+            var _1: Int32?
+            _1 = reader.readInt32()
+            var _2: Int64?
+            _2 = reader.readInt64()
+            var _3: String?
+            _3 = parseString(reader)
+            var _4: String?
+            if Int(_1 ?? 0) & Int(1 << 0) != 0 {
+                _4 = parseString(reader)
+            }
+            let _c1 = _1 != nil
+            let _c2 = _2 != nil
+            let _c3 = _3 != nil
+            let _c4 = (Int(_1 ?? 0) & Int(1 << 0) == 0) || _4 != nil
+            if _c1 && _c2 && _c3 && _c4 {
+                return Api.WalletTransactionPeer.walletTransactionPeerChannel(Cons_walletTransactionPeerChannel(flags: _1!, channelId: _2!, address: _3!, domain: _4))
+            }
+            else {
+                return nil
+            }
+        }
+        public static func parse_walletTransactionPeerTelegramGift(_ reader: BufferReader) -> WalletTransactionPeer? {
+            var _1: Int32?
+            _1 = reader.readInt32()
+            let _c1 = _1 != nil
+            if _c1 {
+                return Api.WalletTransactionPeer.walletTransactionPeerTelegramGift(Cons_walletTransactionPeerTelegramGift(flags: _1!))
             }
             else {
                 return nil
