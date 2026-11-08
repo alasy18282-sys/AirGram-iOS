@@ -322,15 +322,15 @@ private extension WalletTransactionPeer {
         switch apiPeer {
         case let .walletTransactionPeerAddress(peer):
             self = .address(peer.address, domain: peer.domain)
-        case let .walletTransactionPeerChannel(peer):
+        case let .walletTransactionPeerChannel(apiPeer):
             let peerId = EnginePeer.Id(
                 namespace: Namespaces.Peer.CloudChannel,
-                id: PeerId.Id._internalFromInt64Value(peer.channelId)
+                id: PeerId.Id._internalFromInt64Value(apiPeer.channelId)
             )
-            if let peer = transaction.getPeer(peerId) {
-                self = .channel(EnginePeer(peer), address: peer.address, domain: peer.domain)
+            if let resolved = transaction.getPeer(peerId) {
+                self = .channel(EnginePeer(resolved), address: apiPeer.address, domain: apiPeer.domain)
             } else {
-                self = .address(peer.address, domain: peer.domain)
+                self = .address(apiPeer.address, domain: apiPeer.domain)
             }
         case let .walletTransactionPeerTelegramGift(peer):
             self = .telegramGift(ownProfile: (peer.flags & (1 << 0)) != 0)
