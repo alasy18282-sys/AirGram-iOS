@@ -1,0 +1,65 @@
++ echo '===== DIAGNOSE cquery ====='
+===== DIAGNOSE cquery =====
++ build-input/bazel-8.4.2-darwin-arm64 --output_user_root=/private/var/tmp/_bazel_containerhost cquery //Telegram:telegram_auth_build_test --output=build
++ tail -40
+Computing main repo mapping: 
+WARNING: For repository 'bazel_features', the root module requires module version bazel_features@1.33.0, but got bazel_features@1.51.0 in the resolved dependency graph. Please update the version in your MODULE.bazel or set --check_direct_dependencies=off
+WARNING: For repository 'bazel_skylib', the root module requires module version bazel_skylib@1.8.1, but got bazel_skylib@1.9.0 in the resolved dependency graph. Please update the version in your MODULE.bazel or set --check_direct_dependencies=off
+INFO: Worker pool configuration has changed, restarting worker pool...
+Loading: 
+Loading: 0 packages loaded
+WARNING: Build options --apple_generate_dsym, --compilation_mode, --define, and 4 more have changed, discarding analysis cache (this can be expensive, see https://bazel.build/advanced/performance/iteration-speed).
+Analyzing: target //Telegram:telegram_auth_build_test (0 packages loaded, 0 targets configured)
+Analyzing: target //Telegram:telegram_auth_build_test (64 packages loaded, 20 targets configured)
+Analyzing: target //Telegram:telegram_auth_build_test (64 packages loaded, 20 targets configured)
+Analyzing: target //Telegram:telegram_auth_build_test (64 packages loaded, 20 targets configured)
+Analyzing: target //Telegram:telegram_auth_build_test (64 packages loaded, 20 targets configured)
+Analyzing: target //Telegram:telegram_auth_build_test (64 packages loaded, 20 targets configured)
+WARNING: Download from https://github.com/bats-core/bats-core/archive/v1.10.0.tar.gz failed: class java.io.IOException GET returned 504 Gateway Time-out
+INFO: Repository bazel_lib++toolchains+bats_toolchains instantiated at:
+  <builtin>: in <toplevel>
+Repository rule http_archive defined at:
+  /private/var/tmp/_bazel_containerhost/c259e0c7803e089724afaeab1cf94801/external/bazel_tools/tools/build_defs/repo/http.bzl:431:31: in <toplevel>
+ERROR: /private/var/tmp/_bazel_containerhost/c259e0c7803e089724afaeab1cf94801/external/bazel_tools/tools/build_defs/repo/http.bzl:155:45: An error occurred during the fetch of repository 'bazel_lib++toolchains+bats_toolchains':
+   Traceback (most recent call last):
+	File "/private/var/tmp/_bazel_containerhost/c259e0c7803e089724afaeab1cf94801/external/bazel_tools/tools/build_defs/repo/http.bzl", line 155, column 45, in _http_archive_impl
+		download_info = ctx.download_and_extract(
+Error in download_and_extract: java.io.IOException: Error downloading [https://github.com/bats-core/bats-core/archive/v1.10.0.tar.gz] to /private/var/tmp/_bazel_containerhost/c259e0c7803e089724afaeab1cf94801/external/bazel_lib++toolchains+bats_toolchains/temp11530229971888835031/v1.10.0.tar.gz: GET returned 504 Gateway Time-out
+ERROR: Analysis of target '//Telegram:telegram_auth_build_test' failed; build aborted: java.io.IOException: Error downloading [https://github.com/bats-core/bats-core/archive/v1.10.0.tar.gz] to /private/var/tmp/_bazel_containerhost/c259e0c7803e089724afaeab1cf94801/external/bazel_lib++toolchains+bats_toolchains/temp11530229971888835031/v1.10.0.tar.gz: GET returned 504 Gateway Time-out
+INFO: Elapsed time: 14.097s
+INFO: 0 processes.
+ERROR: Build did NOT complete successfully
++ echo '===== DIAGNOSE ton_crates targets ====='
+===== DIAGNOSE ton_crates targets =====
++ build-input/bazel-8.4.2-darwin-arm64 --output_user_root=/private/var/tmp/_bazel_containerhost query @wallet_engine_ton_crates//:all --output=label
++ head -60
+Loading: 0 packages loaded
+ERROR: no such package '@@[unknown repo 'wallet_engine_ton_crates' requested from @@ (did you mean 'wallet_engine_crates'?)]//': The repository '@@[unknown repo 'wallet_engine_ton_crates' requested from @@ (did you mean 'wallet_engine_crates'?)]' could not be resolved: No repository visible as '@wallet_engine_ton_crates' from main repository. Was the repository introduced in WORKSPACE? The WORKSPACE file is disabled by default in Bazel 8 (late 2024) and will be removed in Bazel 9 (late 2025), please migrate to Bzlmod. See https://bazel.build/external/migration
++ echo '===== DIAGNOSE nobuild ====='
+===== DIAGNOSE nobuild =====
++ build-input/bazel-8.4.2-darwin-arm64 --output_user_root=/private/var/tmp/_bazel_containerhost build --nobuild //Telegram:telegram_auth_build_test '--toolchain_resolution_debug=.*'
++ tail -120
+Computing main repo mapping: 
+Loading: 
+Loading: 0 packages loaded
+WARNING: Build option --toolchain_resolution_debug has changed, discarding analysis cache (this can be expensive, see https://bazel.build/advanced/performance/iteration-speed).
+Analyzing: target //Telegram:telegram_auth_build_test (0 packages loaded, 0 targets configured)
+Analyzing: target //Telegram:telegram_auth_build_test (64 packages loaded, 20 targets configured)
+Analyzing: target //Telegram:telegram_auth_build_test (64 packages loaded, 20 targets configured)
+Analyzing: target //Telegram:telegram_auth_build_test (64 packages loaded, 20 targets configured)
+Analyzing: target //Telegram:telegram_auth_build_test (64 packages loaded, 20 targets configured)
+Analyzing: target //Telegram:telegram_auth_build_test (64 packages loaded, 20 targets configured)
+WARNING: Download from https://github.com/bats-core/bats-core/archive/v1.10.0.tar.gz failed: class java.io.IOException GET returned 504 Gateway Time-out
+INFO: Repository bazel_lib++toolchains+bats_toolchains instantiated at:
+  <builtin>: in <toplevel>
+Repository rule http_archive defined at:
+  /private/var/tmp/_bazel_containerhost/c259e0c7803e089724afaeab1cf94801/external/bazel_tools/tools/build_defs/repo/http.bzl:431:31: in <toplevel>
+ERROR: /private/var/tmp/_bazel_containerhost/c259e0c7803e089724afaeab1cf94801/external/bazel_tools/tools/build_defs/repo/http.bzl:155:45: An error occurred during the fetch of repository 'bazel_lib++toolchains+bats_toolchains':
+   Traceback (most recent call last):
+	File "/private/var/tmp/_bazel_containerhost/c259e0c7803e089724afaeab1cf94801/external/bazel_tools/tools/build_defs/repo/http.bzl", line 155, column 45, in _http_archive_impl
+		download_info = ctx.download_and_extract(
+Error in download_and_extract: java.io.IOException: Error downloading [https://github.com/bats-core/bats-core/archive/v1.10.0.tar.gz] to /private/var/tmp/_bazel_containerhost/c259e0c7803e089724afaeab1cf94801/external/bazel_lib++toolchains+bats_toolchains/temp2461638063137038182/v1.10.0.tar.gz: GET returned 504 Gateway Time-out
+ERROR: Analysis of target '//Telegram:telegram_auth_build_test' failed; build aborted: java.io.IOException: Error downloading [https://github.com/bats-core/bats-core/archive/v1.10.0.tar.gz] to /private/var/tmp/_bazel_containerhost/c259e0c7803e089724afaeab1cf94801/external/bazel_lib++toolchains+bats_toolchains/temp2461638063137038182/v1.10.0.tar.gz: GET returned 504 Gateway Time-out
+INFO: Elapsed time: 16.000s
+INFO: 0 processes.
+ERROR: Build did NOT complete successfully
