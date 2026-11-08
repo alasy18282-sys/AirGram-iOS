@@ -1,0 +1,344 @@
+ERROR: /Users/runner/work/AirGram-iOS/AirGram-iOS/submodules/TelegramUI/Components/NavigationBarComponent/BUILD:5:14: Generating derived files for Swift module //submodules/TelegramUI/Components/NavigationBarComponent:NavigationBarComponent failed: (Exit 1): worker failed: error executing SwiftDeriveFiles command (from target //submodules/TelegramUI/Components/NavigationBarComponent:NavigationBarComponent) 
+submodules/TelegramUI/Components/NavigationBarComponent/Sources/NavigationBarAnimationSupport.swift:307:11: error: cannot find type 'GlassContextExtractableContainer' in scope
+    |           `- error: cannot find type 'GlassContextExtractableContainer' in scope
+submodules/TelegramUI/Components/NavigationBarComponent/Sources/NavigationBarAnimationSupport.swift:322:11: error: cannot find type 'GlassBackgroundView' in scope
+    |           `- error: cannot find type 'GlassBackgroundView' in scope
+submodules/TelegramUI/Components/NavigationBarComponent/Sources/NavigationBarComponent.swift:146:49: error: type 'GlassBackgroundContainerView' has no member 'mergesShapes'
+     |                                                 `- error: type 'GlassBackgroundContainerView' has no member 'mergesShapes'
+submodules/TelegramUI/Components/NavigationBarComponent/Sources/NavigationBarComponent.swift:822:48: error: value of type 'GlassContextExtractableContainer' has no member 'morphsIntoContextMenu'
+     |                                                `- error: value of type 'GlassContextExtractableContainer' has no member 'morphsIntoContextMenu'
+submodules/TelegramUI/Components/NavigationBarComponent/Sources/NavigationBarComponent.swift:930:32: error: value of type 'GlassContextExtractableContainer' has no member 'morphsIntoContextMenu'
+     |                                `- error: value of type 'GlassContextExtractableContainer' has no member 'morphsIntoContextMenu'
+submodules/TelegramUI/Components/NavigationBarComponent/Sources/NavigationBarComponent.swift:964:28: error: value of type 'GlassContextExtractableContainer' has no member 'morphsIntoContextMenu'
+     |                            `- error: value of type 'GlassContextExtractableContainer' has no member 'morphsIntoContextMenu'
+submodules/TelegramUI/Components/NavigationBarComponent/Sources/NavigationBarComponent.swift:1130:44: error: value of type 'GlassContextExtractableContainer' has no member 'morphsIntoContextMenu'
+     |                                            `- error: value of type 'GlassContextExtractableContainer' has no member 'morphsIntoContextMenu'
+submodules/TelegramUI/Components/NavigationBarComponent/Sources/NavigationBarComponent.swift:1175:45: error: value of type 'GlassContextExtractableContainer' has no member 'morphsIntoContextMenu'
+     |                                             `- error: value of type 'GlassContextExtractableContainer' has no member 'morphsIntoContextMenu'
+submodules/TelegramUI/Components/NavigationBarComponent/Sources/NavigationBarComponentTransitionState.swift:94:57: error: cannot find type 'NavigationBarTransitionSource' in scope
+    |                                                         `- error: cannot find type 'NavigationBarTransitionSource' in scope
+submodules/TelegramUI/Components/NavigationBarComponent/Sources/NavigationBarContentView.swift:399:74: error: value of type 'NavigationBarStrings' has no member 'more'
+    |                                                                          `- error: value of type 'NavigationBarStrings' has no member 'more'
+submodules/TelegramUI/Components/NavigationBarComponent/Sources/NavigationBarGlassAnimation.swift:259:8: error: type 'NavigationBarGlassPulseCurve' does not conform to protocol 'Equatable'
+    |        |- error: type 'NavigationBarGlassPulseCurve' does not conform to protocol 'Equatable'
+submodules/TelegramUI/Components/NavigationBarComponent/Sources/NavigationBarInPlaceAnimation.swift:647:39: error: value of type 'GlassContextExtractableContainer' has no member 'lendGlass'
+    |                                       `- error: value of type 'GlassContextExtractableContainer' has no member 'lendGlass'
+submodules/TelegramUI/Components/NavigationBarComponent/Sources/NavigationBarInPlaceAnimation.swift:672:31: error: value of type 'GlassContextExtractableContainer' has no member 'reclaimGlass'
+    |                               `- error: value of type 'GlassContextExtractableContainer' has no member 'reclaimGlass'
+submodules/TelegramUI/Components/NavigationBarComponent/Sources/NavigationBarInPlaceAnimation.swift:734:59: error: value of type 'GlassContextExtractableContainer' has no member 'isGlassLent'
+    |                                                           `- error: value of type 'GlassContextExtractableContainer' has no member 'isGlassLent'
+submodules/TelegramUI/Components/NavigationBarComponent/Sources/NavigationBarPlatterTransitionView.swift:342:45: error: type 'GlassBackgroundContainerView' has no member 'mergesShapes'
+     |                                             `- error: type 'GlassBackgroundContainerView' has no member 'mergesShapes'
+submodules/TelegramUI/Components/NavigationBarComponent/Sources/NavigationBarPlatterTransitionView.swift:931:27: error: value of type 'GlassBackgroundContainerView' has no member 'animateSize'
+     |                           `- error: value of type 'GlassBackgroundContainerView' has no member 'animateSize'
+submodules/TelegramUI/Components/NavigationBarComponent/Sources/NavigationBarPlatterTransitionView.swift:943:23: error: value of type 'GlassBackgroundView' has no member 'animateShape'
+     |                       `- error: value of type 'GlassBackgroundView' has no member 'animateShape'
+submodules/TelegramUI/Components/NavigationBarComponent/Sources/NavigationBarPlatterTransitionView.swift:946:29: error: value of type 'GlassBackgroundContainerView' has no member 'animateSize'
+     |                             `- error: value of type 'GlassBackgroundContainerView' has no member 'animateSize'
+submodules/TelegramUI/Components/NavigationBarComponent/Sources/NavigationBarPlatterTransitionView.swift:949:25: error: value of type 'GlassBackgroundView' has no member 'animateShape'
+     |                         `- error: value of type 'GlassBackgroundView' has no member 'animateShape'
+ERROR: /Users/runner/work/AirGram-iOS/AirGram-iOS/submodules/TelegramUI/Components/Wallet/WalletPeerSelectionScreen/BUILD:3:14 Linking submodules/TelegramUI/Components/Wallet/WalletPeerSelectionScreen/libWalletPeerSelectionScreen.a failed: (Exit 1): worker failed: error executing SwiftDeriveFiles command (from target //submodules/TelegramUI/Components/NavigationBarComponent:NavigationBarComponent) 
+ERROR: Build did NOT complete successfully
+FAILED: 
+Traceback (most recent call last):
+--- end of full build log ---
+[6,584 / 8,613] Compiling third-party/webrtc/webrtc/pc/peer_connection_factory.cc; 2s local, disk-cache ... (3 actions running)
+[6,585 / 8,613] Compiling third-party/webrtc/webrtc/pc/peer_connection_factory.cc; 3s local, disk-cache ... (3 actions running)
+[6,587 / 8,613] Compiling third-party/webrtc/webrtc/pc/peer_connection_factory.cc; 4s local, disk-cache ... (3 actions running)
+[6,588 / 8,613] Compiling third-party/webrtc/webrtc/pc/peer_connection_factory.cc; 5s local, disk-cache ... (3 actions, 2 running)
+[6,589 / 8,613] Compiling third-party/webrtc/webrtc/pc/peer_connection_factory.cc; 6s local, disk-cache ... (3 actions, 2 running)
+[6,592 / 8,613] Compiling third-party/webrtc/webrtc/net/dcsctp/tx/stream_scheduler.cc; 1s local, disk-cache ... (3 actions, 2 running)
+[6,594 / 8,613] Compiling third-party/webrtc/webrtc/pc/peer_connection_message_handler.cc; 1s local, disk-cache ... (3 actions running)
+[6,596 / 8,613] Compiling third-party/webrtc/webrtc/pc/peer_connection_message_handler.cc; 2s local, disk-cache ... (3 actions running)
+[6,598 / 8,613] Generating derived files for Swift module //submodules/TelegramUI/Components/GlassBarButtonComponent:GlassBarButtonComponent; 1s disk-cache, worker ... (3 actions, 1 running)
+[6,598 / 8,613] Generating derived files for Swift module //submodules/TelegramUI/Components/GlassBarButtonComponent:GlassBarButtonComponent; 3s disk-cache, worker ... (3 actions running)
+[6,600 / 8,613] Compiling third-party/webrtc/webrtc/pc/remote_audio_source.cc; 2s local, disk-cache ... (3 actions, 2 running)
+[6,600 / 8,613] Compiling third-party/webrtc/webrtc/pc/remote_audio_source.cc; 3s local, disk-cache ... (3 actions running)
+[6,601 / 8,613] Generating derived files for Swift module //submodules/TelegramUI/Components/LiquidLens:LiquidLens; 3s disk-cache, worker ... (3 actions, 2 running)
+[6,603 / 8,613] Compiling third-party/webrtc/webrtc/pc/rtc_stats_collector.cc; 1s local, disk-cache ... (3 actions running)
+[6,606 / 8,613] Compiling third-party/webrtc/webrtc/pc/rtc_stats_collector.cc; 2s local, disk-cache ... (3 actions running)
+[6,607 / 8,613] Compiling third-party/webrtc/webrtc/pc/rtc_stats_collector.cc; 3s local, disk-cache ... (3 actions running)
+[6,608 / 8,613] Compiling third-party/webrtc/webrtc/pc/rtc_stats_collector.cc; 4s local, disk-cache ... (3 actions running)
+[6,611 / 8,613] Compiling third-party/webrtc/webrtc/pc/rtc_stats_collector.cc; 5s local, disk-cache ... (3 actions running)
+[6,613 / 8,613] Compiling third-party/webrtc/webrtc/pc/rtc_stats_collector.cc; 6s local, disk-cache ... (3 actions running)
+[6,615 / 8,613] Compiling Swift module //submodules/TelegramUI/Components/GlassBackgroundComponent:GlassBackgroundComponent; 1s disk-cache, worker ... (3 actions running)
+[6,617 / 8,613] Compiling Swift module //submodules/TelegramUI/Components/GlassBackgroundComponent:GlassBackgroundComponent; 2s disk-cache, worker ... (3 actions running)
+[6,620 / 8,613] Compiling third-party/webrtc/webrtc/net/dcsctp/rx/data_tracker.cc; 1s local, disk-cache ... (3 actions, 2 running)
+[6,624 / 8,613] Compiling third-party/webrtc/webrtc/net/dcsctp/packet/parameter/zero_checksum_acceptable_chunk_parameter.cc; 0s local, disk-cache ... (3 actions, 2 running)
+[6,625 / 8,613] Generating derived files for Swift module //submodules/TelegramUI/Components/LottieComponent:LottieComponent; 1s disk-cache, worker ... (3 actions running)
+[6,627 / 8,613] Compiling third-party/webrtc/webrtc/pc/rtp_parameters_conversion.cc; 2s local, disk-cache ... (3 actions running)
+[6,630 / 8,613] Compiling third-party/webrtc/webrtc/net/dcsctp/packet/parameter/ssn_tsn_reset_request_parameter.cc; 0s local, disk-cache ... (3 actions running)
+[6,631 / 8,613] Generating derived files for Swift module //submodules/TelegramUI/Components/NavigationBarComponent:NavigationBarComponent; 1s disk-cache, worker ... (3 actions running)
+ERROR: /Users/runner/work/AirGram-iOS/AirGram-iOS/submodules/TelegramUI/Components/NavigationBarComponent/BUILD:5:14: Generating derived files for Swift module //submodules/TelegramUI/Components/NavigationBarComponent:NavigationBarComponent failed: (Exit 1): worker failed: error executing SwiftDeriveFiles command (from target //submodules/TelegramUI/Components/NavigationBarComponent:NavigationBarComponent) 
+  (cd /private/var/tmp/_bazel_containerhost/c259e0c7803e089724afaeab1cf94801/execroot/_main && \
+  exec env - \
+    APPLE_SDK_PLATFORM=iPhoneOS \
+    APPLE_SDK_VERSION_OVERRIDE=26.4 \
+    PATH=/usr/bin:/bin:/usr/sbin:/sbin \
+    XCODE_VERSION_OVERRIDE=26.4.1.17E202 \
+    ZERO_AR_DATE=1 \
+  bazel-out/darwin_arm64-opt-exec-ST-d57f47055a04/bin/external/rules_swift+/tools/worker/worker swiftc @bazel-out/ios_arm64-opt-ios-arm64-min13.0-ST-2d46267cd7fb/bin/submodules/TelegramUI/Components/NavigationBarComponent/NavigationBarComponent.swiftmodule-0.params)
+# Configuration: 59ccbfea53ef2f0c93cec124292018c43534abb9ee80e34ab5149051fd349a58
+# Execution platform: @@platforms//host:host
+submodules/TelegramUI/Components/NavigationBarComponent/Sources/NavigationBarAnimationSupport.swift:307:11: error: cannot find type 'GlassContextExtractableContainer' in scope
+305 | /// Keeps a glass container's inner geometry on the bake's final sample: the layer's
+306 | /// position and bounds are keyframed separately, the glass follows the model.
+307 | extension GlassContextExtractableContainer {
+    |           `- error: cannot find type 'GlassContextExtractableContainer' in scope
+308 |     public func animateSize(width: CGFloat, height: CGFloat, timing: NavigationKeyframeTiming, isDark: Bool) {
+309 |         let state = self.normalState
+
+submodules/TelegramUI/Components/NavigationBarComponent/Sources/NavigationBarAnimationSupport.swift:322:11: error: cannot find type 'GlassBackgroundView' in scope
+320 | }
+321 | 
+322 | extension GlassBackgroundView {
+    |           `- error: cannot find type 'GlassBackgroundView' in scope
+323 |     public func animateShape(sizes: [CGSize], timing: NavigationKeyframeTiming, isDark: Bool,
+324 |                              tintColor: GlassBackgroundView.TintColor) {
+
+submodules/TelegramUI/Components/NavigationBarComponent/Sources/NavigationBarComponent.swift:146:49: error: type 'GlassBackgroundContainerView' has no member 'mergesShapes'
+ 144 |         /// Whether a glass container merges the shapes in it (native glass), read as each in-place merge starts.
+ 145 |         var glassMergesShapes: () -> Bool = {
+ 146 |             return GlassBackgroundContainerView.mergesShapes
+     |                                                 `- error: type 'GlassBackgroundContainerView' has no member 'mergesShapes'
+ 147 |         }
+ 148 |         /// The in-place animator's clock (animation seconds since the bar was made), for its matched morphs' curves.
+
+submodules/TelegramUI/Components/NavigationBarComponent/Sources/NavigationBarComponent.swift:822:48: error: value of type 'GlassContextExtractableContainer' has no member 'morphsIntoContextMenu'
+ 820 |                 }
+ 821 |                 // A menu from any of its buttons morphs the whole capsule, as UIKit's does with a section of several items.
+ 822 |                 leftButtonsBackgroundContainer.morphsIntoContextMenu = leftButtonCount != 0
+     |                                                `- error: value of type 'GlassContextExtractableContainer' has no member 'morphsIntoContextMenu'
+ 823 |             } else {
+ 824 |                 if let leftButtonsBackgroundContainer = self.leftButtonsBackgroundContainer {
+
+submodules/TelegramUI/Components/NavigationBarComponent/Sources/NavigationBarComponent.swift:930:32: error: value of type 'GlassContextExtractableContainer' has no member 'morphsIntoContextMenu'
+ 928 |                     let partnerMove = (from: partnerSlot.flatMap { $0 < previousRightPills.count ? previousRightPills[$0]?.frame : nil } ?? partnerFrame, to: rightPillTargets.first(where: { $0.slot == partnerSlot })?.frame ?? partnerFrame)
+ 929 |                     self.startInPlaceMatched(container: background, slot: .right(slot), isRemoval: false, frame: frame, source: returning.frame(at: self.inPlaceTime), partner: partner, partnerFrame: partnerFrame, partnerMove: partnerMove, partnerTintColor: partnerTint, tintColor: tintColor, isDark: isDark, leaving: nil)
+ 930 |                     background.morphsIntoContextMenu = buttonCount != 0
+     |                                `- error: value of type 'GlassContextExtractableContainer' has no member 'morphsIntoContextMenu'
+ 931 |                     continue
+ 932 |                 } else {
+
+submodules/TelegramUI/Components/NavigationBarComponent/Sources/NavigationBarComponent.swift:964:28: error: value of type 'GlassContextExtractableContainer' has no member 'morphsIntoContextMenu'
+ 962 |                 // A menu from any of its buttons morphs the whole pill, its other buttons with it, and closes back into it:
+ 963 |                 // UIKit's with a section of several items (measured on iOS 27, Saved Messages' [search, …]).
+ 964 |                 background.morphsIntoContextMenu = buttonCount != 0
+     |                            `- error: value of type 'GlassContextExtractableContainer' has no member 'morphsIntoContextMenu'
+ 965 |             }
+ 966 |             // Pills the row no longer has.
+
+submodules/TelegramUI/Components/NavigationBarComponent/Sources/NavigationBarComponent.swift:1130:44: error: value of type 'GlassContextExtractableContainer' has no member 'morphsIntoContextMenu'
+1128 |                 capsuleTransition.setFrame(view: capsuleBackgroundContainer, frame: capsuleFrame)
+1129 |                 capsuleBackgroundContainer.update(size: capsuleFrame.size, cornerRadius: capsuleFrame.width * 0.5, isDark: isDark, tintColor: genericTintColor, isInteractive: true, isVisible: !component.hidesSideColumnButtons, transition: transition)
+1130 |                 capsuleBackgroundContainer.morphsIntoContextMenu = self.effectiveContentView?.columnLayout?.cellFrames.count == 1
+     |                                            `- error: value of type 'GlassContextExtractableContainer' has no member 'morphsIntoContextMenu'
+1131 |                 capsuleTransition.setFrame(view: self.columnButtonsContainer, frame: CGRect(origin: CGPoint(), size: capsuleFrame.size))
+1132 |                 for (contentView, _) in contents {
+
+submodules/TelegramUI/Components/NavigationBarComponent/Sources/NavigationBarComponent.swift:1175:45: error: value of type 'GlassContextExtractableContainer' has no member 'morphsIntoContextMenu'
+1173 |                 trailingTransition.setFrame(view: trailingBackgroundContainer, frame: trailingFrame)
+1174 |                 trailingBackgroundContainer.update(size: trailingFrame.size, cornerRadius: trailingFrame.height * 0.5, isDark: isDark, tintColor: navigationBarGlassTintColor(trailingTint, theme: component.theme), isInteractive: true, isVisible: !component.hidesSideColumnButtons, transition: transition)
+1175 |                 trailingBackgroundContainer.morphsIntoContextMenu = true
+     |                                             `- error: value of type 'GlassContextExtractableContainer' has no member 'morphsIntoContextMenu'
+1176 |                 trailingTransition.setFrame(view: self.columnTrailingContainer, frame: CGRect(origin: CGPoint(), size: trailingFrame.size))
+1177 |                 for (contentView, _) in contents {
+
+submodules/TelegramUI/Components/NavigationBarComponent/Sources/NavigationBarComponentTransitionState.swift:94:57: error: cannot find type 'NavigationBarTransitionSource' in scope
+ 92 | 
+ 93 | /// A navigation transition source whose bar is a `NavigationBarComponent` (the regular bar, the chat-list header).
+ 94 | public protocol NavigationBarComponentTransitionSource: NavigationBarTransitionSource {
+    |                                                         `- error: cannot find type 'NavigationBarTransitionSource' in scope
+ 95 |     var componentTransitionState: NavigationBarComponentTransitionState? { get }
+ 96 |     /// True while the transition leaves this bar's backdrop to it (`keepsLoneBackdrop`): the bar shows it in its role,
+
+submodules/TelegramUI/Components/NavigationBarComponent/Sources/NavigationBarContentView.swift:399:74: error: value of type 'NavigationBarStrings' has no member 'more'
+397 |                     alphaTransition.animateAlpha(view: overflowButtonComponentView, from: 0.0, to: 1.0)
+398 |                 }
+399 |                 overflowButtonComponentView.accessibilityLabel = strings.more
+    |                                                                          `- error: value of type 'NavigationBarStrings' has no member 'more'
+400 |                 overflowButtonTransition.setFrame(view: overflowButtonComponentView, frame: CGRect(origin: CGPoint(x: cellFrame.minX + floor((cellFrame.width - overflowButtonSize.width) / 2.0), y: cellFrame.minY + floor((cellFrame.height - overflowButtonSize.height) / 2.0)), size: overflowButtonSize))
+401 |             }
+
+submodules/TelegramUI/Components/NavigationBarComponent/Sources/NavigationBarGlassAnimation.swift:259:8: error: type 'NavigationBarGlassPulseCurve' does not conform to protocol 'Equatable'
+257 | /// `NavigationBarGlassPulse` as curves on a group's clock: the new set rises at `startTime`, the old set's height falls
+258 | /// `pulseDownHeightDelay` later and its width `pulseDownWidthDelay` later.
+259 | struct NavigationBarGlassPulseCurve: Equatable {
+    |        |- error: type 'NavigationBarGlassPulseCurve' does not conform to protocol 'Equatable'
+    |        `- note: add stubs for conformance
+260 |     let m: CGSize
+261 |     let rising: NavigationSpringCurve
+    |         `- note: stored property type 'NavigationSpringCurve' does not conform to protocol 'Equatable', preventing synthesized conformance of 'NavigationBarGlassPulseCurve' to 'Equatable'
+262 |     let fallingHeight: NavigationSpringCurve
+    |         `- note: stored property type 'NavigationSpringCurve' does not conform to protocol 'Equatable', preventing synthesized conformance of 'NavigationBarGlassPulseCurve' to 'Equatable'
+263 |     let fallingWidth: NavigationSpringCurve
+    |         `- note: stored property type 'NavigationSpringCurve' does not conform to protocol 'Equatable', preventing synthesized conformance of 'NavigationBarGlassPulseCurve' to 'Equatable'
+264 |     /// The unit point of the shape that stays put (`ScalePulse.anchor`): the centre for a shape whose items change, the
+265 |     /// matched pair's `transitionAnchor` for a matched insertion or removal.
+
+Swift.==:1:24: note: candidate would match if 'NavigationBarGlassPulseCurve' conformed to 'RawRepresentable'
+1 | @inlinable public func == <T>(lhs: T, rhs: T) -> Bool where T : RawRepresentable, T.RawValue : Equatable
+  |                        `- note: candidate would match if 'NavigationBarGlassPulseCurve' conformed to 'RawRepresentable'
+
+Swift.FloatingPoint.==:2:20: note: candidate would match if 'NavigationBarGlassPulseCurve' conformed to 'FloatingPoint'
+1 | protocol FloatingPoint {
+2 | public static func == (lhs: Self, rhs: Self) -> Bool}
+  |                    `- note: candidate would match if 'NavigationBarGlassPulseCurve' conformed to 'FloatingPoint'
+3 | 
+
+Swift.BinaryInteger.==:2:20: note: candidate would match if 'NavigationBarGlassPulseCurve' conformed to 'BinaryInteger'
+1 | protocol BinaryInteger {
+2 | public static func == <Other>(lhs: Self, rhs: Other) -> Bool where Other : BinaryInteger}
+  |                    `- note: candidate would match if 'NavigationBarGlassPulseCurve' conformed to 'BinaryInteger'
+3 | 
+
+Swift._Pointer.==:2:20: note: candidate would match if 'NavigationBarGlassPulseCurve' conformed to '_Pointer'
+1 | protocol _Pointer {
+2 | public static func == (lhs: Self, rhs: Self) -> Bool}
+  |                    `- note: candidate would match if 'NavigationBarGlassPulseCurve' conformed to '_Pointer'
+3 | 
+
+Swift._Pointer.==:2:31: note: candidate would match if 'NavigationBarGlassPulseCurve' conformed to '_Pointer'
+1 | protocol _Pointer {
+2 | @inlinable public static func == <Other>(lhs: Self, rhs: Other) -> Bool where Other : _Pointer}
+  |                               `- note: candidate would match if 'NavigationBarGlassPulseCurve' conformed to '_Pointer'
+3 | 
+
+Swift.Strideable.==:2:31: note: candidate would match if 'NavigationBarGlassPulseCurve' conformed to 'Strideable'
+1 | protocol Strideable {
+2 | @inlinable public static func == (x: Self, y: Self) -> Bool}
+  |                               `- note: candidate would match if 'NavigationBarGlassPulseCurve' conformed to 'Strideable'
+3 | 
+
+Swift.StringProtocol.==:2:31: note: candidate would match if 'NavigationBarGlassPulseCurve' conformed to 'StringProtocol'
+1 | protocol StringProtocol {
+2 | @inlinable public static func == <RHS>(lhs: Self, rhs: RHS) -> Bool where RHS : StringProtocol}
+  |                               `- note: candidate would match if 'NavigationBarGlassPulseCurve' conformed to 'StringProtocol'
+3 | 
+
+Swift.SIMD.==:2:20: note: candidate would match if 'NavigationBarGlassPulseCurve' conformed to 'SIMD'
+1 | protocol SIMD {
+2 | public static func == (a: Self, b: Self) -> Bool}
+  |                    `- note: candidate would match if 'NavigationBarGlassPulseCurve' conformed to 'SIMD'
+3 | 
+
+Foundation.AttributedStringProtocol.==:2:20: note: candidate would match if 'NavigationBarGlassPulseCurve' conformed to 'AttributedStringProtocol'
+1 | protocol AttributedStringProtocol {
+2 | public static func == <RHS>(lhs: Self, rhs: RHS) -> Bool where RHS : AttributedStringProtocol}
+  |                    `- note: candidate would match if 'NavigationBarGlassPulseCurve' conformed to 'AttributedStringProtocol'
+3 | 
+
+Foundation._BridgedStoredNSError.==:2:20: note: candidate would match if 'NavigationBarGlassPulseCurve' conformed to '_BridgedStoredNSError'
+1 | protocol _BridgedStoredNSError {
+2 | public static func == (lhs: Self, rhs: Self) -> Bool}
+  |                    `- note: candidate would match if 'NavigationBarGlassPulseCurve' conformed to '_BridgedStoredNSError'
+3 | 
+
+CoreFoundation._CFObject.==:2:20: note: candidate would match if 'NavigationBarGlassPulseCurve' conformed to '_CFObject'
+1 | protocol _CFObject {
+2 | public static func == (left: Self, right: Self) -> Bool}
+  |                    `- note: candidate would match if 'NavigationBarGlassPulseCurve' conformed to '_CFObject'
+3 | 
+
+Swift.Equatable.==:2:13: note: protocol requires function '==' with type '(NavigationBarGlassPulseCurve, NavigationBarGlassPulseCurve) -> Bool'
+1 | protocol Equatable {
+2 | static func == (lhs: Self, rhs: Self) -> Bool}
+  |             `- note: protocol requires function '==' with type '(NavigationBarGlassPulseCurve, NavigationBarGlassPulseCurve) -> Bool'
+3 | 
+
+submodules/TelegramUI/Components/NavigationBarComponent/Sources/NavigationBarInPlaceAnimation.swift:647:39: error: value of type 'GlassContextExtractableContainer' has no member 'lendGlass'
+645 |         mergeContainer.frame = self.bounds
+646 |         mergeContainer.update(size: self.bounds.size, isDark: capsule.isDark, transition: .immediate)
+647 |         let glass = capsule.container.lendGlass()
+    |                                       `- error: value of type 'GlassContextExtractableContainer' has no member 'lendGlass'
+648 |         mergeContainer.contentView.addSubview(glass)
+649 |         capsule.lentGlass = glass
+
+submodules/TelegramUI/Components/NavigationBarComponent/Sources/NavigationBarInPlaceAnimation.swift:672:31: error: value of type 'GlassContextExtractableContainer' has no member 'reclaimGlass'
+670 |         if capsule.lentGlass != nil {
+671 |             capsule.lentGlass = nil
+672 |             capsule.container.reclaimGlass()
+    |                               `- error: value of type 'GlassContextExtractableContainer' has no member 'reclaimGlass'
+673 |         }
+674 |         if let mergeContainer = self.inPlaceMergeContainer, !self.inPlaceCapsules.contains(where: { $0.lentGlass != nil }) {
+
+submodules/TelegramUI/Components/NavigationBarComponent/Sources/NavigationBarInPlaceAnimation.swift:734:59: error: value of type 'GlassContextExtractableContainer' has no member 'isGlassLent'
+732 | 
+733 |     private func applyInPlace(_ capsule: NavigationBarInPlaceCapsule) {
+734 |         if capsule.lentGlass != nil && !capsule.container.isGlassLent {
+    |                                                           `- error: value of type 'GlassContextExtractableContainer' has no member 'isGlassLent'
+735 |             // The container took its glass back itself (a context menu extracting it): the loan is over.
+736 |             self.reclaimInPlaceGlass(capsule)
+
+submodules/TelegramUI/Components/NavigationBarComponent/Sources/NavigationBarPlatterTransitionView.swift:342:45: error: type 'GlassBackgroundContainerView' has no member 'mergesShapes'
+ 340 |     /// Whether a glass container merges the shapes in it (native glass), read as glass is hosted.
+ 341 |     var glassMergesShapes: () -> Bool = {
+ 342 |         return GlassBackgroundContainerView.mergesShapes
+     |                                             `- error: type 'GlassBackgroundContainerView' has no member 'mergesShapes'
+ 343 |     }
+ 344 |     /// Reduce Motion, read as each animation starts.
+
+submodules/TelegramUI/Components/NavigationBarComponent/Sources/NavigationBarPlatterTransitionView.swift:931:27: error: value of type 'GlassBackgroundContainerView' has no member 'animateSize'
+ 929 |         self.addBlurKeyframes(to: platter.itemsHost.layer, radii: dematerializations.map { platter.blurRadius * $0 }, timing: timing)
+ 930 | 
+ 931 |         platter.container.animateSize(width: platter.width, height: platter.height, timing: timing, isDark: platter.isDark)
+     |                           `- error: value of type 'GlassBackgroundContainerView' has no member 'animateSize'
+ 932 |         // Merged glass draws its scaled frame as its own geometry in this view's space (a transform would scale the
+ 933 |         // other platter's shape with it); its own container's transform scales the rest.
+
+submodules/TelegramUI/Components/NavigationBarComponent/Sources/NavigationBarPlatterTransitionView.swift:943:23: error: value of type 'GlassBackgroundView' has no member 'animateShape'
+ 941 |             add(platter.glass.layer, "bounds", bounds)
+ 942 |         }
+ 943 |         platter.glass.animateShape(sizes: glassFrames.map { CGSize(width: max(0.0, $0.width), height: max(0.0, $0.height)) }, timing: timing, isDark: platter.isDark, tintColor: platter.tint)
+     |                       `- error: value of type 'GlassBackgroundView' has no member 'animateShape'
+ 944 |         if let fadingContainer = platter.fadingContainer, let fadingGlass = platter.fadingGlass, let fadingTint = platter.fadingTint {
+ 945 |             add(fadingContainer.layer, "opacity", zip(times, dematerializations).map { NSNumber(value: Float(max(0.0, min(1.0, platter.tintFade.value(at: $0.0))) * (1.0 - $0.1))) })
+
+submodules/TelegramUI/Components/NavigationBarComponent/Sources/NavigationBarPlatterTransitionView.swift:946:29: error: value of type 'GlassBackgroundContainerView' has no member 'animateSize'
+ 944 |         if let fadingContainer = platter.fadingContainer, let fadingGlass = platter.fadingGlass, let fadingTint = platter.fadingTint {
+ 945 |             add(fadingContainer.layer, "opacity", zip(times, dematerializations).map { NSNumber(value: Float(max(0.0, min(1.0, platter.tintFade.value(at: $0.0))) * (1.0 - $0.1))) })
+ 946 |             fadingContainer.animateSize(width: platter.width, height: platter.height, timing: timing, isDark: platter.isDark)
+     |                             `- error: value of type 'GlassBackgroundContainerView' has no member 'animateSize'
+ 947 |             add(fadingGlass.layer, "position", glassCenters)
+ 948 |             add(fadingGlass.layer, "bounds", bounds)
+
+submodules/TelegramUI/Components/NavigationBarComponent/Sources/NavigationBarPlatterTransitionView.swift:949:25: error: value of type 'GlassBackgroundView' has no member 'animateShape'
+ 947 |             add(fadingGlass.layer, "position", glassCenters)
+ 948 |             add(fadingGlass.layer, "bounds", bounds)
+ 949 |             fadingGlass.animateShape(width: platter.width, height: platter.height, timing: timing, isDark: platter.isDark, tintColor: fadingTint)
+     |                         `- error: value of type 'GlassBackgroundView' has no member 'animateShape'
+ 950 |         }
+ 951 |         if let glowView = platter.glowView {
+Target //Telegram:telegram_auth_build_test failed to build
+ERROR: /Users/runner/work/AirGram-iOS/AirGram-iOS/submodules/TelegramUI/Components/Wallet/WalletPeerSelectionScreen/BUILD:3:14 Linking submodules/TelegramUI/Components/Wallet/WalletPeerSelectionScreen/libWalletPeerSelectionScreen.a failed: (Exit 1): worker failed: error executing SwiftDeriveFiles command (from target //submodules/TelegramUI/Components/NavigationBarComponent:NavigationBarComponent) 
+  (cd /private/var/tmp/_bazel_containerhost/c259e0c7803e089724afaeab1cf94801/execroot/_main && \
+  exec env - \
+    APPLE_SDK_PLATFORM=iPhoneOS \
+    APPLE_SDK_VERSION_OVERRIDE=26.4 \
+    PATH=/usr/bin:/bin:/usr/sbin:/sbin \
+    XCODE_VERSION_OVERRIDE=26.4.1.17E202 \
+    ZERO_AR_DATE=1 \
+  bazel-out/darwin_arm64-opt-exec-ST-d57f47055a04/bin/external/rules_swift+/tools/worker/worker swiftc @bazel-out/ios_arm64-opt-ios-arm64-min13.0-ST-2d46267cd7fb/bin/submodules/TelegramUI/Components/NavigationBarComponent/NavigationBarComponent.swiftmodule-0.params)
+# Configuration: 59ccbfea53ef2f0c93cec124292018c43534abb9ee80e34ab5149051fd349a58
+# Execution platform: @@platforms//host:host
+INFO: Elapsed time: 2917.693s, Critical Path: 533.49s
+INFO: 6635 processes: 2120 internal, 4273 local, 242 worker.
+ERROR: Build did NOT complete successfully
+FAILED: 
+INFO: Build Event Protocol files produced successfully.
+Traceback (most recent call last):
+  File "/Users/runner/work/AirGram-iOS/AirGram-iOS/build-system/Make/Make.py", line 1294, in <module>
+    build(bazel=bazel_path, arguments=args)
+    ~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/runner/work/AirGram-iOS/AirGram-iOS/build-system/Make/Make.py", line 650, in build
+    bazel_command_line.invoke_build()
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "/Users/runner/work/AirGram-iOS/AirGram-iOS/build-system/Make/Make.py", line 325, in invoke_build
+    call_executable(combined_arguments)
+    ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^
+  File "/Users/runner/work/AirGram-iOS/AirGram-iOS/build-system/Make/BuildEnvironment.py", line 104, in call_executable
+    subprocess.check_call(resolved_arguments, env=resolved_env)
+    ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/homebrew/Cellar/python@3.15/3.15.2/Frameworks/Python.framework/Versions/3.15/lib/python3.15/subprocess.py", line 534, in check_call
+    raise CalledProcessError(retcode, cmd)
+subprocess.CalledProcessError: Command ['/Users/runner/work/AirGram-iOS/AirGram-iOS/build-input/bazel-8.4.2-darwin-arm64', '--output_user_root=/private/var/tmp/_bazel_containerhost', 'build', 'Telegram/telegram_auth_build_test', '--announce_rc', '--features=swift.use_global_module_cache', '--verbose_failures', '--remote_cache_async', '--jobs=3', '--local_cpu_resources=3', '--worker_max_instances=3', '--spawn_strategy=worker,local', '--strategy=SwiftCompile=worker,local', '--strategy=ObjcCompile=worker,local', '--strategy=Genrule=standalone', '--worker_quit_after_build=false', '--define=buildNumber=2837', '--features=swift.split_derived_files_generation', '--disk_cache=/private/var/tmp/_bazel_containerhost/disk_cache', '-c', 'opt', '--ios_multi_cpus=arm64', '--watchos_cpus=arm64_32', '--apple_generate_dsym', '--features=swift.opt_uses_wmo', '--features=swift.opt_uses_osize', '--features=dead_strip', '--objc_enable_binary_stripping', '--build_event_json_file=/var/folders/h5/t85nd63d71x27_8gl5gw3l_w0000gn/T/airgram-build-events.json'] returned non-zero exit status 1.
