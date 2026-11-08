@@ -1,0 +1,15 @@
++ echo '===== DIAGNOSE cquery ====='
+===== DIAGNOSE cquery =====
++ build-input/bazel-8.4.2-darwin-arm64 --output_user_root=/private/var/tmp/_bazel_containerhost cquery //Telegram:telegram_auth_build_test --output=build
++ tail -40
+/Users/runner/work/_temp/bb249e5d-ad22-47e8-9fa7-bde84f12ae75.sh: line 6: build-input/bazel-8.4.2-darwin-arm64: No such file or directory
++ echo '===== DIAGNOSE ton_crates targets ====='
+===== DIAGNOSE ton_crates targets =====
++ build-input/bazel-8.4.2-darwin-arm64 --output_user_root=/private/var/tmp/_bazel_containerhost query @wallet_engine_ton_crates//:all --output=label
++ head -60
+/Users/runner/work/_temp/bb249e5d-ad22-47e8-9fa7-bde84f12ae75.sh: line 9: build-input/bazel-8.4.2-darwin-arm64: No such file or directory
++ echo '===== DIAGNOSE nobuild ====='
+===== DIAGNOSE nobuild =====
++ build-input/bazel-8.4.2-darwin-arm64 --output_user_root=/private/var/tmp/_bazel_containerhost build --nobuild //Telegram:telegram_auth_build_test '--toolchain_resolution_debug=.*'
++ tail -120
+/Users/runner/work/_temp/bb249e5d-ad22-47e8-9fa7-bde84f12ae75.sh: line 12: build-input/bazel-8.4.2-darwin-arm64: No such file or directory
