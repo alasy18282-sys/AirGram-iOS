@@ -75,6 +75,7 @@ static void generate_public_key(unsigned char key[32], id<EncryptionProvider> pr
     while (1) {
         int randomResult = SecRandomCopyBytes(kSecRandomDefault, 32, key);
         assert(randomResult == errSecSuccess);
+        (void)randomResult;
         
         key[31] &= 127;
         [context assignBinTo:x value:[NSData dataWithBytesNoCopy:key length:32 freeWhenDone:false]];
