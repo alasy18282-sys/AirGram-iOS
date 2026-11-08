@@ -376,6 +376,7 @@ API_AVAILABLE(ios(10))
             [currentData getBytes:randomData.mutableBytes length:32];
         }
         assert(result == 0);
+        (void)result; // assert is compiled out in release builds.
         resultData = randomData;
         [resultData writeToFile:filePath atomically:false];
     }
