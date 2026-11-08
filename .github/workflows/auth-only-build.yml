@@ -8,7 +8,7 @@ permissions:
 
 jobs:
   auth-only-build:
-    runs-on: macos-27
+    runs-on: xcode-27
     timeout-minutes: 120
 
     steps:

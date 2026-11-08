@@ -5,7 +5,7 @@ on:
 
 jobs:
   quick-build:
-    runs-on: macos-27
+    runs-on: xcode-27
     timeout-minutes: 40
 
     steps:
