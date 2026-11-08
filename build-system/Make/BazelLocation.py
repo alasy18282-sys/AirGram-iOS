@@ -109,8 +109,9 @@ def locate_bazel(base_path, cache_host_or_path, cache_dir):
             'curl',
             '-L',
             '--fail',
-            '--retry', '5',
-            '--retry-delay', '3',
+            '--retry', '10',
+            '--retry-delay', '10',
+            '--retry-max-time', '300',
             '--retry-all-errors',
             'https://releases.bazel.build/{version}/release/{name}'.format(
                 version=versions.bazel_version,
