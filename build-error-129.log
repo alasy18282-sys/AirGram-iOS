@@ -1,0 +1,390 @@
+ERROR: /Users/runner/work/AirGram-iOS/AirGram-iOS/submodules/WalletContext/BUILD:5:14: Generating derived files for Swift module //submodules/WalletContext:WalletContext failed: (Exit 1): worker failed: error executing SwiftDeriveFiles command (from target //submodules/WalletContext:WalletContext) 
+submodules/WalletContext/Sources/WalletContextImpl.swift:78:31: error: cannot find type 'WalletCardUpdateError' in scope
+     |                               `- error: cannot find type 'WalletCardUpdateError' in scope
+submodules/WalletContext/Sources/WalletCardStickers.swift:64:16: error: the compiler is unable to type-check this expression in reasonable time; try breaking up the expression into distinct sub-expressions
+    |                `- error: the compiler is unable to type-check this expression in reasonable time; try breaking up the expression into distinct sub-expressions
+submodules/WalletContext/Sources/WalletCardStickers.swift:79:34: error: value of type 'StarGift' has no member 'attributes'
+    |                                  `- error: value of type 'StarGift' has no member 'attributes'
+submodules/WalletContext/Sources/WalletCardStickers.swift:82:31: error: cannot find 'EnginePostboxEncoder' in scope
+    |                               `- error: cannot find 'EnginePostboxEncoder' in scope
+submodules/WalletContext/Sources/WalletCardStickers.swift:84:31: error: cannot find 'EnginePostboxEncoder' in scope
+    |                               `- error: cannot find 'EnginePostboxEncoder' in scope
+submodules/WalletContext/Sources/WalletCardStickers.swift:89:32: error: '_' can only appear in a pattern or on the left side of an assignment
+    |                                `- error: '_' can only appear in a pattern or on the left side of an assignment
+submodules/WalletContext/Sources/WalletCardStickers.swift:89:32: error: '_' can only appear in a pattern or on the left side of an assignment
+    |                                `- error: '_' can only appear in a pattern or on the left side of an assignment
+submodules/WalletContext/Sources/WalletCardStickers.swift:89:32: error: '_' can only appear in a pattern or on the left side of an assignment
+    |                                `- error: '_' can only appear in a pattern or on the left side of an assignment
+submodules/WalletContext/Sources/WalletCardStickers.swift:89:32: error: '_' can only appear in a pattern or on the left side of an assignment
+    |                                `- error: '_' can only appear in a pattern or on the left side of an assignment
+submodules/WalletContext/Sources/WalletCardStickers.swift:89:32: error: '_' can only appear in a pattern or on the left side of an assignment
+    |                                `- error: '_' can only appear in a pattern or on the left side of an assignment
+submodules/WalletContext/Sources/WalletCardStickers.swift:89:76: error: value of type 'StarGift' has no member 'attributes'
+    |                                                                            `- error: value of type 'StarGift' has no member 'attributes'
+submodules/WalletContext/Sources/WalletCardStickers.swift:89:87: error: for-in loop requires '[Any]?' to conform to 'Sequence'; did you mean to unwrap optional?
+    |                                                                                       `- error: for-in loop requires '[Any]?' to conform to 'Sequence'; did you mean to unwrap optional?
+submodules/WalletContext/Sources/WalletCardStickers.swift:95:94: error: cannot convert value of type 'CGFloat?' to expected argument type 'Double?'
+    |                                                                                              |- error: cannot convert value of type 'CGFloat?' to expected argument type 'Double?'
+submodules/WalletContext/Sources/WalletCardStickers.swift:120:113: error: cannot find 'WalletCardUpdateError' in scope
+    |                                                                                                                 `- error: cannot find 'WalletCardUpdateError' in scope
+submodules/WalletContext/Sources/WalletCardStickers.swift:120:63: error: generic parameter 'SignalError' could not be inferred
+    |                                                               `- error: generic parameter 'SignalError' could not be inferred
+submodules/WalletContext/Sources/WalletCardStickers.swift:185:171: error: cannot convert value of type '(Signal<WalletCard, NoError>) -> Signal<WalletCard, WalletContextImpl.WalletError>' (aka '(Signal<WalletCard, NoError>) -> Signal<WalletCard, WalletContext.WalletError>') to expected argument type '(Signal<WalletCard, WalletCardError>) -> Signal<WalletCard, WalletContextImpl.WalletError>' (aka '(Signal<WalletCard, WalletCardError>) -> Signal<WalletCard, WalletContext.WalletError>')
+    |                                                                                                                                                                           |- error: cannot convert value of type '(Signal<WalletCard, NoError>) -> Signal<WalletCard, WalletContextImpl.WalletError>' (aka '(Signal<WalletCard, NoError>) -> Signal<WalletCard, WalletContext.WalletError>') to expected argument type '(Signal<WalletCard, WalletCardError>) -> Signal<WalletCard, WalletContextImpl.WalletError>' (aka '(Signal<WalletCard, WalletCardError>) -> Signal<WalletCard, WalletContext.WalletError>')
+submodules/WalletContext/Sources/WalletCardStickers.swift:202:52: error: cannot find type 'WalletCardUpdateError' in scope
+    |                                                    `- error: cannot find type 'WalletCardUpdateError' in scope
+submodules/WalletContext/Sources/WalletCollectibles.swift:79:31: error: value of type 'StarGift' has no member 'attributes'
+    |                               `- error: value of type 'StarGift' has no member 'attributes'
+submodules/WalletContext/Sources/WalletCollectibles.swift:107:29: error: value of type 'StarGift' has no member 'slug'
+    |                             `- error: value of type 'StarGift' has no member 'slug'
+submodules/WalletContext/Sources/WalletModels.swift:1064:35: error: cannot find type 'WalletCardUpdateError' in scope
+     |                                   `- error: cannot find type 'WalletCardUpdateError' in scope
+submodules/WalletContext/Sources/WalletContext.swift:229:21: error: cannot infer contextual base in reference to member 'restoring'
+    |                     `- error: cannot infer contextual base in reference to member 'restoring'
+231 |             transactions: TransactionsState(items: [], offset: 0, canLoadMore: false, isLoadingMore: false, error: nil),
+submodules/WalletContext/Sources/WalletContext.swift:230:23: error: cannot infer contextual base in reference to member 'idle'
+    |                       `- error: cannot infer contextual base in reference to member 'idle'
+231 |             transactions: TransactionsState(items: [], offset: 0, canLoadMore: false, isLoadingMore: false, error: nil),
+submodules/WalletContext/Sources/WalletContext.swift:233:30: error: 'nil' requires a contextual type
+231 |             transactions: TransactionsState(items: [], offset: 0, canLoadMore: false, isLoadingMore: false, error: nil),
+    |                              `- error: 'nil' requires a contextual type
+submodules/WalletContext/Sources/WalletContextImpl.swift:419:21: error: cannot infer contextual base in reference to member 'restoring'
+     |                     `- error: cannot infer contextual base in reference to member 'restoring'
+submodules/WalletContext/Sources/WalletContextImpl.swift:421:111: error: cannot infer contextual base in reference to member 'idle'
+     |                                                                                                               `- error: cannot infer contextual base in reference to member 'idle'
+submodules/WalletContext/Sources/WalletContextImpl.swift:436:30: error: 'nil' requires a contextual type
+     |                              `- error: 'nil' requires a contextual type
+submodules/WalletContext/Sources/WalletContextImpl.swift:1253:148: error: cannot infer contextual base in reference to member 'completed'
+     |                                                                                                                                                    `- error: cannot infer contextual base in reference to member 'completed'
+submodules/WalletContext/Sources/WalletFiatRates.swift:7:21: error: cannot find type 'CurrencyRate' in scope
+    |                     `- error: cannot find type 'CurrencyRate' in scope
+submodules/WalletContext/Sources/WalletFiatRates.swift:67:46: error: value of type 'TelegramEngine.Payments' has no member 'currencyRates'
+    |                                              `- error: value of type 'TelegramEngine.Payments' has no member 'currencyRates'
+submodules/WalletContext/Sources/WalletFiatRates.swift:70:30: error: cannot infer type of closure parameter 'currencyRates' without a type annotation
+    |                              `- error: cannot infer type of closure parameter 'currencyRates' without a type annotation
+submodules/WalletContext/Sources/WalletModels.swift:500:24: error: stored property 'nft' of 'Sendable'-conforming struct 'CollectibleTransfer' contains non-Sendable type 'WalletNftItem'; this is an error in the Swift 6 language mode
+     |                        `- error: stored property 'nft' of 'Sendable'-conforming struct 'CollectibleTransfer' contains non-Sendable type 'WalletNftItem'; this is an error in the Swift 6 language mode
+submodules/WalletContext/Sources/WalletModels.swift:2:1: error: add '@preconcurrency' to suppress 'Sendable'-related warnings from module 'TelegramCore'
+     | `- error: add '@preconcurrency' to suppress 'Sendable'-related warnings from module 'TelegramCore'
+submodules/WalletContext/Sources/WalletModels.swift:643:20: error: stored property 'nft' of 'Sendable'-conforming struct 'Collectible' contains non-Sendable type 'WalletNftItem'; this is an error in the Swift 6 language mode
+     |                    `- error: stored property 'nft' of 'Sendable'-conforming struct 'Collectible' contains non-Sendable type 'WalletNftItem'; this is an error in the Swift 6 language mode
+submodules/WalletContext/Sources/WalletModels.swift:1048:42: error: cannot find type 'WalletCardUpdateError' in scope
+     |                                          `- error: cannot find type 'WalletCardUpdateError' in scope
+submodules/WalletContext/Sources/WalletModels.swift:1035:12: error: type 'WalletContext.State' does not conform to protocol 'Equatable'
+     |            |- error: type 'WalletContext.State' does not conform to protocol 'Equatable'
+submodules/WalletContext/Sources/WalletStoredState.swift:239:20: error: type 'WalletStoredState.Payload' does not conform to protocol 'Decodable'
+    |                    `- error: type 'WalletStoredState.Payload' does not conform to protocol 'Decodable'
+submodules/WalletContext/Sources/WalletStoredState.swift:239:20: error: type 'WalletStoredState.Payload' does not conform to protocol 'Encodable'
+    |                    `- error: type 'WalletStoredState.Payload' does not conform to protocol 'Encodable'
+submodules/WalletContext/Sources/WalletStoredState.swift:275:9: error: stored property 'serverCardsByWallet' of 'Sendable'-conforming struct 'WalletStoredState' contains non-Sendable type 'WalletCard'; this is an error in the Swift 6 language mode
+    |         `- error: stored property 'serverCardsByWallet' of 'Sendable'-conforming struct 'WalletStoredState' contains non-Sendable type 'WalletCard'; this is an error in the Swift 6 language mode
+submodules/WalletContext/Sources/WalletStoredState.swift:3:1: error: add '@preconcurrency' to suppress 'Sendable'-related warnings from module 'TelegramCore'
+    | `- error: add '@preconcurrency' to suppress 'Sendable'-related warnings from module 'TelegramCore'
+submodules/WalletContext/Sources/WalletStoredState.swift:239:20: error: type 'WalletStoredState.Payload' does not conform to protocol 'Decodable'
+    |                    `- error: type 'WalletStoredState.Payload' does not conform to protocol 'Decodable'
+submodules/WalletContext/Sources/WalletStreaming.swift:1802:20: error: cannot convert value of type '(Signal<[WalletTransactionPeer], NoError>) -> Signal<[WalletTransactionPeer], WalletContextImpl.WalletError>' (aka '(Signal<Array<WalletTransactionPeer>, NoError>) -> Signal<Array<WalletTransactionPeer>, WalletContext.WalletError>') to expected argument type '(Signal<[WalletTransactionPeer], WalletCardError>) -> Signal<[WalletTransactionPeer], WalletContextImpl.WalletError>' (aka '(Signal<Array<WalletTransactionPeer>, WalletCardError>) -> Signal<Array<WalletTransactionPeer>, WalletContext.WalletError>')
+     |                    |- error: cannot convert value of type '(Signal<[WalletTransactionPeer], NoError>) -> Signal<[WalletTransactionPeer], WalletContextImpl.WalletError>' (aka '(Signal<Array<WalletTransactionPeer>, NoError>) -> Signal<Array<WalletTransactionPeer>, WalletContext.WalletError>') to expected argument type '(Signal<[WalletTransactionPeer], WalletCardError>) -> Signal<[WalletTransactionPeer], WalletContextImpl.WalletError>' (aka '(Signal<Array<WalletTransactionPeer>, WalletCardError>) -> Signal<Array<WalletTransactionPeer>, WalletContext.WalletError>')
+ERROR: Build did NOT complete successfully
+FAILED: 
+Traceback (most recent call last):
+--- end of full build log ---
+ 417 |         )
+ 418 |         let restoredState = State(
+ 419 |             phase: .restoring,
+     |                     `- error: cannot infer contextual base in reference to member 'restoring'
+ 420 |             walletAddress: storedState.walletAddress,
+ 421 |             balance: storedState.balance.map { .value($0, updatedAt: storedState.balanceUpdatedAt ?? 0) } ?? .idle,
+
+submodules/WalletContext/Sources/WalletContextImpl.swift:421:111: error: cannot infer contextual base in reference to member 'idle'
+ 419 |             phase: .restoring,
+ 420 |             walletAddress: storedState.walletAddress,
+ 421 |             balance: storedState.balance.map { .value($0, updatedAt: storedState.balanceUpdatedAt ?? 0) } ?? .idle,
+     |                                                                                                               `- error: cannot infer contextual base in reference to member 'idle'
+ 422 |             transactions: TransactionsState(
+ 423 |                 items: Array(cachedTransactions.prefix(walletTransactionFetchLimit)),
+
+submodules/WalletContext/Sources/WalletContextImpl.swift:436:30: error: 'nil' requires a contextual type
+ 434 |             ),
+ 435 |             pendingTransfers: storedState.pendingTransfers.filter { !$0.isPreparing }.map(walletPendingTransferAfterRestart),
+ 436 |             activeOperation: nil,
+     |                              `- error: 'nil' requires a contextual type
+ 437 |             fiat: FiatState(
+ 438 |                 selectedCurrency: storedState.selectedFiatCurrency,
+
+submodules/WalletContext/Sources/WalletContextImpl.swift:1253:148: error: cannot infer contextual base in reference to member 'completed'
+1251 |         for transaction in value.transactions.items where transaction.status == .completed || transaction.status == .failed {
+1252 |             if transaction.presentationId.hasPrefix("pending:") {
+1253 |                 self.markWalletTransferConsumed(String(transaction.presentationId.dropFirst("pending:".count)), successful: transaction.status == .completed)
+     |                                                                                                                                                    `- error: cannot infer contextual base in reference to member 'completed'
+1254 |             }
+1255 |         }
+
+submodules/WalletContext/Sources/WalletFiatRates.swift:7:21: error: cannot find type 'CurrencyRate' in scope
+  5 | @available(macOS 10.15, *)
+  6 | func walletFiatRatesResult(
+  7 |     currencyRates: [CurrencyRate]?,
+    |                     `- error: cannot find type 'CurrencyRate' in scope
+  8 |     tonUsdRate: Double?
+  9 | ) -> Result<[WalletContext.FiatCurrency: WalletContext.FiatRate], WalletContext.SynchronizationError> {
+
+submodules/WalletContext/Sources/WalletFiatRates.swift:67:46: error: value of type 'TelegramEngine.Payments' has no member 'currencyRates'
+ 65 |                 result = try await WalletSignalRequestContext<Result<[FiatCurrency: FiatRate], SynchronizationError>>().run(
+ 66 |                     combineLatest(
+ 67 |                         self.engine.payments.currencyRates(),
+    |                                              `- error: value of type 'TelegramEngine.Payments' has no member 'currencyRates'
+ 68 |                         self.engine.data.get(TelegramEngine.EngineData.Item.Configuration.App())
+ 69 |                     )
+
+submodules/WalletContext/Sources/WalletFiatRates.swift:70:30: error: cannot infer type of closure parameter 'currencyRates' without a type annotation
+ 68 |                         self.engine.data.get(TelegramEngine.EngineData.Item.Configuration.App())
+ 69 |                     )
+ 70 |                     |> map { currencyRates, configuration in
+    |                              `- error: cannot infer type of closure parameter 'currencyRates' without a type annotation
+ 71 |                         walletFiatRatesResult(
+ 72 |                             currencyRates: currencyRates,
+
+submodules/WalletContext/Sources/WalletModels.swift:500:24: error: stored property 'nft' of 'Sendable'-conforming struct 'CollectibleTransfer' contains non-Sendable type 'WalletNftItem'; this is an error in the Swift 6 language mode
+ 498 |             public let collectionName: String?
+ 499 |             public let collectionUrl: String?
+ 500 |             public let nft: WalletNftItem?
+     |                        `- error: stored property 'nft' of 'Sendable'-conforming struct 'CollectibleTransfer' contains non-Sendable type 'WalletNftItem'; this is an error in the Swift 6 language mode
+ 501 |             public let kind: Kind
+ 502 | 
+
+TelegramCore.WalletNftItem:1:15: note: struct 'WalletNftItem' does not conform to the 'Sendable' protocol
+ 1 | public struct WalletNftItem : Codable, Equatable {
+   |               `- note: struct 'WalletNftItem' does not conform to the 'Sendable' protocol
+ 2 |     public let collectionAddress: String?
+ 3 |     public let address: String
+
+submodules/WalletContext/Sources/WalletModels.swift:2:1: error: add '@preconcurrency' to suppress 'Sendable'-related warnings from module 'TelegramCore'
+   1 | import Foundation
+   2 | import TelegramCore
+     | `- error: add '@preconcurrency' to suppress 'Sendable'-related warnings from module 'TelegramCore'
+   3 | 
+   4 | let walletPendingTransferUILifetime: Int32 = 90
+
+submodules/WalletContext/Sources/WalletModels.swift:643:20: error: stored property 'nft' of 'Sendable'-conforming struct 'Collectible' contains non-Sendable type 'WalletNftItem'; this is an error in the Swift 6 language mode
+ 641 |         public let attributes: [String: String]
+ 642 |         public let giftSlug: String?
+ 643 |         public let nft: WalletNftItem?
+     |                    `- error: stored property 'nft' of 'Sendable'-conforming struct 'Collectible' contains non-Sendable type 'WalletNftItem'; this is an error in the Swift 6 language mode
+ 644 | 
+ 645 |         public var image: WalletNftFile? { self.nft?.image ?? self.nft?.imageSmall }
+
+TelegramCore.WalletNftItem:1:15: note: struct 'WalletNftItem' does not conform to the 'Sendable' protocol
+ 1 | public struct WalletNftItem : Codable, Equatable {
+   |               `- note: struct 'WalletNftItem' does not conform to the 'Sendable' protocol
+ 2 |     public let collectionAddress: String?
+ 3 |     public let address: String
+
+submodules/WalletContext/Sources/WalletModels.swift:1048:42: error: cannot find type 'WalletCardUpdateError' in scope
+1046 |         public let cardStickerChangesPending: Bool
+1047 |         public let isSavingCardStickers: Bool
+1048 |         public let cardStickerSaveError: WalletCardUpdateError?
+     |                                          `- error: cannot find type 'WalletCardUpdateError' in scope
+1049 |         public var cardStyle: CardGiftStyle? { self.cardStickers.compactMap(\.style).last }
+1050 | 
+
+submodules/WalletContext/Sources/WalletModels.swift:1035:12: error: type 'WalletContext.State' does not conform to protocol 'Equatable'
+1033 |     }
+1034 | 
+1035 |     struct State: Equatable, Sendable {
+     |            |- error: type 'WalletContext.State' does not conform to protocol 'Equatable'
+     |            `- note: add stubs for conformance
+1036 |         public let phase: Phase
+1037 |         public let walletAddress: String?
+     :
+1046 |         public let cardStickerChangesPending: Bool
+1047 |         public let isSavingCardStickers: Bool
+1048 |         public let cardStickerSaveError: WalletCardUpdateError?
+     |                    `- note: stored property type '_' does not conform to protocol 'Equatable', preventing synthesized conformance of 'WalletContext.State' to 'Equatable'
+1049 |         public var cardStyle: CardGiftStyle? { self.cardStickers.compactMap(\.style).last }
+1050 | 
+
+Swift.==:1:24: note: candidate would match if 'WalletContext.State' conformed to 'RawRepresentable'
+1 | @inlinable public func == <T>(lhs: T, rhs: T) -> Bool where T : RawRepresentable, T.RawValue : Equatable
+  |                        `- note: candidate would match if 'WalletContext.State' conformed to 'RawRepresentable'
+
+Swift.FloatingPoint.==:2:20: note: candidate would match if 'WalletContext.State' conformed to 'FloatingPoint'
+1 | protocol FloatingPoint {
+2 | public static func == (lhs: Self, rhs: Self) -> Bool}
+  |                    `- note: candidate would match if 'WalletContext.State' conformed to 'FloatingPoint'
+3 | 
+
+Swift.BinaryInteger.==:2:20: note: candidate would match if 'WalletContext.State' conformed to 'BinaryInteger'
+1 | protocol BinaryInteger {
+2 | public static func == <Other>(lhs: Self, rhs: Other) -> Bool where Other : BinaryInteger}
+  |                    `- note: candidate would match if 'WalletContext.State' conformed to 'BinaryInteger'
+3 | 
+
+Swift._Pointer.==:2:20: note: candidate would match if 'WalletContext.State' conformed to '_Pointer'
+1 | protocol _Pointer {
+2 | public static func == (lhs: Self, rhs: Self) -> Bool}
+  |                    `- note: candidate would match if 'WalletContext.State' conformed to '_Pointer'
+3 | 
+
+Swift._Pointer.==:2:31: note: candidate would match if 'WalletContext.State' conformed to '_Pointer'
+1 | protocol _Pointer {
+2 | @inlinable public static func == <Other>(lhs: Self, rhs: Other) -> Bool where Other : _Pointer}
+  |                               `- note: candidate would match if 'WalletContext.State' conformed to '_Pointer'
+3 | 
+
+Swift.Strideable.==:2:31: note: candidate would match if 'WalletContext.State' conformed to 'Strideable'
+1 | protocol Strideable {
+2 | @inlinable public static func == (x: Self, y: Self) -> Bool}
+  |                               `- note: candidate would match if 'WalletContext.State' conformed to 'Strideable'
+3 | 
+
+Swift.StringProtocol.==:2:31: note: candidate would match if 'WalletContext.State' conformed to 'StringProtocol'
+1 | protocol StringProtocol {
+2 | @inlinable public static func == <RHS>(lhs: Self, rhs: RHS) -> Bool where RHS : StringProtocol}
+  |                               `- note: candidate would match if 'WalletContext.State' conformed to 'StringProtocol'
+3 | 
+
+Swift.SIMD.==:2:20: note: candidate would match if 'WalletContext.State' conformed to 'SIMD'
+1 | protocol SIMD {
+2 | public static func == (a: Self, b: Self) -> Bool}
+  |                    `- note: candidate would match if 'WalletContext.State' conformed to 'SIMD'
+3 | 
+
+Foundation.AttributedStringProtocol.==:2:20: note: candidate would match if 'WalletContext.State' conformed to 'AttributedStringProtocol'
+1 | protocol AttributedStringProtocol {
+2 | public static func == <RHS>(lhs: Self, rhs: RHS) -> Bool where RHS : AttributedStringProtocol}
+  |                    `- note: candidate would match if 'WalletContext.State' conformed to 'AttributedStringProtocol'
+3 | 
+
+Foundation._BridgedStoredNSError.==:2:20: note: candidate would match if 'WalletContext.State' conformed to '_BridgedStoredNSError'
+1 | protocol _BridgedStoredNSError {
+2 | public static func == (lhs: Self, rhs: Self) -> Bool}
+  |                    `- note: candidate would match if 'WalletContext.State' conformed to '_BridgedStoredNSError'
+3 | 
+
+CoreFoundation._CFObject.==:2:20: note: candidate would match if 'WalletContext.State' conformed to '_CFObject'
+1 | protocol _CFObject {
+2 | public static func == (left: Self, right: Self) -> Bool}
+  |                    `- note: candidate would match if 'WalletContext.State' conformed to '_CFObject'
+3 | 
+
+Swift.Equatable.==:2:13: note: protocol requires function '==' with type '(WalletContext.State, WalletContext.State) -> Bool'
+1 | protocol Equatable {
+2 | static func == (lhs: Self, rhs: Self) -> Bool}
+  |             `- note: protocol requires function '==' with type '(WalletContext.State, WalletContext.State) -> Bool'
+3 | 
+
+submodules/WalletContext/Sources/WalletStoredState.swift:239:20: error: type 'WalletStoredState.Payload' does not conform to protocol 'Decodable'
+237 | @available(macOS 10.15, *)
+238 | struct WalletStoredState: Codable, Equatable, Sendable {
+239 |     private struct Payload: Codable {
+    |                    `- error: type 'WalletStoredState.Payload' does not conform to protocol 'Decodable'
+240 |         var walletAddress: String?
+241 |         var tonConnectRequests: [WalletStoredTonConnectRequest]?
+    :
+250 |         var cardStickersByWallet: [String: [WalletContext.CardSticker]]?
+251 |         var cardStickerDirtyWallets: Set<String>?
+252 |         var serverCardsByWallet: [String: WalletCard]?
+    |             `- note: cannot automatically synthesize 'Decodable' because '[String : WalletCard]?' does not conform to 'Decodable'
+253 |     }
+254 | 
+
+Swift.Decodable.init:2:1: note: protocol requires initializer 'init(from:)' with type 'Decodable'
+1 | protocol Decodable {
+2 | init(from decoder: any Decoder) throws}
+  | `- note: protocol requires initializer 'init(from:)' with type 'Decodable'
+3 | 
+
+submodules/WalletContext/Sources/WalletStoredState.swift:239:20: error: type 'WalletStoredState.Payload' does not conform to protocol 'Encodable'
+237 | @available(macOS 10.15, *)
+238 | struct WalletStoredState: Codable, Equatable, Sendable {
+239 |     private struct Payload: Codable {
+    |                    `- error: type 'WalletStoredState.Payload' does not conform to protocol 'Encodable'
+240 |         var walletAddress: String?
+241 |         var tonConnectRequests: [WalletStoredTonConnectRequest]?
+    :
+250 |         var cardStickersByWallet: [String: [WalletContext.CardSticker]]?
+251 |         var cardStickerDirtyWallets: Set<String>?
+252 |         var serverCardsByWallet: [String: WalletCard]?
+    |             `- note: cannot automatically synthesize 'Encodable' because '[String : WalletCard]?' does not conform to 'Encodable'
+253 |     }
+254 | 
+
+Swift.Encodable.encode:2:6: note: protocol requires function 'encode(to:)' with type 'Encodable'
+1 | protocol Encodable {
+2 | func encode(to encoder: any Encoder) throws}
+  |      `- note: protocol requires function 'encode(to:)' with type 'Encodable'
+3 | 
+
+submodules/WalletContext/Sources/WalletStoredState.swift:275:9: error: stored property 'serverCardsByWallet' of 'Sendable'-conforming struct 'WalletStoredState' contains non-Sendable type 'WalletCard'; this is an error in the Swift 6 language mode
+273 |     var cardStickersByWallet: [String: [WalletContext.CardSticker]] = [:]
+274 |     var cardStickerDirtyWallets: Set<String> = []
+275 |     var serverCardsByWallet: [String: WalletCard] = [:]
+    |         `- error: stored property 'serverCardsByWallet' of 'Sendable'-conforming struct 'WalletStoredState' contains non-Sendable type 'WalletCard'; this is an error in the Swift 6 language mode
+276 | 
+277 |     init() {
+
+TelegramCore.WalletCard:1:15: note: struct 'WalletCard' does not conform to the 'Sendable' protocol
+ 1 | public struct WalletCard : Equatable {
+   |               `- note: struct 'WalletCard' does not conform to the 'Sendable' protocol
+ 2 |     public struct Coordinates : Equatable {
+ 3 |         public let x: CGFloat
+
+submodules/WalletContext/Sources/WalletStoredState.swift:3:1: error: add '@preconcurrency' to suppress 'Sendable'-related warnings from module 'TelegramCore'
+  1 | import Foundation
+  2 | import SwiftSignalKit
+  3 | import TelegramCore
+    | `- error: add '@preconcurrency' to suppress 'Sendable'-related warnings from module 'TelegramCore'
+  4 | #if canImport(TelegramUIPreferences)
+  5 | import TelegramUIPreferences
+
+submodules/WalletContext/Sources/WalletStoredState.swift:239:20: error: type 'WalletStoredState.Payload' does not conform to protocol 'Decodable'
+237 | @available(macOS 10.15, *)
+238 | struct WalletStoredState: Codable, Equatable, Sendable {
+239 |     private struct Payload: Codable {
+    |                    `- error: type 'WalletStoredState.Payload' does not conform to protocol 'Decodable'
+240 |         var walletAddress: String?
+241 |         var tonConnectRequests: [WalletStoredTonConnectRequest]?
+    :
+250 |         var cardStickersByWallet: [String: [WalletContext.CardSticker]]?
+251 |         var cardStickerDirtyWallets: Set<String>?
+252 |         var serverCardsByWallet: [String: WalletCard]?
+    |             `- note: cannot automatically synthesize 'Decodable' because '[String : WalletCard]?' does not conform to 'Decodable'
+253 |     }
+254 | 
+
+Swift.Decodable.init:2:1: note: protocol requires initializer 'init(from:)' with type 'Decodable'
+1 | protocol Decodable {
+2 | init(from decoder: any Decoder) throws}
+  | `- note: protocol requires initializer 'init(from:)' with type 'Decodable'
+3 | 
+
+submodules/WalletContext/Sources/WalletStreaming.swift:1802:20: error: cannot convert value of type '(Signal<[WalletTransactionPeer], NoError>) -> Signal<[WalletTransactionPeer], WalletContextImpl.WalletError>' (aka '(Signal<Array<WalletTransactionPeer>, NoError>) -> Signal<Array<WalletTransactionPeer>, WalletContext.WalletError>') to expected argument type '(Signal<[WalletTransactionPeer], WalletCardError>) -> Signal<[WalletTransactionPeer], WalletContextImpl.WalletError>' (aka '(Signal<Array<WalletTransactionPeer>, WalletCardError>) -> Signal<Array<WalletTransactionPeer>, WalletContext.WalletError>')
+1800 |             cachedPeers = (try? await WalletSignalRequestContext<[WalletTransactionPeer]>().run(
+1801 |                 self.engine.wallet.getCachedUserAddressPeers(addresses: Array(addresses))
+1802 |                 |> castError(WalletError.self)
+     |                    |- error: cannot convert value of type '(Signal<[WalletTransactionPeer], NoError>) -> Signal<[WalletTransactionPeer], WalletContextImpl.WalletError>' (aka '(Signal<Array<WalletTransactionPeer>, NoError>) -> Signal<Array<WalletTransactionPeer>, WalletContext.WalletError>') to expected argument type '(Signal<[WalletTransactionPeer], WalletCardError>) -> Signal<[WalletTransactionPeer], WalletContextImpl.WalletError>' (aka '(Signal<Array<WalletTransactionPeer>, WalletCardError>) -> Signal<Array<WalletTransactionPeer>, WalletContext.WalletError>')
+     |                    `- note: arguments to generic parameter 'E' ('WalletCardError' and 'NoError') are expected to be equal
+1803 |             )) ?? []
+1804 |         }
+[6,898 / 8,613] checking cached actions
+Target //Telegram:telegram_auth_build_test failed to build
+INFO: Elapsed time: 2871.346s, Critical Path: 710.04s
+INFO: 6898 processes: 2120 internal, 4457 local, 321 worker.
+ERROR: Build did NOT complete successfully
+FAILED: 
+INFO: Build Event Protocol files produced successfully.
+Traceback (most recent call last):
+  File "/Users/runner/work/AirGram-iOS/AirGram-iOS/build-system/Make/Make.py", line 1294, in <module>
+    build(bazel=bazel_path, arguments=args)
+    ~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/runner/work/AirGram-iOS/AirGram-iOS/build-system/Make/Make.py", line 650, in build
+    bazel_command_line.invoke_build()
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "/Users/runner/work/AirGram-iOS/AirGram-iOS/build-system/Make/Make.py", line 325, in invoke_build
+    call_executable(combined_arguments)
+    ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^
+  File "/Users/runner/work/AirGram-iOS/AirGram-iOS/build-system/Make/BuildEnvironment.py", line 104, in call_executable
+    subprocess.check_call(resolved_arguments, env=resolved_env)
+    ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/homebrew/Cellar/python@3.15/3.15.2/Frameworks/Python.framework/Versions/3.15/lib/python3.15/subprocess.py", line 534, in check_call
+    raise CalledProcessError(retcode, cmd)
+subprocess.CalledProcessError: Command ['/Users/runner/work/AirGram-iOS/AirGram-iOS/build-input/bazel-8.4.2-darwin-arm64', '--output_user_root=/private/var/tmp/_bazel_containerhost', 'build', 'Telegram/telegram_auth_build_test', '--announce_rc', '--features=swift.use_global_module_cache', '--verbose_failures', '--remote_cache_async', '--jobs=3', '--local_cpu_resources=3', '--worker_max_instances=3', '--spawn_strategy=worker,local', '--strategy=SwiftCompile=worker,local', '--strategy=ObjcCompile=worker,local', '--strategy=Genrule=standalone', '--worker_quit_after_build=false', '--define=buildNumber=2849', '--features=swift.split_derived_files_generation', '--disk_cache=/private/var/tmp/_bazel_containerhost/disk_cache', '-c', 'opt', '--ios_multi_cpus=arm64', '--watchos_cpus=arm64_32', '--apple_generate_dsym', '--features=swift.opt_uses_wmo', '--features=swift.opt_uses_osize', '--features=dead_strip', '--objc_enable_binary_stripping', '--build_event_json_file=/var/folders/h5/t85nd63d71x27_8gl5gw3l_w0000gn/T/airgram-build-events.json'] returned non-zero exit status 1.
