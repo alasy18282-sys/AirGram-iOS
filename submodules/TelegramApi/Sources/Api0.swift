@@ -1621,6 +1621,8 @@ fileprivate let parsers: [Int32 : (BufferReader) -> Any?] = {
     dict[-772898407] = { return Api.Update.parse_updateWalletTonConnectPendingDisconnect($0) }
     dict[-1825969613] = { return Api.MessageAction.parse_messageActionGramTransfer($0) }
     dict[1773716671] = { return Api.MessageAction.parse_messageActionWalletTonConnectRequest($0) }
+    dict[1416649777] = { return Api.WalletTransactionPeer.parse_walletTransactionPeerChannel($0) }
+    dict[-193817447] = { return Api.WalletTransactionPeer.parse_walletTransactionPeerTelegramGift($0) }
     dict[417867063] = { return Api.wallet.EncryptedSecretPhrasePart.parse_encryptedSecretPhrasePart($0) }
     dict[-1108800883] = { return Api.wallet.ExistingBalance.parse_existingBalance($0) }
     dict[1277096206] = { return Api.wallet.NftAttribute.parse_nftAttribute($0) }
@@ -2876,6 +2878,8 @@ public extension Api {
         case let _1 as Api.wallet.ExistingBalance:
             _1.serialize(buffer, boxed)
         case let _1 as Api.wallet.NftAttribute:
+            _1.serialize(buffer, boxed)
+        case let _1 as Api.WalletTransactionPeer:
             _1.serialize(buffer, boxed)
         case let _1 as Api.wallet.NftItem:
             _1.serialize(buffer, boxed)

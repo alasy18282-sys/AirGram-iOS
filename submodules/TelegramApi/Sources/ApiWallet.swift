@@ -1118,6 +1118,34 @@ public extension Api {
 
 public extension Api {
     enum WalletState: TypeConstructorDescription {
+        public class Cons_walletTransactionPeerChannel: TypeConstructorDescription {
+            public var flags: Int32
+            public var channelId: Int64
+            public var address: String
+            public var domain: String?
+
+            public init(flags: Int32, channelId: Int64, address: String, domain: String?) {
+                self.flags = flags
+                self.channelId = channelId
+                self.address = address
+                self.domain = domain
+            }
+
+            public func descriptionFields() -> (String, [(String, ConstructorParameterDescription)]) {
+                return ("walletTransactionPeerChannel", [("flags", ConstructorParameterDescription(self.flags)), ("channelId", ConstructorParameterDescription(self.channelId)), ("address", ConstructorParameterDescription(self.address)), ("domain", ConstructorParameterDescription(self.domain))])
+            }
+        }
+        public class Cons_walletTransactionPeerTelegramGift: TypeConstructorDescription {
+            public var flags: Int32
+
+            public init(flags: Int32) {
+                self.flags = flags
+            }
+
+            public func descriptionFields() -> (String, [(String, ConstructorParameterDescription)]) {
+                return ("walletTransactionPeerTelegramGift", [("flags", ConstructorParameterDescription(self.flags))])
+            }
+        }
         public class Cons_walletState: TypeConstructorDescription {
             public var flags: Int32
             public var address: String
@@ -1445,6 +1473,23 @@ public extension Api {
                 if Int(_data.flags) & Int(1 << 0) != 0 {
                     serializeString(_data.domain!, buffer: buffer, boxed: false)
                 }
+                break
+            case .walletTransactionPeerChannel(let _data):
+                if boxed {
+                    buffer.appendInt32(1416649777)
+                }
+                serializeInt32(_data.flags, buffer: buffer, boxed: false)
+                serializeInt64(_data.channelId, buffer: buffer, boxed: false)
+                serializeString(_data.address, buffer: buffer, boxed: false)
+                if Int(_data.flags) & Int(1 << 0) != 0 {
+                    serializeString(_data.domain!, buffer: buffer, boxed: false)
+                }
+                break
+            case .walletTransactionPeerTelegramGift(let _data):
+                if boxed {
+                    buffer.appendInt32(-193817447)
+                }
+                serializeInt32(_data.flags, buffer: buffer, boxed: false)
                 break
             case .walletTransactionPeerOnramp(let _data):
                 if boxed {

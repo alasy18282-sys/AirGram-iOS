@@ -10,6 +10,7 @@ private enum ApplicationSpecificPreferencesKeyValues: Int32 {
     case mediaAutoSaveSettings = 20
     case ageVerificationState = 21
     case textProcessingEditingState = 22
+    case walletState = 23
 }
 
 public struct ApplicationSpecificPreferencesKeys {
@@ -20,6 +21,8 @@ public struct ApplicationSpecificPreferencesKeys {
     public static let mediaAutoSaveSettings = applicationSpecificPreferencesKey(ApplicationSpecificPreferencesKeyValues.mediaAutoSaveSettings.rawValue)
     public static let ageVerificationState = applicationSpecificPreferencesKey(ApplicationSpecificPreferencesKeyValues.ageVerificationState.rawValue)
     
+    public static let walletState = applicationSpecificPreferencesKey(ApplicationSpecificPreferencesKeyValues.walletState.rawValue)
+
     public static func textProcessingEditingState(peerId: PeerId) -> ValueBoxKey {
         let key = ValueBoxKey(length: 4 + 8)
         key.setInt32(0, value: ApplicationSpecificPreferencesKeyValues.textProcessingEditingState.rawValue)

@@ -84,6 +84,8 @@ public struct WalletUserAddress: Equatable {
 
 public enum WalletTransactionPeer: Equatable, @unchecked Sendable {
     case user(EnginePeer, address: String, domain: String?)
+    case channel(EnginePeer, address: String, domain: String?)
+    case telegramGift(ownProfile: Bool)
     case address(String, domain: String?)
     case onramp(address: String, domain: String?, providerName: String)
     case unsupported
@@ -320,6 +322,18 @@ private extension WalletTransactionPeer {
         switch apiPeer {
         case let .walletTransactionPeerAddress(peer):
             self = .address(peer.address, domain: peer.domain)
+        case let .walletTransactionPeerChannel(peer):
+            let peerId = EnginePeer.Id(
+                namespace: Namespaces.Peer.CloudChannel,
+                id: PeerId.Id._internalFromInt64Value(peer.channelId)
+            )
+            if let peer = transaction.getPeer(peerId) {
+                self = .channel(EnginePeer(peer), address: peer.address, domain: peer.domain)
+            } else {
+                self = .address(peer.address, domain: peer.domain)
+            }
+        case let .walletTransactionPeerTelegramGift(peer):
+            self = .telegramGift(ownProfile: (peer.flags & (1 << 0)) != 0)
         case let .walletTransactionPeerOnramp(peer):
             self = .onramp(address: peer.address, domain: peer.domain, providerName: peer.providerName)
         case .walletTransactionPeerUnsupported:
