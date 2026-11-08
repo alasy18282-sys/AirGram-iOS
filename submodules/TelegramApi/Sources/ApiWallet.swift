@@ -317,6 +317,7 @@ public extension Api.wallet {
             let _c11 = (Int(_1 ?? 0) & Int(1 << 6) == 0) || _11 != nil
             let _c12 = (Int(_1 ?? 0) & Int(1 << 7) == 0) || _12 != nil
             let _c13 = (Int(_1 ?? 0) & Int(1 << 8) == 0) || _13 != nil
+            let _c14 = (Int(_1 ?? 0) & Int(1 << 9) == 0) || _14 != nil
             if _c1 && _c2 && _c3 && _c4 && _c5 && _c6 && _c7 && _c8 && _c9 && _c10 && _c11 && _c12 && _c13 && _c14 {
                 return Api.wallet.NftItem.nftItem(Cons_nftItem(flags: _1!, collectionAddress: _2, address: _3!, ownerAddress: _4!, index: _5!, name: _6, description: _7, image: _8, imageSmall: _9, contentUrl: _10, lottie: _11, attributes: _12, extra: _13, gift: _14))
             }
