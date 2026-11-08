@@ -1,3 +1,8 @@
+load(
+    "@rules_cc//cc:defs.bzl",
+    "objc_library",
+)
+
 load("@bazel_skylib//rules:common_settings.bzl",
     "bool_flag",
 )

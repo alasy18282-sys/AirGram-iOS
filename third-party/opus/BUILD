@@ -1,4 +1,10 @@
 
+load(
+    "@rules_cc//cc:defs.bzl",
+    "cc_library",
+    "objc_library",
+)
+
 headers = [
     "opus.h",
     "opus_defines.h",

@@ -1,6 +1,12 @@
 # Description:
 #   Brotli is a generic-purpose lossless compression algorithm.
 
+load(
+    "@rules_cc//cc:defs.bzl",
+    "cc_binary",
+    "cc_library",
+)
+
 load(":compiler_config_setting.bzl", "create_msvc_config")
 
 package(

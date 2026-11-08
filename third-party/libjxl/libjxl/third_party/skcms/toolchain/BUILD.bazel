@@ -1,3 +1,8 @@
+load(
+    "@rules_cc//cc:defs.bzl",
+    "cc_toolchain",
+)
+
 load(":ndk_linux_arm64_toolchain_config.bzl", "ndk_cc_toolchain_config")
 load(":clang_linux_amd64_toolchain_config.bzl", "provide_linux_amd64_toolchain_config")
 

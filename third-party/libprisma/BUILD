@@ -1,4 +1,9 @@
 load(
+    "@rules_cc//cc:defs.bzl",
+    "objc_library",
+)
+
+load(
     "@build_bazel_rules_apple//apple:resources.bzl",
     "apple_resource_bundle",
     "apple_resource_group",

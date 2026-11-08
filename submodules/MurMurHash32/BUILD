@@ -1,4 +1,9 @@
 
+load(
+    "@rules_cc//cc:defs.bzl",
+    "objc_library",
+)
+
 objc_library(
     name = "MurMurHash32",
     enable_modules = True,

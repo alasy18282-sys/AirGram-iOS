@@ -1,3 +1,9 @@
+load(
+    "@rules_cc//cc:defs.bzl",
+    "cc_library",
+    "objc_library",
+)
+
 cc_library(
     name = "h264bitstream",
     srcs = [

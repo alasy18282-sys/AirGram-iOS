@@ -1,3 +1,8 @@
+load(
+    "@rules_cc//cc:defs.bzl",
+    "objc_library",
+)
+
 objc_library(
     name = "TonBinding",
     module_name = "TonBinding",

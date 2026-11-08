@@ -1,4 +1,9 @@
 
+load(
+    "@rules_cc//cc:defs.bzl",
+    "cc_library",
+)
+
 absl_headers = [
     "absl/container/internal/layout.h",
     "absl/container/internal/hashtable_debug_hooks.h",

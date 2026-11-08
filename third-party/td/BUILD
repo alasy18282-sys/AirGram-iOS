@@ -1,4 +1,10 @@
 load(
+    "@rules_cc//cc:defs.bzl",
+    "cc_library",
+    "objc_library",
+)
+
+load(
     "//third-party/boringssl:BUILD.generated.bzl",
     "crypto_headers",
 )

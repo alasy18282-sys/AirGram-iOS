@@ -1,4 +1,9 @@
 
+load(
+    "@rules_cc//cc:defs.bzl",
+    "objc_library",
+)
+
 public_headers = glob([
     "PublicHeaders/**/*.h",
 ])

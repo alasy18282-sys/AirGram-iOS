@@ -1,3 +1,9 @@
+load(
+    "@rules_cc//cc:defs.bzl",
+    "cc_library",
+    "objc_library",
+)
+
 openssl_headers = [
     "aes.h",
     "asn1.h",

@@ -5,6 +5,12 @@
 
 # Load sources/headers/tests lists.
 load(
+    "@rules_cc//cc:defs.bzl",
+    "cc_library",
+    "cc_test",
+)
+
+load(
     "jxl_lists.bzl",
     "libjxl_base_sources",
     "libjxl_codec_apng_sources",

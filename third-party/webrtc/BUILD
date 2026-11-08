@@ -1,5 +1,11 @@
 
 
+load(
+    "@rules_cc//cc:defs.bzl",
+    "cc_library",
+    "objc_library",
+)
+
 config_setting(
     name = "debug_build",
     values = {

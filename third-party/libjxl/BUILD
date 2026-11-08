@@ -1,4 +1,10 @@
 
+load(
+    "@rules_cc//cc:defs.bzl",
+    "cc_library",
+    "objc_library",
+)
+
 headers = [
     "jxl/codestream_header.h",
     "jxl/cms_interface.h",

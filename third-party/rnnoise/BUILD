@@ -1,4 +1,9 @@
 
+load(
+    "@rules_cc//cc:defs.bzl",
+    "objc_library",
+)
+
 replace_symbol_list = [
     "_celt_autocorr",
     "celt_fir",

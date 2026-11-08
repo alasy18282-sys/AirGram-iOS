@@ -1,3 +1,9 @@
+load(
+    "@rules_cc//cc:defs.bzl",
+    "cc_binary",
+    "cc_library",
+)
+
 load("@rules_license//rules:license.bzl", "license")
 load("@bazel_skylib//lib:selects.bzl", "selects")
 

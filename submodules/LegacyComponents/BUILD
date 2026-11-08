@@ -1,4 +1,9 @@
 
+load(
+    "@rules_cc//cc:defs.bzl",
+    "objc_library",
+)
+
 filegroup(
     name = "LegacyComponentsResources",
     srcs = glob([
