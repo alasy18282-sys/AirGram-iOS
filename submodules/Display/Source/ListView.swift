@@ -1930,7 +1930,7 @@ open class ListViewImpl: ASDisplayNode, ListView, ASScrollViewDelegate, ASGestur
         let itemsCount = self.items.count
         state.fixScrollPosition(itemsCount)
         
-        let actions = {
+        let actions = { [self] in
             var previousFrames: [Int: CGRect] = [:]
             for i in 0 ..< state.nodes.count {
                 if let index = state.nodes[i].index {

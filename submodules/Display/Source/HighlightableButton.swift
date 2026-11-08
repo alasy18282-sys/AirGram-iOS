@@ -6,8 +6,8 @@ open class HighlightableButton: HighlightTrackingButton {
     override public init(frame: CGRect) {
         super.init(frame: frame)
         
-        self.adjustsImageWhenHighlighted = false
-        self.adjustsImageWhenDisabled = false
+        self.setValue(false, forKey: "adjustsImageWhenHighlighted")
+        self.setValue(false, forKey: "adjustsImageWhenDisabled")
         self.internalHighligthedChanged = { [weak self] highlighted in
             if let strongSelf = self {
                 if highlighted {
