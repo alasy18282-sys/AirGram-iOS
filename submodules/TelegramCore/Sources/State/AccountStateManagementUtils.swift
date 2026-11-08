@@ -3984,8 +3984,8 @@ func replayFinalState(
     var updatedStarsBalance: [PeerId: StarsAmount] = [:]
     var updatedTonBalance: [PeerId: StarsAmount] = [:]
     var walletTransferApiUpdates: [Api.Update] = []
-    var walletTonConnectEventBatch: [WalletTonConnectEvent] = []
-    var updatedWalletState: Api.WalletState?
+    let walletTonConnectEventBatch: [WalletTonConnectEvent] = []
+    var updatedWalletState: Api.WalletState? = nil
     var updatedStarsRevenueStatus: [PeerId: StarsRevenueStats.Balances] = [:]
     var updatedStarsReactionsDefaultPrivacy: TelegramPaidReactionPrivacy?
     var reportMessageDelivery = Set<MessageId>()

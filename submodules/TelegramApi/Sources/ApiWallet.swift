@@ -2201,3 +2201,137 @@ public extension Api {
     }
 }
 
+
+public extension Api.functions.toncenter {
+    static func getStreamingUrl() -> (FunctionDescription, Buffer, DeserializeFunctionResponse<Api.toncenter.StreamingUrl>) {
+        let buffer = Buffer()
+        buffer.appendInt32(-844143673)
+        return (FunctionDescription(name: "toncenter.getStreamingUrl", parameters: []), buffer, DeserializeFunctionResponse { (buffer: Buffer) -> Api.toncenter.StreamingUrl? in
+            let reader = BufferReader(buffer)
+            var result: Api.toncenter.StreamingUrl?
+            if let signature = reader.readInt32() {
+                result = Api.parse(reader, signature: signature) as? Api.toncenter.StreamingUrl
+            }
+            return result
+        })
+    }
+}
+public extension Api.functions.toncenter {
+    static func performApiRequest(flags: Int32, endpoint: String, query: String?, payload: String?) -> (FunctionDescription, Buffer, DeserializeFunctionResponse<Api.toncenter.ApiResponse>) {
+        let buffer = Buffer()
+        buffer.appendInt32(-1921262239)
+        serializeInt32(flags, buffer: buffer, boxed: false)
+        serializeString(endpoint, buffer: buffer, boxed: false)
+        if Int(flags) & Int(1 << 1) != 0 {
+            serializeString(query!, buffer: buffer, boxed: false)
+        }
+        if Int(flags) & Int(1 << 2) != 0 {
+            serializeString(payload!, buffer: buffer, boxed: false)
+        }
+        return (FunctionDescription(name: "toncenter.performApiRequest", parameters: [("flags", ConstructorParameterDescription(flags)), ("endpoint", ConstructorParameterDescription(endpoint)), ("query", ConstructorParameterDescription(query)), ("payload", ConstructorParameterDescription(payload))]), buffer, DeserializeFunctionResponse { (buffer: Buffer) -> Api.toncenter.ApiResponse? in
+            let reader = BufferReader(buffer)
+            var result: Api.toncenter.ApiResponse?
+            if let signature = reader.readInt32() {
+                result = Api.parse(reader, signature: signature) as? Api.toncenter.ApiResponse
+            }
+            return result
+        })
+    }
+}
+
+public extension Api.toncenter {
+    enum ApiResponse: TypeConstructorDescription {
+        public class Cons_apiResponse: TypeConstructorDescription {
+            public var response: Api.DataJSON
+            public init(response: Api.DataJSON) {
+                self.response = response
+            }
+            public func descriptionFields() -> (String, [(String, ConstructorParameterDescription)]) {
+                return ("apiResponse", [("response", ConstructorParameterDescription(self.response))])
+            }
+        }
+        case apiResponse(Cons_apiResponse)
+
+        public func serialize(_ buffer: Buffer, _ boxed: Swift.Bool) {
+            switch self {
+            case .apiResponse(let _data):
+                if boxed {
+                    buffer.appendInt32(-1399980519)
+                }
+                _data.response.serialize(buffer, true)
+                break
+            }
+        }
+
+        public func descriptionFields() -> (String, [(String, ConstructorParameterDescription)]) {
+            switch self {
+            case .apiResponse(let _data):
+                return ("apiResponse", [("response", ConstructorParameterDescription(_data.response))])
+            }
+        }
+
+        public static func parse_apiResponse(_ reader: BufferReader) -> ApiResponse? {
+            var _1: Api.DataJSON?
+            if let signature = reader.readInt32() {
+                _1 = Api.parse(reader, signature: signature) as? Api.DataJSON
+            }
+            let _c1 = _1 != nil
+            if _c1 {
+                return Api.toncenter.ApiResponse.apiResponse(Cons_apiResponse(response: _1!))
+            }
+            else {
+                return nil
+            }
+        }
+    }
+}
+public extension Api.toncenter {
+    enum StreamingUrl: TypeConstructorDescription {
+        public class Cons_streamingUrl: TypeConstructorDescription {
+            public var url: String
+            public var expires: Int32
+            public init(url: String, expires: Int32) {
+                self.url = url
+                self.expires = expires
+            }
+            public func descriptionFields() -> (String, [(String, ConstructorParameterDescription)]) {
+                return ("streamingUrl", [("url", ConstructorParameterDescription(self.url)), ("expires", ConstructorParameterDescription(self.expires))])
+            }
+        }
+        case streamingUrl(Cons_streamingUrl)
+
+        public func serialize(_ buffer: Buffer, _ boxed: Swift.Bool) {
+            switch self {
+            case .streamingUrl(let _data):
+                if boxed {
+                    buffer.appendInt32(428373505)
+                }
+                serializeString(_data.url, buffer: buffer, boxed: false)
+                serializeInt32(_data.expires, buffer: buffer, boxed: false)
+                break
+            }
+        }
+
+        public func descriptionFields() -> (String, [(String, ConstructorParameterDescription)]) {
+            switch self {
+            case .streamingUrl(let _data):
+                return ("streamingUrl", [("url", ConstructorParameterDescription(_data.url)), ("expires", ConstructorParameterDescription(_data.expires))])
+            }
+        }
+
+        public static func parse_streamingUrl(_ reader: BufferReader) -> StreamingUrl? {
+            var _1: String?
+            _1 = parseString(reader)
+            var _2: Int32?
+            _2 = reader.readInt32()
+            let _c1 = _1 != nil
+            let _c2 = _2 != nil
+            if _c1 && _c2 {
+                return Api.toncenter.StreamingUrl.streamingUrl(Cons_streamingUrl(url: _1!, expires: _2!))
+            }
+            else {
+                return nil
+            }
+        }
+    }
+}

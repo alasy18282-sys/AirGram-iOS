@@ -21,6 +21,7 @@ public enum Api {
     public enum updates {}
     public enum upload {}
     public enum users {}
+    public enum toncenter {}
     public enum wallet {}
     public enum functions {
         public enum account {}
@@ -45,6 +46,7 @@ public enum Api {
         public enum updates {}
         public enum upload {}
         public enum users {}
+        public enum toncenter {}
         public enum wallet {}
     }
 }

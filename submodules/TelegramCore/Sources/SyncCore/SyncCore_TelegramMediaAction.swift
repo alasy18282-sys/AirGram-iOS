@@ -307,6 +307,8 @@ public enum TelegramMediaActionType: PostboxCoding, Equatable {
     case managedBotCreated(botId: PeerId)
     case pollOptionAppended(TelegramMediaPollOption)
     case pollOptionDeleted(TelegramMediaPollOption)
+    case gramTransfer(amount: Int64, peerAddress: String, transactionId: String, comment: String?, commentEncrypted: Bool)
+    case walletTonConnectRequest(flags: Int32, sessionId: Int64, expires: Int32, topic: String?, traceId: String?, dappName: String?)
     
     public init(decoder: PostboxDecoder) {
         let rawValue: Int32 = decoder.decodeInt32ForKey("_rawValue", orElse: 0)
@@ -490,6 +492,16 @@ public enum TelegramMediaActionType: PostboxCoding, Equatable {
             self = .pollOptionAppended(decoder.decodeObjectForKey("option", decoder: { TelegramMediaPollOption(decoder: $0) }) as! TelegramMediaPollOption)
         case 64:
             self = .pollOptionDeleted(decoder.decodeObjectForKey("option", decoder: { TelegramMediaPollOption(decoder: $0) }) as! TelegramMediaPollOption)
+        case 67:
+            self = .gramTransfer(
+                amount: decoder.decodeInt64ForKey("amount", orElse: 0),
+                peerAddress: decoder.decodeStringForKey("peerAddress", orElse: ""),
+                transactionId: decoder.decodeStringForKey("transactionId", orElse: ""),
+                comment: decoder.decodeOptionalStringForKey("comment"),
+                commentEncrypted: decoder.decodeBoolForKey("commentEncrypted", orElse: false)
+            )
+        case 68:
+            self = .walletTonConnectRequest(flags: decoder.decodeInt32ForKey("flags", orElse: 0), sessionId: decoder.decodeInt64ForKey("sessionId", orElse: 0), expires: decoder.decodeInt32ForKey("expires", orElse: 0), topic: decoder.decodeOptionalStringForKey("topic"), traceId: decoder.decodeOptionalStringForKey("traceId"), dappName: decoder.decodeOptionalStringForKey("dappName"))
         default:
             self = .unknown
         }
@@ -1002,6 +1014,37 @@ public enum TelegramMediaActionType: PostboxCoding, Equatable {
         case let .pollOptionDeleted(option):
             encoder.encodeInt32(64, forKey: "_rawValue")
             encoder.encodeObject(option, forKey: "option")
+        case let .gramTransfer(amount, peerAddress, transactionId, comment, commentEncrypted):
+            encoder.encodeInt32(67, forKey: "_rawValue")
+            encoder.encodeInt64(amount, forKey: "amount")
+            encoder.encodeString(peerAddress, forKey: "peerAddress")
+            encoder.encodeString(transactionId, forKey: "transactionId")
+            if let comment {
+                encoder.encodeString(comment, forKey: "comment")
+            } else {
+                encoder.encodeNil(forKey: "comment")
+            }
+            encoder.encodeBool(commentEncrypted, forKey: "commentEncrypted")
+        case let .walletTonConnectRequest(flags, sessionId, expires, topic, traceId, dappName):
+            if let dappName {
+                encoder.encodeString(dappName, forKey: "dappName")
+            } else {
+                encoder.encodeNil(forKey: "dappName")
+            }
+            encoder.encodeInt32(68, forKey: "_rawValue")
+            encoder.encodeInt32(flags, forKey: "flags")
+            encoder.encodeInt64(sessionId, forKey: "sessionId")
+            encoder.encodeInt32(expires, forKey: "expires")
+            if let topic {
+                encoder.encodeString(topic, forKey: "topic")
+            } else {
+                encoder.encodeNil(forKey: "topic")
+            }
+            if let traceId {
+                encoder.encodeString(traceId, forKey: "traceId")
+            } else {
+                encoder.encodeNil(forKey: "traceId")
+            }
         }
     }
     
