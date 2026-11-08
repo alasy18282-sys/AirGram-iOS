@@ -116,6 +116,31 @@ jobs:
           done
           if [ "$BUILD_OK" -ne 1 ]; then exit 1; fi
 
+      - name: Prefetch BCR archives (flaky github downloads)
+        run: |
+          set -x
+          DISTDIR="$BAZEL_USER_ROOT/distdir"
+          mkdir -p "$DISTDIR"
+          python3 - <<'PY'
+          import json, re, os
+          urls = set()
+          with open('MODULE.bazel.lock') as f:
+              data = f.read()
+          for url in re.findall(r'https://[^"\\ ]+\.(?:tar\.gz|zip|bz2)', data):
+              if 'releases/download' in url or 'codeload' in url:
+                  urls.add(url)
+          with open('/tmp/urls.txt', 'w') as f:
+              f.write('\n'.join(sorted(urls)))
+          print(f'{len(urls)} archive URLs')
+          PY
+          while read -r url; do
+            name="$(basename "$url")"
+            if [ -s "$DISTDIR/$name" ]; then continue; fi
+            echo "Prefetching $name"
+            curl -L --retry 6 --retry-delay 3 --retry-all-errors --fail --silent --show-error "$url" -o "$DISTDIR/$name" || echo "skip $name"
+          done < /tmp/urls.txt
+          ls -la "$DISTDIR" | head -30
+
       - name: Diagnose target skip
         if: failure()
         run: |

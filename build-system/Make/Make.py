@@ -212,6 +212,10 @@ class BazelCommandLine:
         combined_arguments = []
         if self.bazel_user_root is not None:
             combined_arguments += ['--output_user_root={}'.format(self.bazel_user_root)]
+        import os
+        distdir = os.environ.get('BAZEL_DISTDIR')
+        if distdir and os.path.isdir(distdir):
+            combined_arguments += ['--distdir={}'.format(distdir)]
         return combined_arguments
 
     def invoke_clean(self):
