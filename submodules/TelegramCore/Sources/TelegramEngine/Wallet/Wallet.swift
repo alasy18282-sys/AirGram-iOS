@@ -173,7 +173,7 @@ public struct WalletSentTransfer: Codable, Equatable, Sendable {
     }
 }
 
-public struct WalletSendTransferResult: Equatable, Sendable {
+public struct WalletSendTransferResult: Equatable {
     public let transfer: WalletSentTransfer
     public let transaction: WalletTransaction?
     public let gaslessInfo: WalletGaslessInfo
@@ -210,7 +210,7 @@ struct WalletSendTransferUpdates {
     }
 }
 
-public enum WalletTransferUpdate: Equatable, Sendable {
+public enum WalletTransferUpdate: Equatable {
     case sentTransaction(WalletSentTransfer, WalletTransaction?)
     case gaslessInfo(WalletGaslessInfo)
 }
