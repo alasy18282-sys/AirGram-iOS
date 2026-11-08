@@ -161,6 +161,7 @@
     
     GLuint framebufferCreationStatus = glCheckFramebufferStatus(GL_FRAMEBUFFER);
     NSAssert(framebufferCreationStatus == GL_FRAMEBUFFER_COMPLETE, @"Failure with display framebuffer generation for display of size: %f, %f", self.bounds.size.width, self.bounds.size.height);
+    (void)framebufferCreationStatus;
     boundsSizeAtFrameBufferEpoch = self.bounds.size;
 }
 
