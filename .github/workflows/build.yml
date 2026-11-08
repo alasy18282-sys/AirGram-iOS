@@ -87,18 +87,34 @@ jobs:
             --new-bundle org.airgram.ios
 
           set -o pipefail
-          python3 -u build-system/Make/Make.py \
-            --bazelUserRoot="$BAZEL_USER_ROOT" \
-            --cacheDir="$BAZEL_USER_ROOT/disk_cache" \
-            --overrideXcodeVersion \
-            build \
-            --configurationPath="build-system/appstore-configuration.json" \
-            --codesigningInformationPath=build-system/fake-codesigning \
-            --outputBuildArtifactsPath=build/bazel-artifacts \
-            --configuration=release_arm64 \
-            --target=Telegram/telegram_auth_build_test \
-            --buildNumber="$BUILD_NUMBER" \
-            --enableParallelSwiftmoduleGeneration 2>&1 | tee /tmp/build_full.log
+          # External BCR module downloads (github releases) intermittently 504;
+          # retry the whole bazel invocation — bazel's cache makes retries resume.
+          BUILD_OK=0
+          for attempt in 1 2 3 4; do
+            echo "::group::Build attempt $attempt"
+            python3 -u build-system/Make/Make.py \
+              --bazelUserRoot="$BAZEL_USER_ROOT" \
+              --cacheDir="$BAZEL_USER_ROOT/disk_cache" \
+              --overrideXcodeVersion \
+              build \
+              --configurationPath="build-system/appstore-configuration.json" \
+              --codesigningInformationPath=build-system/fake-codesigning \
+              --outputBuildArtifactsPath=build/bazel-artifacts \
+              --configuration=release_arm64 \
+              --target=Telegram/telegram_auth_build_test \
+              --buildNumber="$BUILD_NUMBER" \
+              --enableParallelSwiftmoduleGeneration 2>&1 | tee /tmp/build_full.log
+            CODE=$?
+            echo "::endgroup::"
+            if [ "$CODE" -eq 0 ]; then BUILD_OK=1; break; fi
+            if grep -qE "GET returned 50[0234]|Error downloading" /tmp/build_full.log; then
+              echo "Transient download failure, retrying"
+              sleep 15
+            else
+              break
+            fi
+          done
+          if [ "$BUILD_OK" -ne 1 ]; then exit 1; fi
 
       - name: Diagnose target skip
         if: failure()
