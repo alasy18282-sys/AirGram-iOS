@@ -70,7 +70,8 @@ jobs:
         run: |
           set -euxo pipefail
           BAZEL_USER_ROOT="/private/var/tmp/_bazel_containerhost"
-          BAZEL_DISTDIR="/private/var/tmp/_bazel_containerhost/distdir"
+          export BAZEL_USER_ROOT
+          export BAZEL_DISTDIR="/private/var/tmp/_bazel_containerhost/distdir"
           BUILD_NUMBER_OFFSET="$(cat build_number_offset)"
           COMMIT_COUNT="${GITHUB_RUN_NUMBER:-1}"
           BUILD_NUMBER="$((COMMIT_COUNT + BUILD_NUMBER_OFFSET))"
