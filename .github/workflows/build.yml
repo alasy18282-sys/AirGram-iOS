@@ -138,7 +138,10 @@ jobs:
             name="$(basename "$url")"
             if [ -s "$DISTDIR/$name" ]; then continue; fi
             echo "Prefetching $name"
-            curl -L --retry 6 --retry-delay 3 --retry-all-errors --fail --silent --show-error "$url" -o "$DISTDIR/$name" || echo "skip $name"
+            mirror="https://mirror.bazel.build/${url#https://}"
+            curl -L --retry 6 --retry-delay 3 --retry-all-errors --fail --silent --show-error "$mirror" -o "$DISTDIR/$name" \
+              || curl -L --retry 6 --retry-delay 3 --retry-all-errors --fail --silent --show-error "$url" -o "$DISTDIR/$name" \
+              || echo "skip $name"
           done < /tmp/urls.txt
           ls -la "$DISTDIR" | head -30
 

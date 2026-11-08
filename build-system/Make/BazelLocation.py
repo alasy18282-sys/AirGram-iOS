@@ -108,9 +108,14 @@ def locate_bazel(base_path, cache_host_or_path, cache_dir):
         call_executable([
             'curl',
             '-L',
+            '--fail',
             '--retry', '5',
             '--retry-delay', '3',
             '--retry-all-errors',
+            'https://releases.bazel.build/{version}/release/{name}'.format(
+                version=versions.bazel_version,
+                name=bazel_name
+            ),
             'https://github.com/bazelbuild/bazel/releases/download/{version}/{name}'.format(
                 version=versions.bazel_version,
                 name=bazel_name
