@@ -4,8 +4,8 @@ import Postbox
 import TelegramApi
 
 /// The wallet's customizable card: gift stickers placed over the card background.
-public struct WalletCard: Equatable, Sendable {
-    public struct Coordinates: Equatable, Sendable {
+public struct WalletCard: Equatable {
+    public struct Coordinates: Equatable {
         public let x: CGFloat
         public let y: CGFloat
         public let width: CGFloat
@@ -23,7 +23,7 @@ public struct WalletCard: Equatable, Sendable {
         }
     }
 
-    public struct InputSticker: Equatable, Sendable {
+    public struct InputSticker: Equatable {
         public let coordinates: Coordinates
         public let nftAddress: String
 
@@ -33,7 +33,7 @@ public struct WalletCard: Equatable, Sendable {
         }
     }
 
-    public struct Sticker: Equatable, Sendable {
+    public struct Sticker: Equatable {
         public let coordinates: Coordinates
         public let nft: WalletNftItem
 

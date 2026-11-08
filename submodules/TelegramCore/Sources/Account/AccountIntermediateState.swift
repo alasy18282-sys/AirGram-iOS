@@ -908,6 +908,9 @@ struct AccountReplayedFinalState {
     let isPremiumUpdated: Bool
     let updatedStarsBalance: [PeerId: StarsAmount]
     let updatedTonBalance: [PeerId: StarsAmount]
+    let walletTransferUpdates: [WalletTransferUpdate]
+    let walletTonConnectEvents: [WalletTonConnectEvent]
+    let updatedWalletState: Api.WalletState?
     let updatedStarsRevenueStatus: [PeerId: StarsRevenueStats.Balances]
     let sentScheduledMessageIds: Set<MessageId>
     let reportMessageDelivery: Set<MessageId>

@@ -89,7 +89,7 @@ public enum WalletTransactionPeer: Equatable, @unchecked Sendable {
     case unsupported
 }
 
-public struct WalletTransaction: Equatable, Sendable {
+public struct WalletTransaction: Equatable {
     public let incoming: Bool
     public let gasless: Bool
     public let failed: Bool

@@ -98,7 +98,7 @@ public struct WalletNftItem: Codable, Equatable {
     }
 }
 
-public struct WalletNfts: Equatable, Sendable {
+public struct WalletNfts: Equatable {
     public let items: [WalletNftItem]
     public let nextOffset: String?
 
