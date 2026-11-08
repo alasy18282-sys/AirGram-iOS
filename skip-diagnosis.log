@@ -1,0 +1,59 @@
++ echo '===== DIAGNOSE cquery ====='
+===== DIAGNOSE cquery =====
++ build-input/bazel-9.2.0-darwin-arm64 --output_user_root=/private/var/tmp/_bazel_containerhost cquery //Telegram:telegram_auth_build_test --output=build
++ tail -40
+Computing main repo mapping: 
+Computing main repo mapping: 
+WARNING: For repository 'bazel_features', the root module requires module version bazel_features@1.33.0, but got bazel_features@1.51.0 in the resolved dependency graph. Please update the version in your MODULE.bazel or set --check_direct_dependencies=off
+WARNING: For repository 'bazel_skylib', the root module requires module version bazel_skylib@1.8.1, but got bazel_skylib@1.9.0 in the resolved dependency graph. Please update the version in your MODULE.bazel or set --check_direct_dependencies=off
+Loading: 
+Loading: 0 packages loaded
+Loading: 0 packages loaded
+    currently loading: Telegram
+Loading: 0 packages loaded
+    currently loading: Telegram
+ERROR: Traceback (most recent call last):
+	File "/Users/runner/work/AirGram-iOS/AirGram-iOS/Telegram/BUILD", line 181, column 13, in <toplevel>
+		objc_library(
+	File "/virtual_builtins_bzl/bazel/exports.bzl", line 40, column 9, in _removed_rule_failure
+Error in fail: 
+         This rule has been removed from Bazel. Please add a `load()` statement for it.
+         This can also be done automatically by running:
+         buildifier --lint=fix <path-to-BUILD-or-bzl-file>
+         
+WARNING: Target pattern parsing failed.
+ERROR: Skipping '//Telegram:telegram_auth_build_test': no such target '//Telegram:telegram_auth_build_test': target 'telegram_auth_build_test' not declared in package 'Telegram' defined by /Users/runner/work/AirGram-iOS/AirGram-iOS/Telegram/BUILD
+ERROR: no such target '//Telegram:telegram_auth_build_test': target 'telegram_auth_build_test' not declared in package 'Telegram' defined by /Users/runner/work/AirGram-iOS/AirGram-iOS/Telegram/BUILD
+INFO: Elapsed time: 3.906s
+INFO: 0 processes.
+ERROR: Build did NOT complete successfully
++ echo '===== DIAGNOSE ton_crates targets ====='
+===== DIAGNOSE ton_crates targets =====
++ build-input/bazel-9.2.0-darwin-arm64 --output_user_root=/private/var/tmp/_bazel_containerhost query @wallet_engine_ton_crates//:all --output=label
++ head -60
+WARNING: For repository 'bazel_features', the root module requires module version bazel_features@1.33.0, but got bazel_features@1.51.0 in the resolved dependency graph. Please update the version in your MODULE.bazel or set --check_direct_dependencies=off
+WARNING: For repository 'bazel_skylib', the root module requires module version bazel_skylib@1.8.1, but got bazel_skylib@1.9.0 in the resolved dependency graph. Please update the version in your MODULE.bazel or set --check_direct_dependencies=off
+Loading: 0 packages loaded
+ERROR: no such package '@@[unknown repo 'wallet_engine_ton_crates' requested from @@ (did you mean 'wallet_engine_crates'?)]//': The repository '@@[unknown repo 'wallet_engine_ton_crates' requested from @@ (did you mean 'wallet_engine_crates'?)]' could not be resolved: No repository visible as '@wallet_engine_ton_crates' from main repository
++ echo '===== DIAGNOSE nobuild ====='
+===== DIAGNOSE nobuild =====
++ build-input/bazel-9.2.0-darwin-arm64 --output_user_root=/private/var/tmp/_bazel_containerhost build --nobuild //Telegram:telegram_auth_build_test '--toolchain_resolution_debug=.*'
++ tail -120
+Computing main repo mapping: 
+Loading: 
+Loading: 0 packages loaded
+ERROR: Traceback (most recent call last):
+	File "/Users/runner/work/AirGram-iOS/AirGram-iOS/Telegram/BUILD", line 181, column 13, in <toplevel>
+		objc_library(
+	File "/virtual_builtins_bzl/bazel/exports.bzl", line 40, column 9, in _removed_rule_failure
+Error in fail: 
+         This rule has been removed from Bazel. Please add a `load()` statement for it.
+         This can also be done automatically by running:
+         buildifier --lint=fix <path-to-BUILD-or-bzl-file>
+         
+WARNING: Target pattern parsing failed.
+ERROR: Skipping '//Telegram:telegram_auth_build_test': no such target '//Telegram:telegram_auth_build_test': target 'telegram_auth_build_test' not declared in package 'Telegram' defined by /Users/runner/work/AirGram-iOS/AirGram-iOS/Telegram/BUILD
+ERROR: no such target '//Telegram:telegram_auth_build_test': target 'telegram_auth_build_test' not declared in package 'Telegram' defined by /Users/runner/work/AirGram-iOS/AirGram-iOS/Telegram/BUILD
+INFO: Elapsed time: 0.048s
+INFO: 0 processes.
+ERROR: Build did NOT complete successfully
