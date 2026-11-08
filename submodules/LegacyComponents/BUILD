@@ -49,6 +49,7 @@ objc_library(
         "QuickLook",
         "CoreMotion",
         "MediaPlayer",
+        "UniformTypeIdentifiers",
     ],
     weak_sdk_frameworks = [
         "Vision",
