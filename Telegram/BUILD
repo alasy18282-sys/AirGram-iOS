@@ -25,6 +25,8 @@ load("@build_bazel_rules_swift//swift:swift.bzl",
     "swift_library",
 )
 
+load("@rules_shell//shell:sh_binary.bzl", "sh_binary")
+
 load(
     "@rules_xcodeproj//xcodeproj:defs.bzl",
     "top_level_targets",
