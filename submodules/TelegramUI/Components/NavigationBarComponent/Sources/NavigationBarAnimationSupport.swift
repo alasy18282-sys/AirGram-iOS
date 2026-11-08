@@ -309,9 +309,12 @@ public func addNavigationKeyframes(to layer: CALayer, key: String, keyPath: Stri
 /// Keeps a glass container's inner geometry on the bake's final sample: the layer's
 /// position and bounds are keyframed separately, the glass follows the model.
 extension GlassBackgroundContainerView {
-    public func animateSize(width: CGFloat, height: CGFloat, timing: NavigationKeyframeTiming, isDark: Bool) {
+    public func animateSize(width: NavigationSpringCurve, height: NavigationSpringCurve, timing: NavigationKeyframeTiming, isDark: Bool) {
         self.update(
-            size: CGSize(width: max(0.0, width), height: max(0.0, height)),
+            size: CGSize(
+                width: max(0.0, width.value(at: timing.duration)),
+                height: max(0.0, height.value(at: timing.duration))
+            ),
             isDark: isDark,
             transition: .immediate
         )
@@ -333,9 +336,15 @@ extension GlassBackgroundView {
         )
     }
 
-    public func animateShape(width: CGFloat, height: CGFloat, timing: NavigationKeyframeTiming,
-                             isDark: Bool, tintColor: GlassBackgroundView.TintColor) {
-        self.animateShape(sizes: [CGSize(width: width, height: height)], timing: timing,
-                          isDark: isDark, tintColor: tintColor)
+    public func animateShape(width: NavigationSpringCurve, height: NavigationSpringCurve,
+                             timing: NavigationKeyframeTiming, isDark: Bool,
+                             tintColor: GlassBackgroundView.TintColor) {
+        self.animateShape(
+            sizes: [CGSize(
+                width: max(0.0, width.value(at: timing.duration)),
+                height: max(0.0, height.value(at: timing.duration))
+            )],
+            timing: timing, isDark: isDark, tintColor: tintColor
+        )
     }
 }
