@@ -62,6 +62,7 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-bazel-full-device-v3-
             ${{ runner.os }}-bazel-full-device-v2-
+          save-always: true
 
 
 
