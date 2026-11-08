@@ -1897,6 +1897,34 @@ public func universalServiceMessageString(presentationData: (PresentationTheme, 
                     }
                     attributedString = resultAttributedString
                 }
+            case let .walletTonConnectRequest(flags, _, _, _, _, dappName):
+                let text: String
+                if flags & (1 << 3) != 0 {
+                    text = dappName.map { "Wallet request from \($0) declined" } ?? "Wallet request declined"
+                } else if flags & (1 << 2) != 0 {
+                    text = dappName.map { "Wallet request from \($0) accepted" } ?? "Wallet request accepted"
+                } else {
+                    text = dappName.map { "Wallet request from \($0)" } ?? "Wallet request"
+                }
+                attributedString = NSAttributedString(string: text, font: titleFont, textColor: primaryTextColor)
+            case let .gramTransfer(amount, _, _, _, _):
+                let amountText = formatTonAmountText(
+                    amount,
+                    dateTimeFormat: dateTimeFormat,
+                    maxDecimalPositions: 3
+                )
+                let text: String
+                if message._asMessage().effectivelyIncoming(accountPeerId) {
+                    if message.id.peerId.isTelegramNotifications {
+                        text = "Anonymous \(amountText)"
+                    } else {
+                        text = "\(authorName) sent \(amountText)"
+                    }
+                } else {
+                    let conversationPeerName = message.peers[message.id.peerId].flatMap(EnginePeer.init)?.compactDisplayTitle ?? compactAuthorName
+                    text = "You sent \(amountText) to \(conversationPeerName)"
+                }
+                attributedString = NSAttributedString(string: text, font: titleFont, textColor: primaryTextColor)
             case .unknown:
                 attributedString = nil
             }
