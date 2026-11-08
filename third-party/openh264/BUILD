@@ -327,6 +327,8 @@ cc_library(
         "third_party/openh264/src/codec/decoder/core/inc/slice.h",
         "third_party/openh264/src/codec/decoder/core/inc/vlc_decoder.h",
         "third_party/openh264/src/codec/decoder/core/inc/wels_common_basis.h",
+        "third_party/openh264/src/codec/decoder/core/inc/wels_const.h",
+        "third_party/openh264/src/codec/decoder/core/inc/wels_decoder_thread.h",
         "third_party/openh264/src/codec/decoder/plus/inc/welsDecoderExt.h",
     ],
     includes = ["."],
