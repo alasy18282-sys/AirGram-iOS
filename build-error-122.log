@@ -1,0 +1,324 @@
+ERROR: /Users/runner/work/AirGram-iOS/AirGram-iOS/submodules/TelegramCore/BUILD:3:14: Generating derived files for Swift module //submodules/TelegramCore:TelegramCore failed: (Exit 1): worker failed: error executing SwiftDeriveFiles command (from target //submodules/TelegramCore:TelegramCore) 
+submodules/TelegramCore/Sources/Account/AccountIntermediateState.swift:1028:44: error: value of type 'AccountReplayedFinalState' has no member 'walletTransferUpdates'
+     |                                            `- error: value of type 'AccountReplayedFinalState' has no member 'walletTransferUpdates'
+submodules/TelegramCore/Sources/Account/AccountIntermediateState.swift:1029:45: error: value of type 'AccountReplayedFinalState' has no member 'walletTonConnectEvents'
+     |                                             `- error: value of type 'AccountReplayedFinalState' has no member 'walletTonConnectEvents'
+submodules/TelegramCore/Sources/Account/AccountIntermediateState.swift:1030:41: error: value of type 'AccountReplayedFinalState' has no member 'updatedWalletState'
+     |                                         `- error: value of type 'AccountReplayedFinalState' has no member 'updatedWalletState'
+submodules/TelegramCore/Sources/State/AccountStateManagementUtils.swift:6130:37: error: extra arguments at positions #23, #24, #25 in call
+     |                                     `- error: extra arguments at positions #23, #24, #25 in call
+submodules/TelegramCore/Sources/State/AccountStateManagementUtils.swift:6153:57: error: generic parameter 'ElementOfResult' could not be inferred
+     |                                                         `- error: generic parameter 'ElementOfResult' could not be inferred
+submodules/TelegramCore/Sources/TelegramEngine/Wallet/Wallet.swift:105:16: error: stored property 'nft' of 'Sendable'-conforming struct 'WalletTransaction' contains non-Sendable type 'WalletNftItem'; this is an error in the Swift 6 language mode
+    |                `- error: stored property 'nft' of 'Sendable'-conforming struct 'WalletTransaction' contains non-Sendable type 'WalletNftItem'; this is an error in the Swift 6 language mode
+submodules/TelegramCore/Sources/TelegramEngine/Wallet/WalletCard.swift:38:20: error: stored property 'nft' of 'Sendable'-conforming struct 'Sticker' has non-Sendable type 'WalletNftItem'; this is an error in the Swift 6 language mode
+   |                    `- error: stored property 'nft' of 'Sendable'-conforming struct 'Sticker' has non-Sendable type 'WalletNftItem'; this is an error in the Swift 6 language mode
+submodules/TelegramCore/Sources/TelegramEngine/Wallet/WalletCard.swift:49:16: error: stored property 'backgroundNft' of 'Sendable'-conforming struct 'WalletCard' contains non-Sendable type 'WalletNftItem'; this is an error in the Swift 6 language mode
+   |                `- error: stored property 'backgroundNft' of 'Sendable'-conforming struct 'WalletCard' contains non-Sendable type 'WalletNftItem'; this is an error in the Swift 6 language mode
+submodules/TelegramCore/Sources/TelegramEngine/Wallet/WalletNfts.swift:102:16: error: stored property 'items' of 'Sendable'-conforming struct 'WalletNfts' contains non-Sendable type 'WalletNftItem'; this is an error in the Swift 6 language mode
+    |                `- error: stored property 'items' of 'Sendable'-conforming struct 'WalletNfts' contains non-Sendable type 'WalletNftItem'; this is an error in the Swift 6 language mode
+ERROR: /Users/runner/work/AirGram-iOS/AirGram-iOS/submodules/TelegramUIPreferences/BUILD:3:14 Linking submodules/TelegramUIPreferences/libTelegramUIPreferences.a failed: (Exit 1): worker failed: error executing SwiftDeriveFiles command (from target //submodules/TelegramCore:TelegramCore) 
+ERROR: Build did NOT complete successfully
+FAILED: 
+Traceback (most recent call last):
+--- end of full build log ---
+[4,379 / 8,613] Compiling Swift module //submodules/TelegramApi:TelegramApi; 135s disk-cache, worker ... (3 actions running)
+[4,381 / 8,613] Compiling Swift module //submodules/TelegramApi:TelegramApi; 136s disk-cache, worker ... (3 actions running)
+[4,382 / 8,613] Compiling Swift module //submodules/TelegramApi:TelegramApi; 137s disk-cache, worker ... (3 actions running)
+[4,384 / 8,613] Compiling Swift module //submodules/TelegramApi:TelegramApi; 138s disk-cache, worker ... (3 actions running)
+[4,385 / 8,613] Compiling Swift module //submodules/TelegramApi:TelegramApi; 139s disk-cache, worker ... (3 actions running)
+[4,386 / 8,613] Compiling Swift module //submodules/TelegramApi:TelegramApi; 142s disk-cache, worker ... (3 actions, 2 running)
+[4,386 / 8,613] Compiling Swift module //submodules/TelegramApi:TelegramApi; 144s disk-cache, worker ... (3 actions running)
+[4,387 / 8,613] Compiling Swift module //submodules/TelegramApi:TelegramApi; 146s disk-cache, worker ... (3 actions, 2 running)
+[4,388 / 8,613] Compiling Swift module //submodules/TelegramApi:TelegramApi; 147s disk-cache, worker ... (3 actions running)
+[4,389 / 8,613] Compiling Swift module //submodules/TelegramApi:TelegramApi; 148s disk-cache, worker ... (3 actions running)
+[4,391 / 8,613] Compiling Swift module //submodules/TelegramApi:TelegramApi; 149s disk-cache, worker ... (3 actions running)
+[4,392 / 8,613] Compiling Swift module //submodules/TelegramApi:TelegramApi; 151s disk-cache, worker ... (3 actions, 2 running)
+[4,392 / 8,613] Compiling Swift module //submodules/TelegramApi:TelegramApi; 152s disk-cache, worker ... (3 actions running)
+[4,393 / 8,613] Compiling Swift module //submodules/TelegramApi:TelegramApi; 154s disk-cache, worker ... (3 actions running)
+[4,394 / 8,613] Compiling Swift module //submodules/TelegramApi:TelegramApi; 155s disk-cache, worker ... (3 actions, 2 running)
+[4,395 / 8,613] Compiling Swift module //submodules/TelegramApi:TelegramApi; 157s disk-cache, worker ... (3 actions running)
+[4,396 / 8,613] Compiling Swift module //submodules/TelegramApi:TelegramApi; 158s disk-cache, worker ... (3 actions, 2 running)
+[4,396 / 8,613] Compiling Swift module //submodules/TelegramApi:TelegramApi; 159s disk-cache, worker ... (3 actions running)
+[4,397 / 8,613] Compiling Swift module //submodules/TelegramApi:TelegramApi; 161s disk-cache, worker ... (3 actions, 2 running)
+[4,398 / 8,613] Compiling Swift module //submodules/TelegramApi:TelegramApi; 163s disk-cache, worker ... (3 actions running)
+INFO: From Compiling Rust cdylib wallet_engine_bindings_cdylib v0.0.6 (65 files) [for tool]:
+warning: linker stderr: clang: overriding '-mmacosx-version-min=11.0.0' option with '-target arm64-apple-macosx26.4' [-Woverriding-option]
+  |
+  = note: `#[warn(linker_messages)]` on by default
+
+warning: 1 warning emitted
+
+[4,399 / 8,613] Compiling Swift module //submodules/TelegramApi:TelegramApi; 164s disk-cache, worker ... (3 actions running)
+[4,401 / 8,613] Compiling Swift module //submodules/TelegramApi:TelegramApi; 165s disk-cache, worker ... (3 actions running)
+[4,403 / 8,613] Compiling Swift module //submodules/TelegramApi:TelegramApi; 166s disk-cache, worker ... (3 actions running)
+[4,406 / 8,613] Compiling Swift module //submodules/TelegramApi:TelegramApi; 167s disk-cache, worker ... (3 actions running)
+[4,408 / 8,613] Compiling Swift module //submodules/TelegramApi:TelegramApi; 168s disk-cache, worker ... (3 actions running)
+[4,411 / 8,613] Compiling Swift module //submodules/TelegramApi:TelegramApi; 169s disk-cache, worker ... (3 actions, 2 running)
+[4,416 / 8,613] Compiling Swift module //submodules/TelegramApi:TelegramApi; 171s disk-cache, worker ... (3 actions, 2 running)
+[4,418 / 8,613] Compiling Swift module //submodules/TelegramApi:TelegramApi; 172s disk-cache, worker ... (3 actions, 2 running)
+[4,421 / 8,613] Compiling Swift module //submodules/TelegramApi:TelegramApi; 173s disk-cache, worker ... (3 actions, 2 running)
+[4,429 / 8,613] Compiling Swift module //submodules/TelegramApi:TelegramApi; 174s disk-cache, worker ... (3 actions, 2 running)
+[4,433 / 8,613] Compiling Swift module //submodules/TelegramApi:TelegramApi; 175s disk-cache, worker ... (3 actions running)
+[4,435 / 8,613] Compiling Swift module //submodules/TelegramApi:TelegramApi; 176s disk-cache, worker ... (3 actions running)
+[4,436 / 8,613] Compiling Swift module //submodules/TelegramApi:TelegramApi; 179s disk-cache, worker ... (3 actions, 2 running)
+[4,436 / 8,613] Compiling Swift module //submodules/TelegramApi:TelegramApi; 180s disk-cache, worker ... (3 actions running)
+[4,437 / 8,613] Compiling Swift module //submodules/TelegramApi:TelegramApi; 181s disk-cache, worker ... (3 actions, 2 running)
+[4,438 / 8,613] Compiling Swift module //submodules/TelegramApi:TelegramApi; 182s disk-cache, worker ... (3 actions running)
+[4,441 / 8,613] Compiling Swift module //submodules/TelegramApi:TelegramApi; 183s disk-cache, worker ... (3 actions, 2 running)
+[4,443 / 8,613] Compiling Swift module //submodules/TelegramApi:TelegramApi; 185s disk-cache, worker ... (3 actions running)
+[4,445 / 8,613] Compiling Swift module //submodules/TelegramApi:TelegramApi; 186s disk-cache, worker ... (3 actions running)
+[4,446 / 8,613] Compiling Swift module //submodules/TelegramApi:TelegramApi; 187s disk-cache, worker ... (3 actions running)
+[4,447 / 8,613] Compiling Swift module //submodules/TelegramApi:TelegramApi; 188s disk-cache, worker ... (3 actions running)
+[4,448 / 8,613] Compiling Swift module //submodules/TelegramApi:TelegramApi; 189s disk-cache, worker ... (3 actions running)
+[4,449 / 8,613] Compiling Swift module //submodules/TelegramApi:TelegramApi; 192s disk-cache, worker ... (3 actions, 2 running)
+[4,451 / 8,613] Compiling Swift module //submodules/TelegramApi:TelegramApi; 193s disk-cache, worker ... (3 actions, 2 running)
+[4,451 / 8,613] Compiling Swift module //submodules/TelegramApi:TelegramApi; 194s disk-cache, worker ... (3 actions running)
+[4,452 / 8,613] Compiling Swift module //submodules/TelegramApi:TelegramApi; 195s disk-cache, worker ... (3 actions running)
+[4,453 / 8,613] Compiling Swift module //submodules/TelegramApi:TelegramApi; 197s disk-cache, worker ... (3 actions, 2 running)
+[4,454 / 8,613] Compiling Swift module //submodules/TelegramApi:TelegramApi; 199s disk-cache, worker ... (3 actions running)
+[4,455 / 8,613] Compiling Swift module //submodules/TelegramApi:TelegramApi; 205s disk-cache, worker ... (3 actions, 2 running)
+[4,455 / 8,613] Compiling Swift module //submodules/TelegramApi:TelegramApi; 206s disk-cache, worker ... (3 actions running)
+[4,456 / 8,613] Compiling Swift module //submodules/TelegramApi:TelegramApi; 208s disk-cache, worker ... (3 actions, 2 running)
+[4,460 / 8,613] Compiling Swift module //submodules/TelegramApi:TelegramApi; 209s disk-cache, worker ... (3 actions, 2 running)
+[4,465 / 8,613] Compiling Swift module //submodules/TelegramApi:TelegramApi; 211s disk-cache, worker ... (3 actions, 2 running)
+[4,469 / 8,613] Compiling Swift module //submodules/TelegramApi:TelegramApi; 212s disk-cache, worker ... (3 actions, 2 running)
+[4,474 / 8,613] Compiling Swift module //submodules/TelegramApi:TelegramApi; 213s disk-cache, worker ... (3 actions running)
+[4,475 / 8,613] Compiling Swift module //submodules/TelegramApi:TelegramApi; 215s disk-cache, worker ... (3 actions, 2 running)
+[4,477 / 8,613] Compiling Swift module //submodules/TelegramApi:TelegramApi; 217s disk-cache, worker ... (3 actions running)
+[4,478 / 8,613] Compiling Swift module //submodules/TelegramApi:TelegramApi; 220s disk-cache, worker ... (3 actions, 2 running)
+[4,480 / 8,613] Compiling Swift module //submodules/TelegramApi:TelegramApi; 222s disk-cache, worker ... (3 actions, 2 running)
+[4,480 / 8,613] Compiling Swift module //submodules/TelegramApi:TelegramApi; 223s disk-cache, worker ... (3 actions running)
+[4,481 / 8,613] Compiling Swift module //submodules/TelegramApi:TelegramApi; 229s disk-cache, worker ... (3 actions, 2 running)
+[4,488 / 8,613] Compiling Swift module //submodules/TelegramApi:TelegramApi; 231s disk-cache, worker ... (3 actions running)
+[4,489 / 8,613] Compiling Swift module //submodules/TelegramApi:TelegramApi; 233s disk-cache, worker ... (2 actions running)
+[4,489 / 8,613] Compiling Swift module //submodules/TelegramApi:TelegramApi; 234s disk-cache, worker ... (3 actions running)
+[4,490 / 8,613] Compiling Swift module //submodules/TelegramApi:TelegramApi; 236s disk-cache, worker ... (3 actions, 2 running)
+[4,492 / 8,613] Compiling Swift module //submodules/TelegramApi:TelegramApi; 237s disk-cache, worker ... (3 actions running)
+[4,492 / 8,613] Compiling Swift module //submodules/TelegramApi:TelegramApi; 248s disk-cache, worker ... (3 actions running)
+[4,494 / 8,613] Compiling Swift module //submodules/TelegramApi:TelegramApi; 250s disk-cache, worker ... (3 actions running)
+[4,495 / 8,613] Compiling Swift module //submodules/TelegramApi:TelegramApi; 252s disk-cache, worker ... (3 actions, 2 running)
+[4,498 / 8,613] Compiling Swift module //submodules/TelegramApi:TelegramApi; 254s disk-cache, worker ... (3 actions running)
+[4,499 / 8,613] Compiling Swift module //submodules/TelegramApi:TelegramApi; 255s disk-cache, worker ... (3 actions, 2 running)
+[4,501 / 8,613] Compiling Swift module //submodules/TelegramApi:TelegramApi; 256s disk-cache, worker ... (3 actions running)
+[4,502 / 8,613] Compiling Swift module //submodules/TelegramApi:TelegramApi; 261s disk-cache, worker ... (3 actions, 2 running)
+[4,503 / 8,613] Compiling Swift module //submodules/TelegramApi:TelegramApi; 263s disk-cache, worker ... (3 actions running)
+[4,504 / 8,613] Compiling Swift module //submodules/TelegramApi:TelegramApi; 264s disk-cache, worker ... (3 actions, 2 running)
+[4,505 / 8,613] Compiling Swift module //submodules/TelegramApi:TelegramApi; 266s disk-cache, worker ... (3 actions running)
+[4,506 / 8,613] Compiling Swift module //submodules/TelegramApi:TelegramApi; 269s disk-cache, worker ... (3 actions, 2 running)
+[4,506 / 8,613] Compiling Swift module //submodules/TelegramApi:TelegramApi; 270s disk-cache, worker ... (3 actions running)
+[4,506 / 8,613] Compiling Swift module //submodules/TelegramApi:TelegramApi; 280s disk-cache, worker ... (3 actions running)
+[4,507 / 8,613] Compiling Swift module //submodules/TelegramApi:TelegramApi; 284s disk-cache, worker ... (3 actions, 2 running)
+[4,507 / 8,613] Compiling Swift module //submodules/TelegramApi:TelegramApi; 285s disk-cache, worker ... (3 actions running)
+[4,508 / 8,613] Compiling Swift module //submodules/TelegramApi:TelegramApi; 286s disk-cache, worker ... (3 actions running)
+[4,509 / 8,613] Compiling Swift module //submodules/TelegramApi:TelegramApi; 287s disk-cache, worker ... (3 actions running)
+[4,510 / 8,613] Compiling Swift module //submodules/TelegramApi:TelegramApi; 290s disk-cache, worker ... (3 actions, 2 running)
+[4,512 / 8,613] Compiling Swift module //submodules/TelegramApi:TelegramApi; 291s disk-cache, worker ... (3 actions running)
+[4,513 / 8,613] Compiling Swift module //submodules/TelegramApi:TelegramApi; 300s disk-cache, worker ... (3 actions, 2 running)
+[4,515 / 8,613] Compiling Swift module //submodules/TelegramApi:TelegramApi; 302s disk-cache, worker ... (3 actions, 2 running)
+[4,517 / 8,613] Compiling Swift module //submodules/TelegramApi:TelegramApi; 304s disk-cache, worker ... (3 actions running)
+[4,518 / 8,613] Compiling Swift module //submodules/TelegramApi:TelegramApi; 311s disk-cache, worker ... (3 actions, 2 running)
+[4,522 / 8,613] Compiling Swift module //submodules/TelegramApi:TelegramApi; 312s disk-cache, worker ... (3 actions, 2 running)
+[4,523 / 8,613] Compiling Swift module //submodules/TelegramApi:TelegramApi; 313s disk-cache, worker ... (3 actions running)
+[4,523 / 8,613] Compiling Swift module //submodules/TelegramApi:TelegramApi; 324s disk-cache, worker ... (3 actions running)
+[4,524 / 8,613] Compiling Swift module //submodules/TelegramApi:TelegramApi; 327s disk-cache, worker ... (2 actions running)
+[4,525 / 8,613] Compiling Swift module //submodules/TelegramApi:TelegramApi; 328s disk-cache, worker ... (3 actions running)
+[4,526 / 8,613] Compiling Swift module //submodules/TelegramApi:TelegramApi; 335s disk-cache, worker ... (3 actions, 2 running)
+[4,526 / 8,613] Compiling Swift module //submodules/TelegramApi:TelegramApi; 337s disk-cache, worker ... (3 actions running)
+[4,526 / 8,613] Compiling Swift module //submodules/TelegramApi:TelegramApi; 348s disk-cache, worker ... (3 actions running)
+[4,527 / 8,613] Compiling Swift module //submodules/TelegramApi:TelegramApi; 372s disk-cache, worker ... (3 actions, 2 running)
+[4,528 / 8,613] Compiling Swift module //submodules/TelegramApi:TelegramApi; 374s disk-cache, worker ... (3 actions running)
+[4,529 / 8,613] Compiling Swift module //submodules/TelegramApi:TelegramApi; 376s disk-cache, worker ... (3 actions, 2 running)
+[4,533 / 8,613] Compiling Swift module //submodules/TelegramApi:TelegramApi; 377s disk-cache, worker ... (3 actions, 2 running)
+[4,534 / 8,613] Compiling Swift module //submodules/TelegramApi:TelegramApi; 378s disk-cache, worker ... (3 actions running)
+[4,536 / 8,613] Compiling Swift module //submodules/TelegramApi:TelegramApi; 379s disk-cache, worker ... (3 actions running)
+[4,537 / 8,613] Compiling Swift module //submodules/TelegramApi:TelegramApi; 380s disk-cache, worker ... (3 actions, 2 running)
+[4,537 / 8,613] Compiling Swift module //submodules/TelegramApi:TelegramApi; 382s disk-cache, worker ... (3 actions running)
+[4,537 / 8,613] Compiling Swift module //submodules/TelegramApi:TelegramApi; 392s disk-cache, worker ... (3 actions running)
+[4,537 / 8,613] Compiling Swift module //submodules/TelegramApi:TelegramApi; 424s disk-cache, worker ... (3 actions running)
+[4,537 / 8,613] Compiling Swift module //submodules/TelegramApi:TelegramApi; 489s disk-cache, worker ... (3 actions running)
+[4,538 / 8,613] Compiling Swift module //submodules/TelegramApi:TelegramApi; 516s disk-cache, worker ... (3 actions, 2 running)
+[4,538 / 8,613] Compiling Swift module //submodules/TelegramApi:TelegramApi; 517s disk-cache, worker ... (3 actions running)
+[4,539 / 8,613] Compiling Swift module //submodules/TelegramApi:TelegramApi; 521s disk-cache, worker ... (3 actions, 2 running)
+[4,539 / 8,613] Compiling Swift module //submodules/TelegramApi:TelegramApi; 523s disk-cache, worker ... (3 actions running)
+[4,540 / 8,613] Compiling Swift module //submodules/TelegramApi:TelegramApi; 527s disk-cache, worker ... (3 actions, 2 running)
+[4,541 / 8,613] Compiling Swift module //submodules/TelegramApi:TelegramApi; 528s disk-cache, worker ... (3 actions, 2 running)
+[4,541 / 8,613] Compiling Swift module //submodules/TelegramApi:TelegramApi; 529s disk-cache, worker ... (3 actions running)
+[4,541 / 8,613] Compiling Swift module //submodules/TelegramApi:TelegramApi; 539s disk-cache, worker ... (3 actions running)
+[4,541 / 8,613] Compiling Swift module //submodules/TelegramApi:TelegramApi; 572s disk-cache, worker ... (3 actions running)
+[4,542 / 8,613] Compiling Swift module //submodules/TelegramApi:TelegramApi; 608s disk-cache, worker ... (3 actions, 2 running)
+[4,542 / 8,613] Compiling Swift module //submodules/TelegramApi:TelegramApi; 609s disk-cache, worker ... (3 actions running)
+[4,543 / 8,613] Compiling Swift module //submodules/TelegramApi:TelegramApi; 612s disk-cache, worker ... (2 actions running)
+[4,543 / 8,613] Compiling Swift module //submodules/TelegramApi:TelegramApi; 613s disk-cache, worker ... (3 actions running)
+INFO: From Compiling Rust bin wallet_engine_apple_bindgen (1 file) [for tool]:
+warning: linker stderr: clang: overriding '-mmacosx-version-min=11.0.0' option with '-target arm64-apple-macosx26.4' [-Woverriding-option]
+  |
+  = note: `#[warn(linker_messages)]` on by default
+
+warning: 1 warning emitted
+
+[4,546 / 8,613] Generating derived files for Swift module //submodules/TelegramCore:TelegramCore; 86s disk-cache, worker ... (3 actions running)
+[4,547 / 8,613] Generating derived files for Swift module //submodules/TelegramCore:TelegramCore; 87s disk-cache, worker ... (3 actions running)
+[4,548 / 8,613] Generating derived files for Swift module //submodules/TelegramCore:TelegramCore; 92s disk-cache, worker ... (3 actions, 2 running)
+[4,548 / 8,613] Generating derived files for Swift module //submodules/TelegramCore:TelegramCore; 93s disk-cache, worker ... (3 actions running)
+ERROR: /Users/runner/work/AirGram-iOS/AirGram-iOS/submodules/TelegramCore/BUILD:3:14: Generating derived files for Swift module //submodules/TelegramCore:TelegramCore failed: (Exit 1): worker failed: error executing SwiftDeriveFiles command (from target //submodules/TelegramCore:TelegramCore) 
+  (cd /private/var/tmp/_bazel_containerhost/c259e0c7803e089724afaeab1cf94801/execroot/_main && \
+  exec env - \
+    APPLE_SDK_PLATFORM=iPhoneOS \
+    APPLE_SDK_VERSION_OVERRIDE=26.4 \
+    PATH=/usr/bin:/bin:/usr/sbin:/sbin \
+    XCODE_VERSION_OVERRIDE=26.4.1.17E202 \
+    ZERO_AR_DATE=1 \
+  bazel-out/darwin_arm64-opt-exec-ST-d57f47055a04/bin/external/rules_swift+/tools/worker/worker swiftc @bazel-out/ios_arm64-opt-ios-arm64-min13.0-ST-2d46267cd7fb/bin/submodules/TelegramCore/TelegramCore.swiftmodule-0.params)
+# Configuration: 25398f5a1519103b26dfafd60c29923375da8313f21a1492b09a295c23188453
+# Execution platform: @@platforms//host:host
+submodules/TelegramCore/Sources/Account/AccountIntermediateState.swift:1028:44: error: value of type 'AccountReplayedFinalState' has no member 'walletTransferUpdates'
+1026 |         self.updatedStarsBalance = state.updatedStarsBalance
+1027 |         self.updatedTonBalance = state.updatedTonBalance
+1028 |         self.walletTransferUpdates = state.walletTransferUpdates
+     |                                            `- error: value of type 'AccountReplayedFinalState' has no member 'walletTransferUpdates'
+1029 |         self.walletTonConnectEvents = state.walletTonConnectEvents
+1030 |         self.updatedWalletState = state.updatedWalletState
+
+submodules/TelegramCore/Sources/Account/AccountIntermediateState.swift:1029:45: error: value of type 'AccountReplayedFinalState' has no member 'walletTonConnectEvents'
+1027 |         self.updatedTonBalance = state.updatedTonBalance
+1028 |         self.walletTransferUpdates = state.walletTransferUpdates
+1029 |         self.walletTonConnectEvents = state.walletTonConnectEvents
+     |                                             `- error: value of type 'AccountReplayedFinalState' has no member 'walletTonConnectEvents'
+1030 |         self.updatedWalletState = state.updatedWalletState
+1031 |         self.updatedStarsRevenueStatus = state.updatedStarsRevenueStatus
+
+submodules/TelegramCore/Sources/Account/AccountIntermediateState.swift:1030:41: error: value of type 'AccountReplayedFinalState' has no member 'updatedWalletState'
+1028 |         self.walletTransferUpdates = state.walletTransferUpdates
+1029 |         self.walletTonConnectEvents = state.walletTonConnectEvents
+1030 |         self.updatedWalletState = state.updatedWalletState
+     |                                         `- error: value of type 'AccountReplayedFinalState' has no member 'updatedWalletState'
+1031 |         self.updatedStarsRevenueStatus = state.updatedStarsRevenueStatus
+1032 |         self.sentScheduledMessageIds = state.sentScheduledMessageIds
+
+submodules/TelegramCore/Sources/State/AccountStateManagementUtils.swift:6130:37: error: extra arguments at positions #23, #24, #25 in call
+6128 |     }
+6129 |     
+6130 |     return AccountReplayedFinalState(
+     |                                     `- error: extra arguments at positions #23, #24, #25 in call
+6131 |         state: finalState,
+6132 |         addedIncomingMessageIds: addedIncomingMessageIds,
+
+submodules/TelegramCore/Sources/Account/AccountIntermediateState.swift:888:8: note: 'init(state:addedIncomingMessageIds:addedReactionEvents:wasScheduledMessageIds:addedSecretMessageIds:deletedMessageIds:updatedTypingActivities:updatedWebpages:updatedCalls:addedCallSignalingData:updatedGroupCallParticipants:groupCallMessageUpdates:storyUpdates:updatedPeersNearby:isContactUpdates:delayNotificatonsUntil:updatedIncomingThreadReadStates:updatedOutgoingThreadReadStates:updateConfig:isPremiumUpdated:updatedStarsBalance:updatedTonBalance:updatedStarsRevenueStatus:sentScheduledMessageIds:reportMessageDelivery:addedConferenceInvitationMessagesIds:updatedStarGiftAuctionState:updatedStarGiftAuctionMyState:updatedEmojiGameInfo:)' declared here
+ 886 | }
+ 887 | 
+ 888 | struct AccountReplayedFinalState {
+     |        `- note: 'init(state:addedIncomingMessageIds:addedReactionEvents:wasScheduledMessageIds:addedSecretMessageIds:deletedMessageIds:updatedTypingActivities:updatedWebpages:updatedCalls:addedCallSignalingData:updatedGroupCallParticipants:groupCallMessageUpdates:storyUpdates:updatedPeersNearby:isContactUpdates:delayNotificatonsUntil:updatedIncomingThreadReadStates:updatedOutgoingThreadReadStates:updateConfig:isPremiumUpdated:updatedStarsBalance:updatedTonBalance:updatedStarsRevenueStatus:sentScheduledMessageIds:reportMessageDelivery:addedConferenceInvitationMessagesIds:updatedStarGiftAuctionState:updatedStarGiftAuctionMyState:updatedEmojiGameInfo:)' declared here
+ 889 |     let state: AccountFinalState
+ 890 |     let addedIncomingMessageIds: [MessageId]
+
+submodules/TelegramCore/Sources/State/AccountStateManagementUtils.swift:6153:57: error: generic parameter 'ElementOfResult' could not be inferred
+6151 |         updatedStarsBalance: updatedStarsBalance,
+6152 |         updatedTonBalance: updatedTonBalance,
+6153 |         walletTransferUpdates: walletTransferApiUpdates.compactMap { update in
+     |                                                         `- error: generic parameter 'ElementOfResult' could not be inferred
+6154 |             switch update {
+6155 |             case let .updateSentWalletTransaction(data):
+
+Swift.Sequence.compactMap:2:24: note: in call to function 'compactMap'
+1 | protocol Sequence {
+2 | @inlinable public func compactMap<ElementOfResult>(_ transform: (Self.Element) throws -> ElementOfResult?) rethrows -> [ElementOfResult]}
+  |                        `- note: in call to function 'compactMap'
+3 | 
+
+submodules/TelegramCore/Sources/TelegramEngine/Wallet/Wallet.swift:105:16: error: stored property 'nft' of 'Sendable'-conforming struct 'WalletTransaction' contains non-Sendable type 'WalletNftItem'; this is an error in the Swift 6 language mode
+103 |     public let commentEncrypted: Bool
+104 |     public let txHash: String?
+105 |     public let nft: WalletNftItem?
+    |                `- error: stored property 'nft' of 'Sendable'-conforming struct 'WalletTransaction' contains non-Sendable type 'WalletNftItem'; this is an error in the Swift 6 language mode
+106 | 
+107 |     public init(
+
+submodules/TelegramCore/Sources/TelegramEngine/Wallet/WalletNfts.swift:38:15: note: consider making struct 'WalletNftItem' conform to the 'Sendable' protocol
+ 36 | }
+ 37 | 
+ 38 | public struct WalletNftItem: Codable, Equatable {
+    |               `- note: consider making struct 'WalletNftItem' conform to the 'Sendable' protocol
+ 39 |     public let collectionAddress: String?
+ 40 |     public let address: String
+
+submodules/TelegramCore/Sources/TelegramEngine/Wallet/WalletCard.swift:38:20: error: stored property 'nft' of 'Sendable'-conforming struct 'Sticker' has non-Sendable type 'WalletNftItem'; this is an error in the Swift 6 language mode
+36 |     public struct Sticker: Equatable, Sendable {
+37 |         public let coordinates: Coordinates
+38 |         public let nft: WalletNftItem
+   |                    `- error: stored property 'nft' of 'Sendable'-conforming struct 'Sticker' has non-Sendable type 'WalletNftItem'; this is an error in the Swift 6 language mode
+39 | 
+40 |         public init(coordinates: Coordinates, nft: WalletNftItem) {
+
+submodules/TelegramCore/Sources/TelegramEngine/Wallet/WalletNfts.swift:38:15: note: consider making struct 'WalletNftItem' conform to the 'Sendable' protocol
+ 36 | }
+ 37 | 
+ 38 | public struct WalletNftItem: Codable, Equatable {
+    |               `- note: consider making struct 'WalletNftItem' conform to the 'Sendable' protocol
+ 39 |     public let collectionAddress: String?
+ 40 |     public let address: String
+
+submodules/TelegramCore/Sources/TelegramEngine/Wallet/WalletCard.swift:49:16: error: stored property 'backgroundNft' of 'Sendable'-conforming struct 'WalletCard' contains non-Sendable type 'WalletNftItem'; this is an error in the Swift 6 language mode
+47 |     public let balance: Int64
+48 |     public let stickers: [Sticker]
+49 |     public let backgroundNft: WalletNftItem?
+   |                `- error: stored property 'backgroundNft' of 'Sendable'-conforming struct 'WalletCard' contains non-Sendable type 'WalletNftItem'; this is an error in the Swift 6 language mode
+50 | 
+51 |     public init(address: String, balance: Int64, stickers: [Sticker], backgroundNft: WalletNftItem?) {
+
+submodules/TelegramCore/Sources/TelegramEngine/Wallet/WalletNfts.swift:38:15: note: consider making struct 'WalletNftItem' conform to the 'Sendable' protocol
+ 36 | }
+ 37 | 
+ 38 | public struct WalletNftItem: Codable, Equatable {
+    |               `- note: consider making struct 'WalletNftItem' conform to the 'Sendable' protocol
+ 39 |     public let collectionAddress: String?
+ 40 |     public let address: String
+
+submodules/TelegramCore/Sources/TelegramEngine/Wallet/WalletNfts.swift:102:16: error: stored property 'items' of 'Sendable'-conforming struct 'WalletNfts' contains non-Sendable type 'WalletNftItem'; this is an error in the Swift 6 language mode
+ 36 | }
+ 37 | 
+ 38 | public struct WalletNftItem: Codable, Equatable {
+    |               `- note: consider making struct 'WalletNftItem' conform to the 'Sendable' protocol
+ 39 |     public let collectionAddress: String?
+ 40 |     public let address: String
+    :
+100 | 
+101 | public struct WalletNfts: Equatable, Sendable {
+102 |     public let items: [WalletNftItem]
+    |                `- error: stored property 'items' of 'Sendable'-conforming struct 'WalletNfts' contains non-Sendable type 'WalletNftItem'; this is an error in the Swift 6 language mode
+103 |     public let nextOffset: String?
+104 | 
+[4,551 / 8,613] checking cached actions
+Target //Telegram:telegram_auth_build_test failed to build
+ERROR: /Users/runner/work/AirGram-iOS/AirGram-iOS/submodules/TelegramUIPreferences/BUILD:3:14 Linking submodules/TelegramUIPreferences/libTelegramUIPreferences.a failed: (Exit 1): worker failed: error executing SwiftDeriveFiles command (from target //submodules/TelegramCore:TelegramCore) 
+  (cd /private/var/tmp/_bazel_containerhost/c259e0c7803e089724afaeab1cf94801/execroot/_main && \
+  exec env - \
+    APPLE_SDK_PLATFORM=iPhoneOS \
+    APPLE_SDK_VERSION_OVERRIDE=26.4 \
+    PATH=/usr/bin:/bin:/usr/sbin:/sbin \
+    XCODE_VERSION_OVERRIDE=26.4.1.17E202 \
+    ZERO_AR_DATE=1 \
+  bazel-out/darwin_arm64-opt-exec-ST-d57f47055a04/bin/external/rules_swift+/tools/worker/worker swiftc @bazel-out/ios_arm64-opt-ios-arm64-min13.0-ST-2d46267cd7fb/bin/submodules/TelegramCore/TelegramCore.swiftmodule-0.params)
+# Configuration: 25398f5a1519103b26dfafd60c29923375da8313f21a1492b09a295c23188453
+# Execution platform: @@platforms//host:host
+INFO: Elapsed time: 1956.808s, Critical Path: 695.24s
+INFO: 4551 processes: 2087 internal, 2206 local, 258 worker.
+ERROR: Build did NOT complete successfully
+FAILED: 
+INFO: Build Event Protocol files produced successfully.
+Traceback (most recent call last):
+  File "/Users/runner/work/AirGram-iOS/AirGram-iOS/build-system/Make/Make.py", line 1294, in <module>
+    build(bazel=bazel_path, arguments=args)
+    ~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/runner/work/AirGram-iOS/AirGram-iOS/build-system/Make/Make.py", line 650, in build
+    bazel_command_line.invoke_build()
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "/Users/runner/work/AirGram-iOS/AirGram-iOS/build-system/Make/Make.py", line 325, in invoke_build
+    call_executable(combined_arguments)
+    ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^
+  File "/Users/runner/work/AirGram-iOS/AirGram-iOS/build-system/Make/BuildEnvironment.py", line 104, in call_executable
+    subprocess.check_call(resolved_arguments, env=resolved_env)
+    ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/homebrew/Cellar/python@3.15/3.15.2/Frameworks/Python.framework/Versions/3.15/lib/python3.15/subprocess.py", line 534, in check_call
+    raise CalledProcessError(retcode, cmd)
+subprocess.CalledProcessError: Command ['/Users/runner/work/AirGram-iOS/AirGram-iOS/build-input/bazel-8.4.2-darwin-arm64', '--output_user_root=/private/var/tmp/_bazel_containerhost', 'build', 'Telegram/telegram_auth_build_test', '--announce_rc', '--features=swift.use_global_module_cache', '--verbose_failures', '--remote_cache_async', '--jobs=3', '--local_cpu_resources=3', '--worker_max_instances=3', '--spawn_strategy=worker,local', '--strategy=SwiftCompile=worker,local', '--strategy=ObjcCompile=worker,local', '--strategy=Genrule=standalone', '--worker_quit_after_build=false', '--define=buildNumber=2842', '--features=swift.split_derived_files_generation', '--disk_cache=/private/var/tmp/_bazel_containerhost/disk_cache', '-c', 'opt', '--ios_multi_cpus=arm64', '--watchos_cpus=arm64_32', '--apple_generate_dsym', '--features=swift.opt_uses_wmo', '--features=swift.opt_uses_osize', '--features=dead_strip', '--objc_enable_binary_stripping', '--build_event_json_file=/var/folders/h5/t85nd63d71x27_8gl5gw3l_w0000gn/T/airgram-build-events.json'] returned non-zero exit status 1.
