@@ -138,7 +138,11 @@ jobs:
             {
               grep -aE "ERROR|error:|FAILED|Traceback|Could not find|Multiple matching|No .* found" /tmp/build_full.log | tail -n 200 || true
               echo "--- end of full build log ---"
-              tail -n 300 /tmp/build_full.log
+              tr -cd '\11\12\15\40-\176' < /tmp/build_full.log | tail -n 300
+              if [ -n "$bazel_log" ] && [ -f "$bazel_log" ]; then
+                echo "--- bazel command log: $bazel_log ---"
+                tr -cd '\11\12\15\40-\176' < "$bazel_log" | tail -n 120
+              fi
             } > "$LOGFILE"
             wc -l "$LOGFILE"
           else
