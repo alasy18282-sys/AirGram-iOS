@@ -1,0 +1,352 @@
+ERROR: /Users/runner/work/AirGram-iOS/AirGram-iOS/submodules/TelegramCore/BUILD:3:14: Generating derived files for Swift module //submodules/TelegramCore:TelegramCore failed: (Exit 1): worker failed: error executing SwiftDeriveFiles command (from target //submodules/TelegramCore:TelegramCore) 
+submodules/TelegramCore/Sources/Account/AccountIntermediateState.swift:916:9: error: invalid redeclaration of 'walletTransferUpdates'
+     |         `- error: invalid redeclaration of 'walletTransferUpdates'
+submodules/TelegramCore/Sources/Account/AccountIntermediateState.swift:917:9: error: invalid redeclaration of 'walletTonConnectEvents'
+     |         `- error: invalid redeclaration of 'walletTonConnectEvents'
+submodules/TelegramCore/Sources/Account/AccountIntermediateState.swift:918:9: error: invalid redeclaration of 'updatedWalletState'
+     |         `- error: invalid redeclaration of 'updatedWalletState'
+submodules/TelegramCore/Sources/Account/AccountIntermediateState.swift:964:1247: error: value of type 'AccountFinalStateEvents' has no member 'walletTransferUpdates'
+     |                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               `- error: value of type 'AccountFinalStateEvents' has no member 'walletTransferUpdates'
+submodules/TelegramCore/Sources/Account/AccountIntermediateState.swift:964:1285: error: value of type 'AccountFinalStateEvents' has no member 'walletTonConnectEvents'
+     |                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     `- error: value of type 'AccountFinalStateEvents' has no member 'walletTonConnectEvents'
+submodules/TelegramCore/Sources/Account/AccountIntermediateState.swift:964:1324: error: value of type 'AccountFinalStateEvents' has no member 'updatedWalletState'
+     |                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            `- error: value of type 'AccountFinalStateEvents' has no member 'updatedWalletState'
+submodules/TelegramCore/Sources/Account/AccountIntermediateState.swift:994:14: error: value of type 'AccountFinalStateEvents' has no member 'walletTransferUpdates'
+     |              `- error: value of type 'AccountFinalStateEvents' has no member 'walletTransferUpdates'
+submodules/TelegramCore/Sources/Account/AccountIntermediateState.swift:995:14: error: value of type 'AccountFinalStateEvents' has no member 'walletTonConnectEvents'
+     |              `- error: value of type 'AccountFinalStateEvents' has no member 'walletTonConnectEvents'
+submodules/TelegramCore/Sources/Account/AccountIntermediateState.swift:996:14: error: value of type 'AccountFinalStateEvents' has no member 'updatedWalletState'
+     |              `- error: value of type 'AccountFinalStateEvents' has no member 'updatedWalletState'
+submodules/TelegramCore/Sources/Account/AccountIntermediateState.swift:1103:63: error: cannot convert value of type 'StarsAmount' to expected argument type '[WalletTransferUpdate]'
+     |                                                               `- error: cannot convert value of type 'StarsAmount' to expected argument type '[WalletTransferUpdate]'
+submodules/TelegramCore/Sources/Account/AccountIntermediateState.swift:1104:65: error: cannot convert value of type 'StarsAmount' to expected argument type '[WalletTonConnectEvent]'
+     |                                                                 `- error: cannot convert value of type 'StarsAmount' to expected argument type '[WalletTonConnectEvent]'
+submodules/TelegramCore/Sources/Account/AccountIntermediateState.swift:1103:41: error: value of type 'AccountFinalStateEvents' has no member 'walletTransferUpdates'
+     |                                         `- error: value of type 'AccountFinalStateEvents' has no member 'walletTransferUpdates'
+submodules/TelegramCore/Sources/Account/AccountIntermediateState.swift:1103:71: error: value of type 'AccountFinalStateEvents' has no member 'walletTransferUpdates'
+     |                                                                       `- error: value of type 'AccountFinalStateEvents' has no member 'walletTransferUpdates'
+submodules/TelegramCore/Sources/Account/AccountIntermediateState.swift:1104:42: error: value of type 'AccountFinalStateEvents' has no member 'walletTonConnectEvents'
+     |                                          `- error: value of type 'AccountFinalStateEvents' has no member 'walletTonConnectEvents'
+submodules/TelegramCore/Sources/Account/AccountIntermediateState.swift:1104:73: error: value of type 'AccountFinalStateEvents' has no member 'walletTonConnectEvents'
+     |                                                                         `- error: value of type 'AccountFinalStateEvents' has no member 'walletTonConnectEvents'
+submodules/TelegramCore/Sources/Account/AccountIntermediateState.swift:1105:39: error: value of type 'AccountFinalStateEvents' has no member 'updatedWalletState'
+     |                                       `- error: value of type 'AccountFinalStateEvents' has no member 'updatedWalletState'
+submodules/TelegramCore/Sources/Account/AccountIntermediateState.swift:1105:66: error: value of type 'AccountFinalStateEvents' has no member 'updatedWalletState'
+     |                                                                  `- error: value of type 'AccountFinalStateEvents' has no member 'updatedWalletState'
+submodules/TelegramCore/Sources/State/AccountStateManagementUtils.swift:6132:37: error: missing arguments for parameters 'walletTransferUpdates', 'walletTonConnectEvents', 'updatedWalletState' in call
+     |                                     `- error: missing arguments for parameters 'walletTransferUpdates', 'walletTonConnectEvents', 'updatedWalletState' in call
+submodules/TelegramCore/Sources/State/AccountStateManager.swift:1204:40: error: value of type 'AccountFinalStateEvents' has no member 'walletTransferUpdates'
+     |                                        `- error: value of type 'AccountFinalStateEvents' has no member 'walletTransferUpdates'
+submodules/TelegramCore/Sources/TelegramEngine/Wallet/WalletPendingTransferMessages.swift:130:21: error: ambiguous use of 'isEqual(to:)'
+    |                     `- error: ambiguous use of 'isEqual(to:)'
+submodules/TelegramCore/Sources/TelegramEngine/Wallet/WalletPendingTransferMessages.swift:282:21: error: ambiguous use of 'isEqual(to:)'
+    |                     `- error: ambiguous use of 'isEqual(to:)'
+submodules/TelegramCore/Sources/TelegramEngine/Wallet/WalletPendingTransferMessages.swift:301:40: error: incorrect argument label in call (have 'chainTraceId:', expected 'transactionId:')
+    |                                        `- error: incorrect argument label in call (have 'chainTraceId:', expected 'transactionId:')
+submodules/TelegramCore/Sources/TelegramEngine/Wallet/WalletTonConnect.swift:409:26: error: tuple pattern has the wrong length for tuple type '(Int32, String)'
+    |                          `- error: tuple pattern has the wrong length for tuple type '(Int32, String)'
+ERROR: /Users/runner/work/AirGram-iOS/AirGram-iOS/submodules/TelegramUIPreferences/BUILD:3:14 Linking submodules/TelegramUIPreferences/libTelegramUIPreferences.a failed: (Exit 1): worker failed: error executing SwiftDeriveFiles command (from target //submodules/TelegramCore:TelegramCore) 
+ERROR: Build did NOT complete successfully
+FAILED: 
+Traceback (most recent call last):
+--- end of full build log ---
+[3,011 / 8,613] Generating derived files for Swift module //submodules/TelegramCore:TelegramCore; 47s disk-cache, worker ... (3 actions, 2 running)
+[3,012 / 8,613] Generating derived files for Swift module //submodules/TelegramCore:TelegramCore; 49s disk-cache, worker ... (3 actions running)
+INFO: From Compiling submodules/AnimationCompression/DctHuffman/Sources/DctHuffman.mm:
+submodules/AnimationCompression/DctHuffman/Sources/DctHuffman.mm:319:25: warning: variable 'byteno' set but not used [-Wunused-but-set-variable]
+  319 |     static unsigned int byteno = 0;
+      |                         ^
+1 warning generated.
+[3,014 / 8,613] Generating derived files for Swift module //submodules/TelegramCore:TelegramCore; 50s disk-cache, worker ... (3 actions running)
+[3,015 / 8,613] Generating derived files for Swift module //submodules/TelegramCore:TelegramCore; 51s disk-cache, worker ... (3 actions, 2 running)
+[3,016 / 8,613] Generating derived files for Swift module //submodules/TelegramCore:TelegramCore; 53s disk-cache, worker ... (3 actions, 2 running)
+[3,017 / 8,613] Generating derived files for Swift module //submodules/TelegramCore:TelegramCore; 54s disk-cache, worker ... (3 actions, 2 running)
+[3,017 / 8,613] Generating derived files for Swift module //submodules/TelegramCore:TelegramCore; 55s disk-cache, worker ... (3 actions running)
+[3,018 / 8,613] Generating derived files for Swift module //submodules/TelegramCore:TelegramCore; 57s disk-cache, worker ... (3 actions running)
+[3,019 / 8,613] Generating derived files for Swift module //submodules/TelegramCore:TelegramCore; 59s disk-cache, worker ... (3 actions, 2 running)
+INFO: From Compiling submodules/WebPBinding/Sources/UIImage+WebP.m:
+submodules/WebPBinding/Sources/UIImage+WebP.m:87:148: warning: bitwise operation between different enumeration types ('enum CGImageAlphaInfo' and 'enum CGBitmapInfo') [-Wenum-enum-conversion]
+   87 |     CGContextRef context = CGBitmapContextCreate(rawData, width, height, bitsPerComponent, bytesPerRow, colorSpace, kCGImageAlphaPremultipliedLast | kCGBitmapByteOrder32Big);
+      |                                                                                                                     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ^ ~~~~~~~~~~~~~~~~~~~~~~~
+1 warning generated.
+[3,022 / 8,613] Generating derived files for Swift module //submodules/TelegramCore:TelegramCore; 60s disk-cache, worker ... (3 actions, 2 running)
+[3,023 / 8,613] Generating derived files for Swift module //submodules/TelegramCore:TelegramCore; 62s disk-cache, worker ... (3 actions running)
+[3,024 / 8,613] Generating derived files for Swift module //submodules/TelegramCore:TelegramCore; 63s disk-cache, worker ... (3 actions, 2 running)
+[3,024 / 8,613] Generating derived files for Swift module //submodules/TelegramCore:TelegramCore; 65s disk-cache, worker ... (3 actions running)
+[3,025 / 8,613] Generating derived files for Swift module //submodules/TelegramCore:TelegramCore; 66s disk-cache, worker ... (3 actions, 2 running)
+ERROR: /Users/runner/work/AirGram-iOS/AirGram-iOS/submodules/TelegramCore/BUILD:3:14: Generating derived files for Swift module //submodules/TelegramCore:TelegramCore failed: (Exit 1): worker failed: error executing SwiftDeriveFiles command (from target //submodules/TelegramCore:TelegramCore) 
+  (cd /private/var/tmp/_bazel_containerhost/c259e0c7803e089724afaeab1cf94801/execroot/_main && \
+  exec env - \
+    APPLE_SDK_PLATFORM=iPhoneOS \
+    APPLE_SDK_VERSION_OVERRIDE=26.4 \
+    PATH=/usr/bin:/bin:/usr/sbin:/sbin \
+    XCODE_VERSION_OVERRIDE=26.4.1.17E202 \
+    ZERO_AR_DATE=1 \
+  bazel-out/darwin_arm64-opt-exec-ST-d57f47055a04/bin/external/rules_swift+/tools/worker/worker swiftc @bazel-out/ios_arm64-opt-ios-arm64-min13.0-ST-2d46267cd7fb/bin/submodules/TelegramCore/TelegramCore.swiftmodule-0.params)
+# Configuration: 9e8977af21ff3c8d30b9791c73c13acc47092cc99094c1d97e61282cda0e5d53
+# Execution platform: @@platforms//host:host
+submodules/TelegramCore/Sources/Account/AccountIntermediateState.swift:916:9: error: invalid redeclaration of 'walletTransferUpdates'
+ 911 |     let updatedStarsBalance: [PeerId: StarsAmount]
+ 912 |     let updatedTonBalance: [PeerId: StarsAmount]
+ 913 |     let walletTransferUpdates: [WalletTransferUpdate]
+     |         `- note: 'walletTransferUpdates' previously declared here
+ 914 |     let walletTonConnectEvents: [WalletTonConnectEvent]
+ 915 |     let updatedWalletState: Api.WalletState?
+ 916 |     let walletTransferUpdates: [WalletTransferUpdate]
+     |         `- error: invalid redeclaration of 'walletTransferUpdates'
+ 917 |     let walletTonConnectEvents: [WalletTonConnectEvent]
+ 918 |     let updatedWalletState: Api.WalletState?
+
+submodules/TelegramCore/Sources/Account/AccountIntermediateState.swift:917:9: error: invalid redeclaration of 'walletTonConnectEvents'
+ 912 |     let updatedTonBalance: [PeerId: StarsAmount]
+ 913 |     let walletTransferUpdates: [WalletTransferUpdate]
+ 914 |     let walletTonConnectEvents: [WalletTonConnectEvent]
+     |         `- note: 'walletTonConnectEvents' previously declared here
+ 915 |     let updatedWalletState: Api.WalletState?
+ 916 |     let walletTransferUpdates: [WalletTransferUpdate]
+ 917 |     let walletTonConnectEvents: [WalletTonConnectEvent]
+     |         `- error: invalid redeclaration of 'walletTonConnectEvents'
+ 918 |     let updatedWalletState: Api.WalletState?
+ 919 |     let updatedStarsRevenueStatus: [PeerId: StarsRevenueStats.Balances]
+
+submodules/TelegramCore/Sources/Account/AccountIntermediateState.swift:918:9: error: invalid redeclaration of 'updatedWalletState'
+ 913 |     let walletTransferUpdates: [WalletTransferUpdate]
+ 914 |     let walletTonConnectEvents: [WalletTonConnectEvent]
+ 915 |     let updatedWalletState: Api.WalletState?
+     |         `- note: 'updatedWalletState' previously declared here
+ 916 |     let walletTransferUpdates: [WalletTransferUpdate]
+ 917 |     let walletTonConnectEvents: [WalletTonConnectEvent]
+ 918 |     let updatedWalletState: Api.WalletState?
+     |         `- error: invalid redeclaration of 'updatedWalletState'
+ 919 |     let updatedStarsRevenueStatus: [PeerId: StarsRevenueStats.Balances]
+ 920 |     let sentScheduledMessageIds: Set<MessageId>
+
+submodules/TelegramCore/Sources/Account/AccountIntermediateState.swift:964:1247: error: value of type 'AccountFinalStateEvents' has no member 'walletTransferUpdates'
+ 962 |     
+ 963 |     var isEmpty: Bool {
+ 964 |         return self.addedIncomingMessageIds.isEmpty && self.addedReactionEvents.isEmpty && self.wasScheduledMessageIds.isEmpty && self.deletedMessageIds.isEmpty && self.sentScheduledMessageIds.isEmpty && self.updatedTypingActivities.isEmpty && self.updatedWebpages.isEmpty && self.updatedCalls.isEmpty && self.addedCallSignalingData.isEmpty && self.updatedGroupCallParticipants.isEmpty && self.groupCallMessageUpdates.isEmpty && self.storyUpdates.isEmpty && self.updatedPeersNearby?.isEmpty ?? true && self.isContactUpdates.isEmpty && self.displayAlerts.isEmpty && self.dismissBotWebViews.isEmpty && self.delayNotificatonsUntil == nil && self.updatedMaxMessageId == nil && self.updatedQts == nil && self.externallyUpdatedPeerId.isEmpty && !authorizationListUpdated && self.updatedIncomingThreadReadStates.isEmpty && self.updatedOutgoingThreadReadStates.isEmpty && !self.updateConfig && !self.isPremiumUpdated && self.updatedStarsBalance.isEmpty && self.updatedTonBalance.isEmpty && self.updatedStarsRevenueStatus.isEmpty && self.reportMessageDelivery.isEmpty && self.addedConferenceInvitationMessagesIds.isEmpty && self.updatedStarGiftAuctionState.isEmpty && self.updatedStarGiftAuctionMyState.isEmpty && self.updatedEmojiGameInfo == nil && self.walletTransferUpdates.isEmpty && self.walletTonConnectEvents.isEmpty && self.updatedWalletState == nil
+     |                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               `- error: value of type 'AccountFinalStateEvents' has no member 'walletTransferUpdates'
+ 965 |     }
+ 966 |     
+
+submodules/TelegramCore/Sources/Account/AccountIntermediateState.swift:964:1285: error: value of type 'AccountFinalStateEvents' has no member 'walletTonConnectEvents'
+ 962 |     
+ 963 |     var isEmpty: Bool {
+ 964 |         return self.addedIncomingMessageIds.isEmpty && self.addedReactionEvents.isEmpty && self.wasScheduledMessageIds.isEmpty && self.deletedMessageIds.isEmpty && self.sentScheduledMessageIds.isEmpty && self.updatedTypingActivities.isEmpty && self.updatedWebpages.isEmpty && self.updatedCalls.isEmpty && self.addedCallSignalingData.isEmpty && self.updatedGroupCallParticipants.isEmpty && self.groupCallMessageUpdates.isEmpty && self.storyUpdates.isEmpty && self.updatedPeersNearby?.isEmpty ?? true && self.isContactUpdates.isEmpty && self.displayAlerts.isEmpty && self.dismissBotWebViews.isEmpty && self.delayNotificatonsUntil == nil && self.updatedMaxMessageId == nil && self.updatedQts == nil && self.externallyUpdatedPeerId.isEmpty && !authorizationListUpdated && self.updatedIncomingThreadReadStates.isEmpty && self.updatedOutgoingThreadReadStates.isEmpty && !self.updateConfig && !self.isPremiumUpdated && self.updatedStarsBalance.isEmpty && self.updatedTonBalance.isEmpty && self.updatedStarsRevenueStatus.isEmpty && self.reportMessageDelivery.isEmpty && self.addedConferenceInvitationMessagesIds.isEmpty && self.updatedStarGiftAuctionState.isEmpty && self.updatedStarGiftAuctionMyState.isEmpty && self.updatedEmojiGameInfo == nil && self.walletTransferUpdates.isEmpty && self.walletTonConnectEvents.isEmpty && self.updatedWalletState == nil
+     |                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     `- error: value of type 'AccountFinalStateEvents' has no member 'walletTonConnectEvents'
+ 965 |     }
+ 966 |     
+
+submodules/TelegramCore/Sources/Account/AccountIntermediateState.swift:964:1324: error: value of type 'AccountFinalStateEvents' has no member 'updatedWalletState'
+ 962 |     
+ 963 |     var isEmpty: Bool {
+ 964 |         return self.addedIncomingMessageIds.isEmpty && self.addedReactionEvents.isEmpty && self.wasScheduledMessageIds.isEmpty && self.deletedMessageIds.isEmpty && self.sentScheduledMessageIds.isEmpty && self.updatedTypingActivities.isEmpty && self.updatedWebpages.isEmpty && self.updatedCalls.isEmpty && self.addedCallSignalingData.isEmpty && self.updatedGroupCallParticipants.isEmpty && self.groupCallMessageUpdates.isEmpty && self.storyUpdates.isEmpty && self.updatedPeersNearby?.isEmpty ?? true && self.isContactUpdates.isEmpty && self.displayAlerts.isEmpty && self.dismissBotWebViews.isEmpty && self.delayNotificatonsUntil == nil && self.updatedMaxMessageId == nil && self.updatedQts == nil && self.externallyUpdatedPeerId.isEmpty && !authorizationListUpdated && self.updatedIncomingThreadReadStates.isEmpty && self.updatedOutgoingThreadReadStates.isEmpty && !self.updateConfig && !self.isPremiumUpdated && self.updatedStarsBalance.isEmpty && self.updatedTonBalance.isEmpty && self.updatedStarsRevenueStatus.isEmpty && self.reportMessageDelivery.isEmpty && self.addedConferenceInvitationMessagesIds.isEmpty && self.updatedStarGiftAuctionState.isEmpty && self.updatedStarGiftAuctionMyState.isEmpty && self.updatedEmojiGameInfo == nil && self.walletTransferUpdates.isEmpty && self.walletTonConnectEvents.isEmpty && self.updatedWalletState == nil
+     |                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            `- error: value of type 'AccountFinalStateEvents' has no member 'updatedWalletState'
+ 965 |     }
+ 966 |     
+
+submodules/TelegramCore/Sources/Account/AccountIntermediateState.swift:994:14: error: value of type 'AccountFinalStateEvents' has no member 'walletTransferUpdates'
+ 992 |         self.updatedStarsBalance = updatedStarsBalance
+ 993 |         self.updatedTonBalance = updatedTonBalance
+ 994 |         self.walletTransferUpdates = walletTransferUpdates
+     |              `- error: value of type 'AccountFinalStateEvents' has no member 'walletTransferUpdates'
+ 995 |         self.walletTonConnectEvents = walletTonConnectEvents
+ 996 |         self.updatedWalletState = updatedWalletState
+
+submodules/TelegramCore/Sources/Account/AccountIntermediateState.swift:995:14: error: value of type 'AccountFinalStateEvents' has no member 'walletTonConnectEvents'
+ 993 |         self.updatedTonBalance = updatedTonBalance
+ 994 |         self.walletTransferUpdates = walletTransferUpdates
+ 995 |         self.walletTonConnectEvents = walletTonConnectEvents
+     |              `- error: value of type 'AccountFinalStateEvents' has no member 'walletTonConnectEvents'
+ 996 |         self.updatedWalletState = updatedWalletState
+ 997 |         self.updatedStarsRevenueStatus = updatedStarsRevenueStatus
+
+submodules/TelegramCore/Sources/Account/AccountIntermediateState.swift:996:14: error: value of type 'AccountFinalStateEvents' has no member 'updatedWalletState'
+ 994 |         self.walletTransferUpdates = walletTransferUpdates
+ 995 |         self.walletTonConnectEvents = walletTonConnectEvents
+ 996 |         self.updatedWalletState = updatedWalletState
+     |              `- error: value of type 'AccountFinalStateEvents' has no member 'updatedWalletState'
+ 997 |         self.updatedStarsRevenueStatus = updatedStarsRevenueStatus
+ 998 |         self.sentScheduledMessageIds = sentScheduledMessageIds
+
+submodules/TelegramCore/Sources/Account/AccountIntermediateState.swift:1103:63: error: cannot convert value of type 'StarsAmount' to expected argument type '[WalletTransferUpdate]'
+1101 |             updatedStarsBalance: self.updatedStarsBalance.merging(other.updatedStarsBalance, uniquingKeysWith: { lhs, _ in lhs }),
+1102 |             updatedTonBalance: self.updatedTonBalance.merging(other.updatedTonBalance, uniquingKeysWith: { lhs, _ in lhs }),
+1103 |             walletTransferUpdates: self.walletTransferUpdates + other.walletTransferUpdates,
+     |                                                               `- error: cannot convert value of type 'StarsAmount' to expected argument type '[WalletTransferUpdate]'
+1104 |             walletTonConnectEvents: self.walletTonConnectEvents + other.walletTonConnectEvents,
+1105 |             updatedWalletState: other.updatedWalletState ?? self.updatedWalletState,
+
+submodules/TelegramCore/Sources/Account/AccountIntermediateState.swift:1104:65: error: cannot convert value of type 'StarsAmount' to expected argument type '[WalletTonConnectEvent]'
+1102 |             updatedTonBalance: self.updatedTonBalance.merging(other.updatedTonBalance, uniquingKeysWith: { lhs, _ in lhs }),
+1103 |             walletTransferUpdates: self.walletTransferUpdates + other.walletTransferUpdates,
+1104 |             walletTonConnectEvents: self.walletTonConnectEvents + other.walletTonConnectEvents,
+     |                                                                 `- error: cannot convert value of type 'StarsAmount' to expected argument type '[WalletTonConnectEvent]'
+1105 |             updatedWalletState: other.updatedWalletState ?? self.updatedWalletState,
+1106 |             updatedStarsRevenueStatus: self.updatedStarsRevenueStatus.merging(other.updatedStarsRevenueStatus, uniquingKeysWith: { lhs, _ in lhs }),
+
+submodules/TelegramCore/Sources/Account/AccountIntermediateState.swift:1103:41: error: value of type 'AccountFinalStateEvents' has no member 'walletTransferUpdates'
+1101 |             updatedStarsBalance: self.updatedStarsBalance.merging(other.updatedStarsBalance, uniquingKeysWith: { lhs, _ in lhs }),
+1102 |             updatedTonBalance: self.updatedTonBalance.merging(other.updatedTonBalance, uniquingKeysWith: { lhs, _ in lhs }),
+1103 |             walletTransferUpdates: self.walletTransferUpdates + other.walletTransferUpdates,
+     |                                         `- error: value of type 'AccountFinalStateEvents' has no member 'walletTransferUpdates'
+1104 |             walletTonConnectEvents: self.walletTonConnectEvents + other.walletTonConnectEvents,
+1105 |             updatedWalletState: other.updatedWalletState ?? self.updatedWalletState,
+
+submodules/TelegramCore/Sources/Account/AccountIntermediateState.swift:1103:71: error: value of type 'AccountFinalStateEvents' has no member 'walletTransferUpdates'
+1101 |             updatedStarsBalance: self.updatedStarsBalance.merging(other.updatedStarsBalance, uniquingKeysWith: { lhs, _ in lhs }),
+1102 |             updatedTonBalance: self.updatedTonBalance.merging(other.updatedTonBalance, uniquingKeysWith: { lhs, _ in lhs }),
+1103 |             walletTransferUpdates: self.walletTransferUpdates + other.walletTransferUpdates,
+     |                                                                       `- error: value of type 'AccountFinalStateEvents' has no member 'walletTransferUpdates'
+1104 |             walletTonConnectEvents: self.walletTonConnectEvents + other.walletTonConnectEvents,
+1105 |             updatedWalletState: other.updatedWalletState ?? self.updatedWalletState,
+
+submodules/TelegramCore/Sources/Account/AccountIntermediateState.swift:1104:42: error: value of type 'AccountFinalStateEvents' has no member 'walletTonConnectEvents'
+1102 |             updatedTonBalance: self.updatedTonBalance.merging(other.updatedTonBalance, uniquingKeysWith: { lhs, _ in lhs }),
+1103 |             walletTransferUpdates: self.walletTransferUpdates + other.walletTransferUpdates,
+1104 |             walletTonConnectEvents: self.walletTonConnectEvents + other.walletTonConnectEvents,
+     |                                          `- error: value of type 'AccountFinalStateEvents' has no member 'walletTonConnectEvents'
+1105 |             updatedWalletState: other.updatedWalletState ?? self.updatedWalletState,
+1106 |             updatedStarsRevenueStatus: self.updatedStarsRevenueStatus.merging(other.updatedStarsRevenueStatus, uniquingKeysWith: { lhs, _ in lhs }),
+
+submodules/TelegramCore/Sources/Account/AccountIntermediateState.swift:1104:73: error: value of type 'AccountFinalStateEvents' has no member 'walletTonConnectEvents'
+1102 |             updatedTonBalance: self.updatedTonBalance.merging(other.updatedTonBalance, uniquingKeysWith: { lhs, _ in lhs }),
+1103 |             walletTransferUpdates: self.walletTransferUpdates + other.walletTransferUpdates,
+1104 |             walletTonConnectEvents: self.walletTonConnectEvents + other.walletTonConnectEvents,
+     |                                                                         `- error: value of type 'AccountFinalStateEvents' has no member 'walletTonConnectEvents'
+1105 |             updatedWalletState: other.updatedWalletState ?? self.updatedWalletState,
+1106 |             updatedStarsRevenueStatus: self.updatedStarsRevenueStatus.merging(other.updatedStarsRevenueStatus, uniquingKeysWith: { lhs, _ in lhs }),
+
+submodules/TelegramCore/Sources/Account/AccountIntermediateState.swift:1105:39: error: value of type 'AccountFinalStateEvents' has no member 'updatedWalletState'
+1103 |             walletTransferUpdates: self.walletTransferUpdates + other.walletTransferUpdates,
+1104 |             walletTonConnectEvents: self.walletTonConnectEvents + other.walletTonConnectEvents,
+1105 |             updatedWalletState: other.updatedWalletState ?? self.updatedWalletState,
+     |                                       `- error: value of type 'AccountFinalStateEvents' has no member 'updatedWalletState'
+1106 |             updatedStarsRevenueStatus: self.updatedStarsRevenueStatus.merging(other.updatedStarsRevenueStatus, uniquingKeysWith: { lhs, _ in lhs }),
+1107 |             sentScheduledMessageIds: sentScheduledMessageIds,
+
+submodules/TelegramCore/Sources/Account/AccountIntermediateState.swift:1105:66: error: value of type 'AccountFinalStateEvents' has no member 'updatedWalletState'
+1103 |             walletTransferUpdates: self.walletTransferUpdates + other.walletTransferUpdates,
+1104 |             walletTonConnectEvents: self.walletTonConnectEvents + other.walletTonConnectEvents,
+1105 |             updatedWalletState: other.updatedWalletState ?? self.updatedWalletState,
+     |                                                                  `- error: value of type 'AccountFinalStateEvents' has no member 'updatedWalletState'
+1106 |             updatedStarsRevenueStatus: self.updatedStarsRevenueStatus.merging(other.updatedStarsRevenueStatus, uniquingKeysWith: { lhs, _ in lhs }),
+1107 |             sentScheduledMessageIds: sentScheduledMessageIds,
+
+submodules/TelegramCore/Sources/State/AccountStateManagementUtils.swift:6132:37: error: missing arguments for parameters 'walletTransferUpdates', 'walletTonConnectEvents', 'updatedWalletState' in call
+6130 |     }
+6131 |     
+6132 |     return AccountReplayedFinalState(
+     |                                     `- error: missing arguments for parameters 'walletTransferUpdates', 'walletTonConnectEvents', 'updatedWalletState' in call
+6133 |         state: finalState,
+6134 |         addedIncomingMessageIds: addedIncomingMessageIds,
+
+submodules/TelegramCore/Sources/Account/AccountIntermediateState.swift:890:8: note: 'init(state:addedIncomingMessageIds:addedReactionEvents:wasScheduledMessageIds:addedSecretMessageIds:deletedMessageIds:updatedTypingActivities:updatedWebpages:updatedCalls:addedCallSignalingData:updatedGroupCallParticipants:groupCallMessageUpdates:storyUpdates:updatedPeersNearby:isContactUpdates:delayNotificatonsUntil:updatedIncomingThreadReadStates:updatedOutgoingThreadReadStates:updateConfig:isPremiumUpdated:updatedStarsBalance:updatedTonBalance:walletTransferUpdates:walletTonConnectEvents:updatedWalletState:walletTransferUpdates:walletTonConnectEvents:updatedWalletState:updatedStarsRevenueStatus:sentScheduledMessageIds:reportMessageDelivery:addedConferenceInvitationMessagesIds:updatedStarGiftAuctionState:updatedStarGiftAuctionMyState:updatedEmojiGameInfo:)' declared here
+ 888 | }
+ 889 | 
+ 890 | struct AccountReplayedFinalState {
+     |        `- note: 'init(state:addedIncomingMessageIds:addedReactionEvents:wasScheduledMessageIds:addedSecretMessageIds:deletedMessageIds:updatedTypingActivities:updatedWebpages:updatedCalls:addedCallSignalingData:updatedGroupCallParticipants:groupCallMessageUpdates:storyUpdates:updatedPeersNearby:isContactUpdates:delayNotificatonsUntil:updatedIncomingThreadReadStates:updatedOutgoingThreadReadStates:updateConfig:isPremiumUpdated:updatedStarsBalance:updatedTonBalance:walletTransferUpdates:walletTonConnectEvents:updatedWalletState:walletTransferUpdates:walletTonConnectEvents:updatedWalletState:updatedStarsRevenueStatus:sentScheduledMessageIds:reportMessageDelivery:addedConferenceInvitationMessagesIds:updatedStarGiftAuctionState:updatedStarGiftAuctionMyState:updatedEmojiGameInfo:)' declared here
+ 891 |     let state: AccountFinalState
+ 892 |     let addedIncomingMessageIds: [MessageId]
+
+submodules/TelegramCore/Sources/State/AccountStateManager.swift:1204:40: error: value of type 'AccountFinalStateEvents' has no member 'walletTransferUpdates'
+1202 |                                 strongSelf.notifyUpdatedTonBalance(events.updatedTonBalance)
+1203 |                             }
+1204 |                             if !events.walletTransferUpdates.isEmpty {
+     |                                        `- error: value of type 'AccountFinalStateEvents' has no member 'walletTransferUpdates'
+1205 |                                 strongSelf.walletTransferUpdatesPipe.putNext(events.walletTransferUpdates)
+1206 |                             }
+
+submodules/TelegramCore/Sources/TelegramEngine/Wallet/WalletPendingTransferMessages.swift:130:21: error: ambiguous use of 'isEqual(to:)'
+128 |               let serverId = mappings[randomId], serverId > 0 else { continue }
+129 |         let updated = pending.resolving(serverMessageId: serverId)
+130 |         if !updated.isEqual(to: pending) {
+    |                     `- error: ambiguous use of 'isEqual(to:)'
+131 |             updatePendingWalletTransferMessage(transaction: transaction, id: entry.id, attribute: updated)
+132 |         }
+    :
+379 |     }
+380 | 
+381 |     public func isEqual(to other: MessageAttribute) -> Bool {
+    |                 `- note: found this candidate 
+382 |         guard let other = other as? PendingWalletTransferMessageAttribute else {
+383 |             return false
+    :
+386 |     }
+387 | 
+388 |     public func isEqual(to other: PendingMessageActionData) -> Bool {
+    |                 `- note: found this candidate 
+389 |         guard let other = other as? PendingWalletTransferMessageAttribute else {
+390 |             return false
+
+submodules/TelegramCore/Sources/TelegramEngine/Wallet/WalletPendingTransferMessages.swift:282:21: error: ambiguous use of 'isEqual(to:)'
+280 |         }
+281 |         let updated = pending.resolving(transactionId: transactionId)
+282 |         if !updated.isEqual(to: pending) {
+    |                     `- error: ambiguous use of 'isEqual(to:)'
+283 |             updatePendingWalletTransferMessage(transaction: transaction, id: reference.messageId, attribute: updated)
+284 |         }
+    :
+379 |     }
+380 | 
+381 |     public func isEqual(to other: MessageAttribute) -> Bool {
+    |                 `- note: found this candidate 
+382 |         guard let other = other as? PendingWalletTransferMessageAttribute else {
+383 |             return false
+    :
+386 |     }
+387 | 
+388 |     public func isEqual(to other: PendingMessageActionData) -> Bool {
+    |                 `- note: found this candidate 
+389 |         guard let other = other as? PendingWalletTransferMessageAttribute else {
+390 |             return false
+
+submodules/TelegramCore/Sources/TelegramEngine/Wallet/WalletPendingTransferMessages.swift:301:40: error: incorrect argument label in call (have 'chainTraceId:', expected 'transactionId:')
+299 |             return
+300 |         }
+301 |         let updated = pending.resolving(chainTraceId: chainTraceId)
+    |                                        `- error: incorrect argument label in call (have 'chainTraceId:', expected 'transactionId:')
+302 |         if !updated.isEqual(to: pending) {
+303 |             updatePendingWalletTransferMessage(transaction: transaction, id: reference.messageId, attribute: updated)
+
+submodules/TelegramCore/Sources/TelegramEngine/Wallet/WalletTonConnect.swift:409:26: error: tuple pattern has the wrong length for tuple type '(Int32, String)'
+407 |         for media in message.media {
+408 |             if let action = media as? TelegramMediaAction,
+409 |                case let .walletTonConnectRequest(flags, sessionId, expires, topic, traceId, dappName) = action.action {
+    |                          `- error: tuple pattern has the wrong length for tuple type '(Int32, String)'
+410 |                 events.append(.request(WalletTonConnectRequestMessage(messageId: id, flags: flags, sessionId: sessionId, expires: expires, topic: topic, traceId: traceId, dappName: dappName)))
+411 |                 break
+[3,029 / 8,613] checking cached actions
+Target //Telegram:telegram_auth_build_test failed to build
+ERROR: /Users/runner/work/AirGram-iOS/AirGram-iOS/submodules/TelegramUIPreferences/BUILD:3:14 Linking submodules/TelegramUIPreferences/libTelegramUIPreferences.a failed: (Exit 1): worker failed: error executing SwiftDeriveFiles command (from target //submodules/TelegramCore:TelegramCore) 
+  (cd /private/var/tmp/_bazel_containerhost/c259e0c7803e089724afaeab1cf94801/execroot/_main && \
+  exec env - \
+    APPLE_SDK_PLATFORM=iPhoneOS \
+    APPLE_SDK_VERSION_OVERRIDE=26.4 \
+    PATH=/usr/bin:/bin:/usr/sbin:/sbin \
+    XCODE_VERSION_OVERRIDE=26.4.1.17E202 \
+    ZERO_AR_DATE=1 \
+  bazel-out/darwin_arm64-opt-exec-ST-d57f47055a04/bin/external/rules_swift+/tools/worker/worker swiftc @bazel-out/ios_arm64-opt-ios-arm64-min13.0-ST-2d46267cd7fb/bin/submodules/TelegramCore/TelegramCore.swiftmodule-0.params)
+# Configuration: 9e8977af21ff3c8d30b9791c73c13acc47092cc99094c1d97e61282cda0e5d53
+# Execution platform: @@platforms//host:host
+INFO: Elapsed time: 1048.140s, Critical Path: 475.62s
+INFO: 3029 processes: 2082 internal, 798 local, 149 worker.
+ERROR: Build did NOT complete successfully
+FAILED: 
+INFO: Build Event Protocol files produced successfully.
+Traceback (most recent call last):
+  File "/Users/runner/work/AirGram-iOS/AirGram-iOS/build-system/Make/Make.py", line 1294, in <module>
+    build(bazel=bazel_path, arguments=args)
+    ~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/runner/work/AirGram-iOS/AirGram-iOS/build-system/Make/Make.py", line 650, in build
+    bazel_command_line.invoke_build()
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "/Users/runner/work/AirGram-iOS/AirGram-iOS/build-system/Make/Make.py", line 325, in invoke_build
+    call_executable(combined_arguments)
+    ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^
+  File "/Users/runner/work/AirGram-iOS/AirGram-iOS/build-system/Make/BuildEnvironment.py", line 104, in call_executable
+    subprocess.check_call(resolved_arguments, env=resolved_env)
+    ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/homebrew/Cellar/python@3.15/3.15.2/Frameworks/Python.framework/Versions/3.15/lib/python3.15/subprocess.py", line 534, in check_call
+    raise CalledProcessError(retcode, cmd)
+subprocess.CalledProcessError: Command ['/Users/runner/work/AirGram-iOS/AirGram-iOS/build-input/bazel-8.4.2-darwin-arm64', '--output_user_root=/private/var/tmp/_bazel_containerhost', 'build', 'Telegram/telegram_auth_build_test', '--announce_rc', '--features=swift.use_global_module_cache', '--verbose_failures', '--remote_cache_async', '--jobs=3', '--local_cpu_resources=3', '--worker_max_instances=3', '--spawn_strategy=worker,local', '--strategy=SwiftCompile=worker,local', '--strategy=ObjcCompile=worker,local', '--strategy=Genrule=standalone', '--worker_quit_after_build=false', '--define=buildNumber=2903', '--features=swift.split_derived_files_generation', '--disk_cache=/private/var/tmp/_bazel_containerhost/disk_cache', '-c', 'opt', '--ios_multi_cpus=arm64', '--watchos_cpus=arm64_32', '--apple_generate_dsym', '--features=swift.opt_uses_wmo', '--features=swift.opt_uses_osize', '--features=dead_strip', '--objc_enable_binary_stripping', '--build_event_json_file=/var/folders/q2/p1t6rgxj5fj32g1dc7dmd49r0000gn/T/airgram-build-events.json'] returned non-zero exit status 1.
