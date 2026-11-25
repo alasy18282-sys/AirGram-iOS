@@ -1030,6 +1030,9 @@ struct AccountFinalStateEvents {
         self.isPremiumUpdated = state.isPremiumUpdated
         self.updatedStarsBalance = state.updatedStarsBalance
         self.updatedTonBalance = state.updatedTonBalance
+        self.walletTransferUpdates = state.walletTransferUpdates
+        self.walletTonConnectEvents = state.walletTonConnectEvents
+        self.updatedWalletState = state.updatedWalletState
         self.updatedStarsRevenueStatus = state.updatedStarsRevenueStatus
         self.sentScheduledMessageIds = state.sentScheduledMessageIds
         self.reportMessageDelivery = state.reportMessageDelivery
