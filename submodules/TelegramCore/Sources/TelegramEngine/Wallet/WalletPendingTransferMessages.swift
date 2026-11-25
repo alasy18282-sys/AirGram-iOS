@@ -385,6 +385,18 @@ public final class PendingWalletTransferMessageAttribute: MessageAttribute, Pend
         return self.isEqual(to: other as PendingMessageActionData)
     }
 
+    func isEqual(to other: PendingWalletTransferMessageAttribute) -> Bool {
+        return self.operationId == other.operationId
+            && self.expiresAt == other.expiresAt
+            && self.previousMessageId == other.previousMessageId
+            && self.msgHash == other.msgHash
+            && self.receivedAt == other.receivedAt
+            && self.resolvedMessageId == other.resolvedMessageId
+            && self.transactionId == other.transactionId
+            && self.chainTraceId == other.chainTraceId
+            && self.serverMessageId == other.serverMessageId
+    }
+
     public func isEqual(to other: PendingMessageActionData) -> Bool {
         guard let other = other as? PendingWalletTransferMessageAttribute else {
             return false
@@ -406,6 +418,10 @@ public final class PendingWalletTransferMessageAttribute: MessageAttribute, Pend
 
     func resolving(transactionId: String) -> PendingWalletTransferMessageAttribute {
         return PendingWalletTransferMessageAttribute(operationId: self.operationId, expiresAt: self.expiresAt, previousMessageId: self.previousMessageId, msgHash: self.msgHash, receivedAt: self.receivedAt, resolvedMessageId: self.resolvedMessageId, transactionId: transactionId, chainTraceId: self.chainTraceId, serverMessageId: self.serverMessageId)
+    }
+
+    func resolving(chainTraceId: String) -> PendingWalletTransferMessageAttribute {
+        return PendingWalletTransferMessageAttribute(operationId: self.operationId, expiresAt: self.expiresAt, previousMessageId: self.previousMessageId, msgHash: self.msgHash, receivedAt: self.receivedAt, resolvedMessageId: self.resolvedMessageId, transactionId: self.transactionId, chainTraceId: chainTraceId, serverMessageId: self.serverMessageId)
     }
 
     func renewingPreparation(expiresAt: Int32) -> PendingWalletTransferMessageAttribute {

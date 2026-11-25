@@ -7,8 +7,8 @@ func telegramMediaActionFromApiAction(_ action: Api.MessageAction) -> TelegramMe
     switch action {
     case let .messageActionGramTransfer(data):
         return TelegramMediaAction(action: .gramTransfer(amount: data.amount, peerAddress: data.peerAddress, transactionId: data.transactionId, comment: data.comment, commentEncrypted: (data.flags & 1) != 0))
-    case .messageActionWalletTonConnectRequest:
-        return nil
+    case let .messageActionWalletTonConnectRequest(data):
+        return TelegramMediaAction(action: .walletTonConnectRequest(flags: data.flags, sessionId: data.sessionId, expires: data.expires, topic: data.topic, traceId: data.traceId, dappName: data.dappName))
     case let .messageActionChannelCreate(messageActionChannelCreateData):
         let title = messageActionChannelCreateData.title
         return TelegramMediaAction(action: .groupCreated(title: title))
