@@ -149,6 +149,8 @@ public struct Namespaces {
         public static let cachedChatThemes: Int8 = 50
         public static let cachedLiveStorySendAsPeers: Int8 = 51
         public static let cachedGiftUpgradesAttributes: Int8 = 52
+        public static let cachedExistingWaltBalance: Int8 = 53
+        public static let cachedWalletUserAddresses: Int8 = 54
     }
     
     public struct UnorderedItemList {
@@ -204,6 +206,7 @@ public extension PendingMessageActionType {
     static let readReactionOrPollVote = PendingMessageActionType(rawValue: 3)
     static let sendStarsReaction = PendingMessageActionType(rawValue: 4)
     static let sendPostponedPaidMessage = PendingMessageActionType(rawValue: 5)
+    static let walletTransfer = PendingMessageActionType(rawValue: 6)
 }
 
 public let peerIdNamespacesWithInitialCloudMessageHoles = [Namespaces.Peer.CloudUser, Namespaces.Peer.CloudGroup, Namespaces.Peer.CloudChannel]

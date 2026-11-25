@@ -22,6 +22,7 @@ public enum Api {
     public enum upload {}
     public enum users {}
     public enum wallet {}
+    public enum toncenter {}
     public enum functions {
         public enum account {}
         public enum auth {}
@@ -46,6 +47,7 @@ public enum Api {
         public enum upload {}
         public enum users {}
         public enum wallet {}
+        public enum toncenter {}
     }
 }
 
@@ -1618,6 +1620,8 @@ fileprivate let parsers: [Int32 : (BufferReader) -> Any?] = {
     dict[1352896014] = { return Api.Update.parse_updateWalletTonConnectSession($0) }
     dict[-772898407] = { return Api.Update.parse_updateWalletTonConnectPendingDisconnect($0) }
     dict[-1825969613] = { return Api.MessageAction.parse_messageActionGramTransfer($0) }
+    dict[428373505] = { return Api.toncenter.StreamingUrl.parse_streamingUrl($0) }
+    dict[-1399980519] = { return Api.toncenter.ApiResponse.parse_apiResponse($0) }
     dict[1773716671] = { return Api.MessageAction.parse_messageActionWalletTonConnectRequest($0) }
     dict[417867063] = { return Api.wallet.EncryptedSecretPhrasePart.parse_encryptedSecretPhrasePart($0) }
     dict[-1108800883] = { return Api.wallet.ExistingBalance.parse_existingBalance($0) }

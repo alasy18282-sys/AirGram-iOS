@@ -81,3 +81,11 @@ extension TelegramEngine.Wallet {
         return .single([])
     }
 }
+
+public enum WalletError: Error, Equatable, Sendable {
+    case generic
+    case invalidPassword
+    case twoStepAuthMissing
+    case publicKeyInvalid
+    case proofInvalid
+}

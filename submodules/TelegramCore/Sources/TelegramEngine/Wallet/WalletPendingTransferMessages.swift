@@ -305,3 +305,114 @@ func _internal_resolvePendingWalletTransferMessage(postbox: Postbox, reference: 
         reconcileStoredWalletTransferMessage(transaction: transaction, id: reference.messageId, pending: updated)
     }
 }
+
+
+public final class PendingWalletTransferMessageAttribute: MessageAttribute, PendingMessageActionData {
+    public let operationId: String
+    public let expiresAt: Int32
+    public let previousMessageId: Int32
+    public let msgHash: String?
+    public let receivedAt: Int32?
+    public let resolvedMessageId: String?
+    public let transactionId: String?
+    public let chainTraceId: String?
+    public let serverMessageId: Int32?
+
+    init(operationId: String, expiresAt: Int32, previousMessageId: Int32, msgHash: String? = nil, receivedAt: Int32? = nil, resolvedMessageId: String? = nil, transactionId: String? = nil, chainTraceId: String? = nil, serverMessageId: Int32? = nil) {
+        self.operationId = operationId
+        self.expiresAt = expiresAt
+        self.previousMessageId = previousMessageId
+        self.msgHash = msgHash
+        self.receivedAt = receivedAt
+        self.resolvedMessageId = resolvedMessageId
+        self.transactionId = transactionId
+        self.chainTraceId = chainTraceId
+        self.serverMessageId = serverMessageId
+    }
+
+    public required init(decoder: PostboxDecoder) {
+        self.operationId = decoder.decodeStringForKey("operationId", orElse: "")
+        self.expiresAt = decoder.decodeInt32ForKey("expiresAt", orElse: 0)
+        self.previousMessageId = decoder.decodeInt32ForKey("previousMessageId", orElse: 0)
+        self.msgHash = decoder.decodeOptionalStringForKey("msgHash")
+        self.receivedAt = decoder.decodeOptionalInt32ForKey("receivedAt")
+        self.resolvedMessageId = decoder.decodeOptionalStringForKey("resolvedMessageId")
+        self.transactionId = decoder.decodeOptionalStringForKey("transactionId")
+        self.chainTraceId = decoder.decodeOptionalStringForKey("chainTraceId")
+        self.serverMessageId = decoder.decodeOptionalInt32ForKey("serverMessageId")
+    }
+
+    public func encode(_ encoder: PostboxEncoder) {
+        encoder.encodeString(self.operationId, forKey: "operationId")
+        encoder.encodeInt32(self.expiresAt, forKey: "expiresAt")
+        encoder.encodeInt32(self.previousMessageId, forKey: "previousMessageId")
+        if let msgHash = self.msgHash {
+            encoder.encodeString(msgHash, forKey: "msgHash")
+        } else {
+            encoder.encodeNil(forKey: "msgHash")
+        }
+        if let receivedAt = self.receivedAt {
+            encoder.encodeInt32(receivedAt, forKey: "receivedAt")
+        } else {
+            encoder.encodeNil(forKey: "receivedAt")
+        }
+        if let resolvedMessageId = self.resolvedMessageId {
+            encoder.encodeString(resolvedMessageId, forKey: "resolvedMessageId")
+        } else {
+            encoder.encodeNil(forKey: "resolvedMessageId")
+        }
+        if let transactionId = self.transactionId {
+            encoder.encodeString(transactionId, forKey: "transactionId")
+        } else {
+            encoder.encodeNil(forKey: "transactionId")
+        }
+        if let chainTraceId = self.chainTraceId {
+            encoder.encodeString(chainTraceId, forKey: "chainTraceId")
+        } else {
+            encoder.encodeNil(forKey: "chainTraceId")
+        }
+        if let serverMessageId = self.serverMessageId {
+            encoder.encodeInt32(serverMessageId, forKey: "serverMessageId")
+        } else {
+            encoder.encodeNil(forKey: "serverMessageId")
+        }
+    }
+
+    public func isEqual(to other: MessageAttribute) -> Bool {
+        guard let other = other as? PendingWalletTransferMessageAttribute else {
+            return false
+        }
+        return self.isEqual(to: other as PendingMessageActionData)
+    }
+
+    public func isEqual(to other: PendingMessageActionData) -> Bool {
+        guard let other = other as? PendingWalletTransferMessageAttribute else {
+            return false
+        }
+        return self.operationId == other.operationId
+            && self.expiresAt == other.expiresAt
+            && self.previousMessageId == other.previousMessageId
+            && self.msgHash == other.msgHash
+            && self.receivedAt == other.receivedAt
+            && self.resolvedMessageId == other.resolvedMessageId
+            && self.transactionId == other.transactionId
+            && self.chainTraceId == other.chainTraceId
+            && self.serverMessageId == other.serverMessageId
+    }
+
+    func resolving(serverMessageId: Int32) -> PendingWalletTransferMessageAttribute {
+        return PendingWalletTransferMessageAttribute(operationId: self.operationId, expiresAt: self.expiresAt, previousMessageId: self.previousMessageId, msgHash: self.msgHash, receivedAt: self.receivedAt, resolvedMessageId: self.resolvedMessageId, transactionId: self.transactionId, chainTraceId: self.chainTraceId, serverMessageId: serverMessageId)
+    }
+
+    func resolving(transactionId: String) -> PendingWalletTransferMessageAttribute {
+        return PendingWalletTransferMessageAttribute(operationId: self.operationId, expiresAt: self.expiresAt, previousMessageId: self.previousMessageId, msgHash: self.msgHash, receivedAt: self.receivedAt, resolvedMessageId: self.resolvedMessageId, transactionId: transactionId, chainTraceId: self.chainTraceId, serverMessageId: self.serverMessageId)
+    }
+
+    func renewingPreparation(expiresAt: Int32) -> PendingWalletTransferMessageAttribute {
+        return PendingWalletTransferMessageAttribute(operationId: self.operationId, expiresAt: expiresAt, previousMessageId: self.previousMessageId, msgHash: self.msgHash, receivedAt: self.receivedAt, resolvedMessageId: self.resolvedMessageId, transactionId: self.transactionId, chainTraceId: self.chainTraceId, serverMessageId: self.serverMessageId)
+    }
+
+    func accepting(msgHash: String, receivedAt: Int32) -> PendingWalletTransferMessageAttribute {
+        return PendingWalletTransferMessageAttribute(operationId: self.operationId, expiresAt: self.expiresAt, previousMessageId: self.previousMessageId, msgHash: msgHash, receivedAt: receivedAt, resolvedMessageId: self.resolvedMessageId, transactionId: self.transactionId, chainTraceId: self.chainTraceId, serverMessageId: self.serverMessageId)
+    }
+}

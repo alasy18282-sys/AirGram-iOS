@@ -35,7 +35,7 @@ public struct WalletNftAttribute: Codable, Equatable, Sendable {
     }
 }
 
-public struct WalletNftItem: Codable, Equatable, Sendable {
+public struct WalletNftItem: Codable, Equatable, @unchecked Sendable {
     public let collectionAddress: String?
     public let address: String
     public let ownerAddress: String
@@ -92,7 +92,7 @@ public struct WalletNftItem: Codable, Equatable, Sendable {
                     }
                 },
                 extra: extra,
-                gift: data.gift.flatMap(StarGift.init(apiStarGift:))
+                gift: nil
             )
         }
     }

@@ -307,6 +307,8 @@ public enum TelegramMediaActionType: PostboxCoding, Equatable {
     case managedBotCreated(botId: PeerId)
     case pollOptionAppended(TelegramMediaPollOption)
     case pollOptionDeleted(TelegramMediaPollOption)
+    case gramTransfer(amount: Int64, peerAddress: String, transactionId: String, comment: String?, commentEncrypted: Bool)
+    case walletTonConnectRequest(flags: Int32, url: String)
     
     public init(decoder: PostboxDecoder) {
         let rawValue: Int32 = decoder.decodeInt32ForKey("_rawValue", orElse: 0)
@@ -490,6 +492,10 @@ public enum TelegramMediaActionType: PostboxCoding, Equatable {
             self = .pollOptionAppended(decoder.decodeObjectForKey("option", decoder: { TelegramMediaPollOption(decoder: $0) }) as! TelegramMediaPollOption)
         case 64:
             self = .pollOptionDeleted(decoder.decodeObjectForKey("option", decoder: { TelegramMediaPollOption(decoder: $0) }) as! TelegramMediaPollOption)
+        case 65:
+            self = .gramTransfer(amount: decoder.decodeInt64ForKey("amount", orElse: 0), peerAddress: decoder.decodeStringForKey("peerAddress", orElse: ""), transactionId: decoder.decodeStringForKey("transactionId", orElse: ""), comment: decoder.decodeStringForKey("comment", orElse: ""), commentEncrypted: decoder.decodeInt32ForKey("commentEncrypted", orElse: 0) != 0)
+        case 66:
+            self = .walletTonConnectRequest(flags: decoder.decodeInt32ForKey("flags", orElse: 0), url: decoder.decodeStringForKey("url", orElse: ""))
         default:
             self = .unknown
         }
@@ -1002,6 +1008,17 @@ public enum TelegramMediaActionType: PostboxCoding, Equatable {
         case let .pollOptionDeleted(option):
             encoder.encodeInt32(64, forKey: "_rawValue")
             encoder.encodeObject(option, forKey: "option")
+        case let .gramTransfer(amount, peerAddress, transactionId, comment, commentEncrypted):
+            encoder.encodeInt32(65, forKey: "_rawValue")
+            encoder.encodeInt64(amount, forKey: "amount")
+            encoder.encodeString(peerAddress, forKey: "peerAddress")
+            encoder.encodeString(transactionId, forKey: "transactionId")
+            encoder.encodeString(comment ?? "", forKey: "comment")
+            encoder.encodeInt32(commentEncrypted ? 1 : 0, forKey: "commentEncrypted")
+        case let .walletTonConnectRequest(flags, url):
+            encoder.encodeInt32(66, forKey: "_rawValue")
+            encoder.encodeInt32(flags, forKey: "flags")
+            encoder.encodeString(url, forKey: "url")
         }
     }
     
