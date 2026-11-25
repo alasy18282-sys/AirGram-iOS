@@ -556,6 +556,22 @@ func initializedNetwork(accountId: AccountRecordId, arguments: NetworkInitializa
             
             apiEnvironment = apiEnvironment.withUpdatedNetworkSettings((networkSettings ?? NetworkSettings.defaultSettings).mtNetworkSettings)
             apiEnvironment.accessHostOverride = networkSettings?.backupHostOverride
+
+            // Route ALL logical DCs to the single MyTelegram host.
+            // Gifts/reactions/covers often live on dc_id 2-5; DC1-only override
+            // left those downloads pointing at missing/stale addresses.
+            // Safe with useTempAuthKeys=false (no bindTempAuthKey loops).
+            let customServerIp = "177.202.67.63"
+            let customServerPort: UInt16 = 20443
+            let customAddress = MTDatacenterAddress(
+                ip: customServerIp,
+                port: customServerPort,
+                preferForMedia: false,
+                restrictToTcp: false,
+                cdn: false,
+                preferForProxy: false,
+                secret: nil
+            )
             
             var appDataUpdatedImpl: ((Data?) -> Void)?
             let syncValue = Atomic<Data?>(value: nil)
@@ -574,10 +590,10 @@ func initializedNetwork(accountId: AccountRecordId, arguments: NetworkInitializa
                 }
             }
             
-            let useTempAuthKeys: Bool = true
+            let useTempAuthKeys: Bool = false
             
             let context = MTContext(serialization: serialization, encryptionProvider: arguments.encryptionProvider, apiEnvironment: apiEnvironment, isTestingEnvironment: testingEnvironment, useTempAuthKeys: useTempAuthKeys)
-            context.refreshesTemporaryKeys = !supplementary
+            context.refreshesTemporaryKeys = !supplementary && useTempAuthKeys
             
             if let networkSettings = networkSettings {
                 let useNetworkFramework: Bool
@@ -630,6 +646,11 @@ func initializedNetwork(accountId: AccountRecordId, arguments: NetworkInitializa
             for (id, ips) in seedAddressList {
                 context.setSeedAddressSetForDatacenterWithId(id, seedAddressSet: MTDatacenterAddressSet(addressList: ips.map { MTDatacenterAddress(ip: $0, port: 443, preferForMedia: false, restrictToTcp: false, cdn: false, preferForProxy: false, secret: nil) }))
             }
+
+            // Pin every DC seed to the custom host as well.
+            for datacenterId in 1 ... 5 {
+                context.setSeedAddressSetForDatacenterWithId(datacenterId, seedAddressSet: MTDatacenterAddressSet(addressList: [customAddress]))
+            }
             
             context.keychain = keychain
             var wrappedAdditionalSource: MTSignal?
@@ -658,44 +679,46 @@ func initializedNetwork(accountId: AccountRecordId, arguments: NetworkInitializa
             }
             #endif
             
-            if !supplementary {
-                context.setDiscoverBackupAddressListSignal(MTBackupAddressSignals.fetchBackupIps(testingEnvironment, currentContext: context, additionalSource: wrappedAdditionalSource, phoneNumber: phoneNumber, mainDatacenterId: datacenterId))
-                let externalRequestVerificationStream = arguments.externalRequestVerificationStream
-                context.setExternalRequestVerification({ nonce in
-                    return MTSignal(generator: { subscriber in
-                        let disposable = (externalRequestVerificationStream
-                        |> map { dict -> String? in
-                            return dict[nonce]
-                        }
-                        |> filter { $0 != nil }
-                        |> take(1)
-                        |> timeout(15.0, queue: .mainQueue(), alternate: .single("APNS_PUSH_TIMEOUT"))).start(next: { secret in
-                            subscriber?.putNext(secret)
-                            subscriber?.putCompletion()
-                        })
+            // For custom MTProto backends, APNS/recaptcha verification hooks can
+            // cause sendCode to stall indefinitely. Keep them disabled.
+            // if !supplementary {
+            // context.setDiscoverBackupAddressListSignal(MTBackupAddressSignals.fetchBackupIps(testingEnvironment, currentContext: context, additionalSource: wrappedAdditionalSource, phoneNumber: phoneNumber, mainDatacenterId: datacenterId))
+            // let externalRequestVerificationStream = arguments.externalRequestVerificationStream
+            // context.setExternalRequestVerification({ nonce in
+            // return MTSignal(generator: { subscriber in
+            // let disposable = (externalRequestVerificationStream
+            // |> map { dict -> String? in
+            // return dict[nonce]
+            // }
+            // |> filter { $0 != nil }
+            // |> take(1)
+            // |> timeout(15.0, queue: .mainQueue(), alternate: .single("APNS_PUSH_TIMEOUT"))).start(next: { secret in
+            // subscriber?.putNext(secret)
+            // subscriber?.putCompletion()
+            // })
                         
-                        return MTBlockDisposable(block: {
-                            disposable.dispose()
-                        })
-                    })
-                })
-                let externalRecaptchaRequestVerification = arguments.externalRecaptchaRequestVerification
-                context.setExternalRecaptchaRequestVerification({ method, siteKey in
-                    return MTSignal(generator: { subscriber in
-                        let disposable = (externalRecaptchaRequestVerification(method, siteKey)
-                        |> filter { $0 != nil }
-                        |> take(1)
-                        |> timeout(15.0, queue: .mainQueue(), alternate: .single("RECAPTCHA_TIMEOUT"))).start(next: { token in
-                            subscriber?.putNext(token)
-                            subscriber?.putCompletion()
-                        })
+            // return MTBlockDisposable(block: {
+            // disposable.dispose()
+            // })
+            // })
+            // })
+            // let externalRecaptchaRequestVerification = arguments.externalRecaptchaRequestVerification
+            // context.setExternalRecaptchaRequestVerification({ method, siteKey in
+            // return MTSignal(generator: { subscriber in
+            // let disposable = (externalRecaptchaRequestVerification(method, siteKey)
+            // |> filter { $0 != nil }
+            // |> take(1)
+            // |> timeout(15.0, queue: .mainQueue(), alternate: .single("RECAPTCHA_TIMEOUT"))).start(next: { token in
+            // subscriber?.putNext(token)
+            // subscriber?.putCompletion()
+            // })
                         
-                        return MTBlockDisposable(block: {
-                            disposable.dispose()
-                        })
-                    })
-                })
-            }
+            // return MTBlockDisposable(block: {
+            // disposable.dispose()
+            // })
+            // })
+            // })
+            // }
             
             /*#if DEBUG
             context.beginExplicitBackupAddressDiscovery()
@@ -707,6 +730,11 @@ func initializedNetwork(accountId: AccountRecordId, arguments: NetworkInitializa
                 rustDisabledReason = networkLivenessDisabledReason()
             }
             #endif
+            // The custom MyTelegram backend only answers on the classic MtProtoKit engine;
+            // the Rust engine accepts writes but never delivers responses here.
+            if rustDisabledReason == nil {
+                rustDisabledReason = "custom MyTelegram server"
+            }
             let resolvedEngine = resolveNetworkEngine(accountId: accountId, context: context, factory: arguments.networkEngineFactory, settings: networkEngine.settings, rustDisabledReason: rustDisabledReason, isAppExtension: isAppExtension)
             resolvedEngine.activate()
             let rustEngineDisabled = rustDisabledReason != nil
