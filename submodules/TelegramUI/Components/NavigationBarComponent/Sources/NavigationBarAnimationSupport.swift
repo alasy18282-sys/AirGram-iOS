@@ -1,5 +1,6 @@
 import Foundation
 import UIKit
+import GlassBackgroundComponent
 
 /// When a spring rests: `.glass` carries the distance-to-target threshold.
 public enum NavigationSpringRest: Equatable {

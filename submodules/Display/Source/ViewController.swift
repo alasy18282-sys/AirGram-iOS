@@ -48,6 +48,11 @@ public struct ViewControllerSupportedOrientations: Equatable {
     }
 }
 
+/// A screen that can hand a navigation transition its bar. The navigation bar's
+/// renderer refines this; nothing in Display reads it.
+public protocol NavigationBarTransitionSource: AnyObject {
+}
+
 open class ViewControllerPresentationArguments {
     public let presentationAnimation: ViewControllerPresentationAnimation
     public let completion: (() -> Void)?
@@ -83,6 +88,9 @@ public protocol CustomViewControllerNavigationDataSummary: AnyObject {
 }
 
 @objc open class ViewController: UIViewController, ContainableController {
+    open var navigationBarTransitionSource: NavigationBarTransitionSource? {
+        return nil
+    }
     public struct NavigationLayout {
         public var navigationFrame: CGRect
         public var defaultContentHeight: CGFloat

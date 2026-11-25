@@ -513,3 +513,13 @@ func navigationBarNearestPartner(of frame: CGRect, among candidates: [CGRect]) -
         return (gap(frame, candidates[lhs]), centres(frame, candidates[lhs])) < (gap(frame, candidates[rhs]), centres(frame, candidates[rhs]))
     })
 }
+
+
+extension NavigationBarGlassPulseCurve {
+    static func == (lhs: NavigationBarGlassPulseCurve, rhs: NavigationBarGlassPulseCurve) -> Bool {
+        return lhs.m == rhs.m
+            && lhs.rising === rhs.rising
+            && lhs.fallingHeight === rhs.fallingHeight
+            && lhs.fallingWidth === rhs.fallingWidth
+    }
+}

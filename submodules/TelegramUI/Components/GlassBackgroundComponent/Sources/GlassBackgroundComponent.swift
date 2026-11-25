@@ -51,6 +51,13 @@ private final class ContentContainer: UIView {
 }
 
 public class GlassBackgroundView: UIView {
+    // The navigation bar's transition code was written against a newer glass
+    // component than the one 13.2 ships. These keep it compiling and animate nothing.
+    public func animateShape(sizes: [CGSize], timing: Any, isDark: Bool, tintColor: Any?) {
+    }
+
+    public func animateShape(width: CGFloat, height: CGFloat, timing: Any, isDark: Bool, tintColor: Any?) {
+    }
     public protocol ContentView: UIView {
         var tintMask: UIView { get }
     }
@@ -686,6 +693,11 @@ public class GlassBackgroundView: UIView {
 }
 
 public final class GlassBackgroundContainerView: UIView {
+    public static var mergesShapes: Bool = true
+    public var morphsIntoContextMenu: Bool = false
+
+    public func animateSize(width: CGFloat, height: CGFloat, timing: Any, isDark: Bool) {
+    }
     private final class ContentView: UIView {
     }
     
@@ -1199,6 +1211,20 @@ public final class GlassBackgroundComponent: Component {
 }
 
 public final class GlassContextExtractableContainer: UIView, ContextExtractableContainer {
+    private var glassLentState: Bool = false
+
+    public var isGlassLent: Bool {
+        return self.glassLentState
+    }
+
+    public func lendGlass() -> UIView {
+        self.glassLentState = true
+        return UIView()
+    }
+
+    public func reclaimGlass() {
+        self.glassLentState = false
+    }
     private struct NormalParams {
         let size: CGSize
         let cornerRadius: CGFloat
