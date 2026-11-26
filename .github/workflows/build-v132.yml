@@ -114,6 +114,7 @@ jobs:
         if: failure()
         run: |
           set -x
+          mkdir -p ci_logs
           { grep -aE "error:|fatal error:|BUILD FAILED|ERROR: " ci_logs/build.log | head -200; true; } > ci_logs/errors.txt
           wc -l ci_logs/errors.txt
           tail -c 200000 ci_logs/build.log | tr -cd '\11\12\15\40-\176' > ci_logs/build_tail.txt
