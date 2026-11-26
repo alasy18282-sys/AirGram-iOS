@@ -160,9 +160,14 @@ var iPhoneDuoSystemReportIsSettled: Bool {
 /// The frames of the occlusion regions the system reports as active in `view` (iPhone Duo's status corner and its
 /// camera), in the view's coordinates. Empty before iOS 27.1.
 func activeOcclusionFrames(in view: UIView) -> [CGRect] {
-    if #available(iOS 27.1, *) {
-        return view.reservedRegions(kind: .occlusion).filter(\.isActive).map(\.frame)
-    }
+    // `UIView.reservedRegions(kind:)` ships with the iOS 27.1 SDK only, and this
+    // tree is built with Xcode 26.x. A `#available` guard does not help: Swift
+    // still type-checks the call inside it, and it fails there. Before 27.1 the
+    // function returned an empty list anyway, so this is the same value:
+    //
+    //     if #available(iOS 27.1, *) {
+    //         return view.reservedRegions(kind: .occlusion).filter(\.isActive).map(\.frame)
+    //     }
     return []
 }
 
