@@ -10,6 +10,12 @@ swift_library(
     ]),
     copts = [
         "-warnings-as-errors",
+        # The Swift 6.2 optimizer crashes in OSSACompleteLifetime while
+        # completing lexical lifetimes across the availability boundary in
+        # ShareScreen.init ("Invalid SIL provided to OSSACompleteLifetime?!").
+        # Building this module without optimization is functionally identical
+        # and works around the compiler bug.
+        "-Onone",
     ],
     deps = [
         "//submodules/AsyncDisplayKit",
