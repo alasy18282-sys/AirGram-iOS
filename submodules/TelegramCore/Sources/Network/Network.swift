@@ -678,6 +678,9 @@ func initializedNetwork(accountId: AccountRecordId, arguments: NetworkInitializa
                 }
             }
             #endif
+            // Only the disabled verification block below ever read this signal, and
+            // this build fails on warnings, so say out loud that it is unused.
+            _ = wrappedAdditionalSource
             
             // For custom MTProto backends, APNS/recaptcha verification hooks can
             // cause sendCode to stall indefinitely. Keep them disabled.
