@@ -93,12 +93,10 @@ jobs:
           echo "BUILD_NUMBER=$BUILD_NUMBER" >> "$GITHUB_ENV"
           echo "APP_VERSION=$APP_VERSION" >> "$GITHUB_ENV"
 
+          # The provisioning profiles are committed already re-issued for
+          # org.airgram.ios with a 2035 expiry, so no rebranding step is needed
+          # (and RewriteProfilesBundleId.py does not exist in the 13.2 tree).
           python3 build-system/Make/ImportCertificates.py --path build-system/fake-codesigning/certs
-          python3 build-system/Make/RewriteProfilesBundleId.py \
-            --profiles build-system/fake-codesigning/profiles \
-            --certs build-system/fake-codesigning/certs \
-            --old-bundle ph.telegra.Telegraph \
-            --new-bundle org.airgram.ios
 
           python3 -u build-system/Make/Make.py \
             --bazelUserRoot="$BAZEL_USER_ROOT" \
