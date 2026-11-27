@@ -1792,7 +1792,7 @@ private enum DebugControllerEntry: ItemListNodeEntry {
                     transaction.updateSharedData(ApplicationSpecificSharedDataKeys.experimentalUISettings, { settings in
                         var settings = settings?.get(ExperimentalUISettings.self) ?? ExperimentalUISettings.defaultSettings
                         settings.profileV2 = value
-                        return PreferencesEntry(settings)
+                        return EnginePreferencesEntry(settings)
                     })
                 }).start()
             })
