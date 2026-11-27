@@ -760,6 +760,7 @@ private enum DebugControllerEntry: ItemListNodeEntry {
     case enableQuickReactionSwitch(Bool)
     case disableReloginTokens(Bool)
     case liveStreamV2(Bool)
+    case profileV2(Bool)
     case experimentalCallMute(Bool)
     case groupCallReferenceEngine(Bool)
     case playerV2(Bool)
@@ -798,7 +799,7 @@ private enum DebugControllerEntry: ItemListNodeEntry {
             return DebugControllerSection.resetApp.rawValue
         case .experimentsHeader, .keepChatNavigationStack, .skipReadHistory, .alwaysDisplayTyping, .debugRatingLayout, .crashOnSlowQueries, .crashOnMemoryPressure:
             return DebugControllerSection.experiments.rawValue
-        case .crash, .resetBiometricsData, .photoPreview, .knockoutWallpaper, .compressedEmojiCache, .storiesJpegExperiment, .checkSerializedData, .enableQuickReactionSwitch, .experimentalCompatibility, .enableDebugDataDisplay, .fakeGlass, .forceClearGlass, .debugRipple, .inputDecEngineEditor, .coreListChatBackend, .coreListScrollTrace, .respectSystemMicrophone, .useModernVideoMessagePipeline, .videoMessageCameraMode, .browserExperiment, .allForumsHaveTabs, .enableReactionOverrides, .disableReloginTokens, .liveStreamV2, .experimentalCallMute, .groupCallReferenceEngine, .playerV2, .devRequests, .enableUpdates, .pwa, .enableLocalTranslation, .testPasscodeMigration:
+        case .crash, .resetBiometricsData, .photoPreview, .knockoutWallpaper, .compressedEmojiCache, .storiesJpegExperiment, .checkSerializedData, .enableQuickReactionSwitch, .experimentalCompatibility, .enableDebugDataDisplay, .fakeGlass, .forceClearGlass, .debugRipple, .inputDecEngineEditor, .coreListChatBackend, .coreListScrollTrace, .respectSystemMicrophone, .useModernVideoMessagePipeline, .videoMessageCameraMode, .browserExperiment, .allForumsHaveTabs, .enableReactionOverrides, .disableReloginTokens, .liveStreamV2, .profileV2, .experimentalCallMute, .groupCallReferenceEngine, .playerV2, .devRequests, .enableUpdates, .pwa, .enableLocalTranslation, .testPasscodeMigration:
             return DebugControllerSection.experiments.rawValue
         case .inputDecTextBackend, .springSendAnimation, .fakeWalletTransfers, .chatMediaEditorLegacy, .insertWidgetConformanceSet, .insertWidgetGames, .mediaGridLegacy, .sharedMediaGridLegacy, .storyLegacyVideoWriter, .chatLegacyVideoWriter, .chatSideListLegacy, .runWidgetStressKit, .showWidgetWalletWindow:
             return DebugControllerSection.experiments.rawValue
@@ -933,7 +934,7 @@ private enum DebugControllerEntry: ItemListNodeEntry {
             return 58
         case .enableQuickReactionSwitch:
             return 59
-        case .liveStreamV2:
+        case .liveStreamV2, .profileV2:
             return 60
         case .experimentalCallMute:
             return 61
@@ -1785,6 +1786,16 @@ private enum DebugControllerEntry: ItemListNodeEntry {
                     })
                 }).start()
             })
+        case let .profileV2(value):
+            return ItemListSwitchItem(presentationData: presentationData, systemStyle: .glass, title: "Profile V2", value: value, sectionId: self.section, style: .blocks, updated: { value in
+                let _ = arguments.sharedContext.accountManager.transaction ({ transaction in
+                    transaction.updateSharedData(ApplicationSpecificSharedDataKeys.experimentalUISettings, { settings in
+                        var settings = settings?.get(ExperimentalUISettings.self) ?? ExperimentalUISettings.defaultSettings
+                        settings.profileV2 = value
+                        return PreferencesEntry(settings)
+                    })
+                }).start()
+            })
         case let .experimentalCallMute(value):
             return ItemListSwitchItem(presentationData: presentationData, systemStyle: .glass, title: "[WIP] OS mic mute", value: value, sectionId: self.section, style: .blocks, updated: { value in
                 let _ = arguments.sharedContext.accountManager.transaction ({ transaction in
@@ -2178,6 +2189,7 @@ private func debugControllerEntries(context: AccountContext?, sharedContext: Sha
         entries.append(.checkSerializedData(experimentalSettings.checkSerializedData))
         entries.append(.enableQuickReactionSwitch(!experimentalSettings.disableQuickReaction))
         entries.append(.liveStreamV2(experimentalSettings.liveStreamV2))
+        entries.append(.profileV2(experimentalSettings.profileV2))
         entries.append(.experimentalCallMute(experimentalSettings.experimentalCallMute))
         entries.append(.groupCallReferenceEngine(experimentalSettings.groupCallReferenceEngine))
         

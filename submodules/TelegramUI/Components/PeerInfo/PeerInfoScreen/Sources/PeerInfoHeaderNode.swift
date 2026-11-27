@@ -118,6 +118,7 @@ final class PeerInfoHeaderNode: ASDisplayNode {
     let avatarListNode: PeerInfoAvatarListNode
     
     let backgroundBannerView: UIView
+    let profileV2BackgroundView = UIView()
     let backgroundCover = ComponentView<Empty>()
     let giftsCover = ComponentView<Empty>()
     var didSetupBackgroundCover = false
@@ -388,6 +389,10 @@ final class PeerInfoHeaderNode: ASDisplayNode {
         }
         
         self.view.addSubview(self.backgroundBannerView)
+        self.profileV2BackgroundView.isUserInteractionEnabled = false
+        self.profileV2BackgroundView.clipsToBounds = true
+        self.profileV2BackgroundView.isHidden = true
+        self.view.insertSubview(self.profileV2BackgroundView, aboveSubview: self.backgroundBannerView)
         self.titleNodeContainer.addSubnode(self.titleNode)
         self.subtitleNodeContainer.addSubnode(self.subtitleNode)
         self.subtitleNodeContainer.addSubnode(self.panelSubtitleNode)
@@ -2454,6 +2459,25 @@ final class PeerInfoHeaderNode: ASDisplayNode {
             transition.updateFrameAdditive(view: self.backgroundBannerView, frame: bannerFrame)
         } else {
             transition.updateFrame(view: self.backgroundBannerView, frame: bannerFrame)
+        }
+
+        let profileV2Enabled = self.context.sharedContext.immediateExperimentalUISettings.profileV2
+        self.profileV2BackgroundView.isHidden = !profileV2Enabled
+        if profileV2Enabled {
+            if additive {
+                transition.updateFrameAdditive(view: self.profileV2BackgroundView, frame: bannerFrame)
+            } else {
+                transition.updateFrame(view: self.profileV2BackgroundView, frame: bannerFrame)
+            }
+            let profileV2Dark = presentationData.theme.overallDarkAppearance
+            let enginePeer = peer
+            var profileV2Color: UIColor?
+            if let profileColor = enginePeer?.effectiveProfileColor {
+                profileV2Color = self.context.peerNameColors.getProfile(profileColor, dark: profileV2Dark).main
+            } else if case let .preset(nameColor)? = enginePeer?.nameColor {
+                profileV2Color = self.context.peerNameColors.get(nameColor, dark: profileV2Dark).main
+            }
+            self.profileV2BackgroundView.backgroundColor = profileV2Color ?? presentationData.theme.list.plainBackgroundColor
         }
                         
         let backgroundCoverSize = self.backgroundCover.update(

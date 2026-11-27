@@ -73,6 +73,7 @@ public struct ExperimentalUISettings: Codable, Equatable {
     public var autoBenchmarkReflectors: Bool?
     public var playerV2: Bool
     public var devRequests: Bool
+    public var profileV2: Bool
     public var fakeAds: Bool
     public var conferenceDebug: Bool
     public var checkSerializedData: Bool
@@ -141,6 +142,7 @@ public struct ExperimentalUISettings: Codable, Equatable {
             autoBenchmarkReflectors: nil,
             playerV2: false,
             devRequests: false,
+            profileV2: false,
             fakeAds: false,
             conferenceDebug: false,
             checkSerializedData: false,
@@ -207,6 +209,7 @@ public struct ExperimentalUISettings: Codable, Equatable {
         autoBenchmarkReflectors: Bool?,
         playerV2: Bool,
         devRequests: Bool,
+        profileV2: Bool = false,
         fakeAds: Bool,
         conferenceDebug: Bool,
         checkSerializedData: Bool,
@@ -271,6 +274,7 @@ public struct ExperimentalUISettings: Codable, Equatable {
         self.autoBenchmarkReflectors = autoBenchmarkReflectors
         self.playerV2 = playerV2
         self.devRequests = devRequests
+        self.profileV2 = profileV2
         self.fakeAds = fakeAds
         self.conferenceDebug = conferenceDebug
         self.checkSerializedData = checkSerializedData
@@ -339,6 +343,7 @@ public struct ExperimentalUISettings: Codable, Equatable {
         self.autoBenchmarkReflectors = try container.decodeIfPresent(Bool.self, forKey: "autoBenchmarkReflectors")
         self.playerV2 = try container.decodeIfPresent(Bool.self, forKey: "playerV2") ?? false
         self.devRequests = try container.decodeIfPresent(Bool.self, forKey: "devRequests") ?? false
+        self.profileV2 = try container.decodeIfPresent(Bool.self, forKey: "profileV2") ?? false
         self.fakeAds = try container.decodeIfPresent(Bool.self, forKey: "fakeAds") ?? false
         self.conferenceDebug = try container.decodeIfPresent(Bool.self, forKey: "conferenceDebug") ?? false
         self.checkSerializedData = try container.decodeIfPresent(Bool.self, forKey: "checkSerializedData") ?? false
@@ -409,6 +414,7 @@ public struct ExperimentalUISettings: Codable, Equatable {
         try container.encodeIfPresent(self.autoBenchmarkReflectors, forKey: "autoBenchmarkReflectors")
         try container.encodeIfPresent(self.playerV2, forKey: "playerV2")
         try container.encodeIfPresent(self.devRequests, forKey: "devRequests")
+        try container.encodeIfPresent(self.profileV2, forKey: "profileV2")
         try container.encodeIfPresent(self.fakeAds, forKey: "fakeAds")
         try container.encodeIfPresent(self.conferenceDebug, forKey: "conferenceDebug")
         try container.encodeIfPresent(self.checkSerializedData, forKey: "checkSerializedData")
