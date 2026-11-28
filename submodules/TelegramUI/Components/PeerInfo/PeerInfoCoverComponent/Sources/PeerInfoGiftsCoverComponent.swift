@@ -275,6 +275,34 @@ public final class PeerInfoGiftsCoverComponent: Component {
                     timingFunction: kCAMediaTimingFunctionSpring
                 )
             }
+            if component.context.sharedContext.immediateExperimentalUISettings.profileV2 {
+                for (_, layer) in self.iconLayers {
+                    self.applyProfileV2Dance(to: layer)
+                }
+            }
+        }
+
+        private func applyProfileV2Dance(to layer: GiftIconLayer) {
+            layer.removeAnimation(forKey: "profileV2.dance")
+            layer.removeAnimation(forKey: "profileV2.sway")
+
+            let beat: CFTimeInterval = 0.56
+            let bob = CAKeyframeAnimation(keyPath: "transform.translation.y")
+            bob.values = [0.0, -5.0, 0.0, 2.5, 0.0]
+            bob.keyTimes = [0.0, 0.25, 0.5, 0.75, 1.0] as [NSNumber]
+            bob.duration = beat * 2.0
+            bob.repeatCount = .infinity
+            bob.beginTime = CACurrentMediaTime() + Double.random(in: 0.0 ... 0.4)
+            bob.timingFunction = CAMediaTimingFunction(name: .easeInEaseOut)
+            layer.add(bob, forKey: "profileV2.dance")
+
+            let sway = CAKeyframeAnimation(keyPath: "transform.rotation.z")
+            sway.values = [-0.05, 0.05, -0.05]
+            sway.keyTimes = [0.0, 0.5, 1.0] as [NSNumber]
+            sway.duration = beat * 3.0
+            sway.repeatCount = .infinity
+            sway.timingFunction = CAMediaTimingFunction(name: .easeInEaseOut)
+            layer.add(sway, forKey: "profileV2.sway")
         }
     
         func update(component: PeerInfoGiftsCoverComponent, availableSize: CGSize, state: EmptyComponentState, environment: Environment<Empty>, transition: ComponentTransition) -> CGSize {

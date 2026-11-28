@@ -118,7 +118,7 @@ final class PeerInfoHeaderNode: ASDisplayNode {
     let avatarListNode: PeerInfoAvatarListNode
     
     let backgroundBannerView: UIView
-    let profileV2BackgroundView = UIView()
+    let profileV2BackgroundView = ProfileV2BackgroundView()
     let backgroundCover = ComponentView<Empty>()
     let giftsCover = ComponentView<Empty>()
     var didSetupBackgroundCover = false
@@ -2471,13 +2471,19 @@ final class PeerInfoHeaderNode: ASDisplayNode {
             }
             let profileV2Dark = presentationData.theme.overallDarkAppearance
             let enginePeer = peer
-            var profileV2Color: UIColor?
+            var profileV2Colors: [UIColor] = []
             if let profileColor = enginePeer?.effectiveProfileColor {
-                profileV2Color = self.context.peerNameColors.getProfile(profileColor, dark: profileV2Dark).main
+                let value = self.context.peerNameColors.getProfile(profileColor, dark: profileV2Dark)
+                profileV2Colors = [value.main, value.secondary ?? value.main, value.tertiary ?? value.secondary ?? value.main]
             } else if case let .preset(nameColor)? = enginePeer?.nameColor {
-                profileV2Color = self.context.peerNameColors.get(nameColor, dark: profileV2Dark).main
+                let value = self.context.peerNameColors.get(nameColor, dark: profileV2Dark)
+                profileV2Colors = [value.main, value.secondary ?? value.main, value.tertiary ?? value.secondary ?? value.main]
             }
-            self.profileV2BackgroundView.backgroundColor = profileV2Color ?? presentationData.theme.list.plainBackgroundColor
+            if profileV2Colors.isEmpty {
+                profileV2Colors = [presentationData.theme.list.plainBackgroundColor]
+            }
+            self.profileV2BackgroundView.update(colors: profileV2Colors, isDark: profileV2Dark)
+            self.profileV2BackgroundView.alpha = backgroundBannerAlpha
         }
                         
         let backgroundCoverSize = self.backgroundCover.update(
@@ -2552,6 +2558,11 @@ final class PeerInfoHeaderNode: ASDisplayNode {
             if let giftsCoverView = self.giftsCover.view as? PeerInfoGiftsCoverComponent.View {
                 if giftsCoverView.superview == nil {
                     self.view.insertSubview(giftsCoverView, aboveSubview: self.backgroundBannerView)
+                }
+                if !self.profileV2BackgroundView.isHidden, giftsCoverView.superview === self.view {
+                    // Profile V2 paints an opaque gradient over the banner; the
+                    // flying gifts must stay above it.
+                    self.view.insertSubview(giftsCoverView, aboveSubview: self.profileV2BackgroundView)
                 }
                 if additive {
                     transition.updateFrameAdditive(view: giftsCoverView, frame: CGRect(origin: CGPoint(x: 0.0, y: 0.0), size: giftsCoverSize))
@@ -3029,5 +3040,132 @@ final class PeerInfoHeaderNode: ASDisplayNode {
         
         let maskAnchorPoint = CGPoint(x: 0.5, y: self.isAvatarExpanded ? 0.37 : 0.5)
         transition.updateAnchorPoint(layer: self.avatarListNode.maskNode.layer, anchorPoint: maskAnchorPoint)
+    }
+}
+
+/// Profile V2 header background: a living gradient built from the peer's
+/// profile colours, with a soft glow that pulses like the profile music beat.
+/// The 13.3 build animates gifts "in time" with the music and lights the
+/// backdrop up in sync; this reproduces the backdrop half of that effect
+/// without depending on audio analysis.
+final class ProfileV2BackgroundView: UIView {
+    private let gradientLayer = CAGradientLayer()
+    private let glowLayer = CAGradientLayer()
+    private let vignetteLayer = CAGradientLayer()
+    private var isAnimating = false
+    private var lastColors: [UIColor] = []
+
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+
+        self.isUserInteractionEnabled = false
+        self.clipsToBounds = true
+
+        self.gradientLayer.startPoint = CGPoint(x: 0.0, y: 0.0)
+        self.gradientLayer.endPoint = CGPoint(x: 1.0, y: 1.0)
+        self.gradientLayer.locations = [0.0, 0.45, 1.0] as [NSNumber]
+        self.layer.addSublayer(self.gradientLayer)
+
+        self.glowLayer.type = .radial
+        self.glowLayer.startPoint = CGPoint(x: 0.5, y: 0.5)
+        self.glowLayer.endPoint = CGPoint(x: 1.0, y: 1.0)
+        self.glowLayer.colors = [
+            UIColor.white.withAlphaComponent(0.42).cgColor,
+            UIColor.white.withAlphaComponent(0.0).cgColor
+        ]
+        self.glowLayer.locations = [0.0, 1.0] as [NSNumber]
+        self.layer.addSublayer(self.glowLayer)
+
+        self.vignetteLayer.startPoint = CGPoint(x: 0.5, y: 0.0)
+        self.vignetteLayer.endPoint = CGPoint(x: 0.5, y: 1.0)
+        self.vignetteLayer.colors = [
+            UIColor.black.withAlphaComponent(0.0).cgColor,
+            UIColor.black.withAlphaComponent(0.32).cgColor
+        ]
+        self.vignetteLayer.locations = [0.55, 1.0] as [NSNumber]
+        self.layer.addSublayer(self.vignetteLayer)
+    }
+
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+
+    func update(colors: [UIColor], isDark: Bool) {
+        let resolved = colors.isEmpty ? [UIColor.gray] : colors
+        let changed = resolved.count != self.lastColors.count
+            || zip(resolved, self.lastColors).contains(where: { !$0.0.isEqual($0.1) })
+        if changed {
+            self.lastColors = resolved
+            CATransaction.begin()
+            CATransaction.setAnimationDuration(0.25)
+            CATransaction.setAnimationTimingFunction(CAMediaTimingFunction(name: .easeInEaseOut))
+            self.gradientLayer.colors = resolved.map { $0.cgColor }
+            CATransaction.commit()
+        }
+        self.vignetteLayer.opacity = isDark ? 1.0 : 0.55
+        self.glowLayer.opacity = isDark ? 0.9 : 0.7
+        self.startAnimatingIfNeeded()
+    }
+
+    private func startAnimatingIfNeeded() {
+        guard !self.isAnimating else {
+            return
+        }
+        self.isAnimating = true
+
+        let drift = CABasicAnimation(keyPath: "locations")
+        drift.fromValue = [0.0, 0.45, 1.0] as [NSNumber]
+        drift.toValue = [0.18, 0.62, 0.92] as [NSNumber]
+        drift.duration = 7.0
+        drift.autoreverses = true
+        drift.repeatCount = .infinity
+        drift.timingFunction = CAMediaTimingFunction(name: .easeInEaseOut)
+        self.gradientLayer.add(drift, forKey: "profileV2.drift")
+
+        let sweep = CABasicAnimation(keyPath: "startPoint")
+        sweep.fromValue = CGPoint(x: 0.0, y: 0.0)
+        sweep.toValue = CGPoint(x: 1.0, y: 0.35)
+        sweep.duration = 9.0
+        sweep.autoreverses = true
+        sweep.repeatCount = .infinity
+        sweep.timingFunction = CAMediaTimingFunction(name: .easeInEaseOut)
+        self.gradientLayer.add(sweep, forKey: "profileV2.sweep")
+
+        let beat: CFTimeInterval = 0.56
+        let pulse = CABasicAnimation(keyPath: "opacity")
+        pulse.fromValue = 0.22
+        pulse.toValue = 0.8
+        pulse.duration = beat
+        pulse.autoreverses = true
+        pulse.repeatCount = .infinity
+        pulse.timingFunction = CAMediaTimingFunction(name: .easeInEaseOut)
+        self.glowLayer.add(pulse, forKey: "profileV2.pulse")
+
+        let breathe = CABasicAnimation(keyPath: "transform.scale")
+        breathe.fromValue = 0.96
+        breathe.toValue = 1.14
+        breathe.duration = beat
+        breathe.autoreverses = true
+        breathe.repeatCount = .infinity
+        breathe.timingFunction = CAMediaTimingFunction(name: .easeInEaseOut)
+        self.glowLayer.add(breathe, forKey: "profileV2.breathe")
+    }
+
+    override func layoutSubviews() {
+        super.layoutSubviews()
+
+        let bounds = self.bounds
+        CATransaction.begin()
+        CATransaction.setDisableActions(true)
+        self.gradientLayer.frame = bounds
+        self.vignetteLayer.frame = bounds
+        let glowSide = max(bounds.width, 1.0) * 1.15
+        self.glowLayer.frame = CGRect(
+            x: bounds.midX - glowSide / 2.0,
+            y: bounds.maxY - glowSide * 0.78,
+            width: glowSide,
+            height: glowSide
+        )
+        CATransaction.commit()
     }
 }
