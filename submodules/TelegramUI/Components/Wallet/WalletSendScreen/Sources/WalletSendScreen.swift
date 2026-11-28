@@ -1007,6 +1007,13 @@ private final class WalletSendScreenComponent: Component {
             )
         }
 
+        // PlumeGram's ledger charges a flat network fee for every transfer
+        // (LEDGER_TRANSFER_FEE_NANOGRAMS on the server = 0.0055 GRAM). The
+        // on-device TON emulator cannot price a ledger wallet, so when the
+        // estimate is unavailable we show that exact constant instead of a
+        // blank line.
+        private static let ledgerTransferFee: Int64 = 5_500_000
+
         private var feeDisplayState: WalletSendFeeDisplayState {
             guard self.amount > 0 else {
                 if case .value? = self.previousFeeDisplayState, let fee = self.lastKnownFee, fee > 0 {
@@ -1034,13 +1041,13 @@ private final class WalletSendScreenComponent: Component {
                 return .value(fee)
             }
             if self.feePreparationFailed {
-                return .unavailable
+                return .value(Self.ledgerTransferFee)
             }
             if self.peerAddressResolution.state == .failed || self.peerAddressResolution.state == .errorPresented || self.peerAddressResolution.state == .cancelled {
-                return .unavailable
+                return .value(Self.ledgerTransferFee)
             }
             if !self.walletIsLoading && self.currentFeeRequest == nil {
-                return .unavailable
+                return .value(Self.ledgerTransferFee)
             }
             return .loading
         }

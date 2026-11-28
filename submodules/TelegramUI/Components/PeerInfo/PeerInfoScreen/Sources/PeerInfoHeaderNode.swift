@@ -119,6 +119,7 @@ final class PeerInfoHeaderNode: ASDisplayNode {
     
     let backgroundBannerView: UIView
     let profileV2BackgroundView = ProfileV2BackgroundView()
+    let profileV2BubblesView = ProfileV2BubblesView()
     let backgroundCover = ComponentView<Empty>()
     let giftsCover = ComponentView<Empty>()
     var didSetupBackgroundCover = false
@@ -393,6 +394,8 @@ final class PeerInfoHeaderNode: ASDisplayNode {
         self.profileV2BackgroundView.clipsToBounds = true
         self.profileV2BackgroundView.isHidden = true
         self.view.insertSubview(self.profileV2BackgroundView, aboveSubview: self.backgroundBannerView)
+        self.profileV2BubblesView.isHidden = true
+        self.view.insertSubview(self.profileV2BubblesView, aboveSubview: self.profileV2BackgroundView)
         self.titleNodeContainer.addSubnode(self.titleNode)
         self.subtitleNodeContainer.addSubnode(self.subtitleNode)
         self.subtitleNodeContainer.addSubnode(self.panelSubtitleNode)
@@ -2463,6 +2466,7 @@ final class PeerInfoHeaderNode: ASDisplayNode {
 
         let profileV2Enabled = self.context.sharedContext.immediateExperimentalUISettings.profileV2
         self.profileV2BackgroundView.isHidden = !profileV2Enabled
+        self.profileV2BubblesView.isHidden = !profileV2Enabled
         if profileV2Enabled {
             if additive {
                 transition.updateFrameAdditive(view: self.profileV2BackgroundView, frame: bannerFrame)
@@ -2484,6 +2488,22 @@ final class PeerInfoHeaderNode: ASDisplayNode {
             }
             self.profileV2BackgroundView.update(colors: profileV2Colors, isDark: profileV2Dark)
             self.profileV2BackgroundView.alpha = backgroundBannerAlpha
+
+            self.profileV2BubblesView.isHidden = false
+            if additive {
+                transition.updateFrameAdditive(view: self.profileV2BubblesView, frame: bannerFrame)
+            } else {
+                transition.updateFrame(view: self.profileV2BubblesView, frame: bannerFrame)
+            }
+            self.profileV2BubblesView.alpha = backgroundBannerAlpha
+            self.profileV2BubblesView.update(
+                center: CGPoint(
+                    x: apparentAvatarFrame.midX + bannerInset,
+                    y: apparentAvatarFrame.midY - bannerFrame.minY
+                ),
+                avatarSize: apparentAvatarFrame.size,
+                isDark: profileV2Dark
+            )
         }
                         
         let backgroundCoverSize = self.backgroundCover.update(
@@ -3167,5 +3187,138 @@ final class ProfileV2BackgroundView: UIView {
             height: glowSide
         )
         CATransaction.commit()
+    }
+}
+
+/// Profile V2 "bubbles": translucent soap-bubble circles that slowly orbit the
+/// avatar, the way the 13.3 profile scatters small floating gifts around the
+/// photo. Drawn with Core Animation so there is nothing to ship in the bundle.
+final class ProfileV2BubblesView: UIView {
+    private struct Bubble {
+        let layer: CAShapeLayer
+        let orbitRadius: CGFloat
+        let duration: Double
+        let phase: Double
+        let scaleDuration: Double
+    }
+
+    private var bubbles: [Bubble] = []
+    private var lastCenter: CGPoint = .zero
+    private var lastAvatarSize: CGSize = .zero
+    private var lastIsDark: Bool?
+
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        self.isUserInteractionEnabled = false
+        self.backgroundColor = .clear
+        self.clipsToBounds = true
+    }
+
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+
+    func update(center: CGPoint, avatarSize: CGSize, isDark: Bool) {
+        let centerChanged = abs(center.x - self.lastCenter.x) > 1.0 || abs(center.y - self.lastCenter.y) > 1.0
+        let sizeChanged = abs(avatarSize.width - self.lastAvatarSize.width) > 1.0
+        let themeChanged = self.lastIsDark != isDark
+        if !centerChanged && !sizeChanged && !themeChanged && !self.bubbles.isEmpty {
+            return
+        }
+        self.lastCenter = center
+        self.lastAvatarSize = avatarSize
+        self.lastIsDark = isDark
+
+        if self.bubbles.isEmpty {
+            self.createBubbles(isDark: isDark)
+        }
+        for (index, bubble) in self.bubbles.enumerated() {
+            self.layout(bubble: bubble, index: index, center: center, avatarSize: avatarSize)
+        }
+    }
+
+    private func createBubbles(isDark: Bool) {
+        let count = 9
+        let fillAlpha: CGFloat = isDark ? 0.10 : 0.16
+        let strokeAlpha: CGFloat = isDark ? 0.34 : 0.45
+        for index in 0 ..< count {
+            let size = CGFloat(14 + ((index * 7) % 34))
+            let layer = CAShapeLayer()
+            layer.path = UIBezierPath(ovalIn: CGRect(x: 0.0, y: 0.0, width: size, height: size)).cgPath
+            layer.fillColor = UIColor.white.withAlphaComponent(fillAlpha).cgColor
+            layer.strokeColor = UIColor.white.withAlphaComponent(strokeAlpha).cgColor
+            layer.lineWidth = 1.0
+            layer.opacity = 0.0
+            layer.frame = CGRect(x: 0.0, y: 0.0, width: size, height: size)
+
+            let highlight = CAShapeLayer()
+            highlight.path = UIBezierPath(ovalIn: CGRect(
+                x: size * 0.20,
+                y: size * 0.14,
+                width: size * 0.34,
+                height: size * 0.26
+            )).cgPath
+            highlight.fillColor = UIColor.white.withAlphaComponent(isDark ? 0.30 : 0.42).cgColor
+            layer.addSublayer(highlight)
+
+            self.layer.addSublayer(layer)
+            self.bubbles.append(Bubble(
+                layer: layer,
+                orbitRadius: 0.0,
+                duration: 0.0,
+                phase: Double(index) * (Double.pi * 2.0 / Double(count)),
+                scaleDuration: 0.0
+            ))
+        }
+    }
+
+    private func layout(bubble: Bubble, index: Int, center: CGPoint, avatarSize: CGSize) {
+        let baseRadius = max(avatarSize.width, 64.0) * 0.5
+        let orbitRadius = baseRadius + 26.0 + CGFloat(index % 3) * 18.0
+        let bubbleSize = bubble.layer.bounds.size
+        // The orbit path starts at the rightmost point of the ellipse; keeping
+        // the model position there makes the loop seamless, `timeOffset`
+        // spreads the bubbles over the circle.
+        let startPoint = CGPoint(x: center.x + orbitRadius, y: center.y)
+
+        CATransaction.begin()
+        CATransaction.setDisableActions(true)
+        bubble.layer.bounds = CGRect(origin: .zero, size: bubbleSize)
+        bubble.layer.position = startPoint
+        CATransaction.commit()
+
+        bubble.layer.removeAnimation(forKey: "profileV2.orbit")
+        bubble.layer.removeAnimation(forKey: "profileV2.scale")
+        bubble.layer.removeAnimation(forKey: "profileV2.fade")
+
+        let pathRect = CGRect(
+            x: center.x - orbitRadius,
+            y: center.y - orbitRadius * 0.55,
+            width: orbitRadius * 2.0,
+            height: orbitRadius * 1.1
+        )
+        let orbit = CAKeyframeAnimation(keyPath: "position")
+        orbit.path = UIBezierPath(ovalIn: pathRect).cgPath
+        orbit.duration = 24.0 + Double(index) * 2.5
+        orbit.repeatCount = .infinity
+        orbit.timingFunction = CAMediaTimingFunction(name: .linear)
+        orbit.timeOffset = orbit.duration * (bubble.phase / (Double.pi * 2.0))
+        bubble.layer.add(orbit, forKey: "profileV2.orbit")
+
+        let scale = CAKeyframeAnimation(keyPath: "transform.scale")
+        scale.values = [0.94, 1.06, 0.94]
+        scale.keyTimes = [0.0, 0.5, 1.0] as [NSNumber]
+        scale.duration = 3.4 + Double(index % 4) * 0.7
+        scale.repeatCount = .infinity
+        scale.timingFunction = CAMediaTimingFunction(name: .easeInEaseOut)
+        bubble.layer.add(scale, forKey: "profileV2.scale")
+
+        let fade = CAKeyframeAnimation(keyPath: "opacity")
+        fade.values = [0.35, 0.85, 0.35]
+        fade.keyTimes = [0.0, 0.5, 1.0] as [NSNumber]
+        fade.duration = 5.0 + Double(index % 3) * 1.3
+        fade.repeatCount = .infinity
+        fade.timingFunction = CAMediaTimingFunction(name: .easeInEaseOut)
+        bubble.layer.add(fade, forKey: "profileV2.fade")
     }
 }
