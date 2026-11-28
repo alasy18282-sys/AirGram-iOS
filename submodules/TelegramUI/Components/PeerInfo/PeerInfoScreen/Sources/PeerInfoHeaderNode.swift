@@ -3194,12 +3194,20 @@ final class ProfileV2BackgroundView: UIView {
 /// avatar, the way the 13.3 profile scatters small floating gifts around the
 /// photo. Drawn with Core Animation so there is nothing to ship in the bundle.
 final class ProfileV2BubblesView: UIView {
+    // 13.3 renders the floating drops as liquid glass (profileGiftDrop
+    // body/front/light/lens Metal passes).  The same look, built in Core
+    // Animation: a tinted glass body, a bright top rim, a soft bottom rim, an
+    // inner refraction lens and a specular hotspot.
     private struct Bubble {
-        let layer: CAShapeLayer
-        let orbitRadius: CGFloat
-        let duration: Double
+        let container: CALayer
+        let glass: CAGradientLayer
+        let body: CAShapeLayer
+        let rimTop: CAShapeLayer
+        let rimBottom: CAShapeLayer
+        let lens: CAShapeLayer
+        let hotspot: CALayer
+        let size: CGFloat
         let phase: Double
-        let scaleDuration: Double
     }
 
     private var bubbles: [Bubble] = []
@@ -3239,43 +3247,81 @@ final class ProfileV2BubblesView: UIView {
 
     private func createBubbles(isDark: Bool) {
         let count = 9
-        let fillAlpha: CGFloat = isDark ? 0.10 : 0.16
-        let strokeAlpha: CGFloat = isDark ? 0.34 : 0.45
         for index in 0 ..< count {
-            let size = CGFloat(14 + ((index * 7) % 34))
-            let layer = CAShapeLayer()
-            layer.path = UIBezierPath(ovalIn: CGRect(x: 0.0, y: 0.0, width: size, height: size)).cgPath
-            layer.fillColor = UIColor.white.withAlphaComponent(fillAlpha).cgColor
-            layer.strokeColor = UIColor.white.withAlphaComponent(strokeAlpha).cgColor
-            layer.lineWidth = 1.0
-            layer.opacity = 0.0
-            layer.frame = CGRect(x: 0.0, y: 0.0, width: size, height: size)
+            let size = CGFloat(16 + ((index * 7) % 30))
+            let container = CALayer()
+            container.masksToBounds = false
 
-            let highlight = CAShapeLayer()
-            highlight.path = UIBezierPath(ovalIn: CGRect(
-                x: size * 0.20,
-                y: size * 0.14,
-                width: size * 0.34,
-                height: size * 0.26
-            )).cgPath
-            highlight.fillColor = UIColor.white.withAlphaComponent(isDark ? 0.30 : 0.42).cgColor
-            layer.addSublayer(highlight)
+            let body = CAShapeLayer()
+            body.fillColor = UIColor.white.withAlphaComponent(isDark ? 0.10 : 0.16).cgColor
+            body.shadowColor = UIColor.black.cgColor
+            body.shadowOpacity = isDark ? 0.30 : 0.16
+            body.shadowRadius = 5.0
+            body.shadowOffset = CGSize(width: 0.0, height: 3.0)
+            container.addSublayer(body)
 
-            self.layer.addSublayer(layer)
+            let glass = CAGradientLayer()
+            glass.type = .radial
+            glass.startPoint = CGPoint(x: 0.32, y: 0.24)
+            glass.endPoint = CGPoint(x: 0.78, y: 0.86)
+            glass.colors = [
+                UIColor.white.withAlphaComponent(isDark ? 0.26 : 0.42).cgColor,
+                UIColor.white.withAlphaComponent(isDark ? 0.10 : 0.14).cgColor,
+                UIColor.white.withAlphaComponent(0.02).cgColor
+            ]
+            glass.locations = [0.0, 0.55, 1.0]
+            container.addSublayer(glass)
+
+            let lens = CAShapeLayer()
+            lens.fillColor = UIColor.clear.cgColor
+            lens.strokeColor = UIColor.white.withAlphaComponent(isDark ? 0.16 : 0.22).cgColor
+            lens.lineWidth = 0.8
+            container.addSublayer(lens)
+
+            let rimTop = CAShapeLayer()
+            rimTop.fillColor = UIColor.clear.cgColor
+            rimTop.strokeColor = UIColor.white.withAlphaComponent(isDark ? 0.55 : 0.80).cgColor
+            rimTop.lineWidth = 1.4
+            rimTop.lineCap = .round
+            container.addSublayer(rimTop)
+
+            let rimBottom = CAShapeLayer()
+            rimBottom.fillColor = UIColor.clear.cgColor
+            rimBottom.strokeColor = UIColor.white.withAlphaComponent(isDark ? 0.10 : 0.16).cgColor
+            rimBottom.lineWidth = 1.0
+            rimBottom.lineCap = .round
+            container.addSublayer(rimBottom)
+
+            let hotspot = CALayer()
+            hotspot.backgroundColor = UIColor.white.cgColor
+            hotspot.shadowColor = UIColor.white.cgColor
+            hotspot.shadowOpacity = isDark ? 0.55 : 0.75
+            hotspot.shadowRadius = size * 0.16
+            hotspot.shadowOffset = .zero
+            container.addSublayer(hotspot)
+
+            self.layer.addSublayer(container)
             self.bubbles.append(Bubble(
-                layer: layer,
-                orbitRadius: 0.0,
-                duration: 0.0,
-                phase: Double(index) * (Double.pi * 2.0 / Double(count)),
-                scaleDuration: 0.0
+                container: container,
+                glass: glass,
+                body: body,
+                rimTop: rimTop,
+                rimBottom: rimBottom,
+                lens: lens,
+                hotspot: hotspot,
+                size: size,
+                phase: Double(index) * (Double.pi * 2.0 / Double(count))
             ))
         }
     }
 
-    private func layout(bubble: Bubble, index: Int, center: CGPoint, avatarSize: CGSize) {
+    private func layout(bubble: Bubble, index: Int, center: CGPoint,
+                        avatarSize: CGSize) {
         let baseRadius = max(avatarSize.width, 64.0) * 0.5
         let orbitRadius = baseRadius + 26.0 + CGFloat(index % 3) * 18.0
-        let bubbleSize = bubble.layer.bounds.size
+        let size = bubble.size
+        let full = CGRect(x: 0.0, y: 0.0, width: size, height: size)
+        let c = CGPoint(x: size / 2.0, y: size / 2.0)
         // The orbit path starts at the rightmost point of the ellipse; keeping
         // the model position there makes the loop seamless, `timeOffset`
         // spreads the bubbles over the circle.
@@ -3283,13 +3329,39 @@ final class ProfileV2BubblesView: UIView {
 
         CATransaction.begin()
         CATransaction.setDisableActions(true)
-        bubble.layer.bounds = CGRect(origin: .zero, size: bubbleSize)
-        bubble.layer.position = startPoint
+        bubble.container.bounds = full
+        bubble.container.position = startPoint
+
+        bubble.body.path = UIBezierPath(ovalIn: full).cgPath
+
+        bubble.glass.frame = full
+        if bubble.glass.mask == nil {
+            let mask = CAShapeLayer()
+            bubble.glass.mask = mask
+        }
+        (bubble.glass.mask as? CAShapeLayer)?.path = UIBezierPath(ovalIn: full).cgPath
+
+        let inset = size * 0.14
+        bubble.lens.path = UIBezierPath(ovalIn: CGRect(
+            x: inset, y: inset, width: size - inset * 2.0, height: size - inset * 2.0)).cgPath
+
+        bubble.rimTop.path = UIBezierPath(
+            arcCenter: c, radius: size / 2.0 - 0.8,
+            startAngle: CGFloat.pi * 1.05, endAngle: CGFloat.pi * 1.85,
+            clockwise: true).cgPath
+        bubble.rimBottom.path = UIBezierPath(
+            arcCenter: c, radius: size / 2.0 - 0.8,
+            startAngle: CGFloat.pi * 0.10, endAngle: CGFloat.pi * 0.85,
+            clockwise: true).cgPath
+
+        bubble.hotspot.bounds = CGRect(x: 0.0, y: 0.0,
+                                       width: size * 0.22, height: size * 0.16)
+        bubble.hotspot.position = CGPoint(x: size * 0.30, y: size * 0.26)
         CATransaction.commit()
 
-        bubble.layer.removeAnimation(forKey: "profileV2.orbit")
-        bubble.layer.removeAnimation(forKey: "profileV2.scale")
-        bubble.layer.removeAnimation(forKey: "profileV2.fade")
+        for key in ["profileV2.orbit", "profileV2.scale", "profileV2.fade"] {
+            bubble.container.removeAnimation(forKey: key)
+        }
 
         let pathRect = CGRect(
             x: center.x - orbitRadius,
@@ -3299,26 +3371,28 @@ final class ProfileV2BubblesView: UIView {
         )
         let orbit = CAKeyframeAnimation(keyPath: "position")
         orbit.path = UIBezierPath(ovalIn: pathRect).cgPath
-        orbit.duration = 24.0 + Double(index) * 2.5
+        orbit.duration = 7.5 + Double(index % 4) * 1.6
         orbit.repeatCount = .infinity
-        orbit.timingFunction = CAMediaTimingFunction(name: .linear)
-        orbit.timeOffset = orbit.duration * (bubble.phase / (Double.pi * 2.0))
-        bubble.layer.add(orbit, forKey: "profileV2.orbit")
+        orbit.calculationMode = .paced
+        orbit.timeOffset = bubble.phase * orbit.duration / (Double.pi * 2.0)
+        orbit.isRemovedOnCompletion = false
+        orbit.fillMode = .forwards
+        bubble.container.add(orbit, forKey: "profileV2.orbit")
 
         let scale = CAKeyframeAnimation(keyPath: "transform.scale")
         scale.values = [0.94, 1.06, 0.94]
-        scale.keyTimes = [0.0, 0.5, 1.0] as [NSNumber]
-        scale.duration = 3.4 + Double(index % 4) * 0.7
+        scale.duration = 0.56 * 2.0
         scale.repeatCount = .infinity
-        scale.timingFunction = CAMediaTimingFunction(name: .easeInEaseOut)
-        bubble.layer.add(scale, forKey: "profileV2.scale")
+        scale.isRemovedOnCompletion = false
+        scale.fillMode = .forwards
+        bubble.container.add(scale, forKey: "profileV2.scale")
 
         let fade = CAKeyframeAnimation(keyPath: "opacity")
-        fade.values = [0.35, 0.85, 0.35]
-        fade.keyTimes = [0.0, 0.5, 1.0] as [NSNumber]
-        fade.duration = 5.0 + Double(index % 3) * 1.3
+        fade.values = [0.55, 0.95, 0.55]
+        fade.duration = 0.56 * 2.0
         fade.repeatCount = .infinity
-        fade.timingFunction = CAMediaTimingFunction(name: .easeInEaseOut)
-        bubble.layer.add(fade, forKey: "profileV2.fade")
+        fade.isRemovedOnCompletion = false
+        fade.fillMode = .forwards
+        bubble.container.add(fade, forKey: "profileV2.fade")
     }
 }
